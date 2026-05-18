@@ -30,6 +30,58 @@ if errorlevel 2 (
 )
 > "%LOCKFILE%" echo %date% %time%
 
+call :SETUP_TOOLS
+if errorlevel 1 (
+    echo.
+    echo Corrija os itens acima e execute este arquivo novamente.
+    echo.
+    pause
+    exit /b 1
+)
+goto :LOOP
+
+:SETUP_TOOLS
+set "PY_CMD="
+where py >nul 2>nul
+if not errorlevel 1 set "PY_CMD=py"
+
+if not defined PY_CMD (
+    where python >nul 2>nul
+    if not errorlevel 1 set "PY_CMD=python"
+)
+
+if not defined PY_CMD (
+    echo [ERRO] Python nao encontrado. Instale o Python e deixe o comando py ou python disponivel no PATH.
+    exit /b 1
+)
+
+%PY_CMD% --version >nul 2>nul
+if errorlevel 1 (
+    echo [ERRO] Python encontrado, mas nao executou corretamente. Reinstale o Python ou ajuste o PATH.
+    exit /b 1
+)
+
+where git >nul 2>nul
+if errorlevel 1 (
+    if exist "%LOCALAPPDATA%\Programs\Git\cmd\git.exe" set "PATH=%LOCALAPPDATA%\Programs\Git\cmd;%PATH%"
+    if exist "%ProgramFiles%\Git\cmd\git.exe" set "PATH=%ProgramFiles%\Git\cmd;%PATH%"
+    if exist "%ProgramFiles(x86)%\Git\cmd\git.exe" set "PATH=%ProgramFiles(x86)%\Git\cmd;%PATH%"
+)
+
+where git >nul 2>nul
+if errorlevel 1 (
+    echo [ERRO] Git nao encontrado. Instale o Git for Windows e execute este arquivo novamente.
+    exit /b 1
+)
+
+git config --get user.name >nul 2>nul
+if errorlevel 1 git config user.name "Aura Auto Update"
+
+git config --get user.email >nul 2>nul
+if errorlevel 1 git config user.email "aura-auto-update@example.local"
+
+exit /b 0
+
 :LOOP
 > "%LOCKFILE%" echo %date% %time%
 set "EXIT_CODE=0"
@@ -43,7 +95,7 @@ echo Inicio do ciclo: %date% %time%
 echo.
 
 echo [1/3] Gerando HTML atualizado...
-py ".\gerar_html_estoque.py"
+%PY_CMD% ".\gerar_html_estoque.py"
 if errorlevel 1 set "ERRMSG=Falha ao gerar o HTML (passo 1)." & goto :FAIL
 echo [OK] HTML gerado com sucesso.
 echo.

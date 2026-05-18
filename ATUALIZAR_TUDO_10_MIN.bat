@@ -204,10 +204,7 @@ set "GIT_HTTPS_PROXY="
 set "AHEAD_COUNT=0"
 for /f %%A in ('git rev-list --count origin/main..HEAD 2^>nul') do set "AHEAD_COUNT=%%A"
 
-if "%AHEAD_COUNT%"=="0" (
-    echo [INFO] Push nao necessario (sem commits locais pendentes).
-    goto :AFTER_PUSH
-)
+if "%AHEAD_COUNT%"=="0" goto :NO_PUSH
 
 echo [INFO] Enviando %AHEAD_COUNT% commit(s) pendente(s)...
 git push origin HEAD:main
@@ -216,6 +213,10 @@ if errorlevel 1 (
     goto :FAIL
 )
 echo [OK] Push concluido com sucesso.
+goto :AFTER_PUSH
+
+:NO_PUSH
+echo [INFO] Push nao necessario - sem commits locais pendentes.
 
 :AFTER_PUSH
 echo.

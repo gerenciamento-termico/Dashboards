@@ -12,8 +12,26 @@ if errorlevel 1 exit /b 1
 set "PAGE_URL=https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html"
 set "INTERVAL_MIN=5"
 set "INTERVAL_SEC=300"
+set "LOCKFILE=%TEMP%\aura_estoque_hoje.lock"
+set "LOCK_STALE_MIN=10"
+
+powershell -NoProfile -Command ^
+  "$p = '%LOCKFILE%';" ^
+  "if (Test-Path $p) {" ^
+  "  $age = (Get-Date) - ((Get-Item $p).LastWriteTime);" ^
+  "  if ($age.TotalMinutes -lt %LOCK_STALE_MIN%) { exit 2 }" ^
+  "  Remove-Item $p -Force" ^
+  "}" ^
+  "exit 0"
+if errorlevel 2 (
+    echo Ja existe uma instancia recente do launcher em execucao.
+    echo Aguarde alguns minutos ou feche a outra janela antes de iniciar novamente.
+    exit /b 1
+)
+> "%LOCKFILE%" echo %date% %time%
 
 :LOOP
+> "%LOCKFILE%" echo %date% %time%
 set "EXIT_CODE=0"
 set "HAS_CHANGES=0"
 
@@ -87,3 +105,7 @@ echo.
 echo Proxima tentativa em %INTERVAL_MIN% minutos. Pressione Ctrl+C para encerrar.
 timeout /t %INTERVAL_SEC% /nobreak >nul
 goto :LOOP
+
+:CLEANUP
+if exist "%LOCKFILE%" del "%LOCKFILE%" >nul 2>&1
+exit /b %EXIT_CODE%

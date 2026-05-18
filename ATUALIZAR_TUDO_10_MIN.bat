@@ -13,12 +13,18 @@ if errorlevel 1 exit /b 1
 set "INTERVAL_MIN=10"
 set "INTERVAL_SEC=600"
 set "LOCKFILE=%TEMP%\aura_atualizar_tudo_10_min.lock"
-set "LOCK_STALE_MIN=30"
 set "EXIT_CODE=0"
 
-call :CHECK_LOCK
-if errorlevel 1 exit /b 1
+call :RUN_LOCKED 9>"%LOCKFILE%"
+if errorlevel 1 (
+    echo Ja existe uma instancia do atualizador unificado em execucao.
+    echo Feche a outra janela antes de iniciar novamente.
+    exit /b 1
+)
+exit /b %ERRORLEVEL%
 
+:RUN_LOCKED
+> "%LOCKFILE%" echo %date% %time%
 call :SETUP_TOOLS
 if errorlevel 1 (
     echo.
@@ -35,23 +41,6 @@ cd /d "%~dp0"
 if errorlevel 1 exit /b 1
 call :SETUP_TOOLS
 exit /b %ERRORLEVEL%
-
-:CHECK_LOCK
-powershell -NoProfile -Command ^
-  "$p = '%LOCKFILE%';" ^
-  "if (Test-Path $p) {" ^
-  "  $age = (Get-Date) - ((Get-Item $p).LastWriteTime);" ^
-  "  if ($age.TotalMinutes -lt %LOCK_STALE_MIN%) { exit 2 }" ^
-  "  Remove-Item $p -Force" ^
-  "}" ^
-  "exit 0"
-if errorlevel 2 (
-    echo Ja existe uma instancia recente do atualizador unificado em execucao.
-    echo Feche a outra janela ou aguarde alguns minutos antes de iniciar novamente.
-    exit /b 1
-)
-> "%LOCKFILE%" echo %date% %time%
-exit /b 0
 
 :SETUP_TOOLS
 set "PY_CMD="

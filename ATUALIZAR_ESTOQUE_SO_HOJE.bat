@@ -94,15 +94,39 @@ echo Pasta atual: %CD%
 echo Inicio do ciclo: %date% %time%
 echo.
 
-echo [1/3] Gerando HTML atualizado...
+echo [1/4] Sincronizando com origin/main...
+if exist ".git\rebase-merge" (
+    set "ERRMSG=Existe um rebase pendente no Git. Execute git rebase --abort ou me chame para limpar."
+    goto :FAIL
+)
+if exist ".git\rebase-apply" (
+    set "ERRMSG=Existe um rebase pendente no Git. Execute git rebase --abort ou me chame para limpar."
+    goto :FAIL
+)
+
+git pull --rebase --autostash origin main
+if errorlevel 1 (
+    set "ERRMSG=Falha ao sincronizar com o remoto (passo 1)."
+    goto :FAIL
+)
+echo [OK] Repositorio sincronizado.
+echo.
+
+echo [2/4] Gerando HTML atualizado...
 %PY_CMD% ".\gerar_html_estoque.py"
-if errorlevel 1 set "ERRMSG=Falha ao gerar o HTML (passo 1)." & goto :FAIL
+if errorlevel 1 (
+    set "ERRMSG=Falha ao gerar o HTML (passo 2)."
+    goto :FAIL
+)
 echo [OK] HTML gerado com sucesso.
 echo.
 
-echo [2/3] Preparando commit no Git...
-git add ESTOQUE_DATALOGGERS.html gerar_html_estoque.py ATUALIZAR_ESTOQUE_SO_HOJE.bat
-if errorlevel 1 set "ERRMSG=Falha no git add (passo 2)." & goto :FAIL
+echo [3/4] Preparando commit no Git...
+git add ESTOQUE_DATALOGGERS.html gerar_html_estoque.py
+if errorlevel 1 (
+    set "ERRMSG=Falha no git add (passo 3)."
+    goto :FAIL
+)
 
 git diff --cached --quiet --exit-code
 if errorlevel 1 goto :DO_COMMIT
@@ -112,30 +136,36 @@ goto :AFTER_COMMIT
 :DO_COMMIT
 set "HAS_CHANGES=1"
 git commit -m "Atualiza ESTOQUE_DATALOGGERS.html - hoje"
-if errorlevel 1 set "ERRMSG=Falha no git commit (passo 2)." & goto :FAIL
+if errorlevel 1 (
+    set "ERRMSG=Falha no git commit (passo 3)."
+    goto :FAIL
+)
 echo [OK] Commit criado com sucesso.
 
 :AFTER_COMMIT
 echo.
 
-echo [3/3] Enviando para GitHub...
+echo [4/4] Enviando para GitHub...
 set "ALL_PROXY="
 set "HTTP_PROXY="
 set "HTTPS_PROXY="
 set "GIT_HTTP_PROXY="
 set "GIT_HTTPS_PROXY="
 
-if "%HAS_CHANGES%"=="1" goto :DO_PUSH
-echo [INFO] Push nao necessario (sem alteracoes novas).
+set "AHEAD_COUNT=0"
+for /f %%A in ('git rev-list --count origin/main..HEAD 2^>nul') do set "AHEAD_COUNT=%%A"
+
+if not "%AHEAD_COUNT%"=="0" goto :DO_PUSH
+echo [INFO] Push nao necessario (sem commits locais pendentes).
 goto :AFTER_PUSH
 
 :DO_PUSH
-echo [INFO] Sincronizando com origin/main antes do push...
-git pull --rebase --autostash origin main
-if errorlevel 1 set "ERRMSG=Falha ao sincronizar com o remoto (passo 3)." & goto :FAIL
-
+echo [INFO] Enviando %AHEAD_COUNT% commit(s) pendente(s)...
 git push origin HEAD:main
-if errorlevel 1 set "ERRMSG=Falha no git push (passo 3)." & goto :FAIL
+if errorlevel 1 (
+    set "ERRMSG=Falha no git push (passo 4)."
+    goto :FAIL
+)
 echo [OK] Push concluido com sucesso.
 
 :AFTER_PUSH

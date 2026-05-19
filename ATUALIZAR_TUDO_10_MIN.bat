@@ -86,13 +86,15 @@ exit /b 0
 :LOOP
 set "EXIT_CODE=0"
 set "ERRMSG="
+set "CYCLE_START_TS="
+for /f %%A in ('powershell -NoProfile -Command "[DateTimeOffset]::Now.ToUnixTimeSeconds()"') do set "CYCLE_START_TS=%%A"
 
 echo ============================================================
 echo  ATUALIZAR DASHBOARDS AURA - ESTOQUE + ENTREGAS + HTML
 echo ============================================================
 echo Pasta atual: %CD%
 echo Inicio do ciclo: %date% %time%
-echo Intervalo padrao: %INTERVAL_MIN% minutos
+echo Atualiza agora ao abrir; depois, novo inicio a cada %INTERVAL_MIN% minutos
 echo.
 
 echo [1/6] Sincronizando com origin/main...
@@ -215,8 +217,7 @@ echo   https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.htm
 echo   https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html
 echo Fim do ciclo: %date% %time%
 echo.
-echo Proxima atualizacao em %INTERVAL_MIN% minutos. Pressione Ctrl+C para encerrar.
-timeout /t %INTERVAL_SEC% /nobreak >nul
+call :WAIT_NEXT
 goto :LOOP
 
 :FAIL
@@ -225,6 +226,14 @@ echo.
 echo [ERRO] %ERRMSG%
 echo Fim com erro: %date% %time%
 echo.
-echo Proxima tentativa em %INTERVAL_MIN% minutos. Pressione Ctrl+C para encerrar.
-timeout /t %INTERVAL_SEC% /nobreak >nul
+call :WAIT_NEXT
 goto :LOOP
+
+:WAIT_NEXT
+set "WAIT_SEC=%INTERVAL_SEC%"
+if defined CYCLE_START_TS (
+    for /f %%A in ('powershell -NoProfile -Command "$elapsed = [DateTimeOffset]::Now.ToUnixTimeSeconds() - [int64]%CYCLE_START_TS%; $wait = %INTERVAL_SEC% - $elapsed; if ($wait -lt 1) { 1 } else { [int]$wait }"') do set "WAIT_SEC=%%A"
+)
+echo Proxima atualizacao em %WAIT_SEC% segundo(s). Pressione Ctrl+C para encerrar.
+timeout /t %WAIT_SEC% /nobreak >nul
+exit /b 0

@@ -24,7 +24,6 @@ if errorlevel 1 (
 exit /b %ERRORLEVEL%
 
 :RUN_LOCKED
-> "%LOCKFILE%" echo %date% %time%
 call :SETUP_TOOLS
 if errorlevel 1 (
     echo.
@@ -85,7 +84,6 @@ if errorlevel 1 git config user.email "aura-auto-update@example.local"
 exit /b 0
 
 :LOOP
-> "%LOCKFILE%" echo %date% %time%
 set "EXIT_CODE=0"
 set "ERRMSG="
 
@@ -189,6 +187,7 @@ set "HTTP_PROXY="
 set "HTTPS_PROXY="
 set "GIT_HTTP_PROXY="
 set "GIT_HTTPS_PROXY="
+set "GIT_TERMINAL_PROMPT=0"
 
 set "AHEAD_COUNT=0"
 for /f %%A in ('git rev-list --count origin/main..HEAD 2^>nul') do set "AHEAD_COUNT=%%A"
@@ -198,7 +197,7 @@ if "%AHEAD_COUNT%"=="0" goto :NO_PUSH
 echo [INFO] Enviando %AHEAD_COUNT% commit(s) pendente(s)...
 git push origin HEAD:main
 if errorlevel 1 (
-    set "ERRMSG=Falha no git push (passo 6)."
+    set "ERRMSG=Falha no git push (passo 6). Faca login no GitHub pelo Git Credential Manager ou execute gh auth login e rode novamente."
     goto :FAIL
 )
 echo [OK] Push concluido com sucesso.

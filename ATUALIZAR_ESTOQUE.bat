@@ -51,6 +51,7 @@ set "HTTP_PROXY="
 set "HTTPS_PROXY="
 set "GIT_HTTP_PROXY="
 set "GIT_HTTPS_PROXY="
+set "GIT_TERMINAL_PROMPT=0"
 
 if "%HAS_CHANGES%"=="1" goto :DO_PUSH
 echo [INFO] Push nao necessario (sem alteracoes novas).
@@ -62,7 +63,7 @@ git pull --rebase --autostash origin main
 if errorlevel 1 set "ERRMSG=Falha ao sincronizar com o remoto (passo 3)." & goto :FAIL
 
 git push origin HEAD:main
-if errorlevel 1 set "ERRMSG=Falha no git push (passo 3)." & goto :FAIL
+if errorlevel 1 set "ERRMSG=Falha no git push (passo 3). Faca login no GitHub pelo Git Credential Manager ou execute gh auth login e rode novamente." & goto :FAIL
 echo [OK] Push concluido com sucesso.
 
 :AFTER_PUSH

@@ -57,6 +57,7 @@ echo [4/4] Enviando para GitHub...
 set "ALL_PROXY="
 set "HTTP_PROXY="
 set "HTTPS_PROXY="
+set "GIT_TERMINAL_PROMPT=0"
 
 if "%HAS_CHANGES%"=="0" (
     echo [INFO] Push nao necessario ^(sem alteracoes novas^).
@@ -70,7 +71,7 @@ git rebase --autostash origin/main
 if errorlevel 1 set "ERRMSG=Falha no git rebase contra origin/main (passo 4)." & goto :FAIL
 
 git push origin HEAD:main
-if errorlevel 1 set "ERRMSG=Falha no git push (passo 4)." & goto :FAIL
+if errorlevel 1 set "ERRMSG=Falha no git push (passo 4). Faca login no GitHub pelo Git Credential Manager ou execute gh auth login e rode novamente." & goto :FAIL
 echo [OK] Push concluido.
 
 :AFTER_PUSH

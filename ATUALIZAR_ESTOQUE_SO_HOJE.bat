@@ -151,6 +151,7 @@ set "HTTP_PROXY="
 set "HTTPS_PROXY="
 set "GIT_HTTP_PROXY="
 set "GIT_HTTPS_PROXY="
+set "GIT_TERMINAL_PROMPT=0"
 
 set "AHEAD_COUNT=0"
 for /f %%A in ('git rev-list --count origin/main..HEAD 2^>nul') do set "AHEAD_COUNT=%%A"
@@ -163,7 +164,7 @@ goto :AFTER_PUSH
 echo [INFO] Enviando %AHEAD_COUNT% commit(s) pendente(s)...
 git push origin HEAD:main
 if errorlevel 1 (
-    set "ERRMSG=Falha no git push (passo 4)."
+    set "ERRMSG=Falha no git push (passo 4). Faca login no GitHub pelo Git Credential Manager ou execute gh auth login e rode novamente."
     goto :FAIL
 )
 echo [OK] Push concluido com sucesso.

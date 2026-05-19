@@ -70,6 +70,7 @@ set "HTTP_PROXY="
 set "HTTPS_PROXY="
 set "GIT_HTTP_PROXY="
 set "GIT_HTTPS_PROXY="
+set "GIT_TERMINAL_PROMPT=0"
 
 git fetch origin
 if errorlevel 1 set "ERRMSG=Falha no git fetch antes do push (passo 4)." & goto :CYCLE_END
@@ -80,7 +81,7 @@ if errorlevel 1 set "ERRMSG=Falha no git rebase contra origin/main (passo 4)." &
 echo.
 echo [5/5] Enviando para GitHub...
 git push origin HEAD:main
-if errorlevel 1 set "ERRMSG=Falha no git push (passo 5)." & goto :CYCLE_END
+if errorlevel 1 set "ERRMSG=Falha no git push (passo 5). Faca login no GitHub pelo Git Credential Manager ou execute gh auth login e rode novamente." & goto :CYCLE_END
 echo [OK] Push concluido.
 
 :CYCLE_OK

@@ -461,7 +461,11 @@ def command_changed_files(args: argparse.Namespace) -> int:
             if _git_status_for(path) and path not in stage_paths:
                 stage_paths.append(path)
 
-        if args.restore_timestamp_only:
+        if args.publish_timestamp_only:
+            for path in timestamp_only:
+                if path not in stage_paths:
+                    stage_paths.append(path)
+        elif args.restore_timestamp_only:
             for path in timestamp_only:
                 _restore_worktree_path(path)
 
@@ -472,8 +476,11 @@ def command_changed_files(args: argparse.Namespace) -> int:
         for path in stage_paths:
             _print(path)
         if timestamp_only:
-            _print("[stage] Ignorados por alteracao apenas de horario: " + ", ".join(timestamp_only))
-            if args.restore_timestamp_only:
+            if args.publish_timestamp_only:
+                _print("[stage] Publicados por carimbo de atualizacao: " + ", ".join(timestamp_only))
+            else:
+                _print("[stage] Ignorados por alteracao apenas de horario: " + ", ".join(timestamp_only))
+            if args.restore_timestamp_only and not args.publish_timestamp_only:
                 _print("[stage] Arquivos restaurados para evitar commit somente de horario.")
         if not stage_paths:
             _print("[stage] Nenhum arquivo com alteracao real para commit.")
@@ -499,6 +506,7 @@ def main(argv: list[str] | None = None) -> int:
     p_changed = sub.add_parser("changed-files", help="Lista arquivos que merecem git add.")
     p_changed.add_argument("--out", default="")
     p_changed.add_argument("--restore-timestamp-only", action="store_true")
+    p_changed.add_argument("--publish-timestamp-only", action="store_true")
     p_changed.set_defaults(func=command_changed_files)
 
     args = parser.parse_args(argv)

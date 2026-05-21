@@ -328,7 +328,7 @@ call :LOG "[9/10] Preparando git add somente para alteracoes reais..."
 set "STAGE_FILE=%TEMP%\aura_stage_%RANDOM%_%RANDOM%.txt"
 set "STEP_NAME=changed-files"
 call :MAKE_STEP_LOG
-"%PY_EXE%" ".\aura_update_checks.py" changed-files --restore-timestamp-only --out "!STAGE_FILE!" >"!STEP_LOG!" 2>&1
+"%PY_EXE%" ".\aura_update_checks.py" changed-files --publish-timestamp-only --out "!STAGE_FILE!" >"!STEP_LOG!" 2>&1
 set "STEP_RC=%ERRORLEVEL%"
 call :FLUSH_STEP
 if errorlevel 1 (

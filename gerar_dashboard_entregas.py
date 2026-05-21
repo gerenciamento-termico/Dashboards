@@ -1070,12 +1070,12 @@ def render_html(payload: dict) -> str:
       width: 0%;
     }}
     .section {{
-      margin-top: 8px;
+      margin-top: 10px;
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 8px;
-      box-shadow: 0 2px 8px rgba(23, 35, 50, .05);
+      border-radius: 10px;
+      padding: 12px;
+      box-shadow: 0 8px 22px rgba(23, 35, 50, .06);
     }}
     .section h2 {{
       margin: 0 0 6px;
@@ -1083,23 +1083,110 @@ def render_html(payload: dict) -> str:
     }}
     .chart-wrap {{
       width: 100%;
-      overflow-x: auto;
+      min-height: 270px;
+      position: relative;
+      overflow: hidden;
+      background: #fff;
+      border: 1px solid #e4ebf3;
+      border-radius: 10px;
+      padding: 8px 8px 2px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.85);
     }}
-    svg {{
+    .chart-wrap svg {{
       width: 100%;
-      min-width: 760px;
-      height: 255px;
+      min-width: 0;
+      height: 300px;
       display: block;
       background: #fff;
-      border: 1px solid #e8edf3;
-      border-radius: 8px;
+      border: 0;
+      border-radius: 0;
+      overflow: visible;
     }}
     .legend {{
       display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 4px;
+      margin-bottom: 8px;
       color: var(--muted);
       font-size: .76rem;
+      align-items: center;
+    }}
+    .chart-axis-label {{
+      fill: #64748b;
+      font-size: 11px;
+      font-weight: 600;
+    }}
+    .chart-y-label {{
+      fill: #64748b;
+      font-size: 11px;
+    }}
+    .chart-grid {{
+      stroke: #edf2f7;
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+    }}
+    .chart-axis {{
+      stroke: #cbd5e1;
+      stroke-width: 1;
+      shape-rendering: crispEdges;
+    }}
+    .chart-bar {{
+      opacity: .92;
+      transition: opacity .16s ease, filter .16s ease, stroke-width .16s ease;
+      shape-rendering: geometricPrecision;
+    }}
+    .chart-bar.is-hover {{
+      opacity: 1;
+      filter: drop-shadow(0 4px 8px rgba(15, 23, 42, .18));
+      stroke: #0f172a;
+      stroke-width: 1;
+    }}
+    .chart-bar-hit {{
+      fill: transparent;
+      cursor: pointer;
+      pointer-events: all;
+    }}
+    .chart-value-label {{
+      fill: #334155;
+      font-size: 11px;
+      font-weight: 700;
+    }}
+    .chart-tooltip {{
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 50;
+      max-width: min(280px, calc(100vw - 24px));
+      padding: 9px 11px;
+      border: 1px solid #d8e2ee;
+      border-radius: 9px;
+      background: rgba(255, 255, 255, .97);
+      box-shadow: 0 12px 28px rgba(15, 23, 42, .16);
+      color: #172033;
+      font-size: .78rem;
+      line-height: 1.35;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-9999px, -9999px);
+      transition: opacity .12s ease;
+    }}
+    .chart-tooltip .tooltip-date {{
+      color: #64748b;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }}
+    .chart-tooltip .tooltip-row {{
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }}
+    .chart-tooltip .tooltip-swatch {{
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+      flex: 0 0 auto;
     }}
     .dot {{
       width: 10px;
@@ -1373,216 +1460,296 @@ def render_html(payload: dict) -> str:
     const allSensorDailyStats = payload.sensor_daily_stats || [];
     const allOrderDailyStats = payload.order_daily_stats || [];
 
-    function drawGroupedBars(svgId, labels, aVals, bVals, colors) {{
-      const svg = document.getElementById(svgId);
-      const width = 1080;
-      const height = 260;
-      const pad = {{ top: 20, right: 12, bottom: 44, left: 46 }};
-      const cw = width - pad.left - pad.right;
-      const ch = height - pad.top - pad.bottom;
-      svg.setAttribute('viewBox', `0 0 ${{width}} ${{height}}`);
+    const chartRegistry = new Map();
+    let chartTooltipEl = null;
+    let chartResizeTimer = null;
+
+    function svgNode(name, attrs = {{}}, text = null) {{
+      const node = document.createElementNS('http://www.w3.org/2000/svg', name);
+      for (const [key, value] of Object.entries(attrs)) {{
+        if (value === null || value === undefined) continue;
+        node.setAttribute(key, String(value));
+      }}
+      if (text !== null && text !== undefined) node.textContent = text;
+      return node;
+    }}
+
+    function htmlEscape(value) {{
+      const escapes = {{ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }};
+      return String(value ?? '').replace(/[&<>"']/g, ch => escapes[ch]);
+    }}
+
+    function formatMetric(value, metricType = 'integer') {{
+      const n = Number(value);
+      if (!Number.isFinite(n)) return '-';
+      const digits = metricType === 'decimal' ? 1 : 0;
+      return new Intl.NumberFormat('pt-BR', {{
+        maximumFractionDigits: digits,
+        minimumFractionDigits: 0,
+      }}).format(n);
+    }}
+
+    function formatDateShort(iso) {{
+      const m = String(iso || '').match(/^(\\d{{4}})-(\\d{{2}})-(\\d{{2}})$/);
+      if (!m) return String(iso || '');
+      return `${{m[3]}}/${{m[2]}}`;
+    }}
+
+    function formatDateLong(iso) {{
+      const m = String(iso || '').match(/^(\\d{{4}})-(\\d{{2}})-(\\d{{2}})$/);
+      if (!m) return String(iso || '');
+      return `${{m[3]}}/${{m[2]}}/${{m[1]}}`;
+    }}
+
+    function niceCeil(value) {{
+      const raw = Math.max(1, Number(value) || 1);
+      const exp = Math.floor(Math.log10(raw));
+      const base = Math.pow(10, exp);
+      const scaled = raw / base;
+      const nice = scaled <= 1 ? 1 : scaled <= 2 ? 2 : scaled <= 5 ? 5 : 10;
+      return nice * base;
+    }}
+
+    function getChartTooltip() {{
+      if (chartTooltipEl) return chartTooltipEl;
+      chartTooltipEl = document.createElement('div');
+      chartTooltipEl.className = 'chart-tooltip';
+      chartTooltipEl.setAttribute('role', 'status');
+      document.body.appendChild(chartTooltipEl);
+      return chartTooltipEl;
+    }}
+
+    function moveChartTooltip(event) {{
+      if (!chartTooltipEl) return;
+      const pad = 12;
+      const rect = chartTooltipEl.getBoundingClientRect();
+      const x = Math.min(window.innerWidth - rect.width - pad, event.clientX + 14);
+      const y = Math.max(pad, event.clientY - rect.height - 14);
+      chartTooltipEl.style.transform = `translate(${{Math.max(pad, x)}}px, ${{y}}px)`;
+    }}
+
+    function showChartTooltip(event, date, seriesName, value, color, metricType) {{
+      const tip = getChartTooltip();
+      tip.innerHTML = `
+        <div class="tooltip-date">${{htmlEscape(formatDateLong(date))}}</div>
+        <div class="tooltip-row">
+          <span class="tooltip-swatch" style="background:${{htmlEscape(color)}}"></span>
+          <span><strong>${{htmlEscape(seriesName)}}</strong>: ${{htmlEscape(formatMetric(value, metricType))}}</span>
+        </div>`;
+      tip.style.opacity = '1';
+      moveChartTooltip(event);
+    }}
+
+    function hideChartTooltip() {{
+      const tip = getChartTooltip();
+      tip.style.opacity = '0';
+      tip.style.transform = 'translate(-9999px, -9999px)';
+    }}
+
+    function drawEmptyChart(svg, width, height, message) {{
+      svg.appendChild(svgNode('text', {{
+        x: width / 2,
+        y: height / 2,
+        'text-anchor': 'middle',
+        'font-size': 14,
+        fill: '#64748b',
+        'font-weight': 700,
+      }}, message));
+    }}
+
+    function renderColumnChart(config) {{
+      const svg = document.getElementById(config.svgId);
+      if (!svg) return;
+      const wrap = svg.closest('.chart-wrap') || svg.parentElement;
+      const wrapWidth = Math.round((wrap && wrap.getBoundingClientRect().width) || svg.clientWidth || 720);
+      const width = Math.max(320, wrapWidth);
+      const rows = (config.data || []).map(row => {{
+        const out = {{ date: row[config.dateField] }};
+        for (const s of config.series) {{
+          out[s.key] = Number(row[s.key]) || 0;
+        }}
+        return out;
+      }});
+      const dense = rows.length > 72;
+      const height = Math.round(Math.max(250, Math.min(380, width * (dense ? 0.34 : 0.40))));
+      const pad = {{
+        top: width < 520 ? 18 : 22,
+        right: width < 520 ? 8 : 16,
+        bottom: width < 520 ? 36 : 44,
+        left: width < 520 ? 44 : 58,
+      }};
+      const cw = Math.max(10, width - pad.left - pad.right);
+      const ch = Math.max(10, height - pad.top - pad.bottom);
+      const xAxisY = pad.top + ch;
+
       svg.innerHTML = '';
-      if (!labels || labels.length === 0) {{
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', width / 2);
-        t.setAttribute('y', height / 2);
-        t.setAttribute('text-anchor', 'middle');
-        t.setAttribute('font-size', '14');
-        t.setAttribute('fill', '#5d7083');
-        t.textContent = 'Sem dados no período';
-        svg.appendChild(t);
+      svg.style.height = `${{height}}px`;
+      svg.setAttribute('viewBox', `0 0 ${{width}} ${{height}}`);
+      svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+      svg.setAttribute('role', 'img');
+      svg.setAttribute('aria-label', config.ariaLabel || 'Gráfico de colunas');
+
+      if (!rows.length) {{
+        drawEmptyChart(svg, width, height, config.emptyMessage || 'Sem dados no período');
         return;
       }}
 
-      const maxVal = Math.max(1, ...aVals, ...bVals);
-      const groupW = cw / labels.length;
-      const barW = Math.max(6, Math.min(20, groupW * 0.26));
-      const xAxisY = pad.top + ch;
+      const series = config.series || [];
+      const values = rows.flatMap(row => series.map(s => Number(row[s.key]) || 0));
+      const maxVal = niceCeil(Math.max(1, ...values));
+      const groupW = cw / rows.length;
+      const seriesCount = Math.max(1, series.length);
+      const innerGap = Math.max(0.6, Math.min(4, groupW * 0.08));
+      const usableGroupW = Math.max(1, groupW * 0.78);
+      const barMax = seriesCount > 1 ? 20 : 28;
+      const barW = Math.max(1.4, Math.min(barMax, (usableGroupW - innerGap * (seriesCount - 1)) / seriesCount));
+      const totalBarsW = barW * seriesCount + innerGap * (seriesCount - 1);
+      const showValueLabels = rows.length <= (width < 600 ? 10 : 18) && groupW > (seriesCount > 1 ? 32 : 24);
+      const maxXTicks = Math.max(3, Math.floor(cw / (width < 520 ? 62 : 82)));
+      const labelStep = Math.max(1, Math.ceil(rows.length / maxXTicks));
+      const tickCount = 4;
 
-      const axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      axis.setAttribute('x1', pad.left);
-      axis.setAttribute('y1', xAxisY);
-      axis.setAttribute('x2', pad.left + cw);
-      axis.setAttribute('y2', xAxisY);
-      axis.setAttribute('stroke', '#91a1b2');
-      axis.setAttribute('stroke-width', '1');
-      svg.appendChild(axis);
+      svg.appendChild(svgNode('line', {{
+        x1: pad.left,
+        y1: xAxisY,
+        x2: pad.left + cw,
+        y2: xAxisY,
+        class: 'chart-axis',
+      }}));
 
-      for (let i = 0; i < 5; i++) {{
-        const y = pad.top + (ch * i / 4);
-        const v = Math.round(maxVal * (1 - i / 4));
-        const grid = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        grid.setAttribute('x1', pad.left);
-        grid.setAttribute('y1', y);
-        grid.setAttribute('x2', pad.left + cw);
-        grid.setAttribute('y2', y);
-        grid.setAttribute('stroke', '#e6edf5');
-        grid.setAttribute('stroke-width', '1');
-        svg.appendChild(grid);
-
-        const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        txt.setAttribute('x', pad.left - 8);
-        txt.setAttribute('y', y + 4);
-        txt.setAttribute('text-anchor', 'end');
-        txt.setAttribute('font-size', '11');
-        txt.setAttribute('fill', '#607284');
-        txt.textContent = new Intl.NumberFormat('pt-BR').format(v);
-        svg.appendChild(txt);
+      for (let i = 0; i <= tickCount; i++) {{
+        const y = pad.top + (ch * i / tickCount);
+        const v = maxVal * (1 - i / tickCount);
+        svg.appendChild(svgNode('line', {{
+          x1: pad.left,
+          y1: y,
+          x2: pad.left + cw,
+          y2: y,
+          class: 'chart-grid',
+        }}));
+        svg.appendChild(svgNode('text', {{
+          x: pad.left - 9,
+          y: y + 4,
+          'text-anchor': 'end',
+          class: 'chart-y-label',
+        }}, formatMetric(v, config.metricType)));
       }}
 
-      labels.forEach((lb, i) => {{
-        const gx = pad.left + i * groupW + groupW * 0.5;
-        const a = aVals[i];
-        const b = bVals[i];
-        const ah = (a / maxVal) * ch;
-        const bh = (b / maxVal) * ch;
+      rows.forEach((row, i) => {{
+        const centerX = pad.left + i * groupW + groupW / 2;
+        const startX = centerX - totalBarsW / 2;
 
-        const ra = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        ra.setAttribute('x', gx - barW - 2);
-        ra.setAttribute('y', xAxisY - ah);
-        ra.setAttribute('width', barW);
-        ra.setAttribute('height', ah);
-        ra.setAttribute('rx', '3');
-        ra.setAttribute('fill', colors[0]);
-        svg.appendChild(ra);
-        if (a > 0) {{
-          const la = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          la.setAttribute('x', gx - barW/2 - 2);
-          la.setAttribute('y', Math.max(12, xAxisY - ah - 4));
-          la.setAttribute('text-anchor', 'middle');
-          la.setAttribute('font-size', '12');
-          la.setAttribute('font-weight', '600');
-          la.setAttribute('fill', '#2f3e4d');
-          la.textContent = new Intl.NumberFormat('pt-BR').format(a);
-          svg.appendChild(la);
+        if (i === 0 || i === rows.length - 1 || i % labelStep === 0) {{
+          svg.appendChild(svgNode('text', {{
+            x: centerX,
+            y: xAxisY + (width < 520 ? 17 : 19),
+            'text-anchor': 'middle',
+            class: 'chart-axis-label',
+          }}, formatDateShort(row.date)));
         }}
 
-        const rb = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        rb.setAttribute('x', gx + 2);
-        rb.setAttribute('y', xAxisY - bh);
-        rb.setAttribute('width', barW);
-        rb.setAttribute('height', bh);
-        rb.setAttribute('rx', '3');
-        rb.setAttribute('fill', colors[1]);
-        svg.appendChild(rb);
-        if (b > 0) {{
-          const lbv = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          lbv.setAttribute('x', gx + barW/2 + 2);
-          lbv.setAttribute('y', Math.max(12, xAxisY - bh - 4));
-          lbv.setAttribute('text-anchor', 'middle');
-          lbv.setAttribute('font-size', '12');
-          lbv.setAttribute('font-weight', '600');
-          lbv.setAttribute('fill', '#2f3e4d');
-          lbv.textContent = new Intl.NumberFormat('pt-BR').format(b);
-          svg.appendChild(lbv);
-        }}
+        series.forEach((s, si) => {{
+          const value = Number(row[s.key]) || 0;
+          const rawH = (value / maxVal) * ch;
+          const h = value > 0 ? Math.max(2, rawH) : 0;
+          const x = startX + si * (barW + innerGap);
+          const y = xAxisY - h;
+          const bar = svgNode('rect', {{
+            x: x,
+            y: y,
+            width: barW,
+            height: h,
+            rx: Math.min(5, Math.max(1, barW / 3)),
+            fill: s.color,
+            class: 'chart-bar',
+          }});
+          svg.appendChild(bar);
 
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', gx);
-        t.setAttribute('y', xAxisY + 14);
-        t.setAttribute('text-anchor', 'middle');
-        t.setAttribute('font-size', '12');
-        t.setAttribute('fill', '#5d7083');
-        const [y, m, d] = lb.split('-');
-        t.textContent = `${{d}}/${{m}}`;
-        svg.appendChild(t);
+          if (showValueLabels && value > 0) {{
+            svg.appendChild(svgNode('text', {{
+              x: x + barW / 2,
+              y: Math.max(12, y - 5),
+              'text-anchor': 'middle',
+              class: 'chart-value-label',
+            }}, formatMetric(value, config.metricType)));
+          }}
+
+          const hitW = Math.max(barW, Math.min(groupW / seriesCount, 14));
+          const hit = svgNode('rect', {{
+            x: x + barW / 2 - hitW / 2,
+            y: pad.top,
+            width: hitW,
+            height: ch,
+            class: 'chart-bar-hit',
+          }});
+          hit.addEventListener('mouseenter', event => {{
+            bar.classList.add('is-hover');
+            showChartTooltip(event, row.date, s.label, value, s.color, config.metricType);
+          }});
+          hit.addEventListener('mousemove', moveChartTooltip);
+          hit.addEventListener('mouseleave', () => {{
+            bar.classList.remove('is-hover');
+            hideChartTooltip();
+          }});
+          svg.appendChild(hit);
+        }});
       }});
     }}
 
-    function drawSingleBars(svgId, labels, vals, color) {{
-      const svg = document.getElementById(svgId);
-      const width = 1080;
-      const height = 260;
-      const pad = {{ top: 20, right: 12, bottom: 44, left: 52 }};
-      const cw = width - pad.left - pad.right;
-      const ch = height - pad.top - pad.bottom;
-      svg.setAttribute('viewBox', `0 0 ${{width}} ${{height}}`);
-      svg.innerHTML = '';
-      if (!labels || labels.length === 0) {{
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', width / 2);
-        t.setAttribute('y', height / 2);
-        t.setAttribute('text-anchor', 'middle');
-        t.setAttribute('font-size', '14');
-        t.setAttribute('fill', '#5d7083');
-        t.textContent = 'Sem dados no período';
-        svg.appendChild(t);
-        return;
-      }}
+    function drawColumnChart(svgId, data, options) {{
+      const config = {{
+        svgId,
+        data,
+        dateField: options.dateField || 'dia',
+        series: options.series || [],
+        metricType: options.metricType || 'integer',
+        ariaLabel: options.ariaLabel || '',
+        emptyMessage: options.emptyMessage || 'Sem dados no período',
+      }};
+      chartRegistry.set(svgId, config);
+      renderColumnChart(config);
+    }}
 
-      const maxVal = Math.max(1, ...vals);
-      const groupW = cw / labels.length;
-      const barW = Math.max(10, Math.min(26, groupW * 0.45));
-      const xAxisY = pad.top + ch;
-
-      const axis = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      axis.setAttribute('x1', pad.left);
-      axis.setAttribute('y1', xAxisY);
-      axis.setAttribute('x2', pad.left + cw);
-      axis.setAttribute('y2', xAxisY);
-      axis.setAttribute('stroke', '#91a1b2');
-      axis.setAttribute('stroke-width', '1');
-      svg.appendChild(axis);
-
-      for (let i = 0; i < 5; i++) {{
-        const y = pad.top + (ch * i / 4);
-        const v = maxVal * (1 - i / 4);
-        const grid = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-        grid.setAttribute('x1', pad.left);
-        grid.setAttribute('y1', y);
-        grid.setAttribute('x2', pad.left + cw);
-        grid.setAttribute('y2', y);
-        grid.setAttribute('stroke', '#e6edf5');
-        grid.setAttribute('stroke-width', '1');
-        svg.appendChild(grid);
-
-        const txt = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        txt.setAttribute('x', pad.left - 8);
-        txt.setAttribute('y', y + 4);
-        txt.setAttribute('text-anchor', 'end');
-        txt.setAttribute('font-size', '11');
-        txt.setAttribute('fill', '#607284');
-        txt.textContent = new Intl.NumberFormat('pt-BR', {{ maximumFractionDigits: 1 }}).format(v);
-        svg.appendChild(txt);
-      }}
-
-      labels.forEach((lb, i) => {{
-        const gx = pad.left + i * groupW + groupW * 0.5;
-        const v = vals[i];
-        const h = (v / maxVal) * ch;
-
-        const r = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
-        r.setAttribute('x', gx - barW/2);
-        r.setAttribute('y', xAxisY - h);
-        r.setAttribute('width', barW);
-        r.setAttribute('height', h);
-        r.setAttribute('rx', '3');
-        r.setAttribute('fill', color);
-        svg.appendChild(r);
-
-        if (v > 0) {{
-          const lv = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-          lv.setAttribute('x', gx);
-          lv.setAttribute('y', Math.max(12, xAxisY - h - 4));
-          lv.setAttribute('text-anchor', 'middle');
-          lv.setAttribute('font-size', '12');
-          lv.setAttribute('font-weight', '600');
-          lv.setAttribute('fill', '#2f3e4d');
-          lv.textContent = new Intl.NumberFormat('pt-BR', {{ maximumFractionDigits: 1 }}).format(v);
-          svg.appendChild(lv);
-        }}
-
-        const t = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-        t.setAttribute('x', gx);
-        t.setAttribute('y', xAxisY + 14);
-        t.setAttribute('text-anchor', 'middle');
-        t.setAttribute('font-size', '12');
-        t.setAttribute('fill', '#5d7083');
-        const [y, m, d] = lb.split('-');
-        t.textContent = `${{d}}/${{m}}`;
-        svg.appendChild(t);
+    function drawGroupedBars(svgId, labels, aVals, bVals, colors, names = ['Entregues', 'Inseridos']) {{
+      const data = (labels || []).map((dia, i) => ({{
+        dia,
+        serie_a: Number(aVals[i]) || 0,
+        serie_b: Number(bVals[i]) || 0,
+      }}));
+      drawColumnChart(svgId, data, {{
+        dateField: 'dia',
+        metricType: 'integer',
+        ariaLabel: `${{names[0]}} x ${{names[1]}} por dia`,
+        series: [
+          {{ key: 'serie_a', label: names[0], color: colors[0] }},
+          {{ key: 'serie_b', label: names[1], color: colors[1] }},
+        ],
       }});
     }}
+
+    function drawSingleBars(svgId, labels, vals, color, name = 'Valor') {{
+      const data = (labels || []).map((dia, i) => ({{
+        dia,
+        valor: Number(vals[i]) || 0,
+      }}));
+      drawColumnChart(svgId, data, {{
+        dateField: 'dia',
+        metricType: 'decimal',
+        ariaLabel: `${{name}} por dia`,
+        series: [
+          {{ key: 'valor', label: name, color }},
+        ],
+      }});
+    }}
+
+    window.addEventListener('resize', () => {{
+      window.clearTimeout(chartResizeTimer);
+      chartResizeTimer = window.setTimeout(() => {{
+        for (const config of chartRegistry.values()) {{
+          renderColumnChart(config);
+        }}
+      }}, 120);
+    }});
 
     const dateUniverse = [
       ...new Set([
@@ -1837,38 +2004,44 @@ def render_html(payload: dict) -> str:
         'chartDeliveryLaunch',
         dlLabels,
         dlDaily.map(x => x.media_horas == null ? 0 : x.media_horas),
-        '#1e40af'
+        '#1e40af',
+        'Média horas para lançamento'
       );
       const dailyLabels = daily.map(x => x.dia);
       drawSingleBars(
         'chartLatency',
         dailyLabels,
         daily.map(x => x.avg_horas_pedidos == null ? 0 : x.avg_horas_pedidos),
-        '#2563eb'
+        '#2563eb',
+        'Média horas para inserir pedidos'
       );
       drawSingleBars(
         'chartLatencyAres',
         dailyLabels,
         daily.map(x => x.avg_horas_itens_ares == null ? 0 : x.avg_horas_itens_ares),
-        '#1d4ed8'
+        '#1d4ed8',
+        'Média horas ARES'
       );
       drawSingleBars(
         'chartLatencySyos',
         dailyLabels,
         daily.map(x => x.avg_horas_itens_syos == null ? 0 : x.avg_horas_itens_syos),
-        '#0f766e'
+        '#0f766e',
+        'Média horas SYOS'
       );
       drawSingleBars(
         'chartLatencyShield',
         dailyLabels,
         daily.map(x => x.avg_horas_itens_shield == null ? 0 : x.avg_horas_itens_shield),
-        '#b45309'
+        '#b45309',
+        'Média horas Shield'
       );
       drawSingleBars(
         'chartLatencyWeb',
         dailyLabels,
         daily.map(x => x.avg_horas_itens_sensor_web == null ? 0 : x.avg_horas_itens_sensor_web),
-        '#475569'
+        '#475569',
+        'Média horas Sensor web'
       );
 
       setSensorSections(sensorMode);

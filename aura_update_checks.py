@@ -1,0 +1,509 @@
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import re
+import subprocess
+import sys
+import traceback
+from datetime import datetime
+from pathlib import Path
+from types import SimpleNamespace
+
+from env_utils import load_env_file
+
+
+ROOT = Path(__file__).resolve().parent
+
+PYTHON_SCRIPTS = [
+    "gerar_html_estoque.py",
+    "gerar_html_controle_entregas.py",
+    "HTMLACOMPANHAMENTO.py",
+    "gerar_dashboard_entregas.py",
+    "env_utils.py",
+    "aura_update_checks.py",
+]
+
+GENERATED_HTML = {
+    "ESTOQUE_DATALOGGERS.html": {
+        "min_size": 100_000,
+        "markers": ["Gerado em", "const STATES", "const DETAIL_ROWS"],
+    },
+    "CONTROLE_ENTREGAS_20D.html": {
+        "min_size": 100_000,
+        "markers": ["Gerado em", "const RAW_DATA"],
+    },
+    "HTMLACOMPANHAMENTO.html": {
+        "min_size": 100_000,
+        "markers": ["Gerado em", "const payload", "generated_at"],
+    },
+}
+
+GENERATED_DATA = [
+    "CONTROLE_ENTREGAS_20D.csv",
+    "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
+]
+
+CODE_FILES = [
+    "ATUALIZAR_TUDO_10_MIN.bat",
+    "HTMLACOMPANHAMENTO.py",
+    "gerar_dashboard_entregas.py",
+    "gerar_html_estoque.py",
+    "gerar_html_controle_entregas.py",
+    "env_utils.py",
+    "aura_update_checks.py",
+    ".env.example",
+    ".gitignore",
+    "README.md",
+]
+
+REQUIRED_PRESENT = [
+    "AURA_DB_HOST",
+    "AURA_DB_NAME",
+    "AURA_DB_USER",
+    "AURA_DB_PASSWORD",
+    "AURA_DB_PORT",
+    "AURA_START_DATE",
+    "AURA_END_DATE",
+    "AURA_POSTGRES_HOST",
+    "AURA_POSTGRES_NAME",
+    "AURA_POSTGRES_USER",
+    "AURA_POSTGRES_PASSWORD",
+    "AURA_POSTGRES_PORT",
+]
+
+REQUIRED_NONEMPTY = [
+    "AURA_DB_HOST",
+    "AURA_DB_NAME",
+    "AURA_DB_USER",
+    "AURA_DB_PASSWORD",
+    "AURA_DB_PORT",
+    "AURA_START_DATE",
+    "AURA_POSTGRES_HOST",
+    "AURA_POSTGRES_NAME",
+    "AURA_POSTGRES_USER",
+    "AURA_POSTGRES_PASSWORD",
+    "AURA_POSTGRES_PORT",
+]
+
+
+def _print(msg: str) -> None:
+    print(msg, flush=True)
+
+
+def _fail(msg: str) -> int:
+    _print(f"[ERRO] {msg}")
+    return 1
+
+
+def _as_int(value: object) -> int:
+    try:
+        return int(value or 0)
+    except (TypeError, ValueError):
+        return 0
+
+
+def _parse_date(value: str, var_name: str) -> None:
+    if not value:
+        return
+    datetime.strptime(value, "%Y-%m-%d")
+
+
+def _postgres_cfg(prefix: str) -> dict:
+    if prefix == "AURA_DB":
+        return {
+            "host": os.getenv("AURA_DB_HOST", ""),
+            "database": os.getenv("AURA_DB_NAME", ""),
+            "user": os.getenv("AURA_DB_USER", ""),
+            "password": os.getenv("AURA_DB_PASSWORD", ""),
+            "port": int(os.getenv("AURA_DB_PORT", "5432")),
+        }
+    return {
+        "host": os.getenv("AURA_POSTGRES_HOST", ""),
+        "database": os.getenv("AURA_POSTGRES_NAME", ""),
+        "user": os.getenv("AURA_POSTGRES_USER", ""),
+        "password": os.getenv("AURA_POSTGRES_PASSWORD", ""),
+        "port": int(os.getenv("AURA_POSTGRES_PORT", "5432")),
+    }
+
+
+def _check_postgres_connection(label: str, cfg: dict) -> None:
+    import psycopg2
+
+    safe_target = f"{label} ({cfg['host']}:{cfg['port']}/{cfg['database']})"
+    _print(f"[check] Testando conexao {safe_target}...")
+    with psycopg2.connect(connect_timeout=15, **cfg) as conn:
+        with conn.cursor() as cur:
+            cur.execute("select 1")
+            row = cur.fetchone()
+    if not row or row[0] != 1:
+        raise RuntimeError(f"select 1 inesperado em {label}")
+    _print(f"[check] Conexao OK: {label}")
+
+
+def validate_acompanhamento_payload(payload: dict) -> dict:
+    """Raise if HTMLACOMPANHAMENTO would be generated with empty KPIs."""
+    totals = payload.get("totals") or {}
+    daily = payload.get("daily") or []
+    generated_at = str(payload.get("generated_at") or "").strip()
+
+    main_values = {
+        "pedidos_entregues_total": _as_int(totals.get("pedidos_entregues_total")),
+        "pedidos_inseridos_total": _as_int(totals.get("pedidos_inseridos_total")),
+        "loggers_entregues_total": _as_int(totals.get("loggers_entregues_total")),
+        "loggers_inseridos_total": _as_int(totals.get("loggers_inseridos_total")),
+    }
+    if not generated_at:
+        raise ValueError("payload_sem_generated_at")
+    if not daily:
+        raise ValueError("payload_sem_series_diaria")
+    if max(main_values.values() or [0]) <= 0:
+        raise ValueError("payload_sem_kpi_principal_real")
+
+    summary = {
+        "dias": len(daily),
+        **main_values,
+    }
+    return summary
+
+
+def build_acompanhamento_payload() -> dict:
+    from gerar_dashboard_entregas import (
+        DEFAULT_DATABASE,
+        DEFAULT_HOST,
+        DEFAULT_PASSWORD,
+        DEFAULT_PORT,
+        DEFAULT_USER,
+        build_payload,
+        get_connection,
+        query_data,
+    )
+
+    args = SimpleNamespace(
+        host=os.getenv("AURA_DB_HOST", DEFAULT_HOST),
+        database=os.getenv("AURA_DB_NAME", DEFAULT_DATABASE),
+        user=os.getenv("AURA_DB_USER", DEFAULT_USER),
+        password=os.getenv("AURA_DB_PASSWORD", DEFAULT_PASSWORD),
+        port=int(os.getenv("AURA_DB_PORT", DEFAULT_PORT)),
+    )
+    start_date = os.getenv("AURA_START_DATE", "2025-12-04")
+    end_date = (os.getenv("AURA_END_DATE", "") or "").strip() or datetime.now().strftime("%Y-%m-%d")
+
+    with get_connection(args) as conn:
+        (
+            rows,
+            sensor_rows,
+            sensor_daily_rows,
+            sensor_daily_stats_rows,
+            order_daily_stats_rows,
+            latency_row,
+            delivery_launch,
+        ) = query_data(conn, start_date, end_date)
+
+    return build_payload(
+        rows,
+        start_date,
+        end_date,
+        sensor_rows,
+        sensor_daily_rows,
+        sensor_daily_stats_rows,
+        order_daily_stats_rows,
+        latency_row,
+        delivery_launch,
+    )
+
+
+def command_check_env(args: argparse.Namespace) -> int:
+    try:
+        env_path = load_env_file()
+        if env_path:
+            _print(f"[check] .env carregado: {env_path}")
+        else:
+            _print("[check] .env nao encontrado; usando somente variaveis do processo.")
+
+        missing_present = [key for key in REQUIRED_PRESENT if key not in os.environ]
+        missing_value = [key for key in REQUIRED_NONEMPTY if not os.getenv(key, "").strip()]
+        if missing_present:
+            return _fail("Variaveis ausentes: " + ", ".join(missing_present))
+        if missing_value:
+            return _fail("Variaveis sem valor: " + ", ".join(missing_value))
+
+        for var_name in ["AURA_DB_PORT", "AURA_POSTGRES_PORT"]:
+            int(os.getenv(var_name, ""))
+        _parse_date(os.getenv("AURA_START_DATE", ""), "AURA_START_DATE")
+        _parse_date(os.getenv("AURA_END_DATE", ""), "AURA_END_DATE")
+
+        _print("[check] Variaveis AURA_DB_* OK.")
+        _print("[check] Variaveis AURA_POSTGRES_* OK.")
+        if os.getenv("AURA_END_DATE", ""):
+            _print("[check] AURA_END_DATE definida; o acompanhamento usara esta data final.")
+        else:
+            _print("[check] AURA_END_DATE vazia; o acompanhamento usara a data atual.")
+
+        if not args.no_connection:
+            _check_postgres_connection("AURA_DB", _postgres_cfg("AURA_DB"))
+            _check_postgres_connection("AURA_POSTGRES", _postgres_cfg("AURA_POSTGRES"))
+
+        if not args.no_payload:
+            _print("[check] Consultando payload real do HTMLACOMPANHAMENTO...")
+            payload = build_acompanhamento_payload()
+            summary = validate_acompanhamento_payload(payload)
+            _print(
+                "[check] HTMLACOMPANHAMENTO payload OK: "
+                f"dias={summary['dias']} "
+                f"pedidos_entregues={summary['pedidos_entregues_total']} "
+                f"pedidos_inseridos={summary['pedidos_inseridos_total']} "
+                f"loggers_entregues={summary['loggers_entregues_total']} "
+                f"loggers_inseridos={summary['loggers_inseridos_total']}"
+            )
+
+        return 0
+    except Exception:
+        traceback.print_exc()
+        return 1
+
+
+def _read_text(path: Path) -> str:
+    return path.read_text(encoding="utf-8", errors="ignore")
+
+
+def _extract_js_json(text: str, var_name: str):
+    prefix = f"const {var_name} = "
+    start = text.find(prefix)
+    if start < 0:
+        raise ValueError(f"variavel_js_nao_encontrada:{var_name}")
+    fragment = text[start + len(prefix) :].lstrip()
+    value, _ = json.JSONDecoder().raw_decode(fragment)
+    return value
+
+
+def _validate_common_html(name: str, cycle_start: float | None) -> str:
+    spec = GENERATED_HTML[name]
+    path = ROOT / name
+    if not path.exists():
+        raise FileNotFoundError(f"{name} nao existe")
+    stat = path.stat()
+    if cycle_start and stat.st_mtime < cycle_start - 5:
+        raise RuntimeError(f"{name} nao foi modificado neste ciclo")
+    if stat.st_size < spec["min_size"]:
+        raise RuntimeError(f"{name} pequeno demais: {stat.st_size} bytes")
+
+    text = _read_text(path)
+    for marker in spec["markers"]:
+        if marker not in text:
+            raise RuntimeError(f"{name} sem marcador obrigatorio: {marker}")
+    return text
+
+
+def _validate_estoque(cycle_start: float | None) -> None:
+    text = _validate_common_html("ESTOQUE_DATALOGGERS.html", cycle_start)
+    states = _extract_js_json(text, "STATES")
+    details = _extract_js_json(text, "DETAIL_ROWS")
+    all_state = states.get("ALL") if isinstance(states, dict) else None
+    if not isinstance(all_state, dict):
+        raise RuntimeError("ESTOQUE_DATALOGGERS.html sem estado ALL")
+    kpis = [
+        _as_int(all_state.get("total_estoque")),
+        _as_int(all_state.get("apto_uso")),
+        _as_int(all_state.get("resumo_cf")),
+        _as_int(all_state.get("total_mov_cf")),
+        _as_int(all_state.get("total_rec_est")),
+    ]
+    if max(kpis or [0]) <= 0:
+        raise RuntimeError("ESTOQUE_DATALOGGERS.html sem KPIs reais")
+    if not isinstance(details, list) or len(details) <= 0:
+        raise RuntimeError("ESTOQUE_DATALOGGERS.html sem detalhe de registros")
+    _print(
+        "[html] ESTOQUE_DATALOGGERS.html OK: "
+        f"detalhes={len(details)} total_estoque={_as_int(all_state.get('total_estoque'))}"
+    )
+
+
+def _csv_rows(path: Path) -> int:
+    if not path.exists():
+        raise FileNotFoundError(f"{path.name} nao existe")
+    lines = path.read_text(encoding="utf-8-sig", errors="ignore").splitlines()
+    if not lines:
+        return 0
+    return max(0, len([line for line in lines[1:] if line.strip()]))
+
+
+def _validate_controle(cycle_start: float | None) -> None:
+    text = _validate_common_html("CONTROLE_ENTREGAS_20D.html", cycle_start)
+    data = _extract_js_json(text, "RAW_DATA")
+    if not isinstance(data, list) or len(data) <= 0:
+        raise RuntimeError("CONTROLE_ENTREGAS_20D.html sem RAW_DATA real")
+    main_rows = _csv_rows(ROOT / "CONTROLE_ENTREGAS_20D.csv")
+    if main_rows <= 0:
+        raise RuntimeError("CONTROLE_ENTREGAS_20D.csv sem linhas")
+    sla_rows = _csv_rows(ROOT / "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv")
+    _print(
+        "[html] CONTROLE_ENTREGAS_20D.html OK: "
+        f"raw_data={len(data)} csv_linhas={main_rows} sla_pendentes={sla_rows}"
+    )
+
+
+def _validate_acompanhamento_html(cycle_start: float | None) -> None:
+    text = _validate_common_html("HTMLACOMPANHAMENTO.html", cycle_start)
+    payload = _extract_js_json(text, "payload")
+    summary = validate_acompanhamento_payload(payload)
+    _print(
+        "[html] HTMLACOMPANHAMENTO.html OK: "
+        f"dias={summary['dias']} "
+        f"pedidos_entregues={summary['pedidos_entregues_total']} "
+        f"pedidos_inseridos={summary['pedidos_inseridos_total']} "
+        f"loggers_entregues={summary['loggers_entregues_total']} "
+        f"loggers_inseridos={summary['loggers_inseridos_total']}"
+    )
+
+
+def command_validate_html(args: argparse.Namespace) -> int:
+    cycle_start = float(args.cycle_start) if args.cycle_start else None
+    try:
+        _validate_estoque(cycle_start)
+        _validate_controle(cycle_start)
+        _validate_acompanhamento_html(cycle_start)
+        return 0
+    except Exception:
+        traceback.print_exc()
+        return 1
+
+
+def _git(args: list[str], *, check: bool = False) -> subprocess.CompletedProcess:
+    return subprocess.run(
+        ["git", *args],
+        cwd=ROOT,
+        text=False,
+        capture_output=True,
+        check=check,
+    )
+
+
+def _git_text(args: list[str]) -> str:
+    proc = _git(args)
+    if proc.returncode != 0:
+        return ""
+    return proc.stdout.decode("utf-8", errors="ignore")
+
+
+def _git_status_for(path: str) -> str:
+    return _git_text(["status", "--porcelain", "--", path]).strip()
+
+
+def _git_head_bytes(path: str) -> bytes | None:
+    proc = _git(["show", f"HEAD:{path}"])
+    if proc.returncode != 0:
+        return None
+    return proc.stdout
+
+
+def _normalize_html_for_meaningful_diff(path: str, data: bytes) -> str:
+    text = data.decode("utf-8", errors="ignore").replace("\r\n", "\n")
+    text = re.sub(r'("generated_at"\s*:\s*")[^"]+(")', r"\1<TIMESTAMP>\2", text)
+    text = re.sub(
+        r"(<span id=\"meta-gerado\">)[^<]+(</span>)",
+        r"\1<TIMESTAMP>\2",
+        text,
+        flags=re.IGNORECASE,
+    )
+    text = re.sub(
+        r"(Gerado em(?::)?(?:</strong>)?(?:\s|&nbsp;)*)\d{2}/\d{2}/\d{4} \d{2}:\d{2}(?::\d{2})?",
+        r"\1<TIMESTAMP>",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if path == "CONTROLE_ENTREGAS_20D.html":
+        # Plotly used to generate random div ids on every render; those ids are
+        # not data and must not force a publish by themselves.
+        text = re.sub(
+            r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+            "<PLOTLY_DIV_ID>",
+            text,
+            flags=re.IGNORECASE,
+        )
+    return text
+
+
+def _restore_worktree_path(path: str) -> None:
+    subprocess.run(
+        ["git", "restore", "--worktree", "--staged", "--", path],
+        cwd=ROOT,
+        stdout=subprocess.DEVNULL,
+        stderr=subprocess.DEVNULL,
+        check=False,
+    )
+
+
+def command_changed_files(args: argparse.Namespace) -> int:
+    try:
+        stage_paths: list[str] = []
+        timestamp_only: list[str] = []
+
+        for path in GENERATED_HTML:
+            if not _git_status_for(path):
+                continue
+            current_path = ROOT / path
+            if not current_path.exists():
+                stage_paths.append(path)
+                continue
+            head = _git_head_bytes(path)
+            current = current_path.read_bytes()
+            if head is None:
+                stage_paths.append(path)
+                continue
+            if _normalize_html_for_meaningful_diff(path, current) != _normalize_html_for_meaningful_diff(path, head):
+                stage_paths.append(path)
+            elif current != head:
+                timestamp_only.append(path)
+
+        for path in GENERATED_DATA + CODE_FILES:
+            if _git_status_for(path) and path not in stage_paths:
+                stage_paths.append(path)
+
+        if args.restore_timestamp_only:
+            for path in timestamp_only:
+                _restore_worktree_path(path)
+
+        if args.out:
+            out_path = Path(args.out)
+            out_path.write_text("\n".join(stage_paths) + ("\n" if stage_paths else ""), encoding="utf-8")
+
+        for path in stage_paths:
+            _print(path)
+        if timestamp_only:
+            _print("[stage] Ignorados por alteracao apenas de horario: " + ", ".join(timestamp_only))
+            if args.restore_timestamp_only:
+                _print("[stage] Arquivos restaurados para evitar commit somente de horario.")
+        if not stage_paths:
+            _print("[stage] Nenhum arquivo com alteracao real para commit.")
+        return 0
+    except Exception:
+        traceback.print_exc()
+        return 1
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Validacoes do atualizador Aura.")
+    sub = parser.add_subparsers(dest="command", required=True)
+
+    p_check = sub.add_parser("check-env", help="Valida .env, variaveis e conexoes.")
+    p_check.add_argument("--no-connection", action="store_true")
+    p_check.add_argument("--no-payload", action="store_true")
+    p_check.set_defaults(func=command_check_env)
+
+    p_html = sub.add_parser("validate-html", help="Valida HTMLs gerados no ciclo.")
+    p_html.add_argument("--cycle-start", default="")
+    p_html.set_defaults(func=command_validate_html)
+
+    p_changed = sub.add_parser("changed-files", help="Lista arquivos que merecem git add.")
+    p_changed.add_argument("--out", default="")
+    p_changed.add_argument("--restore-timestamp-only", action="store_true")
+    p_changed.set_defaults(func=command_changed_files)
+
+    args = parser.parse_args(argv)
+    return int(args.func(args))
+
+
+if __name__ == "__main__":
+    sys.exit(main())

@@ -1,55 +1,51 @@
-# Banco_Aura
+# Banco Aura Dashboard
 
-Script para calcular o gap entre:
+Este repositorio gera e publica os dashboards HTML:
 
-- `sync_orders + sync_items` (chave de sync)
-- `orders + order_items` (chave do Aura principal)
+- `ESTOQUE_DATALOGGERS.html`
+- `CONTROLE_ENTREGAS_20D.html`
+- `HTMLACOMPANHAMENTO.html`
 
-Indicadores principais (sempre reportados):
+## Atualizador automatico
 
-- Pedidos inseridos (`orders`)
-- Dispositivos inseridos (`order_items`)
-- Pedidos sem relatorio
-- Dispositivos sem relatorio
+Use sempre a partir da pasta `Banco_Aura`:
 
-## Regra da chave
-
-- Sync key: `sync_orders.order_code + sync_items.device_serial`
-- Aura key: `orders.order_code + order_items.item_label`
-- Normalizacao: maiusculo e remocao de caracteres fora de `[A-Z0-9]`
-
-Exemplo: `541010` + `A1010` = `541010A1010`
-
-## Filtro de data
-
-O filtro e aplicado em `sync_orders.delivery_date`:
-
-- `delivery_date > cutoff_date`
-
-Default: `2025-12-04`
-
-## Script
-
-Arquivo: `aura_sync_gap_report.py`
-
-## Uso rapido
-
-```bash
-py .\Banco_Aura\aura_sync_gap_report.py
+```bat
+ATUALIZAR_TUDO_10_MIN.bat __CHECK__
+ATUALIZAR_TUDO_10_MIN.bat __ONCE__
+ATUALIZAR_TUDO_10_MIN.bat
 ```
 
-## Parametros uteis
+Modos:
 
-```bash
-py .\Banco_Aura\aura_sync_gap_report.py --cutoff-date 2025-12-04 --sample-size 20
-py .\Banco_Aura\aura_sync_gap_report.py --export-missing-csv .\Banco_Aura\missing_keys.csv
-```
+- `__CHECK__`: valida Python, Git, sintaxe dos scripts, `.env`, variaveis obrigatorias, conexoes e payload real do `HTMLACOMPANHAMENTO`, sem gerar commit nem push.
+- `__ONCE__`: roda um ciclo completo uma unica vez, valida os HTMLs, commita somente se houver alteracao real e envia para `origin/main`.
+- Sem argumento: abre uma janela em loop, com novo inicio a cada 600 segundos. O tempo de execucao do ciclo e descontado da espera.
 
-## Variaveis de ambiente opcionais
+Os logs ficam em `logs/atualizacao_YYYY-MM-DD.log` e nao sao versionados.
 
-- `AURA_DB_HOST`
-- `AURA_DB_NAME`
-- `AURA_DB_USER`
-- `AURA_DB_PASSWORD`
-- `AURA_DB_PORT`
-- `AURA_CUTOFF_DATE`
+## Variaveis de ambiente
+
+Copie `.env.example` para `.env` e preencha as senhas localmente. Nao grave senhas no codigo.
+
+Uso dos prefixos:
+
+- `AURA_DB_*`: banco principal do Aura usado por `HTMLACOMPANHAMENTO.py` e `gerar_dashboard_entregas.py`.
+- `AURA_POSTGRES_*`: banco do portal/loggers usado por `gerar_html_estoque.py` e `gerar_html_controle_entregas.py`.
+- `AURA_START_DATE`: data inicial do acompanhamento, no formato `YYYY-MM-DD`.
+- `AURA_END_DATE`: opcional. Se ficar vazia, o acompanhamento usa a data atual.
+- `AURA_SQLSERVER_CONN_STRING`: opcional, usado apenas para o card complementar de tempo de lancamento quando disponivel.
+
+## Protecoes do fluxo
+
+Antes de publicar, o BAT:
+
+- sincroniza com `origin/main`;
+- roda `py_compile` nos scripts principais;
+- executa os geradores Python;
+- valida existencia, tamanho, data de modificacao e payload dos HTMLs;
+- bloqueia commit e push se algum script ou validacao falhar;
+- ignora/restaura alteracoes que sejam somente horario de geracao;
+- faz `git add` apenas dos arquivos necessarios;
+- cria commit com mensagem `Atualiza dashboards Aura - YYYY-MM-DD HH:mm`;
+- envia para `origin/main` apenas quando houver commit local pendente.

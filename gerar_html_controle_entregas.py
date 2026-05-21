@@ -480,7 +480,7 @@ def build_sla_section() -> str:
             title=dict(x=0.02, font=dict(size=15)),
             bargap=0.25,
         )
-        bucket_chart_html = fig_div(bucket_fig)
+        bucket_chart_html = fig_div(bucket_fig, "sla-bucket-chart")
 
     rank_chart_html = '<div class="empty-box">Sem ranking de atraso para mostrar.</div>'
     if not rank_df.empty:
@@ -505,7 +505,7 @@ def build_sla_section() -> str:
             yaxis=dict(gridcolor="#25304a", autorange="reversed"),
             title=dict(x=0.02, font=dict(size=15)),
         )
-        rank_chart_html = fig_div(rank_fig)
+        rank_chart_html = fig_div(rank_fig, "sla-rank-chart")
 
     return f"""
     <div class="section" id="sla-retorno">
@@ -927,11 +927,12 @@ def make_agent_return_chart(df: pd.DataFrame) -> go.Figure:
     return fig
 
 
-def fig_div(fig) -> str:
+def fig_div(fig, div_id: str) -> str:
     return pio.to_html(
         fig,
         include_plotlyjs=False,
         full_html=False,
+        div_id=div_id,
         config={"displayModeBar": False, "responsive": True},
     )
 

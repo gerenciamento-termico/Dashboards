@@ -19,6 +19,7 @@ from env_utils import load_env_file
 WORKSPACE = Path(__file__).resolve().parent
 SNAPSHOT_DIR = WORKSPACE.parent / "snapshot_reversa"
 MODEL_FILE = SNAPSHOT_DIR / "modelo_final.pkl"
+RECEBIMENTO_RESUMO_FILE = SNAPSHOT_DIR / "recebimento_resumo.pkl"
 OUTPUT_HTML = WORKSPACE / "CONTROLE_ENTREGAS_20D.html"
 OUTPUT_CSV = WORKSPACE / "CONTROLE_ENTREGAS_20D.csv"
 OUTPUT_SLA_PENDING_CSV = WORKSPACE / "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv"
@@ -56,13 +57,51 @@ def clean_text(series: pd.Series) -> pd.Series:
     return series.fillna("").astype(str).str.strip()
 
 
+def normalize_key(series: pd.Series) -> pd.Series:
+    return series.fillna("").astype(str).str.strip().str.upper()
+
+
+def refresh_return_status(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty or not RECEBIMENTO_RESUMO_FILE.exists() or "Logger" not in df.columns:
+        return df
+
+    resumo = pd.read_pickle(RECEBIMENTO_RESUMO_FILE)
+    if "Ultimo_Historico" in resumo.columns and "dt_historico" not in resumo.columns:
+        resumo = resumo.rename(columns={"Ultimo_Historico": "dt_historico"})
+    if not {"ds_tag", "dt_historico"}.issubset(resumo.columns):
+        return df
+
+    retorno = resumo[["ds_tag", "dt_historico"]].copy()
+    retorno["_logger_key"] = normalize_key(retorno["ds_tag"])
+    retorno["dt_historico"] = pd.to_datetime(retorno["dt_historico"], errors="coerce")
+    retorno = (
+        retorno[retorno["_logger_key"].ne("") & retorno["dt_historico"].notna()]
+        .groupby("_logger_key", as_index=False)["dt_historico"]
+        .max()
+    )
+
+    out = df.copy()
+    out["_logger_key"] = normalize_key(out["Logger"])
+    out = out.merge(retorno, how="left", on="_logger_key")
+    historico_atual = (
+        pd.to_datetime(out["Ultimo_Historico"], errors="coerce")
+        if "Ultimo_Historico" in out.columns
+        else pd.Series(pd.NaT, index=out.index)
+    )
+    out["Ultimo_Historico"] = out["dt_historico"].combine_first(historico_atual)
+    entrega_dt = pd.to_datetime(out.get("Data de Entrega"), errors="coerce")
+    out["Status Retorno"] = "Pendente de Retorno"
+    out.loc[out["Ultimo_Historico"].notna() & entrega_dt.notna() & (out["Ultimo_Historico"] > entrega_dt), "Status Retorno"] = "Retornado"
+    return out.drop(columns=["_logger_key", "dt_historico"], errors="ignore")
+
+
 def load_data() -> pd.DataFrame:
     if not MODEL_FILE.exists():
         raise FileNotFoundError(
             f"Nao encontrei o snapshot necessario: {MODEL_FILE}"
         )
     df = pd.read_pickle(MODEL_FILE).copy()
-    return df
+    return refresh_return_status(df)
 
 
 def _build_pg_url() -> URL:
@@ -984,6 +1023,12 @@ def build_page(df: pd.DataFrame) -> str:
     total_pedidos = int(df["Pedido"].nunique()) if not df.empty and "Pedido" in df.columns else 0
     total_agentes = int(df["Agente"].nunique()) if not df.empty and "Agente" in df.columns else 0
     total_retorno = int(df.loc[df["Status Retorno"].eq("Retornado"), "Logger"].nunique()) if not df.empty and "Status Retorno" in df.columns else 0
+    total_retorno_hoje = 0
+    if not df.empty and {"Status Retorno", "Ultimo_Historico", "Logger"}.issubset(df.columns):
+        retorno_dt = pd.to_datetime(df["Ultimo_Historico"], errors="coerce").dt.normalize()
+        total_retorno_hoje = int(
+            df.loc[df["Status Retorno"].eq("Retornado") & retorno_dt.eq(today), "Logger"].nunique()
+        )
     total_hoje = int(df.loc[df["Dia"].eq(today), "Logger"].nunique()) if not df.empty else 0
     total_ontem = int(df.loc[df["Dia"].eq(yesterday), "Logger"].nunique()) if not df.empty else 0
 
@@ -1379,7 +1424,8 @@ def build_page(df: pd.DataFrame) -> str:
       <div class="kpi"><div class="label">Entregues ontem</div><div class="value" id="kpi-ontem">{fmt_int(total_ontem)}</div><div class="foot">Referencia para o turno anterior</div></div>
       <div class="kpi"><div class="label">Pedidos unicos</div><div class="value" id="kpi-pedidos">{fmt_int(total_pedidos)}</div><div class="foot">Pedidos com logger entregue</div></div>
       <div class="kpi"><div class="label">Agentes unicos</div><div class="value" id="kpi-agentes">{fmt_int(total_agentes)}</div><div class="foot">Responsaveis da entrega</div></div>
-      <div class="kpi"><div class="label">Retornados no periodo</div><div class="value" id="kpi-retornados">{fmt_int(total_retorno)}</div><div class="foot">Status Retorno = Retornado</div></div>
+      <div class="kpi"><div class="label">Entregues que retornaram</div><div class="value" id="kpi-retornados">{fmt_int(total_retorno)}</div><div class="foot">Da janela de entrega, com retorno ao estoque</div></div>
+      <div class="kpi"><div class="label">Retornos hoje</div><div class="value" id="kpi-retornos-hoje">{fmt_int(total_retorno_hoje)}</div><div class="foot">Pela data do Ultimo Historico</div></div>
     </div>
 
     <div class="chart-stack" id="painel-operacional">
@@ -1471,6 +1517,7 @@ def build_page(df: pd.DataFrame) -> str:
         kpiPedidos: document.getElementById("kpi-pedidos"),
         kpiAgentes: document.getElementById("kpi-agentes"),
         kpiRetornados: document.getElementById("kpi-retornados"),
+        kpiRetornosHoje: document.getElementById("kpi-retornos-hoje"),
         todaySummary: document.getElementById("today-summary"),
         yesterdaySummary: document.getElementById("yesterday-summary"),
         detailSummary: document.getElementById("detail-summary"),
@@ -1580,6 +1627,15 @@ def build_page(df: pd.DataFrame) -> str:
         ).size;
       }}
 
+      function countReturnedByHistoryDate(rows, targetDate) {{
+        return new Set(
+          rows
+            .filter(function(row) {{ return clean(row.StatusRetorno) === "Retornado" && clean(row.UltimoHistorico).startsWith(targetDate); }})
+            .map(function(row) {{ return clean(row.Logger); }})
+            .filter(Boolean)
+        ).size;
+      }}
+
       function todayKey() {{
         return new Date().toLocaleDateString("pt-BR");
       }}
@@ -1658,6 +1714,7 @@ def build_page(df: pd.DataFrame) -> str:
         const pedidos = countUnique(rows, "Pedido");
         const agentes = countUnique(rows, "Agente");
         const retornados = countByStatus(rows, "Retornado");
+        const retornosHoje = countReturnedByHistoryDate(rows, todayKey());
         const hoje = countUniqueByDate(rows, todayKey());
         const ontem = countUniqueByDate(rows, yesterdayKey());
 
@@ -1667,6 +1724,7 @@ def build_page(df: pd.DataFrame) -> str:
         els.kpiPedidos.textContent = formatInt(pedidos);
         els.kpiAgentes.textContent = formatInt(agentes);
         els.kpiRetornados.textContent = formatInt(retornados);
+        els.kpiRetornosHoje.textContent = formatInt(retornosHoje);
 
         els.todaySummary.textContent = formatInt(hoje) + " registro(s) encontrados para a data atual.";
         els.yesterdaySummary.textContent = formatInt(ontem) + " registro(s) encontrados para o dia anterior.";

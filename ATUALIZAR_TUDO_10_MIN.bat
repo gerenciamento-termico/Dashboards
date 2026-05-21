@@ -239,6 +239,7 @@ call :LOG " ATUALIZAR DASHBOARDS AURA - ESTOQUE + ENTREGAS + HTML"
 call :LOG "============================================================"
 call :LOG "Pasta atual: %CD%"
 call :LOG "Inicio do ciclo: !CYCLE_START_HUMAN!"
+call :LOG "Atualizacao automatica: a cada %INTERVAL_MIN% minutos"
 call :LOG "Intervalo configurado: %INTERVAL_SEC% segundos entre inicios de ciclo"
 call :LOG ""
 
@@ -391,6 +392,12 @@ set "PUSH_DONE=sim"
 call :LOG "[OK] Push concluido com sucesso."
 
 :AFTER_PUSH
+call :VERIFY_REMOTE_SYNC
+if errorlevel 1 (
+    set "ERRMSG=Falha ao confirmar commit/push no GitHub apos o envio."
+    goto :CYCLE_FAIL
+)
+
 call :GIT_STATUS "Git status apos ciclo"
 call :LOG ""
 call :LOG "[OK] Ciclo concluido com sucesso."
@@ -440,6 +447,35 @@ set "STEP_RC=%ERRORLEVEL%"
 call :FLUSH_STEP
 exit /b %ERRORLEVEL%
 
+:VERIFY_REMOTE_SYNC
+call :LOG "[verificacao] Confirmando commit/push no GitHub..."
+set "LOCAL_HEAD="
+set "LOCAL_SHORT="
+set "REMOTE_HEAD="
+
+for /f %%A in ('git rev-parse HEAD 2^>nul') do set "LOCAL_HEAD=%%A"
+for /f %%A in ('git rev-parse --short HEAD 2^>nul') do set "LOCAL_SHORT=%%A"
+if not defined LOCAL_HEAD (
+    call :LOG "[ERRO] Nao foi possivel ler o commit local."
+    exit /b 1
+)
+
+for /f "tokens=1" %%A in ('git ls-remote origin refs/heads/main 2^>nul') do set "REMOTE_HEAD=%%A"
+if not defined REMOTE_HEAD (
+    call :LOG "[ERRO] Nao foi possivel ler o commit publicado em origin/main."
+    exit /b 1
+)
+
+if /I not "!LOCAL_HEAD!"=="!REMOTE_HEAD!" (
+    call :LOG "[ERRO] O commit local ainda nao bate com origin/main."
+    call :LOG "      local:  !LOCAL_HEAD!"
+    call :LOG "      remoto: !REMOTE_HEAD!"
+    exit /b 1
+)
+
+call :LOG "[OK] Commit/push confirmado no GitHub: !LOCAL_SHORT! em origin/main."
+exit /b 0
+
 :FINISH_CYCLE
 set "FINAL_RC=%~1"
 set "CYCLE_END_TS="
@@ -456,6 +492,7 @@ if defined CYCLE_START_TS (
     for /f %%A in ('powershell -NoProfile -Command "$elapsed = [DateTimeOffset]::Now.ToUnixTimeSeconds() - [int64]!CYCLE_START_TS!; $wait = %INTERVAL_SEC% - $elapsed; if ($wait -lt 1) { 1 } else { [int]$wait }"') do set "WAIT_SEC=%%A"
 )
 for /f "delims=" %%A in ('powershell -NoProfile -Command "(Get-Date).AddSeconds(!WAIT_SEC!).ToString('yyyy-MM-dd HH:mm:ss')"') do set "NEXT_AT=%%A"
+call :LOG "Atualizacao automatica: a cada %INTERVAL_MIN% minutos"
 call :LOG "Proxima execucao: !NEXT_AT! (!WAIT_SEC! segundo(s) de espera)"
 echo Pressione Ctrl+C para encerrar.
 timeout /t !WAIT_SEC! /nobreak >nul

@@ -493,10 +493,9 @@ def classify_badge(disponivel: int, aguardando: int):
 CSS = """
 <style>
 *{box-sizing:border-box;margin:0;padding:0;}
-:root{--bg-main:#0b1020;--bg-panel:#121b2d;--bg-panel-2:#0f1728;--line:#24344d;}
-body{background:radial-gradient(900px 260px at 0% -10%,#13233f 0%,rgba(19,35,63,0) 60%),
-     radial-gradient(700px 220px at 100% -20%,#1a2d4d 0%,rgba(26,45,77,0) 58%),
-     var(--bg-main);color:#e8edf5;font-family:"Segoe UI","Trebuchet MS",sans-serif;padding:18px;}
+:root{--bg-main:#eef3f8;--bg-panel:#ffffff;--bg-panel-2:#f8fbff;--line:#d7e2ef;--text:#172033;--muted:#617083;--shadow:0 10px 24px rgba(23,35,50,.07);}
+body{background:linear-gradient(180deg,#e9f1f9 0%,#f8fafc 36%,#f4f7fb 100%);
+     color:var(--text);font-family:"Segoe UI","Trebuchet MS",sans-serif;padding:18px;}
 .hero-wrap{background:linear-gradient(120deg,#0f2344 0%,#173463 52%,#1e4178 100%);
   border:1px solid #2b4a76;border-radius:16px;padding:14px 18px;margin-bottom:14px;}
 .hero-title{margin:0;font-size:2rem;font-weight:800;}
@@ -505,70 +504,72 @@ body{background:radial-gradient(900px 260px at 0% -10%,#13233f 0%,rgba(19,35,63,
 .hero-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;
   background:rgba(9,15,28,.34);border:1px solid rgba(173,200,232,.2);color:#dfeaf8;font-size:.78rem;}
 .filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px 0;}
-.tipo-label-sm{font-size:.85rem;color:#9fb7d4;font-weight:600;white-space:nowrap;}
+.tipo-label-sm{font-size:.85rem;color:#43566d;font-weight:700;white-space:nowrap;}
 .type-chip-list{display:flex;flex-wrap:wrap;gap:8px;}
 .type-chip{display:inline-flex;align-items:center;gap:8px;padding:6px 12px;border-radius:999px;
-  background:#13243c;border:1px solid #2b466b;color:#dceafe;cursor:pointer;font-size:.84rem;
+  background:#ffffff;border:1px solid #cbd9ea;color:#172033;cursor:pointer;font-size:.84rem;
   font-weight:700;user-select:none;transition:background .15s,color .15s,border-color .15s;}
-.type-chip:hover{background:#1a3358;border-color:#3a6090;}
+.type-chip:hover{background:#eef6ff;border-color:#8fb1d8;}
 .type-chip input{accent-color:#2f80d0;cursor:pointer;}
 .type-chip-all{background:linear-gradient(135deg,#173158 0%,#1d4f8f 100%);border-color:#4f94da;}
 .type-chip-all:hover{background:linear-gradient(135deg,#1d3f72 0%,#2560ab 100%);}
-.device-select{background:#13243c;border:1px solid #2b466b;border-radius:8px;color:#dceafe;
+.device-select{background:#ffffff;border:1px solid #cbd9ea;border-radius:8px;color:#172033;
   cursor:pointer;font-size:.88rem;font-weight:600;padding:6px 12px;min-width:240px;outline:none;}
 .device-select:hover{background:#1a3358;border-color:#3a6090;}
 .device-select:focus{border-color:#4f94da;box-shadow:0 0 0 2px rgba(47,128,208,.18);}
 .meta-strip{background:linear-gradient(180deg,var(--bg-panel) 0%,var(--bg-panel-2) 100%);
-  border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0 12px;color:#b7cbe4;
+  border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0 12px;color:#43566d;
   font-size:.92rem;line-height:1.6;}
-.meta-strip strong{color:#d7e6fb;font-weight:700;}
-.caption{font-size:.78rem;color:#7a90a8;margin-bottom:10px;}
+.meta-strip strong{color:#172033;font-weight:700;}
+.caption{font-size:.78rem;color:#617083;margin-bottom:10px;}
 .section-head{display:flex;align-items:baseline;justify-content:space-between;margin:10px 2px 8px 2px;}
-.section-title{margin:0;font-size:1.02rem;font-weight:800;color:#dceafe;letter-spacing:.01em;}
-.section-note{margin:0;font-size:.78rem;color:#96afcf;}
+.section-title{margin:0;font-size:1.02rem;font-weight:800;color:#172033;letter-spacing:.01em;}
+.section-note{margin:0;font-size:.78rem;color:#617083;}
 .kpi-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:6px 0 16px 0;}
 .kpi-card{position:relative;overflow:hidden;
-  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
-  border:1px solid #2a3e5e;border-radius:14px;padding:16px 18px;min-height:108px;
-  box-shadow:inset 0 1px 0 rgba(125,173,230,.06);text-align:center;}
+  background:linear-gradient(155deg,#ffffff 0%,#f8fbff 100%);
+  border:1px solid var(--line);border-radius:14px;padding:16px 18px;min-height:108px;
+  box-shadow:var(--shadow);text-align:center;}
 .kpi-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,#3f7bc3 0%,#75b5ff 100%);opacity:.85;}
-.kpi-title{font-size:1rem;font-weight:700;color:#9fb7d4;margin-bottom:12px;}
-.kpi-value{font-size:2.4rem;font-weight:800;color:#f6fbff;line-height:1;}
-.resumo-wrap{background:linear-gradient(170deg,#121f34 0%,#0f1828 100%);
-  border:1px solid #2a3e5e;border-radius:14px;padding:12px 12px 10px 12px;margin:8px 0 14px 0;}
-.resumo-title{font-size:.98rem;font-weight:800;color:#d8e6fb;margin-bottom:9px;}
+.kpi-title{font-size:1rem;font-weight:700;color:#617083;margin-bottom:12px;}
+.kpi-value{font-size:2.4rem;font-weight:800;color:#172033;line-height:1;}
+.resumo-wrap{background:linear-gradient(170deg,#ffffff 0%,#f8fbff 100%);
+  border:1px solid var(--line);border-radius:14px;padding:12px 12px 10px 12px;margin:8px 0 14px 0;box-shadow:var(--shadow);}
+.resumo-title{font-size:.98rem;font-weight:800;color:#172033;margin-bottom:9px;}
 .resumo-grid-main{display:grid;grid-template-columns:repeat(3,minmax(240px,360px));
   justify-content:center;gap:12px;margin-bottom:12px;}
-.resumo-card{position:relative;overflow:hidden;border:1px solid #2b466b;border-radius:12px;
+.resumo-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:12px;
   padding:14px;min-height:108px;
-  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
-  text-align:center;box-shadow:inset 0 1px 0 rgba(125,173,230,.06);}
+  background:linear-gradient(155deg,#ffffff 0%,#f8fbff 100%);
+  text-align:center;box-shadow:0 6px 16px rgba(23,35,50,.05);}
 .resumo-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,#3f7bc3 0%,#75b5ff 100%);opacity:.85;}
-.resumo-label{font-size:.96rem;color:#9ec2ea;font-weight:700;margin-bottom:10px;}
-.resumo-value{font-size:2rem;color:#f1f6ff;font-weight:800;line-height:1.1;}
-.resumo-meta{margin-top:3px;font-size:.72rem;color:#89a9cf;}
+.resumo-label{font-size:.96rem;color:#617083;font-weight:700;margin-bottom:10px;}
+.resumo-value{font-size:2rem;color:#172033;font-weight:800;line-height:1.1;}
+.resumo-meta{margin-top:3px;font-size:.72rem;color:#617083;}
 .critical-strip{display:grid;grid-template-columns:repeat(2,minmax(280px,420px));
   justify-content:center;gap:12px;margin:6px 0 12px 0;}
-.critical-card{position:relative;overflow:hidden;border:1px solid #365379;border-radius:12px;
+.critical-card{position:relative;overflow:hidden;border:1px solid var(--line);border-radius:12px;
   padding:13px 14px;min-height:104px;
-  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
-  text-align:center;box-shadow:inset 0 1px 0 rgba(125,173,230,.06);}
+  background:linear-gradient(155deg,#ffffff 0%,#f8fbff 100%);
+  text-align:center;box-shadow:var(--shadow);}
 .critical-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;
   background:linear-gradient(90deg,#3f7bc3 0%,#75b5ff 100%);opacity:.9;}
 .critical-head{position:relative;display:flex;justify-content:center;align-items:center;
   margin-bottom:8px;min-height:20px;}
-.critical-title{font-size:.95rem;color:#b9d1ee;font-weight:700;}
-.critical-value{font-size:2rem;font-weight:800;color:#f5f9ff;line-height:1.1;}
+.critical-title{font-size:.95rem;color:#617083;font-weight:700;}
+.critical-value{font-size:2rem;font-weight:800;color:#172033;line-height:1.1;}
 .badge{position:absolute;right:0;top:0;font-size:.68rem;font-weight:800;text-transform:uppercase;
   letter-spacing:.04em;border-radius:999px;padding:3px 8px;border:1px solid transparent;}
 .badge-normal{color:#9ff0c2;background:rgba(28,92,57,.5);border-color:rgba(134,237,185,.35);}
 .badge-warning{color:#ffd48a;background:rgba(98,67,18,.5);border-color:rgba(245,195,109,.35);}
 .badge-critical{color:#ffb3b3;background:rgba(96,31,31,.5);border-color:rgba(247,147,147,.35);}
 .charts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;margin-top:16px;}
-.chart-box{background:#141b26;border:1px solid #24344d;border-radius:12px;padding:10px;}
-.chart-title{font-size:.92rem;font-weight:700;color:#dceafe;margin-bottom:4px;padding:0 4px;}
+.chart-box{background:#ffffff;border:1px solid var(--line);border-radius:12px;padding:12px;box-shadow:var(--shadow);}
+.chart-title{font-size:.92rem;font-weight:800;color:#172033;margin-bottom:4px;padding:0 4px;}
+.chart-note{font-size:.76rem;color:#617083;margin:0 4px 6px;}
+.chart-box-wide{grid-column:1 / -1;}
 footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
 @media(max-width:1100px){
   .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
@@ -1076,14 +1077,19 @@ def generate_html_tipo(
 
 <div class="section-head">
   <h3 class="section-title">Gráficos — Últimos 7 dias</h3>
-  <p class="section-note">A seleção acima atualiza todos os indicadores</p>
+  <p class="section-note">A seleção acima atualiza todos os indicadores e gráficos</p>
 </div>
 <div class="charts">
-  <div class="chart-box"><div class="chart-title">Retornados ao Estoque</div><div id="chart-ret" style="height:290px"></div></div>
-  <div class="chart-box"><div class="chart-title">Movimentados para CF</div><div id="chart-cf" style="height:290px"></div></div>
-  <div class="chart-box"><div class="chart-title">Recebidos pela CF</div><div id="chart-cf-7d" style="height:290px"></div></div>
-  <div class="chart-box"><div class="chart-title">Status Geral dos Dataloggers (Top 12)</div><div id="chart-status" style="height:430px"></div></div>
-  <div class="chart-box"><div class="chart-title">Volumes Embalados</div><div id="chart-pack" style="height:290px"></div></div>
+  <div class="chart-box chart-box-wide">
+    <div class="chart-title">Movimentações por dia</div>
+    <p class="chart-note">Compara Retornados ao Estoque, Movimentados para CF, Recebidos pela CF e Volumes Embalados no mesmo eixo temporal.</p>
+    <div id="chart-movements" style="height:360px"></div>
+  </div>
+  <div class="chart-box chart-box-wide">
+    <div class="chart-title">Status Geral dos Dataloggers (Top 12)</div>
+    <p class="chart-note">Ranking horizontal para leitura dos status com nomes longos.</p>
+    <div id="chart-status" style="height:430px"></div>
+  </div>
 </div>
 
 <div class="detail-wrap">
@@ -1119,14 +1125,24 @@ def generate_html_tipo(
 const STATES = {states_json};
 const DETAIL_ROWS = {detail_rows_json};
 const PLOTLY_CFG = {{displayModeBar:false, responsive:true}};
+const CHART_COLORS = {{
+  ret: "#2563eb",
+  cf: "#0ea5e9",
+  rcf: "#13a8a3",
+  pack: "#1f9d7a",
+  status: "#1d4ed8",
+  grid: "#e7eef7",
+  axis: "#607089",
+  ink: "#172033"
+}};
 const BASE_LAYOUT = {{
-  paper_bgcolor: "#141b26",
-  plot_bgcolor: "#141b26",
+  paper_bgcolor: "#ffffff",
+  plot_bgcolor: "#ffffff",
   title_text: "",
-  font: {{color: "#e8edf5"}},
-  xaxis: {{gridcolor: "#2b3a4d", zerolinecolor: "#2b3a4d", linecolor: "#2b3a4d", tickfont: {{color: "#d3dceb"}}}},
-  yaxis: {{gridcolor: "#2b3a4d", zerolinecolor: "#2b3a4d", linecolor: "#2b3a4d", tickfont: {{color: "#d3dceb"}}}},
-  hoverlabel: {{bgcolor: "#1b2635", font: {{color: "#f1f5fb"}}}},
+  font: {{color: CHART_COLORS.ink, family: "Segoe UI, Tahoma, Arial, sans-serif"}},
+  xaxis: {{gridcolor: CHART_COLORS.grid, zerolinecolor: CHART_COLORS.grid, linecolor: "#cbd8e6", tickfont: {{color: CHART_COLORS.axis, size: 11}}, automargin: true}},
+  yaxis: {{gridcolor: CHART_COLORS.grid, zerolinecolor: CHART_COLORS.grid, linecolor: "#cbd8e6", tickfont: {{color: CHART_COLORS.axis, size: 11}}, automargin: true}},
+  hoverlabel: {{bgcolor: "#ffffff", bordercolor: "#c9d8e8", font: {{color: CHART_COLORS.ink, size: 12}}}},
   margin: {{l: 10, r: 40, t: 20, b: 10}}
 }};
 function fmt(n) {{ return Number(n || 0).toLocaleString("pt-BR"); }}
@@ -1137,42 +1153,107 @@ function badgeHtml(valueA, valueB) {{
   const cls = label === "critico" ? "badge-critical" : "badge-normal";
   return "<div class='badge " + cls + "'>" + label + "</div>";
 }}
-function renderBar(id, labels, values, color, height) {{
-  Plotly.react(id, [{{
-    x: labels || [],
-    y: values || [],
+function renderEmptyChart(id, message, height) {{
+  Plotly.react(id, [], {{
+    ...BASE_LAYOUT,
+    height: height || 320,
+    xaxis: {{visible: false}},
+    yaxis: {{visible: false}},
+    annotations: [{{
+      text: message || "Sem dados disponíveis para esta seleção",
+      x: 0.5,
+      y: 0.5,
+      xref: "paper",
+      yref: "paper",
+      showarrow: false,
+      font: {{color: CHART_COLORS.axis, size: 14}}
+    }}]
+  }}, PLOTLY_CFG);
+}}
+function normalizeDailySeries(series) {{
+  const map = new Map();
+  (series.labels || []).forEach((label, idx) => {{
+    map.set(String(label || ""), Number((series.values || [])[idx]) || 0);
+  }});
+  return map;
+}}
+function renderGroupedDailyChart(id, data) {{
+  const maps = {{
+    ret: normalizeDailySeries(data.ret_dia || {{}}),
+    cf: normalizeDailySeries(data.cf_dia || {{}}),
+    rcf: normalizeDailySeries(data.cf_7d || {{}}),
+    pack: normalizeDailySeries(data.packing_dia || {{}})
+  }};
+  const labels = Array.from(new Set([
+    ...maps.ret.keys(),
+    ...maps.cf.keys(),
+    ...maps.rcf.keys(),
+    ...maps.pack.keys()
+  ])).sort();
+  const series = [
+    {{key: "ret", label: "Retornados ao Estoque", color: CHART_COLORS.ret}},
+    {{key: "cf", label: "Movimentados para CF", color: CHART_COLORS.cf}},
+    {{key: "rcf", label: "Recebidos pela CF", color: CHART_COLORS.rcf}},
+    {{key: "pack", label: "Volumes Embalados", color: CHART_COLORS.pack}}
+  ];
+  const hasData = labels.some(label => series.some(s => (maps[s.key].get(label) || 0) > 0));
+  if (!hasData) {{
+    renderEmptyChart(id, "Sem dados disponíveis para esta seleção", 360);
+    return;
+  }}
+  const traces = series.map(s => ({{
+    x: labels,
+    y: labels.map(label => maps[s.key].get(label) || 0),
     type: "bar",
-    text: (values || []).map(v => String(v)),
+    name: s.label,
+    marker: {{color: s.color, line: {{width: 0}}}},
+    text: labels.map(label => {{
+      const v = maps[s.key].get(label) || 0;
+      return labels.length <= 7 && v > 0 ? String(v) : "";
+    }}),
     textposition: "outside",
     cliponaxis: false,
-    marker: {{color}}
-  }}], {{
+    hovertemplate: "<b>%{{x}}</b><br>" + s.label + ": %{{y}}<extra></extra>"
+  }}));
+  Plotly.react(id, traces, {{
     ...BASE_LAYOUT,
-    height,
-    margin: {{l: 30, r: 20, t: 20, b: 40}}
+    height: 360,
+    barmode: "group",
+    bargap: 0.24,
+    bargroupgap: 0.08,
+    margin: {{l: 54, r: 24, t: 28, b: 48}},
+    legend: {{orientation: "h", yanchor: "bottom", y: 1.04, xanchor: "left", x: 0, font: {{size: 12}}}},
+    yaxis: {{...BASE_LAYOUT.yaxis, rangemode: "tozero"}}
   }}, PLOTLY_CFG);
 }}
 function renderStatus(id, labels, values) {{
+  const rows = (labels || []).map((label, idx) => ({{
+    label: String(label || "Sem status"),
+    value: Number((values || [])[idx]) || 0
+  }})).filter(row => row.value > 0);
+  if (!rows.length) {{
+    renderEmptyChart(id, "Sem dados disponíveis para esta seleção", 430);
+    return;
+  }}
+  rows.sort((a, b) => a.value - b.value);
+  const maxValue = Math.max(...rows.map(row => row.value), 1);
   Plotly.react(id, [{{
-    x: labels || [],
-    y: values || [],
+    y: rows.map(row => row.label),
+    x: rows.map(row => row.value),
     type: "bar",
-    text: (values || []).map(v => String(v)),
+    orientation: "h",
+    text: rows.map(row => String(row.value)),
     textposition: "outside",
     cliponaxis: false,
-    marker: {{color: "#274a9f"}}
+    marker: {{color: CHART_COLORS.status, line: {{width: 0}}}},
+    hovertemplate: "<b>%{{y}}</b><br>Dataloggers: %{{x}}<extra></extra>"
   }}], {{
     ...BASE_LAYOUT,
-    height: 430,
-    margin: {{l: 40, r: 20, t: 20, b: 120}},
-    xaxis: {{
-      gridcolor: "#2b3a4d",
-      zerolinecolor: "#2b3a4d",
-      linecolor: "#2b3a4d",
-      tickfont: {{color: "#d3dceb"}},
-      tickangle: -35,
-      automargin: true
-    }}
+    height: Math.max(430, 120 + rows.length * 30),
+    margin: {{l: 210, r: 52, t: 24, b: 38}},
+    showlegend: false,
+    xaxis: {{...BASE_LAYOUT.xaxis, range: [0, maxValue * 1.16], rangemode: "tozero"}},
+    yaxis: {{...BASE_LAYOUT.yaxis, automargin: true}}
   }}, PLOTLY_CFG);
 }}
 function escapeHtml(value) {{
@@ -1260,16 +1341,23 @@ function refreshTipo() {{
   const badgeAg = document.getElementById("badge-aguardando");
   if (badgeDisp) badgeDisp.innerHTML = badgeHtml(data.apto_uso, data.resumo_cf_aguar);
   if (badgeAg) badgeAg.innerHTML = badgeHtml(data.resumo_cf_aguar, data.apto_uso);
-  renderBar("chart-ret", data.ret_dia.labels, data.ret_dia.values, "#4d7ed5", 290);
-  renderBar("chart-cf", data.cf_dia.labels, data.cf_dia.values, "#5c8ce2", 290);
-  renderBar("chart-cf-7d", data.cf_7d.labels, data.cf_7d.values, "#7da7ff", 290);
+  renderGroupedDailyChart("chart-movements", data);
   renderStatus("chart-status", data.status.labels, data.status.values);
-  renderBar("chart-pack", data.packing_dia.labels, data.packing_dia.values, "#77a2ee", 290);
   renderDetailTable();
 }}
 document.addEventListener("DOMContentLoaded", () => {{
   refreshTipo();
   renderDetailTable();
+}});
+let resizeTimer = null;
+window.addEventListener("resize", () => {{
+  clearTimeout(resizeTimer);
+  resizeTimer = setTimeout(() => {{
+    ["chart-movements", "chart-status"].forEach(id => {{
+      const el = document.getElementById(id);
+      if (el) Plotly.Plots.resize(el);
+    }});
+  }}, 120);
 }});
 </script>
 

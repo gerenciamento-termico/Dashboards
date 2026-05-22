@@ -1111,6 +1111,62 @@ def render_html(payload: dict) -> str:
       font-size: .76rem;
       align-items: center;
     }}
+    .chart-period-card {{
+      margin-top: 10px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 12px;
+      box-shadow: 0 6px 18px rgba(23, 35, 50, .05);
+    }}
+    .chart-period-head {{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }}
+    .chart-period-title {{
+      color: #172033;
+      font-size: .86rem;
+      font-weight: 800;
+    }}
+    .chart-period-sub {{
+      color: var(--muted);
+      font-size: .74rem;
+      font-weight: 600;
+      margin-top: 2px;
+    }}
+    .chart-period-segment {{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: flex-end;
+    }}
+    .chart-period-btn {{
+      appearance: none;
+      border: 1px solid #cbd8e7;
+      background: #f8fbff;
+      color: #1f3349;
+      border-radius: 999px;
+      padding: 7px 12px;
+      min-height: 32px;
+      font: inherit;
+      font-size: .78rem;
+      font-weight: 800;
+      cursor: pointer;
+      box-shadow: 0 1px 2px rgba(15, 23, 42, .04);
+      transition: background .14s ease, border-color .14s ease, color .14s ease, box-shadow .14s ease;
+    }}
+    .chart-period-btn:hover {{
+      border-color: #8fb1d8;
+      background: #eef6ff;
+    }}
+    .chart-period-btn.active {{
+      color: #fff;
+      border-color: #1f6fb8;
+      background: linear-gradient(180deg, #2b7fd0, #1f67aa);
+      box-shadow: 0 6px 14px rgba(31, 103, 170, .22);
+    }}
     .chart-axis-label {{
       fill: #64748b;
       font-size: 11px;
@@ -1235,6 +1291,12 @@ def render_html(payload: dict) -> str:
       .sensor-grid {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
       .latency-grid {{ grid-template-columns: repeat(1, minmax(0, 1fr)); }}
       .filters {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+      .chart-period-head {{ align-items: flex-start; flex-direction: column; }}
+      .chart-period-segment {{ justify-content: flex-start; width: 100%; }}
+    }}
+    @media (max-width: 520px) {{
+      .chart-period-card {{ padding: 10px; }}
+      .chart-period-btn {{ flex: 1 1 calc(50% - 6px); padding-inline: 8px; }}
     }}
   </style>
 </head>
@@ -1323,6 +1385,22 @@ def render_html(payload: dict) -> str:
       <div class="card">
         <div class="k">Loggers pendentes</div>
         <div class="v" id="l_pen">-</div>
+      </div>
+    </div>
+
+    <div class="chart-period-card">
+      <div class="chart-period-head">
+        <div>
+          <div class="chart-period-title">Período dos gráficos</div>
+          <div class="chart-period-sub" id="chart_period_state"></div>
+        </div>
+        <div class="chart-period-segment" role="group" aria-label="Período dos gráficos">
+          <button class="chart-period-btn" type="button" data-chart-period="7d">7 dias</button>
+          <button class="chart-period-btn" type="button" data-chart-period="15d">15 dias</button>
+          <button class="chart-period-btn" type="button" data-chart-period="30d">30 dias</button>
+          <button class="chart-period-btn" type="button" data-chart-period="month">Mês atual</button>
+          <button class="chart-period-btn" type="button" data-chart-period="all">Tudo</button>
+        </div>
       </div>
     </div>
 
@@ -1560,6 +1638,7 @@ def render_html(payload: dict) -> str:
     function renderColumnChart(config) {{
       const svg = document.getElementById(config.svgId);
       if (!svg) return;
+      if (chartTooltipEl) hideChartTooltip();
       const wrap = svg.closest('.chart-wrap') || svg.parentElement;
       const wrapWidth = Math.round((wrap && wrap.getBoundingClientRect().width) || svg.clientWidth || 720);
       const width = Math.max(320, wrapWidth);
@@ -1704,7 +1783,7 @@ def render_html(payload: dict) -> str:
         series: options.series || [],
         metricType: options.metricType || 'integer',
         ariaLabel: options.ariaLabel || '',
-        emptyMessage: options.emptyMessage || 'Sem dados no período',
+        emptyMessage: options.emptyMessage || 'Sem dados para o período selecionado',
       }};
       chartRegistry.set(svgId, config);
       renderColumnChart(config);
@@ -1771,6 +1850,17 @@ def render_html(payload: dict) -> str:
     const btnReset = document.getElementById('btn_reset');
     const btnToday = document.getElementById('btn_today');
     const filterState = document.getElementById('filter_state');
+    const chartPeriodState = document.getElementById('chart_period_state');
+    const chartPeriodBtns = Array.from(document.querySelectorAll('[data-chart-period]'));
+    let selectedChartPeriod = '30d';
+    let currentChartPeriodAnchor = '';
+    const chartPeriodLabels = {{
+      '7d': 'Últimos 7 dias',
+      '15d': 'Últimos 15 dias',
+      '30d': 'Últimos 30 dias',
+      month: 'Mês atual',
+      all: 'Tudo',
+    }};
     const sensorLabelMap = {{ all: 'Todos', ares: 'ARES', syos: 'SYOS', shield: 'Shield', web: 'Sensor web' }};
     const thermalLabelMap = {{ all: 'Todos', refrigerado: 'Refrigerado', congelado: 'Congelado' }};
 
@@ -1795,6 +1885,60 @@ def render_html(payload: dict) -> str:
       const m = String(iso).match(/^(\\d{{4}})-(\\d{{2}})-(\\d{{2}})$/);
       if (!m) return iso;
       return `${{m[3]}}/${{m[2]}}/${{m[1]}}`;
+    }}
+
+    function addDaysIso(iso, deltaDays) {{
+      const d = new Date(`${{iso}}T00:00:00`);
+      if (Number.isNaN(d.getTime())) return iso;
+      d.setDate(d.getDate() + deltaDays);
+      return d.toISOString().slice(0, 10);
+    }}
+
+    function maxIsoDate(items, dateField) {{
+      return (items || [])
+        .map(item => String(item && item[dateField] ? item[dateField] : ''))
+        .filter(Boolean)
+        .sort()
+        .pop() || '';
+    }}
+
+    function filterChartDataByPeriod(data, dateField, selectedPeriod) {{
+      const rows = (data || []).filter(row => row && row[dateField]);
+      if (!rows.length || selectedPeriod === 'all') return rows;
+      const anchor = currentChartPeriodAnchor || maxIsoDate(rows, dateField);
+      if (!anchor) return rows;
+      let start = '';
+      let end = anchor;
+      if (selectedPeriod === 'month') {{
+        start = `${{anchor.slice(0, 8)}}01`;
+      }} else {{
+        const days = Number(String(selectedPeriod).replace('d', '')) || 30;
+        start = addDaysIso(anchor, -(days - 1));
+      }}
+      return rows.filter(row => row[dateField] >= start && row[dateField] <= end);
+    }}
+
+    function updateChartPeriodButtons() {{
+      for (const btn of chartPeriodBtns) {{
+        const active = btn.dataset.chartPeriod === selectedChartPeriod;
+        btn.classList.toggle('active', active);
+        btn.setAttribute('aria-pressed', active ? 'true' : 'false');
+      }}
+    }}
+
+    function updateChartPeriodState(visibleRows) {{
+      if (!chartPeriodState) return;
+      const dates = (visibleRows || [])
+        .map(row => String(row && row.dia ? row.dia : ''))
+        .filter(Boolean)
+        .sort();
+      const label = chartPeriodLabels[selectedChartPeriod] || selectedChartPeriod;
+      if (!dates.length) {{
+        chartPeriodState.textContent = `Gráficos: ${{label}} | sem dados no período`;
+        return;
+      }}
+      chartPeriodState.textContent =
+        `Gráficos: ${{label}} | ${{formatDateBr(dates[0])}} a ${{formatDateBr(dates[dates.length - 1])}} | ${{dates.length}} dias com dados`;
     }}
 
     function inRange(dia, start, end) {{
@@ -1969,77 +2113,97 @@ def render_html(payload: dict) -> str:
         }}
       }}
 
-      const labels = [...new Set([
+      const baseLabels = [...new Set([
         ...Array.from(orderByDay.keys()),
         ...Array.from(loggerByDay.keys()),
       ])].sort();
-      const loggerLabels = labels;
-      const pedidoEntVals = labels.map(d => (orderByDay.get(d)?.ent || 0));
-      const pedidoInsVals = labels.map(d => (orderByDay.get(d)?.ins || 0));
-      const loggerEntVals = loggerLabels.map(d => (loggerByDay.get(d)?.ent || 0));
-      const loggerInsVals = loggerLabels.map(d => (loggerByDay.get(d)?.ins || 0));
+      currentChartPeriodAnchor = end || maxIsoDate(baseLabels.map(dia => ({{ dia }})), 'dia') || maxDate;
+      const chartDateRows = baseLabels.map(dia => ({{ dia }}));
+      const visibleChartDateRows = filterChartDataByPeriod(chartDateRows, 'dia', selectedChartPeriod);
+      const pedidoChartRows = filterChartDataByPeriod(
+        baseLabels.map(dia => ({{
+          dia,
+          ent: orderByDay.get(dia)?.ent || 0,
+          ins: orderByDay.get(dia)?.ins || 0,
+        }})),
+        'dia',
+        selectedChartPeriod
+      );
+      const loggerChartRows = filterChartDataByPeriod(
+        baseLabels.map(dia => ({{
+          dia,
+          ent: loggerByDay.get(dia)?.ent || 0,
+          ins: loggerByDay.get(dia)?.ins || 0,
+        }})),
+        'dia',
+        selectedChartPeriod
+      );
       const h2Loggers = document.getElementById('h2_loggers');
       if (h2Loggers) {{
         const sensorText = sensorLabelMap[sensorMode] || sensorMode;
         const thermalText = thermalLabelMap[thermalMode] || thermalMode;
         h2Loggers.textContent = `Loggers por dia (${{sensorText}} | ${{thermalText}}): entregues x inseridos`;
       }}
+      updateChartPeriodButtons();
+      updateChartPeriodState(visibleChartDateRows);
       drawGroupedBars(
         'chartPedidos',
-        labels,
-        pedidoEntVals,
-        pedidoInsVals,
+        pedidoChartRows.map(x => x.dia),
+        pedidoChartRows.map(x => x.ent),
+        pedidoChartRows.map(x => x.ins),
         ['#2563eb', '#0ea5e9']
       );
       drawGroupedBars(
         'chartLoggers',
-        loggerLabels,
-        loggerEntVals,
-        loggerInsVals,
+        loggerChartRows.map(x => x.dia),
+        loggerChartRows.map(x => x.ent),
+        loggerChartRows.map(x => x.ins),
         ['#1f9d7a', '#65c7ae']
       );
 
-      const dlLabels = dlDaily.map(x => x.dia);
+      const dlChartDaily = filterChartDataByPeriod(dlDaily, 'dia', selectedChartPeriod);
+      const dlLabels = dlChartDaily.map(x => x.dia);
       drawSingleBars(
         'chartDeliveryLaunch',
         dlLabels,
-        dlDaily.map(x => x.media_horas == null ? 0 : x.media_horas),
+        dlChartDaily.map(x => x.media_horas == null ? 0 : x.media_horas),
         '#1e40af',
         'Média horas para lançamento'
       );
-      const dailyLabels = daily.map(x => x.dia);
+      const chartDaily = filterChartDataByPeriod(daily, 'dia', selectedChartPeriod);
+      const dailyLabels = chartDaily.map(x => x.dia);
       drawSingleBars(
         'chartLatency',
         dailyLabels,
-        daily.map(x => x.avg_horas_pedidos == null ? 0 : x.avg_horas_pedidos),
+        chartDaily.map(x => x.avg_horas_pedidos == null ? 0 : x.avg_horas_pedidos),
         '#2563eb',
         'Média horas para inserir pedidos'
       );
       drawSingleBars(
         'chartLatencyAres',
         dailyLabels,
-        daily.map(x => x.avg_horas_itens_ares == null ? 0 : x.avg_horas_itens_ares),
+        chartDaily.map(x => x.avg_horas_itens_ares == null ? 0 : x.avg_horas_itens_ares),
         '#1d4ed8',
         'Média horas ARES'
       );
       drawSingleBars(
         'chartLatencySyos',
         dailyLabels,
-        daily.map(x => x.avg_horas_itens_syos == null ? 0 : x.avg_horas_itens_syos),
+        chartDaily.map(x => x.avg_horas_itens_syos == null ? 0 : x.avg_horas_itens_syos),
         '#0f766e',
         'Média horas SYOS'
       );
       drawSingleBars(
         'chartLatencyShield',
         dailyLabels,
-        daily.map(x => x.avg_horas_itens_shield == null ? 0 : x.avg_horas_itens_shield),
+        chartDaily.map(x => x.avg_horas_itens_shield == null ? 0 : x.avg_horas_itens_shield),
         '#b45309',
         'Média horas Shield'
       );
       drawSingleBars(
         'chartLatencyWeb',
         dailyLabels,
-        daily.map(x => x.avg_horas_itens_sensor_web == null ? 0 : x.avg_horas_itens_sensor_web),
+        chartDaily.map(x => x.avg_horas_itens_sensor_web == null ? 0 : x.avg_horas_itens_sensor_web),
         '#475569',
         'Média horas Sensor web'
       );
@@ -2048,7 +2212,7 @@ def render_html(payload: dict) -> str:
       if (filterState) {{
         const sensorLabel = sensorLabelMap[sensorMode] || 'Todos';
         const thermalLabel = thermalLabelMap[thermalMode] || 'Todos';
-        filterState.textContent = `Filtro ativo: ${{formatDateBr(start)}} a ${{formatDateBr(end)}} | Sensor: ${{sensorLabel}} | Faixa térmica: ${{thermalLabel}} | Dias com dados: ${{labels.length}}`;
+        filterState.textContent = `Filtro ativo: ${{formatDateBr(start)}} a ${{formatDateBr(end)}} | Sensor: ${{sensorLabel}} | Faixa térmica: ${{thermalLabel}} | Dias com dados: ${{baseLabels.length}}`;
       }}
     }}
 
@@ -2072,7 +2236,15 @@ def render_html(payload: dict) -> str:
     fltEnd.addEventListener('change', applyFilters);
     fltSensor.addEventListener('change', applyFilters);
     fltThermal.addEventListener('change', applyFilters);
+    for (const btn of chartPeriodBtns) {{
+      btn.addEventListener('click', () => {{
+        selectedChartPeriod = btn.dataset.chartPeriod || '30d';
+        updateChartPeriodButtons();
+        applyFilters();
+      }});
+    }}
 
+    updateChartPeriodButtons();
     applyFilters();
   </script>
 </body>

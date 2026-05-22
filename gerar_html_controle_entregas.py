@@ -520,18 +520,18 @@ def build_sla_section() -> str:
             hovertemplate="<b>%{x}</b><br>Pendentes: %{y}<extra></extra>",
         )
         bucket_fig.update_layout(
-            template="plotly_white",
-            paper_bgcolor="#ffffff",
-            plot_bgcolor="#ffffff",
+            template="plotly_dark",
+            paper_bgcolor="#0b1020",
+            plot_bgcolor="#0b1020",
             margin=dict(l=46, r=18, t=34, b=42),
             height=320,
-            font=dict(color="#172033", family="Segoe UI, Tahoma, Arial, sans-serif"),
-            xaxis=dict(gridcolor="#e7eef7", tickangle=0, automargin=True),
-            yaxis=dict(gridcolor="#e7eef7", title="", rangemode="tozero"),
-            title=dict(x=0.02, font=dict(size=15, color="#172033")),
+            font=dict(color="#e5eefc", family="Segoe UI, Tahoma, Arial, sans-serif"),
+            xaxis=dict(gridcolor="#25304a", tickangle=0, automargin=True),
+            yaxis=dict(gridcolor="#25304a", title="", rangemode="tozero"),
+            title=dict(x=0.02, font=dict(size=15, color="#e5eefc")),
             bargap=0.25,
             showlegend=False,
-            hoverlabel=dict(bgcolor="#ffffff", bordercolor="#c9d8e8", font=dict(color="#172033")),
+            hoverlabel=dict(bgcolor="#0e1626", bordercolor="#25304a", font=dict(color="#e5eefc")),
         )
         bucket_chart_html = fig_div(bucket_fig, "sla-bucket-chart")
 
@@ -554,16 +554,16 @@ def build_sla_section() -> str:
             hovertemplate="<b>%{y}</b><br>Pendentes: %{x}<br>Média: %{customdata[0]:.1f} dias<br>Maior atraso: %{customdata[1]:.1f} dias<extra></extra>",
         )
         rank_fig.update_layout(
-            template="plotly_white",
-            paper_bgcolor="#ffffff",
-            plot_bgcolor="#ffffff",
+            template="plotly_dark",
+            paper_bgcolor="#0b1020",
+            plot_bgcolor="#0b1020",
             margin=dict(l=160, r=44, t=34, b=36),
             height=max(320, 110 + len(rank_df) * 30),
-            font=dict(color="#172033", family="Segoe UI, Tahoma, Arial, sans-serif"),
-            xaxis=dict(gridcolor="#e7eef7", title="", rangemode="tozero"),
-            yaxis=dict(gridcolor="#e7eef7", autorange="reversed", automargin=True),
-            title=dict(x=0.02, font=dict(size=15, color="#172033")),
-            hoverlabel=dict(bgcolor="#ffffff", bordercolor="#c9d8e8", font=dict(color="#172033")),
+            font=dict(color="#e5eefc", family="Segoe UI, Tahoma, Arial, sans-serif"),
+            xaxis=dict(gridcolor="#25304a", title="", rangemode="tozero"),
+            yaxis=dict(gridcolor="#25304a", autorange="reversed", automargin=True),
+            title=dict(x=0.02, font=dict(size=15, color="#e5eefc")),
+            hoverlabel=dict(bgcolor="#0e1626", bordercolor="#25304a", font=dict(color="#e5eefc")),
         )
         rank_chart_html = fig_div(rank_fig, "sla-rank-chart")
 
@@ -1123,25 +1123,28 @@ def build_page(df: pd.DataFrame) -> str:
   <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
   <style>
     :root {{
-      --bg: #eef3f8;
-      --panel: #ffffff;
-      --panel-2: #f8fbff;
-      --line: #d7e2ef;
-      --line-strong: #c5d6e8;
-      --text: #172033;
-      --muted: #617083;
-      --accent: #1e63a7;
-      --accent-2: #2f7fd0;
+      --bg: #07101d;
+      --panel: rgba(14, 22, 38, 0.96);
+      --panel-2: rgba(10, 16, 29, 0.96);
+      --line: rgba(122,162,255,0.16);
+      --line-strong: rgba(122,162,255,0.28);
+      --text: #e8eefb;
+      --muted: #93a2b8;
+      --accent: #8fb8ff;
+      --accent-2: #4f8cff;
       --accent-3: #2dd4bf;
       --warn: #f59e0b;
       --danger: #fb7185;
-      --shadow: 0 10px 24px rgba(23, 35, 50, 0.07);
+      --shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
     }}
     * {{ box-sizing: border-box; }}
     body {{
       margin: 0;
       font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-      background: linear-gradient(180deg, #e9f1f9 0%, #f8fafc 36%, #f4f7fb 100%);
+      background:
+        radial-gradient(circle at top left, rgba(122,162,255,0.13), transparent 26%),
+        radial-gradient(circle at top right, rgba(79,140,255,0.12), transparent 22%),
+        linear-gradient(180deg, #09111e 0%, #050911 100%);
       color: var(--text);
     }}
     .wrap {{ max-width: 1620px; margin: 0 auto; padding: 24px 18px 40px; }}
@@ -1214,8 +1217,8 @@ def build_page(df: pd.DataFrame) -> str:
       width: 100%;
       border-radius: 12px;
       border: 1px solid rgba(122,162,255,0.26);
-      background: #ffffff;
-      color: #172033;
+      background: rgba(9,14,25,0.92);
+      color: #e8eefb;
       padding: 10px 12px;
       font-size: 13px;
       outline: none;
@@ -1225,11 +1228,11 @@ def build_page(df: pd.DataFrame) -> str:
       box-shadow: 0 0 0 3px rgba(79,140,255,0.16);
     }}
     .pill {{
-      border: 1px solid rgba(255,255,255,0.22);
+      border: 1px solid rgba(148,163,184,0.22);
       border-radius: 999px;
       padding: 8px 12px;
-      background: rgba(255,255,255,0.12);
-      color: #ffffff;
+      background: rgba(255,255,255,0.03);
+      color: var(--text);
       font-size: 13px;
     }}
     .kpis {{
@@ -1239,8 +1242,7 @@ def build_page(df: pd.DataFrame) -> str:
       margin: 16px 0 18px;
     }}
     .kpi {{
-      background:
-        linear-gradient(180deg, #ffffff, #f8fbff);
+      background: linear-gradient(180deg, var(--panel), var(--panel-2));
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 16px 16px 14px;
@@ -1292,7 +1294,7 @@ def build_page(df: pd.DataFrame) -> str:
       font-size: 15px;
       font-weight: 800;
       margin: 2px 0 12px;
-      color: #172033;
+      color: #e8eefb;
     }}
     .chart-box {{
       min-height: 320px;
@@ -1331,7 +1333,7 @@ def build_page(df: pd.DataFrame) -> str:
       align-items: center;
       gap: 8px;
       border: 1px solid rgba(122,162,255,0.26);
-      background: linear-gradient(180deg, #ffffff, #f2f7fd);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
       color: var(--text);
       text-decoration: none;
       border-radius: 12px;
@@ -1339,7 +1341,7 @@ def build_page(df: pd.DataFrame) -> str:
       font-weight: 700;
       font-size: 13px;
     }}
-    .btn:hover {{ background: #eaf3fd; }}
+    .btn:hover {{ background: rgba(255,255,255,0.08); }}
     .meta {{
       color: var(--muted);
       font-size: 13px;
@@ -1356,29 +1358,30 @@ def build_page(df: pd.DataFrame) -> str:
     table.data-table {{
       width: 100%;
       border-collapse: collapse;
-      background: #ffffff;
+      background: var(--panel);
       min-width: 100%;
       table-layout: auto;
     }}
     .data-table th,
     .data-table td {{
       padding: 11px 10px;
-      border-bottom: 1px solid #e5edf6;
-      border-right: 1px solid #eef3f8;
+      border-bottom: 1px solid var(--line);
+      border-right: 1px solid rgba(255,255,255,0.03);
       font-size: 12px;
       text-align: left;
       white-space: normal;
       overflow-wrap: anywhere;
+      color: #e8eefb;
     }}
     .data-table th {{
       position: sticky;
       top: 0;
-      background: linear-gradient(180deg, #f8fbff, #eef4fb);
-      color: #172033;
+      background: linear-gradient(180deg, var(--panel-2), var(--panel));
+      color: var(--text);
       z-index: 1;
     }}
-    .data-table tbody tr:nth-child(even) {{ background: #f8fbff; }}
-    .data-table tbody tr:hover {{ background: #edf6ff; }}
+    .data-table tbody tr:nth-child(even) {{ background: rgba(255,255,255,0.02); }}
+    .data-table tbody tr:hover {{ background: rgba(122,162,255,0.08); }}
     .two-col {{
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1388,7 +1391,7 @@ def build_page(df: pd.DataFrame) -> str:
     .empty-box {{
       padding: 18px;
       color: var(--muted);
-      background: #ffffff;
+      background: var(--panel-2);
       border-radius: 14px;
       border: 1px dashed rgba(148,163,184,0.24);
     }}
@@ -1556,14 +1559,14 @@ def build_page(df: pd.DataFrame) -> str:
       }};
       const PLOTLY_CFG = {{ displayModeBar: false, responsive: true }};
       const CHART_COLORS = {{
-        returned: "#2563eb",
-        pending: "#93c5fd",
-        pct: "#0f766e",
-        ranking: "#1d4ed8",
-        uf: "#0ea5e9",
-        grid: "#e7eef7",
-        axis: "#607089",
-        ink: "#172033"
+        returned: "#2f6fd6",
+        pending: "#9bc7ff",
+        pct: "#2dd4bf",
+        ranking: "#4f8cff",
+        uf: "#4f8cff",
+        grid: "#25304a",
+        axis: "#93a2b8",
+        ink: "#e8eefb"
       }};
 
       function clean(value) {{
@@ -1773,16 +1776,16 @@ def build_page(df: pd.DataFrame) -> str:
 
       function basePlotlyLayout(height, extra) {{
         return Object.assign({{
-          template: "plotly_white",
-          paper_bgcolor: "#ffffff",
-          plot_bgcolor: "#ffffff",
+          template: "plotly_dark",
+          paper_bgcolor: "#0b1020",
+          plot_bgcolor: "#0b1020",
           height: height,
           margin: {{ l: 54, r: 30, t: 34, b: 46 }},
           font: {{ color: CHART_COLORS.ink, family: "Segoe UI, Tahoma, Arial, sans-serif" }},
           hovermode: "closest",
           hoverlabel: {{
-            bgcolor: "#ffffff",
-            bordercolor: "#c9d8e8",
+            bgcolor: "#0e1626",
+            bordercolor: "#25304a",
             font: {{ color: CHART_COLORS.ink, size: 12 }}
           }},
           legend: {{
@@ -1796,14 +1799,14 @@ def build_page(df: pd.DataFrame) -> str:
           xaxis: {{
             gridcolor: CHART_COLORS.grid,
             zerolinecolor: CHART_COLORS.grid,
-            linecolor: "#cbd8e6",
+            linecolor: "#25304a",
             tickfont: {{ color: CHART_COLORS.axis, size: 11 }},
             automargin: true
           }},
           yaxis: {{
             gridcolor: CHART_COLORS.grid,
             zerolinecolor: CHART_COLORS.grid,
-            linecolor: "#cbd8e6",
+            linecolor: "#25304a",
             tickfont: {{ color: CHART_COLORS.axis, size: 11 }},
             automargin: true
           }}

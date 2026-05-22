@@ -1178,6 +1178,7 @@ def build_page(df: pd.DataFrame) -> str:
       font-size: 31px;
       line-height: 1.1;
     }}
+    .hero h1 {{ color: #ffffff; }}
     .sub {{
       color: #d9ecff;
       font-size: 14px;
@@ -1208,6 +1209,7 @@ def build_page(df: pd.DataFrame) -> str:
       letter-spacing: 0.06em;
       font-weight: 700;
     }}
+    .hero .filter-label {{ color: #bfe1ff; }}
     .filter-select {{
       width: 100%;
       border-radius: 12px;
@@ -1280,6 +1282,7 @@ def build_page(df: pd.DataFrame) -> str:
       padding: 14px 14px 10px;
       overflow: hidden;
       box-shadow: var(--shadow);
+      min-width: 0;
     }}
     .panel-wide {{
       padding-bottom: 8px;
@@ -1304,6 +1307,7 @@ def build_page(df: pd.DataFrame) -> str:
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 16px;
+      min-width: 0;
     }}
     .section h2 {{
       margin: 0 0 8px;
@@ -1341,6 +1345,10 @@ def build_page(df: pd.DataFrame) -> str:
       font-size: 13px;
     }}
     .table-wrap {{
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      display: block;
       overflow-x: auto;
       border-radius: 14px;
       border: 1px solid rgba(148,163,184,0.16);
@@ -1349,7 +1357,8 @@ def build_page(df: pd.DataFrame) -> str:
       width: 100%;
       border-collapse: collapse;
       background: #ffffff;
-      min-width: 1050px;
+      min-width: 100%;
+      table-layout: auto;
     }}
     .data-table th,
     .data-table td {{
@@ -1358,7 +1367,8 @@ def build_page(df: pd.DataFrame) -> str:
       border-right: 1px solid #eef3f8;
       font-size: 12px;
       text-align: left;
-      white-space: nowrap;
+      white-space: normal;
+      overflow-wrap: anywhere;
     }}
     .data-table th {{
       position: sticky;

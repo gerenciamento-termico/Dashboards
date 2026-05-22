@@ -443,13 +443,14 @@ def _summarize_state(
 
 def _style(fig, height=300):
     fig.update_layout(
-        paper_bgcolor="#141b26", plot_bgcolor="#141b26",
-        title_text="", font={"color": "#e8edf5"},
-        xaxis={"gridcolor": "#2b3a4d", "zerolinecolor": "#2b3a4d",
-               "linecolor": "#2b3a4d", "tickfont": {"color": "#d3dceb"}},
-        yaxis={"gridcolor": "#2b3a4d", "zerolinecolor": "#2b3a4d",
-               "linecolor": "#2b3a4d", "tickfont": {"color": "#d3dceb"}},
-        hoverlabel={"bgcolor": "#1b2635", "font": {"color": "#f1f5fb"}},
+        template="plotly_white",
+        paper_bgcolor="#ffffff", plot_bgcolor="#ffffff",
+        title_text="", font={"color": "#172033"},
+        xaxis={"gridcolor": "#e7eef7", "zerolinecolor": "#e7eef7",
+               "linecolor": "#cbd8e6", "tickfont": {"color": "#607089"}},
+        yaxis={"gridcolor": "#e7eef7", "zerolinecolor": "#e7eef7",
+               "linecolor": "#cbd8e6", "tickfont": {"color": "#607089"}},
+        hoverlabel={"bgcolor": "#ffffff", "bordercolor": "#c9d8e8", "font": {"color": "#172033"}},
         margin=dict(l=10, r=40, t=20, b=10), height=height,
     )
     fig.update_xaxes(title_text="")
@@ -498,7 +499,7 @@ body{background:linear-gradient(180deg,#e9f1f9 0%,#f8fafc 36%,#f4f7fb 100%);
      color:var(--text);font-family:"Segoe UI","Trebuchet MS",sans-serif;padding:18px;}
 .hero-wrap{background:linear-gradient(120deg,#0f2344 0%,#173463 52%,#1e4178 100%);
   border:1px solid #2b4a76;border-radius:16px;padding:14px 18px;margin-bottom:14px;}
-.hero-title{margin:0;font-size:2rem;font-weight:800;}
+.hero-title{margin:0;font-size:2rem;font-weight:800;color:#ffffff;}
 .hero-sub{margin-top:4px;color:#bdd0ec;font-size:.95rem;}
 .hero-meta{margin-top:6px;display:flex;flex-wrap:wrap;gap:8px;}
 .hero-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;
@@ -570,6 +571,19 @@ body{background:linear-gradient(180deg,#e9f1f9 0%,#f8fafc 36%,#f4f7fb 100%);
 .chart-title{font-size:.92rem;font-weight:800;color:#172033;margin-bottom:4px;padding:0 4px;}
 .chart-note{font-size:.76rem;color:#617083;margin:0 4px 6px;}
 .chart-box-wide{grid-column:1 / -1;}
+.detail-wrap{background:#ffffff;border:1px solid var(--line);border-radius:14px;padding:14px;margin-top:16px;box-shadow:var(--shadow);}
+.detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-bottom:10px;}
+.detail-subtitle{font-size:.78rem;color:#617083;margin-top:3px;}
+.detail-controls{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+.detail-select{background:#ffffff;border:1px solid #cbd9ea;border-radius:8px;color:#172033;padding:7px 10px;min-width:220px;outline:none;}
+.detail-count{font-size:.84rem;color:#43566d;}
+.detail-scroll{overflow-x:auto;border:1px solid #e5edf6;border-radius:12px;}
+.detail-tbl{width:100%;min-width:900px;border-collapse:collapse;background:#ffffff;}
+.detail-tbl th,.detail-tbl td{padding:10px;border-bottom:1px solid #e5edf6;border-right:1px solid #eef3f8;font-size:.78rem;text-align:left;white-space:nowrap;}
+.detail-tbl th{background:#f3f7fb;color:#172033;font-weight:800;}
+.detail-tbl tbody tr:nth-child(even){background:#f8fbff;}
+.detail-tbl tbody tr:hover{background:#edf6ff;}
+.detail-empty{text-align:center;color:#617083;padding:18px;}
 footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
 @media(max-width:1100px){
   .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));}

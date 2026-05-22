@@ -498,40 +498,26 @@ def build_sla_section() -> str:
 
     bucket_chart_html = '<div class="empty-box">Sem faixas de atraso para mostrar.</div>'
     if not bucket_df.empty:
-        bucket_colors = {
-            "11-14 dias": "#93c5fd",
-            "15-20 dias": "#60a5fa",
-            "21-30 dias": "#f59e0b",
-            "31+ dias": "#ef4444",
-        }
         bucket_fig = px.bar(
             bucket_df,
             x="Faixa",
             y="Pendentes",
             text="Pendentes",
             title="Faixas de atraso",
-            color="Faixa",
-            color_discrete_map=bucket_colors,
+            color_discrete_sequence=["#6f9eff"],
         )
-        bucket_fig.update_traces(
-            textposition="outside",
-            cliponaxis=False,
-            marker_line_width=0,
-            hovertemplate="<b>%{x}</b><br>Pendentes: %{y}<extra></extra>",
-        )
+        bucket_fig.update_traces(textposition="outside", cliponaxis=False)
         bucket_fig.update_layout(
             template="plotly_dark",
             paper_bgcolor="#0b1020",
             plot_bgcolor="#0b1020",
-            margin=dict(l=46, r=18, t=34, b=42),
+            margin=dict(l=18, r=18, t=48, b=36),
             height=320,
-            font=dict(color="#e5eefc", family="Segoe UI, Tahoma, Arial, sans-serif"),
-            xaxis=dict(gridcolor="#25304a", tickangle=0, automargin=True),
-            yaxis=dict(gridcolor="#25304a", title="", rangemode="tozero"),
-            title=dict(x=0.02, font=dict(size=15, color="#e5eefc")),
+            font=dict(color="#e5eefc"),
+            xaxis=dict(gridcolor="#25304a", tickangle=-15),
+            yaxis=dict(gridcolor="#25304a", title="Pendentes"),
+            title=dict(x=0.02, font=dict(size=15)),
             bargap=0.25,
-            showlegend=False,
-            hoverlabel=dict(bgcolor="#0e1626", bordercolor="#25304a", font=dict(color="#e5eefc")),
         )
         bucket_chart_html = fig_div(bucket_fig, "sla-bucket-chart")
 
@@ -545,25 +531,18 @@ def build_sla_section() -> str:
             text="PendentesTxt",
             title="Agentes com mais pendencias acima de 10 dias",
             color_discrete_sequence=["#2f6fd6"],
-            custom_data=["MediaDias", "MaiorDia"],
         )
-        rank_fig.update_traces(
-            textposition="outside",
-            cliponaxis=False,
-            marker_line_width=0,
-            hovertemplate="<b>%{y}</b><br>Pendentes: %{x}<br>Média: %{customdata[0]:.1f} dias<br>Maior atraso: %{customdata[1]:.1f} dias<extra></extra>",
-        )
+        rank_fig.update_traces(textposition="inside", cliponaxis=False)
         rank_fig.update_layout(
             template="plotly_dark",
             paper_bgcolor="#0b1020",
             plot_bgcolor="#0b1020",
-            margin=dict(l=160, r=44, t=34, b=36),
-            height=max(320, 110 + len(rank_df) * 30),
-            font=dict(color="#e5eefc", family="Segoe UI, Tahoma, Arial, sans-serif"),
-            xaxis=dict(gridcolor="#25304a", title="", rangemode="tozero"),
-            yaxis=dict(gridcolor="#25304a", autorange="reversed", automargin=True),
-            title=dict(x=0.02, font=dict(size=15, color="#e5eefc")),
-            hoverlabel=dict(bgcolor="#0e1626", bordercolor="#25304a", font=dict(color="#e5eefc")),
+            margin=dict(l=18, r=18, t=48, b=36),
+            height=320,
+            font=dict(color="#e5eefc"),
+            xaxis=dict(gridcolor="#25304a", title="Pendencias"),
+            yaxis=dict(gridcolor="#25304a", autorange="reversed"),
+            title=dict(x=0.02, font=dict(size=15)),
         )
         rank_chart_html = fig_div(rank_fig, "sla-rank-chart")
 
@@ -1135,7 +1114,6 @@ def build_page(df: pd.DataFrame) -> str:
       --accent-3: #2dd4bf;
       --warn: #f59e0b;
       --danger: #fb7185;
-      --shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
     }}
     * {{ box-sizing: border-box; }}
     body {{
@@ -1150,12 +1128,12 @@ def build_page(df: pd.DataFrame) -> str:
     .wrap {{ max-width: 1620px; margin: 0 auto; padding: 24px 18px 40px; }}
     .hero {{
       background:
-        linear-gradient(135deg, #0b2745, #14528d 58%, #1e78bd),
-        radial-gradient(circle at top right, rgba(255,255,255,0.18), transparent 30%);
-      border: 1px solid rgba(255,255,255,0.20);
+        linear-gradient(135deg, rgba(17,26,44,0.98), rgba(10,16,29,0.98)),
+        radial-gradient(circle at top right, rgba(122,162,255,0.10), transparent 30%);
+      border: 1px solid var(--line);
       border-radius: 22px;
       padding: 24px 24px 20px;
-      box-shadow: 0 14px 34px rgba(13, 36, 66, 0.22);
+      box-shadow: 0 18px 44px rgba(0,0,0,0.30);
       position: relative;
       overflow: hidden;
     }}
@@ -1170,7 +1148,7 @@ def build_page(df: pd.DataFrame) -> str:
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      color: #bfe1ff;
+      color: var(--accent);
       font-weight: 800;
       letter-spacing: 0.10em;
       text-transform: uppercase;
@@ -1181,9 +1159,8 @@ def build_page(df: pd.DataFrame) -> str:
       font-size: 31px;
       line-height: 1.1;
     }}
-    .hero h1 {{ color: #ffffff; }}
     .sub {{
-      color: #d9ecff;
+      color: var(--muted);
       font-size: 14px;
       line-height: 1.6;
       max-width: 1120px;
@@ -1212,7 +1189,6 @@ def build_page(df: pd.DataFrame) -> str:
       letter-spacing: 0.06em;
       font-weight: 700;
     }}
-    .hero .filter-label {{ color: #bfe1ff; }}
     .filter-select {{
       width: 100%;
       border-radius: 12px;
@@ -1242,12 +1218,13 @@ def build_page(df: pd.DataFrame) -> str:
       margin: 16px 0 18px;
     }}
     .kpi {{
-      background: linear-gradient(180deg, var(--panel), var(--panel-2));
+      background:
+        linear-gradient(180deg, rgba(17,26,44,0.98), rgba(11,18,32,0.98));
       border: 1px solid var(--line);
       border-radius: 18px;
       padding: 16px 16px 14px;
       min-height: 108px;
-      box-shadow: var(--shadow);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
     }}
     .kpi .label {{
       color: var(--muted);
@@ -1283,8 +1260,7 @@ def build_page(df: pd.DataFrame) -> str:
       border-radius: 20px;
       padding: 14px 14px 10px;
       overflow: hidden;
-      box-shadow: var(--shadow);
-      min-width: 0;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
     }}
     .panel-wide {{
       padding-bottom: 8px;
@@ -1294,7 +1270,7 @@ def build_page(df: pd.DataFrame) -> str:
       font-size: 15px;
       font-weight: 800;
       margin: 2px 0 12px;
-      color: #e8eefb;
+      color: #f6f8ff;
     }}
     .chart-box {{
       min-height: 320px;
@@ -1309,7 +1285,6 @@ def build_page(df: pd.DataFrame) -> str:
       border: 1px solid var(--line);
       border-radius: 20px;
       padding: 16px;
-      min-width: 0;
     }}
     .section h2 {{
       margin: 0 0 8px;
@@ -1347,10 +1322,6 @@ def build_page(df: pd.DataFrame) -> str:
       font-size: 13px;
     }}
     .table-wrap {{
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      display: block;
       overflow-x: auto;
       border-radius: 14px;
       border: 1px solid rgba(148,163,184,0.16);
@@ -1358,30 +1329,27 @@ def build_page(df: pd.DataFrame) -> str:
     table.data-table {{
       width: 100%;
       border-collapse: collapse;
-      background: var(--panel);
-      min-width: 100%;
-      table-layout: auto;
+      background: rgba(9,14,25,0.95);
+      min-width: 1050px;
     }}
     .data-table th,
     .data-table td {{
       padding: 11px 10px;
-      border-bottom: 1px solid var(--line);
-      border-right: 1px solid rgba(255,255,255,0.03);
+      border-bottom: 1px solid rgba(148,163,184,0.12);
+      border-right: 1px solid rgba(148,163,184,0.10);
       font-size: 12px;
       text-align: left;
-      white-space: normal;
-      overflow-wrap: anywhere;
-      color: #e8eefb;
+      white-space: nowrap;
     }}
     .data-table th {{
       position: sticky;
       top: 0;
-      background: linear-gradient(180deg, var(--panel-2), var(--panel));
-      color: var(--text);
+      background: linear-gradient(180deg, rgba(30,37,54,0.98), rgba(25,31,46,0.98));
+      color: #e6efff;
       z-index: 1;
     }}
-    .data-table tbody tr:nth-child(even) {{ background: rgba(255,255,255,0.02); }}
-    .data-table tbody tr:hover {{ background: rgba(122,162,255,0.08); }}
+    .data-table tbody tr:nth-child(even) {{ background: rgba(255,255,255,0.015); }}
+    .data-table tbody tr:hover {{ background: rgba(122,162,255,0.07); }}
     .two-col {{
       display: grid;
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1391,7 +1359,7 @@ def build_page(df: pd.DataFrame) -> str:
     .empty-box {{
       padding: 18px;
       color: var(--muted);
-      background: var(--panel-2);
+      background: rgba(10,16,29,0.92);
       border-radius: 14px;
       border: 1px dashed rgba(148,163,184,0.24);
     }}
@@ -1556,17 +1524,6 @@ def build_page(df: pd.DataFrame) -> str:
         todayTable: document.getElementById("today-table"),
         yesterdayTable: document.getElementById("yesterday-table"),
         detailTable: document.getElementById("detail-table")
-      }};
-      const PLOTLY_CFG = {{ displayModeBar: false, responsive: true }};
-      const CHART_COLORS = {{
-        returned: "#2f6fd6",
-        pending: "#9bc7ff",
-        pct: "#2dd4bf",
-        ranking: "#4f8cff",
-        uf: "#4f8cff",
-        grid: "#25304a",
-        axis: "#93a2b8",
-        ink: "#e8eefb"
       }};
 
       function clean(value) {{
@@ -1774,221 +1731,155 @@ def build_page(df: pd.DataFrame) -> str:
         els.detailSummary.innerHTML = formatInt(rows.length) + ' linhas exibidas na tabela; o CSV completo sai em <code>CONTROLE_ENTREGAS_20D.csv</code>.';
       }}
 
-      function basePlotlyLayout(height, extra) {{
-        return Object.assign({{
-          template: "plotly_dark",
-          paper_bgcolor: "#0b1020",
-          plot_bgcolor: "#0b1020",
-          height: height,
-          margin: {{ l: 54, r: 30, t: 34, b: 46 }},
-          font: {{ color: CHART_COLORS.ink, family: "Segoe UI, Tahoma, Arial, sans-serif" }},
-          hovermode: "closest",
-          hoverlabel: {{
-            bgcolor: "#0e1626",
-            bordercolor: "#25304a",
-            font: {{ color: CHART_COLORS.ink, size: 12 }}
-          }},
-          legend: {{
-            orientation: "h",
-            yanchor: "bottom",
-            y: 1.04,
-            xanchor: "left",
-            x: 0,
-            font: {{ size: 12 }}
-          }},
-          xaxis: {{
-            gridcolor: CHART_COLORS.grid,
-            zerolinecolor: CHART_COLORS.grid,
-            linecolor: "#25304a",
-            tickfont: {{ color: CHART_COLORS.axis, size: 11 }},
-            automargin: true
-          }},
-          yaxis: {{
-            gridcolor: CHART_COLORS.grid,
-            zerolinecolor: CHART_COLORS.grid,
-            linecolor: "#25304a",
-            tickfont: {{ color: CHART_COLORS.axis, size: 11 }},
-            automargin: true
-          }}
-        }}, extra || {{}});
-      }}
-
-      function renderEmptyChart(id, message, height) {{
-        Plotly.react(id, [], basePlotlyLayout(height || 320, {{
-          xaxis: {{ visible: false }},
-          yaxis: {{ visible: false }},
-          annotations: [{{
-            text: message || "Sem dados disponíveis para esta seleção",
-            x: 0.5,
-            y: 0.5,
-            xref: "paper",
-            yref: "paper",
-            showarrow: false,
-            font: {{ color: CHART_COLORS.axis, size: 14 }}
-          }}]
-        }}), PLOTLY_CFG);
-      }}
-
-      function renderStackedDailyChart(id, series) {{
-        const visible = (series || []).filter((d) => d.total > 0);
-        if (!visible.length) {{
-          renderEmptyChart(id, "Sem dados disponíveis para esta seleção", 380);
-          return;
-        }}
+      function renderDailyChart(rows) {{
+        const series = buildDailySeries(rows);
         const traceRet = {{
           x: series.map((d) => d.day),
           y: series.map((d) => d.ret),
           type: "bar",
           name: "Retornado ao estoque",
-          marker: {{ color: CHART_COLORS.returned, line: {{ width: 0 }} }},
-          text: series.map((d) => d.total > 0 ? Math.round(d.pct) + "%" : ""),
+          marker: {{ color: "#2f6fd6" }},
+          text: series.map((d) => d.ret > 0 ? Math.round(d.pct) + "%" : ""),
           textposition: "inside",
           insidetextanchor: "middle",
-          textfont: {{ color: "#ffffff", size: 12 }},
+          textfont: {{ color: "#ffffff", size: 15 }},
           cliponaxis: false,
-          customdata: series.map((d) => [d.pct, d.total]),
-          hovertemplate: "<b>%{{x}}</b><br>Retornado: %{{y}}<br>Total no dia: %{{customdata[1]}}<br>% retornado: %{{customdata[0]:.0f}}%<extra></extra>"
+          customdata: series.map((d) => [d.pct]),
+          hovertemplate: "<b>%{{x}}</b><br>Retornado: %{{y}}<br>% retornado: %{{customdata[0]:.0f}}%<extra></extra>"
         }};
         const tracePend = {{
           x: series.map((d) => d.day),
           y: series.map((d) => d.pend),
           type: "bar",
           name: "Pendente de retorno",
-          marker: {{ color: CHART_COLORS.pending, line: {{ width: 0 }} }},
+          marker: {{ color: "#9bc7ff" }},
           cliponaxis: false,
-          customdata: series.map((d) => [d.total]),
-          hovertemplate: "<b>%{{x}}</b><br>Pendente: %{{y}}<br>Total no dia: %{{customdata[0]}}<extra></extra>"
-        }};
-        const tracePct = {{
-          x: series.map((d) => d.day),
-          y: series.map((d) => d.pct),
-          type: "scatter",
-          mode: "lines+markers",
-          name: "% retornado",
-          yaxis: "y2",
-          line: {{ color: CHART_COLORS.pct, width: 3, shape: "spline" }},
-          marker: {{ color: CHART_COLORS.pct, size: 7 }},
-          hovertemplate: "<b>%{{x}}</b><br>% retornado: %{{y:.0f}}%<extra></extra>"
+          hovertemplate: "<b>%{{x}}</b><br>Pendente: %{{y}}<extra></extra>"
         }};
         const annotations = series
           .filter((d) => d.total > 0)
-          .map((d) => ({{ x: d.day, y: d.total, text: formatInt(d.total), showarrow: false, yshift: 8, font: {{ color: CHART_COLORS.ink, size: 11, weight: 700 }} }}));
-        Plotly.react(id, [traceRet, tracePend, tracePct], basePlotlyLayout(390, {{
+          .map((d) => ({{ x: d.day, y: d.total, text: formatInt(d.total), showarrow: false, yshift: 10, font: {{ color: "#ffffff", size: 13 }} }}));
+        Plotly.react("chart-daily", [traceRet, tracePend], {{
           barmode: "stack",
-          bargap: 0.24,
-          margin: {{ l: 54, r: 58, t: 42, b: 48 }},
-          yaxis: {{ gridcolor: CHART_COLORS.grid, rangemode: "tozero", title: "", tickfont: {{ color: CHART_COLORS.axis, size: 11 }} }},
-          yaxis2: {{
-            overlaying: "y",
-            side: "right",
-            range: [0, 100],
-            ticksuffix: "%",
-            showgrid: false,
-            zeroline: false,
-            tickfont: {{ color: CHART_COLORS.pct, size: 11 }}
-          }},
-          annotations
-        }}), PLOTLY_CFG);
-      }}
-
-      function renderHorizontalStackedRanking(id, series) {{
-        const visible = (series || []).filter((d) => d.total > 0);
-        const chartHeight = Math.max(360, 120 + (visible.length * 32));
-        if (!visible.length) {{
-          renderEmptyChart(id, "Sem dados disponíveis para esta seleção", chartHeight);
-          return;
-        }}
-        const labels = visible.map((d) => d.agent).reverse();
-        const ret = visible.map((d) => d.ret).reverse();
-        const pend = visible.map((d) => d.pend).reverse();
-        const pct = visible.map((d) => d.pct).reverse();
-        const totals = visible.map((d) => d.total).reverse();
-        const maxTotal = Math.max.apply(null, totals) || 1;
-        const traceRet = {{
-          y: labels,
-          x: ret,
-          orientation: "h",
-          type: "bar",
-          name: "Retornado ao estoque",
-          marker: {{ color: CHART_COLORS.returned, line: {{ width: 0 }} }},
-          text: pct.map((v, i) => ret[i] > 0 ? Math.round(v) + "%" : ""),
-          textposition: "inside",
-          insidetextanchor: "middle",
-          textfont: {{ color: "#ffffff", size: 11 }},
-          cliponaxis: false,
-          customdata: pct.map((v, i) => [v, totals[i]]),
-          hovertemplate: "<b>%{{y}}</b><br>Retornado: %{{x}}<br>Total: %{{customdata[1]}}<br>% retornado: %{{customdata[0]:.0f}}%<extra></extra>"
-        }};
-        const tracePend = {{
-          y: labels,
-          x: pend,
-          orientation: "h",
-          type: "bar",
-          name: "Pendente de retorno",
-          marker: {{ color: CHART_COLORS.pending, line: {{ width: 0 }} }},
-          cliponaxis: false,
-          customdata: totals.map((v) => [v]),
-          hovertemplate: "<b>%{{y}}</b><br>Pendente: %{{x}}<br>Total: %{{customdata[0]}}<extra></extra>"
-        }};
-        const annotations = labels.map((label, i) => ({{
-          x: totals[i],
-          y: label,
-          text: formatInt(totals[i]),
-          showarrow: false,
-          xshift: 14,
-          font: {{ color: CHART_COLORS.ink, size: 11 }}
-        }}));
-        Plotly.react(id, [traceRet, tracePend], basePlotlyLayout(chartHeight, {{
-          barmode: "stack",
+          template: "plotly_dark",
+          paper_bgcolor: "#0b1020",
+          plot_bgcolor: "#0b1020",
+          margin: {{ l: 24, r: 20, t: 52, b: 52 }},
+          height: 390,
+          font: {{ color: "#e5eefc" }},
+          xaxis: {{ gridcolor: "#25304a", tickfont: {{ size: 11 }}, automargin: true }},
+          yaxis: {{ gridcolor: "#25304a", showticklabels: false, ticks: "", zeroline: false }},
+          title: {{ x: 0.02, font: {{ size: 15 }} }},
           bargap: 0.22,
-          margin: {{ l: 170, r: 54, t: 42, b: 42 }},
-          xaxis: {{ gridcolor: CHART_COLORS.grid, zeroline: false, range: [0, maxTotal * 1.16], tickfont: {{ color: CHART_COLORS.axis, size: 11 }} }},
-          yaxis: {{ automargin: true, tickfont: {{ color: CHART_COLORS.axis, size: 11 }} }},
-          annotations
-        }}), PLOTLY_CFG);
-      }}
-
-      function renderHorizontalRanking(id, series) {{
-        const visible = (series || []).filter((d) => d.total > 0);
-        const chartHeight = Math.max(320, 120 + (visible.length * 30));
-        if (!visible.length) {{
-          renderEmptyChart(id, "Sem dados disponíveis para esta seleção", chartHeight);
-          return;
-        }}
-        const labels = visible.map((d) => d.uf).reverse();
-        const values = visible.map((d) => d.total).reverse();
-        const maxTotal = Math.max.apply(null, values) || 1;
-        const trace = {{
-          y: labels,
-          x: values,
-          orientation: "h",
-          type: "bar",
-          name: "Loggers",
-          marker: {{ color: CHART_COLORS.uf, line: {{ width: 0 }} }},
-          text: values.map(formatInt),
-          textposition: "outside",
-          cliponaxis: false,
-          hovertemplate: "<b>%{{y}}</b><br>Loggers: %{{x}}<extra></extra>"
-        }};
-        Plotly.react(id, [trace], basePlotlyLayout(chartHeight, {{
-          showlegend: false,
-          bargap: 0.24,
-          margin: {{ l: 70, r: 54, t: 32, b: 38 }},
-          xaxis: {{ gridcolor: CHART_COLORS.grid, zeroline: false, range: [0, maxTotal * 1.18], tickfont: {{ color: CHART_COLORS.axis, size: 11 }} }},
-          yaxis: {{ automargin: true, tickfont: {{ color: CHART_COLORS.axis, size: 11 }} }}
-        }}), PLOTLY_CFG);
-      }}
-
-      function renderDailyChart(rows) {{
-        renderStackedDailyChart("chart-daily", buildDailySeries(rows));
+          legend: {{
+            orientation: "h",
+            yanchor: "bottom",
+            y: 1.02,
+            xanchor: "left",
+            x: 0.0
+          }},
+          annotations: annotations
+        }}, {{ displayModeBar: false, responsive: true }});
       }}
 
       function renderAgentChart(rows) {{
-        renderHorizontalStackedRanking("chart-agentes", buildAgentSeries(rows));
+        const series = buildAgentSeries(rows);
+        const chartHeight = Math.max(620, 110 + (series.length * 34));
+        const traceRet = {{
+          y: series.map((d) => d.agent),
+          x: series.map((d) => d.ret),
+          orientation: "h",
+          type: "bar",
+          name: "Retornado ao estoque",
+          marker: {{ color: "#2f6fd6" }},
+          text: series.map((d) => d.ret > 0 ? Math.round(d.pct) + "%" : ""),
+          textposition: "inside",
+          insidetextanchor: "middle",
+          textfont: {{ color: "#ffffff", size: 15 }},
+          cliponaxis: false,
+          customdata: series.map((d) => [d.pct]),
+          hovertemplate: "<b>%{{y}}</b><br>Retornado: %{{x}}<br>% retornado: %{{customdata[0]:.0f}}%<extra></extra>"
+        }};
+        const tracePend = {{
+          y: series.map((d) => d.agent),
+          x: series.map((d) => d.pend),
+          orientation: "h",
+          type: "bar",
+          name: "Pendente de retorno",
+          marker: {{ color: "#9bc7ff" }},
+          cliponaxis: false,
+          hovertemplate: "<b>%{{y}}</b><br>Pendente: %{{x}}<extra></extra>"
+        }};
+        const maxTotal = series.length ? Math.max.apply(null, series.map((d) => d.total)) : 1;
+        const annotations = series
+          .filter((d) => d.total > 0)
+          .map((d) => ({{ x: d.total, y: d.agent, text: formatInt(d.total), showarrow: false, xshift: 14, font: {{ color: "#e5eefc", size: 13 }} }}));
+        Plotly.react("chart-agentes", [traceRet, tracePend], {{
+          barmode: "stack",
+          template: "plotly_dark",
+          paper_bgcolor: "#0b1020",
+          plot_bgcolor: "#0b1020",
+          margin: {{ l: 22, r: 44, t: 56, b: 36 }},
+          height: chartHeight,
+          font: {{ color: "#e5eefc" }},
+          xaxis: {{ gridcolor: "#25304a", zeroline: false, showticklabels: false, range: [0, maxTotal * 1.15] }},
+          yaxis: {{
+            gridcolor: "#25304a",
+            automargin: true,
+            categoryorder: "array",
+            categoryarray: series.map((d) => d.agent),
+            autorange: "reversed"
+          }},
+          title: {{ x: 0.02, font: {{ size: 15 }} }},
+          legend: {{
+            orientation: "h",
+            yanchor: "bottom",
+            y: 1.02,
+            xanchor: "left",
+            x: 0.0
+          }},
+          bargap: 0.25,
+          annotations: annotations
+        }}, {{ displayModeBar: false, responsive: true }});
       }}
 
       function renderUfChart(rows) {{
-        renderHorizontalRanking("chart-ufs", buildUfSeries(rows));
+        const series = buildUfSeries(rows);
+        const chartHeight = Math.max(620, 110 + (series.length * 34));
+        const maxTotal = series.length ? Math.max.apply(null, series.map((d) => d.total)) : 1;
+        const trace = {{
+          y: series.map((d) => d.uf),
+          x: series.map((d) => d.total),
+          orientation: "h",
+          type: "bar",
+          name: "Loggers",
+          marker: {{ color: "#9bc7ff" }},
+          cliponaxis: false,
+          hovertemplate: "<b>%{{y}}</b><br>Loggers: %{{x}}<extra></extra>"
+        }};
+        const annotations = series
+          .filter((d) => d.total > 0)
+          .map((d) => ({{ x: d.total, y: d.uf, text: formatInt(d.total), showarrow: false, xshift: 14, font: {{ color: "#e5eefc", size: 13 }} }}));
+        Plotly.react("chart-ufs", [trace], {{
+          template: "plotly_dark",
+          paper_bgcolor: "#0b1020",
+          plot_bgcolor: "#0b1020",
+          margin: {{ l: 22, r: 44, t: 56, b: 36 }},
+          height: chartHeight,
+          font: {{ color: "#e5eefc" }},
+          xaxis: {{ gridcolor: "#25304a", zeroline: false, showticklabels: false, range: [0, maxTotal * 1.15] }},
+          yaxis: {{
+            gridcolor: "#25304a",
+            automargin: true,
+            categoryorder: "array",
+            categoryarray: series.map((d) => d.uf),
+            autorange: "reversed"
+          }},
+          title: {{ x: 0.02, font: {{ size: 15 }} }},
+          showlegend: false,
+          bargap: 0.22,
+          annotations: annotations
+        }}, {{ displayModeBar: false, responsive: true }});
       }}
 
       function renderTable(container, rows) {{

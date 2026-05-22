@@ -943,56 +943,152 @@ def render_html(payload: dict) -> str:
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Dashboard Aura - Entregas e Inserções</title>
+  <title>Painel Operacional Aura - Entregas e Inserções</title>
   <style>
     :root {{
-      --bg: #f5f7fb;
+      --bg: #eef3f8;
+      --bg-soft: #f7faff;
       --card: #ffffff;
-      --ink: #14202b;
-      --muted: #5f6d7a;
-      --line: #d9e1ea;
+      --ink: #122033;
+      --muted: #637184;
+      --muted-2: #8a98a8;
+      --line: #d8e2ec;
+      --line-soft: #eaf0f6;
+      --primary: #185c9d;
+      --primary-2: #2476c7;
+      --primary-soft: #e8f2ff;
       --ok: #1f9d7a;
       --warn: #ce4d4d;
       --a: #2563eb;
       --b: #0ea5e9;
+      --shadow-soft: 0 10px 28px rgba(23, 35, 50, .07);
+      --shadow-card: 0 8px 20px rgba(23, 35, 50, .06);
+      --radius: 12px;
     }}
     * {{ box-sizing: border-box; }}
     body {{
       margin: 0;
       font-family: "Segoe UI", Tahoma, sans-serif;
       color: var(--ink);
-      background:
-        radial-gradient(1200px 500px at 0% -10%, #dcecff 0%, transparent 60%),
-        radial-gradient(900px 400px at 100% -15%, #d7f9ef 0%, transparent 60%),
-        var(--bg);
+      background: linear-gradient(180deg, #e8f0f8 0%, #f8fafc 36%, #f4f7fb 100%);
     }}
     .wrap {{
-      max-width: 1200px;
-      margin: 10px auto;
-      padding: 0 10px 10px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 14px 14px 22px;
     }}
     .header {{
-      background: linear-gradient(135deg, #0f2f53 0%, #134a87 55%, #1a69b0 100%);
+      background: linear-gradient(135deg, #0b2745 0%, #14528d 58%, #1e78bd 100%);
       color: #fff;
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: 0 6px 16px rgba(13, 36, 66, .20);
+      border: 1px solid rgba(255, 255, 255, .20);
+      border-radius: 16px;
+      padding: 18px;
+      box-shadow: 0 14px 32px rgba(13, 36, 66, .22);
+      overflow: hidden;
+    }}
+    .header-top {{
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      align-items: center;
+    }}
+    .brand-row {{
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      min-width: 0;
+    }}
+    .brand-mark {{
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      background: rgba(255, 255, 255, .16);
+      border: 1px solid rgba(255, 255, 255, .24);
+      color: #fff;
+      font-weight: 900;
+      font-size: 1.05rem;
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .20);
+    }}
+    .header-copy {{ min-width: 0; }}
+    .eyebrow {{
+      color: #bfe1ff;
+      font-size: .72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 3px;
     }}
     .header h1 {{
-      margin: 0 0 2px;
-      font-size: 1.05rem;
+      margin: 0 0 5px;
+      font-size: clamp(1.28rem, 2vw, 1.85rem);
+      line-height: 1.08;
+      font-weight: 850;
     }}
     .sub {{
       color: #d9ecff;
-      font-size: .82rem;
+      font-size: .88rem;
+      line-height: 1.35;
+      max-width: 760px;
+    }}
+    .header-badges {{
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      max-width: 520px;
+    }}
+    .header-badge {{
+      min-width: 142px;
+      border: 1px solid rgba(255, 255, 255, .20);
+      border-radius: 12px;
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, .12);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, .16);
+    }}
+    .badge-label {{
+      color: #bfe1ff;
+      display: block;
+      font-size: .68rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }}
+    .badge-value {{
+      display: block;
+      color: #fff;
+      font-size: .8rem;
+      font-weight: 800;
+      line-height: 1.22;
+    }}
+    .section-head {{
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: flex-start;
+      margin-bottom: 10px;
+    }}
+    .section-title {{
+      margin: 0;
+      color: #172033;
+      font-size: .96rem;
+      font-weight: 850;
+    }}
+    .section-copy {{
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: .78rem;
+      line-height: 1.35;
     }}
     .filters {{
-      margin-top: 8px;
-      padding: 8px;
       display: grid;
       grid-template-columns: repeat(7, minmax(0, 1fr));
       gap: 8px;
       align-items: end;
+    }}
+    .filter-panel {{
+      margin-top: 12px;
     }}
     .fgroup {{
       display: flex;
@@ -1002,36 +1098,80 @@ def render_html(payload: dict) -> str:
     .flabel {{
       color: var(--muted);
       font-size: .74rem;
+      font-weight: 750;
     }}
     .finput {{
       width: 100%;
       border: 1px solid var(--line);
-      border-radius: 6px;
-      padding: 6px 8px;
+      border-radius: 9px;
+      padding: 8px 9px;
       font-size: .82rem;
       color: var(--ink);
       background: #fff;
+      min-height: 36px;
+      outline: none;
+      transition: border-color .14s ease, box-shadow .14s ease, background .14s ease;
+    }}
+    .finput:focus {{
+      border-color: #7fb3e5;
+      box-shadow: 0 0 0 3px rgba(36, 118, 199, .14);
+      background: #fbfdff;
     }}
     .fbtn {{
-      border: 1px solid #1b4f8a;
-      background: #1a69b0;
+      border: 1px solid #1b5f9f;
+      background: linear-gradient(180deg, #257bcc, #1b66ac);
       color: #fff;
-      border-radius: 6px;
-      padding: 7px 10px;
+      border-radius: 9px;
+      padding: 8px 10px;
+      min-height: 36px;
       font-size: .82rem;
       cursor: pointer;
-      font-weight: 600;
+      font-weight: 800;
+      box-shadow: 0 7px 16px rgba(27, 102, 172, .16);
+      transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease, background .12s ease;
+    }}
+    .fbtn:hover {{
+      border-color: #134f86;
+      box-shadow: 0 9px 18px rgba(27, 102, 172, .22);
+      transform: translateY(-1px);
+    }}
+    .fbtn:active {{
+      transform: translateY(0);
+      box-shadow: 0 4px 10px rgba(27, 102, 172, .18);
     }}
     .fbtn.secondary {{
       border-color: #9fb3c7;
-      background: #eef3f8;
+      background: #f3f7fb;
       color: #33485c;
+      box-shadow: 0 5px 12px rgba(23, 35, 50, .06);
+    }}
+    .fbtn.secondary:hover {{
+      border-color: #7f99b3;
+      background: #eaf1f8;
     }}
     .filter-state {{
-      margin-top: 6px;
-      color: #49627a;
+      margin-top: 10px;
+      color: #41566d;
       font-size: .78rem;
-      font-weight: 600;
+      font-weight: 750;
+      border: 1px solid #d7e3ef;
+      background: #f7fbff;
+      border-radius: 10px;
+      padding: 8px 10px;
+    }}
+    .dashboard-section-title {{
+      margin: 14px 2px 8px;
+    }}
+    .dashboard-section-title span {{
+      color: #172033;
+      display: block;
+      font-size: .98rem;
+      font-weight: 850;
+    }}
+    .dashboard-section-title p {{
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: .78rem;
     }}
     .grid {{
       display: grid;
@@ -1042,22 +1182,61 @@ def render_html(payload: dict) -> str:
     .card {{
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 8px 10px;
-      box-shadow: 0 2px 8px rgba(23, 35, 50, .05);
+      border-radius: 12px;
+      padding: 12px;
+      box-shadow: var(--shadow-card);
     }}
+    .kpi-card {{
+      position: relative;
+      overflow: hidden;
+      min-height: 104px;
+    }}
+    .kpi-card::before {{
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 4px;
+      background: var(--accent, var(--primary-2));
+    }}
+    .kpi-top {{
+      display: flex;
+      justify-content: space-between;
+      gap: 8px;
+      align-items: flex-start;
+      margin-bottom: 8px;
+    }}
+    .kpi-icon {{
+      width: 34px;
+      height: 34px;
+      display: grid;
+      place-items: center;
+      flex: 0 0 auto;
+      border-radius: 10px;
+      color: var(--accent, var(--primary-2));
+      background: var(--accent-bg, var(--primary-soft));
+      font-size: .72rem;
+      font-weight: 900;
+    }}
+    .accent-blue {{ --accent: #2563eb; --accent-bg: #eaf2ff; }}
+    .accent-sky {{ --accent: #0ea5e9; --accent-bg: #e8f7ff; }}
+    .accent-green {{ --accent: #1f9d7a; --accent-bg: #e8f8f3; }}
+    .accent-teal {{ --accent: #13a8a3; --accent-bg: #e7fbfa; }}
+    .accent-amber {{ --accent: #c17a12; --accent-bg: #fff5df; }}
+    .accent-red {{ --accent: #c85050; --accent-bg: #fff0f0; }}
     .k {{
       color: var(--muted);
-      font-size: .74rem;
+      font-size: .75rem;
+      font-weight: 800;
       margin-bottom: 2px;
     }}
     .v {{
-      font-size: 1.15rem;
-      font-weight: 700;
+      color: #11243a;
+      font-size: clamp(1.3rem, 2.1vw, 1.78rem);
+      font-weight: 850;
       line-height: 1.1;
     }}
     .progress {{
-      margin-top: 4px;
+      margin-top: 10px;
       height: 6px;
       border-radius: 999px;
       background: #e7edf4;
@@ -1073,13 +1252,15 @@ def render_html(payload: dict) -> str:
       margin-top: 10px;
       background: var(--card);
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 12px;
-      box-shadow: 0 8px 22px rgba(23, 35, 50, .06);
+      border-radius: 14px;
+      padding: 14px;
+      box-shadow: var(--shadow-soft);
     }}
     .section h2 {{
-      margin: 0 0 6px;
-      font-size: .9rem;
+      margin: 0 0 8px;
+      color: #16243a;
+      font-size: .98rem;
+      font-weight: 850;
     }}
     .chart-wrap {{
       width: 100%;
@@ -1088,8 +1269,8 @@ def render_html(payload: dict) -> str:
       overflow: hidden;
       background: #fff;
       border: 1px solid #e4ebf3;
-      border-radius: 10px;
-      padding: 8px 8px 2px;
+      border-radius: 12px;
+      padding: 10px 10px 2px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.85);
     }}
     .chart-wrap svg {{
@@ -1106,18 +1287,19 @@ def render_html(payload: dict) -> str:
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
       color: var(--muted);
       font-size: .76rem;
       align-items: center;
+      font-weight: 700;
     }}
     .chart-period-card {{
       margin-top: 10px;
-      background: #fff;
+      background: linear-gradient(180deg, #ffffff 0%, #f9fbfe 100%);
       border: 1px solid var(--line);
-      border-radius: 10px;
-      padding: 10px 12px;
-      box-shadow: 0 6px 18px rgba(23, 35, 50, .05);
+      border-radius: 14px;
+      padding: 12px 14px;
+      box-shadow: var(--shadow-soft);
     }}
     .chart-period-head {{
       display: flex;
@@ -1127,7 +1309,7 @@ def render_html(payload: dict) -> str:
     }}
     .chart-period-title {{
       color: #172033;
-      font-size: .86rem;
+      font-size: .92rem;
       font-weight: 800;
     }}
     .chart-period-sub {{
@@ -1148,8 +1330,8 @@ def render_html(payload: dict) -> str:
       background: #f8fbff;
       color: #1f3349;
       border-radius: 999px;
-      padding: 7px 12px;
-      min-height: 32px;
+      padding: 8px 13px;
+      min-height: 34px;
       font: inherit;
       font-size: .78rem;
       font-weight: 800;
@@ -1253,9 +1435,10 @@ def render_html(payload: dict) -> str:
       transform: translateY(1px);
     }}
     .t {{
-      margin-top: 6px;
+      margin-top: 8px;
       color: var(--muted);
       font-size: .74rem;
+      line-height: 1.35;
     }}
     .sensor-grid {{
       display: grid;
@@ -1265,9 +1448,10 @@ def render_html(payload: dict) -> str:
     }}
     .sensor-card {{
       border: 1px solid var(--line);
-      border-radius: 8px;
-      padding: 8px;
+      border-radius: 12px;
+      padding: 12px;
       background: #fbfdff;
+      box-shadow: 0 5px 14px rgba(23, 35, 50, .04);
     }}
     .sensor-name {{
       font-size: .78rem;
@@ -1275,8 +1459,8 @@ def render_html(payload: dict) -> str:
       margin-bottom: 2px;
     }}
     .sensor-val {{
-      font-size: 1.05rem;
-      font-weight: 700;
+      font-size: 1.2rem;
+      font-weight: 850;
       color: #1f2e3b;
       line-height: 1.1;
     }}
@@ -1287,6 +1471,9 @@ def render_html(payload: dict) -> str:
       margin-top: 6px;
     }}
     @media (max-width: 950px) {{
+      .header-top {{ align-items: flex-start; flex-direction: column; }}
+      .header-badges {{ justify-content: flex-start; max-width: none; width: 100%; }}
+      .header-badge {{ flex: 1 1 160px; }}
       .grid {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
       .sensor-grid {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
       .latency-grid {{ grid-template-columns: repeat(1, minmax(0, 1fr)); }}
@@ -1295,6 +1482,13 @@ def render_html(payload: dict) -> str:
       .chart-period-segment {{ justify-content: flex-start; width: 100%; }}
     }}
     @media (max-width: 520px) {{
+      .wrap {{ padding: 10px 8px 16px; }}
+      .header {{ padding: 14px; border-radius: 14px; }}
+      .brand-row {{ align-items: flex-start; }}
+      .brand-mark {{ width: 40px; height: 40px; border-radius: 10px; }}
+      .header-badge {{ min-width: 0; flex-basis: 100%; }}
+      .filters {{ grid-template-columns: 1fr; }}
+      .grid {{ grid-template-columns: 1fr; }}
       .chart-period-card {{ padding: 10px; }}
       .chart-period-btn {{ flex: 1 1 calc(50% - 6px); padding-inline: 8px; }}
     }}
@@ -1303,91 +1497,153 @@ def render_html(payload: dict) -> str:
 <body>
   <div class="wrap">
     <div class="header">
-      <h1>Dashboard simples de entregas x inserções (Aura)</h1>
-      <div class="sub" id="subtitle"></div>
-    </div>
-    <div class="section filters">
-      <div class="fgroup">
-        <div class="flabel">Data inicial (entrega)</div>
-        <input class="finput" type="date" id="flt_start" />
-      </div>
-      <div class="fgroup">
-        <div class="flabel">Data final (entrega)</div>
-        <input class="finput" type="date" id="flt_end" />
-      </div>
-      <div class="fgroup">
-        <div class="flabel">Sensor (gráficos por sensor)</div>
-        <select class="finput" id="flt_sensor">
-          <option value="all">Todos</option>
-          <option value="ares">ARES</option>
-          <option value="syos">SYOS</option>
-          <option value="shield">Shield</option>
-          <option value="web">Sensor web</option>
-        </select>
-      </div>
-      <div class="fgroup">
-        <div class="flabel">Faixa térmica</div>
-        <select class="finput" id="flt_thermal">
-          <option value="all">Todos</option>
-          <option value="refrigerado">Refrigerado (>= 0°C)</option>
-          <option value="congelado">Congelado (< 0°C)</option>
-        </select>
-      </div>
-      <div class="fgroup">
-        <div class="flabel">Ações</div>
-        <button class="fbtn" id="btn_apply" type="button">Aplicar filtro</button>
-      </div>
-      <div class="fgroup">
-        <div class="flabel">Ações</div>
-        <button class="fbtn secondary" id="btn_reset" type="button">Limpar</button>
-      </div>
-      <div class="fgroup">
-        <div class="flabel">Atalho</div>
-        <button class="fbtn secondary" id="btn_today" type="button">Somente hoje</button>
+      <div class="header-top">
+        <div class="brand-row">
+          <div class="brand-mark" aria-hidden="true">A</div>
+          <div class="header-copy">
+            <div class="eyebrow">Painel operacional</div>
+            <h1>Painel Operacional Aura | Entregas, Inserções e Loggers</h1>
+            <div class="sub" id="subtitle"></div>
+          </div>
+        </div>
+        <div class="header-badges" aria-label="Informações da base">
+          <div class="header-badge">
+            <span class="badge-label">Período analisado</span>
+            <span class="badge-value" id="header_period">-</span>
+          </div>
+          <div class="header-badge">
+            <span class="badge-label">Última atualização</span>
+            <span class="badge-value" id="header_generated">-</span>
+          </div>
+          <div class="header-badge">
+            <span class="badge-label">Base</span>
+            <span class="badge-value">Aura</span>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="filter-state" id="filter_state"></div>
+    <div class="section filter-panel">
+      <div class="section-head">
+        <div>
+          <h2 class="section-title">Filtros operacionais</h2>
+          <p class="section-copy">Ajuste o recorte de entrega, sensor e faixa térmica sem alterar a base consolidada.</p>
+        </div>
+      </div>
+      <div class="filters">
+        <div class="fgroup">
+          <div class="flabel">Data inicial (entrega)</div>
+          <input class="finput" type="date" id="flt_start" />
+        </div>
+        <div class="fgroup">
+          <div class="flabel">Data final (entrega)</div>
+          <input class="finput" type="date" id="flt_end" />
+        </div>
+        <div class="fgroup">
+          <div class="flabel">Sensor (gráficos por sensor)</div>
+          <select class="finput" id="flt_sensor">
+            <option value="all">Todos</option>
+            <option value="ares">ARES</option>
+            <option value="syos">SYOS</option>
+            <option value="shield">Shield</option>
+            <option value="web">Sensor web</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <div class="flabel">Faixa térmica</div>
+          <select class="finput" id="flt_thermal">
+            <option value="all">Todos</option>
+            <option value="refrigerado">Refrigerado (>= 0°C)</option>
+            <option value="congelado">Congelado (< 0°C)</option>
+          </select>
+        </div>
+        <div class="fgroup">
+          <div class="flabel">Ações</div>
+          <button class="fbtn" id="btn_apply" type="button">Aplicar filtro</button>
+        </div>
+        <div class="fgroup">
+          <div class="flabel">Ações</div>
+          <button class="fbtn secondary" id="btn_reset" type="button">Limpar</button>
+        </div>
+        <div class="fgroup">
+          <div class="flabel">Atalho</div>
+          <button class="fbtn secondary" id="btn_today" type="button">Somente hoje</button>
+        </div>
+      </div>
+      <div class="filter-state" id="filter_state"></div>
+    </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="k">Pedidos entregues</div>
+    <div class="dashboard-section-title">
+      <span>Resumo operacional</span>
+      <p>Indicadores consolidados do recorte selecionado.</p>
+    </div>
+    <div class="grid kpi-grid">
+      <div class="card kpi-card accent-blue">
+        <div class="kpi-top">
+          <div class="k">Pedidos entregues</div>
+          <div class="kpi-icon" aria-hidden="true">PE</div>
+        </div>
         <div class="v" id="p_ent">-</div>
       </div>
-      <div class="card">
-        <div class="k">Pedidos inseridos</div>
+      <div class="card kpi-card accent-sky">
+        <div class="kpi-top">
+          <div class="k">Pedidos inseridos</div>
+          <div class="kpi-icon" aria-hidden="true">PI</div>
+        </div>
         <div class="v" id="p_ins">-</div>
       </div>
-      <div class="card">
-        <div class="k">Loggers entregues</div>
+      <div class="card kpi-card accent-green">
+        <div class="kpi-top">
+          <div class="k">Loggers entregues</div>
+          <div class="kpi-icon" aria-hidden="true">LE</div>
+        </div>
         <div class="v" id="l_ent">-</div>
       </div>
-      <div class="card">
-        <div class="k">Loggers inseridos</div>
+      <div class="card kpi-card accent-teal">
+        <div class="kpi-top">
+          <div class="k">Loggers inseridos</div>
+          <div class="kpi-icon" aria-hidden="true">LI</div>
+        </div>
         <div class="v" id="l_ins">-</div>
       </div>
     </div>
 
-    <div class="grid">
-      <div class="card">
-        <div class="k">Proporção de pedidos inseridos</div>
+    <div class="grid kpi-grid">
+      <div class="card kpi-card accent-blue">
+        <div class="kpi-top">
+          <div class="k">Proporção de pedidos inseridos</div>
+          <div class="kpi-icon" aria-hidden="true">%</div>
+        </div>
         <div class="v" id="p_pct">-</div>
         <div class="progress"><div class="fill" id="p_fill"></div></div>
       </div>
-      <div class="card">
-        <div class="k">Pedidos pendentes</div>
+      <div class="card kpi-card accent-red">
+        <div class="kpi-top">
+          <div class="k">Pedidos pendentes</div>
+          <div class="kpi-icon" aria-hidden="true">PP</div>
+        </div>
         <div class="v" id="p_pen">-</div>
       </div>
-      <div class="card">
-        <div class="k">Proporção de loggers inseridos</div>
+      <div class="card kpi-card accent-green">
+        <div class="kpi-top">
+          <div class="k">Proporção de loggers inseridos</div>
+          <div class="kpi-icon" aria-hidden="true">%</div>
+        </div>
         <div class="v" id="l_pct">-</div>
         <div class="progress"><div class="fill" id="l_fill"></div></div>
       </div>
-      <div class="card">
-        <div class="k">Loggers pendentes</div>
+      <div class="card kpi-card accent-amber">
+        <div class="kpi-top">
+          <div class="k">Loggers pendentes</div>
+          <div class="kpi-icon" aria-hidden="true">LP</div>
+        </div>
         <div class="v" id="l_pen">-</div>
       </div>
     </div>
 
+    <div class="dashboard-section-title">
+      <span>Análise diária</span>
+      <p>Visualização dos gráficos com segmentação de período para leitura executiva.</p>
+    </div>
     <div class="chart-period-card">
       <div class="chart-period-head">
         <div>
@@ -1404,8 +1660,8 @@ def render_html(payload: dict) -> str:
       </div>
     </div>
 
-    <div class="section">
-      <h2>Pedidos por dia: entregues x inseridos</h2>
+    <div class="section chart-section">
+      <h2>Pedidos por dia | entregues x inseridos</h2>
       <div class="legend">
         <div><span class="dot" style="background:#2563eb"></span>Entregues</div>
         <div><span class="dot" style="background:#0ea5e9"></span>Inseridos</div>
@@ -1413,8 +1669,8 @@ def render_html(payload: dict) -> str:
       <div class="chart-wrap"><svg id="chartPedidos"></svg></div>
     </div>
 
-    <div class="section">
-      <h2 id="h2_loggers">Loggers por dia: entregues x inseridos</h2>
+    <div class="section chart-section">
+      <h2 id="h2_loggers">Loggers por dia | entregues x inseridos</h2>
       <div class="legend">
         <div><span class="dot" style="background:#1f9d7a"></span>Entregues</div>
         <div><span class="dot" style="background:#65c7ae"></span>Inseridos</div>
@@ -1423,7 +1679,10 @@ def render_html(payload: dict) -> str:
       <div class="t">Gerado em <span id="gen_at"></span></div>
     </div>
 
-
+    <div class="dashboard-section-title">
+      <span>Pendências por tipo de sensor</span>
+      <p>Distribuição dos loggers pendentes por tecnologia no recorte selecionado.</p>
+    </div>
     <div class="section">
       <h2>Loggers pendentes por tipo</h2>
       <div class="sensor-grid">
@@ -1446,6 +1705,10 @@ def render_html(payload: dict) -> str:
       </div>
     </div>
 
+    <div class="dashboard-section-title">
+      <span>Tempos médios de processamento</span>
+      <p>Métricas de latência operacional para inserção e lançamento de entregas.</p>
+    </div>
     <div class="section">
       <h2>Tempo para inserir pedido após entrega</h2>
       <div class="latency-grid">
@@ -1471,7 +1734,7 @@ def render_html(payload: dict) -> str:
       <div class="t">Cálculo: <code>Data_Lancamento - Data_Entrega</code> na ocorrência 32 (somente valores não negativos).</div>
       <div class="t" id="dl_status"></div>
     </div>
-    <div class="section">
+    <div class="section chart-section">
       <h2>Média de horas para lançar data de entrega por dia</h2>
       <div class="legend">
         <div><span class="dot" style="background:#1e40af"></span>Média horas para lançamento da entrega</div>
@@ -1479,7 +1742,7 @@ def render_html(payload: dict) -> str:
       <div class="chart-wrap"><svg id="chartDeliveryLaunch"></svg></div>
       <div class="t">Exemplo: pedidos entregues em 10/04 mostram a média de horas até a data de entrega ser lançada no sistema.</div>
     </div>
-    <div class="section">
+    <div class="section chart-section">
       <h2>Média de horas por dia para inserir pedidos</h2>
       <div class="legend">
         <div><span class="dot" style="background:#2563eb"></span>Média horas (delivery_date x created_at)</div>
@@ -1487,7 +1750,11 @@ def render_html(payload: dict) -> str:
       <div class="chart-wrap"><svg id="chartLatency"></svg></div>
       <div class="t">Exemplo: para 16/04, o valor mostra a média de horas dos pedidos com entrega em 16/04 que já subiram no Aura.</div>
     </div>
-    <div class="section" id="secLatencyAres">
+    <div class="dashboard-section-title">
+      <span>Análise por tecnologia/sensor</span>
+      <p>Tempos médios item a item por tecnologia, mantendo a mesma base de cálculo atual.</p>
+    </div>
+    <div class="section chart-section" id="secLatencyAres">
       <h2>Média de horas por dia para inserir itens ARES</h2>
       <div class="legend">
         <div><span class="dot" style="background:#1d4ed8"></span>Média horas ARES (delivery do item x created_at do pedido)</div>
@@ -1495,7 +1762,7 @@ def render_html(payload: dict) -> str:
       <div class="chart-wrap"><svg id="chartLatencyAres"></svg></div>
       <div class="t">Base item a item: cruza chave de <code>sync_items</code> com <code>order_items</code>.</div>
     </div>
-    <div class="section" id="secLatencySyos">
+    <div class="section chart-section" id="secLatencySyos">
       <h2>Média de horas por dia para inserir itens SYOS</h2>
       <div class="legend">
         <div><span class="dot" style="background:#0f766e"></span>Média horas SYOS (delivery do item x created_at do pedido)</div>
@@ -1503,7 +1770,7 @@ def render_html(payload: dict) -> str:
       <div class="chart-wrap"><svg id="chartLatencySyos"></svg></div>
       <div class="t">Base item a item: cruza chave de <code>sync_items</code> com <code>order_items</code>.</div>
     </div>
-    <div class="section" id="secLatencyShield">
+    <div class="section chart-section" id="secLatencyShield">
       <h2>Média de horas por dia para inserir itens Shield</h2>
       <div class="legend">
         <div><span class="dot" style="background:#b45309"></span>Média horas Shield (delivery do item x created_at do pedido)</div>
@@ -1511,7 +1778,7 @@ def render_html(payload: dict) -> str:
       <div class="chart-wrap"><svg id="chartLatencyShield"></svg></div>
       <div class="t">Base item a item: cruza chave de <code>sync_items</code> com <code>order_items</code>.</div>
     </div>
-    <div class="section" id="secLatencyWeb">
+    <div class="section chart-section" id="secLatencyWeb">
       <h2>Média de horas por dia para inserir itens Sensor web</h2>
       <div class="legend">
         <div><span class="dot" style="background:#475569"></span>Média horas Sensor web (delivery do item x created_at do pedido)</div>
@@ -1526,11 +1793,15 @@ def render_html(payload: dict) -> str:
     const fmt = (n) => new Intl.NumberFormat('pt-BR').format(n);
     const fmtPct = (n) => `${{n.toFixed(1)}}%`;
 
-    const periodText = payload.end_date
-      ? `${{payload.start_date}} até ${{payload.end_date}}`
-      : `desde ${{payload.start_date}}`;
+    const periodBadgeText = payload.end_date
+      ? `${{formatDateBr(payload.start_date)}} até ${{formatDateBr(payload.end_date)}}`
+      : `desde ${{formatDateBr(payload.start_date)}}`;
     document.getElementById('subtitle').textContent =
-      `Baseado em data de entrega ${{periodText}} | Atualizado em ${{payload.generated_at}}`;
+      `Acompanhamento operacional de pedidos entregues, pedidos inseridos, loggers e tempos médios de processamento.`;
+    const headerPeriod = document.getElementById('header_period');
+    const headerGenerated = document.getElementById('header_generated');
+    if (headerPeriod) headerPeriod.textContent = periodBadgeText;
+    if (headerGenerated) headerGenerated.textContent = payload.generated_at || '-';
     document.getElementById('gen_at').textContent = payload.generated_at;
     const allDaily = payload.daily || [];
     const allDlDaily = (payload.delivery_launch && payload.delivery_launch.daily) ? payload.delivery_launch.daily : [];
@@ -2142,7 +2413,7 @@ def render_html(payload: dict) -> str:
       if (h2Loggers) {{
         const sensorText = sensorLabelMap[sensorMode] || sensorMode;
         const thermalText = thermalLabelMap[thermalMode] || thermalMode;
-        h2Loggers.textContent = `Loggers por dia (${{sensorText}} | ${{thermalText}}): entregues x inseridos`;
+        h2Loggers.textContent = `Loggers por dia (${{sensorText}} | ${{thermalText}}) | entregues x inseridos`;
       }}
       updateChartPeriodButtons();
       updateChartPeriodState(visibleChartDateRows);

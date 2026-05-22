@@ -1150,7 +1150,6 @@ const CHART_COLORS = {{
   ink: "#d3dceb"
 }};
 const BASE_LAYOUT = {{
-  template: "plotly_dark",
   paper_bgcolor: "#121b2d",
   plot_bgcolor: "#121b2d",
   title_text: "",

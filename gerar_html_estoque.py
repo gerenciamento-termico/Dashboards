@@ -999,6 +999,7 @@ def generate_html_tipo(
 
     states_json = json.dumps(states, ensure_ascii=False)
     detail_rows_json = json.dumps(detail_df.to_dict(orient="records"), ensure_ascii=False)
+    type_options_json = json.dumps(device_types, ensure_ascii=False)
     status_options = ["Todos"]
     if not detail_df.empty and "status" in detail_df.columns:
         status_options.extend(
@@ -1151,6 +1152,7 @@ def generate_html_tipo(
 <script>
 const STATES = {states_json};
 const DETAIL_ROWS = {detail_rows_json};
+const TYPE_OPTIONS = {type_options_json};
 const PLOTLY_CFG = {{displayModeBar:false, responsive:true}};
 const BASE_LAYOUT = {{
   paper_bgcolor: "#141b26",
@@ -1216,6 +1218,29 @@ function escapeHtml(value) {{
     .replaceAll('"', "&quot;")
     .replaceAll("'", "&#39;");
 }}
+const DETAIL_RENDER_CHUNK = 450;
+let detailRenderToken = 0;
+let detailLastKey = "";
+const DETAIL_ROWS_PREPARED = (DETAIL_ROWS || [])
+  .map(row => {{
+    const prepared = {{
+      tipo: String(row.tipo || "").trim(),
+      status: String(row.status || "").trim(),
+      ts: Number(row.ultima_atualizacao_ts || 0),
+      html: `
+    <tr>
+      <td>${{escapeHtml(row.Tag)}}</td>
+      <td>${{escapeHtml(row.Destino)}}</td>
+      <td>${{escapeHtml(row.Finalidade)}}</td>
+      <td>${{escapeHtml(row.ultima_atualizacao_str)}}</td>
+      <td>${{escapeHtml(row.status)}}</td>
+      <td>${{escapeHtml(row.responsavel)}}</td>
+    </tr>
+  `
+    }};
+    return prepared;
+  }})
+  .sort((a, b) => b.ts - a.ts);
 function getSelectedTipos() {{
   return Array.from(document.querySelectorAll(".tipo-checkbox"))
     .filter(cb => cb.checked)
@@ -1237,32 +1262,45 @@ function toggleAllTipos(checked) {{
   }});
   refreshTipo();
 }}
+function getDetailRows(selectedTipos, selectedStatus) {{
+  const filterByTipo = selectedTipos.size > 0 && selectedTipos.size < TYPE_OPTIONS.length;
+  const filterByStatus = selectedStatus !== "Todos";
+  if (!filterByTipo && !filterByStatus) return DETAIL_ROWS_PREPARED;
+  return DETAIL_ROWS_PREPARED.filter(row => {{
+    if (filterByTipo && !selectedTipos.has(row.tipo)) return false;
+    if (filterByStatus && row.status !== selectedStatus) return false;
+    return true;
+  }});
+}}
+function appendDetailRows(tbody, rows, token, startIndex) {{
+  if (token !== detailRenderToken) return;
+  const endIndex = Math.min(startIndex + DETAIL_RENDER_CHUNK, rows.length);
+  let html = "";
+  for (let i = startIndex; i < endIndex; i++) html += rows[i].html;
+  if (startIndex === 0) tbody.innerHTML = html;
+  else tbody.insertAdjacentHTML("beforeend", html);
+  if (endIndex < rows.length) {{
+    requestAnimationFrame(() => appendDetailRows(tbody, rows, token, endIndex));
+  }}
+}}
 function renderDetailTable() {{
   const selectedTipos = new Set(getSelectedTipos());
   const selectedStatus = getSelectedStatus();
   const tbody = document.getElementById("detail-tbody");
   const countEl = document.getElementById("detail-count");
   if (!tbody || !countEl) return;
-  const rows = (DETAIL_ROWS || [])
-    .filter(row => !selectedTipos.size || selectedTipos.has(String(row.tipo || "").trim()))
-    .filter(row => selectedStatus === "Todos" || String(row.status || "").trim() === selectedStatus)
-    .slice()
-    .sort((a, b) => (Number(b.ultima_atualizacao_ts || 0) - Number(a.ultima_atualizacao_ts || 0)));
+  const detailKey = Array.from(selectedTipos).sort().join("|") + "::" + selectedStatus;
+  if (detailKey === detailLastKey) return;
+  detailLastKey = detailKey;
+  const rows = getDetailRows(selectedTipos, selectedStatus);
+  const token = ++detailRenderToken;
   countEl.textContent = Number(rows.length || 0).toLocaleString("pt-BR");
   if (!rows.length) {{
     tbody.innerHTML = '<tr><td colspan="6" class="detail-empty">Sem registros para os filtros selecionados.</td></tr>';
     return;
   }}
-  tbody.innerHTML = rows.map(row => `
-    <tr>
-      <td>${{escapeHtml(row.Tag)}}</td>
-      <td>${{escapeHtml(row.Destino)}}</td>
-      <td>${{escapeHtml(row.Finalidade)}}</td>
-      <td>${{escapeHtml(row.ultima_atualizacao_str)}}</td>
-      <td>${{escapeHtml(row.status)}}</td>
-      <td>${{escapeHtml(row.responsavel)}}</td>
-    </tr>
-  `).join("");
+  tbody.innerHTML = '<tr><td colspan="6" class="detail-empty">Carregando registros...</td></tr>';
+  requestAnimationFrame(() => appendDetailRows(tbody, rows, token, 0));
 }}
 function refreshTipo() {{
   let selected = getSelectedTipos();
@@ -1303,7 +1341,6 @@ function refreshTipo() {{
 }}
 document.addEventListener("DOMContentLoaded", () => {{
   refreshTipo();
-  renderDetailTable();
 }});
 </script>
 

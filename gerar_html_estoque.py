@@ -1063,10 +1063,10 @@ def generate_html_tipo(
   </div>
   <div class="critical-card">
     <div class="critical-head">
-      <div class="critical-title">GESTÃO DE DISPOSITIVOS</div>
+      <div class="critical-title">Embalados em câmara fria</div>
     </div>
     <div class="critical-value" id="critical-gestao">{fmt(all_state["gestao_dispositivos"])}</div>
-    <div class="resumo-meta">Destino Câmara Fria + finalidade PACKING</div>
+    <div class="resumo-meta">Packing</div>
   </div>
 </div>
 

@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import argparse
+import contextlib
+import io
 import json
 import os
 import re
@@ -10,6 +12,8 @@ import traceback
 from datetime import datetime
 from pathlib import Path
 from types import SimpleNamespace
+from urllib.error import URLError
+from urllib.request import Request, urlopen
 
 from env_utils import load_env_file
 
@@ -47,6 +51,7 @@ GENERATED_DATA = [
 
 CODE_FILES = [
     "ATUALIZAR_TUDO_10_MIN.bat",
+    "VERIFICACAO_DIARIA_DASHBOARDS.BAT",
     "HTMLACOMPANHAMENTO.py",
     "gerar_dashboard_entregas.py",
     "gerar_html_estoque.py",
@@ -57,6 +62,12 @@ CODE_FILES = [
     ".gitignore",
     "README.md",
 ]
+
+PUBLIC_PAGES = {
+    "ESTOQUE_DATALOGGERS.html": "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
+    "CONTROLE_ENTREGAS_20D.html": "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
+    "HTMLACOMPANHAMENTO.html": "https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html",
+}
 
 REQUIRED_PRESENT = [
     "AURA_DB_HOST",
@@ -490,6 +501,251 @@ def command_changed_files(args: argparse.Namespace) -> int:
         return 1
 
 
+def _cmd_text(args: list[str]) -> tuple[int, str]:
+    proc = subprocess.run(
+        args,
+        cwd=ROOT,
+        text=True,
+        capture_output=True,
+        check=False,
+        encoding="utf-8",
+        errors="ignore",
+    )
+    output = (proc.stdout or "") + (proc.stderr or "")
+    return proc.returncode, output.strip()
+
+
+def _extract_generated_value(name: str, text: str) -> str:
+    if name == "HTMLACOMPANHAMENTO.html":
+        try:
+            payload = _extract_js_json(text, "payload")
+            value = str(payload.get("generated_at") or "").strip()
+            if value:
+                return value
+        except Exception:
+            pass
+    match = re.search(
+        r"Gerado em\s*:?\s*(?:</strong>)?\s*([^<\n]+)",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if match:
+        return re.sub(r"\s+", " ", match.group(1).replace("&nbsp;", " ")).strip()
+    return ""
+
+
+def _parse_generated_datetime(value: str) -> datetime | None:
+    cleaned = re.sub(r"<[^>]+>", " ", value or "")
+    cleaned = cleaned.replace("&nbsp;", " ").replace("\xa0", " ")
+    cleaned = re.sub(r"\s+", " ", cleaned).strip()
+    for fmt in ("%Y-%m-%d %H:%M:%S", "%d/%m/%Y %H:%M:%S", "%d/%m/%Y %H:%M"):
+        try:
+            return datetime.strptime(cleaned, fmt)
+        except ValueError:
+            continue
+    return None
+
+
+def _fetch_public_page(url: str) -> str:
+    sep = "&" if "?" in url else "?"
+    cache_buster = datetime.now().strftime("%Y%m%d%H%M%S")
+    request = Request(
+        f"{url}{sep}verificacao={cache_buster}",
+        headers={
+            "Cache-Control": "no-cache",
+            "Pragma": "no-cache",
+            "User-Agent": "AuraDailyDashboardCheck/1.0",
+        },
+    )
+    with urlopen(request, timeout=30) as response:
+        charset = response.headers.get_content_charset() or "utf-8"
+        return response.read().decode(charset, errors="ignore")
+
+
+def _last_success_from_log(log_path: Path) -> datetime | None:
+    if not log_path.exists():
+        return None
+    text = log_path.read_text(encoding="utf-8", errors="ignore")
+    matches = list(
+        re.finditer(
+            r"\[(\d{2}/\d{2}/\d{4})\s+(\d{2}:\d{2}:\d{2}),\d+\]\s+\[OK\]\s+Ciclo concluido com sucesso\.",
+            text,
+        )
+    )
+    if not matches:
+        return None
+    last = matches[-1]
+    return datetime.strptime(" ".join(last.groups()), "%d/%m/%Y %H:%M:%S")
+
+
+def command_daily_check(args: argparse.Namespace) -> int:
+    log_dir = ROOT / "logs"
+    log_dir.mkdir(exist_ok=True)
+    log_path = log_dir / "verificacao_diaria.txt"
+    today = datetime.now().date()
+    errors: list[str] = []
+    alerts: list[str] = []
+
+    def emit(status: str, message: str) -> None:
+        line = f"{status} - {message}"
+        print(line, flush=True)
+        with log_path.open("a", encoding="utf-8") as fh:
+            fh.write(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] {line}\n")
+
+    def ok(message: str) -> None:
+        emit("OK", message)
+
+    def alert(message: str) -> None:
+        alerts.append(message)
+        emit("ALERTA", message)
+
+    def error(message: str) -> None:
+        errors.append(message)
+        emit("ERRO", message)
+
+    emit("INFO", "=" * 72)
+    emit("INFO", "VERIFICACAO DIARIA DOS DASHBOARDS AURA")
+    emit("INFO", f"Pasta: {ROOT}")
+
+    for html_name in GENERATED_HTML:
+        path = ROOT / html_name
+        if not path.exists():
+            error(f"Dashboard nao encontrado: {html_name}")
+            continue
+        stat = path.stat()
+        modified_at = datetime.fromtimestamp(stat.st_mtime)
+        if stat.st_size < GENERATED_HTML[html_name]["min_size"]:
+            error(f"{html_name} esta pequeno demais ({stat.st_size} bytes)")
+        if modified_at.date() == today:
+            ok(f"Dashboard atualizado hoje: {html_name} ({modified_at.strftime('%Y-%m-%d %H:%M:%S')})")
+        else:
+            alert(f"Arquivo nao atualizado hoje: {html_name} ({modified_at.strftime('%Y-%m-%d %H:%M:%S')})")
+        text = _read_text(path)
+        generated = _extract_generated_value(html_name, text)
+        generated_dt = _parse_generated_datetime(generated)
+        if generated_dt and generated_dt.date() == today:
+            ok(f"Data exibida no HTML confere com hoje: {html_name} ({generated})")
+        elif generated:
+            alert(f"Data exibida no HTML pode estar antiga: {html_name} ({generated})")
+        else:
+            alert(f"Nao foi possivel identificar a data exibida em {html_name}")
+
+    buffer = io.StringIO()
+    validation_error: Exception | None = None
+    with contextlib.redirect_stdout(buffer):
+        try:
+            _validate_estoque(None)
+            _validate_controle(None)
+            _validate_acompanhamento_html(None)
+        except Exception as exc:
+            validation_error = exc
+    captured = buffer.getvalue().strip()
+    if captured:
+        for line in captured.splitlines():
+            emit("INFO", line)
+    if validation_error:
+        error(f"Validacao interna dos HTMLs falhou: {validation_error}")
+    else:
+        ok("Payloads e indicadores principais dos HTMLs foram validados")
+
+    rc, remote_url = _cmd_text(["git", "remote", "get-url", "origin"])
+    if rc == 0 and remote_url:
+        ok(f"Repositorio remoto configurado: {remote_url}")
+    else:
+        error("Repositorio remoto origin nao configurado")
+
+    branch_rc, branch = _cmd_text(["git", "branch", "--show-current"])
+    if branch_rc == 0 and branch:
+        ok(f"Branch atual: {branch}")
+    else:
+        alert("Nao foi possivel identificar o branch atual")
+
+    fetch_rc, fetch_out = _cmd_text(["git", "fetch", "--quiet", "origin", "main"])
+    if fetch_rc == 0:
+        ok("Fetch do origin/main concluido")
+    else:
+        error(f"Falha ao buscar origin/main: {fetch_out}")
+
+    rc, local_head = _cmd_text(["git", "rev-parse", "HEAD"])
+    rc_remote, remote_head = _cmd_text(["git", "rev-parse", "origin/main"])
+    if rc == 0 and rc_remote == 0 and local_head == remote_head:
+        ok(f"Commit local confere com origin/main: {local_head[:7]}")
+    elif rc == 0 and rc_remote == 0:
+        error(f"Falha no push ou repositorio divergente: local={local_head[:7]} origin/main={remote_head[:7]}")
+    else:
+        error("Nao foi possivel comparar HEAD local com origin/main")
+
+    rc, counts = _cmd_text(["git", "rev-list", "--left-right", "--count", "HEAD...origin/main"])
+    if rc == 0 and counts:
+        parts = counts.split()
+        ahead = int(parts[0]) if len(parts) > 0 and parts[0].isdigit() else 0
+        behind = int(parts[1]) if len(parts) > 1 and parts[1].isdigit() else 0
+        if ahead == 0 and behind == 0:
+            ok("Sem commits locais pendentes e sem atraso em relacao ao origin/main")
+        if ahead > 0:
+            error(f"Existem alteracoes nao enviadas ao GitHub: {ahead} commit(s) local(is)")
+        if behind > 0:
+            alert(f"Repositorio local esta atrasado em relacao ao origin/main: {behind} commit(s)")
+
+    rc, status = _cmd_text(["git", "status", "--porcelain"])
+    if rc == 0:
+        status_lines = [line for line in status.splitlines() if line.strip()]
+        tracked = [line for line in status_lines if not line.startswith("??")]
+        untracked = [line for line in status_lines if line.startswith("??")]
+        if tracked:
+            error("Existem alteracoes rastreadas pendentes no Git: " + "; ".join(tracked[:10]))
+        else:
+            ok("Nao existem alteracoes rastreadas pendentes")
+        if untracked:
+            alert(f"Existem {len(untracked)} arquivo(s) nao rastreado(s); eles nao sao enviados pelo push automatico")
+            for line in untracked[:10]:
+                emit("INFO", line)
+    else:
+        error("Falha ao consultar git status")
+
+    rc, commit_info = _cmd_text(["git", "log", "-1", "--date=iso-strict", "--pretty=format:%h %cd %s"])
+    if rc == 0 and commit_info:
+        ok(f"Ultimo commit: {commit_info}")
+        date_match = re.search(r"\d{4}-\d{2}-\d{2}", commit_info)
+        if date_match and date_match.group(0) != today.isoformat():
+            alert(f"Ultimo commit nao e de hoje: {commit_info}")
+    else:
+        alert("Nao foi possivel ler o ultimo commit")
+
+    today_log = ROOT / "logs" / f"atualizacao_{today.isoformat()}.log"
+    last_success = _last_success_from_log(today_log)
+    if last_success:
+        minutes = (datetime.now() - last_success).total_seconds() / 60
+        ok(f"Ultimo ciclo automatico com sucesso: {last_success.strftime('%Y-%m-%d %H:%M:%S')}")
+        if minutes > 30:
+            alert(f"Ultimo ciclo automatico ocorreu ha {minutes:.1f} minutos")
+    else:
+        alert("Nao encontrei ciclo automatico concluido com sucesso no log de hoje")
+
+    for html_name, url in PUBLIC_PAGES.items():
+        try:
+            public_text = _fetch_public_page(url)
+            generated = _extract_generated_value(html_name, public_text)
+            generated_dt = _parse_generated_datetime(generated)
+            if generated_dt and generated_dt.date() == today:
+                ok(f"GitHub Pages atualizado: {html_name} ({generated})")
+            elif generated:
+                alert(f"GitHub Pages pode estar desatualizado: {html_name} ({generated})")
+            else:
+                alert(f"GitHub Pages respondeu, mas nao identifiquei a data: {html_name}")
+        except (URLError, TimeoutError, OSError) as exc:
+            alert(f"Nao foi possivel verificar GitHub Pages para {html_name}: {exc}")
+
+    if errors:
+        emit("ERRO", f"Verificacao diaria finalizada com {len(errors)} erro(s) e {len(alerts)} alerta(s)")
+        return 1
+    if alerts:
+        emit("ALERTA", f"Verificacao diaria finalizada sem erros criticos, com {len(alerts)} alerta(s)")
+        return 0
+    ok("Verificacao diaria finalizada sem erros ou alertas")
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Validacoes do atualizador Aura.")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -508,6 +764,9 @@ def main(argv: list[str] | None = None) -> int:
     p_changed.add_argument("--restore-timestamp-only", action="store_true")
     p_changed.add_argument("--publish-timestamp-only", action="store_true")
     p_changed.set_defaults(func=command_changed_files)
+
+    p_daily = sub.add_parser("daily-check", help="Executa verificacao diaria dos dashboards, Git e GitHub Pages.")
+    p_daily.set_defaults(func=command_daily_check)
 
     args = parser.parse_args(argv)
     return int(args.func(args))

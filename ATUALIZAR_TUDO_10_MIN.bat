@@ -435,7 +435,7 @@ exit /b 0
 if not defined ERRMSG set "ERRMSG=Erro inesperado no ciclo."
 call :LOG ""
 call :LOG "[ERRO] !ERRMSG!"
-call :LOG "[ERRO] GeraÃƒÂ§ÃƒÂ£o falhou ou validacao falhou; commit e push foram bloqueados."
+call :LOG "[ERRO] Geracao falhou ou validacao falhou; commit e push foram bloqueados."
 call :GIT_STATUS "Git status apos erro"
 call :FINISH_CYCLE 1
 if exist "!STAGE_FILE!" del /q "!STAGE_FILE!" >nul 2>nul

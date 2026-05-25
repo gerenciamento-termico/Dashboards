@@ -50,6 +50,21 @@ def normalize_text(value) -> str:
 def normalize_tag_series(series: pd.Series) -> pd.Series:
     return series.fillna("").astype(str).str.strip().str.upper()
 
+def count_gestao_dispositivos(df: pd.DataFrame) -> int:
+    required = {"ds_destino", "ds_finalidade"}
+    if df.empty or not required.issubset(df.columns):
+        return 0
+    base = df.copy()
+    dest_norm = base["ds_destino"].map(normalize_text)
+    fin_norm = base["ds_finalidade"].map(normalize_text)
+    mask = dest_norm.str.contains("CAMARA FRIA", regex=False, na=False) & fin_norm.str.contains("PACKING", regex=False, na=False)
+    if "ds_tag" in base.columns:
+        tags = normalize_tag_series(base.loc[mask, "ds_tag"])
+        tags = tags[tags.ne("")]
+        if not tags.empty:
+            return int(tags.nunique())
+    return int(mask.sum())
+
 def fmt(n: int) -> str:
     return f"{int(n):,}".replace(",", ".")
 
@@ -549,7 +564,7 @@ body{background:radial-gradient(900px 260px at 0% -10%,#13233f 0%,rgba(19,35,63,
 .resumo-label{font-size:.96rem;color:#9ec2ea;font-weight:700;margin-bottom:10px;}
 .resumo-value{font-size:2rem;color:#f1f6ff;font-weight:800;line-height:1.1;}
 .resumo-meta{margin-top:3px;font-size:.72rem;color:#89a9cf;}
-.critical-strip{display:grid;grid-template-columns:repeat(2,minmax(280px,420px));
+.critical-strip{display:grid;grid-template-columns:repeat(3,minmax(240px,360px));
   justify-content:center;gap:12px;margin:6px 0 12px 0;}
 .critical-card{position:relative;overflow:hidden;border:1px solid #365379;border-radius:12px;
   padding:13px 14px;min-height:104px;
@@ -573,6 +588,7 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
 @media(max-width:1100px){
   .kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .resumo-grid-main{grid-template-columns:repeat(2,minmax(240px,360px));}
+  .critical-strip{grid-template-columns:repeat(2,minmax(240px,360px));}
   .charts{grid-template-columns:1fr;}
 }
 @media(max-width:640px){
@@ -847,6 +863,7 @@ def generate_html_tipo(
         total_mov_cf = int(dffc["ds_tag"].nunique()) if "ds_tag" in dffc.columns else 0
         total_rec_est = int(dfre["ds_tag"].nunique()) if "ds_tag" in dfre.columns else 0
         total_packing = int(dfpa["ds_tag"].nunique()) if "ds_tag" in dfpa.columns else 0
+        gestao_dispositivos = count_gestao_dispositivos(dfe)
         total_estoque = 0
         if not dfe.empty and "situacao_oficial" in dfe.columns:
             est_base = dfe.copy()
@@ -888,6 +905,7 @@ def generate_html_tipo(
             "total_mov_cf": total_mov_cf,
             "total_rec_est": total_rec_est,
             "total_packing": total_packing,
+            "gestao_dispositivos": gestao_dispositivos,
             "total_estoque": total_estoque,
             "resumo_ret": resumo_ret,
             "resumo_cf": resumo_cf,
@@ -1042,6 +1060,13 @@ def generate_html_tipo(
     </div>
     <div class="critical-value" id="critical-aguardando">{fmt(all_state["resumo_cf_aguar"])}</div>
     <div class="resumo-meta">Movimentação nos últimos 5 dias</div>
+  </div>
+  <div class="critical-card">
+    <div class="critical-head">
+      <div class="critical-title">GESTÃO DE DISPOSITIVOS</div>
+    </div>
+    <div class="critical-value" id="critical-gestao">{fmt(all_state["gestao_dispositivos"])}</div>
+    <div class="resumo-meta">Destino Câmara Fria + finalidade PACKING</div>
   </div>
 </div>
 
@@ -1249,6 +1274,7 @@ function refreshTipo() {{
   setText("meta-update", data.ultima_atualizacao || "Sem dados");
   setText("critical-disponivel", fmt(data.apto_uso));
   setText("critical-aguardando", fmt(data.resumo_cf_aguar));
+  setText("critical-gestao", fmt(data.gestao_dispositivos));
   setText("resumo-cf", fmt(data.resumo_cf));
   setText("resumo-emb", fmt(data.resumo_emb));
   setText("resumo-ret", fmt(data.resumo_ret));

@@ -37,6 +37,7 @@ FINALIDADE_SALDO_EST  = "e8031b09-2d30-414d-af5b-16e43a41618b"
 FINALIDADE_PACKING    = "460c2f9a-2d38-40c3-a9ff-58eabb6cb21f"
 SNAPSHOT_CUTOFF       = "2024-06-26"
 BASE_DAYS             = 7
+GESTAO_DISPOSITIVOS_DAYS = 6
 DEVICE_TYPES          = {"ARES", "ARES COM SONDA", "SENSOR VTC", "SHIELD", "SYOS"}
 
 
@@ -51,13 +52,20 @@ def normalize_tag_series(series: pd.Series) -> pd.Series:
     return series.fillna("").astype(str).str.strip().str.upper()
 
 def count_gestao_dispositivos(df: pd.DataFrame) -> int:
-    required = {"ds_destino", "ds_finalidade"}
+    required = {"situacao_oficial", "ds_finalidade", "dt_atualizacao"}
     if df.empty or not required.issubset(df.columns):
         return 0
     base = df.copy()
-    dest_norm = base["ds_destino"].map(normalize_text)
+    status_norm = base["situacao_oficial"].map(normalize_text)
     fin_norm = base["ds_finalidade"].map(normalize_text)
-    mask = dest_norm.str.contains("CAMARA FRIA", regex=False, na=False) & fin_norm.str.contains("PACKING", regex=False, na=False)
+    atualizado_em = pd.to_datetime(base["dt_atualizacao"], errors="coerce")
+    corte = pd.Timestamp.now() - pd.Timedelta(days=GESTAO_DISPOSITIVOS_DAYS)
+    mask = (
+        status_norm.eq("CAMARA FRIA")
+        & fin_norm.str.contains("PACKING", regex=False, na=False)
+        & atualizado_em.notna()
+        & atualizado_em.ge(corte)
+    )
     if "ds_tag" in base.columns:
         tags = normalize_tag_series(base.loc[mask, "ds_tag"])
         tags = tags[tags.ne("")]
@@ -1063,7 +1071,7 @@ def generate_html_tipo(
   </div>
   <div class="critical-card">
     <div class="critical-head">
-      <div class="critical-title">Embalados em câmara fria</div>
+      <div class="critical-title">Embalados na câmara fria</div>
     </div>
     <div class="critical-value" id="critical-gestao">{fmt(all_state["gestao_dispositivos"])}</div>
     <div class="resumo-meta">Packing</div>

@@ -1,4 +1,5 @@
 ﻿import argparse
+import ast
 import json
 import os
 import re
@@ -64,10 +65,70 @@ def build_output_path(start_date: str, end_date: str | None, output: str) -> str
     )
 
 
+def _sqlserver_conn_string_from_cfg(cfg: dict) -> str:
+    host = str(cfg.get("host", "")).strip()
+    database = str(cfg.get("database", "")).strip()
+    user = str(cfg.get("user", "")).strip()
+    password = str(cfg.get("password", "")).strip()
+    driver = str(cfg.get("driver", "")).strip() or "ODBC Driver 18 for SQL Server"
+    port = str(cfg.get("port", "")).strip()
+    if not host or not database or not user or not password:
+        return ""
+
+    server = host if not port else f"{host},{port}"
+    encrypt = str(cfg.get("encrypt", "yes")).strip().lower()
+    trust = str(cfg.get("trust_server_certificate", "yes")).strip().lower()
+    encrypt_value = "yes" if encrypt in {"1", "true", "yes", "y", "sim"} else "no"
+    trust_value = "yes" if trust in {"1", "true", "yes", "y", "sim"} else "no"
+    return (
+        f"DRIVER={{{driver}}};"
+        f"SERVER={server};"
+        f"DATABASE={database};"
+        f"UID={user};"
+        f"PWD={password};"
+        f"Encrypt={encrypt_value};"
+        f"TrustServerCertificate={trust_value};"
+    )
+
+
+def _load_sqlserver_cfg_from_python(path: Path, var_name: str) -> dict:
+    if not path.exists():
+        return {}
+    try:
+        module = ast.parse(path.read_text(encoding="utf-8-sig", errors="ignore"))
+    except Exception:
+        return {}
+    for node in module.body:
+        if not isinstance(node, ast.Assign):
+            continue
+        for target in node.targets:
+            if isinstance(target, ast.Name) and target.id == var_name:
+                try:
+                    value = ast.literal_eval(node.value)
+                except Exception:
+                    return {}
+                return value if isinstance(value, dict) else {}
+    return {}
+
+
 def _load_sqlserver_conn_string() -> str:
     env_cs = os.getenv("AURA_SQLSERVER_CONN_STRING", "").strip()
     if env_cs:
         return env_cs
+
+    env_cfg = {
+        "host": os.getenv("AURA_SQLSERVER_HOST", ""),
+        "port": os.getenv("AURA_SQLSERVER_PORT", ""),
+        "database": os.getenv("AURA_SQLSERVER_DATABASE", ""),
+        "user": os.getenv("AURA_SQLSERVER_USER", ""),
+        "password": os.getenv("AURA_SQLSERVER_PASSWORD", ""),
+        "driver": os.getenv("AURA_SQLSERVER_DRIVER", "ODBC Driver 18 for SQL Server"),
+        "encrypt": os.getenv("AURA_SQLSERVER_ENCRYPT", "yes"),
+        "trust_server_certificate": os.getenv("AURA_SQLSERVER_TRUST_SERVER_CERTIFICATE", "yes"),
+    }
+    env_built = _sqlserver_conn_string_from_cfg(env_cfg)
+    if env_built:
+        return env_built
 
     workspace_root = Path(__file__).resolve().parent.parent
     odc_candidates = [
@@ -85,6 +146,16 @@ def _load_sqlserver_conn_string() -> str:
         )
         if match:
             return re.sub(r"\s+", " ", match.group(0)).strip()
+
+    python_cfg_candidates = [
+        (workspace_root / "streamlit" / "gerar_snapshot_reversa.py", "SQLSERVER_CFG"),
+        (workspace_root / "streamlit" / "dasboard_reversa_loggers.py", "DEFAULT_SQLSERVER_CFG"),
+    ]
+    for py_path, var_name in python_cfg_candidates:
+        cfg = _load_sqlserver_cfg_from_python(py_path, var_name)
+        built = _sqlserver_conn_string_from_cfg(cfg)
+        if built:
+            return built
     return ""
 
 

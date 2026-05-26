@@ -1,0 +1,960 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Controle de Dispositivos em Trânsito - Aura</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg-main:#0b1020;
+  --bg-panel:#121b2d;
+  --bg-panel-2:#0f1728;
+  --line:#24344d;
+  --line-soft:#2a3e5e;
+  --text:#e8edf5;
+  --muted:#9fb7d4;
+  --muted-2:#7f95b2;
+  --blue:#3f7bc3;
+  --blue-2:#75b5ff;
+  --green:#8bf0bf;
+  --yellow:#ffd48a;
+  --red:#ffb3b3;
+}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(900px 260px at 0% -10%,#13233f 0%,rgba(19,35,63,0) 60%),
+    radial-gradient(700px 220px at 100% -20%,#1a2d4d 0%,rgba(26,45,77,0) 58%),
+    var(--bg-main);
+  color:var(--text);
+  font-family:"Segoe UI","Trebuchet MS",Arial,sans-serif;
+  padding:18px;
+}
+.page-shell{max-width:1360px;margin:0 auto;}
+.hero-wrap{
+  background:linear-gradient(120deg,#0f2344 0%,#173463 52%,#1e4178 100%);
+  border:1px solid #2b4a76;
+  border-radius:16px;
+  padding:16px 18px;
+  margin-bottom:14px;
+  box-shadow:inset 0 1px 0 rgba(125,173,230,.08);
+}
+.hero-title{font-size:2rem;font-weight:800;letter-spacing:0;}
+.hero-sub{margin-top:5px;color:#bdd0ec;font-size:.95rem;line-height:1.45;}
+.hero-meta{margin-top:10px;display:flex;flex-wrap:wrap;gap:8px;}
+.hero-pill{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:5px 11px;border-radius:999px;
+  background:rgba(9,15,28,.34);
+  border:1px solid rgba(173,200,232,.2);
+  color:#dfeaf8;font-size:.78rem;font-weight:700;
+}
+.hero-pill.ok{color:var(--green);border-color:rgba(139,240,191,.28);}
+.hero-pill.warn{color:var(--yellow);border-color:rgba(255,212,138,.3);}
+.meta-strip{
+  background:linear-gradient(180deg,var(--bg-panel) 0%,var(--bg-panel-2) 100%);
+  border:1px solid var(--line);
+  border-radius:12px;
+  padding:10px 12px;
+  margin:8px 0 14px;
+  color:#b7cbe4;
+  font-size:.92rem;
+  line-height:1.65;
+}
+.meta-strip strong{color:#d7e6fb;font-weight:800;}
+.filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 14px;}
+.tipo-label-sm{font-size:.85rem;color:#9fb7d4;font-weight:700;white-space:nowrap;}
+.type-chip-list{display:flex;flex-wrap:wrap;gap:8px;}
+.type-chip{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:6px 12px;border-radius:999px;
+  background:#13243c;border:1px solid #2b466b;color:#dceafe;
+  cursor:pointer;font-size:.84rem;font-weight:800;user-select:none;
+  transition:background .15s,color .15s,border-color .15s;
+}
+.type-chip:hover{background:#1a3358;border-color:#3a6090;}
+.type-chip input{accent-color:#2f80d0;cursor:pointer;}
+.type-chip-all{background:linear-gradient(135deg,#173158 0%,#1d4f8f 100%);border-color:#4f94da;}
+.type-chip-all:hover{background:linear-gradient(135deg,#1d3f72 0%,#2560ab 100%);}
+.section-head{
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:12px;
+  margin:16px 2px 9px;
+}
+.section-title{font-size:1.02rem;font-weight:800;color:#dceafe;}
+.section-note{font-size:.78rem;color:#96afcf;text-align:right;}
+.critical-strip{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(190px,1fr));
+  gap:12px;
+  margin:8px 0 14px;
+}
+.critical-card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid #365379;
+  border-radius:12px;
+  padding:14px 14px 13px;
+  min-height:118px;
+  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
+  text-align:center;
+  box-shadow:inset 0 1px 0 rgba(125,173,230,.06);
+}
+.critical-card::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 100%);
+  opacity:.9;
+}
+.critical-head{
+  position:relative;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:31px;
+  margin-bottom:9px;
+}
+.critical-title{
+  font-size:.92rem;
+  color:#b9d1ee;
+  font-weight:800;
+  line-height:1.25;
+}
+.critical-value{
+  font-size:2.15rem;
+  font-weight:800;
+  color:#f5f9ff;
+  line-height:1.05;
+  white-space:nowrap;
+}
+.resumo-meta{margin-top:7px;font-size:.74rem;color:#89a9cf;line-height:1.35;}
+.device-type-grid{
+  display:grid;
+  grid-template-columns:repeat(5,minmax(150px,1fr));
+  gap:12px;
+  margin:8px 0 14px;
+}
+.device-type-card{
+  position:relative;
+  overflow:hidden;
+  border:1px solid #365379;
+  border-radius:12px;
+  padding:14px 12px 13px;
+  min-height:112px;
+  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
+  text-align:center;
+  box-shadow:inset 0 1px 0 rgba(125,173,230,.06);
+}
+.device-type-card::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 100%);
+  opacity:.82;
+}
+.device-type-title{
+  min-height:34px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#b9d1ee;
+  font-size:.86rem;
+  font-weight:800;
+  line-height:1.22;
+}
+.device-type-value{
+  margin-top:8px;
+  color:#f5f9ff;
+  font-size:1.92rem;
+  font-weight:800;
+  line-height:1;
+  white-space:nowrap;
+}
+.device-type-meta{margin-top:7px;font-size:.72rem;color:#89a9cf;line-height:1.35;}
+.kpi-grid{
+  display:grid;
+  grid-template-columns:minmax(0,1fr);
+  gap:14px;
+  margin:6px 0 16px;
+}
+.kpi-card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
+  border:1px solid var(--line-soft);
+  border-radius:14px;
+  padding:16px 18px;
+  min-height:108px;
+  box-shadow:inset 0 1px 0 rgba(125,173,230,.06);
+  text-align:center;
+}
+.kpi-card::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 100%);
+  opacity:.85;
+}
+.kpi-title{font-size:.96rem;font-weight:800;color:#9fb7d4;margin-bottom:12px;}
+.kpi-value{font-size:2.15rem;font-weight:800;color:#f6fbff;line-height:1;}
+.status-panel{
+  display:grid;
+  grid-template-columns:1fr;
+  gap:14px;
+  margin-top:14px;
+}
+.panel{
+  background:linear-gradient(170deg,#121f34 0%,#0f1828 100%);
+  border:1px solid var(--line-soft);
+  border-radius:14px;
+  padding:14px;
+}
+.panel-title{font-size:.98rem;font-weight:800;color:#d8e6fb;margin-bottom:10px;}
+.source-list{display:grid;gap:8px;}
+.source-row{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  border:1px solid #253a58;
+  background:#111c2f;
+  border-radius:10px;
+  padding:9px 10px;
+  color:#b9cce6;
+  font-size:.86rem;
+}
+.source-row span:last-child{font-weight:800;color:#f3f7ff;text-align:right;}
+.badge{
+  position:absolute;
+  right:0;
+  top:0;
+  font-size:.66rem;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+  border-radius:999px;
+  padding:3px 8px;
+  border:1px solid transparent;
+}
+.badge-normal{color:#9ff0c2;background:rgba(28,92,57,.5);border-color:rgba(134,237,185,.35);}
+.badge-warning{color:#ffd48a;background:rgba(98,67,18,.5);border-color:rgba(245,195,109,.35);}
+footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
+@media(max-width:1180px){
+  .critical-strip{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .device-type-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+}
+@media(max-width:900px){
+  body{padding:12px;}
+  .critical-strip,.kpi-grid,.status-panel{grid-template-columns:1fr;}
+  .device-type-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .hero-title{font-size:1.55rem;}
+  .section-head{align-items:flex-start;flex-direction:column;}
+  .section-note{text-align:left;}
+}
+@media(max-width:520px){
+  .critical-card,.kpi-card,.panel,.device-type-card{padding:13px 12px;}
+  .critical-value,.kpi-value,.device-type-value{font-size:1.86rem;}
+  .device-type-grid{grid-template-columns:1fr;}
+  .source-row{flex-direction:column;gap:3px;}
+  .source-row span:last-child{text-align:left;}
+}
+</style>
+</head>
+<body>
+<main class="page-shell">
+  <section class="hero-wrap">
+    <h1 class="hero-title">Controle de Dispositivos em Trânsito</h1>
+    <div class="hero-sub">
+      Painel local consolidado para trânsito, entregas, retornos e estoque operacional.
+      Conexão opcional com VTC STAGE e fallback para JSONs locais.
+    </div>
+    <div class="hero-meta">
+      <span class="hero-pill" id="pill-stage">VTC Stage: aguardando</span>
+      <span class="hero-pill" id="pill-local">JSON local: aguardando</span>
+      <span class="hero-pill">Atualização: <span id="ultima-atualizacao">--</span></span>
+    </div>
+  </section>
+
+  <div class="meta-strip">
+    <strong>Fonte ativa:</strong> <span id="fonte-ativa">Carregando dados...</span> &nbsp;|&nbsp;
+    <strong>Tipo aplicado:</strong> <span id="meta-tipo">Todos os tipos</span> &nbsp;|&nbsp;
+    <strong>Registros analisados:</strong> <span id="total-registros">0</span> &nbsp;|&nbsp;
+    <strong>Total em estoque:</strong> <span id="total-estoque-meta">0</span>
+  </div>
+
+  <div class="filter-row">
+    <span class="tipo-label-sm">Filtro por tipo de dispositivo/logger</span>
+    <div class="type-chip-list">
+      <label class="type-chip type-chip-all"><input id="tipo-all" type="checkbox" checked onchange="toggleAllTipos(this.checked)"> <span>Todos os tipos</span></label>
+      <label class="type-chip"><input class="tipo-checkbox" type="checkbox" data-tipo="ARES" checked onchange="refreshTipo()"> <span>ARES</span></label>
+      <label class="type-chip"><input class="tipo-checkbox" type="checkbox" data-tipo="ARES COM SONDA" checked onchange="refreshTipo()"> <span>ARES COM SONDA</span></label>
+      <label class="type-chip"><input class="tipo-checkbox" type="checkbox" data-tipo="SENSOR VTC" checked onchange="refreshTipo()"> <span>SENSOR VTC</span></label>
+      <label class="type-chip"><input class="tipo-checkbox" type="checkbox" data-tipo="SHIELD" checked onchange="refreshTipo()"> <span>SHIELD</span></label>
+      <label class="type-chip"><input class="tipo-checkbox" type="checkbox" data-tipo="SYOS" checked onchange="refreshTipo()"> <span>SYOS</span></label>
+    </div>
+  </div>
+
+  <div class="section-head">
+    <h2 class="section-title">Indicadores consolidados</h2>
+    <p class="section-note">Cards no padrão visual do pacote Aura</p>
+  </div>
+  <section class="critical-strip" aria-label="Indicadores principais">
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">Informações de estoque</div>
+      </div>
+      <div class="critical-value" id="card-estoque">0</div>
+      <div class="resumo-meta"></div>
+    </article>
+
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">Loggers em trânsito</div>
+      </div>
+      <div class="critical-value" id="card-loggers-transito">0</div>
+      <div class="resumo-meta"></div>
+    </article>
+
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">Loggers entregues</div>
+      </div>
+      <div class="critical-value" id="card-loggers-entregues">0</div>
+      <div class="resumo-meta">Últimos <span id="dias-retorno-label">20</span> dias</div>
+    </article>
+
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">Loggers retornados</div>
+      </div>
+      <div class="critical-value" id="card-loggers-retornados">0</div>
+      <div class="resumo-meta">Últimos <span id="dias-retorno-label">20</span> dias</div>
+    </article>
+  </section>
+
+  <div class="section-head">
+    <h2 class="section-title">Estoque por equipamento</h2>
+    <p class="section-note">Quantidade consolidada por tipo de logger/dispositivo</p>
+  </div>
+  <section class="device-type-grid" id="device-type-grid" aria-label="Resumo operacional por tipo de logger"></section>
+
+  <div class="section-head">
+    <h2 class="section-title">Totais técnicos</h2>
+    <p class="section-note">Volumes consolidados da fonte ativa</p>
+  </div>
+  <section class="kpi-grid" aria-label="Totais técnicos">
+    <article class="kpi-card">
+      <div class="kpi-title">Registros de estoque</div>
+      <div class="kpi-value" id="kpi-estoque-registros">0</div>
+    </article>
+  </section>
+
+  <section class="status-panel">
+    <div class="panel">
+      <div class="panel-title">Fontes de dados</div>
+      <div class="source-list">
+        <div class="source-row"><span>VTC Stage sincronizado</span><span id="status-stage">Não configurado</span></div>
+        <div class="source-row"><span>../data/estoque.json</span><span id="status-estoque">Aguardando</span></div>
+        <div class="source-row"><span>../data/entregas.json</span><span id="status-entregas">Aguardando</span></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Arquivo local - não publicado no GitHub Pages - Pacote Aura</footer>
+</main>
+
+<script src="GESTAO_DISPOSITIVOS_PLANILHA_DATA.js"></script>
+<script>
+const CONFIG = {
+  diasRetorno: 20,
+  status: {
+    transito: ["EM_TRANSITO", "EM TRANSITO"],
+    entregue: ["ENTREGUE"],
+    retornado: ["DEVOLVIDO", "ESTOQUE"]
+  },
+  campos: {
+    status: "status",
+    tipo: "tipo",
+    pedido: "pedido",
+    identificador: "identificador",
+    dataColeta: "data_coleta",
+    statusColeta: "status_coleta",
+    statusEntrega: "status_entrega",
+    dataEnvio: "data_envio",
+    dataEntrega: "data_entrega",
+    dataRetorno: "data_retorno",
+    destino: "destino",
+    finalidade: "finalidade",
+    localEstoque: "local_estoque",
+    quantidade: "quantidade"
+  },
+  aliasesCampos: {
+    pedido: ["pedido", "nr_pedido", "numero_pedido", "numeroPedido", "pedido_id", "id_pedido", "order", "order_id", "id_sem", "sem", "cd_pedido"],
+    logger: ["logger", "identificador", "ds_tag", "tag", "datalogger", "nr_datalogger", "codigo_logger", "serial", "serie", "ds_serie"],
+    dataColeta: ["data_coleta", "dt_coleta", "coleta_data", "data_envio", "dt_envio", "data_retirada", "dt_retirada"],
+    statusColeta: ["status_coleta", "st_coleta", "coleta_status", "situacao_coleta"],
+    dataEntrega: ["data_entrega", "dt_entrega", "entrega_data", "data_recebimento", "dt_recebimento"],
+    statusEntrega: ["status_entrega", "st_entrega", "entrega_status", "situacao_entrega", "status"]
+  },
+  tiposDispositivo: ["ARES", "ARES COM SONDA", "SENSOR VTC", "SHIELD", "SYOS"],
+  fontes: {
+    // Configure aqui quando o endpoint do VTC STAGE estiver disponível.
+    // Exemplo: "https://vtc-stage.seu-dominio/api/gestao-dispositivos"
+    vtcStageUrl: "",
+    estoqueLocal: "../data/estoque.json",
+    entregasLocal: "../data/entregas.json"
+  },
+  timeoutStageMs: 8000
+};
+
+const PREFIXO_LOG = "GESTAO DISPOSITIVOS - ";
+const $ = id => document.getElementById(id);
+let APP_DATA = { estoque: [], entregas: [], fontes: [], erros: [], metricasOperacionais: null, ultimaAtualizacao: "" };
+let LAST_FIELD_SIGNATURE = "";
+
+function logInfo(msg, extra) {
+  if (extra === undefined) console.log(PREFIXO_LOG + msg);
+  else console.log(PREFIXO_LOG + msg, extra);
+}
+
+function logWarn(msg, extra) {
+  if (extra === undefined) console.warn(PREFIXO_LOG + msg);
+  else console.warn(PREFIXO_LOG + msg, extra);
+}
+
+function normalizeText(value) {
+  return String(value ?? "")
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toUpperCase();
+}
+
+function normalizeStatus(value) {
+  return normalizeText(value).replace(/[\s-]+/g, "_");
+}
+
+function parseSafeDate(value) {
+  if (value === null || value === undefined || value === "") return null;
+  if (value instanceof Date && !Number.isNaN(value.getTime())) return value;
+  if (typeof value === "number" && Number.isFinite(value)) {
+    const ms = value > 100000000000 ? value : value * 1000;
+    const date = new Date(ms);
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+  const raw = String(value).trim();
+  if (!raw) return null;
+
+  const br = raw.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})(?:[ T](\d{1,2}):(\d{2})(?::(\d{2}))?)?$/);
+  if (br) {
+    const [, dd, mm, yyyy, hh = "0", mi = "0", ss = "0"] = br;
+    const date = new Date(Number(yyyy), Number(mm) - 1, Number(dd), Number(hh), Number(mi), Number(ss));
+    return Number.isNaN(date.getTime()) ? null : date;
+  }
+
+  const iso = new Date(raw);
+  return Number.isNaN(iso.getTime()) ? null : iso;
+}
+
+function fmt(value) {
+  return Number(value || 0).toLocaleString("pt-BR");
+}
+
+function setText(id, value) {
+  const el = $(id);
+  if (el) el.textContent = value;
+}
+
+function setSourceStatus(id, text) {
+  setText(id, text);
+}
+
+function setPill(id, text, mode) {
+  const el = $(id);
+  if (!el) return;
+  el.textContent = text;
+  el.classList.remove("ok", "warn");
+  if (mode) el.classList.add(mode);
+}
+
+function asArray(payload) {
+  if (Array.isArray(payload)) return payload;
+  if (payload && Array.isArray(payload.data)) return payload.data;
+  if (payload && Array.isArray(payload.items)) return payload.items;
+  if (payload && Array.isArray(payload.registros)) return payload.registros;
+  return [];
+}
+
+function splitStagePayload(payload) {
+  if (!payload) return { estoque: [], entregas: [] };
+  if (Array.isArray(payload)) {
+    const estoque = [];
+    const entregas = [];
+    payload.forEach(item => {
+      if (item && (CONFIG.campos.quantidade in item || CONFIG.campos.localEstoque in item)) estoque.push(item);
+      else entregas.push(item);
+    });
+    return { estoque, entregas };
+  }
+  return {
+    estoque: asArray(payload.estoque || payload.stock || payload.inventory),
+    entregas: asArray(payload.entregas || payload.deliveries || payload.movimentacoes || payload.data)
+  };
+}
+
+async function fetchJson(url, label, timeoutMs) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs || 10000);
+  try {
+    const response = await fetch(url, { cache: "no-store", signal: controller.signal });
+    if (!response.ok) throw new Error(`HTTP ${response.status}`);
+    const json = await response.json();
+    logInfo(`${label} carregado`, url);
+    return { ok: true, data: json, erro: "" };
+  } catch (error) {
+    logWarn(`${label} indisponível`, error.message);
+    return { ok: false, data: null, erro: error.message };
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
+function carregarVtcStageLocal(resultado) {
+  const stageData = window.GESTAO_DISPOSITIVOS_STAGE_DATA;
+  if (!stageData || !stageData.summary) return false;
+  const fonteLocal = "VTC Stage";
+  const fonteVisual = "VTC Stage: sincronizado";
+
+  resultado.metricasOperacionais = {
+    summary: stageData.summary,
+    fonte: stageData.fonte || fonteLocal,
+    alertas: stageData.alertas || [],
+    campos: stageData.campos || {}
+  };
+  resultado.fontes.push(fonteVisual);
+  resultado.ultimaAtualizacao = stageData.geradoEm || stageData.generatedAt || "";
+
+  const all = stageData.summary.ALL || {};
+  setSourceStatus("status-stage", `${fmt((all.registrosEntregas || 0) + (all.registrosEstoque || 0))} registros`);
+  setSourceStatus("status-estoque", `${fmt(all.registrosEstoque || 0)} registros`);
+  setSourceStatus("status-entregas", `${fmt(all.registrosEntregas || 0)} registros`);
+  setPill("pill-stage", "VTC Stage: carregado", "ok");
+  setPill("pill-local", "Fallback local: desativado", "warn");
+  logInfo(`${fonteLocal} carregado`, {
+    geradoEm: resultado.ultimaAtualizacao,
+    registrosEntregas: all.registrosEntregas || 0,
+    registrosEstoque: all.registrosEstoque || 0
+  });
+  return true;
+}
+
+async function carregarDados() {
+  const resultado = {
+    estoque: [],
+    entregas: [],
+    fontes: [],
+    erros: [],
+    metricasOperacionais: null,
+    ultimaAtualizacao: ""
+  };
+
+  if (carregarVtcStageLocal(resultado)) {
+    return resultado;
+  }
+
+  const stageUrl = String(CONFIG.fontes.vtcStageUrl || "").trim();
+  if (stageUrl) {
+    setSourceStatus("status-stage", "Conectando...");
+    const stage = await fetchJson(stageUrl, "VTC STAGE", CONFIG.timeoutStageMs);
+    if (stage.ok) {
+      const stageData = splitStagePayload(stage.data);
+      resultado.estoque.push(...stageData.estoque);
+      resultado.entregas.push(...stageData.entregas);
+      resultado.fontes.push("VTC STAGE");
+      setSourceStatus("status-stage", `${fmt(stageData.estoque.length + stageData.entregas.length)} registros`);
+      setPill("pill-stage", "VTC STAGE: conectado", "ok");
+    } else {
+      resultado.erros.push(`VTC STAGE: ${stage.erro}`);
+      setSourceStatus("status-stage", "Falhou - usando fallback local");
+      setPill("pill-stage", "VTC STAGE: fallback", "warn");
+    }
+  } else {
+    setSourceStatus("status-stage", "URL não configurada");
+    setPill("pill-stage", "VTC STAGE: não configurado", "warn");
+    logInfo("VTC STAGE sem URL configurada; seguindo com JSON local.");
+  }
+
+  const [estoqueLocal, entregasLocal] = await Promise.all([
+    fetchJson(CONFIG.fontes.estoqueLocal, "estoque.json", 10000),
+    fetchJson(CONFIG.fontes.entregasLocal, "entregas.json", 10000)
+  ]);
+
+  if (estoqueLocal.ok) {
+    const rows = asArray(estoqueLocal.data);
+    resultado.estoque.push(...rows);
+    resultado.fontes.push("estoque.json");
+    setSourceStatus("status-estoque", `${fmt(rows.length)} registros`);
+  } else {
+    resultado.erros.push(`estoque.json: ${estoqueLocal.erro}`);
+    setSourceStatus("status-estoque", "Não carregado");
+  }
+
+  if (entregasLocal.ok) {
+    const rows = asArray(entregasLocal.data);
+    resultado.entregas.push(...rows);
+    resultado.fontes.push("entregas.json");
+    setSourceStatus("status-entregas", `${fmt(rows.length)} registros`);
+  } else {
+    resultado.erros.push(`entregas.json: ${entregasLocal.erro}`);
+    setSourceStatus("status-entregas", "Não carregado");
+  }
+
+  setPill(
+    "pill-local",
+    resultado.fontes.some(f => f.includes(".json")) ? "JSON local: carregado" : "JSON local: indisponível",
+    resultado.fontes.some(f => f.includes(".json")) ? "ok" : "warn"
+  );
+
+  return resultado;
+}
+
+function statusIn(row, statusList) {
+  const status = normalizeStatus(row?.[CONFIG.campos.status]);
+  return statusList.map(normalizeStatus).includes(status);
+}
+
+function isLogger(row) {
+  const tipo = normalizeText(row?.[CONFIG.campos.tipo]);
+  const tiposDispositivo = CONFIG.tiposDispositivo.map(normalizeText);
+  return tipo === "" || tipo.includes("LOGGER") || tiposDispositivo.includes(tipo);
+}
+
+function hasValue(value) {
+  return value !== null && value !== undefined && String(value).trim() !== "";
+}
+
+function getAvailableFields(rows) {
+  const fields = new Set();
+  (rows || []).slice(0, 100).forEach(row => {
+    if (row && typeof row === "object") {
+      Object.keys(row).forEach(key => fields.add(key));
+    }
+  });
+  return Array.from(fields).sort();
+}
+
+function detectField(availableFields, aliases, fallback) {
+  const normalizedMap = new Map(availableFields.map(field => [normalizeText(field), field]));
+  for (const alias of aliases || []) {
+    const exact = availableFields.find(field => field === alias);
+    if (exact) return exact;
+    const normalized = normalizedMap.get(normalizeText(alias));
+    if (normalized) return normalized;
+  }
+  if (fallback && availableFields.includes(fallback)) return fallback;
+  return "";
+}
+
+function buildEntregaFieldMap(entregas) {
+  const availableFields = getAvailableFields(entregas);
+  const map = {
+    pedido: detectField(availableFields, CONFIG.aliasesCampos.pedido, CONFIG.campos.pedido),
+    logger: detectField(availableFields, CONFIG.aliasesCampos.logger, CONFIG.campos.identificador),
+    dataColeta: detectField(availableFields, CONFIG.aliasesCampos.dataColeta, CONFIG.campos.dataColeta),
+    statusColeta: detectField(availableFields, CONFIG.aliasesCampos.statusColeta, CONFIG.campos.statusColeta),
+    dataEntrega: detectField(availableFields, CONFIG.aliasesCampos.dataEntrega, CONFIG.campos.dataEntrega),
+    statusEntrega: detectField(availableFields, CONFIG.aliasesCampos.statusEntrega, CONFIG.campos.statusEntrega),
+    statusGeral: detectField(availableFields, [CONFIG.campos.status], CONFIG.campos.status)
+  };
+  const signature = JSON.stringify({ availableFields, map });
+  if (signature !== LAST_FIELD_SIGNATURE) {
+    LAST_FIELD_SIGNATURE = signature;
+    logInfo("Campos disponíveis em entregas.json/VTC STAGE", availableFields);
+    logInfo("Campos detectados para regra de Loggers em trânsito", map);
+    ["pedido", "logger", "dataColeta", "dataEntrega"].forEach(key => {
+      if (!map[key]) logWarn(`Campo equivalente a ${key} não encontrado; regra usará fallback seguro.`);
+    });
+    if (!map.statusColeta && !map.statusGeral) logWarn("Campo equivalente a status de coleta não encontrado.");
+    if (!map.statusEntrega && !map.statusGeral) logWarn("Campo equivalente a status entregue não encontrado.");
+  }
+  return map;
+}
+
+function getFieldValue(row, field) {
+  return field ? row?.[field] : undefined;
+}
+
+function hasColeta(row, fieldMap) {
+  const dataColeta = parseSafeDate(getFieldValue(row, fieldMap.dataColeta));
+  if (dataColeta) return true;
+
+  const statusColeta = normalizeStatus(getFieldValue(row, fieldMap.statusColeta));
+  if (statusColeta) return true;
+
+  const statusGeral = normalizeStatus(getFieldValue(row, fieldMap.statusGeral));
+  return CONFIG.status.transito.map(normalizeStatus).includes(statusGeral);
+}
+
+function hasEntrega(row, fieldMap) {
+  const dataEntrega = parseSafeDate(getFieldValue(row, fieldMap.dataEntrega));
+  if (dataEntrega) return true;
+
+  const statusEntrega = normalizeStatus(getFieldValue(row, fieldMap.statusEntrega));
+  if (CONFIG.status.entregue.map(normalizeStatus).includes(statusEntrega)) return true;
+
+  const statusGeral = normalizeStatus(getFieldValue(row, fieldMap.statusGeral));
+  return CONFIG.status.entregue.map(normalizeStatus).includes(statusGeral);
+}
+
+function buildPedidoLoggerKey(row, fieldMap, index) {
+  const pedido = hasValue(getFieldValue(row, fieldMap.pedido))
+    ? String(getFieldValue(row, fieldMap.pedido)).trim()
+    : "SEM_PEDIDO";
+  const logger = hasValue(getFieldValue(row, fieldMap.logger))
+    ? String(getFieldValue(row, fieldMap.logger)).trim()
+    : `SEM_LOGGER_${index}`;
+  return `${normalizeText(pedido)}|${normalizeText(logger)}`;
+}
+
+function countLoggersEmTransito(entregas) {
+  const fieldMap = buildEntregaFieldMap(entregas);
+  const chaves = new Set();
+  entregas.forEach((row, index) => {
+    if (!isLogger(row)) return;
+    if (!hasColeta(row, fieldMap)) return;
+    if (hasEntrega(row, fieldMap)) return;
+    chaves.add(buildPedidoLoggerKey(row, fieldMap, index));
+  });
+  return chaves.size;
+}
+
+function getSelectedTipos() {
+  return Array.from(document.querySelectorAll(".tipo-checkbox"))
+    .filter(cb => cb.checked)
+    .map(cb => cb.dataset.tipo);
+}
+
+function getTipoLabel(selectedTipos) {
+  const total = CONFIG.tiposDispositivo.length;
+  if (!selectedTipos.length || selectedTipos.length === total) return "Todos os tipos";
+  return selectedTipos.join(" + ");
+}
+
+function syncTipoAll() {
+  const total = document.querySelectorAll(".tipo-checkbox").length;
+  const selected = getSelectedTipos().length;
+  const all = $("tipo-all");
+  if (all) all.checked = total > 0 && selected === total;
+}
+
+function toggleAllTipos(checked) {
+  document.querySelectorAll(".tipo-checkbox").forEach(cb => {
+    cb.checked = checked;
+  });
+  refreshTipo();
+}
+
+function matchesSelectedTipo(row, selectedTipos) {
+  if (!selectedTipos.length || selectedTipos.length === CONFIG.tiposDispositivo.length) return true;
+  const tipo = normalizeText(row?.[CONFIG.campos.tipo]);
+  const selectedNorm = selectedTipos.map(normalizeText);
+  return selectedNorm.includes(tipo);
+}
+
+function getFilteredData() {
+  let selectedTipos = getSelectedTipos();
+  if (!selectedTipos.length) {
+    document.querySelectorAll(".tipo-checkbox").forEach(cb => {
+      cb.checked = true;
+    });
+    selectedTipos = getSelectedTipos();
+  }
+  syncTipoAll();
+  const estoque = APP_DATA.estoque.filter(row => matchesSelectedTipo(row, selectedTipos));
+  const entregas = APP_DATA.entregas.filter(row => matchesSelectedTipo(row, selectedTipos));
+  return { estoque, entregas, selectedTipos };
+}
+
+function calcularIndicadoresOperacionais(selectedTipos = CONFIG.tiposDispositivo) {
+  const metricas = APP_DATA.metricasOperacionais || { summary: {} };
+  const summary = metricas.summary || {};
+  const allTipos = CONFIG.tiposDispositivo;
+  const tipos = !selectedTipos.length || selectedTipos.length === allTipos.length ? ["ALL"] : selectedTipos;
+  const base = tipos.includes("ALL")
+    ? (summary.ALL || {})
+    : tipos.reduce((acc, tipo) => {
+        const item = summary[tipo] || {};
+        acc.totalEstoque += Number(item.totalEstoque || 0);
+        acc.loggersTransito += Number(item.loggersTransito || 0);
+        acc.loggersEntregues += Number(item.loggersEntregues || 0);
+        acc.loggersRetornados += Number(item.loggersRetornados || 0);
+        acc.registrosEntregas += Number(item.registrosEntregas || 0);
+        acc.registrosEstoque += Number(item.registrosEstoque || 0);
+        acc.semStatus += Number(item.semStatus || 0);
+        acc.semData += Number(item.semData || 0);
+        acc.estoqueSemQuantidade += Number(item.estoqueSemQuantidade || 0);
+        return acc;
+      }, { totalEstoque: 0, loggersTransito: 0, loggersEntregues: 0, loggersRetornados: 0, registrosEntregas: 0, registrosEstoque: 0, semStatus: 0, semData: 0, estoqueSemQuantidade: 0 });
+
+  return {
+    totalEstoque: Number(base.totalEstoque || 0),
+    loggersTransito: Number(base.loggersTransito || 0),
+    loggersEntregues: Number(base.loggersEntregues || 0),
+    loggersRetornados: Number(base.loggersRetornados || 0),
+    registrosEntregas: Number(base.registrosEntregas || 0),
+    registrosEstoque: Number(base.registrosEstoque || 0),
+    totalRegistros: Number(base.registrosEntregas || 0) + Number(base.registrosEstoque || 0),
+    semStatus: Number(base.semStatus || 0),
+    semData: Number(base.semData || 0),
+    estoqueSemQuantidade: Number(base.estoqueSemQuantidade || 0),
+    alertasQualidade: metricas.alertas || []
+  };
+}
+
+function getTiposResumoVisiveis(selectedTipos = CONFIG.tiposDispositivo) {
+  const allTipos = CONFIG.tiposDispositivo;
+  if (!selectedTipos.length || selectedTipos.length === allTipos.length) return allTipos;
+  const selectedSet = new Set(selectedTipos);
+  return allTipos.filter(tipo => selectedSet.has(tipo));
+}
+
+function calcularQuantidadePorTipoFallback(tipo) {
+  const tipoNormalizado = normalizeText(tipo);
+  const rows = APP_DATA.estoque.filter(row => normalizeText(row?.[CONFIG.campos.tipo]) === tipoNormalizado);
+  return sumQuantidade(rows);
+}
+
+function getResumoQuantidadePorTipo(tipo) {
+  const summary = APP_DATA.metricasOperacionais?.summary;
+  if (summary && summary[tipo]) {
+    return Number(summary[tipo].totalEstoque || 0);
+  }
+  return calcularQuantidadePorTipoFallback(tipo);
+}
+
+function renderizarResumoPorTipoLogger(selectedTipos = CONFIG.tiposDispositivo) {
+  const grid = $("device-type-grid");
+  if (!grid) return;
+  const tipos = getTiposResumoVisiveis(selectedTipos);
+  grid.innerHTML = tipos.map(tipo => {
+    const quantidade = getResumoQuantidadePorTipo(tipo);
+    return `
+      <article class="device-type-card">
+        <div class="device-type-title">${escapeHtml(tipo)}</div>
+        <div class="device-type-value">${fmt(quantidade)}</div>
+        <div class="device-type-meta">Quantidade consolidada</div>
+      </article>
+    `;
+  }).join("");
+}
+
+function refreshTipo() {
+  const filtrado = getFilteredData();
+  const indicadores = APP_DATA.metricasOperacionais
+    ? calcularIndicadoresOperacionais(filtrado.selectedTipos)
+    : calcularIndicadores(filtrado.estoque, filtrado.entregas, filtrado.selectedTipos);
+  renderizar(indicadores, APP_DATA, APP_DATA.erros, filtrado.selectedTipos);
+}
+
+function getAnyDate(row) {
+  return (
+    parseSafeDate(row?.[CONFIG.campos.dataRetorno]) ||
+    parseSafeDate(row?.[CONFIG.campos.dataEntrega]) ||
+    parseSafeDate(row?.[CONFIG.campos.dataEnvio])
+  );
+}
+
+function uniqueCount(rows) {
+  const campo = CONFIG.campos.identificador;
+  const ids = rows
+    .map(row => String(row?.[campo] ?? "").trim())
+    .filter(Boolean);
+  if (ids.length) return new Set(ids).size;
+  return rows.length;
+}
+
+function sumQuantidade(rows) {
+  return rows.reduce((total, row) => {
+    const raw = row?.[CONFIG.campos.quantidade];
+    const normalized = typeof raw === "string" ? raw.replace(/\./g, "").replace(",", ".") : raw;
+    const number = Number(normalized);
+    return total + (Number.isFinite(number) ? number : 0);
+  }, 0);
+}
+
+function calcularIndicadores(estoque, entregas, selectedTipos = CONFIG.tiposDispositivo) {
+  const hoje = new Date();
+  const inicioRetorno = new Date(hoje);
+  inicioRetorno.setDate(inicioRetorno.getDate() - CONFIG.diasRetorno);
+
+  const loggersEntregues = entregas.filter(row => statusIn(row, CONFIG.status.entregue) && isLogger(row));
+  const loggersRetornados = entregas.filter(row => {
+    const dataRetorno = parseSafeDate(row?.[CONFIG.campos.dataRetorno]);
+    return statusIn(row, CONFIG.status.retornado) && isLogger(row) && dataRetorno && dataRetorno >= inicioRetorno;
+  });
+
+  const semStatus = entregas.filter(row => !normalizeText(row?.[CONFIG.campos.status]));
+  const semData = entregas.filter(row => !getAnyDate(row));
+  const estoqueSemQuantidade = estoque.filter(row => row?.[CONFIG.campos.quantidade] === null || row?.[CONFIG.campos.quantidade] === undefined || row?.[CONFIG.campos.quantidade] === "");
+
+  const indicadores = {
+    totalEstoque: sumQuantidade(estoque),
+    loggersTransito: countLoggersEmTransito(entregas),
+    loggersEntregues: uniqueCount(loggersEntregues),
+    loggersRetornados: uniqueCount(loggersRetornados),
+    registrosEntregas: entregas.length,
+    registrosEstoque: estoque.length,
+    totalRegistros: entregas.length + estoque.length,
+    semStatus: semStatus.length,
+    semData: semData.length,
+    estoqueSemQuantidade: estoqueSemQuantidade.length
+  };
+
+  const tipoLabel = getTipoLabel(selectedTipos);
+  logInfo(`Filtro por tipo aplicado: ${tipoLabel}`);
+  logInfo("Informações de estoque - soma quantidade", indicadores.totalEstoque);
+  logInfo("Loggers em trânsito", indicadores.loggersTransito);
+  logInfo("Loggers entregues", indicadores.loggersEntregues);
+  logInfo(`Loggers retornados nos últimos ${CONFIG.diasRetorno} dias`, indicadores.loggersRetornados);
+  logInfo("Registros sem status", indicadores.semStatus);
+  logInfo("Registros sem data", indicadores.semData);
+
+  return indicadores;
+}
+
+function renderizar(indicadores, dados, erros, selectedTipos = CONFIG.tiposDispositivo) {
+  setText("card-estoque", fmt(indicadores.totalEstoque));
+  setText("card-loggers-transito", fmt(indicadores.loggersTransito));
+  setText("card-loggers-entregues", fmt(indicadores.loggersEntregues));
+  setText("card-loggers-retornados", fmt(indicadores.loggersRetornados));
+  setText("kpi-estoque-registros", fmt(indicadores.registrosEstoque));
+  setText("total-registros", fmt(indicadores.totalRegistros));
+  setText("total-estoque-meta", fmt(indicadores.totalEstoque));
+  setText("dias-retorno-label", fmt(CONFIG.diasRetorno));
+  setText("ultima-atualizacao", dados.ultimaAtualizacao || new Date().toLocaleString("pt-BR"));
+  setText("meta-tipo", getTipoLabel(selectedTipos));
+  setText("fonte-ativa", dados.fontes.length ? dados.fontes.join(" + ") : "Nenhuma fonte carregada");
+  renderizarResumoPorTipoLogger(selectedTipos);
+}
+
+function escapeHtml(value) {
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#39;");
+}
+
+async function iniciar() {
+  logInfo("iniciando página local");
+  APP_DATA = await carregarDados();
+  refreshTipo();
+  logInfo("renderização concluída");
+}
+
+document.addEventListener("DOMContentLoaded", iniciar);
+</script>
+</body>
+</html>

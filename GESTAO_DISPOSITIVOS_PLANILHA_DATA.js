@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "26/05/2026 18:28:07",
+  "geradoEm": "26/05/2026 18:31:46",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
@@ -18,7 +18,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ARES COM SONDA": {
       "totalEstoque": 78,
-      "loggersTransito": 14,
+      "loggersTransito": 8,
       "loggersEntregues": 165,
       "loggersRetornados": 145,
       "registrosEntregas": 165,
@@ -31,7 +31,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": 135,
-      "loggersTransito": 56,
+      "loggersTransito": 17,
       "loggersEntregues": 281,
       "loggersRetornados": 220,
       "registrosEntregas": 281,
@@ -70,7 +70,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ALL": {
       "totalEstoque": 1417,
-      "loggersTransito": 995,
+      "loggersTransito": 950,
       "loggersEntregues": 4643,
       "loggersRetornados": 3180,
       "registrosEntregas": 4643,
@@ -1137,13 +1137,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "fonteTransito": "vtc_stage.documentos",
     "criterioTransito": "chave nr_pedido + cd_referencia com dt_entregaefetiva vazia",
-    "linhasTransitoDocumentos": 1120,
-    "chavesTransitoDocumentos": 995,
+    "linhasTransitoDocumentos": 1074,
+    "chavesTransitoDocumentos": 950,
     "pedidosTransitoDocumentos": 125,
     "chavesTransitoPorTipo": {
       "ARES": 690,
-      "ARES COM SONDA": 14,
-      "SENSOR VTC": 56,
+      "ARES COM SONDA": 8,
+      "SENSOR VTC": 17,
       "SYOS": 235
     }
   },

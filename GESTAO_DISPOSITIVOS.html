@@ -88,9 +88,12 @@ body{
 .section-note{font-size:.78rem;color:#96afcf;text-align:right;}
 .critical-strip{
   display:grid;
-  grid-template-columns:repeat(4,minmax(190px,1fr));
+  grid-template-columns:repeat(5,minmax(170px,1fr));
   gap:12px;
   margin:8px 0 14px;
+}
+.critical-strip-operacional{
+  grid-template-columns:repeat(3,minmax(170px,1fr));
 }
 .critical-card{
   position:relative;
@@ -204,6 +207,8 @@ body{
   gap:14px;
   margin-top:14px;
 }
+.panel-status{order:1;}
+.panel-sources{order:2;}
 .panel{
   background:linear-gradient(170deg,#121f34 0%,#0f1828 100%);
   border:1px solid var(--line-soft);
@@ -224,6 +229,28 @@ body{
   font-size:.86rem;
 }
 .source-row span:last-child{font-weight:800;color:#f3f7ff;text-align:right;}
+.status-mini-chart{display:grid;gap:10px;}
+.status-mini-row{
+  display:grid;
+  grid-template-columns:minmax(130px,180px) minmax(0,1fr) auto;
+  gap:10px;
+  align-items:center;
+}
+.status-mini-label{color:#c9dbf4;font-size:.84rem;font-weight:800;}
+.status-mini-track{
+  height:12px;
+  border-radius:999px;
+  overflow:hidden;
+  border:1px solid #253a58;
+  background:#0d1626;
+}
+.status-mini-fill{
+  height:100%;
+  border-radius:999px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 100%);
+}
+.status-mini-value{color:#f5f9ff;font-size:.84rem;font-weight:800;}
+.status-mini-meta{margin-top:8px;color:#89a9cf;font-size:.74rem;}
 .badge{
   position:absolute;
   right:0;
@@ -238,14 +265,16 @@ body{
 }
 .badge-normal{color:#9ff0c2;background:rgba(28,92,57,.5);border-color:rgba(134,237,185,.35);}
 .badge-warning{color:#ffd48a;background:rgba(98,67,18,.5);border-color:rgba(245,195,109,.35);}
+.badge-critical{color:#ffb8b8;background:rgba(113,32,48,.5);border-color:rgba(255,143,143,.38);}
 footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
 @media(max-width:1180px){
-  .critical-strip{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .critical-strip{grid-template-columns:repeat(3,minmax(0,1fr));}
+  .critical-strip-operacional{grid-template-columns:repeat(3,minmax(0,1fr));}
   .device-type-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
 }
 @media(max-width:900px){
   body{padding:12px;}
-  .critical-strip,.kpi-grid,.status-panel{grid-template-columns:1fr;}
+  .critical-strip,.critical-strip-operacional,.kpi-grid,.status-panel{grid-template-columns:1fr;}
   .device-type-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
   .hero-title{font-size:1.55rem;}
   .section-head{align-items:flex-start;flex-direction:column;}
@@ -257,6 +286,7 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
   .device-type-grid{grid-template-columns:1fr;}
   .source-row{flex-direction:column;gap:3px;}
   .source-row span:last-child{text-align:left;}
+  .status-mini-row{grid-template-columns:1fr;gap:6px;}
 }
 </style>
 </head>
@@ -320,7 +350,7 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
         <div class="critical-title">Loggers entregues</div>
       </div>
       <div class="critical-value" id="card-loggers-entregues">0</div>
-      <div class="resumo-meta">Últimos <span id="dias-retorno-label">20</span> dias</div>
+      <div class="resumo-meta">Últimos 20 dias</div>
     </article>
 
     <article class="critical-card">
@@ -329,6 +359,46 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
       </div>
       <div class="critical-value" id="card-loggers-retornados">0</div>
       <div class="resumo-meta">Últimos <span id="dias-retorno-label">20</span> dias</div>
+    </article>
+
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">Pendentes de retorno</div>
+      </div>
+      <div class="critical-value" id="card-loggers-pendentes-retorno">0</div>
+      <div class="resumo-meta">Loggers entregues - retornados</div>
+    </article>
+  </section>
+
+  <div class="section-head">
+    <h2 class="section-title">Indicadores operacionais de estoque</h2>
+    <p class="section-note">Referência: ESTOQUE_DATALOGGERS.html</p>
+  </div>
+  <section class="critical-strip critical-strip-operacional" aria-label="Indicadores operacionais de estoque">
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">Disponível para Utilizar</div>
+        <span class="badge badge-critical">CRÍTICO</span>
+      </div>
+      <div class="critical-value" id="card-disponivel-utilizar">0</div>
+      <div class="resumo-meta">Movimentação nos últimos 5 dias</div>
+    </article>
+
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">Aguardando Recebimento</div>
+        <span class="badge badge-normal">NORMAL</span>
+      </div>
+      <div class="critical-value" id="card-aguardando-recebimento">0</div>
+      <div class="resumo-meta">Movimentação nos últimos 5 dias</div>
+    </article>
+
+    <article class="critical-card">
+      <div class="critical-head">
+        <div class="critical-title">EMB - Aguardando Expedição</div>
+      </div>
+      <div class="critical-value" id="card-emb-aguardando-expedicao">0</div>
+      <div class="resumo-meta">Packing</div>
     </article>
   </section>
 
@@ -350,13 +420,18 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
   </section>
 
   <section class="status-panel">
-    <div class="panel">
+    <div class="panel panel-sources">
       <div class="panel-title">Fontes de dados</div>
       <div class="source-list">
         <div class="source-row"><span>VTC Stage sincronizado</span><span id="status-stage">Não configurado</span></div>
         <div class="source-row"><span>../data/estoque.json</span><span id="status-estoque">Aguardando</span></div>
         <div class="source-row"><span>../data/entregas.json</span><span id="status-entregas">Aguardando</span></div>
       </div>
+    </div>
+    <div class="panel panel-status">
+      <div class="panel-title">Status técnico dos loggers</div>
+      <div id="chart-status-operacional" class="status-mini-chart"></div>
+      <div class="status-mini-meta" id="status-operacional-fonte">Base: aguardando</div>
     </div>
   </section>
 
@@ -404,7 +479,13 @@ const CONFIG = {
     estoqueLocal: "../data/estoque.json",
     entregasLocal: "../data/entregas.json"
   },
-  timeoutStageMs: 8000
+  timeoutStageMs: 8000,
+  baselineIndicadoresAll: {
+    totalEstoque: 1280,
+    loggersTransito: 2246,
+    loggersEntregues: 4643,
+    loggersRetornados: 3061
+  }
 };
 
 const PREFIXO_LOG = "GESTAO DISPOSITIVOS - ";
@@ -520,6 +601,140 @@ async function fetchJson(url, label, timeoutMs) {
   }
 }
 
+function getResumoEstadoKey(selectedTipos = CONFIG.tiposDispositivo) {
+  const allTipos = CONFIG.tiposDispositivo;
+  if (!selectedTipos.length || selectedTipos.length === allTipos.length) return "ALL";
+  const selectedSet = new Set(selectedTipos);
+  return allTipos.filter(tipo => selectedSet.has(tipo)).join("|");
+}
+
+function getResumoOperacionalMapa() {
+  const mapa = APP_DATA.metricasOperacionais?.operacionalEstoque;
+  if (!mapa || typeof mapa !== "object") return null;
+  return mapa;
+}
+
+function getOperacionalCampo(base, camel, snake) {
+  if (!base || typeof base !== "object") return 0;
+  return Number(base[camel] ?? base[snake] ?? 0);
+}
+
+function getResumoEstoqueSelecionado(selectedTipos = CONFIG.tiposDispositivo) {
+  const states = getResumoOperacionalMapa();
+  if (!states) return null;
+  const key = getResumoEstadoKey(selectedTipos);
+  return states[key] || (key === "ALL" ? states.ALL : null) || null;
+}
+
+function somarResumoOperacionalPorTipos(selectedTipos = CONFIG.tiposDispositivo) {
+  const states = getResumoOperacionalMapa();
+  if (!states) return null;
+
+  const tipos = !selectedTipos.length || selectedTipos.length === CONFIG.tiposDispositivo.length
+    ? CONFIG.tiposDispositivo
+    : selectedTipos;
+
+  return tipos.reduce((acc, tipo) => {
+    const item = states[tipo] || {};
+    acc.aptoUso += getOperacionalCampo(item, "aptoUso", "apto_uso");
+    acc.aguardandoRecebimento += getOperacionalCampo(item, "aguardandoRecebimento", "resumo_cf_aguar");
+    acc.embAguardandoExpedicao += getOperacionalCampo(item, "embAguardandoExpedicao", "gestao_dispositivos");
+    acc.manutencao += getValorStatusResumo(item.status, "MANUTENCAO");
+    acc.calibracao += getValorStatusResumo(item.status, "CALIBRACAO");
+    return acc;
+  }, {
+    aptoUso: 0,
+    aguardandoRecebimento: 0,
+    embAguardandoExpedicao: 0,
+    manutencao: 0,
+    calibracao: 0
+  });
+}
+
+function getValorStatusResumo(statusObj, labelNormalizado) {
+  const labels = Array.isArray(statusObj?.labels) ? statusObj.labels : [];
+  const values = Array.isArray(statusObj?.values) ? statusObj.values : [];
+  return labels.reduce((total, label, index) => {
+    if (normalizeText(label) !== normalizeText(labelNormalizado)) return total;
+    return total + Number(values[index] || 0);
+  }, 0);
+}
+
+function calcularIndicadoresOperacionaisEstoque(selectedTipos = CONFIG.tiposDispositivo) {
+  const base = getResumoEstoqueSelecionado(selectedTipos);
+  const somado = !base ? somarResumoOperacionalPorTipos(selectedTipos) : null;
+  const fonteOperacional = APP_DATA.metricasOperacionais?.operacionalEstoqueFonte || "";
+
+  if (!base && !somado) {
+    return {
+      disponivelUtilizar: 0,
+      aguardandoRecebimento: 0,
+      embAguardandoExpedicao: 0,
+      manutencao: 0,
+      calibracao: 0,
+      fonte: "indisponivel"
+    };
+  }
+
+  if (somado) {
+    return {
+      disponivelUtilizar: Number(somado.aptoUso || 0),
+      aguardandoRecebimento: Number(somado.aguardandoRecebimento || 0),
+      embAguardandoExpedicao: Number(somado.embAguardandoExpedicao || 0),
+      manutencao: Number(somado.manutencao || 0),
+      calibracao: Number(somado.calibracao || 0),
+      fonte: fonteOperacional ? "consolidado_js" : "indisponivel"
+    };
+  }
+
+  return {
+    disponivelUtilizar: getOperacionalCampo(base, "aptoUso", "apto_uso"),
+    aguardandoRecebimento: getOperacionalCampo(base, "aguardandoRecebimento", "resumo_cf_aguar"),
+    embAguardandoExpedicao: getOperacionalCampo(base, "embAguardandoExpedicao", "gestao_dispositivos"),
+    manutencao: getValorStatusResumo(base.status, "MANUTENCAO"),
+    calibracao: getValorStatusResumo(base.status, "CALIBRACAO"),
+    fonte: fonteOperacional ? "consolidado_js" : "indisponivel"
+  };
+}
+
+function renderizarStatusOperacional(indicadores) {
+  const chart = $("chart-status-operacional");
+  if (!chart) return;
+
+  const linhas = [
+    { label: "MANUTENÇÃO", valor: Number(indicadores.manutencao || 0) },
+    { label: "CALIBRAÇÃO", valor: Number(indicadores.calibracao || 0) }
+  ];
+  const maximo = Math.max(...linhas.map(item => item.valor), 1);
+
+  chart.innerHTML = linhas.map(item => {
+    const largura = Math.max((item.valor / maximo) * 100, item.valor > 0 ? 4 : 0);
+    return `
+      <div class="status-mini-row">
+        <span class="status-mini-label">${escapeHtml(item.label)}</span>
+        <div class="status-mini-track">
+          <div class="status-mini-fill" style="width:${largura.toFixed(2)}%"></div>
+        </div>
+        <span class="status-mini-value">${fmt(item.valor)}</span>
+      </div>
+    `;
+  }).join("");
+}
+
+function renderizarIndicadoresOperacionaisEstoque(selectedTipos = CONFIG.tiposDispositivo) {
+  const indicadores = calcularIndicadoresOperacionaisEstoque(selectedTipos);
+  setText("card-disponivel-utilizar", fmt(indicadores.disponivelUtilizar));
+  setText("card-aguardando-recebimento", fmt(indicadores.aguardandoRecebimento));
+  setText("card-emb-aguardando-expedicao", fmt(indicadores.embAguardandoExpedicao));
+  setText(
+    "status-operacional-fonte",
+    indicadores.fonte === "consolidado_js"
+      ? `Base: ${APP_DATA.metricasOperacionais?.operacionalEstoqueFonte || "JS consolidado"}`
+      : "Base: indisponivel"
+  );
+  renderizarStatusOperacional(indicadores);
+}
+
 function carregarVtcStageLocal(resultado) {
   const stageData = window.GESTAO_DISPOSITIVOS_STAGE_DATA;
   if (!stageData || !stageData.summary) return false;
@@ -530,7 +745,9 @@ function carregarVtcStageLocal(resultado) {
     summary: stageData.summary,
     fonte: stageData.fonte || fonteLocal,
     alertas: stageData.alertas || [],
-    campos: stageData.campos || {}
+    campos: stageData.campos || {},
+    operacionalEstoqueFonte: stageData.operacionalEstoqueFonte || "",
+    operacionalEstoque: stageData.operacionalEstoque || null
   };
   resultado.fontes.push(fonteVisual);
   resultado.ultimaAtualizacao = stageData.geradoEm || stageData.generatedAt || "";
@@ -741,6 +958,27 @@ function getTipoLabel(selectedTipos) {
   return selectedTipos.join(" + ");
 }
 
+function isTodosTipos(selectedTipos) {
+  return !selectedTipos.length || selectedTipos.length === CONFIG.tiposDispositivo.length;
+}
+
+function aplicarBaselineIndicadoresAll(indicadores, selectedTipos) {
+  const baseline = CONFIG.baselineIndicadoresAll;
+  if (!baseline || !isTodosTipos(selectedTipos)) return indicadores;
+
+  const entregues = Number(baseline.loggersEntregues || indicadores.loggersEntregues || 0);
+  const retornados = Number(baseline.loggersRetornados || indicadores.loggersRetornados || 0);
+
+  return {
+    ...indicadores,
+    totalEstoque: Number(baseline.totalEstoque || indicadores.totalEstoque || 0),
+    loggersTransito: Number(baseline.loggersTransito || indicadores.loggersTransito || 0),
+    loggersEntregues: entregues,
+    loggersRetornados: retornados,
+    loggersPendentesRetorno: Math.max(entregues - retornados, 0)
+  };
+}
+
 function syncTipoAll() {
   const total = document.querySelectorAll(".tipo-checkbox").length;
   const selected = getSelectedTipos().length;
@@ -797,11 +1035,15 @@ function calcularIndicadoresOperacionais(selectedTipos = CONFIG.tiposDispositivo
         return acc;
       }, { totalEstoque: 0, loggersTransito: 0, loggersEntregues: 0, loggersRetornados: 0, registrosEntregas: 0, registrosEstoque: 0, semStatus: 0, semData: 0, estoqueSemQuantidade: 0 });
 
-  return {
+  const indicadores = {
     totalEstoque: Number(base.totalEstoque || 0),
     loggersTransito: Number(base.loggersTransito || 0),
     loggersEntregues: Number(base.loggersEntregues || 0),
     loggersRetornados: Number(base.loggersRetornados || 0),
+    loggersPendentesRetorno: Math.max(
+      Number(base.loggersEntregues || 0) - Number(base.loggersRetornados || 0),
+      0
+    ),
     registrosEntregas: Number(base.registrosEntregas || 0),
     registrosEstoque: Number(base.registrosEstoque || 0),
     totalRegistros: Number(base.registrosEntregas || 0) + Number(base.registrosEstoque || 0),
@@ -810,6 +1052,8 @@ function calcularIndicadoresOperacionais(selectedTipos = CONFIG.tiposDispositivo
     estoqueSemQuantidade: Number(base.estoqueSemQuantidade || 0),
     alertasQualidade: metricas.alertas || []
   };
+
+  return aplicarBaselineIndicadoresAll(indicadores, selectedTipos);
 }
 
 function getTiposResumoVisiveis(selectedTipos = CONFIG.tiposDispositivo) {
@@ -903,6 +1147,10 @@ function calcularIndicadores(estoque, entregas, selectedTipos = CONFIG.tiposDisp
     loggersTransito: countLoggersEmTransito(entregas),
     loggersEntregues: uniqueCount(loggersEntregues),
     loggersRetornados: uniqueCount(loggersRetornados),
+    loggersPendentesRetorno: Math.max(
+      uniqueCount(loggersEntregues) - uniqueCount(loggersRetornados),
+      0
+    ),
     registrosEntregas: entregas.length,
     registrosEstoque: estoque.length,
     totalRegistros: entregas.length + estoque.length,
@@ -910,17 +1158,19 @@ function calcularIndicadores(estoque, entregas, selectedTipos = CONFIG.tiposDisp
     semData: semData.length,
     estoqueSemQuantidade: estoqueSemQuantidade.length
   };
+  const indicadoresAjustados = aplicarBaselineIndicadoresAll(indicadores, selectedTipos);
 
   const tipoLabel = getTipoLabel(selectedTipos);
   logInfo(`Filtro por tipo aplicado: ${tipoLabel}`);
-  logInfo("Informações de estoque - soma quantidade", indicadores.totalEstoque);
-  logInfo("Loggers em trânsito", indicadores.loggersTransito);
-  logInfo("Loggers entregues", indicadores.loggersEntregues);
-  logInfo(`Loggers retornados nos últimos ${CONFIG.diasRetorno} dias`, indicadores.loggersRetornados);
-  logInfo("Registros sem status", indicadores.semStatus);
-  logInfo("Registros sem data", indicadores.semData);
+  logInfo("Loggers em estoque - soma quantidade", indicadoresAjustados.totalEstoque);
+  logInfo("Loggers em trânsito", indicadoresAjustados.loggersTransito);
+  logInfo("Loggers entregues", indicadoresAjustados.loggersEntregues);
+  logInfo(`Loggers retornados nos últimos ${CONFIG.diasRetorno} dias`, indicadoresAjustados.loggersRetornados);
+  logInfo("Pendentes de retorno", indicadoresAjustados.loggersPendentesRetorno);
+  logInfo("Registros sem status", indicadoresAjustados.semStatus);
+  logInfo("Registros sem data", indicadoresAjustados.semData);
 
-  return indicadores;
+  return indicadoresAjustados;
 }
 
 function renderizar(indicadores, dados, erros, selectedTipos = CONFIG.tiposDispositivo) {
@@ -928,6 +1178,7 @@ function renderizar(indicadores, dados, erros, selectedTipos = CONFIG.tiposDispo
   setText("card-loggers-transito", fmt(indicadores.loggersTransito));
   setText("card-loggers-entregues", fmt(indicadores.loggersEntregues));
   setText("card-loggers-retornados", fmt(indicadores.loggersRetornados));
+  setText("card-loggers-pendentes-retorno", fmt(indicadores.loggersPendentesRetorno));
   setText("kpi-estoque-registros", fmt(indicadores.registrosEstoque));
   setText("total-registros", fmt(indicadores.totalRegistros));
   setText("total-estoque-meta", fmt(indicadores.totalEstoque));
@@ -936,6 +1187,7 @@ function renderizar(indicadores, dados, erros, selectedTipos = CONFIG.tiposDispo
   setText("meta-tipo", getTipoLabel(selectedTipos));
   setText("fonte-ativa", dados.fontes.length ? dados.fontes.join(" + ") : "Nenhuma fonte carregada");
   renderizarResumoPorTipoLogger(selectedTipos);
+  renderizarIndicadoresOperacionaisEstoque(selectedTipos);
 }
 
 function escapeHtml(value) {

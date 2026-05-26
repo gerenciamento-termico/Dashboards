@@ -220,9 +220,7 @@ call :MAKE_STEP_LOG
     ".\HTMLACOMPANHAMENTO.py" ^
     ".\gerar_dashboard_entregas.py" ^
     ".\env_utils.py" ^
-    ".\aura_update_checks.py" ^
-    ".\..\streamlit\gerar_snapshot_reversa.py" ^
-    ".\..\streamlit\gerar_modelo_final_reversa.py" >"!STEP_LOG!" 2>&1
+    ".\aura_update_checks.py" >"!STEP_LOG!" 2>&1
 set "STEP_RC=%ERRORLEVEL%"
 call :FLUSH_STEP
 exit /b %ERRORLEVEL%
@@ -248,7 +246,7 @@ call :LOG ""
 call :GIT_STATUS "Git status antes do pull"
 if errorlevel 1 goto :CYCLE_FAIL
 
-call :LOG "[1/10] Sincronizando com origin/main..."
+call :LOG "[1/8] Sincronizando com origin/main..."
 if exist ".git\rebase-merge" (
     set "ERRMSG=Existe um rebase pendente no Git. Execute git rebase --abort ou resolva o rebase antes do ciclo."
     goto :CYCLE_FAIL
@@ -273,44 +271,32 @@ if errorlevel 1 (
     goto :CYCLE_FAIL
 )
 
-call :LOG "[2/10] Validando sintaxe Python antes de gerar..."
+call :LOG "[2/8] Validando sintaxe Python antes de gerar..."
 call :RUN_PY_COMPILE
 if errorlevel 1 (
     set "ERRMSG=Falha de sintaxe em script Python."
     goto :CYCLE_FAIL
 )
 
-call :RUN_SCRIPT "gerar_html_estoque.py" "[3/10] Gerando ESTOQUE_DATALOGGERS.html..."
+call :RUN_SCRIPT "gerar_html_estoque.py" "[3/8] Gerando ESTOQUE_DATALOGGERS.html..."
 if errorlevel 1 (
     set "ERRMSG=Falha ao gerar ESTOQUE_DATALOGGERS.html."
     goto :CYCLE_FAIL
 )
 
-call :RUN_SCRIPT "..\streamlit\gerar_snapshot_reversa.py" "[4/10] Atualizando snapshot_reversa usado pelo controle de entregas..."
-if errorlevel 1 (
-    set "ERRMSG=Falha ao atualizar snapshot_reversa."
-    goto :CYCLE_FAIL
-)
-
-call :RUN_SCRIPT "..\streamlit\gerar_modelo_final_reversa.py" "[5/10] Reconstruindo modelo_final.pkl com entregas atualizadas..."
-if errorlevel 1 (
-    set "ERRMSG=Falha ao reconstruir modelo_final.pkl."
-    goto :CYCLE_FAIL
-)
-
-call :RUN_SCRIPT "gerar_html_controle_entregas.py" "[6/10] Gerando CONTROLE_ENTREGAS_20D.html e CSVs..."
+call :RUN_SCRIPT "gerar_html_controle_entregas.py" "[4/8] Gerando CONTROLE_ENTREGAS_20D.html e CSVs..."
 if errorlevel 1 (
     set "ERRMSG=Falha ao gerar CONTROLE_ENTREGAS_20D."
     goto :CYCLE_FAIL
 )
 
-call :RUN_SCRIPT "HTMLACOMPANHAMENTO.py" "[7/10] Gerando HTMLACOMPANHAMENTO.html..."
+call :RUN_SCRIPT "HTMLACOMPANHAMENTO.py" "[5/8] Gerando HTMLACOMPANHAMENTO.html..."
 if errorlevel 1 (
     set "ERRMSG=Falha ao gerar HTMLACOMPANHAMENTO.html."
     goto :CYCLE_FAIL
 )
 
-call :LOG "[8/10] Validando HTMLs gerados e payloads reais..."
+call :LOG "[6/8] Validando HTMLs gerados e payloads reais..."
 set "STEP_NAME=validate-html"
 call :MAKE_STEP_LOG
 "%PY_EXE%" ".\aura_update_checks.py" validate-html --cycle-start "!CYCLE_START_TS!" >"!STEP_LOG!" 2>&1
@@ -324,11 +310,11 @@ if errorlevel 1 (
 call :GIT_STATUS "Git status antes do stage"
 if errorlevel 1 goto :CYCLE_FAIL
 
-call :LOG "[9/10] Preparando git add somente para alteracoes reais..."
+call :LOG "[7/8] Preparando git add somente para os 3 HTMLs do site..."
 set "STAGE_FILE=%TEMP%\aura_stage_%RANDOM%_%RANDOM%.txt"
 set "STEP_NAME=changed-files"
 call :MAKE_STEP_LOG
-"%PY_EXE%" ".\aura_update_checks.py" changed-files --publish-timestamp-only --out "!STAGE_FILE!" >"!STEP_LOG!" 2>&1
+"%PY_EXE%" ".\aura_update_checks.py" changed-files --html-only --publish-timestamp-only --out "!STAGE_FILE!" >"!STEP_LOG!" 2>&1
 set "STEP_RC=%ERRORLEVEL%"
 call :FLUSH_STEP
 if errorlevel 1 (
@@ -384,7 +370,7 @@ set "COMMIT_DONE=sim"
 call :LOG "[OK] Commit criado: Atualiza dashboards Aura - !COMMIT_STAMP!"
 
 :AFTER_COMMIT
-call :LOG "[10/10] Verificando push para origin/main..."
+call :LOG "[8/8] Verificando push para origin/main..."
 set "AHEAD_COUNT=0"
 for /f %%A in ('git rev-list --count origin/main..HEAD 2^>nul') do set "AHEAD_COUNT=%%A"
 if "!AHEAD_COUNT!"=="0" (

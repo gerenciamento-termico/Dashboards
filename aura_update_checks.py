@@ -468,9 +468,10 @@ def command_changed_files(args: argparse.Namespace) -> int:
             elif current != head:
                 timestamp_only.append(path)
 
-        for path in GENERATED_DATA + CODE_FILES:
-            if _git_status_for(path) and path not in stage_paths:
-                stage_paths.append(path)
+        if not args.html_only:
+            for path in GENERATED_DATA + CODE_FILES:
+                if _git_status_for(path) and path not in stage_paths:
+                    stage_paths.append(path)
 
         if args.publish_timestamp_only:
             for path in timestamp_only:
@@ -763,6 +764,7 @@ def main(argv: list[str] | None = None) -> int:
     p_changed.add_argument("--out", default="")
     p_changed.add_argument("--restore-timestamp-only", action="store_true")
     p_changed.add_argument("--publish-timestamp-only", action="store_true")
+    p_changed.add_argument("--html-only", action="store_true")
     p_changed.set_defaults(func=command_changed_files)
 
     p_daily = sub.add_parser("daily-check", help="Executa verificacao diaria dos dashboards, Git e GitHub Pages.")

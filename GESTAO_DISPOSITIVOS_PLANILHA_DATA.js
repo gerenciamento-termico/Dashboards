@@ -1,11 +1,11 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "27/05/2026 10:26:34",
+  "geradoEm": "27/05/2026 10:36:34",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 548,
-      "loggersTransito": 808,
+      "loggersTransito": 804,
       "loggersEntregues": 3149,
       "loggersRetornados": 1753,
       "registrosEntregas": 3149,
@@ -57,7 +57,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "SYOS": {
       "totalEstoque": 921,
-      "loggersTransito": 230,
+      "loggersTransito": 229,
       "loggersEntregues": 1018,
       "loggersRetornados": 724,
       "registrosEntregas": 1018,
@@ -70,7 +70,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ALL": {
       "totalEstoque": 1773,
-      "loggersTransito": 1062,
+      "loggersTransito": 1057,
       "loggersEntregues": 4643,
       "loggersRetornados": 2862,
       "registrosEntregas": 4643,
@@ -1136,22 +1136,22 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "SHIELD": 30
     },
     "fonteTransito": "vtc_stage.documentos",
-    "criterioTransito": "chave nr_pedido + cd_referencia com dt_coletaefetiva preenchida e dt_entregaefetiva vazia",
-    "linhasTransitoDocumentos": 1197,
-    "chavesTransitoDocumentos": 1062,
-    "pedidosTransitoDocumentos": 128,
+    "criterioTransito": "chave nr_pedido + cd_referencia agrupada primeiro; conta se existe dt_coletaefetiva e nao existe dt_entregaefetiva",
+    "linhasTransitoDocumentos": 1191,
+    "chavesTransitoDocumentos": 1057,
+    "pedidosTransitoDocumentos": 123,
     "chavesTransitoPorTipo": {
-      "ARES": 808,
+      "ARES": 804,
       "ARES COM SONDA": 8,
       "SENSOR VTC": 16,
-      "SYOS": 230
+      "SYOS": 229
     }
   },
   "alertas": [
     "Fonte carregada da planilha local Conexao com vtc_stage.",
     "Chave de consolidacao: nr_pedido + cd_referencia.",
     "Entregas da planilha foram deduplicadas por chave para indicadores e registros consolidados.",
-    "Loggers em transito: chaves nr_pedido + cd_referencia com dt_entregaefetiva vazia em vtc_stage.documentos.",
+    "Loggers em transito: chaves nr_pedido + '-' + cd_referencia agrupadas em vtc_stage.documentos; conta quando existe dt_coletaefetiva e nao existe dt_entregaefetiva.",
     "Estoque foi consolidado do dashboard local ESTOQUE_DATALOGGERS.html.",
     "Status de retorno foi enriquecido pelo CONTROLE_ENTREGAS_20D.csv e, quando ausente, pelo status atual de estoque.",
     "304 linhas da planilha nao possuem cd_referencia e nao entram em indicadores por logger."

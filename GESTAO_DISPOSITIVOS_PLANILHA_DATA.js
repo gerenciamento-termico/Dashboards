@@ -1,11 +1,11 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "27/05/2026 15:46:47",
+  "geradoEm": "27/05/2026 15:56:48",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 331,
-      "loggersTransito": 730,
+      "loggersTransito": 608,
       "loggersEntregues": 3149,
       "loggersRetornados": 1773,
       "registrosEntregas": 3149,
@@ -18,7 +18,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ARES COM SONDA": {
       "totalEstoque": 80,
-      "loggersTransito": 8,
+      "loggersTransito": 0,
       "loggersEntregues": 165,
       "loggersRetornados": 145,
       "registrosEntregas": 165,
@@ -31,7 +31,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": 176,
-      "loggersTransito": 16,
+      "loggersTransito": 1,
       "loggersEntregues": 281,
       "loggersRetornados": 213,
       "registrosEntregas": 281,
@@ -57,7 +57,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "SYOS": {
       "totalEstoque": 952,
-      "loggersTransito": 194,
+      "loggersTransito": 193,
       "loggersEntregues": 1018,
       "loggersRetornados": 754,
       "registrosEntregas": 1018,
@@ -70,7 +70,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ALL": {
       "totalEstoque": 1615,
-      "loggersTransito": 948,
+      "loggersTransito": 802,
       "loggersEntregues": 4643,
       "loggersRetornados": 2912,
       "registrosEntregas": 4643,
@@ -1137,14 +1137,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "fonteTransito": "vtc_stage.documentos",
     "criterioTransito": "chave nr_pedido + '-' + cd_referencia agrupada primeiro; conta se existe dt_coletaefetiva e nao existe dt_entregaefetiva",
-    "linhasTransitoDocumentos": 1070,
-    "chavesTransitoDocumentos": 948,
-    "pedidosTransitoDocumentos": 121,
+    "linhasTransitoDocumentos": 897,
+    "chavesTransitoDocumentos": 802,
+    "pedidosTransitoDocumentos": 119,
     "chavesTransitoPorTipo": {
-      "ARES": 730,
-      "ARES COM SONDA": 8,
-      "SENSOR VTC": 16,
-      "SYOS": 194
+      "ARES": 608,
+      "SENSOR VTC": 1,
+      "SYOS": 193
     }
   },
   "alertas": [

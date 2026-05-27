@@ -536,8 +536,8 @@ function fmt(value) {
   return Number(value || 0).toLocaleString("pt-BR");
 }
 
-function fmtIndicadorConsolidado(value) {
-  if (value === null || value === undefined || value === "" || Number.isNaN(Number(value))) return "N/D";
+function fmtCardValue(value) {
+  if (value === null || value === undefined || value === "") return "N/D";
   return fmt(value);
 }
 
@@ -742,7 +742,6 @@ function carregarVtcStageLocal(resultado) {
 
   resultado.metricasOperacionais = {
     summary: stageData.summary,
-    indicadoresConsolidadosDocumentos: stageData.indicadoresConsolidadosDocumentos || null,
     fonte: stageData.fonte || fonteLocal,
     alertas: stageData.alertas || [],
     campos: stageData.campos || {},
@@ -1036,60 +1035,12 @@ function calcularIndicadoresOperacionais(selectedTipos = CONFIG.tiposDispositivo
     alertasQualidade: metricas.alertas || []
   };
 
-  return indicadores;
-}
-
-function sumNullableIndicador(items, key) {
-  if (!items.length || items.some(item => item?.[key] === null || item?.[key] === undefined)) return null;
-  return items.reduce((acc, item) => acc + Number(item?.[key] || 0), 0);
-}
-
-function calcularCardsIndicadoresConsolidados(selectedTipos = CONFIG.tiposDispositivo) {
-  const documentos = APP_DATA.metricasOperacionais?.indicadoresConsolidadosDocumentos;
-  const summary = documentos?.summary || null;
-  if (!summary) {
-    logWarn("Indicadores consolidados sem bloco oficial de vtc_stage.documentos.");
-    return {
-      totalEstoque: null,
-      loggersTransito: null,
-      loggersEntregues: null,
-      loggersRetornados: null,
-      loggersPendentesRetorno: null
-    };
+  if (metricas.diagnostico?.fonteTransito === "indisponivel") {
+    indicadores.loggersTransito = null;
+    logWarn("Loggers em trânsito indisponível: vtc_stage.documentos não respondeu na geração dos dados.");
   }
 
-  (documentos.alertas || []).forEach(alerta => logWarn(alerta));
-
-  const allTipos = CONFIG.tiposDispositivo;
-  const tipos = !selectedTipos.length || selectedTipos.length === allTipos.length ? ["ALL"] : selectedTipos;
-  const base = tipos.includes("ALL")
-    ? (summary.ALL || {})
-    : (() => {
-        const items = tipos.map(tipo => summary[tipo] || {});
-        const entregues = sumNullableIndicador(items, "loggersEntregues");
-        const retornados = sumNullableIndicador(items, "loggersRetornados");
-        return {
-          totalEstoque: sumNullableIndicador(items, "totalEstoque"),
-          loggersTransito: sumNullableIndicador(items, "loggersTransito"),
-          loggersEntregues: entregues,
-          loggersRetornados: retornados,
-          loggersPendentesRetorno: entregues !== null && retornados !== null ? Math.max(entregues - retornados, 0) : null
-        };
-      })();
-
-  return {
-    totalEstoque: base.totalEstoque ?? null,
-    loggersTransito: base.loggersTransito ?? null,
-    loggersEntregues: base.loggersEntregues ?? null,
-    loggersRetornados: base.loggersRetornados ?? null,
-    loggersPendentesRetorno:
-      base.loggersPendentesRetorno ?? (
-        base.loggersEntregues !== null && base.loggersEntregues !== undefined &&
-        base.loggersRetornados !== null && base.loggersRetornados !== undefined
-          ? Math.max(Number(base.loggersEntregues || 0) - Number(base.loggersRetornados || 0), 0)
-          : null
-      )
-  };
+  return indicadores;
 }
 
 function getTiposResumoVisiveis(selectedTipos = CONFIG.tiposDispositivo) {
@@ -1208,12 +1159,11 @@ function calcularIndicadores(estoque, entregas, selectedTipos = CONFIG.tiposDisp
 }
 
 function renderizar(indicadores, dados, erros, selectedTipos = CONFIG.tiposDispositivo) {
-  const cardsConsolidados = calcularCardsIndicadoresConsolidados(selectedTipos);
-  setText("card-estoque", fmtIndicadorConsolidado(cardsConsolidados.totalEstoque));
-  setText("card-loggers-transito", fmtIndicadorConsolidado(cardsConsolidados.loggersTransito));
-  setText("card-loggers-entregues", fmtIndicadorConsolidado(cardsConsolidados.loggersEntregues));
-  setText("card-loggers-retornados", fmtIndicadorConsolidado(cardsConsolidados.loggersRetornados));
-  setText("card-loggers-pendentes-retorno", fmtIndicadorConsolidado(cardsConsolidados.loggersPendentesRetorno));
+  setText("card-estoque", fmtCardValue(indicadores.totalEstoque));
+  setText("card-loggers-transito", fmtCardValue(indicadores.loggersTransito));
+  setText("card-loggers-entregues", fmtCardValue(indicadores.loggersEntregues));
+  setText("card-loggers-retornados", fmtCardValue(indicadores.loggersRetornados));
+  setText("card-loggers-pendentes-retorno", fmtCardValue(indicadores.loggersPendentesRetorno));
   setText("kpi-estoque-registros", fmt(indicadores.registrosEstoque));
   setText("total-registros", fmt(indicadores.totalRegistros));
   setText("total-estoque-meta", fmt(indicadores.totalEstoque));

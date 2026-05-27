@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "27/05/2026 09:24:32",
+  "geradoEm": "27/05/2026 09:30:36",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
@@ -13,7 +13,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "27/05/2026 09:19",
+      "ultimaAtualizacao": "27/05/2026 09:27",
       "totalRegistros": 8923
     },
     "ARES COM SONDA": {
@@ -30,16 +30,16 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "totalRegistros": 361
     },
     "SENSOR VTC": {
-      "totalEstoque": 135,
+      "totalEstoque": 138,
       "loggersTransito": 0,
       "loggersEntregues": 281,
-      "loggersRetornados": 211,
+      "loggersRetornados": 213,
       "registrosEntregas": 281,
       "registrosEstoque": 614,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "27/05/2026 09:19",
+      "ultimaAtualizacao": "27/05/2026 09:29",
       "totalRegistros": 895
     },
     "SHIELD": {
@@ -69,86 +69,18 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "totalRegistros": 3018
     },
     "ALL": {
-      "totalEstoque": 1788,
+      "totalEstoque": 1791,
       "loggersTransito": 0,
       "loggersEntregues": 4643,
-      "loggersRetornados": 2857,
+      "loggersRetornados": 2859,
       "registrosEntregas": 4643,
       "registrosEstoque": 8939,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "27/05/2026 09:19",
+      "ultimaAtualizacao": "27/05/2026 09:29",
       "totalRegistros": 13582
     }
-  },
-  "indicadoresConsolidadosDocumentos": {
-    "fonte": "vtc_stage.documentos",
-    "geradoEm": "27/05/2026 09:24:32",
-    "summary": {
-      "ARES": {
-        "totalEstoque": null,
-        "loggersTransito": 0,
-        "loggersEntregues": 0,
-        "loggersRetornados": null,
-        "loggersPendentesRetorno": null
-      },
-      "ARES COM SONDA": {
-        "totalEstoque": null,
-        "loggersTransito": 0,
-        "loggersEntregues": 0,
-        "loggersRetornados": null,
-        "loggersPendentesRetorno": null
-      },
-      "SENSOR VTC": {
-        "totalEstoque": null,
-        "loggersTransito": 0,
-        "loggersEntregues": 0,
-        "loggersRetornados": null,
-        "loggersPendentesRetorno": null
-      },
-      "SHIELD": {
-        "totalEstoque": null,
-        "loggersTransito": 0,
-        "loggersEntregues": 0,
-        "loggersRetornados": null,
-        "loggersPendentesRetorno": null
-      },
-      "SYOS": {
-        "totalEstoque": null,
-        "loggersTransito": 0,
-        "loggersEntregues": 0,
-        "loggersRetornados": null,
-        "loggersPendentesRetorno": null
-      },
-      "ALL": {
-        "totalEstoque": null,
-        "loggersTransito": 0,
-        "loggersEntregues": 0,
-        "loggersRetornados": null,
-        "loggersPendentesRetorno": null
-      }
-    },
-    "criterios": {
-      "loggersTransito": "distinct nr_pedido + cd_referencia com dt_coletaefetiva preenchida e dt_entregaefetiva vazia",
-      "loggersEntregues": "distinct nr_pedido + cd_referencia com dt_entregaefetiva preenchida",
-      "loggersRetornados": "distinct nr_pedido + cd_referencia com campo de retorno confiavel nos ultimos 20 dias",
-      "loggersPendentesRetorno": "loggersEntregues - loggersRetornados quando retorno estiver disponivel",
-      "totalEstoque": "indisponivel sem campo confiavel de estoque atual em vtc_stage.documentos"
-    },
-    "campos": {
-      "pedido": "nr_pedido",
-      "logger": "cd_referencia",
-      "coleta": "dt_coletaefetiva",
-      "entrega": "dt_entregaefetiva",
-      "retorno": null,
-      "estoque": null,
-      "tipo": "inferido por cd_referencia"
-    },
-    "alertas": [
-      "Falha ao consultar vtc_stage.documentos: connection to server at \"db.lwfiljyxrlahuhjddfnp.supabase.co\" (18.116.208.78), port 5432 failed: timeout expired\n"
-    ],
-    "erro": "connection to server at \"db.lwfiljyxrlahuhjddfnp.supabase.co\" (18.116.208.78), port 5432 failed: timeout expired\n"
   },
   "operacionalEstoqueFonte": "ESTOQUE_DATALOGGERS.html :: const STATES",
   "operacionalEstoque": {
@@ -181,12 +113,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           231,
           446,
           450,
-          536,
-          1788,
-          4762
+          535,
+          1791,
+          4760
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES": {
       "aptoUso": 20,
@@ -222,7 +154,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           3823
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES COM SONDA": {
       "aptoUso": 0,
@@ -260,13 +192,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
         ],
         "values": [
           21,
-          31,
-          135,
+          30,
+          138,
           155,
-          272
+          270
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "SHIELD": {
       "aptoUso": 0,
@@ -362,7 +294,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           3855
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES|SENSOR VTC": {
       "aptoUso": 20,
@@ -393,12 +325,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           136,
           171,
           450,
-          487,
-          713,
-          4095
+          486,
+          716,
+          4093
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES|SHIELD": {
       "aptoUso": 20,
@@ -434,7 +366,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           3847
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES|SYOS": {
       "aptoUso": 23,
@@ -470,7 +402,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           4434
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES COM SONDA|SENSOR VTC": {
       "aptoUso": 0,
@@ -487,14 +419,14 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
         ],
         "values": [
           24,
-          35,
+          34,
           79,
           155,
-          213,
-          304
+          216,
+          302
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES COM SONDA|SHIELD": {
       "aptoUso": 0,
@@ -582,13 +514,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           16,
           21,
           32,
-          33,
-          211,
-          296,
+          32,
+          214,
+          294,
           341
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "SENSOR VTC|SYOS": {
       "aptoUso": 3,
@@ -612,15 +544,15 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           23,
           32,
           69,
-          74,
+          73,
           80,
           150,
           244,
-          883,
-          1056
+          881,
+          1059
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "SHIELD|SYOS": {
       "aptoUso": 3,
@@ -685,12 +617,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           171,
           199,
           450,
-          491,
-          791,
-          4127
+          490,
+          794,
+          4125
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES|ARES COM SONDA|SHIELD": {
       "aptoUso": 20,
@@ -726,7 +658,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           3879
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES|ARES COM SONDA|SYOS": {
       "aptoUso": 23,
@@ -762,7 +694,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           4466
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES|SENSOR VTC|SHIELD": {
       "aptoUso": 20,
@@ -793,12 +725,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           152,
           357,
           450,
-          489,
-          789,
-          4119
+          488,
+          792,
+          4117
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES|SENSOR VTC|SYOS": {
       "aptoUso": 23,
@@ -829,12 +761,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           166,
           260,
           450,
-          530,
-          1634,
-          4706
+          529,
+          1637,
+          4704
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES|SHIELD|SYOS": {
       "aptoUso": 23,
@@ -870,7 +802,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           4458
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES COM SONDA|SENSOR VTC|SHIELD": {
       "aptoUso": 0,
@@ -893,14 +825,14 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           13,
           16,
           24,
-          37,
+          36,
           111,
-          289,
-          328,
+          292,
+          326,
           341
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES COM SONDA|SENSOR VTC|SYOS": {
       "aptoUso": 3,
@@ -925,16 +857,16 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           26,
           32,
           69,
-          78,
+          77,
           79,
           80,
           150,
           244,
-          915,
-          1134
+          913,
+          1137
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES COM SONDA|SHIELD|SYOS": {
       "aptoUso": 3,
@@ -993,16 +925,16 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           23,
           32,
           32,
-          76,
+          75,
           85,
           86,
           163,
           430,
-          907,
-          1132
+          905,
+          1135
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES|ARES COM SONDA|SENSOR VTC|SHIELD": {
       "aptoUso": 20,
@@ -1033,12 +965,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           231,
           357,
           450,
-          493,
-          867,
-          4151
+          492,
+          870,
+          4149
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES|ARES COM SONDA|SENSOR VTC|SYOS": {
       "aptoUso": 23,
@@ -1069,12 +1001,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           199,
           260,
           450,
-          534,
-          1712,
-          4738
+          533,
+          1715,
+          4736
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES|ARES COM SONDA|SHIELD|SYOS": {
       "aptoUso": 23,
@@ -1110,7 +1042,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           4490
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:27"
     },
     "ARES|SENSOR VTC|SHIELD|SYOS": {
       "aptoUso": 23,
@@ -1141,12 +1073,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           179,
           446,
           450,
-          532,
-          1710,
-          4730
+          531,
+          1713,
+          4728
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     },
     "ARES COM SONDA|SENSOR VTC|SHIELD|SYOS": {
       "aptoUso": 3,
@@ -1170,17 +1102,17 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           3,
           26,
           32,
-          80,
+          79,
           85,
           86,
           111,
           163,
           430,
-          939,
-          1210
+          937,
+          1213
         ]
       },
-      "ultimaAtualizacao": "27/05/2026 09:19"
+      "ultimaAtualizacao": "27/05/2026 09:29"
     }
   },
   "diagnostico": {
@@ -1194,8 +1126,8 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "chavesComTipoEstoqueDataloggers": 1465,
     "chavesComTipoInferidoPorPrefixo": 0,
     "retornoPorControleEntregas": 2380,
-    "retornoPorEstoqueAtual": 477,
-    "retornoPendenteOuSemMatch": 1786,
+    "retornoPorEstoqueAtual": 479,
+    "retornoPendenteOuSemMatch": 1784,
     "chavesPorTipo": {
       "ARES": 3149,
       "SYOS": 1018,
@@ -1204,7 +1136,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "SHIELD": 30
     },
     "fonteTransito": "indisponivel",
-    "criterioTransito": "chave nr_pedido + cd_referencia com dt_entregaefetiva vazia",
+    "criterioTransito": "chave nr_pedido + cd_referencia com dt_coletaefetiva preenchida e dt_entregaefetiva vazia",
     "linhasTransitoDocumentos": 0,
     "chavesTransitoDocumentos": 0,
     "pedidosTransitoDocumentos": 0,
@@ -1221,8 +1153,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "Loggers em transito: chaves nr_pedido + cd_referencia com dt_entregaefetiva vazia em vtc_stage.documentos.",
     "Estoque foi consolidado do dashboard local ESTOQUE_DATALOGGERS.html.",
     "Status de retorno foi enriquecido pelo CONTROLE_ENTREGAS_20D.csv e, quando ausente, pelo status atual de estoque.",
-    "304 linhas da planilha nao possuem cd_referencia e nao entram em indicadores por logger.",
-    "Falha ao consultar vtc_stage.documentos: connection to server at \"db.lwfiljyxrlahuhjddfnp.supabase.co\" (18.116.208.78), port 5432 failed: timeout expired\n"
+    "304 linhas da planilha nao possuem cd_referencia e nao entram em indicadores por logger."
   ],
   "campos": {
     "pedido": "nr_pedido",

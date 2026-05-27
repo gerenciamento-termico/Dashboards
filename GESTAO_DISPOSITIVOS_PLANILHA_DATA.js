@@ -1,13 +1,13 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "27/05/2026 15:16:47",
+  "geradoEm": "27/05/2026 15:26:47",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 331,
       "loggersTransito": 730,
       "loggersEntregues": 3149,
-      "loggersRetornados": 1737,
+      "loggersRetornados": 1773,
       "registrosEntregas": 3149,
       "registrosEstoque": 5774,
       "semStatus": 0,
@@ -72,7 +72,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "totalEstoque": 1615,
       "loggersTransito": 948,
       "loggersEntregues": 4643,
-      "loggersRetornados": 2876,
+      "loggersRetornados": 2912,
       "registrosEntregas": 4643,
       "registrosEstoque": 8939,
       "semStatus": 0,
@@ -87,7 +87,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ALL": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 257,
+      "embAguardandoExpedicao": 254,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -123,7 +123,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 229,
+      "embAguardandoExpedicao": 226,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -263,7 +263,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|ARES COM SONDA": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 229,
+      "embAguardandoExpedicao": 226,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -299,7 +299,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|SENSOR VTC": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 231,
+      "embAguardandoExpedicao": 228,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -335,7 +335,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|SHIELD": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 229,
+      "embAguardandoExpedicao": 226,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -371,7 +371,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|SYOS": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 255,
+      "embAguardandoExpedicao": 252,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -591,7 +591,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|ARES COM SONDA|SENSOR VTC": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 231,
+      "embAguardandoExpedicao": 228,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -627,7 +627,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|ARES COM SONDA|SHIELD": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 229,
+      "embAguardandoExpedicao": 226,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -663,7 +663,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|ARES COM SONDA|SYOS": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 255,
+      "embAguardandoExpedicao": 252,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -699,7 +699,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|SENSOR VTC|SHIELD": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 231,
+      "embAguardandoExpedicao": 228,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -735,7 +735,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|SENSOR VTC|SYOS": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 257,
+      "embAguardandoExpedicao": 254,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -771,7 +771,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|SHIELD|SYOS": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 255,
+      "embAguardandoExpedicao": 252,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -939,7 +939,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|ARES COM SONDA|SENSOR VTC|SHIELD": {
       "aptoUso": 323,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 231,
+      "embAguardandoExpedicao": 228,
       "status": {
         "labels": [
           "CF - Aguar. Receber",
@@ -975,7 +975,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|ARES COM SONDA|SENSOR VTC|SYOS": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 257,
+      "embAguardandoExpedicao": 254,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -1011,7 +1011,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|ARES COM SONDA|SHIELD|SYOS": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 255,
+      "embAguardandoExpedicao": 252,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -1047,7 +1047,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "ARES|SENSOR VTC|SHIELD|SYOS": {
       "aptoUso": 326,
       "aguardandoRecebimento": 9,
-      "embAguardandoExpedicao": 257,
+      "embAguardandoExpedicao": 254,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -1122,12 +1122,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "linhasComLoggerOuReferencia": 5691,
     "linhasSemLoggerOuReferencia": 304,
     "chavesDistintas": 4643,
-    "chavesComTipoControleEntregas": 3178,
-    "chavesComTipoEstoqueDataloggers": 1465,
+    "chavesComTipoControleEntregas": 3256,
+    "chavesComTipoEstoqueDataloggers": 1387,
     "chavesComTipoInferidoPorPrefixo": 0,
-    "retornoPorControleEntregas": 2408,
-    "retornoPorEstoqueAtual": 468,
-    "retornoPendenteOuSemMatch": 1767,
+    "retornoPorControleEntregas": 2468,
+    "retornoPorEstoqueAtual": 444,
+    "retornoPendenteOuSemMatch": 1731,
     "chavesPorTipo": {
       "ARES": 3149,
       "SYOS": 1018,

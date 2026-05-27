@@ -1,11 +1,11 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "27/05/2026 08:04:01",
+  "geradoEm": "27/05/2026 08:14:14",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 144,
-      "loggersTransito": 852,
+      "loggersTransito": 0,
       "loggersEntregues": 3149,
       "loggersRetornados": 1688,
       "registrosEntregas": 3149,
@@ -18,7 +18,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ARES COM SONDA": {
       "totalEstoque": 78,
-      "loggersTransito": 8,
+      "loggersTransito": 0,
       "loggersEntregues": 165,
       "loggersRetornados": 145,
       "registrosEntregas": 165,
@@ -31,7 +31,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": 135,
-      "loggersTransito": 16,
+      "loggersTransito": 0,
       "loggersEntregues": 281,
       "loggersRetornados": 211,
       "registrosEntregas": 281,
@@ -57,7 +57,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "SYOS": {
       "totalEstoque": 909,
-      "loggersTransito": 234,
+      "loggersTransito": 0,
       "loggersEntregues": 1018,
       "loggersRetornados": 721,
       "registrosEntregas": 1018,
@@ -70,7 +70,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ALL": {
       "totalEstoque": 1342,
-      "loggersTransito": 1110,
+      "loggersTransito": 0,
       "loggersEntregues": 4643,
       "loggersRetornados": 2792,
       "registrosEntregas": 4643,
@@ -1135,17 +1135,16 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "ARES COM SONDA": 165,
       "SHIELD": 30
     },
-    "fonteTransito": "vtc_stage.documentos",
+    "fonteTransito": "indisponivel",
     "criterioTransito": "chave nr_pedido + cd_referencia com dt_entregaefetiva vazia",
-    "linhasTransitoDocumentos": 1249,
-    "chavesTransitoDocumentos": 1110,
-    "pedidosTransitoDocumentos": 131,
-    "chavesTransitoPorTipo": {
-      "ARES": 852,
-      "ARES COM SONDA": 8,
-      "SENSOR VTC": 16,
-      "SYOS": 234
-    }
+    "linhasTransitoDocumentos": 0,
+    "chavesTransitoDocumentos": 0,
+    "pedidosTransitoDocumentos": 0,
+    "chavesTransitoPorTipo": {},
+    "erroTransitoDocumentos": "connection to server at \"db.lwfiljyxrlahuhjddfnp.supabase.co\" (18.116.208.78), port 5432 failed: timeout expired\n",
+    "fonteTransitoFallback": "planilha_local",
+    "criterioTransitoFallback": "chave nr_pedido + cd_referencia com dt_entregaefetiva vazia na planilha",
+    "chavesTransitoFallback": 0
   },
   "alertas": [
     "Fonte carregada da planilha local Conexao com vtc_stage.",

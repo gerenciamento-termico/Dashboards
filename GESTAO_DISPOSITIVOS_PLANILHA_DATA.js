@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "27/05/2026 04:53:53",
+  "geradoEm": "27/05/2026 05:03:53",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
@@ -1137,7 +1137,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "fonteTransito": "vtc_stage.documentos",
     "criterioTransito": "chave nr_pedido + cd_referencia com dt_entregaefetiva vazia",
-    "linhasTransitoDocumentos": 1241,
+    "linhasTransitoDocumentos": 1242,
     "chavesTransitoDocumentos": 1108,
     "pedidosTransitoDocumentos": 130,
     "chavesTransitoPorTipo": {

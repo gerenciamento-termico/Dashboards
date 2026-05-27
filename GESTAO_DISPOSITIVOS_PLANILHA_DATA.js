@@ -1,11 +1,11 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "27/05/2026 18:36:51",
+  "geradoEm": "27/05/2026 18:46:52",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 592,
-      "loggersTransito": 479,
+      "loggersTransito": 476,
       "loggersEntregues": 3149,
       "loggersRetornados": 1916,
       "registrosEntregas": 3149,
@@ -70,7 +70,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ALL": {
       "totalEstoque": 1937,
-      "loggersTransito": 667,
+      "loggersTransito": 664,
       "loggersEntregues": 4643,
       "loggersRetornados": 3088,
       "registrosEntregas": 4643,
@@ -1145,11 +1145,11 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "fonteTransito": "vtc_stage.documentos",
     "criterioTransito": "chave nr_pedido + '-' + cd_referencia agrupada primeiro; conta se existe dt_coletaefetiva e nao existe dt_entregaefetiva",
-    "linhasTransitoDocumentos": 756,
-    "chavesTransitoDocumentos": 667,
-    "pedidosTransitoDocumentos": 114,
+    "linhasTransitoDocumentos": 749,
+    "chavesTransitoDocumentos": 664,
+    "pedidosTransitoDocumentos": 113,
     "chavesTransitoPorTipo": {
-      "ARES": 479,
+      "ARES": 476,
       "SENSOR VTC": 1,
       "SYOS": 187
     }

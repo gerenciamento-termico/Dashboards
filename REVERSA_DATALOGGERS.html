@@ -393,6 +393,12 @@ function topEntries(map, limit){
     .slice(-limit);
 }
 
+function buildLoggerPendenciaKey(row){
+  const pedido = String(row[0] ?? "").trim();
+  const logger = String(row[1] ?? "").trim();
+  return pedido && logger ? `${pedido}-${logger}` : "";
+}
+
 function computePeriodData(rows, days){
   const pedidos = new Set();
   let loggers = 0;
@@ -404,6 +410,7 @@ function computePeriodData(rows, days){
   const ufCounts = new Map();
   const trendCounts = new Map();
   const rec7ByDay = new Map();
+  const pendenciaPorChave = new Map();
 
   const dates = [];
   const today = new Date();
@@ -426,6 +433,16 @@ function computePeriodData(rows, days){
     if (logger) loggers += 1;
     if (status.includes("Retornado")) retornados += 1;
     else pendentes += 1;
+
+    const pendenciaKey = buildLoggerPendenciaKey(row);
+    if (pendenciaKey) {
+      if (!pendenciaPorChave.has(pendenciaKey)) {
+        pendenciaPorChave.set(pendenciaKey, { temPendente: false, temRetornado: false });
+      }
+      const registro = pendenciaPorChave.get(pendenciaKey);
+      if (status.includes("Pendente de Retorno")) registro.temPendente = true;
+      if (status.includes("Retornado")) registro.temRetornado = true;
+    }
 
     if (agente) agCounts.set(agente, (agCounts.get(agente) || 0) + 1);
     if (status.includes("Pendente de Retorno") && agente) {
@@ -471,6 +488,10 @@ function computePeriodData(rows, days){
     rec7Y.push((rec7ByDay.get(key) || new Set()).size);
   }
 
+  const pendentesUnicos = Array.from(pendenciaPorChave.values())
+    .filter(registro => registro.temPendente && !registro.temRetornado)
+    .length;
+
   const toChartData = (map, limit) => {
     const entries = topEntries(map, limit);
     return {
@@ -485,7 +506,7 @@ function computePeriodData(rows, days){
       pedidos: pedidos.size.toLocaleString("pt-BR"),
       loggers: loggers.toLocaleString("pt-BR"),
       retornados: retornados.toLocaleString("pt-BR"),
-      pendentes: pendentes.toLocaleString("pt-BR"),
+      pendentes: pendentesUnicos.toLocaleString("pt-BR"),
       taxa_ret: loggers > 0 ? `${((retornados / loggers) * 100).toFixed(1).replace(".", ",")}%` : "0,0%",
       taxa_pend: loggers > 0 ? `${((pendentes / loggers) * 100).toFixed(1).replace(".", ",")}%` : "0,0%",
     },

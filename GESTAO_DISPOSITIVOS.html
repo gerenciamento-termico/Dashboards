@@ -216,6 +216,41 @@ body{
   padding:14px;
 }
 .panel-title{font-size:.98rem;font-weight:800;color:#d8e6fb;margin-bottom:10px;}
+.technical-status-card{
+  position:relative;
+  overflow:hidden;
+  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
+  border:1px solid #365379;
+  box-shadow:inset 0 1px 0 rgba(125,173,230,.06);
+  padding:16px 18px;
+}
+.technical-status-card::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 100%);
+  opacity:.85;
+}
+.technical-status-card .panel-title{
+  position:relative;
+  color:#b9d1ee;
+  font-size:.96rem;
+  margin-bottom:12px;
+}
+.technical-status-card .status-mini-chart{position:relative;}
+.technical-status-card .status-mini-row{
+  border:1px solid #253a58;
+  background:#111c2f;
+  border-radius:10px;
+  padding:9px 10px;
+}
+.technical-status-card .status-mini-value{
+  color:#f6fbff;
+  font-size:1.18rem;
+}
+.technical-status-card .status-mini-meta{
+  position:relative;
+  color:#89a9cf;
+}
 .source-list{display:grid;gap:8px;}
 .source-row{
   display:flex;
@@ -420,6 +455,9 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
   </section>
 
   <section class="status-panel">
+    <div class="section-head">
+      <h2 class="section-title">Status técnico dos loggers</h2>
+    </div>
     <div class="panel panel-sources">
       <div class="panel-title">Fontes de dados</div>
       <div class="source-list">
@@ -428,8 +466,7 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
         <div class="source-row"><span>../data/entregas.json</span><span id="status-entregas">Aguardando</span></div>
       </div>
     </div>
-    <div class="panel panel-status">
-      <div class="panel-title">Status técnico dos loggers</div>
+    <div class="panel panel-status technical-status-card">
       <div id="chart-status-operacional" class="status-mini-chart"></div>
       <div class="status-mini-meta" id="status-operacional-fonte">Base: aguardando</div>
     </div>

@@ -219,16 +219,13 @@ body{
 .technical-status-card{
   position:relative;
   overflow:hidden;
-  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
-  border:1px solid #365379;
-  box-shadow:inset 0 1px 0 rgba(125,173,230,.06);
-  padding:16px 18px;
-}
-.technical-status-card::before{
-  content:"";
-  position:absolute;top:0;left:0;right:0;height:3px;
-  background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 100%);
-  opacity:.85;
+  background:transparent;
+  border:0;
+  border-radius:0;
+  box-shadow:none;
+  padding:0;
+  min-height:0;
+  text-align:center;
 }
 .technical-status-card .panel-title{
   position:relative;
@@ -236,16 +233,59 @@ body{
   font-size:.96rem;
   margin-bottom:12px;
 }
-.technical-status-card .status-mini-chart{position:relative;}
+.technical-status-card .status-mini-chart{
+  position:relative;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(170px,1fr));
+  gap:12px;
+}
 .technical-status-card .status-mini-row{
-  border:1px solid #253a58;
-  background:#111c2f;
-  border-radius:10px;
-  padding:9px 10px;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  min-height:132px;
+  border:1px solid #365379;
+  background:linear-gradient(155deg,#15233a 0%,#121b2d 62%,#101829 100%);
+  border-radius:12px;
+  padding:14px 14px 13px;
+  box-shadow:inset 0 1px 0 rgba(125,173,230,.06);
+}
+.technical-status-card .status-mini-row::before{
+  content:"";
+  position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue) 0%,var(--blue-2) 100%);
+  opacity:.85;
+}
+.technical-status-card .status-mini-track{
+  order:3;
+  display:block;
+  width:min(190px,72%);
+  height:8px;
+  margin-top:12px;
+  border:1px solid #2a4264;
+  background:#0d1626;
+  opacity:.9;
+}
+.technical-status-card .status-mini-label{
+  position:relative;
+  order:1;
+  color:#b9d1ee;
+  font-size:.92rem;
+  font-weight:800;
+  line-height:1.25;
+  margin-bottom:9px;
 }
 .technical-status-card .status-mini-value{
+  position:relative;
+  order:2;
   color:#f6fbff;
-  font-size:1.18rem;
+  font-size:2.15rem;
+  font-weight:800;
+  line-height:1.05;
+  white-space:nowrap;
 }
 .technical-status-card .status-mini-meta{
   position:relative;
@@ -443,17 +483,6 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
     <p class="section-note">Quantidade consolidada por tipo de logger/dispositivo</p>
   </div>
   <section class="device-type-grid" id="device-type-grid" aria-label="Resumo operacional por tipo de logger"></section>
-
-  <div class="section-head">
-    <h2 class="section-title">Totais técnicos</h2>
-    <p class="section-note">Volumes consolidados da fonte ativa</p>
-  </div>
-  <section class="kpi-grid" aria-label="Totais técnicos">
-    <article class="kpi-card">
-      <div class="kpi-title">Registros de estoque</div>
-      <div class="kpi-value" id="kpi-estoque-registros">0</div>
-    </article>
-  </section>
 
   <section class="status-panel">
     <div class="section-head">

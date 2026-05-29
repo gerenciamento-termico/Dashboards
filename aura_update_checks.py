@@ -25,6 +25,7 @@ PYTHON_SCRIPTS = [
     "gerar_html_controle_entregas.py",
     "HTMLACOMPANHAMENTO.py",
     "gerar_dashboard_entregas.py",
+    "gerar_html_reversa.py",
     "env_utils.py",
     "aura_update_checks.py",
 ]
@@ -42,6 +43,10 @@ GENERATED_HTML = {
         "min_size": 100_000,
         "markers": ["Gerado em", "const payload", "generated_at"],
     },
+    "REVERSA_DATALOGGERS.html": {
+        "min_size": 100_000,
+        "markers": ["Gerado em", "const ALL_ROWS", "const DEFAULT_PERIOD"],
+    },
 }
 
 GENERATED_DATA = [
@@ -52,10 +57,12 @@ GENERATED_DATA = [
 CODE_FILES = [
     "ATUALIZAR_TUDO_10_MIN.bat",
     "VERIFICACAO_DIARIA_DASHBOARDS.BAT",
+    "ATUALIZAR_REVERSA.bat",
     "HTMLACOMPANHAMENTO.py",
     "gerar_dashboard_entregas.py",
     "gerar_html_estoque.py",
     "gerar_html_controle_entregas.py",
+    "gerar_html_reversa.py",
     "env_utils.py",
     "aura_update_checks.py",
     ".env.example",
@@ -355,6 +362,39 @@ def _validate_controle(cycle_start: float | None) -> None:
     )
 
 
+def _validate_reversa(cycle_start: float | None) -> None:
+    text = _validate_common_html("REVERSA_DATALOGGERS.html", cycle_start)
+    rows = _extract_js_json(text, "ALL_ROWS")
+    if not isinstance(rows, list) or len(rows) <= 0:
+        raise RuntimeError("REVERSA_DATALOGGERS.html sem ALL_ROWS real")
+    keys: set[str] = set()
+    duplicates = 0
+    pending = 0
+    for row in rows:
+        if not isinstance(row, list) or len(row) < 8:
+            continue
+        pedido = str(row[0]).strip().upper()
+        logger = str(row[1]).strip().upper()
+        if not pedido or not logger:
+            continue
+        key = f"{pedido}|{logger}"
+        if key in keys:
+            duplicates += 1
+        else:
+            keys.add(key)
+            if str(row[7]).strip() == "Pendente de Retorno":
+                pending += 1
+    if duplicates:
+        raise RuntimeError(
+            "REVERSA_DATALOGGERS.html com chaves Pedido+Logger duplicadas "
+            f"em ALL_ROWS: {duplicates}"
+        )
+    _print(
+        "[html] REVERSA_DATALOGGERS.html OK: "
+        f"registros={len(rows)} chaves_unicas={len(keys)} pendentes={pending}"
+    )
+
+
 def _validate_acompanhamento_html(cycle_start: float | None) -> None:
     text = _validate_common_html("HTMLACOMPANHAMENTO.html", cycle_start)
     payload = _extract_js_json(text, "payload")
@@ -374,6 +414,7 @@ def command_validate_html(args: argparse.Namespace) -> int:
     try:
         _validate_estoque(cycle_start)
         _validate_controle(cycle_start)
+        _validate_reversa(cycle_start)
         _validate_acompanhamento_html(cycle_start)
         return 0
     except Exception:

@@ -56,6 +56,28 @@ def fmt_pct(v: float) -> str:
 def safe_pct(num: int, den: int) -> float:
     return 0.0 if den <= 0 else (num / den) * 100.0
 
+def _pedido_logger_key(df: pd.DataFrame) -> pd.Series:
+    return normalize_key(df["Pedido"]) + "|" + normalize_key(df["Logger"])
+
+def dedupe_pedido_logger(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return df.copy()
+    out = df.copy()
+    out["Pedido"] = out["Pedido"].fillna("").astype(str).str.strip()
+    out["Logger"] = out["Logger"].fillna("").astype(str).str.strip()
+    out = out[out["Pedido"].ne("") & out["Logger"].ne("")].copy()
+    out["_pedido_logger_key"] = _pedido_logger_key(out)
+    out["_status_rank"] = out["Status Retorno"].eq("Retornado").astype(int)
+    out["_hist_sort"] = pd.to_datetime(out.get("Ultimo_Historico"), errors="coerce")
+    out["_entrega_sort"] = pd.to_datetime(out.get("_data_entrega_dt", out.get("Data de Entrega")), errors="coerce")
+    out = out.sort_values(
+        ["_pedido_logger_key", "_status_rank", "_hist_sort", "_entrega_sort"],
+        ascending=[True, False, False, False],
+        kind="mergesort",
+    )
+    out = out.drop_duplicates("_pedido_logger_key", keep="first")
+    return out.drop(columns=["_pedido_logger_key", "_status_rank", "_hist_sort", "_entrega_sort"])
+
 def infer_tipo_datalogger(series: pd.Series) -> pd.Series:
     logger = series.fillna("").astype(str).str.strip().str.upper()
     tipo = pd.Series("", index=series.index, dtype="object")
@@ -200,6 +222,7 @@ def _compute_period_data(df: pd.DataFrame, days: int) -> dict:
     df["Logger"] = df["Logger"].fillna("").astype(str).str.strip()
     df = df[df["Logger"] != ""].copy()
     df = df[df["Data de Entrega"].notna()].copy()
+    df = dedupe_pedido_logger(df)
 
     pedidos    = int(df["Pedido"].nunique())
     loggers    = int(len(df))
@@ -317,6 +340,7 @@ def _build_all_rows(df: pd.DataFrame) -> list[list[str]]:
     tbl = tbl[tbl["Logger"] != ""].copy()
     tbl["Data de Entrega"] = pd.to_datetime(tbl["Data de Entrega"], errors="coerce")
     tbl = tbl[tbl["Data de Entrega"].notna()].copy()
+    tbl = dedupe_pedido_logger(tbl)
     tbl = tbl.sort_values("Data de Entrega", ascending=False)
     tbl["_data_entrega_iso"] = tbl["Data de Entrega"].dt.strftime("%Y-%m-%dT%H:%M:%S").fillna("")
     tbl["Data de Entrega"] = tbl["Data de Entrega"].dt.strftime("%d/%m/%Y %H:%M:%S").fillna("")
@@ -758,7 +782,44 @@ function topEntries(map, limit){{
     .slice(-limit);
 }}
 
+function pedidoLoggerKey(row){{
+  const pedido = normalizeText(row[0]);
+  const logger = normalizeText(row[1]);
+  return pedido && logger ? `${{pedido}}|${{logger}}` : "";
+}}
+
+function rowRank(row){{
+  const status = String(row[7] ?? "");
+  const hist = parseBrDate(row[5]);
+  const entrega = parseBrDate(row[4]);
+  return {{
+    status: status.includes("Retornado") ? 1 : 0,
+    hist: hist ? hist.getTime() : 0,
+    entrega: entrega ? entrega.getTime() : 0,
+  }};
+}}
+
+function isBetterRow(candidate, current){{
+  const a = rowRank(candidate);
+  const b = rowRank(current);
+  if (a.status !== b.status) return a.status > b.status;
+  if (a.hist !== b.hist) return a.hist > b.hist;
+  return a.entrega > b.entrega;
+}}
+
+function uniquePedidoLoggerRows(rows){{
+  const byKey = new Map();
+  for (const row of rows) {{
+    const key = pedidoLoggerKey(row);
+    if (!key) continue;
+    const current = byKey.get(key);
+    if (!current || isBetterRow(row, current)) byKey.set(key, row);
+  }}
+  return Array.from(byKey.values());
+}}
+
 function computePeriodData(rows, days){{
+  rows = uniquePedidoLoggerRows(rows);
   const pedidos = new Set();
   let loggers = 0;
   let retornados = 0;
@@ -990,6 +1051,9 @@ def main():
         model_full = build_model(base_loggers, base_agentes, recebimento, base_destinatarios)
         cutoff_max = pd.Timestamp.now() - pd.Timedelta(days=max_days)
         model_full = model_full[model_full["_data_entrega_dt"] >= cutoff_max].copy()
+        before_dedupe = len(model_full)
+        model_full = dedupe_pedido_logger(model_full)
+        print(f"[reversa] Deduplicacao Pedido+Logger: {before_dedupe} -> {len(model_full)} registros")
         print(f"[reversa] Modelo completo: {len(model_full)} registros")
     except MemoryError:
         print("[reversa] Memoria insuficiente ao carregar os snapshots brutos.")
@@ -1000,6 +1064,9 @@ def main():
         if "_data_entrega_dt" not in model_full.columns:
             model_full["_data_entrega_dt"] = pd.to_datetime(model_full.get("Data de Entrega"), errors="coerce")
         model_full = model_full.copy()
+        before_dedupe = len(model_full)
+        model_full = dedupe_pedido_logger(model_full)
+        print(f"[reversa] Deduplicacao Pedido+Logger: {before_dedupe} -> {len(model_full)} registros")
         print(f"[reversa] Modelo pronto: {len(model_full)} registros")
 
     gerado = datetime.now().strftime("%d/%m/%Y %H:%M:%S")

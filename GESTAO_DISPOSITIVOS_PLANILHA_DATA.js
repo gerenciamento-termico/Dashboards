@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "29/05/2026 10:00:42",
+  "geradoEm": "29/05/2026 10:10:48",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
@@ -1125,8 +1125,8 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "chavesComTipoControleEntregas": 2333,
     "chavesComTipoEstoqueDataloggers": 2310,
     "chavesComTipoInferidoPorPrefixo": 0,
-    "retornoPorControleEntregas": 1795,
-    "retornoPorEstoqueAtual": 852,
+    "retornoPorControleEntregas": 1806,
+    "retornoPorEstoqueAtual": 841,
     "retornoPendenteOuSemMatch": 1996,
     "chavesPorTipo": {
       "ARES": 3149,

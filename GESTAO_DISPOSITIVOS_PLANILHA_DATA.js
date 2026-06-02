@@ -1,13 +1,13 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "02/06/2026 17:06:08",
+  "geradoEm": "02/06/2026 17:16:09",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 139,
       "loggersTransito": 332,
       "loggersEntregues": 3149,
-      "loggersRetornados": 867,
+      "loggersRetornados": 868,
       "registrosEntregas": 3149,
       "registrosEstoque": 5768,
       "semStatus": 0,
@@ -72,7 +72,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "totalEstoque": 1761,
       "loggersTransito": 332,
       "loggersEntregues": 4643,
-      "loggersRetornados": 1958,
+      "loggersRetornados": 1959,
       "registrosEntregas": 4643,
       "registrosEstoque": 8902,
       "semStatus": 0,
@@ -1149,9 +1149,9 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "chavesComTipoControleEntregas": 1418,
     "chavesComTipoEstoqueDataloggers": 3225,
     "chavesComTipoInferidoPorPrefixo": 0,
-    "retornoPorControleEntregas": 1110,
+    "retornoPorControleEntregas": 1111,
     "retornoPorEstoqueAtual": 848,
-    "retornoPendenteOuSemMatch": 2685,
+    "retornoPendenteOuSemMatch": 2684,
     "chavesPorTipo": {
       "ARES": 3149,
       "SYOS": 1018,

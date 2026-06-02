@@ -1,11 +1,11 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "02/06/2026 14:29:39",
+  "geradoEm": "02/06/2026 14:39:40",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 287,
-      "loggersTransito": 206,
+      "loggersTransito": 372,
       "loggersEntregues": 3149,
       "loggersRetornados": 929,
       "registrosEntregas": 3149,
@@ -70,7 +70,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "ALL": {
       "totalEstoque": 1909,
-      "loggersTransito": 206,
+      "loggersTransito": 372,
       "loggersEntregues": 4643,
       "loggersRetornados": 2020,
       "registrosEntregas": 4643,
@@ -1149,8 +1149,8 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "chavesComTipoControleEntregas": 1418,
     "chavesComTipoEstoqueDataloggers": 3225,
     "chavesComTipoInferidoPorPrefixo": 0,
-    "retornoPorControleEntregas": 1109,
-    "retornoPorEstoqueAtual": 911,
+    "retornoPorControleEntregas": 1110,
+    "retornoPorEstoqueAtual": 910,
     "retornoPendenteOuSemMatch": 2623,
     "chavesPorTipo": {
       "ARES": 3149,
@@ -1161,11 +1161,11 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     },
     "fonteTransito": "vtc_stage.documentos",
     "criterioTransito": "chave nr_pedido + '-' + cd_referencia agrupada primeiro; conta se existe dt_coletaefetiva e nao existe dt_entregaefetiva",
-    "linhasTransitoDocumentos": 211,
-    "chavesTransitoDocumentos": 206,
-    "pedidosTransitoDocumentos": 50,
+    "linhasTransitoDocumentos": 379,
+    "chavesTransitoDocumentos": 372,
+    "pedidosTransitoDocumentos": 68,
     "chavesTransitoPorTipo": {
-      "ARES": 206
+      "ARES": 372
     }
   },
   "alertas": [

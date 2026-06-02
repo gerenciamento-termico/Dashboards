@@ -69,6 +69,7 @@ set "INTERVAL_MIN=10"
 set "INTERVAL_SEC=600"
 set "LOCKFILE=%TEMP%\aura_atualizar_tudo_10_min.lock"
 set "LOG_DIR=%CD%\logs"
+set "STREAMLIT_DIR=%SCRIPT_DIR%..\streamlit"
 if not exist "%LOG_DIR%" mkdir "%LOG_DIR%" >nul 2>nul
 
 for /f "delims=" %%A in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd"') do set "LOG_DATE=%%A"
@@ -219,6 +220,7 @@ call :MAKE_STEP_LOG
     ".\gerar_html_controle_entregas.py" ^
     ".\HTMLACOMPANHAMENTO.py" ^
     ".\gerar_dashboard_entregas.py" ^
+    ".\gerar_html_reversa.py" ^
     ".\env_utils.py" ^
     ".\aura_update_checks.py" >"!STEP_LOG!" 2>&1
 set "STEP_RC=%ERRORLEVEL%"
@@ -230,12 +232,15 @@ set "COMMIT_DONE=nao"
 set "PUSH_DONE=nao"
 set "ERRMSG="
 set "STAGE_FILE="
+set "VALIDATE_SCOPE=estoque,controle,reversa,acompanhamento"
+set "ACOMPANHAMENTO_OK=sim"
+set "STREAMLIT_DIR=%SCRIPT_DIR%..\streamlit"
 set "CYCLE_START_TS="
 for /f %%A in ('powershell -NoProfile -Command "[DateTimeOffset]::Now.ToUnixTimeSeconds()"') do set "CYCLE_START_TS=%%A"
 for /f "delims=" %%A in ('powershell -NoProfile -Command "Get-Date -Format 'yyyy-MM-dd HH:mm:ss'"') do set "CYCLE_START_HUMAN=%%A"
 
 call :LOG "============================================================"
-call :LOG " ATUALIZAR DASHBOARDS AURA - ESTOQUE + ENTREGAS + HTML"
+call :LOG " ATUALIZAR DASHBOARDS AURA - ESTOQUE + REVERSA + ENTREGAS + HTML"
 call :LOG "============================================================"
 call :LOG "Pasta atual: %CD%"
 call :LOG "Inicio do ciclo: !CYCLE_START_HUMAN!"
@@ -246,7 +251,7 @@ call :LOG ""
 call :GIT_STATUS "Git status antes do pull"
 if errorlevel 1 goto :CYCLE_FAIL
 
-call :LOG "[1/8] Sincronizando com origin/main..."
+call :LOG "[1/11] Sincronizando com origin/main..."
 if exist ".git\rebase-merge" (
     set "ERRMSG=Existe um rebase pendente no Git. Execute git rebase --abort ou resolva o rebase antes do ciclo."
     goto :CYCLE_FAIL
@@ -271,35 +276,56 @@ if errorlevel 1 (
     goto :CYCLE_FAIL
 )
 
-call :LOG "[2/8] Validando sintaxe Python antes de gerar..."
+call :LOG "[2/11] Validando sintaxe Python antes de gerar..."
 call :RUN_PY_COMPILE
 if errorlevel 1 (
     set "ERRMSG=Falha de sintaxe em script Python."
     goto :CYCLE_FAIL
 )
 
-call :RUN_SCRIPT "gerar_html_estoque.py" "[3/8] Gerando ESTOQUE_DATALOGGERS.html..."
+call :RUN_SCRIPT "gerar_html_estoque.py" "[3/11] Gerando ESTOQUE_DATALOGGERS.html..."
 if errorlevel 1 (
     set "ERRMSG=Falha ao gerar ESTOQUE_DATALOGGERS.html."
     goto :CYCLE_FAIL
 )
 
-call :RUN_SCRIPT "gerar_html_controle_entregas.py" "[4/8] Gerando CONTROLE_ENTREGAS_20D.html e CSVs..."
+call :RUN_PY_PATH "%STREAMLIT_DIR%\gerar_snapshot_reversa.py" "[4/11] Atualizando snapshot_reversa usado pela reversa e pelo controle de entregas..."
+if errorlevel 1 (
+    set "ERRMSG=Falha ao atualizar snapshot_reversa."
+    goto :CYCLE_FAIL
+)
+
+call :RUN_PY_PATH "%STREAMLIT_DIR%\gerar_modelo_final_reversa.py" "[5/11] Reconstruindo modelo_final.pkl com entregas atualizadas..."
+if errorlevel 1 (
+    set "ERRMSG=Falha ao reconstruir modelo_final.pkl."
+    goto :CYCLE_FAIL
+)
+
+call :RUN_SCRIPT "gerar_html_reversa.py" "[6/11] Gerando REVERSA_DATALOGGERS.html..."
+if errorlevel 1 (
+    set "ERRMSG=Falha ao gerar REVERSA_DATALOGGERS.html."
+    goto :CYCLE_FAIL
+)
+
+call :RUN_SCRIPT "gerar_html_controle_entregas.py" "[7/11] Gerando CONTROLE_ENTREGAS_20D.html e CSVs..."
 if errorlevel 1 (
     set "ERRMSG=Falha ao gerar CONTROLE_ENTREGAS_20D."
     goto :CYCLE_FAIL
 )
 
-call :RUN_SCRIPT "HTMLACOMPANHAMENTO.py" "[5/8] Gerando HTMLACOMPANHAMENTO.html..."
+call :RUN_SCRIPT_RETRY "HTMLACOMPANHAMENTO.py" "[8/11] Gerando HTMLACOMPANHAMENTO.html..." 3 15
 if errorlevel 1 (
-    set "ERRMSG=Falha ao gerar HTMLACOMPANHAMENTO.html."
-    goto :CYCLE_FAIL
+    set "ACOMPANHAMENTO_OK=nao"
+    set "VALIDATE_SCOPE=estoque,controle,reversa"
+    call :LOG "[AVISO] HTMLACOMPANHAMENTO.py falhou apos tentativas. HTMLACOMPANHAMENTO.html antigo sera preservado."
+    call :LOG "[AVISO] Continuando com validacao/publicacao dos demais dashboards gerados neste ciclo."
 )
 
-call :LOG "[6/8] Validando HTMLs gerados e payloads reais..."
+call :LOG "[9/11] Validando HTMLs gerados e payloads reais..."
+call :LOG "Escopo de validacao deste ciclo: !VALIDATE_SCOPE!"
 set "STEP_NAME=validate-html"
 call :MAKE_STEP_LOG
-"%PY_EXE%" ".\aura_update_checks.py" validate-html --cycle-start "!CYCLE_START_TS!" >"!STEP_LOG!" 2>&1
+"%PY_EXE%" ".\aura_update_checks.py" validate-html --only "!VALIDATE_SCOPE!" --cycle-start "!CYCLE_START_TS!" >"!STEP_LOG!" 2>&1
 set "STEP_RC=%ERRORLEVEL%"
 call :FLUSH_STEP
 if errorlevel 1 (
@@ -310,11 +336,11 @@ if errorlevel 1 (
 call :GIT_STATUS "Git status antes do stage"
 if errorlevel 1 goto :CYCLE_FAIL
 
-call :LOG "[7/8] Preparando git add somente para os 3 HTMLs do site..."
+call :LOG "[10/11] Preparando git add somente para os HTMLs validos deste ciclo..."
 set "STAGE_FILE=%TEMP%\aura_stage_%RANDOM%_%RANDOM%.txt"
 set "STEP_NAME=changed-files"
 call :MAKE_STEP_LOG
-"%PY_EXE%" ".\aura_update_checks.py" changed-files --html-only --publish-timestamp-only --out "!STAGE_FILE!" >"!STEP_LOG!" 2>&1
+"%PY_EXE%" ".\aura_update_checks.py" changed-files --html-only --publish-timestamp-only --only "!VALIDATE_SCOPE!" --out "!STAGE_FILE!" >"!STEP_LOG!" 2>&1
 set "STEP_RC=%ERRORLEVEL%"
 call :FLUSH_STEP
 if errorlevel 1 (
@@ -370,7 +396,7 @@ set "COMMIT_DONE=sim"
 call :LOG "[OK] Commit criado: Atualiza dashboards Aura - !COMMIT_STAMP!"
 
 :AFTER_COMMIT
-call :LOG "[8/8] Verificando push para origin/main..."
+call :LOG "[11/11] Verificando push para origin/main..."
 set "AHEAD_COUNT=0"
 for /f %%A in ('git rev-list --count origin/main..HEAD 2^>nul') do set "AHEAD_COUNT=%%A"
 if "!AHEAD_COUNT!"=="0" (
@@ -403,6 +429,9 @@ call :LOG ""
 call :LOG "[OK] Ciclo concluido com sucesso."
 call :LOG "Commit neste ciclo: !COMMIT_DONE!"
 call :LOG "Push neste ciclo: !PUSH_DONE!"
+if /I "!ACOMPANHAMENTO_OK!"=="nao" (
+    call :LOG "[AVISO] HTMLACOMPANHAMENTO falhou neste ciclo; demais dashboards foram atualizados."
+)
 if "!PUSH_DONE!"=="sim" (
     call :LOG "Arquivos enviados neste ciclo:"
     for /f "usebackq delims=" %%F in ("!STAGE_FILE!") do (
@@ -412,6 +441,7 @@ if "!PUSH_DONE!"=="sim" (
 call :LOG "URLs publicadas:"
 call :LOG "  https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html"
 call :LOG "  https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html"
+call :LOG "  https://luan9753.github.io/banco-aura-dashboard/REVERSA_DATALOGGERS.html"
 call :LOG "  https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html"
 call :FINISH_CYCLE 0
 if exist "!STAGE_FILE!" del /q "!STAGE_FILE!" >nul 2>nul
@@ -434,6 +464,39 @@ call :LOG "%STEP_LABEL%"
 set "STEP_NAME=%SCRIPT_NAME%"
 call :MAKE_STEP_LOG
 "%PY_EXE%" ".\%SCRIPT_NAME%" >"!STEP_LOG!" 2>&1
+set "STEP_RC=%ERRORLEVEL%"
+call :FLUSH_STEP
+exit /b %ERRORLEVEL%
+
+:RUN_SCRIPT_RETRY
+set "SCRIPT_NAME=%~1"
+set "STEP_LABEL=%~2"
+set "MAX_ATTEMPTS=%~3"
+set "RETRY_WAIT=%~4"
+if not defined MAX_ATTEMPTS set "MAX_ATTEMPTS=3"
+if not defined RETRY_WAIT set "RETRY_WAIT=15"
+set /a ATTEMPT=1
+:RUN_SCRIPT_RETRY_LOOP
+call :LOG "%STEP_LABEL% Tentativa !ATTEMPT!/!MAX_ATTEMPTS!."
+set "STEP_NAME=%SCRIPT_NAME% tentativa !ATTEMPT!/!MAX_ATTEMPTS!"
+call :MAKE_STEP_LOG
+"%PY_EXE%" ".\%SCRIPT_NAME%" >"!STEP_LOG!" 2>&1
+set "STEP_RC=%ERRORLEVEL%"
+call :FLUSH_STEP
+if "!STEP_RC!"=="0" exit /b 0
+if !ATTEMPT! GEQ !MAX_ATTEMPTS! exit /b !STEP_RC!
+call :LOG "[AVISO] %SCRIPT_NAME% falhou na tentativa !ATTEMPT!. Nova tentativa em !RETRY_WAIT! segundo(s)."
+timeout /t !RETRY_WAIT! /nobreak >nul
+set /a ATTEMPT+=1
+goto :RUN_SCRIPT_RETRY_LOOP
+
+:RUN_PY_PATH
+set "SCRIPT_PATH=%~1"
+set "STEP_LABEL=%~2"
+call :LOG "%STEP_LABEL%"
+set "STEP_NAME=%~nx1"
+call :MAKE_STEP_LOG
+"%PY_EXE%" "%SCRIPT_PATH%" >"!STEP_LOG!" 2>&1
 set "STEP_RC=%ERRORLEVEL%"
 call :FLUSH_STEP
 exit /b %ERRORLEVEL%

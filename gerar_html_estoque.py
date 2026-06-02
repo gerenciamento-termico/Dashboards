@@ -24,10 +24,10 @@ AUX_STATUS_FILE = APP_DIR / "TAG para Estoque.xlsx"
 load_env_file()
 
 POSTGRES_CFG = {
-    "host": os.getenv("AURA_POSTGRES_HOST", "10.141.0.32"),
+    "host": os.getenv("AURA_POSTGRES_HOST", ""),
     "port": int(os.getenv("AURA_POSTGRES_PORT", "5432")),
-    "database": os.getenv("AURA_POSTGRES_NAME", "dtbPortal"),
-    "user": os.getenv("AURA_POSTGRES_USER", "bi_qualidade"),
+    "database": os.getenv("AURA_POSTGRES_NAME", ""),
+    "user": os.getenv("AURA_POSTGRES_USER", ""),
     "password": os.getenv("AURA_POSTGRES_PASSWORD", ""),
 }
 DESTINO_CAMARA_FRIA   = "6c1d1b0f-0613-47d3-9687-00f7bdef4980"

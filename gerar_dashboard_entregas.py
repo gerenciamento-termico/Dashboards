@@ -14,9 +14,9 @@ from env_utils import load_env_file
 
 load_env_file()
 
-DEFAULT_HOST = "db.lwfiljyxrlahuhjddfnp.supabase.co"
-DEFAULT_DATABASE = "postgres"
-DEFAULT_USER = "readonly_user"
+DEFAULT_HOST = ""
+DEFAULT_DATABASE = ""
+DEFAULT_USER = ""
 DEFAULT_PASSWORD = os.getenv("AURA_DB_PASSWORD", "")
 DEFAULT_PORT = 5432
 DEFAULT_START_DATE = "2026-04-10"
@@ -115,6 +115,7 @@ def _load_sqlserver_conn_string() -> str:
     env_cs = os.getenv("AURA_SQLSERVER_CONN_STRING", "").strip()
     if env_cs:
         return env_cs
+    workspace_root = Path(__file__).resolve().parent.parent
 
     env_cfg = {
         "host": os.getenv("AURA_SQLSERVER_HOST", ""),
@@ -130,11 +131,10 @@ def _load_sqlserver_conn_string() -> str:
     if env_built:
         return env_built
 
-    workspace_root = Path(__file__).resolve().parent.parent
-    odc_candidates = [
-        workspace_root / "10.141.0.111_Entregas_Dashboard.odc",
-        workspace_root / "GRUAG_02_Entregas_Dashboard.odc",
-    ]
+    odc_candidates = []
+    odc_env_path = os.getenv("AURA_SQLSERVER_ODC_PATH", "").strip()
+    if odc_env_path:
+        odc_candidates.append(Path(odc_env_path))
     for odc_path in odc_candidates:
         if not odc_path.exists():
             continue

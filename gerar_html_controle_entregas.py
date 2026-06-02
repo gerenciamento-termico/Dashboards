@@ -35,10 +35,10 @@ FINALIDADE_SALDO_ESTOQUE = "e8031b09-2d30-414d-af5b-16e43a41618b"
 load_env_file()
 
 PG_CFG = {
-    "host": os.getenv("AURA_POSTGRES_HOST", "10.141.0.32"),
+    "host": os.getenv("AURA_POSTGRES_HOST", ""),
     "port": int(os.getenv("AURA_POSTGRES_PORT", "5432")),
-    "database": os.getenv("AURA_POSTGRES_NAME", "dtbPortal"),
-    "user": os.getenv("AURA_POSTGRES_USER", "bi_qualidade"),
+    "database": os.getenv("AURA_POSTGRES_NAME", ""),
+    "user": os.getenv("AURA_POSTGRES_USER", ""),
     "password": os.getenv("AURA_POSTGRES_PASSWORD", ""),
 }
 

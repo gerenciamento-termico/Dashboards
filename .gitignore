@@ -1,5 +1,11 @@
 .env
 .env.local
+*.env
+ENV_LOCAL_SEGURO/
+*.key
+*.pem
+secrets.json
+credentials.json
 __pycache__/
 *.pyc
 logs/

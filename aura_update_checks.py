@@ -49,6 +49,13 @@ GENERATED_HTML = {
     },
 }
 
+HTML_SCOPE_FILES = {
+    "estoque": "ESTOQUE_DATALOGGERS.html",
+    "controle": "CONTROLE_ENTREGAS_20D.html",
+    "acompanhamento": "HTMLACOMPANHAMENTO.html",
+    "reversa": "REVERSA_DATALOGGERS.html",
+}
+
 GENERATED_DATA = [
     "CONTROLE_ENTREGAS_20D.csv",
     "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
@@ -149,8 +156,7 @@ def _postgres_cfg(prefix: str) -> dict:
 def _check_postgres_connection(label: str, cfg: dict) -> None:
     import psycopg2
 
-    safe_target = f"{label} ({cfg['host']}:{cfg['port']}/{cfg['database']})"
-    _print(f"[check] Testando conexao {safe_target}...")
+    _print(f"[check] Testando conexao {label}...")
     with psycopg2.connect(connect_timeout=15, **cfg) as conn:
         with conn.cursor() as cur:
             cur.execute("select 1")
@@ -411,11 +417,26 @@ def _validate_acompanhamento_html(cycle_start: float | None) -> None:
 
 def command_validate_html(args: argparse.Namespace) -> int:
     cycle_start = float(args.cycle_start) if args.cycle_start else None
+    validators = {
+        "estoque": _validate_estoque,
+        "controle": _validate_controle,
+        "reversa": _validate_reversa,
+        "acompanhamento": _validate_acompanhamento_html,
+    }
+    selected = list(validators)
+    if args.only:
+        selected = [item.strip().lower() for item in args.only.split(",") if item.strip()]
+        invalid = [item for item in selected if item not in validators]
+        if invalid:
+            return _fail(
+                "Escopo invalido em --only: "
+                + ", ".join(invalid)
+                + ". Use: "
+                + ", ".join(validators)
+            )
     try:
-        _validate_estoque(cycle_start)
-        _validate_controle(cycle_start)
-        _validate_reversa(cycle_start)
-        _validate_acompanhamento_html(cycle_start)
+        for name in selected:
+            validators[name](cycle_start)
         return 0
     except Exception:
         traceback.print_exc()
@@ -492,7 +513,15 @@ def command_changed_files(args: argparse.Namespace) -> int:
         stage_paths: list[str] = []
         timestamp_only: list[str] = []
 
-        for path in GENERATED_HTML:
+        html_paths = list(GENERATED_HTML)
+        if args.only:
+            selected = [item.strip().lower() for item in args.only.split(",") if item.strip()]
+            invalid = [item for item in selected if item not in HTML_SCOPE_FILES]
+            if invalid:
+                raise ValueError(f"Escopo invalido para changed-files: {', '.join(invalid)}")
+            html_paths = [HTML_SCOPE_FILES[item] for item in selected]
+
+        for path in html_paths:
             if not _git_status_for(path):
                 continue
             current_path = ROOT / path
@@ -799,6 +828,11 @@ def main(argv: list[str] | None = None) -> int:
 
     p_html = sub.add_parser("validate-html", help="Valida HTMLs gerados no ciclo.")
     p_html.add_argument("--cycle-start", default="")
+    p_html.add_argument(
+        "--only",
+        default="",
+        help="Escopo separado por virgula: estoque,controle,reversa,acompanhamento.",
+    )
     p_html.set_defaults(func=command_validate_html)
 
     p_changed = sub.add_parser("changed-files", help="Lista arquivos que merecem git add.")
@@ -806,6 +840,11 @@ def main(argv: list[str] | None = None) -> int:
     p_changed.add_argument("--restore-timestamp-only", action="store_true")
     p_changed.add_argument("--publish-timestamp-only", action="store_true")
     p_changed.add_argument("--html-only", action="store_true")
+    p_changed.add_argument(
+        "--only",
+        default="",
+        help="Escopo separado por virgula: estoque,controle,reversa,acompanhamento.",
+    )
     p_changed.set_defaults(func=command_changed_files)
 
     p_daily = sub.add_parser("daily-check", help="Executa verificacao diaria dos dashboards, Git e GitHub Pages.")

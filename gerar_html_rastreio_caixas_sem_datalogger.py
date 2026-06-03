@@ -6,6 +6,7 @@ import unicodedata
 from datetime import datetime
 from html import escape
 from pathlib import Path
+from zoneinfo import ZoneInfo
 
 import pandas as pd
 from sqlalchemy import create_engine, text
@@ -16,6 +17,7 @@ from env_utils import load_env_file
 
 WORKSPACE = Path(__file__).resolve().parent
 OUTPUT_HTML = WORKSPACE / "RASTREIO_CAIXAS_SEM_DATALOGGER.html"
+BRASILIA_TZ = ZoneInfo("America/Sao_Paulo")
 
 load_env_file()
 
@@ -219,12 +221,19 @@ def build_rows(df: pd.DataFrame) -> list[dict]:
 
 
 def now_for_coleta(df: pd.DataFrame) -> pd.Timestamp:
+    now_brasilia = pd.Timestamp.now(tz=BRASILIA_TZ)
     if df.empty or "dt_coletaefetiva" not in df.columns:
-        return pd.Timestamp.now()
+        return now_brasilia
     tz = getattr(df["dt_coletaefetiva"].dt, "tz", None)
     if tz is not None:
-        return pd.Timestamp.now(tz=tz)
-    return pd.Timestamp.now()
+        return now_brasilia.tz_convert(tz)
+    return now_brasilia.tz_localize(None)
+
+
+def format_generated_at(value: pd.Timestamp) -> str:
+    if value.tzinfo is not None:
+        value = value.tz_convert(BRASILIA_TZ)
+    return value.strftime("%d/%m/%Y %H:%M")
 
 
 def validate_business_rules(df: pd.DataFrame, summary: dict) -> None:
@@ -260,7 +269,7 @@ def _top_summary(rows: list[dict], first_col: str, limit: int = 3) -> str:
 
 def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
     generated_at = now_for_coleta(df)
-    gerado = generated_at.strftime("%d/%m/%Y %H:%M")
+    gerado = format_generated_at(generated_at)
     summary = build_summary(df, generated_at)
     validate_business_rules(df, summary)
 
@@ -413,7 +422,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
     .kpi .foot {{ font-size: .74rem; color: #89a9cf; line-height: 1.35; }}
     .insight-grid {{
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      grid-template-columns: 1fr;
       gap: 10px;
       margin: 10px 0 12px;
       align-items: start;
@@ -567,7 +576,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
     }}
     .type-filter-grid {{
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
       gap: 7px;
     }}
     .type-filter-card {{
@@ -820,16 +829,6 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
     <div class="insight-grid">
       <div class="section summary-panel">
         <div class="section-head">
-          <div><h2>Total por UF</h2><p>Caixas unicas sem datalogger por UF.</p></div>
-          <span class="summary-count">{fmt_int(summary["ufs_afetadas"])} UFs</span>
-        </div>
-        <div class="quick-filter-panel">
-          <div class="quick-filter-list" id="uf-quick-list"></div>
-        </div>
-        <div class="filter-applied-text" id="uf-filter-text">Todas as UFs selecionadas.</div>
-      </div>
-      <div class="section summary-panel">
-        <div class="section-head">
           <div><h2>Total por tipo de caixa</h2><p>Contagem por ds_tipo apos excluir pallets.</p></div>
           <span class="summary-count">{fmt_int(len(summary["total_por_tipo"]))} tipos</span>
         </div>
@@ -873,6 +872,10 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
           <div class="filter-label">&nbsp;</div>
           <button id="btn-clear" class="btn" type="button">Limpar filtros</button>
         </div>
+        <div class="filter-box">
+          <div class="filter-label">&nbsp;</div>
+          <button id="btn-export-xlsx" class="btn" type="button">Exportar .xlsx</button>
+        </div>
       </div>
       <div class="table-wrap">
         <table class="data-table">
@@ -906,6 +909,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       uf: document.getElementById("filter-uf"),
       search: document.getElementById("filter-search"),
       clear: document.getElementById("btn-clear"),
+      exportXlsx: document.getElementById("btn-export-xlsx"),
       tbody: document.getElementById("detail-tbody"),
       summary: document.getElementById("detail-summary"),
       ufSummarySearch: document.getElementById("uf-summary-search"),
@@ -944,6 +948,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       return view;
     }}
     function renderUfSummary() {{
+      if (!els.ufQuickList) return;
       let rows = sortSummaryRows(SUMMARY.total_por_uf || [], "UF", "desc");
       const selectedUf = clean(els.uf.value);
       let html = '<button class="quick-filter-chip ' + (selectedUf ? "" : "active") + '" type="button" data-uf=""><span>Todas as UFs</span><strong>' + formatInt(SUMMARY.total_caixas) + '</strong></button>';
@@ -1035,14 +1040,149 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       }});
       els.tbody.innerHTML = html;
     }}
+    function xmlEscape(value) {{
+      return clean(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&apos;");
+    }}
+    function utf8Bytes(text) {{
+      return new TextEncoder().encode(text);
+    }}
+    const CRC_TABLE = (() => {{
+      const table = new Uint32Array(256);
+      for (let i = 0; i < 256; i++) {{
+        let c = i;
+        for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+        table[i] = c >>> 0;
+      }}
+      return table;
+    }})();
+    function crc32(bytes) {{
+      let crc = 0xffffffff;
+      for (let i = 0; i < bytes.length; i++) {{
+        crc = CRC_TABLE[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+      }}
+      return (crc ^ 0xffffffff) >>> 0;
+    }}
+    function writeUint16(out, value) {{
+      out.push(value & 0xff, (value >>> 8) & 0xff);
+    }}
+    function writeUint32(out, value) {{
+      out.push(value & 0xff, (value >>> 8) & 0xff, (value >>> 16) & 0xff, (value >>> 24) & 0xff);
+    }}
+    function dosDateTime(date) {{
+      const year = Math.max(1980, date.getFullYear());
+      const dosTime = (date.getHours() << 11) | (date.getMinutes() << 5) | Math.floor(date.getSeconds() / 2);
+      const dosDate = ((year - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate();
+      return {{ dosTime, dosDate }};
+    }}
+    function createZip(files) {{
+      const chunks = [];
+      const central = [];
+      let offset = 0;
+      const now = new Date();
+      const dt = dosDateTime(now);
+      files.forEach((file) => {{
+        const nameBytes = utf8Bytes(file.name);
+        const data = utf8Bytes(file.content);
+        const crc = crc32(data);
+        const local = [];
+        writeUint32(local, 0x04034b50);
+        writeUint16(local, 20);
+        writeUint16(local, 0x0800);
+        writeUint16(local, 0);
+        writeUint16(local, dt.dosTime);
+        writeUint16(local, dt.dosDate);
+        writeUint32(local, crc);
+        writeUint32(local, data.length);
+        writeUint32(local, data.length);
+        writeUint16(local, nameBytes.length);
+        writeUint16(local, 0);
+        local.push(...nameBytes);
+        chunks.push(new Uint8Array(local), data);
+        const entry = [];
+        writeUint32(entry, 0x02014b50);
+        writeUint16(entry, 20);
+        writeUint16(entry, 20);
+        writeUint16(entry, 0x0800);
+        writeUint16(entry, 0);
+        writeUint16(entry, dt.dosTime);
+        writeUint16(entry, dt.dosDate);
+        writeUint32(entry, crc);
+        writeUint32(entry, data.length);
+        writeUint32(entry, data.length);
+        writeUint16(entry, nameBytes.length);
+        writeUint16(entry, 0);
+        writeUint16(entry, 0);
+        writeUint16(entry, 0);
+        writeUint16(entry, 0);
+        writeUint32(entry, 0);
+        writeUint32(entry, offset);
+        entry.push(...nameBytes);
+        central.push(new Uint8Array(entry));
+        offset += local.length + data.length;
+      }});
+      const centralOffset = offset;
+      let centralSize = 0;
+      central.forEach((entry) => {{
+        chunks.push(entry);
+        centralSize += entry.length;
+      }});
+      const end = [];
+      writeUint32(end, 0x06054b50);
+      writeUint16(end, 0);
+      writeUint16(end, 0);
+      writeUint16(end, files.length);
+      writeUint16(end, files.length);
+      writeUint32(end, centralSize);
+      writeUint32(end, centralOffset);
+      writeUint16(end, 0);
+      chunks.push(new Uint8Array(end));
+      return new Blob(chunks, {{ type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }});
+    }}
+    function buildWorksheetXml(rows) {{
+      const headers = ["Pedido", "UF", "Data da coleta", "Tipo de caixa", "LPN", "Logger/Datalogger", "Status do logger"];
+      const data = [headers, ...rows.map((row) => headers.map((header) => clean(row[header])))];
+      const sheetRows = data.map((cells, rowIndex) => {{
+        const cellXml = cells.map((value, colIndex) => {{
+          const ref = String.fromCharCode(65 + colIndex) + (rowIndex + 1);
+          return '<c r="' + ref + '" t="inlineStr"><is><t>' + xmlEscape(value) + '</t></is></c>';
+        }}).join("");
+        return '<row r="' + (rowIndex + 1) + '">' + cellXml + '</row>';
+      }}).join("");
+      return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+        '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+        '<sheetData>' + sheetRows + '</sheetData></worksheet>';
+    }}
+    function exportCurrentRowsXlsx() {{
+      const rows = filterRows().sort((a, b) => Number(b._coleta_ts || 0) - Number(a._coleta_ts || 0));
+      const files = [
+        {{ name: "[Content_Types].xml", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>' }},
+        {{ name: "_rels/.rels", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>' }},
+        {{ name: "xl/workbook.xml", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Detalhe das caixas" sheetId="1" r:id="rId1"/></sheets></workbook>' }},
+        {{ name: "xl/_rels/workbook.xml.rels", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>' }},
+        {{ name: "xl/worksheets/sheet1.xml", content: buildWorksheetXml(rows) }},
+      ];
+      const blob = createZip(files);
+      const stamp = new Date().toISOString().slice(0, 19).replace(/[-:T]/g, "");
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = "rastreio_caixas_sem_datalogger_" + stamp + ".xlsx";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      URL.revokeObjectURL(url);
+    }}
     function refreshAll() {{
-      renderUfSummary();
       renderTipoSummary();
       renderTable();
     }}
     els.periodo.addEventListener("change", renderTable);
     els.uf.addEventListener("change", () => {{
-      renderUfSummary();
       renderTable();
     }});
     els.search.addEventListener("input", renderTable);
@@ -1056,6 +1196,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       if (els.tipoSummarySort) els.tipoSummarySort.value = "desc";
       refreshAll();
     }});
+    if (els.exportXlsx) els.exportXlsx.addEventListener("click", exportCurrentRowsXlsx);
     if (els.ufSummarySearch) els.ufSummarySearch.addEventListener("input", renderUfSummary);
     if (els.ufLimitActions) els.ufLimitActions.addEventListener("click", (ev) => {{
       const btn = ev.target.closest(".view-toggle");

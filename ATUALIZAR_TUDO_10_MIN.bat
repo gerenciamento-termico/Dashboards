@@ -234,6 +234,7 @@ set "PUSH_DONE=nao"
 set "ERRMSG="
 set "STAGE_FILE="
 set "VALIDATE_SCOPE=estoque,controle,reversa,rastreio,acompanhamento"
+set "ESTOQUE_OK=sim"
 set "ACOMPANHAMENTO_OK=sim"
 set "STREAMLIT_DIR=%SCRIPT_DIR%..\streamlit"
 set "CYCLE_START_TS="
@@ -286,8 +287,9 @@ if errorlevel 1 (
 
 call :RUN_SCRIPT "gerar_html_estoque.py" "[3/12] Gerando ESTOQUE_DATALOGGERS.html..."
 if errorlevel 1 (
-    set "ERRMSG=Falha ao gerar ESTOQUE_DATALOGGERS.html."
-    goto :CYCLE_FAIL
+    set "ESTOQUE_OK=nao"
+    call :LOG "[AVISO] gerar_html_estoque.py falhou. ESTOQUE_DATALOGGERS.html antigo sera preservado."
+    call :LOG "[AVISO] Continuando com os demais dashboards."
 )
 
 call :RUN_PY_PATH "%STREAMLIT_DIR%\gerar_snapshot_reversa.py" "[4/12] Atualizando snapshot_reversa usado pela reversa e pelo controle de entregas..."
@@ -323,10 +325,15 @@ if errorlevel 1 (
 call :RUN_SCRIPT_RETRY "HTMLACOMPANHAMENTO.py" "[9/12] Gerando HTMLACOMPANHAMENTO.html..." 3 15
 if errorlevel 1 (
     set "ACOMPANHAMENTO_OK=nao"
-    set "VALIDATE_SCOPE=estoque,controle,reversa,rastreio"
     call :LOG "[AVISO] HTMLACOMPANHAMENTO.py falhou apos tentativas. HTMLACOMPANHAMENTO.html antigo sera preservado."
     call :LOG "[AVISO] Continuando com validacao/publicacao dos demais dashboards gerados neste ciclo."
 )
+
+rem --- Recalcular escopo de validacao com base nos dashboards que funcionaram ---
+set "VALIDATE_SCOPE="
+if /I "!ESTOQUE_OK!"=="sim" set "VALIDATE_SCOPE=estoque,"
+set "VALIDATE_SCOPE=!VALIDATE_SCOPE!controle,reversa,rastreio"
+if /I "!ACOMPANHAMENTO_OK!"=="sim" set "VALIDATE_SCOPE=!VALIDATE_SCOPE!,acompanhamento"
 
 call :LOG "[10/12] Validando HTMLs gerados e payloads reais..."
 call :LOG "Escopo de validacao deste ciclo: !VALIDATE_SCOPE!"
@@ -436,6 +443,9 @@ call :LOG ""
 call :LOG "[OK] Ciclo concluido com sucesso."
 call :LOG "Commit neste ciclo: !COMMIT_DONE!"
 call :LOG "Push neste ciclo: !PUSH_DONE!"
+if /I "!ESTOQUE_OK!"=="nao" (
+    call :LOG "[AVISO] ESTOQUE_DATALOGGERS falhou neste ciclo; demais dashboards foram atualizados."
+)
 if /I "!ACOMPANHAMENTO_OK!"=="nao" (
     call :LOG "[AVISO] HTMLACOMPANHAMENTO falhou neste ciclo; demais dashboards foram atualizados."
 )

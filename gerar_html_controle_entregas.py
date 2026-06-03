@@ -1023,12 +1023,6 @@ def build_page(df: pd.DataFrame) -> str:
     total_pedidos = int(df["Pedido"].nunique()) if not df.empty and "Pedido" in df.columns else 0
     total_agentes = int(df["Agente"].nunique()) if not df.empty and "Agente" in df.columns else 0
     total_retorno = int(df.loc[df["Status Retorno"].eq("Retornado"), "Logger"].nunique()) if not df.empty and "Status Retorno" in df.columns else 0
-    total_retorno_hoje = 0
-    if not df.empty and {"Status Retorno", "Ultimo_Historico", "Logger"}.issubset(df.columns):
-        retorno_dt = pd.to_datetime(df["Ultimo_Historico"], errors="coerce").dt.normalize()
-        total_retorno_hoje = int(
-            df.loc[df["Status Retorno"].eq("Retornado") & retorno_dt.eq(today), "Logger"].nunique()
-        )
     total_hoje = int(df.loc[df["Dia"].eq(today), "Logger"].nunique()) if not df.empty else 0
     total_ontem = int(df.loc[df["Dia"].eq(yesterday), "Logger"].nunique()) if not df.empty else 0
 
@@ -1425,7 +1419,6 @@ def build_page(df: pd.DataFrame) -> str:
       <div class="kpi"><div class="label">Pedidos unicos</div><div class="value" id="kpi-pedidos">{fmt_int(total_pedidos)}</div><div class="foot">Pedidos com logger entregue</div></div>
       <div class="kpi"><div class="label">Agentes unicos</div><div class="value" id="kpi-agentes">{fmt_int(total_agentes)}</div><div class="foot">Responsaveis da entrega</div></div>
       <div class="kpi"><div class="label">Entregues que retornaram</div><div class="value" id="kpi-retornados">{fmt_int(total_retorno)}</div><div class="foot">Da janela de entrega, com retorno ao estoque</div></div>
-      <div class="kpi"><div class="label">Retornos hoje</div><div class="value" id="kpi-retornos-hoje">{fmt_int(total_retorno_hoje)}</div><div class="foot">Pela data do Ultimo Historico</div></div>
     </div>
 
     <div class="chart-stack" id="painel-operacional">
@@ -1517,7 +1510,6 @@ def build_page(df: pd.DataFrame) -> str:
         kpiPedidos: document.getElementById("kpi-pedidos"),
         kpiAgentes: document.getElementById("kpi-agentes"),
         kpiRetornados: document.getElementById("kpi-retornados"),
-        kpiRetornosHoje: document.getElementById("kpi-retornos-hoje"),
         todaySummary: document.getElementById("today-summary"),
         yesterdaySummary: document.getElementById("yesterday-summary"),
         detailSummary: document.getElementById("detail-summary"),
@@ -1627,15 +1619,6 @@ def build_page(df: pd.DataFrame) -> str:
         ).size;
       }}
 
-      function countReturnedByHistoryDate(rows, targetDate) {{
-        return new Set(
-          rows
-            .filter(function(row) {{ return clean(row.StatusRetorno) === "Retornado" && clean(row.UltimoHistorico).startsWith(targetDate); }})
-            .map(function(row) {{ return clean(row.Logger); }})
-            .filter(Boolean)
-        ).size;
-      }}
-
       function todayKey() {{
         return new Date().toLocaleDateString("pt-BR");
       }}
@@ -1714,7 +1697,6 @@ def build_page(df: pd.DataFrame) -> str:
         const pedidos = countUnique(rows, "Pedido");
         const agentes = countUnique(rows, "Agente");
         const retornados = countByStatus(rows, "Retornado");
-        const retornosHoje = countReturnedByHistoryDate(rows, todayKey());
         const hoje = countUniqueByDate(rows, todayKey());
         const ontem = countUniqueByDate(rows, yesterdayKey());
 
@@ -1724,7 +1706,6 @@ def build_page(df: pd.DataFrame) -> str:
         els.kpiPedidos.textContent = formatInt(pedidos);
         els.kpiAgentes.textContent = formatInt(agentes);
         els.kpiRetornados.textContent = formatInt(retornados);
-        els.kpiRetornosHoje.textContent = formatInt(retornosHoje);
 
         els.todaySummary.textContent = formatInt(hoje) + " registro(s) encontrados para a data atual.";
         els.yesterdaySummary.textContent = formatInt(ontem) + " registro(s) encontrados para o dia anterior.";

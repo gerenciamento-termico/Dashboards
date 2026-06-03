@@ -1,4 +1,4 @@
-@echo off
+resum@echo off
 setlocal EnableExtensions
 set "SCRIPT_DIR=%~dp0"
 cd /d "%SCRIPT_DIR%"
@@ -25,13 +25,13 @@ if not defined PY_EXE (
 if not exist "logs" mkdir "logs" >nul 2>nul
 
 echo ============================================================
-echo VERIFICACAO DIARIA DOS DASHBOARDS AURA
+echo VALIDACAO DOS DASHBOARDS PUBLICADOS AURA
 echo ============================================================
 echo Pasta atual: %CD%
 echo Log: %CD%\logs\verificacao_diaria.txt
 echo.
 
-"%PY_EXE%" ".\aura_update_checks.py" daily-check
+"%PY_EXE%" ".\validar_dashboards_publicados.py" daily-check
 set "CHECK_RC=%ERRORLEVEL%"
 echo.
 if "%CHECK_RC%"=="0" (

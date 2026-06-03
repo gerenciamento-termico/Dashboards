@@ -9,3 +9,13 @@ credentials.json
 __pycache__/
 *.pyc
 logs/
+
+# Backups e temporarios
+*.bak
+*.codex_backup*
+*.xlsx
+temp_*.py
+temp_*.json
+_tmp_*.txt
+check.py
+check2.py

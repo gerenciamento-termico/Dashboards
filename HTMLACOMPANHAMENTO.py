@@ -7,7 +7,7 @@ from datetime import datetime
 from pathlib import Path
 from types import SimpleNamespace
 
-from aura_update_checks import validate_acompanhamento_payload
+from validar_dashboards_publicados import validate_acompanhamento_payload
 from env_utils import load_env_file
 from gerar_dashboard_entregas import (
     DEFAULT_DATABASE,

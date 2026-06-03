@@ -1,26 +1,26 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "03/06/2026 00:06:22",
+  "geradoEm": "03/06/2026 00:16:22",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
       "totalEstoque": 139,
       "loggersTransito": 304,
       "loggersEntregues": 3149,
-      "loggersRetornados": 884,
+      "loggersRetornados": 777,
       "registrosEntregas": 3149,
-      "registrosEstoque": 5769,
+      "registrosEstoque": 5756,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
       "ultimaAtualizacao": "02/06/2026 22:57",
-      "totalRegistros": 8918
+      "totalRegistros": 8905
     },
     "ARES COM SONDA": {
       "totalEstoque": 94,
       "loggersTransito": 0,
       "loggersEntregues": 165,
-      "loggersRetornados": 96,
+      "loggersRetornados": 94,
       "registrosEntregas": 165,
       "registrosEstoque": 196,
       "semStatus": 0,
@@ -30,17 +30,17 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "totalRegistros": 361
     },
     "SENSOR VTC": {
-      "totalEstoque": 267,
+      "totalEstoque": 266,
       "loggersTransito": 0,
       "loggersEntregues": 281,
-      "loggersRetornados": 158,
+      "loggersRetornados": 136,
       "registrosEntregas": 281,
-      "registrosEstoque": 614,
+      "registrosEstoque": 613,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
       "ultimaAtualizacao": "02/06/2026 17:08",
-      "totalRegistros": 895
+      "totalRegistros": 894
     },
     "SHIELD": {
       "totalEstoque": 76,
@@ -59,7 +59,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "totalEstoque": 1187,
       "loggersTransito": 0,
       "loggersEntregues": 1018,
-      "loggersRetornados": 810,
+      "loggersRetornados": 804,
       "registrosEntregas": 1018,
       "registrosEstoque": 2000,
       "semStatus": 0,
@@ -69,17 +69,17 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "totalRegistros": 3018
     },
     "ALL": {
-      "totalEstoque": 1763,
+      "totalEstoque": 1762,
       "loggersTransito": 304,
       "loggersEntregues": 4643,
-      "loggersRetornados": 1975,
+      "loggersRetornados": 1838,
       "registrosEntregas": 4643,
-      "registrosEstoque": 8903,
+      "registrosEstoque": 8889,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
       "ultimaAtualizacao": "02/06/2026 22:57",
-      "totalRegistros": 13546
+      "totalRegistros": 13532
     }
   },
   "operacionalEstoqueFonte": "ESTOQUE_DATALOGGERS.html :: const STATES",
@@ -109,13 +109,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           124,
           179,
           194,
-          234,
+          233,
           355,
           417,
           749,
           764,
-          1763,
-          3872
+          1762,
+          3860
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -145,13 +145,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           16,
           40,
           99,
-          121,
+          120,
           139,
           187,
           353,
           743,
           749,
-          3279
+          3267
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -199,7 +199,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           5,
           159,
           178,
-          267
+          266
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -290,12 +290,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           40,
           99,
           188,
-          202,
+          201,
           233,
           353,
           744,
           749,
-          3298
+          3286
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -324,14 +324,14 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           18,
           40,
           99,
-          121,
+          120,
           175,
           189,
           354,
-          406,
+          405,
           748,
           749,
-          3457
+          3445
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -360,14 +360,14 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           29,
           55,
           99,
-          153,
+          152,
           170,
           187,
           215,
           353,
           745,
           749,
-          3299
+          3287
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -396,14 +396,14 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           99,
           104,
           109,
-          121,
+          120,
           166,
           191,
           354,
           749,
           756,
           1326,
-          3655
+          3643
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -431,7 +431,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           81,
           159,
           197,
-          361
+          360
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -529,7 +529,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           32,
           198,
           313,
-          343
+          342
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -563,7 +563,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           150,
           247,
           554,
-          1454
+          1453
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -628,12 +628,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           99,
           175,
           190,
-          202,
+          201,
           354,
-          500,
+          499,
           749,
           749,
-          3476
+          3464
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -664,12 +664,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           99,
           170,
           188,
-          234,
+          233,
           309,
           353,
           746,
           749,
-          3318
+          3306
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -700,12 +700,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           109,
           166,
           192,
-          202,
+          201,
           354,
           749,
           757,
           1420,
-          3674
+          3662
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -734,14 +734,14 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           29,
           55,
           99,
-          153,
+          152,
           189,
           329,
           354,
-          482,
+          481,
           749,
           750,
-          3477
+          3465
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -769,15 +769,15 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           81,
           99,
           109,
-          121,
+          120,
           166,
           193,
           263,
           355,
           749,
           761,
-          1593,
-          3833
+          1592,
+          3821
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -805,7 +805,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           93,
           99,
           124,
-          153,
+          152,
           179,
           191,
           258,
@@ -813,7 +813,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           749,
           758,
           1402,
-          3675
+          3663
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -847,7 +847,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           113,
           217,
           313,
-          437
+          436
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -883,7 +883,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           150,
           247,
           573,
-          1548
+          1547
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -953,7 +953,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           163,
           401,
           574,
-          1530
+          1529
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -983,13 +983,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           55,
           99,
           190,
-          234,
+          233,
           329,
           354,
-          576,
+          575,
           749,
           751,
-          3496
+          3484
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -1019,13 +1019,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           109,
           166,
           194,
-          202,
+          201,
           263,
           355,
           749,
           762,
-          1687,
-          3852
+          1686,
+          3840
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -1055,13 +1055,13 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           124,
           179,
           192,
-          234,
+          233,
           258,
           354,
           749,
           759,
           1496,
-          3694
+          3682
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -1089,15 +1089,15 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           93,
           99,
           124,
-          153,
+          152,
           179,
           193,
           355,
           417,
           749,
           763,
-          1669,
-          3853
+          1668,
+          3841
         ]
       },
       "ultimaAtualizacao": "02/06/2026 22:57"
@@ -1133,7 +1133,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           163,
           401,
           593,
-          1624
+          1623
         ]
       },
       "ultimaAtualizacao": "02/06/2026 17:08"
@@ -1146,12 +1146,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "linhasComLoggerOuReferencia": 5691,
     "linhasSemLoggerOuReferencia": 304,
     "chavesDistintas": 4643,
-    "chavesComTipoControleEntregas": 1418,
-    "chavesComTipoEstoqueDataloggers": 3225,
+    "chavesComTipoControleEntregas": 1085,
+    "chavesComTipoEstoqueDataloggers": 3558,
     "chavesComTipoInferidoPorPrefixo": 0,
-    "retornoPorControleEntregas": 1111,
-    "retornoPorEstoqueAtual": 864,
-    "retornoPendenteOuSemMatch": 2668,
+    "retornoPorControleEntregas": 851,
+    "retornoPorEstoqueAtual": 987,
+    "retornoPendenteOuSemMatch": 2805,
     "chavesPorTipo": {
       "ARES": 3149,
       "SYOS": 1018,

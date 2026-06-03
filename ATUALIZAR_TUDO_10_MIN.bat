@@ -235,6 +235,9 @@ set "ERRMSG="
 set "STAGE_FILE="
 set "VALIDATE_SCOPE=estoque,controle,reversa,rastreio,acompanhamento"
 set "ESTOQUE_OK=sim"
+set "REVERSA_OK=sim"
+set "CONTROLE_OK=sim"
+set "RASTREIO_OK=sim"
 set "ACOMPANHAMENTO_OK=sim"
 set "STREAMLIT_DIR=%SCRIPT_DIR%..\streamlit"
 set "CYCLE_START_TS="
@@ -293,33 +296,37 @@ if errorlevel 1 (
 )
 
 call :RUN_PY_PATH "%STREAMLIT_DIR%\gerar_snapshot_reversa.py" "[4/12] Atualizando snapshot_reversa usado pela reversa e pelo controle de entregas..."
+set "SNAPSHOT_OK=sim"
 if errorlevel 1 (
-    set "ERRMSG=Falha ao atualizar snapshot_reversa."
-    goto :CYCLE_FAIL
+    set "SNAPSHOT_OK=nao"
+    call :LOG "[AVISO] gerar_snapshot_reversa.py falhou (host interno inacessivel?). Snapshots antigos serao usados."
 )
 
-call :RUN_PY_PATH "%STREAMLIT_DIR%\gerar_modelo_final_reversa.py" "[5/12] Reconstruindo modelo_final.pkl com entregas atualizadas..."
-if errorlevel 1 (
-    set "ERRMSG=Falha ao reconstruir modelo_final.pkl."
-    goto :CYCLE_FAIL
+if /I "!SNAPSHOT_OK!"=="sim" (
+    call :RUN_PY_PATH "%STREAMLIT_DIR%\gerar_modelo_final_reversa.py" "[5/12] Reconstruindo modelo_final.pkl com entregas atualizadas..."
+    if errorlevel 1 (
+        call :LOG "[AVISO] gerar_modelo_final_reversa.py falhou. Modelo antigo sera usado."
+    )
+) else (
+    call :LOG "[5/12] Pulando reconstrucao do modelo_final.pkl (snapshot nao atualizado)."
 )
 
 call :RUN_SCRIPT "gerar_html_reversa.py" "[6/12] Gerando REVERSA_DATALOGGERS.html..."
 if errorlevel 1 (
-    set "ERRMSG=Falha ao gerar REVERSA_DATALOGGERS.html."
-    goto :CYCLE_FAIL
+    set "REVERSA_OK=nao"
+    call :LOG "[AVISO] gerar_html_reversa.py falhou. REVERSA_DATALOGGERS.html antigo sera preservado."
 )
 
 call :RUN_SCRIPT "gerar_html_controle_entregas.py" "[7/12] Gerando CONTROLE_ENTREGAS_20D.html e CSVs..."
 if errorlevel 1 (
-    set "ERRMSG=Falha ao gerar CONTROLE_ENTREGAS_20D."
-    goto :CYCLE_FAIL
+    set "CONTROLE_OK=nao"
+    call :LOG "[AVISO] gerar_html_controle_entregas.py falhou. CONTROLE_ENTREGAS_20D.html antigo sera preservado."
 )
 
 call :RUN_SCRIPT "gerar_html_rastreio_caixas_sem_datalogger.py" "[8/12] Gerando RASTREIO_CAIXAS_SEM_DATALOGGER.html..."
 if errorlevel 1 (
-    set "ERRMSG=Falha ao gerar RASTREIO_CAIXAS_SEM_DATALOGGER.html."
-    goto :CYCLE_FAIL
+    set "RASTREIO_OK=nao"
+    call :LOG "[AVISO] gerar_html_rastreio_caixas_sem_datalogger.py falhou. HTML antigo sera preservado."
 )
 
 call :RUN_SCRIPT_RETRY "HTMLACOMPANHAMENTO.py" "[9/12] Gerando HTMLACOMPANHAMENTO.html..." 3 15
@@ -331,9 +338,17 @@ if errorlevel 1 (
 
 rem --- Recalcular escopo de validacao com base nos dashboards que funcionaram ---
 set "VALIDATE_SCOPE="
-if /I "!ESTOQUE_OK!"=="sim" set "VALIDATE_SCOPE=estoque,"
-set "VALIDATE_SCOPE=!VALIDATE_SCOPE!controle,reversa,rastreio"
-if /I "!ACOMPANHAMENTO_OK!"=="sim" set "VALIDATE_SCOPE=!VALIDATE_SCOPE!,acompanhamento"
+if /I "!ESTOQUE_OK!"=="sim" set "VALIDATE_SCOPE=!VALIDATE_SCOPE!estoque,"
+if /I "!CONTROLE_OK!"=="sim" set "VALIDATE_SCOPE=!VALIDATE_SCOPE!controle,"
+if /I "!REVERSA_OK!"=="sim" set "VALIDATE_SCOPE=!VALIDATE_SCOPE!reversa,"
+if /I "!RASTREIO_OK!"=="sim" set "VALIDATE_SCOPE=!VALIDATE_SCOPE!rastreio,"
+if /I "!ACOMPANHAMENTO_OK!"=="sim" set "VALIDATE_SCOPE=!VALIDATE_SCOPE!acompanhamento,"
+rem Remover virgula final se houver
+if "!VALIDATE_SCOPE!"=="" (
+    call :LOG "[AVISO] Nenhum dashboard foi gerado com sucesso neste ciclo."
+    goto :AFTER_PUSH
+)
+if "!VALIDATE_SCOPE:~-1!"=="," set "VALIDATE_SCOPE=!VALIDATE_SCOPE:~0,-1!"
 
 call :LOG "[10/12] Validando HTMLs gerados e payloads reais..."
 call :LOG "Escopo de validacao deste ciclo: !VALIDATE_SCOPE!"
@@ -443,11 +458,15 @@ call :LOG ""
 call :LOG "[OK] Ciclo concluido com sucesso."
 call :LOG "Commit neste ciclo: !COMMIT_DONE!"
 call :LOG "Push neste ciclo: !PUSH_DONE!"
-if /I "!ESTOQUE_OK!"=="nao" (
-    call :LOG "[AVISO] ESTOQUE_DATALOGGERS falhou neste ciclo; demais dashboards foram atualizados."
-)
-if /I "!ACOMPANHAMENTO_OK!"=="nao" (
-    call :LOG "[AVISO] HTMLACOMPANHAMENTO falhou neste ciclo; demais dashboards foram atualizados."
+set "FALHAS_CICLO="
+if /I "!ESTOQUE_OK!"=="nao" set "FALHAS_CICLO=!FALHAS_CICLO! ESTOQUE"
+if /I "!REVERSA_OK!"=="nao" set "FALHAS_CICLO=!FALHAS_CICLO! REVERSA"
+if /I "!CONTROLE_OK!"=="nao" set "FALHAS_CICLO=!FALHAS_CICLO! CONTROLE"
+if /I "!RASTREIO_OK!"=="nao" set "FALHAS_CICLO=!FALHAS_CICLO! RASTREIO"
+if /I "!ACOMPANHAMENTO_OK!"=="nao" set "FALHAS_CICLO=!FALHAS_CICLO! ACOMPANHAMENTO"
+if defined FALHAS_CICLO (
+    call :LOG "[AVISO] Dashboards que falharam neste ciclo:!FALHAS_CICLO!"
+    call :LOG "[AVISO] Demais dashboards foram atualizados normalmente."
 )
 if "!PUSH_DONE!"=="sim" (
     call :LOG "Arquivos enviados neste ciclo:"

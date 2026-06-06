@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
   "fonte": "Planilha local: Conexão com vtc_stage (1).xlsx",
-  "geradoEm": "05/06/2026 23:51:22",
+  "geradoEm": "06/06/2026 00:01:24",
   "ultimaAtualizacaoFonte": "18/05/2026 15:30:24",
   "summary": {
     "ARES": {
@@ -9,12 +9,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "loggersEntregues": 3149,
       "loggersRetornados": 347,
       "registrosEntregas": 3149,
-      "registrosEstoque": 5819,
+      "registrosEstoque": 5796,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
       "ultimaAtualizacao": "05/06/2026 18:16",
-      "totalRegistros": 8968
+      "totalRegistros": 8945
     },
     "ARES COM SONDA": {
       "totalEstoque": 101,
@@ -74,12 +74,12 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
       "loggersEntregues": 4643,
       "loggersRetornados": 1510,
       "registrosEntregas": 4643,
-      "registrosEstoque": 8971,
+      "registrosEstoque": 8948,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
       "ultimaAtualizacao": "05/06/2026 18:16",
-      "totalRegistros": 13614
+      "totalRegistros": 13591
     }
   },
   "operacionalEstoqueFonte": "ESTOQUE_DATALOGGERS.html :: const STATES",
@@ -115,7 +115,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           943,
           2455,
-          2779
+          2756
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -151,7 +151,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           659,
           796,
           924,
-          2357
+          2334
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -297,7 +297,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           760,
           796,
           925,
-          2361
+          2338
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -333,7 +333,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           928,
           988,
-          2462
+          2439
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -369,7 +369,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           772,
           796,
           926,
-          2377
+          2354
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -405,7 +405,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           936,
           1912,
-          2650
+          2627
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -641,7 +641,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           929,
           1089,
-          2466
+          2443
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -677,7 +677,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           873,
           927,
-          2381
+          2358
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -713,7 +713,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           937,
           2013,
-          2654
+          2631
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -749,7 +749,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           930,
           1101,
-          2482
+          2459
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -785,7 +785,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           940,
           2241,
-          2755
+          2732
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -821,7 +821,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           938,
           2025,
-          2670
+          2647
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -1001,7 +1001,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           931,
           1202,
-          2486
+          2463
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -1037,7 +1037,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           941,
           2342,
-          2759
+          2736
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -1073,7 +1073,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           939,
           2126,
-          2674
+          2651
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"
@@ -1109,7 +1109,7 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
           796,
           942,
           2354,
-          2775
+          2752
         ]
       },
       "ultimaAtualizacao": "05/06/2026 18:16"

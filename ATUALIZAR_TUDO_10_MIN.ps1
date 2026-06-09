@@ -467,6 +467,13 @@ function Run-Cycle {
             Test-PublishedFiles -CycleStart $cycleStart -Files @("GESTAO_DISPOSITIVOS_PLANILHA_DATA.js")
         }) -and $ok
     }
+    $blockEstoque = $stepFailures | Where-Object { $_ -match "^Estoque" }
+    $blockGestao = $stepFailures | Where-Object { $_ -match "^Gestao" }
+
+    if ($blockEstoque -or $blockGestao) {
+        Write-Host "AVISO: Falha identificada no Estoque ou Gestão de Dispositivos. Esses arquivos não serão atualizados neste ciclo, mas os demais dashboards seguirão normalmente." -ForegroundColor Yellow
+        Write-Log "AVISO: Falha identificada no Estoque ou Gestão de Dispositivos. Esses arquivos não serão atualizados neste ciclo, mas os demais dashboards seguirão normalmente."
+    }
 
     if ($ok) {
         try {

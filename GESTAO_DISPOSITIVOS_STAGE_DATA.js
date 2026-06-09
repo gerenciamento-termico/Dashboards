@@ -1,19 +1,19 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
-  "fonte": "VTC STAGE PostgreSQL/Supabase (public.devices + public.sync_items + public.sync_orders)",
-  "geradoEm": "09/06/2026 10:53:33",
+  "fonte": "VTC STAGE (vtc_stage.documentos) + Aura Snapshot",
+  "geradoEm": "09/06/2026 11:28:45",
   "summary": {
     "ARES": {
-      "totalEstoque": 11905,
-      "loggersTransito": 181,
-      "loggersEntregues": 38995,
-      "loggersRetornados": 0,
-      "registrosEntregas": 43786,
-      "registrosEstoque": 11905,
+      "totalEstoque": 0,
+      "loggersTransito": 0,
+      "loggersEntregues": 279,
+      "loggersRetornados": 188,
+      "registrosEntregas": 5532,
+      "registrosEstoque": 0,
       "semStatus": 0,
-      "semData": 4610,
+      "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "25/05/2026 14:06:56",
-      "totalRegistros": 55691
+      "ultimaAtualizacao": "03/06/2026 21:22:30",
+      "totalRegistros": 5532
     },
     "ARES COM SONDA": {
       "totalEstoque": 0,
@@ -29,56 +29,56 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "totalRegistros": 0
     },
     "SENSOR VTC": {
-      "totalEstoque": 715,
-      "loggersTransito": 74,
-      "loggersEntregues": 2572,
-      "loggersRetornados": 0,
-      "registrosEntregas": 2873,
-      "registrosEstoque": 715,
+      "totalEstoque": 0,
+      "loggersTransito": 1175,
+      "loggersEntregues": 4488,
+      "loggersRetornados": 2754,
+      "registrosEntregas": 52217,
+      "registrosEstoque": 0,
       "semStatus": 0,
-      "semData": 227,
+      "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "26/05/2026 16:21:07",
-      "totalRegistros": 3588
+      "ultimaAtualizacao": "09/06/2026 09:24:33",
+      "totalRegistros": 52217
     },
     "SHIELD": {
-      "totalEstoque": 15,
+      "totalEstoque": 0,
       "loggersTransito": 0,
-      "loggersEntregues": 64,
+      "loggersEntregues": 0,
       "loggersRetornados": 0,
-      "registrosEntregas": 66,
-      "registrosEstoque": 15,
+      "registrosEntregas": 0,
+      "registrosEstoque": 0,
       "semStatus": 0,
-      "semData": 2,
+      "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "16/05/2026 13:19:41",
-      "totalRegistros": 81
+      "ultimaAtualizacao": null,
+      "totalRegistros": 0
     },
     "SYOS": {
-      "totalEstoque": 1992,
-      "loggersTransito": 80,
-      "loggersEntregues": 4606,
+      "totalEstoque": 0,
+      "loggersTransito": 0,
+      "loggersEntregues": 0,
       "loggersRetornados": 0,
-      "registrosEntregas": 4687,
-      "registrosEstoque": 1992,
+      "registrosEntregas": 0,
+      "registrosEstoque": 0,
       "semStatus": 0,
-      "semData": 1,
+      "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "24/05/2026 14:31:00",
-      "totalRegistros": 6679
+      "ultimaAtualizacao": null,
+      "totalRegistros": 0
     },
     "ALL": {
-      "totalEstoque": 14627,
-      "loggersTransito": 335,
-      "loggersEntregues": 46237,
-      "loggersRetornados": 0,
-      "registrosEntregas": 51412,
-      "registrosEstoque": 14627,
+      "totalEstoque": 0,
+      "loggersTransito": 1175,
+      "loggersEntregues": 4767,
+      "loggersRetornados": 2942,
+      "registrosEntregas": 57749,
+      "registrosEstoque": 0,
       "semStatus": 0,
-      "semData": 4840,
+      "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "26/05/2026 16:21:07",
-      "totalRegistros": 66039
+      "ultimaAtualizacao": "09/06/2026 09:24:33",
+      "totalRegistros": 57749
     }
   },
   "operacionalEstoqueFonte": "ESTOQUE_DATALOGGERS.html :: const STATES",
@@ -1149,21 +1149,19 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     }
   },
   "alertas": [
-    "Fonte carregada do VTC STAGE PostgreSQL/Supabase em modo local.",
-    "Loggers em trânsito: distinct Pedido + Logger com collection_date preenchida e delivery_date vazia em public.sync_items.",
-    "Loggers entregues: distinct Pedido + Logger com delivery_date preenchida em public.sync_items.",
-    "Informações de estoque: public.devices com active=true, cada dispositivo contado como quantidade 1.",
-    "O VTC STAGE identificado não possui campo de retorno ao estoque/data_retorno; por segurança, 'Loggers retornados' fica 0 nesta fonte.",
-    "Tipo ARES COM SONDA não possui campo próprio no esquema encontrado; ele só será preenchido se a fonte trouxer essa classificação explicitamente.",
-    "4840 registros de sync_items estão sem collection_date e sem delivery_date."
+    "Fonte corrigida: vtc_stage.documentos do VTC STAGE + snapshot recebimento_resumo.pkl para retornados.",
+    "Loggers em trânsito: distinct Pedido + Logger com coleta preenchida e entrega vazia.",
+    "Loggers entregues: distinct Pedido + Logger com entrega preenchida nos últimos 20 dias.",
+    "Loggers retornados: intersecção das entregas com recebimento_resumo.pkl.",
+    "Estoque bruto zero no sumário: o script JS consolidará os números através da variável operacionalEstoque."
   ],
   "campos": {
-    "pedido": "sync_orders.order_code/external_order_id",
-    "logger": "sync_items.device_serial/external_item_id",
-    "tipo": "devices.vendor/device_type",
-    "coleta": "sync_items.collection_date",
-    "entrega": "sync_items.delivery_date",
-    "estoque": "devices.active=true",
-    "retorno": null
+    "pedido": "documentos.nr_pedido",
+    "logger": "documentos.ds_tag",
+    "tipo": "documentos.ds_tipo",
+    "coleta": "documentos.dt_coletaefetiva",
+    "entrega": "documentos.dt_entregaefetiva",
+    "estoque": "ESTOQUE_DATALOGGERS.html",
+    "retorno": "recebimento_resumo.pkl"
   }
 };

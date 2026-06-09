@@ -27,6 +27,7 @@ $PublishFiles = @(
     "REVERSA_DATALOGGERS.html",
     "GESTAO_DISPOSITIVOS.html",
     "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js",
+    "GESTAO_DISPOSITIVOS_STAGE_DATA.js",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "INDICADOR_VTCBOX.html",
     "relatorio_analitico_vtcbox.xlsx"
@@ -464,6 +465,9 @@ function Run-Cycle {
             if (Test-Path -LiteralPath (Join-Path $DevDir "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js")) {
                 Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js") -DestinationName "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js"
             }
+            if (Test-Path -LiteralPath (Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js")) {
+                Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js") -DestinationName "GESTAO_DISPOSITIVOS_STAGE_DATA.js"
+            }
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Gestao Dispositivos" -Message "falha ao publicar arquivos da gestao; arquivos anteriores serao preservados se existirem"
         }
@@ -486,7 +490,7 @@ function Run-Cycle {
     if ($ok) {
         $ok = (Invoke-Step "[VALIDACAO] Arquivos gerados" {
             Test-PublishedFiles -CycleStart $cycleStart -Files $DashboardFiles
-            Test-PublishedFiles -CycleStart $cycleStart -Files @("GESTAO_DISPOSITIVOS_PLANILHA_DATA.js")
+            Test-PublishedFiles -CycleStart $cycleStart -Files @("GESTAO_DISPOSITIVOS_PLANILHA_DATA.js", "GESTAO_DISPOSITIVOS_STAGE_DATA.js")
         }) -and $ok
     }
     $blockEstoque = $stepFailures | Where-Object { $_ -match "^Estoque" }

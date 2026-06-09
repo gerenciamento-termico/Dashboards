@@ -1,5 +1,6 @@
 """Gera ESTOQUE_DATALOGGERS.html replicando fielmente o dashboard_loggers_estoque.py"""
 from __future__ import annotations
+from concurrent.futures import ThreadPoolExecutor
 import json
 import os
 from itertools import combinations
@@ -57,7 +58,7 @@ def count_gestao_dispositivos(df: pd.DataFrame) -> int:
     base = df.copy()
     status_norm = base["situacao_oficial"].map(normalize_text)
     fin_norm = base["ds_finalidade"].map(normalize_text)
-    atualizado_em = pd.to_datetime(base["dt_atualizacao"], errors="coerce", utc=True).dt.tz_convert(None)
+    atualizado_em = pd.to_datetime(base["dt_atualizacao"], errors="coerce")
     corte = pd.Timestamp.now() - pd.Timedelta(days=GESTAO_DISPOSITIVOS_DAYS)
     mask = (
         status_norm.eq("CAMARA FRIA")
@@ -75,147 +76,15 @@ def count_gestao_dispositivos(df: pd.DataFrame) -> int:
 def fmt(n: int) -> str:
     return f"{int(n):,}".replace(",", ".")
 
-def _pg_configs() -> list[tuple[str, dict]]:
-    return [
-        ("AURA_POSTGRES", POSTGRES_CFG),
-        (
-            "AURA_DB",
-            {
-                "host": os.getenv("AURA_DB_HOST", ""),
-                "port": int(os.getenv("AURA_DB_PORT", "5432")),
-                "database": os.getenv("AURA_DB_NAME", ""),
-                "user": os.getenv("AURA_DB_USER", ""),
-                "password": os.getenv("AURA_DB_PASSWORD", ""),
-            },
-        ),
-    ]
-
-def _build_url(cfg: dict):
+def _build_url():
     return URL.create("postgresql+psycopg2",
-        username=cfg["user"], password=cfg["password"],
-        host=cfg["host"], port=cfg["port"],
-        database=cfg["database"])
+        username=POSTGRES_CFG["user"], password=POSTGRES_CFG["password"],
+        host=POSTGRES_CFG["host"], port=POSTGRES_CFG["port"],
+        database=POSTGRES_CFG["database"])
 
 def _read(engine, sql: str) -> pd.DataFrame:
     with engine.connect() as conn:
         return pd.read_sql(text(sql), conn)
-
-def _make_engine():
-    errors: list[str] = []
-    for label, cfg in _pg_configs():
-        if not all([cfg.get("host"), cfg.get("database"), cfg.get("user"), cfg.get("password")]):
-            errors.append(f"{label}: configuracao incompleta")
-            continue
-        try:
-            print(f"  [estoque] Tentando conexao {label}...")
-            engine = create_engine(
-                _build_url(cfg),
-                pool_pre_ping=True,
-                pool_size=1,
-                max_overflow=0,
-                connect_args={"connect_timeout": 12, "options": "-c statement_timeout=60000"},
-            )
-            with engine.connect() as conn:
-                conn.exec_driver_sql("SELECT 1")
-                conn.exec_driver_sql("SELECT 1 FROM vwTabelaMovDataloggers LIMIT 1")
-            print(f"  [estoque] Conexao ativa: {label}")
-            return engine
-        except Exception as exc:
-            errors.append(f"{label}: {type(exc).__name__}")
-            continue
-    raise RuntimeError("Nao foi possivel conectar ao PostgreSQL. Tentativas: " + "; ".join(errors))
-
-def _make_stage_engine():
-    cfg = next((cfg for label, cfg in _pg_configs() if label == "AURA_DB"), None)
-    if not cfg or not all([cfg.get("host"), cfg.get("database"), cfg.get("user"), cfg.get("password")]):
-        raise RuntimeError("AURA_DB incompleto para fallback VTC STAGE.")
-    engine = create_engine(
-        _build_url(cfg),
-        pool_pre_ping=True,
-        pool_size=1,
-        max_overflow=0,
-        connect_args={"connect_timeout": 12, "options": "-c statement_timeout=60000"},
-    )
-    with engine.connect() as conn:
-        conn.exec_driver_sql("SELECT 1")
-        conn.exec_driver_sql("SELECT 1 FROM public.devices LIMIT 1")
-        conn.exec_driver_sql("SELECT 1 FROM public.sync_items LIMIT 1")
-    print("  [estoque] Fallback ativo: AURA_DB / VTC STAGE")
-    return engine
-
-def _q_stage_devices() -> str:
-    return """
-SELECT
-  NULL::text AS cd_ufdestino,
-  CASE
-    WHEN UPPER(COALESCE(vendor, device_type::text, '')) LIKE '%ARES COM SONDA%' THEN 'ARES COM SONDA'
-    WHEN UPPER(COALESCE(vendor, device_type::text, '')) LIKE '%SHIELD%' THEN 'SHIELD'
-    WHEN UPPER(COALESCE(vendor, device_type::text, '')) LIKE '%SYOS%' THEN 'SYOS'
-    WHEN UPPER(COALESCE(vendor, device_type::text, '')) LIKE '%ARES%' THEN 'ARES'
-    ELSE 'SENSOR VTC'
-  END AS ds_tipodatalogger,
-  COALESCE(NULLIF(TRIM(serial_number), ''), NULLIF(TRIM(device_serial), ''), id::text) AS ds_tag,
-  'ESTOQUE'::text AS ds_destino,
-  'SALDO ESTOQUE'::text AS ds_finalidade,
-  NULL::text AS ds_responsavel,
-  NULL::text AS id_usuarioatualizacao,
-  COALESCE(updated_at, created_at, now()) AS dt_atualizacao,
-  'DISPONIVEL'::text AS ds_statusrecebimento,
-  'ESTOQUE - GRU'::text AS situacao_oficial
-FROM public.devices
-WHERE active IS TRUE
-  AND COALESCE(NULLIF(TRIM(serial_number), ''), NULLIF(TRIM(device_serial), ''), id::text) IS NOT NULL
-"""
-
-def _q_stage_collections(days: int) -> str:
-    return f"""
-SELECT
-  si.collection_date AS dt_historico,
-  'COLETA'::text AS ds_acaomovimentacao,
-  'CAMARA FRIA'::text AS ds_destino,
-  'PEDIDOS'::text AS ds_finalidade,
-  NULL::text AS nr_historico,
-  COALESCE(si.device_serial, si.external_item_id) AS nr_datalogger,
-  COALESCE(si.device_serial, si.external_item_id) AS ds_datalogger,
-  COALESCE(si.device_serial, si.external_item_id) AS ds_tag,
-  COALESCE(si.device_serial, si.external_item_id) AS ds_serie,
-  NULL::text AS ds_observacao,
-  NULL::text AS ds_usuarioinclusao,
-  'RECEBIDO'::text AS ds_statusrecebimento
-FROM public.sync_items si
-WHERE si.collection_date >= CURRENT_DATE - INTERVAL '{days} days'
-  AND COALESCE(NULLIF(TRIM(si.device_serial), ''), NULLIF(TRIM(si.external_item_id), '')) IS NOT NULL
-"""
-
-def _q_stage_deliveries(days: int) -> str:
-    return f"""
-SELECT
-  si.delivery_date AS dt_historico,
-  'ENTREGA'::text AS ds_acaomovimentacao,
-  'ESTOQUE'::text AS ds_destino,
-  'SALDO ESTOQUE'::text AS ds_finalidade,
-  NULL::text AS nr_historico,
-  COALESCE(si.device_serial, si.external_item_id) AS nr_datalogger,
-  COALESCE(si.device_serial, si.external_item_id) AS ds_datalogger,
-  COALESCE(si.device_serial, si.external_item_id) AS ds_tag,
-  COALESCE(si.device_serial, si.external_item_id) AS ds_serie,
-  NULL::text AS ds_observacao,
-  NULL::text AS ds_usuarioinclusao,
-  'RECEBIDO'::text AS ds_statusrecebimento
-FROM public.sync_items si
-WHERE si.delivery_date >= CURRENT_DATE - INTERVAL '{days} days'
-  AND COALESCE(NULLIF(TRIM(si.device_serial), ''), NULLIF(TRIM(si.external_item_id), '')) IS NOT NULL
-"""
-
-def load_stage_fallback() -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    engine = _make_stage_engine()
-    df_geral = _read(engine, _q_stage_devices())
-    df_cf = _read(engine, _q_stage_collections(BASE_DAYS))
-    df_est = _read(engine, _q_stage_deliveries(BASE_DAYS))
-    df_pack = _read(engine, _q_stage_collections(BASE_DAYS))
-    df_rcf = _read(engine, _q_stage_collections(BASE_DAYS))
-    df_recente = _read(engine, _q_stage_collections(5))
-    return df_geral, df_cf, df_est, df_pack, df_rcf, df_recente
 
 def _fig_div(fig) -> str:
     return pio.to_html(fig, include_plotlyjs=False, full_html=False,
@@ -308,24 +177,16 @@ def apply_aux_status(df: pd.DataFrame, aux_map: pd.DataFrame) -> pd.DataFrame:
     if out.empty:
         out["situacao_oficial"] = pd.Series(dtype="object")
         return out
-    existing_situacao = (
-        out["situacao_oficial"].copy()
-        if "situacao_oficial" in out.columns
-        else pd.Series(index=out.index, dtype="object")
-    )
     out["_map_key"] = (
         out.get("ds_destino",        pd.Series(index=out.index, dtype="object")).map(normalize_text) + "|" +
         out.get("ds_finalidade",     pd.Series(index=out.index, dtype="object")).map(normalize_text) + "|" +
         out.get("ds_statusrecebimento", pd.Series(index=out.index, dtype="object")).map(normalize_text)
     )
     if aux_map.empty:
-        out["situacao_oficial"] = existing_situacao.fillna("Sem Mapeamento")
+        out["situacao_oficial"] = "Sem Mapeamento"
         return out
-    if "situacao_oficial" in out.columns:
-        out = out.drop(columns=["situacao_oficial"])
     out = out.merge(aux_map, how="left", on="_map_key")
-    existing_aligned = existing_situacao.reindex(out.index)
-    out["situacao_oficial"] = out["situacao_oficial"].fillna(existing_aligned).fillna("Sem Mapeamento")
+    out["situacao_oficial"] = out["situacao_oficial"].fillna("Sem Mapeamento")
     return out
 
 
@@ -1492,19 +1353,23 @@ document.addEventListener("DOMContentLoaded", () => {{
 
 def main():
     print("  [estoque] Conectando ao PostgreSQL...")
-    try:
-        engine = _make_engine()
-        print("  [estoque] Carregando dados...")
-        df_geral = _read(engine, q_estoque_geral())
-        df_cf = _read(engine, q_mov_cf(BASE_DAYS))
-        df_est = _read(engine, q_rec_est(BASE_DAYS))
-        df_pack = _read(engine, q_packing(BASE_DAYS))
-        df_rcf = _read(engine, q_recebidos_cf(BASE_DAYS))
-        df_recente = _read(engine, q_mov_recente(5))
-    except RuntimeError as exc:
-        print(f"  [estoque] Banco legado indisponivel: {exc}")
-        print("  [estoque] Usando fallback VTC STAGE para gerar HTML atualizado.")
-        df_geral, df_cf, df_est, df_pack, df_rcf, df_recente = load_stage_fallback()
+    engine = create_engine(_build_url(), pool_pre_ping=True,
+                           connect_args={"options": "-c statement_timeout=60000"})
+
+    print("  [estoque] Carregando dados em paralelo...")
+    with ThreadPoolExecutor(max_workers=5) as ex:
+        f_geral   = ex.submit(_read, engine, q_estoque_geral())
+        f_cf      = ex.submit(_read, engine, q_mov_cf(BASE_DAYS))
+        f_est     = ex.submit(_read, engine, q_rec_est(BASE_DAYS))
+        f_pack    = ex.submit(_read, engine, q_packing(BASE_DAYS))
+        f_rcf     = ex.submit(_read, engine, q_recebidos_cf(BASE_DAYS))
+        f_recente = ex.submit(_read, engine, q_mov_recente(5))
+        df_geral   = f_geral.result()
+        df_cf      = f_cf.result()
+        df_est     = f_est.result()
+        df_pack    = f_pack.result()
+        df_rcf     = f_rcf.result()
+        df_recente = f_recente.result()
 
     print(f"  [estoque] geral={len(df_geral)} cf={len(df_cf)} est={len(df_est)} pack={len(df_pack)} rcf={len(df_rcf)} recente={len(df_recente)}")
     html = generate_html_tipo(df_geral, df_cf, df_est, df_pack, df_rcf, df_recente)

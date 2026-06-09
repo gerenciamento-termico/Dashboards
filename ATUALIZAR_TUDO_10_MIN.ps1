@@ -20,6 +20,7 @@ $GitBranch = "main"
 $ExpectedRemote = "banco-aura-dashboard.git"
 
 $PublishFiles = @(
+    "aura-hub.html",
     "ESTOQUE_DATALOGGERS.html",
     "CONTROLE_ENTREGAS_20D.html",
     "HTMLACOMPANHAMENTO.html",
@@ -43,6 +44,7 @@ $DashboardFiles = @(
 )
 
 $Urls = @(
+    "https://luan9753.github.io/banco-aura-dashboard/aura-hub.html",
     "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
     "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
     "https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html",
@@ -314,6 +316,26 @@ function Sync-GitBeforeCycle {
     Invoke-LoggedProcess -FilePath "git" -Arguments @("pull", "--rebase", "--autostash", $GitRemote, $GitBranch) -WorkingDirectory $PublishDir -Name "git pull --rebase --autostash" -TimeoutSec 180
 }
 
+function Update-HubTimestamp {
+    $hubPath = Join-Path $PublishDir "aura-hub.html"
+    if (-not (Test-Path -LiteralPath $hubPath -PathType Leaf)) {
+        throw "Hub Aura nao encontrado: $hubPath"
+    }
+
+    $agora = Get-Date -Format "dd/MM/yyyy HH:mm"
+    $content = Get-Content -LiteralPath $hubPath -Raw -Encoding UTF8
+    $pattern = '(Banco Aura Dashboard Hub[^<]*Atualizado em )\d{2}/\d{2}/\d{4}( \d{2}:\d{2})?'
+    if ($content -notmatch $pattern) {
+        throw "Rodape do Hub nao encontrado para atualizar timestamp."
+    }
+
+    $updated = [regex]::Replace($content, $pattern, { param($match) $match.Groups[1].Value + $agora }, 1)
+    $utf8NoBom = New-Object System.Text.UTF8Encoding -ArgumentList $false
+    [System.IO.File]::WriteAllText($hubPath, $updated, $utf8NoBom)
+    (Get-Item -LiteralPath $hubPath).LastWriteTime = Get-Date
+    Write-Log ("HUB TIMESTAMP: aura-hub.html atualizado para {0}" -f $agora)
+}
+
 function Publish-Changes {
     $preStaged = @(& git -C $PublishDir diff --cached --name-only)
     if ($preStaged.Count -gt 0) {
@@ -473,6 +495,12 @@ function Run-Cycle {
     if ($blockEstoque -or $blockGestao) {
         Write-Host "AVISO: Falha identificada no Estoque ou Gestão de Dispositivos. Esses arquivos não serão atualizados neste ciclo, mas os demais dashboards seguirão normalmente." -ForegroundColor Yellow
         Write-Log "AVISO: Falha identificada no Estoque ou Gestão de Dispositivos. Esses arquivos não serão atualizados neste ciclo, mas os demais dashboards seguirão normalmente."
+    }
+
+    if ($ok) {
+        $ok = (Invoke-Step "[HUB] Timestamp do footer" {
+            Update-HubTimestamp
+        }) -and $ok
     }
 
     if ($ok) {

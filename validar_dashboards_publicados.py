@@ -28,6 +28,7 @@ PYTHON_SCRIPTS = [
     "gerar_html_reversa.py",
     "gerar_html_rastreio_caixas_sem_datalogger.py",
     "env_utils.py",
+    "validar_gestao_dispositivos_db.py",
     "validar_dashboards_publicados.py",
 ]
 
@@ -52,6 +53,10 @@ GENERATED_HTML = {
         "min_size": 20_000,
         "markers": ["Gerado em", "const SUMMARY", "const TABLE_ROWS", "const DS_TIPO_VALUES"],
     },
+    "GESTAO_DISPOSITIVOS.html": {
+        "min_size": 20_000,
+        "markers": ["GESTAO_DISPOSITIVOS_STAGE_DATA.js", "Fonte ativa", "buildPedidoLoggerKey"],
+    },
 }
 
 HTML_SCOPE_FILES = {
@@ -60,11 +65,14 @@ HTML_SCOPE_FILES = {
     "acompanhamento": "HTMLACOMPANHAMENTO.html",
     "reversa": "REVERSA_DATALOGGERS.html",
     "rastreio": "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
+    "gestao": "GESTAO_DISPOSITIVOS.html",
 }
 
 GENERATED_DATA = [
     "CONTROLE_ENTREGAS_20D.csv",
     "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
+    "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js",
+    "GESTAO_DISPOSITIVOS_STAGE_DATA.js",
 ]
 
 CODE_FILES = [
@@ -78,6 +86,7 @@ CODE_FILES = [
     "gerar_html_reversa.py",
     "gerar_html_rastreio_caixas_sem_datalogger.py",
     "env_utils.py",
+    "validar_gestao_dispositivos_db.py",
     "validar_dashboards_publicados.py",
     ".env.example",
     ".gitignore",
@@ -89,6 +98,7 @@ PUBLIC_PAGES = {
     "CONTROLE_ENTREGAS_20D.html": "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
     "HTMLACOMPANHAMENTO.html": "https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html": "https://luan9753.github.io/banco-aura-dashboard/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
+    "GESTAO_DISPOSITIVOS.html": "https://luan9753.github.io/banco-aura-dashboard/GESTAO_DISPOSITIVOS.html",
 }
 
 REQUIRED_PRESENT = [
@@ -310,6 +320,16 @@ def _extract_js_json(text: str, var_name: str):
     return value
 
 
+def _extract_window_json(text: str, var_name: str):
+    prefix = f"window.{var_name} = "
+    start = text.find(prefix)
+    if start < 0:
+        raise ValueError(f"variavel_window_nao_encontrada:{var_name}")
+    fragment = text[start + len(prefix) :].lstrip()
+    value, _ = json.JSONDecoder().raw_decode(fragment)
+    return value
+
+
 def _validate_common_html(name: str, cycle_start: float | None) -> str:
     spec = GENERATED_HTML[name]
     path = ROOT / name
@@ -488,6 +508,39 @@ def _validate_rastreio(cycle_start: float | None) -> None:
     )
 
 
+def _validate_gestao(cycle_start: float | None) -> None:
+    text = _validate_common_html("GESTAO_DISPOSITIVOS.html", cycle_start)
+    if "../data/estoque.json" in text or "../data/entregas.json" in text:
+        raise RuntimeError("GESTAO_DISPOSITIVOS.html ainda referencia JSON fora do projeto")
+
+    stage_text = _read_text(ROOT / "GESTAO_DISPOSITIVOS_STAGE_DATA.js")
+    stage_data = _extract_window_json(stage_text, "GESTAO_DISPOSITIVOS_STAGE_DATA")
+    summary = stage_data.get("summary") if isinstance(stage_data, dict) else None
+    all_summary = summary.get("ALL") if isinstance(summary, dict) else None
+    if not isinstance(all_summary, dict):
+        raise RuntimeError("GESTAO_DISPOSITIVOS_STAGE_DATA.js sem summary.ALL")
+    if _as_int(all_summary.get("registrosEstoque")) == 0 and all_summary.get("totalEstoque") not in (None, ""):
+        raise RuntimeError("GESTAO_DISPOSITIVOS_STAGE_DATA.js tem totalEstoque com registrosEstoque=0")
+
+    estoque_text = _read_text(ROOT / "ESTOQUE_DATALOGGERS.html")
+    states = _extract_js_json(estoque_text, "STATES")
+    details = _extract_js_json(estoque_text, "DETAIL_ROWS")
+    all_state = states.get("ALL") if isinstance(states, dict) else None
+    if not isinstance(all_state, dict):
+        raise RuntimeError("ESTOQUE_DATALOGGERS.html sem STATES.ALL para gestao")
+    if _as_int(all_state.get("total_estoque")) <= 0:
+        raise RuntimeError("ESTOQUE_DATALOGGERS.html sem total_estoque valido para gestao")
+    if not isinstance(details, list) or len(details) <= 0:
+        raise RuntimeError("ESTOQUE_DATALOGGERS.html sem DETAIL_ROWS para gestao")
+
+    _print(
+        "[html] GESTAO_DISPOSITIVOS.html OK: "
+        f"stage_entregas={_as_int(all_summary.get('registrosEntregas'))} "
+        f"estoque_detalhes={len(details)} "
+        f"estoque_total={_as_int(all_state.get('total_estoque'))}"
+    )
+
+
 def command_validate_html(args: argparse.Namespace) -> int:
     cycle_start = float(args.cycle_start) if args.cycle_start else None
     validators = {
@@ -496,6 +549,7 @@ def command_validate_html(args: argparse.Namespace) -> int:
         "reversa": _validate_reversa,
         "acompanhamento": _validate_acompanhamento_html,
         "rastreio": _validate_rastreio,
+        "gestao": _validate_gestao,
     }
     selected = list(validators)
     if args.only:

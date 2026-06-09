@@ -3,7 +3,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "geradoEm": "09/06/2026 17:51:41",
   "summary": {
     "ARES": {
-      "totalEstoque": 6539,
+      "totalEstoque": null,
       "loggersTransito": 0,
       "loggersEntregues": 279,
       "loggersRetornados": 188,
@@ -16,7 +16,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "totalRegistros": 5532
     },
     "ARES COM SONDA": {
-      "totalEstoque": 201,
+      "totalEstoque": null,
       "loggersTransito": 0,
       "loggersEntregues": 0,
       "loggersRetornados": 0,
@@ -29,7 +29,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "totalRegistros": 0
     },
     "SENSOR VTC": {
-      "totalEstoque": 613,
+      "totalEstoque": null,
       "loggersTransito": 838,
       "loggersEntregues": 4697,
       "loggersRetornados": 2665,
@@ -42,7 +42,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "totalRegistros": 52244
     },
     "SHIELD": {
-      "totalEstoque": 341,
+      "totalEstoque": null,
       "loggersTransito": 0,
       "loggersEntregues": 0,
       "loggersRetornados": 0,
@@ -55,7 +55,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "totalRegistros": 0
     },
     "SYOS": {
-      "totalEstoque": 2000,
+      "totalEstoque": null,
       "loggersTransito": 0,
       "loggersEntregues": 0,
       "loggersRetornados": 0,
@@ -68,7 +68,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "totalRegistros": 0
     },
     "ALL": {
-      "totalEstoque": 9625,
+      "totalEstoque": null,
       "loggersTransito": 838,
       "loggersEntregues": 4976,
       "loggersRetornados": 2853,

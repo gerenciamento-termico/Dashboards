@@ -310,6 +310,22 @@ function Copy-PublishedFile {
     Write-Log ("COPIADO: {0} -> {1}" -f $Source, $destination)
 }
 
+function Sync-GestaoStageCompatData {
+    $stagePath = Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js"
+    $compatPath = Join-Path $DevDir "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js"
+    if (-not (Test-Path -LiteralPath $stagePath -PathType Leaf)) {
+        throw "Arquivo Stage da Gestao nao encontrado: $stagePath"
+    }
+    $content = Get-Content -LiteralPath $stagePath -Raw -Encoding UTF8
+    if ($content -notmatch "window\.GESTAO_DISPOSITIVOS_STAGE_DATA\s*=") {
+        throw "Arquivo Stage da Gestao nao contem GESTAO_DISPOSITIVOS_STAGE_DATA."
+    }
+    $compat = $content -replace "window\.GESTAO_DISPOSITIVOS_STAGE_DATA\s*=", "window.GESTAO_DISPOSITIVOS_PLANILHA_DATA ="
+    $compat += "`nwindow.GESTAO_DISPOSITIVOS_STAGE_DATA = window.GESTAO_DISPOSITIVOS_PLANILHA_DATA;`n"
+    Set-Content -LiteralPath $compatPath -Value $compat -Encoding UTF8
+    Write-Log ("GESTAO COMPAT: {0} atualizado a partir de {1}" -f $compatPath, $stagePath)
+}
+
 function Sync-GitBeforeCycle {
     Invoke-LoggedProcess -FilePath "git" -Arguments @("pull", "--rebase", "--autostash", $GitRemote, $GitBranch) -WorkingDirectory $PublishDir -Name "git pull --rebase --autostash" -TimeoutSec 180
 }
@@ -431,12 +447,17 @@ function Run-Cycle {
 
         if (-not (Invoke-Step "[5/7] Gestao Dispositivos" {
             $planilha = Invoke-OptionalProcess -Label "exportar_planilha_gestao_dispositivos.py" -FilePath $script:PythonExe -Arguments @((Join-Path $DevDir "exportar_planilha_gestao_dispositivos.py")) -WorkingDirectory $DevDir -Name "exportar_planilha_gestao_dispositivos.py"
-            if (-not $planilha.Ok) {
-                Add-StepFailure -Failures $stepFailures -Name "Gestao planilha" -Message "Conex*.xlsx ausente ou invalido; GESTAO_DISPOSITIVOS_PLANILHA_DATA.js anterior sera preservado"
-            }
             $stage = Invoke-OptionalProcess -Label "exportar_vtc_stage_gestao.py" -FilePath $script:PythonExe -Arguments @((Join-Path $DevDir "exportar_vtc_stage_gestao.py")) -WorkingDirectory $DevDir -Name "exportar_vtc_stage_gestao.py"
             if (-not $stage.Ok) {
                 Add-StepFailure -Failures $stepFailures -Name "Gestao VTC Stage" -Message $stage.Message
+                if (-not $planilha.Ok) {
+                    Add-StepFailure -Failures $stepFailures -Name "Gestao planilha" -Message "Conex*.xlsx ausente ou invalido; GESTAO_DISPOSITIVOS_PLANILHA_DATA.js anterior sera preservado"
+                }
+            } else {
+                Sync-GestaoStageCompatData
+                if (-not $planilha.Ok) {
+                    Write-Log "INFO: Conex*.xlsx ausente; GESTAO_DISPOSITIVOS_PLANILHA_DATA.js foi atualizado pelo VTC STAGE."
+                }
             }
             Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html") -DestinationName "GESTAO_DISPOSITIVOS.html"
             if (Test-Path -LiteralPath (Join-Path $DevDir "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js")) {

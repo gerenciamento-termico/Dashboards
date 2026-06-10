@@ -540,12 +540,35 @@ def _validate_rastreio(cycle_start: float | None) -> None:
     )
 
 
+def _validate_no_conflict_markers(name: str, text: str) -> None:
+    if "<<<<<<<" in text or "=======" in text or ">>>>>>>" in text:
+        raise RuntimeError(f"{name} contem marcador de conflito Git")
+
+
 def _validate_gestao(cycle_start: float | None) -> None:
     text = _validate_common_html("GESTAO_DISPOSITIVOS.html", cycle_start)
+    _validate_no_conflict_markers("GESTAO_DISPOSITIVOS.html", text)
     if "../data/estoque.json" in text or "../data/entregas.json" in text:
         raise RuntimeError("GESTAO_DISPOSITIVOS.html ainda referencia JSON fora do projeto")
+    if "SEM_LOGGER" in text or "SEM_PEDIDO" in text or "buildPedidoLoggerKey(row, fieldMap, index)" in text:
+        raise RuntimeError("GESTAO_DISPOSITIVOS.html voltou a aceitar pedido/logger vazio na chave de deduplicacao")
+    required_markers = [
+        "estoqueDashboard: \"ESTOQUE_DATALOGGERS.html\"",
+        "await carregarEstoqueDashboard(resultado)",
+        "numberOrNull(base.totalEstoque)",
+        "function buildPedidoLoggerKey(row, fieldMap)",
+    ]
+    for marker in required_markers:
+        if marker not in text:
+            raise RuntimeError(f"GESTAO_DISPOSITIVOS.html sem regra/fonte corrigida: {marker}")
+
+    planilha_text = _read_text(ROOT / "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js")
+    _validate_no_conflict_markers("GESTAO_DISPOSITIVOS_PLANILHA_DATA.js", planilha_text)
+    if "GESTAO_DISPOSITIVOS_STAGE_DATA = window.GESTAO_DISPOSITIVOS_PLANILHA_DATA" in planilha_text:
+        raise RuntimeError("GESTAO_DISPOSITIVOS_PLANILHA_DATA.js nao pode sobrescrever STAGE_DATA preservado")
 
     stage_text = _read_text(ROOT / "GESTAO_DISPOSITIVOS_STAGE_DATA.js")
+    _validate_no_conflict_markers("GESTAO_DISPOSITIVOS_STAGE_DATA.js", stage_text)
     stage_data = _extract_window_json(stage_text, "GESTAO_DISPOSITIVOS_STAGE_DATA")
     summary = stage_data.get("summary") if isinstance(stage_data, dict) else None
     all_summary = summary.get("ALL") if isinstance(summary, dict) else None
@@ -553,6 +576,11 @@ def _validate_gestao(cycle_start: float | None) -> None:
         raise RuntimeError("GESTAO_DISPOSITIVOS_STAGE_DATA.js sem summary.ALL")
     if _as_int(all_summary.get("registrosEstoque")) == 0 and all_summary.get("totalEstoque") not in (None, ""):
         raise RuntimeError("GESTAO_DISPOSITIVOS_STAGE_DATA.js tem totalEstoque com registrosEstoque=0")
+    if _as_int(all_summary.get("loggersEntregues")) < _as_int(all_summary.get("loggersRetornados")):
+        raise RuntimeError("GESTAO_DISPOSITIVOS_STAGE_DATA.js tem retornados maior que entregues")
+    campos = stage_data.get("campos") if isinstance(stage_data, dict) else {}
+    if campos.get("pedido") != "documentos.nr_pedido" or campos.get("logger") != "documentos.ds_tag":
+        raise RuntimeError("GESTAO_DISPOSITIVOS_STAGE_DATA.js sem amarracao nr_pedido + ds_tag")
 
     estoque_text = _read_text(ROOT / "ESTOQUE_DATALOGGERS.html")
     states = _extract_js_json(estoque_text, "STATES")

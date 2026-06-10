@@ -489,9 +489,9 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
     <div class="panel panel-sources">
       <div class="panel-title">Fontes de dados</div>
       <div class="source-list">
-        <div class="source-row"><span>Fonte VTC Stage</span><span id="status-stage">Não configurado</span></div>
-        <div class="source-row"><span>Fonte de estoque</span><span id="status-estoque">Aguardando</span></div>
-        <div class="source-row"><span>Fonte de entregas</span><span id="status-entregas">Aguardando</span></div>
+        <div class="source-row"><span>VTC Stage sincronizado</span><span id="status-stage">Não configurado</span></div>
+        <div class="source-row"><span>../data/estoque.json</span><span id="status-estoque">Aguardando</span></div>
+        <div class="source-row"><span>../data/entregas.json</span><span id="status-entregas">Aguardando</span></div>
       </div>
     </div>
     <div class="panel panel-status technical-status-card">
@@ -542,9 +542,8 @@ const CONFIG = {
     // Configure aqui quando o endpoint do VTC STAGE estiver disponível.
     // Exemplo: "https://vtc-stage.seu-dominio/api/gestao-dispositivos"
     vtcStageUrl: "",
-    estoqueDashboard: "ESTOQUE_DATALOGGERS.html",
-    estoqueLocal: "data/estoque.json",
-    entregasLocal: "data/entregas.json"
+    estoqueLocal: "../data/estoque.json",
+    entregasLocal: "../data/entregas.json"
   },
   timeoutStageMs: 8000
 };
@@ -608,12 +607,6 @@ function fmtCardValue(value) {
   return fmt(value);
 }
 
-function numberOrNull(value) {
-  if (value === null || value === undefined || value === "") return null;
-  const number = Number(value);
-  return Number.isFinite(number) ? number : null;
-}
-
 function setText(id, value) {
   const el = $(id);
   if (el) el.textContent = value;
@@ -670,128 +663,6 @@ async function fetchJson(url, label, timeoutMs) {
     return { ok: false, data: null, erro: error.message };
   } finally {
     clearTimeout(timeout);
-  }
-}
-
-async function fetchText(url, label, timeoutMs) {
-  const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), timeoutMs || 10000);
-  try {
-    const response = await fetch(url, { cache: "no-store", signal: controller.signal });
-    if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const text = await response.text();
-    logInfo(`${label} carregado`, url);
-    return { ok: true, data: text, erro: "" };
-  } catch (error) {
-    logWarn(`${label} indisponivel`, error.message);
-    return { ok: false, data: "", erro: error.message };
-  } finally {
-    clearTimeout(timeout);
-  }
-}
-
-function extractConstJson(html, constName) {
-  const prefix = `const ${constName} = `;
-  const start = html.indexOf(prefix);
-  if (start < 0) throw new Error(`${constName} nao encontrado`);
-  const fragment = html.slice(start + prefix.length);
-  let depth = 0;
-  let inString = false;
-  let escaped = false;
-  let end = -1;
-
-  for (let i = 0; i < fragment.length; i++) {
-    const char = fragment[i];
-    if (inString) {
-      if (escaped) escaped = false;
-      else if (char === "\\") escaped = true;
-      else if (char === "\"") inString = false;
-      continue;
-    }
-    if (char === "\"") {
-      inString = true;
-      continue;
-    }
-    if (char === "{" || char === "[") depth++;
-    if (char === "}" || char === "]") {
-      depth--;
-      if (depth === 0) {
-        end = i + 1;
-        break;
-      }
-    }
-  }
-
-  if (end < 0) throw new Error(`${constName} sem fim valido`);
-  return JSON.parse(fragment.slice(0, end));
-}
-
-function convertEstoqueStateToOperacional(state) {
-  return {
-    aptoUso: Number(state?.apto_uso || 0),
-    aguardandoRecebimento: Number(state?.resumo_cf_aguar || 0),
-    embAguardandoExpedicao: Number(state?.gestao_dispositivos || 0),
-    status: state?.status || { labels: [], values: [] },
-    ultimaAtualizacao: state?.ultima_atualizacao || ""
-  };
-}
-
-function countDetailsByTipo(details) {
-  return details.reduce((acc, row) => {
-    const tipo = String(row?.tipo || "").trim();
-    if (tipo) acc[tipo] = (acc[tipo] || 0) + 1;
-    return acc;
-  }, {});
-}
-
-function applyEstoqueDashboardSnapshot(resultado, states, details) {
-  const metricas = resultado.metricasOperacionais;
-  if (!metricas || !states?.ALL) return false;
-
-  const summary = metricas.summary || {};
-  const detalhesPorTipo = countDetailsByTipo(Array.isArray(details) ? details : []);
-  CONFIG.tiposDispositivo.forEach(tipo => {
-    if (!summary[tipo]) summary[tipo] = {};
-    if (states[tipo]) {
-      summary[tipo].totalEstoque = Number(states[tipo].total_estoque || 0);
-      summary[tipo].registrosEstoque = Number(detalhesPorTipo[tipo] || 0);
-    }
-  });
-
-  if (!summary.ALL) summary.ALL = {};
-  summary.ALL.totalEstoque = Number(states.ALL.total_estoque || 0);
-  summary.ALL.registrosEstoque = Array.isArray(details) ? details.length : 0;
-  metricas.summary = summary;
-  metricas.operacionalEstoqueFonte = "ESTOQUE_DATALOGGERS.html :: const STATES";
-  metricas.operacionalEstoque = Object.fromEntries(
-    Object.entries(states).map(([key, state]) => [key, convertEstoqueStateToOperacional(state)])
-  );
-
-  setSourceStatus(
-    "status-estoque",
-    `${fmt(summary.ALL.registrosEstoque || 0)} detalhes; ${fmt(summary.ALL.totalEstoque || 0)} em estoque`
-  );
-  if (!resultado.fontes.includes("ESTOQUE_DATALOGGERS.html")) {
-    resultado.fontes.push("ESTOQUE_DATALOGGERS.html");
-  }
-  return true;
-}
-
-async function carregarEstoqueDashboard(resultado) {
-  const estoque = await fetchText(CONFIG.fontes.estoqueDashboard, "ESTOQUE_DATALOGGERS.html", 15000);
-  if (!estoque.ok) {
-    resultado.erros.push(`ESTOQUE_DATALOGGERS.html: ${estoque.erro}`);
-    setSourceStatus("status-estoque", "Nao carregado");
-    return false;
-  }
-  try {
-    const states = extractConstJson(estoque.data, "STATES");
-    const details = extractConstJson(estoque.data, "DETAIL_ROWS");
-    return applyEstoqueDashboardSnapshot(resultado, states, details);
-  } catch (error) {
-    resultado.erros.push(`ESTOQUE_DATALOGGERS.html: ${error.message}`);
-    setSourceStatus("status-estoque", "Invalido");
-    return false;
   }
 }
 
@@ -932,11 +803,11 @@ function renderizarIndicadoresOperacionaisEstoque(selectedTipos = CONFIG.tiposDi
 function carregarVtcStageLocal(resultado) {
   const stageData = window.GESTAO_DISPOSITIVOS_STAGE_DATA;
   if (!stageData || !stageData.summary) return false;
-  const fonteLocal = "VTC Stage snapshot";
-  const fonteVisual = "VTC Stage snapshot (vtc_stage.documentos)";
+  const fonteLocal = "VTC Stage";
+  const fonteVisual = "VTC Stage: sincronizado";
 
   resultado.metricasOperacionais = {
-    summary: JSON.parse(JSON.stringify(stageData.summary)),
+    summary: stageData.summary,
     fonte: stageData.fonte || fonteLocal,
     alertas: stageData.alertas || [],
     diagnostico: stageData.diagnostico || null,
@@ -947,20 +818,12 @@ function carregarVtcStageLocal(resultado) {
   resultado.fontes.push(fonteVisual);
   resultado.ultimaAtualizacao = stageData.geradoEm || stageData.generatedAt || "";
 
-  const all = resultado.metricasOperacionais.summary.ALL || {};
-  if (!Number(all.registrosEstoque || 0)) {
-    all.totalEstoque = null;
-    CONFIG.tiposDispositivo.forEach(tipo => {
-      if (resultado.metricasOperacionais.summary[tipo]) {
-        resultado.metricasOperacionais.summary[tipo].totalEstoque = null;
-      }
-    });
-  }
-  setSourceStatus("status-stage", `${fmt(all.registrosEntregas || 0)} registros de entregas`);
-  setSourceStatus("status-estoque", "Aguardando ESTOQUE_DATALOGGERS.html");
+  const all = stageData.summary.ALL || {};
+  setSourceStatus("status-stage", `${fmt((all.registrosEntregas || 0) + (all.registrosEstoque || 0))} registros`);
+  setSourceStatus("status-estoque", `${fmt(all.registrosEstoque || 0)} registros`);
   setSourceStatus("status-entregas", `${fmt(all.registrosEntregas || 0)} registros`);
-  setPill("pill-stage", "VTC Stage: snapshot carregado", "ok");
-  setPill("pill-local", "JSON local: nao usado", "warn");
+  setPill("pill-stage", "VTC Stage: carregado", "ok");
+  setPill("pill-local", "Fallback local: desativado", "warn");
   logInfo(`${fonteLocal} carregado`, {
     geradoEm: resultado.ultimaAtualizacao,
     registrosEntregas: all.registrosEntregas || 0,
@@ -980,7 +843,6 @@ async function carregarDados() {
   };
 
   if (carregarVtcStageLocal(resultado)) {
-    await carregarEstoqueDashboard(resultado);
     return resultado;
   }
 
@@ -992,13 +854,13 @@ async function carregarDados() {
       const stageData = splitStagePayload(stage.data);
       resultado.estoque.push(...stageData.estoque);
       resultado.entregas.push(...stageData.entregas);
-      resultado.fontes.push("VTC STAGE API");
+      resultado.fontes.push("VTC STAGE");
       setSourceStatus("status-stage", `${fmt(stageData.estoque.length + stageData.entregas.length)} registros`);
       setPill("pill-stage", "VTC STAGE: conectado", "ok");
     } else {
       resultado.erros.push(`VTC STAGE: ${stage.erro}`);
-      setSourceStatus("status-stage", "Falhou");
-      setPill("pill-stage", "VTC STAGE: indisponivel", "warn");
+      setSourceStatus("status-stage", "Falhou - usando fallback local");
+      setPill("pill-stage", "VTC STAGE: fallback", "warn");
     }
   } else {
     setSourceStatus("status-stage", "URL não configurada");
@@ -1128,23 +990,24 @@ function hasEntrega(row, fieldMap) {
   return CONFIG.status.entregue.map(normalizeStatus).includes(statusGeral);
 }
 
-function buildPedidoLoggerKey(row, fieldMap) {
-  if (!hasValue(getFieldValue(row, fieldMap.pedido))) return "";
-  if (!hasValue(getFieldValue(row, fieldMap.logger))) return "";
-  const pedido = String(getFieldValue(row, fieldMap.pedido)).trim();
-  const logger = String(getFieldValue(row, fieldMap.logger)).trim();
+function buildPedidoLoggerKey(row, fieldMap, index) {
+  const pedido = hasValue(getFieldValue(row, fieldMap.pedido))
+    ? String(getFieldValue(row, fieldMap.pedido)).trim()
+    : "SEM_PEDIDO";
+  const logger = hasValue(getFieldValue(row, fieldMap.logger))
+    ? String(getFieldValue(row, fieldMap.logger)).trim()
+    : `SEM_LOGGER_${index}`;
   return `${normalizeText(pedido)}|${normalizeText(logger)}`;
 }
 
 function countLoggersEmTransito(entregas) {
   const fieldMap = buildEntregaFieldMap(entregas);
   const chaves = new Set();
-  entregas.forEach(row => {
+  entregas.forEach((row, index) => {
     if (!isLogger(row)) return;
     if (!hasColeta(row, fieldMap)) return;
     if (hasEntrega(row, fieldMap)) return;
-    const chave = buildPedidoLoggerKey(row, fieldMap);
-    if (chave) chaves.add(chave);
+    chaves.add(buildPedidoLoggerKey(row, fieldMap, index));
   });
   return chaves.size;
 }
@@ -1222,7 +1085,7 @@ function calcularIndicadoresOperacionais(selectedTipos = CONFIG.tiposDispositivo
       }, { totalEstoque: 0, loggersTransito: 0, loggersEntregues: 0, loggersRetornados: 0, registrosEntregas: 0, registrosEstoque: 0, semStatus: 0, semData: 0, estoqueSemQuantidade: 0 });
 
   const indicadores = {
-    totalEstoque: numberOrNull(base.totalEstoque),
+    totalEstoque: Number(base.totalEstoque || 0),
     loggersTransito: Number(base.loggersTransito || 0),
     loggersEntregues: Number(base.loggersEntregues || 0),
     loggersRetornados: Number(base.loggersRetornados || 0),
@@ -1300,13 +1163,13 @@ function getAnyDate(row) {
   );
 }
 
-function uniquePedidoLoggerCount(rows, fieldMap) {
-  const chaves = new Set();
-  rows.forEach(row => {
-    const chave = buildPedidoLoggerKey(row, fieldMap);
-    if (chave) chaves.add(chave);
-  });
-  return chaves.size;
+function uniqueCount(rows) {
+  const campo = CONFIG.campos.identificador;
+  const ids = rows
+    .map(row => String(row?.[campo] ?? "").trim())
+    .filter(Boolean);
+  if (ids.length) return new Set(ids).size;
+  return rows.length;
 }
 
 function sumQuantidade(rows) {
@@ -1322,7 +1185,6 @@ function calcularIndicadores(estoque, entregas, selectedTipos = CONFIG.tiposDisp
   const hoje = new Date();
   const inicioRetorno = new Date(hoje);
   inicioRetorno.setDate(inicioRetorno.getDate() - CONFIG.diasRetorno);
-  const fieldMap = buildEntregaFieldMap(entregas);
 
   const loggersEntregues = entregas.filter(row => statusIn(row, CONFIG.status.entregue) && isLogger(row));
   const loggersRetornados = entregas.filter(row => {
@@ -1337,10 +1199,10 @@ function calcularIndicadores(estoque, entregas, selectedTipos = CONFIG.tiposDisp
   const indicadores = {
     totalEstoque: sumQuantidade(estoque),
     loggersTransito: countLoggersEmTransito(entregas),
-    loggersEntregues: uniquePedidoLoggerCount(loggersEntregues, fieldMap),
-    loggersRetornados: uniquePedidoLoggerCount(loggersRetornados, fieldMap),
+    loggersEntregues: uniqueCount(loggersEntregues),
+    loggersRetornados: uniqueCount(loggersRetornados),
     loggersPendentesRetorno: Math.max(
-      uniquePedidoLoggerCount(loggersEntregues, fieldMap) - uniquePedidoLoggerCount(loggersRetornados, fieldMap),
+      uniqueCount(loggersEntregues) - uniqueCount(loggersRetornados),
       0
     ),
     registrosEntregas: entregas.length,
@@ -1371,7 +1233,7 @@ function renderizar(indicadores, dados, erros, selectedTipos = CONFIG.tiposDispo
   setText("card-loggers-pendentes-retorno", fmtCardValue(indicadores.loggersPendentesRetorno));
   setText("kpi-estoque-registros", fmt(indicadores.registrosEstoque));
   setText("total-registros", fmt(indicadores.totalRegistros));
-  setText("total-estoque-meta", fmtCardValue(indicadores.totalEstoque));
+  setText("total-estoque-meta", fmt(indicadores.totalEstoque));
   setText("dias-retorno-label", fmt(CONFIG.diasRetorno));
   setText("ultima-atualizacao", dados.ultimaAtualizacao || new Date().toLocaleString("pt-BR"));
   setText("meta-tipo", getTipoLabel(selectedTipos));

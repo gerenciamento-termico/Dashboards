@@ -1198,4 +1198,3 @@ window.GESTAO_DISPOSITIVOS_PLANILHA_DATA = {
     "chave": "normalize(nr_pedido) + '|' + normalize(cd_referencia)"
   }
 };
-window.GESTAO_DISPOSITIVOS_STAGE_DATA = window.GESTAO_DISPOSITIVOS_PLANILHA_DATA;

@@ -1,9 +1,11 @@
 param(
-    [ValidateSet("LOOP", "ONCE", "CHECK")]
+    [ValidateSet("LOOP", "RUN", "ONCE", "CHECK", "DRY_RUN")]
     [string]$Mode = "LOOP"
 )
 
 $ErrorActionPreference = "Stop"
+if ($Mode -eq "RUN") { $Mode = "LOOP" }
+if ($Mode -eq "DRY_RUN") { $Mode = "CHECK" }
 $env:PYTHONDONTWRITEBYTECODE = "1"
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
@@ -20,9 +22,11 @@ $GitBranch = "main"
 $ExpectedRemote = "banco-aura-dashboard.git"
 
 $PublishFiles = @(
-    "aura-hub.html",
+    "gerenciamento_termico.html",
     "ESTOQUE_DATALOGGERS.html",
     "CONTROLE_ENTREGAS_20D.html",
+    "CONTROLE_ENTREGAS_20D.csv",
+    "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
     "HTMLACOMPANHAMENTO.html",
     "REVERSA_DATALOGGERS.html",
     "GESTAO_DISPOSITIVOS.html",
@@ -34,8 +38,11 @@ $PublishFiles = @(
 )
 
 $DashboardFiles = @(
+    "gerenciamento_termico.html",
     "ESTOQUE_DATALOGGERS.html",
     "CONTROLE_ENTREGAS_20D.html",
+    "CONTROLE_ENTREGAS_20D.csv",
+    "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
     "HTMLACOMPANHAMENTO.html",
     "REVERSA_DATALOGGERS.html",
     "GESTAO_DISPOSITIVOS.html",
@@ -45,7 +52,7 @@ $DashboardFiles = @(
 )
 
 $Urls = @(
-    "https://luan9753.github.io/banco-aura-dashboard/aura-hub.html",
+    "https://luan9753.github.io/banco-aura-dashboard/gerenciamento_termico.html",
     "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
     "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
     "https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html",
@@ -313,14 +320,164 @@ function Copy-PublishedFile {
     Write-Log ("COPIADO: {0} -> {1}" -f $Source, $destination)
 }
 
+function Protect-SensitiveText {
+    param([string]$Text)
+    if ($null -eq $Text) { return "" }
+    $safe = $Text -replace '(https://)([^/\s:@]+):([^@/\s]+)@', '$1***:***@'
+    $safe = $safe -replace '(https://)([^@/\s]+)@', '$1***@'
+    $safe = $safe -replace '(token|password|senha|secret|api[_-]?key)(["'']?\s*[:=]\s*["'']?)[^"''\s]+', '$1$2***'
+    return $safe
+}
+
+function Invoke-GitCapture {
+    param([string[]]$Arguments)
+
+    $lines = New-Object System.Collections.Generic.List[string]
+    $argLine = ($Arguments | ForEach-Object { Quote-Arg $_ }) -join " "
+    $outFile = Join-Path $env:TEMP ("aura_git_{0}_{1}.out" -f $PID, ([guid]::NewGuid().ToString("N")))
+    $errFile = Join-Path $env:TEMP ("aura_git_{0}_{1}.err" -f $PID, ([guid]::NewGuid().ToString("N")))
+    try {
+        $process = Start-Process -FilePath "git" -ArgumentList $argLine -WorkingDirectory $PublishDir -NoNewWindow -PassThru -Wait -RedirectStandardOutput $outFile -RedirectStandardError $errFile
+        $exitCode = $process.ExitCode
+        $stdout = if (Test-Path -LiteralPath $outFile) { [string](Get-Content -LiteralPath $outFile -Raw -ErrorAction SilentlyContinue) } else { "" }
+        $stderr = if (Test-Path -LiteralPath $errFile) { [string](Get-Content -LiteralPath $errFile -Raw -ErrorAction SilentlyContinue) } else { "" }
+        if ($stdout) {
+            foreach ($line in @($stdout.TrimEnd() -split "`r?`n")) {
+                if ($line) { [void]$lines.Add((Protect-SensitiveText ([string]$line))) }
+            }
+        }
+        if ($stderr) {
+            foreach ($line in @($stderr.TrimEnd() -split "`r?`n")) {
+                if ($line) { [void]$lines.Add((Protect-SensitiveText ([string]$line))) }
+            }
+        }
+    } catch {
+        $exitCode = 1
+        [void]$lines.Add((Protect-SensitiveText $_.Exception.Message))
+    } finally {
+        Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
+    }
+
+    return [pscustomobject]@{
+        ExitCode = $exitCode
+        Output = @($lines)
+    }
+}
+
+function Write-GitLines {
+    param(
+        [string]$Title,
+        [string[]]$Lines,
+        [ConsoleColor]$Color = [ConsoleColor]::DarkGray
+    )
+    Write-Host $Title -ForegroundColor $Color
+    Write-Log $Title
+    if (-not $Lines -or $Lines.Count -eq 0) {
+        Write-Host "      <sem saida>" -ForegroundColor DarkGray
+        Write-Log "      <sem saida>"
+        return
+    }
+    foreach ($line in $Lines) {
+        Write-Host ("      " + $line) -ForegroundColor $Color
+        Write-Log ("      " + $line)
+    }
+}
+
+function Get-GitProbableReason {
+    param(
+        [int]$ExitCode,
+        [string]$OutputText
+    )
+    $text = $OutputText.ToLowerInvariant()
+    if ($text -match 'unmerged files|unresolved conflict|resolve your current index') { return "existem arquivos com conflito nao resolvido no indice Git" }
+    if ($text -match 'would be overwritten by merge|local changes would be overwritten') { return "existem alteracoes locais que seriam sobrescritas pelo pull" }
+    if ($text -match 'rebase-merge|rebase-apply|rebase in progress') { return "existe rebase pendente" }
+    if ($text -match 'merge_head|merge in progress') { return "existe merge pendente" }
+    if ($text -match 'index\.lock|unable to create.*lock') { return "existe lock de Git impedindo escrita no indice" }
+    if ($text -match 'authentication failed|could not read username|permission denied|repository not found|403|401') { return "falha de autenticacao/permissao no GitHub" }
+    if ($text -match 'ssl|tls|certificate') { return "falha de SSL/certificado ao acessar o GitHub" }
+    if ($text -match 'could not resolve host|failed to connect|timed out|network') { return "falha de rede ao acessar o GitHub" }
+    if ($ExitCode -ne 0) { return "Git retornou codigo $ExitCode; ver saida acima" }
+    return "sem erro identificado"
+}
+
+function Write-GitSnapshot {
+    Write-Log "[GIT] Diagnostico antes do pull"
+    Write-Host "[GIT] Diagnostico antes do pull" -ForegroundColor Gray
+    Write-Host ("      Pasta atual: {0}" -f $PublishDir) -ForegroundColor DarkGray
+    Write-Log ("[GIT] Pasta atual: {0}" -f $PublishDir)
+
+    $branch = Invoke-GitCapture -Arguments @("branch", "--show-current")
+    $branchText = if ($branch.Output.Count -gt 0 -and $branch.Output[0]) { $branch.Output[0] } else { "<desconhecido>" }
+    Write-Host ("      Branch atual: {0}" -f $branchText) -ForegroundColor DarkGray
+    Write-Log ("[GIT] Branch atual: {0}" -f $branchText)
+    if ($branchText -ne "<desconhecido>" -and $branchText -ne $GitBranch) {
+        Write-Log ("[GIT] AVISO: branch local diferente do alvo remoto ({0}); pull/push continuam usando {1}/{0}." -f $GitBranch, $GitRemote)
+    }
+
+    $remote = Invoke-GitCapture -Arguments @("remote", "get-url", $GitRemote)
+    $remoteText = if ($remote.Output.Count -gt 0 -and $remote.Output[0]) { $remote.Output[0] } else { "<desconhecido>" }
+    Write-Host ("      Remote origin: {0}" -f $remoteText) -ForegroundColor DarkGray
+    Write-Log ("[GIT] Remote origin: {0}" -f $remoteText)
+}
+
+function Test-GitBlockingState {
+    $status = Invoke-GitCapture -Arguments @("status", "--porcelain=v1", "--branch")
+    Write-GitLines -Title "[GIT] Status antes do pull:" -Lines $status.Output
+
+    $unmerged = @($status.Output | Where-Object { $_ -match '^(DD|AU|UD|UA|DU|AA|UU)\s+' })
+    if ($unmerged.Count -gt 0) {
+        $reason = "existem arquivos com conflito nao resolvido: " + (($unmerged | ForEach-Object { $_.Substring(3) }) -join ", ")
+        Write-Host "[GIT] Resultado: ERRO" -ForegroundColor Red
+        Write-Host ("[GIT] Motivo provavel: {0}" -f $reason) -ForegroundColor Red
+        Write-Host "[GIT] Orientacao: resolva o conflito, use git add no arquivo resolvido e rode o atualizador novamente." -ForegroundColor Yellow
+        Write-Log "[GIT] Resultado: ERRO"
+        Write-Log ("[GIT] Motivo provavel: {0}" -f $reason)
+        Write-Log "[GIT] Orientacao: resolva o conflito, use git add no arquivo resolvido e rode o atualizador novamente."
+        throw $reason
+    }
+
+    $rebaseMerge = Test-Path -LiteralPath (Join-Path $PublishDir ".git\rebase-merge")
+    $rebaseApply = Test-Path -LiteralPath (Join-Path $PublishDir ".git\rebase-apply")
+    $mergeHead = Test-Path -LiteralPath (Join-Path $PublishDir ".git\MERGE_HEAD")
+    $indexLock = Test-Path -LiteralPath (Join-Path $PublishDir ".git\index.lock")
+    if ($rebaseMerge -or $rebaseApply) { throw "existe rebase pendente em .git; finalize ou use git rebase --abort apos avaliar o estado" }
+    if ($mergeHead) { throw "existe merge pendente em .git\MERGE_HEAD; finalize ou aborte o merge apos avaliar o estado" }
+    if ($indexLock) { throw "existe .git\index.lock; verifique se outro Git esta em execucao antes de remover" }
+}
+
 function Sync-GitBeforeCycle {
-    Invoke-LoggedProcess -FilePath "git" -Arguments @("pull", "--rebase", "--autostash", $GitRemote, $GitBranch) -WorkingDirectory $PublishDir -Name "git pull --rebase --autostash" -TimeoutSec 180
+    Write-GitSnapshot
+    Test-GitBlockingState
+
+    $pullArgs = @("pull", "--rebase", "--autostash", $GitRemote, $GitBranch)
+    $commandLine = "git " + (($pullArgs | ForEach-Object { Quote-Arg $_ }) -join " ")
+    Write-Host ("[GIT] Executando: {0}" -f $commandLine) -ForegroundColor Gray
+    Write-Log ("[GIT] Executando: {0}" -f $commandLine)
+
+    $result = Invoke-GitCapture -Arguments $pullArgs
+    Write-GitLines -Title "[GIT] Saida:" -Lines $result.Output
+
+    if ($result.ExitCode -ne 0) {
+        $outputText = ($result.Output -join "`n")
+        $reason = Get-GitProbableReason -ExitCode $result.ExitCode -OutputText $outputText
+        Write-Host "[GIT] Resultado: ERRO" -ForegroundColor Red
+        Write-Host ("[GIT] Motivo provavel: {0}" -f $reason) -ForegroundColor Red
+        Write-Host "[GIT] Orientacao: corrija o estado acima e rode CHECK/ONCE novamente." -ForegroundColor Yellow
+        Write-Log "[GIT] Resultado: ERRO"
+        Write-Log ("[GIT] Motivo provavel: {0}" -f $reason)
+        Write-Log "[GIT] Orientacao: corrija o estado acima e rode CHECK/ONCE novamente."
+        throw ("git pull --rebase --autostash falhou com codigo {0}: {1}" -f $result.ExitCode, $reason)
+    }
+
+    Write-Log "[GIT] Resultado: OK"
 }
 
 function Update-HubTimestamp {
     $hubPath = Join-Path $PublishDir "aura-hub.html"
     if (-not (Test-Path -LiteralPath $hubPath -PathType Leaf)) {
-        throw "Hub Aura nao encontrado: $hubPath"
+        Write-Log ("HUB TIMESTAMP: aura-hub.html ausente; etapa ignorada neste pacote.")
+        return
     }
 
     $agora = Get-Date -Format "dd/MM/yyyy HH:mm"
@@ -491,6 +648,7 @@ function Run-Cycle {
         $ok = (Invoke-Step "[VALIDACAO] Arquivos gerados" {
             Test-PublishedFiles -CycleStart $cycleStart -Files $DashboardFiles
             Test-PublishedFiles -CycleStart $cycleStart -Files @("GESTAO_DISPOSITIVOS_PLANILHA_DATA.js", "GESTAO_DISPOSITIVOS_STAGE_DATA.js")
+            Write-Log "PAGINA ESTATICA: gerenciamento_termico.html nao possui script gerador proprio; mantida no ciclo para commit/push e validacao do deploy."
         }) -and $ok
     }
     $blockEstoque = $stepFailures | Where-Object { $_ -match "^Estoque" }
@@ -532,6 +690,7 @@ function Run-Cycle {
         }
         Write-Log "URLs publicadas:"
         $Urls | ForEach-Object { Write-Log ("  " + $_) }
+        Write-Log "Paginas estaticas sem gerador proprio: gerenciamento_termico.html"
     } else {
         Write-Host "Ciclo finalizado com erro. Nada foi publicado." -ForegroundColor Red
         Write-Host ("Verifique o log em: {0}" -f $LogFile) -ForegroundColor Yellow
@@ -549,6 +708,8 @@ function Run-Check {
     Write-Log "CHECK iniciado."
     $script:PythonExe = Select-Python
     Test-Repo
+    Write-GitSnapshot
+    Test-GitBlockingState
 
     $required = @(
         (Join-Path $PublishDir "gerar_html_estoque.py"),
@@ -561,6 +722,7 @@ function Run-Check {
         (Join-Path $DevDir "exportar_planilha_gestao_dispositivos.py"),
         (Join-Path $DevDir "exportar_vtc_stage_gestao.py"),
         (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html"),
+        (Join-Path $PublishDir "gerenciamento_termico.html"),
         (Join-Path $IndicadorDir "gerar_indicador.py")
     )
     foreach ($path in $required) {

@@ -59,6 +59,18 @@ GENERATED_HTML = {
     },
 }
 
+STATIC_HTML = {
+    "gerenciamento_termico.html": {
+        "min_size": 20_000,
+        "markers": [
+            "Gerenciamento T",
+            "INDICADOR_VTCBOX.html",
+            "GESTAO_DISPOSITIVOS.html",
+            "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
+        ],
+    },
+}
+
 HTML_SCOPE_FILES = {
     "estoque": "ESTOQUE_DATALOGGERS.html",
     "controle": "CONTROLE_ENTREGAS_20D.html",
@@ -66,6 +78,7 @@ HTML_SCOPE_FILES = {
     "reversa": "REVERSA_DATALOGGERS.html",
     "rastreio": "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "gestao": "GESTAO_DISPOSITIVOS.html",
+    "gerenciamento_termico": "gerenciamento_termico.html",
 }
 
 GENERATED_DATA = [
@@ -77,6 +90,7 @@ GENERATED_DATA = [
 
 CODE_FILES = [
     "ATUALIZAR_TUDO_10_MIN.bat",
+    "ATUALIZAR_TUDO_10_MIN.ps1",
     "VALIDAR_DASHBOARDS_10_MIN.bat",
     "ATUALIZAR_REVERSA.bat",
     "HTMLACOMPANHAMENTO.py",
@@ -94,6 +108,7 @@ CODE_FILES = [
 ]
 
 PUBLIC_PAGES = {
+    "gerenciamento_termico.html": "https://luan9753.github.io/banco-aura-dashboard/gerenciamento_termico.html",
     "ESTOQUE_DATALOGGERS.html": "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
     "CONTROLE_ENTREGAS_20D.html": "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
     "HTMLACOMPANHAMENTO.html": "https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html",
@@ -348,6 +363,23 @@ def _validate_common_html(name: str, cycle_start: float | None) -> str:
     return text
 
 
+def _validate_static_html(name: str) -> str:
+    spec = STATIC_HTML[name]
+    path = ROOT / name
+    if not path.exists():
+        raise FileNotFoundError(f"{name} nao existe")
+    stat = path.stat()
+    if stat.st_size < spec["min_size"]:
+        raise RuntimeError(f"{name} pequeno demais: {stat.st_size} bytes")
+
+    text = _read_text(path)
+    for marker in spec["markers"]:
+        if marker not in text:
+            raise RuntimeError(f"{name} sem marcador obrigatorio: {marker}")
+    _print(f"[html] {name} OK: pagina estatica sem script gerador proprio; validada para publicacao")
+    return text
+
+
 def _validate_estoque(cycle_start: float | None) -> None:
     text = _validate_common_html("ESTOQUE_DATALOGGERS.html", cycle_start)
     states = _extract_js_json(text, "STATES")
@@ -550,6 +582,7 @@ def command_validate_html(args: argparse.Namespace) -> int:
         "acompanhamento": _validate_acompanhamento_html,
         "rastreio": _validate_rastreio,
         "gestao": _validate_gestao,
+        "gerenciamento_termico": lambda _cycle_start: _validate_static_html("gerenciamento_termico.html"),
     }
     selected = list(validators)
     if args.only:
@@ -641,7 +674,7 @@ def command_changed_files(args: argparse.Namespace) -> int:
         stage_paths: list[str] = []
         timestamp_only: list[str] = []
 
-        html_paths = list(GENERATED_HTML)
+        html_paths = list(GENERATED_HTML) + list(STATIC_HTML)
         if args.only:
             selected = [item.strip().lower() for item in args.only.split(",") if item.strip()]
             invalid = [item for item in selected if item not in HTML_SCOPE_FILES]
@@ -829,6 +862,18 @@ def command_daily_check(args: argparse.Namespace) -> int:
         else:
             alert(f"Nao foi possivel identificar a data exibida em {html_name}")
 
+    for html_name in STATIC_HTML:
+        try:
+            _validate_static_html(html_name)
+            path = ROOT / html_name
+            stat = path.stat()
+            ok(
+                "Pagina estatica sem script gerador proprio validada: "
+                f"{html_name} ({stat.st_size} bytes)"
+            )
+        except Exception as exc:
+            error(f"Validacao da pagina estatica falhou: {html_name}: {exc}")
+
     buffer = io.StringIO()
     validation_error: Exception | None = None
     with contextlib.redirect_stdout(buffer):
@@ -924,6 +969,13 @@ def command_daily_check(args: argparse.Namespace) -> int:
     for html_name, url in PUBLIC_PAGES.items():
         try:
             public_text = _fetch_public_page(url)
+            if html_name in STATIC_HTML:
+                missing = [marker for marker in STATIC_HTML[html_name]["markers"] if marker not in public_text]
+                if missing:
+                    error(f"GitHub Pages respondeu sem marcador da pagina estatica {html_name}: {', '.join(missing)}")
+                else:
+                    ok(f"GitHub Pages validado para pagina estatica: {html_name}")
+                continue
             generated = _extract_generated_value(html_name, public_text)
             generated_dt = _parse_generated_datetime(generated)
             if generated_dt and generated_dt.date() == today:
@@ -959,7 +1011,7 @@ def main(argv: list[str] | None = None) -> int:
     p_html.add_argument(
         "--only",
         default="",
-        help="Escopo separado por virgula: estoque,controle,reversa,acompanhamento.",
+        help="Escopo separado por virgula: estoque,controle,reversa,acompanhamento,rastreio,gestao,gerenciamento_termico.",
     )
     p_html.set_defaults(func=command_validate_html)
 
@@ -971,7 +1023,7 @@ def main(argv: list[str] | None = None) -> int:
     p_changed.add_argument(
         "--only",
         default="",
-        help="Escopo separado por virgula: estoque,controle,reversa,acompanhamento.",
+        help="Escopo separado por virgula: estoque,controle,reversa,acompanhamento,rastreio,gestao,gerenciamento_termico.",
     )
     p_changed.set_defaults(func=command_changed_files)
 

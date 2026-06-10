@@ -6,6 +6,9 @@ ENV_LOCAL_SEGURO/
 *.pem
 secrets.json
 credentials.json
+.aura_token.txt
+*.token
+tokens/
 __pycache__/
 *.pyc
 logs/

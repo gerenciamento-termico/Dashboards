@@ -22,6 +22,7 @@ $GitBranch = "main"
 $ExpectedRemote = "banco-aura-dashboard.git"
 
 $PublishFiles = @(
+    "aura-hub.html",
     "gerenciamento_termico.html",
     "ESTOQUE_DATALOGGERS.html",
     "CONTROLE_ENTREGAS_20D.html",
@@ -52,6 +53,7 @@ $DashboardFiles = @(
 )
 
 $Urls = @(
+    "https://luan9753.github.io/banco-aura-dashboard/aura-hub.html",
     "https://luan9753.github.io/banco-aura-dashboard/gerenciamento_termico.html",
     "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
     "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",

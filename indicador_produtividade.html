@@ -69,7 +69,14 @@
     *::-webkit-scrollbar{width:0;height:0;display:none}
     .scroll,.table-scroll{scrollbar-width:none;-ms-overflow-style:none}
     .scroll::-webkit-scrollbar,.table-scroll::-webkit-scrollbar{width:0;height:0;display:none}
-  
+
+    /* Restore root scrollbar visibility for page navigation */
+    html,body{scrollbar-width:auto;-webkit-overflow-scrolling:touch}
+    html::-webkit-scrollbar,body::-webkit-scrollbar{width:10px;height:10px}
+    html::-webkit-scrollbar-track,body::-webkit-scrollbar-track{background:rgba(11,24,45,.4);border-radius:999px}
+    html::-webkit-scrollbar-thumb,body::-webkit-scrollbar-thumb{background:rgba(47,128,208,.45);border-radius:999px}
+    html::-webkit-scrollbar-thumb:hover,body::-webkit-scrollbar-thumb:hover{background:rgba(47,128,208,.65)}
+
     /* Compact third-row category panels */
     .grid>.panel:nth-child(6),.grid>.panel:nth-child(7),.grid>.panel:nth-child(8){min-height:150px;padding:10px 12px}
     .grid>.panel:nth-child(6) h2,.grid>.panel:nth-child(7) h2,.grid>.panel:nth-child(8) h2{font-size:13px;margin-bottom:8px}

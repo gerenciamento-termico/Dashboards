@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos) + Aura Snapshot",
-  "geradoEm": "13/06/2026 07:46:46",
+  "geradoEm": "13/06/2026 08:01:06",
   "summary": {
     "ARES": {
       "totalEstoque": null,

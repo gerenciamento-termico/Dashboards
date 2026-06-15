@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos) + Aura Snapshot",
-  "geradoEm": "15/06/2026 05:00:35",
+  "geradoEm": "15/06/2026 05:15:35",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -30,16 +30,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 796,
+      "loggersTransito": 877,
       "loggersEntregues": 4593,
       "loggersRetornados": 1403,
-      "registrosEntregas": 54523,
+      "registrosEntregas": 54625,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "15/06/2026 04:54:24",
-      "totalRegistros": 54523
+      "ultimaAtualizacao": "15/06/2026 05:09:24",
+      "totalRegistros": 54625
     },
     "SHIELD": {
       "totalEstoque": null,
@@ -69,16 +69,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 796,
+      "loggersTransito": 877,
       "loggersEntregues": 4831,
       "loggersRetornados": 1562,
-      "registrosEntregas": 60055,
+      "registrosEntregas": 60157,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "15/06/2026 04:54:24",
-      "totalRegistros": 60055
+      "ultimaAtualizacao": "15/06/2026 05:09:24",
+      "totalRegistros": 60157
     }
   },
   "operacionalEstoqueFonte": "ESTOQUE_DATALOGGERS.html :: const STATES",

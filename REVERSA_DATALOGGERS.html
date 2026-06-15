@@ -204,7 +204,7 @@ footer{margin-top:24px;font-size:.75rem;color:#556070;text-align:right;}
 <!-- ===== VISAO DETALHADA ===== -->
 <div id="tab-detalhe" class="tab-content" style="display:none">
   <h3 class="section-title">Detalhamento</h3>
-  <a id="csv-download" class="csv-link" href="#" download="dataloggers_filtrado.csv">&#8595; Baixar CSV</a>
+  <a id="csv-download" class="csv-link" href="#" download="dataloggers_filtrado.xlsx">&#8595; Baixar XLSX</a>
   <div class="detail-wrap" style="max-height:600px;overflow-y:auto;margin-top:8px;">
     <table class="detail-tbl">
       <thead><tr><th>Pedido</th><th>Logger</th><th>Tipo Datalogger</th><th>UF</th><th>Data de Entrega</th><th>Ultimo Historico</th><th>Agente</th><th>Status Retorno</th><th>UF Destino</th><th>Cidade Destino</th><th>Destinatario</th><th>Motorista</th></tr></thead>
@@ -317,11 +317,151 @@ function buildTableRows(rows){
   }).join("");
 }
 
-function buildCsvHref(headers, rows){
-  const escape = v => '"' + String(v).replace(/"/g,'""') + '"';
-  const lines = [headers.map(escape).join(",")].concat(rows.map(r => r.slice(0, headers.length).map(escape).join(",")));
-  const blob = new Blob([lines.join("\n")], {type:"text/csv;charset=utf-8;"});
-  return URL.createObjectURL(blob);
+function xmlEscape(value){
+  return String(value ?? "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&apos;");
+}
+
+function utf8Bytes(text){
+  return new TextEncoder().encode(text);
+}
+
+const CRC_TABLE = (() => {
+  const table = new Uint32Array(256);
+  for (let i = 0; i < 256; i++) {
+    let c = i;
+    for (let k = 0; k < 8; k++) c = (c & 1) ? (0xedb88320 ^ (c >>> 1)) : (c >>> 1);
+    table[i] = c >>> 0;
+  }
+  return table;
+})();
+
+function crc32(bytes){
+  let crc = 0xffffffff;
+  for (let i = 0; i < bytes.length; i++) {
+    crc = CRC_TABLE[(crc ^ bytes[i]) & 0xff] ^ (crc >>> 8);
+  }
+  return (crc ^ 0xffffffff) >>> 0;
+}
+
+function writeUint16(out, value){
+  out.push(value & 0xff, (value >>> 8) & 0xff);
+}
+
+function writeUint32(out, value){
+  out.push(value & 0xff, (value >>> 8) & 0xff, (value >>> 16) & 0xff, (value >>> 24) & 0xff);
+}
+
+function dosDateTime(date){
+  const year = Math.max(1980, date.getFullYear());
+  const dosTime = (date.getHours() << 11) | (date.getMinutes() << 5) | Math.floor(date.getSeconds() / 2);
+  const dosDate = ((year - 1980) << 9) | ((date.getMonth() + 1) << 5) | date.getDate();
+  return { dosTime, dosDate };
+}
+
+function createZip(files){
+  const chunks = [];
+  const central = [];
+  let offset = 0;
+  const dt = dosDateTime(new Date());
+  files.forEach(file => {
+    const nameBytes = utf8Bytes(file.name);
+    const data = utf8Bytes(file.content);
+    const crc = crc32(data);
+    const local = [];
+    writeUint32(local, 0x04034b50);
+    writeUint16(local, 20);
+    writeUint16(local, 0x0800);
+    writeUint16(local, 0);
+    writeUint16(local, dt.dosTime);
+    writeUint16(local, dt.dosDate);
+    writeUint32(local, crc);
+    writeUint32(local, data.length);
+    writeUint32(local, data.length);
+    writeUint16(local, nameBytes.length);
+    writeUint16(local, 0);
+    local.push(...nameBytes);
+    chunks.push(new Uint8Array(local), data);
+
+    const entry = [];
+    writeUint32(entry, 0x02014b50);
+    writeUint16(entry, 20);
+    writeUint16(entry, 20);
+    writeUint16(entry, 0x0800);
+    writeUint16(entry, 0);
+    writeUint16(entry, dt.dosTime);
+    writeUint16(entry, dt.dosDate);
+    writeUint32(entry, crc);
+    writeUint32(entry, data.length);
+    writeUint32(entry, data.length);
+    writeUint16(entry, nameBytes.length);
+    writeUint16(entry, 0);
+    writeUint16(entry, 0);
+    writeUint16(entry, 0);
+    writeUint16(entry, 0);
+    writeUint32(entry, 0);
+    writeUint32(entry, offset);
+    entry.push(...nameBytes);
+    central.push(new Uint8Array(entry));
+    offset += local.length + data.length;
+  });
+  const centralOffset = offset;
+  let centralSize = 0;
+  central.forEach(entry => {
+    chunks.push(entry);
+    centralSize += entry.length;
+  });
+  const end = [];
+  writeUint32(end, 0x06054b50);
+  writeUint16(end, 0);
+  writeUint16(end, 0);
+  writeUint16(end, files.length);
+  writeUint16(end, files.length);
+  writeUint32(end, centralSize);
+  writeUint32(end, centralOffset);
+  writeUint16(end, 0);
+  chunks.push(new Uint8Array(end));
+  return new Blob(chunks, {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+
+function columnName(index){
+  let name = "";
+  let n = index + 1;
+  while (n > 0) {
+    const rem = (n - 1) % 26;
+    name = String.fromCharCode(65 + rem) + name;
+    n = Math.floor((n - 1) / 26);
+  }
+  return name;
+}
+
+function buildWorksheetXml(headers, rows){
+  const data = [headers].concat(rows.map(r => r.slice(0, headers.length)));
+  const sheetRows = data.map((cells, rowIndex) => {
+    const cellXml = cells.map((value, colIndex) => {
+      const ref = columnName(colIndex) + (rowIndex + 1);
+      return '<c r="' + ref + '" t="inlineStr"><is><t>' + xmlEscape(value) + '</t></is></c>';
+    }).join("");
+    return '<row r="' + (rowIndex + 1) + '">' + cellXml + '</row>';
+  }).join("");
+  return '<?xml version="1.0" encoding="UTF-8" standalone="yes"?>' +
+    '<worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main">' +
+    '<sheetData>' + sheetRows + '</sheetData></worksheet>';
+}
+
+function buildXlsxHref(headers, rows){
+  const files = [
+    { name: "[Content_Types].xml", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>' },
+    { name: "_rels/.rels", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>' },
+    { name: "xl/workbook.xml", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Detalhamento" sheetId="1" r:id="rId1"/></sheets></workbook>' },
+    { name: "xl/_rels/workbook.xml.rels", content: '<?xml version="1.0" encoding="UTF-8" standalone="yes"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>' },
+    { name: "xl/worksheets/sheet1.xml", content: buildWorksheetXml(headers, rows) },
+  ];
+  return URL.createObjectURL(createZip(files));
 }
 
 let _currentDays = DEFAULT_PERIOD;
@@ -578,7 +718,7 @@ function renderAll(days, tipo){
   const tbody = document.getElementById("detail-tbody");
   if (tbody) tbody.innerHTML = computed.table.rows.length ? buildTableRows(computed.table.rows) : '<tr><td colspan="12" style="padding:16px;text-align:center;color:#9fb0c8;">Sem dados no filtro selecionado</td></tr>';
   const csvLink = document.getElementById("csv-download");
-  if (csvLink) csvLink.href = buildCsvHref(computed.table.headers, rows);
+  if (csvLink) csvLink.href = buildXlsxHref(computed.table.headers, rows);
 }
 
 function switchPeriod(days){

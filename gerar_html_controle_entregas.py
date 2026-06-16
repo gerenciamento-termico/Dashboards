@@ -119,7 +119,6 @@ def _read_pg(sql: str, params: dict | None = None) -> pd.DataFrame:
     engine = create_engine(
         _build_pg_url(),
         pool_pre_ping=True,
-        connect_args={"options": "-c statement_timeout=60000"},
     )
     with engine.connect() as conn:
         return pd.read_sql(text(sql), conn, params=params)
@@ -181,7 +180,6 @@ def prepare_data(df: pd.DataFrame) -> pd.DataFrame:
     if "Destinatario" in out.columns:
         out["Destinatario"] = clean_text(out["Destinatario"]).replace("", "SEM DESTINATARIO")
 
-    out["Agente"] = out["Agente"].replace("", "SEM AGENTE")
     out["UF"] = out["UF"].replace("", "SEM UF")
     out["Tipo Datalogger"] = out["Tipo Datalogger"].replace("", "SEM TIPO")
     if "Status Retorno" in out.columns:
@@ -450,8 +448,14 @@ def build_sla_section() -> str:
 
         rank_df = pd.DataFrame(columns=["Agente", "Pendentes", "MediaDias", "MaiorDia"])
         if not pending_view.empty:
+            rank_source = pending_view.copy()
+            rank_source["Agente"] = rank_source["Agente"].fillna("").astype(str).str.strip()
+            rank_source = rank_source[rank_source["Agente"].ne("")].copy()
+        else:
+            rank_source = pending_view
+        if not rank_source.empty:
             rank_df = (
-                pending_view.groupby("Agente", as_index=False)
+                rank_source.groupby("Agente", as_index=False)
                 .agg(
                     Pendentes=("Logger", "count"),
                     MediaDias=("Dias sem retorno", "mean"),
@@ -462,7 +466,6 @@ def build_sla_section() -> str:
                 .copy()
             )
             rank_df["Agente"] = rank_df["Agente"].fillna("").astype(str).str.strip()
-            rank_df.loc[rank_df["Agente"].eq(""), "Agente"] = "SEM AGENTE"
             rank_df["PendentesTxt"] = rank_df["Pendentes"].map(lambda v: fmt_int(int(v)))
 
     pending_export = pending_view.copy()
@@ -662,7 +665,9 @@ def _agent_return_stack(df: pd.DataFrame, limit: int = 12) -> pd.DataFrame:
 
     base = df.copy()
     base["Agente"] = base["Agente"].fillna("").astype(str).str.strip()
-    base.loc[base["Agente"].eq(""), "Agente"] = "SEM AGENTE"
+    base = base[base["Agente"].ne("")].copy()
+    if base.empty:
+        return pd.DataFrame(columns=["Agente", "Retornado", "Pendente", "Total", "PctRetornado"])
     base["Status Retorno"] = base["Status Retorno"].fillna("").astype(str).str.strip()
 
     agg = (
@@ -1655,8 +1660,9 @@ def build_page(df: pd.DataFrame) -> str:
       function buildAgentSeries(rows) {{
         const map = new Map();
         rows.forEach(function(row) {{
-          const agent = clean(row.Agente) || "SEM AGENTE";
+          const agent = clean(row.Agente);
           const logger = clean(row.Logger);
+          if (!agent) return;
           if (!logger) return;
           if (!map.has(agent)) map.set(agent, {{ ret: new Set(), pend: new Set() }});
           const bucket = map.get(agent);

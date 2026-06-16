@@ -22,16 +22,13 @@ $GitBranch = "main"
 $ExpectedRemote = "banco-aura-dashboard.git"
 
 $PublishFiles = @(
-    "aura-hub.html",
     "gerenciamento_termico.html",
     "ESTOQUE_DATALOGGERS.html",
     "CONTROLE_ENTREGAS_20D.html",
     "CONTROLE_ENTREGAS_20D.csv",
     "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
-    "HTMLACOMPANHAMENTO.html",
     "REVERSA_DATALOGGERS.html",
     "GESTAO_DISPOSITIVOS.html",
-    "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js",
     "GESTAO_DISPOSITIVOS_STAGE_DATA.js",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "INDICADOR_VTCBOX.html",
@@ -44,7 +41,6 @@ $DashboardFiles = @(
     "CONTROLE_ENTREGAS_20D.html",
     "CONTROLE_ENTREGAS_20D.csv",
     "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
-    "HTMLACOMPANHAMENTO.html",
     "REVERSA_DATALOGGERS.html",
     "GESTAO_DISPOSITIVOS.html",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
@@ -53,11 +49,9 @@ $DashboardFiles = @(
 )
 
 $Urls = @(
-    "https://luan9753.github.io/banco-aura-dashboard/aura-hub.html",
     "https://luan9753.github.io/banco-aura-dashboard/gerenciamento_termico.html",
     "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
     "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
-    "https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html",
     "https://luan9753.github.io/banco-aura-dashboard/REVERSA_DATALOGGERS.html",
     "https://luan9753.github.io/banco-aura-dashboard/GESTAO_DISPOSITIVOS.html",
     "https://luan9753.github.io/banco-aura-dashboard/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
@@ -475,27 +469,6 @@ function Sync-GitBeforeCycle {
     Write-Log "[GIT] Resultado: OK"
 }
 
-function Update-HubTimestamp {
-    $hubPath = Join-Path $PublishDir "aura-hub.html"
-    if (-not (Test-Path -LiteralPath $hubPath -PathType Leaf)) {
-        Write-Log ("HUB TIMESTAMP: aura-hub.html ausente; etapa ignorada neste pacote.")
-        return
-    }
-
-    $agora = Get-Date -Format "dd/MM/yyyy HH:mm"
-    $content = Get-Content -LiteralPath $hubPath -Raw -Encoding UTF8
-    $pattern = '(Banco Aura Dashboard Hub[^<]*Atualizado em )\d{2}/\d{2}/\d{4}( \d{2}:\d{2})?'
-    if ($content -notmatch $pattern) {
-        throw "Rodape do Hub nao encontrado para atualizar timestamp."
-    }
-
-    $updated = [regex]::Replace($content, $pattern, { param($match) $match.Groups[1].Value + $agora }, 1)
-    $utf8NoBom = New-Object System.Text.UTF8Encoding -ArgumentList $false
-    [System.IO.File]::WriteAllText($hubPath, $updated, $utf8NoBom)
-    (Get-Item -LiteralPath $hubPath).LastWriteTime = Get-Date
-    Write-Log ("HUB TIMESTAMP: aura-hub.html atualizado para {0}" -f $agora)
-}
-
 function Publish-Changes {
     $preStaged = @(& git -C $PublishDir diff --cached --name-only)
     if ($preStaged.Count -gt 0) {
@@ -515,8 +488,24 @@ function Publish-Changes {
     }
 
     $normalFiles = $PublishFiles | Where-Object { $_ -ne "relatorio_analitico_vtcbox.xlsx" }
-    Invoke-LoggedProcess -FilePath "git" -Arguments (@("add", "--") + $normalFiles) -WorkingDirectory $PublishDir -Name "git add arquivos publicados" -TimeoutSec 60 -Quiet
-    Invoke-LoggedProcess -FilePath "git" -Arguments @("add", "-f", "--", "relatorio_analitico_vtcbox.xlsx") -WorkingDirectory $PublishDir -Name "git add -f relatorio xlsx" -TimeoutSec 60 -Quiet
+    # Somente inclua no git add os arquivos que existem no disco para evitar falha quando
+    # arquivos opcionais (ex: aura-hub.html) estiverem ausentes.
+    $existingNormalFiles = @()
+    foreach ($f in $normalFiles) {
+        if (Test-Path -LiteralPath (Join-Path $PublishDir $f)) { $existingNormalFiles += $f }
+    }
+    if ($existingNormalFiles.Count -gt 0) {
+        Invoke-LoggedProcess -FilePath "git" -Arguments (@("add", "--") + $existingNormalFiles) -WorkingDirectory $PublishDir -Name "git add arquivos publicados" -TimeoutSec 60 -Quiet
+    } else {
+        Write-Log "Nenhum dos arquivos normais existem no disco; pulando git add para esses arquivos."
+    }
+
+    # relatorio_analitico_vtcbox.xlsx deve ser forçado apenas se existir
+    if (Test-Path -LiteralPath (Join-Path $PublishDir "relatorio_analitico_vtcbox.xlsx")) {
+        Invoke-LoggedProcess -FilePath "git" -Arguments @("add", "-f", "--", "relatorio_analitico_vtcbox.xlsx") -WorkingDirectory $PublishDir -Name "git add -f relatorio xlsx" -TimeoutSec 60 -Quiet
+    } else {
+        Write-Log "relatorio_analitico_vtcbox.xlsx ausente; pulando git add -f."
+    }
 
     $staged = @(& git -C $PublishDir diff --cached --name-only)
     $bad = @($staged | Where-Object { $PublishFiles -notcontains $_ })
@@ -591,53 +580,32 @@ function Run-Cycle {
             Add-StepFailure -Failures $stepFailures -Name "Controle Entregas" -Message "falha ao gerar; arquivo anterior sera preservado se existir"
         }
 
-        if (-not (Invoke-Step "[3/7] Acompanhamento" {
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "HTMLACOMPANHAMENTO.py")) -WorkingDirectory $PublishDir -Name "HTMLACOMPANHAMENTO.py"
-        })) {
-            Add-StepFailure -Failures $stepFailures -Name "Acompanhamento" -Message "falha ao gerar; arquivo anterior sera preservado se existir"
-        }
-
-        if (-not (Invoke-Step "[4/7] Reversa" {
-            $snapshot = Invoke-OptionalProcess -Label "gerar_snapshot_reversa.py" -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_snapshot_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_snapshot_reversa.py"
-            if (-not $snapshot.Ok) {
-                Add-StepFailure -Failures $stepFailures -Name "Reversa snapshot" -Message $snapshot.Message
-            }
-            $modelo = Invoke-OptionalProcess -Label "gerar_modelo_final_reversa.py" -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_modelo_final_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_modelo_final_reversa.py"
-            if (-not $modelo.Ok) {
-                Add-StepFailure -Failures $stepFailures -Name "Reversa modelo" -Message $modelo.Message
-            }
+        if (-not (Invoke-Step "[3/6] Reversa" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_snapshot_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_snapshot_reversa.py"
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_modelo_final_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_modelo_final_reversa.py"
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_reversa.py")) -WorkingDirectory $PublishDir -Name "gerar_html_reversa.py"
         })) {
-            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao gerar HTML; arquivo anterior sera preservado se existir"
+            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao atualizar dados/HTML; ciclo sera interrompido para evitar publicar arquivo antigo"
+            $ok = $false
         }
 
-        if (-not (Invoke-Step "[5/7] Gestao Dispositivos" {
-            $planilha = Invoke-OptionalProcess -Label "exportar_planilha_gestao_dispositivos.py" -FilePath $script:PythonExe -Arguments @((Join-Path $DevDir "exportar_planilha_gestao_dispositivos.py")) -WorkingDirectory $DevDir -Name "exportar_planilha_gestao_dispositivos.py"
-            if (-not $planilha.Ok) {
-                Add-StepFailure -Failures $stepFailures -Name "Gestao planilha" -Message "Conex*.xlsx ausente ou invalido; GESTAO_DISPOSITIVOS_PLANILHA_DATA.js anterior sera preservado"
-            }
-            $stage = Invoke-OptionalProcess -Label "exportar_vtc_stage_gestao.py" -FilePath $script:PythonExe -Arguments @((Join-Path $DevDir "exportar_vtc_stage_gestao.py")) -WorkingDirectory $DevDir -Name "exportar_vtc_stage_gestao.py"
-            if (-not $stage.Ok) {
-                Add-StepFailure -Failures $stepFailures -Name "Gestao VTC Stage" -Message $stage.Message
-            }
+        if (-not (Invoke-Step "[4/6] Gestao Dispositivos" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $DevDir "exportar_vtc_stage_gestao.py")) -WorkingDirectory $DevDir -Name "exportar_vtc_stage_gestao.py"
             Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html") -DestinationName "GESTAO_DISPOSITIVOS.html"
-            if (Test-Path -LiteralPath (Join-Path $DevDir "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js")) {
-                Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js") -DestinationName "GESTAO_DISPOSITIVOS_PLANILHA_DATA.js"
-            }
-            if (Test-Path -LiteralPath (Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js")) {
-                Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js") -DestinationName "GESTAO_DISPOSITIVOS_STAGE_DATA.js"
-            }
+            Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js") -DestinationName "GESTAO_DISPOSITIVOS_STAGE_DATA.js"
         })) {
-            Add-StepFailure -Failures $stepFailures -Name "Gestao Dispositivos" -Message "falha ao publicar arquivos da gestao; arquivos anteriores serao preservados se existirem"
+            Add-StepFailure -Failures $stepFailures -Name "Gestao Dispositivos" -Message "falha ao gerar/copiar Stage; ciclo sera interrompido para evitar publicar dado antigo"
+            $ok = $false
         }
 
-        if (-not (Invoke-Step "[6/7] Rastreio Caixas Sem Logger" {
+        if (-not (Invoke-Step "[5/6] Rastreio Caixas Sem Logger" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_rastreio_caixas_sem_datalogger.py")) -WorkingDirectory $PublishDir -Name "gerar_html_rastreio_caixas_sem_datalogger.py"
         })) {
-            Add-StepFailure -Failures $stepFailures -Name "Rastreio Caixas Sem Logger" -Message "falha ao gerar; arquivo anterior sera preservado se existir"
+            Add-StepFailure -Failures $stepFailures -Name "Rastreio Caixas Sem Logger" -Message "falha ao gerar; ciclo sera interrompido para evitar publicar arquivo antigo"
+            $ok = $false
         }
 
-        if (-not (Invoke-Step "[7/7] Indicador VTCBOX" {
+        if (-not (Invoke-Step "[6/6] Indicador VTCBOX" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $IndicadorDir "gerar_indicador.py")) -WorkingDirectory $IndicadorDir -Name "Indicador VTCBOX gerar_indicador.py"
             Copy-PublishedFile -Source (Join-Path $IndicadorDir "INDICADOR_VTCBOX.html") -DestinationName "INDICADOR_VTCBOX.html"
             Copy-PublishedFile -Source (Join-Path $IndicadorDir "relatorio_analitico_vtcbox.xlsx") -DestinationName "relatorio_analitico_vtcbox.xlsx"
@@ -649,7 +617,7 @@ function Run-Cycle {
     if ($ok) {
         $ok = (Invoke-Step "[VALIDACAO] Arquivos gerados" {
             Test-PublishedFiles -CycleStart $cycleStart -Files $DashboardFiles
-            Test-PublishedFiles -CycleStart $cycleStart -Files @("GESTAO_DISPOSITIVOS_PLANILHA_DATA.js", "GESTAO_DISPOSITIVOS_STAGE_DATA.js")
+            Test-PublishedFiles -CycleStart $cycleStart -Files @("GESTAO_DISPOSITIVOS_STAGE_DATA.js")
             Write-Log "PAGINA ESTATICA: gerenciamento_termico.html nao possui script gerador proprio; mantida no ciclo para commit/push e validacao do deploy."
         }) -and $ok
     }
@@ -662,9 +630,7 @@ function Run-Cycle {
     }
 
     if ($ok) {
-        $ok = (Invoke-Step "[HUB] Timestamp do footer" {
-            Update-HubTimestamp
-        }) -and $ok
+        # aura-hub.html não faz parte do ciclo de atualização a cada 10 minutos.
     }
 
     if ($ok) {
@@ -716,7 +682,6 @@ function Run-Check {
     $required = @(
         (Join-Path $PublishDir "gerar_html_estoque.py"),
         (Join-Path $PublishDir "gerar_html_controle_entregas.py"),
-        (Join-Path $PublishDir "HTMLACOMPANHAMENTO.py"),
         (Join-Path $PublishDir "gerar_html_reversa.py"),
         (Join-Path $PublishDir "gerar_html_rastreio_caixas_sem_datalogger.py"),
         (Join-Path $StreamlitDir "gerar_snapshot_reversa.py"),

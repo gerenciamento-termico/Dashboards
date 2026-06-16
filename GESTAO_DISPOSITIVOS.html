@@ -371,12 +371,11 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
   <section class="hero-wrap">
     <h1 class="hero-title">Controle de Dispositivos em Trânsito</h1>
     <div class="hero-sub">
-      Painel local consolidado para trânsito, entregas, retornos e estoque operacional.
-      Conexão opcional com VTC STAGE e fallback para JSONs locais.
+      Painel consolidado diretamente do VTC STAGE para trânsito e entregas, sem fallback local.
     </div>
     <div class="hero-meta">
       <span class="hero-pill" id="pill-stage">VTC Stage: aguardando</span>
-      <span class="hero-pill" id="pill-local">JSON local: aguardando</span>
+      <span class="hero-pill" id="pill-local">Fallback local: bloqueado</span>
       <span class="hero-pill">Atualização: <span id="ultima-atualizacao">--</span></span>
     </div>
   </section>
@@ -503,7 +502,6 @@ footer{margin-top:20px;font-size:.75rem;color:#556070;text-align:right;}
   <footer>Arquivo em produção - publicado no GitHub Pages - Pacote Aura</footer>
 </main>
 
-<script src="GESTAO_DISPOSITIVOS_PLANILHA_DATA.js"></script>
 <script src="GESTAO_DISPOSITIVOS_STAGE_DATA.js"></script>
 <script>
 const CONFIG = {
@@ -539,12 +537,7 @@ const CONFIG = {
   },
   tiposDispositivo: ["ARES", "ARES COM SONDA", "SENSOR VTC", "SHIELD", "SYOS"],
   fontes: {
-    // Configure aqui quando o endpoint do VTC STAGE estiver disponível.
-    // Exemplo: "https://vtc-stage.seu-dominio/api/gestao-dispositivos"
-    vtcStageUrl: "",
-    estoqueDashboard: "ESTOQUE_DATALOGGERS.html",
-    estoqueLocal: "data/estoque.json",
-    entregasLocal: "data/entregas.json"
+    estoqueDashboard: "ESTOQUE_DATALOGGERS.html"
   },
   timeoutStageMs: 8000
 };
@@ -612,6 +605,10 @@ function numberOrNull(value) {
   if (value === null || value === undefined || value === "") return null;
   const number = Number(value);
   return Number.isFinite(number) ? number : null;
+}
+
+function hasMetric(value) {
+  return value !== null && value !== undefined && value !== "";
 }
 
 function setText(id, value) {
@@ -960,7 +957,7 @@ function carregarVtcStageLocal(resultado) {
   setSourceStatus("status-estoque", "Aguardando ESTOQUE_DATALOGGERS.html");
   setSourceStatus("status-entregas", `${fmt(all.registrosEntregas || 0)} registros`);
   setPill("pill-stage", "VTC Stage: snapshot carregado", "ok");
-  setPill("pill-local", "JSON local: nao usado", "warn");
+  setPill("pill-local", "Fallback local: bloqueado", "warn");
   logInfo(`${fonteLocal} carregado`, {
     geradoEm: resultado.ultimaAtualizacao,
     registrosEntregas: all.registrosEntregas || 0,
@@ -984,60 +981,13 @@ async function carregarDados() {
     return resultado;
   }
 
-  const stageUrl = String(CONFIG.fontes.vtcStageUrl || "").trim();
-  if (stageUrl) {
-    setSourceStatus("status-stage", "Conectando...");
-    const stage = await fetchJson(stageUrl, "VTC STAGE", CONFIG.timeoutStageMs);
-    if (stage.ok) {
-      const stageData = splitStagePayload(stage.data);
-      resultado.estoque.push(...stageData.estoque);
-      resultado.entregas.push(...stageData.entregas);
-      resultado.fontes.push("VTC STAGE API");
-      setSourceStatus("status-stage", `${fmt(stageData.estoque.length + stageData.entregas.length)} registros`);
-      setPill("pill-stage", "VTC STAGE: conectado", "ok");
-    } else {
-      resultado.erros.push(`VTC STAGE: ${stage.erro}`);
-      setSourceStatus("status-stage", "Falhou");
-      setPill("pill-stage", "VTC STAGE: indisponivel", "warn");
-    }
-  } else {
-    setSourceStatus("status-stage", "URL não configurada");
-    setPill("pill-stage", "VTC STAGE: não configurado", "warn");
-    logInfo("VTC STAGE sem URL configurada; seguindo com JSON local.");
-  }
-
-  const [estoqueLocal, entregasLocal] = await Promise.all([
-    fetchJson(CONFIG.fontes.estoqueLocal, "estoque.json", 10000),
-    fetchJson(CONFIG.fontes.entregasLocal, "entregas.json", 10000)
-  ]);
-
-  if (estoqueLocal.ok) {
-    const rows = asArray(estoqueLocal.data);
-    resultado.estoque.push(...rows);
-    resultado.fontes.push("estoque.json");
-    setSourceStatus("status-estoque", `${fmt(rows.length)} registros`);
-  } else {
-    resultado.erros.push(`estoque.json: ${estoqueLocal.erro}`);
-    setSourceStatus("status-estoque", "Não carregado");
-  }
-
-  if (entregasLocal.ok) {
-    const rows = asArray(entregasLocal.data);
-    resultado.entregas.push(...rows);
-    resultado.fontes.push("entregas.json");
-    setSourceStatus("status-entregas", `${fmt(rows.length)} registros`);
-  } else {
-    resultado.erros.push(`entregas.json: ${entregasLocal.erro}`);
-    setSourceStatus("status-entregas", "Não carregado");
-  }
-
-  setPill(
-    "pill-local",
-    resultado.fontes.some(f => f.includes(".json")) ? "JSON local: carregado" : "JSON local: indisponível",
-    resultado.fontes.some(f => f.includes(".json")) ? "ok" : "warn"
-  );
-
-  return resultado;
+  resultado.erros.push("GESTAO_DISPOSITIVOS_STAGE_DATA.js ausente ou invalido; nenhum fallback local sera usado.");
+  setSourceStatus("status-stage", "Falhou");
+  setSourceStatus("status-estoque", "Nao carregado");
+  setSourceStatus("status-entregas", "Nao carregado");
+  setPill("pill-stage", "VTC Stage: indisponivel", "warn");
+  setPill("pill-local", "Fallback local: bloqueado", "warn");
+  throw new Error("Fonte Stage obrigatoria indisponivel.");
 }
 
 function statusIn(row, statusList) {
@@ -1065,7 +1015,7 @@ function getAvailableFields(rows) {
   return Array.from(fields).sort();
 }
 
-function detectField(availableFields, aliases, fallback) {
+function detectField(availableFields, aliases, defaultField) {
   const normalizedMap = new Map(availableFields.map(field => [normalizeText(field), field]));
   for (const alias of aliases || []) {
     const exact = availableFields.find(field => field === alias);
@@ -1073,7 +1023,7 @@ function detectField(availableFields, aliases, fallback) {
     const normalized = normalizedMap.get(normalizeText(alias));
     if (normalized) return normalized;
   }
-  if (fallback && availableFields.includes(fallback)) return fallback;
+  if (defaultField && availableFields.includes(defaultField)) return defaultField;
   return "";
 }
 
@@ -1091,10 +1041,10 @@ function buildEntregaFieldMap(entregas) {
   const signature = JSON.stringify({ availableFields, map });
   if (signature !== LAST_FIELD_SIGNATURE) {
     LAST_FIELD_SIGNATURE = signature;
-    logInfo("Campos disponíveis em entregas.json/VTC STAGE", availableFields);
+    logInfo("Campos disponiveis no VTC STAGE", availableFields);
     logInfo("Campos detectados para regra de Loggers em trânsito", map);
     ["pedido", "logger", "dataColeta", "dataEntrega"].forEach(key => {
-      if (!map[key]) logWarn(`Campo equivalente a ${key} não encontrado; regra usará fallback seguro.`);
+      if (!map[key]) logWarn(`Campo equivalente a ${key} nao encontrado no VTC STAGE.`);
     });
     if (!map.statusColeta && !map.statusGeral) logWarn("Campo equivalente a status de coleta não encontrado.");
     if (!map.statusEntrega && !map.statusGeral) logWarn("Campo equivalente a status entregue não encontrado.");
@@ -1212,7 +1162,9 @@ function calcularIndicadoresOperacionais(selectedTipos = CONFIG.tiposDispositivo
         acc.totalEstoque += Number(item.totalEstoque || 0);
         acc.loggersTransito += Number(item.loggersTransito || 0);
         acc.loggersEntregues += Number(item.loggersEntregues || 0);
-        acc.loggersRetornados += Number(item.loggersRetornados || 0);
+        acc.loggersRetornados = acc.loggersRetornados === null || !hasMetric(item.loggersRetornados)
+          ? null
+          : acc.loggersRetornados + Number(item.loggersRetornados || 0);
         acc.registrosEntregas += Number(item.registrosEntregas || 0);
         acc.registrosEstoque += Number(item.registrosEstoque || 0);
         acc.semStatus += Number(item.semStatus || 0);
@@ -1221,15 +1173,16 @@ function calcularIndicadoresOperacionais(selectedTipos = CONFIG.tiposDispositivo
         return acc;
       }, { totalEstoque: 0, loggersTransito: 0, loggersEntregues: 0, loggersRetornados: 0, registrosEntregas: 0, registrosEstoque: 0, semStatus: 0, semData: 0, estoqueSemQuantidade: 0 });
 
+  const retornoDisponivel = hasMetric(base.loggersRetornados);
+
   const indicadores = {
     totalEstoque: numberOrNull(base.totalEstoque),
     loggersTransito: Number(base.loggersTransito || 0),
     loggersEntregues: Number(base.loggersEntregues || 0),
-    loggersRetornados: Number(base.loggersRetornados || 0),
-    loggersPendentesRetorno: Math.max(
-      Number(base.loggersEntregues || 0) - Number(base.loggersRetornados || 0),
-      0
-    ),
+    loggersRetornados: retornoDisponivel ? Number(base.loggersRetornados || 0) : null,
+    loggersPendentesRetorno: retornoDisponivel
+      ? Math.max(Number(base.loggersEntregues || 0) - Number(base.loggersRetornados || 0), 0)
+      : null,
     registrosEntregas: Number(base.registrosEntregas || 0),
     registrosEstoque: Number(base.registrosEstoque || 0),
     totalRegistros: Number(base.registrosEntregas || 0) + Number(base.registrosEstoque || 0),

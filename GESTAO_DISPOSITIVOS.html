@@ -1041,10 +1041,10 @@ function buildEntregaFieldMap(entregas) {
   const signature = JSON.stringify({ availableFields, map });
   if (signature !== LAST_FIELD_SIGNATURE) {
     LAST_FIELD_SIGNATURE = signature;
-    logInfo("Campos disponiveis no VTC STAGE", availableFields);
+    logInfo("Campos disponíveis no VTC STAGE", availableFields);
     logInfo("Campos detectados para regra de Loggers em trânsito", map);
     ["pedido", "logger", "dataColeta", "dataEntrega"].forEach(key => {
-      if (!map[key]) logWarn(`Campo equivalente a ${key} nao encontrado no VTC STAGE.`);
+      if (!map[key]) logWarn(`Campo equivalente a ${key} não encontrado no VTC STAGE.`);
     });
     if (!map.statusColeta && !map.statusGeral) logWarn("Campo equivalente a status de coleta não encontrado.");
     if (!map.statusEntrega && !map.statusGeral) logWarn("Campo equivalente a status entregue não encontrado.");

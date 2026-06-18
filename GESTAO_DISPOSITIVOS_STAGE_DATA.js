@@ -1,19 +1,19 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "18/06/2026 05:10:10",
+  "geradoEm": "18/06/2026 05:25:20",
   "summary": {
     "ARES": {
       "totalEstoque": null,
-      "loggersTransito": 144,
+      "loggersTransito": 145,
       "loggersEntregues": 2,
       "loggersRetornados": 1,
-      "registrosEntregas": 5697,
+      "registrosEntregas": 5699,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "18/06/2026 05:08:46",
-      "totalRegistros": 5697
+      "ultimaAtualizacao": "18/06/2026 05:23:46",
+      "totalRegistros": 5699
     },
     "ARES COM SONDA": {
       "totalEstoque": null,
@@ -30,16 +30,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 1277,
-      "loggersEntregues": 4704,
+      "loggersTransito": 1278,
+      "loggersEntregues": 4703,
       "loggersRetornados": 1925,
-      "registrosEntregas": 57259,
+      "registrosEntregas": 57268,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "18/06/2026 05:08:46",
-      "totalRegistros": 57259
+      "ultimaAtualizacao": "18/06/2026 05:23:46",
+      "totalRegistros": 57268
     },
     "SHIELD": {
       "totalEstoque": null,
@@ -69,16 +69,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 1421,
-      "loggersEntregues": 4706,
+      "loggersTransito": 1423,
+      "loggersEntregues": 4705,
       "loggersRetornados": 1926,
-      "registrosEntregas": 62956,
+      "registrosEntregas": 62967,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "18/06/2026 05:08:46",
-      "totalRegistros": 62956
+      "ultimaAtualizacao": "18/06/2026 05:23:46",
+      "totalRegistros": 62967
     }
   },
   "fonteRetorno": "AURA PostgreSQL public.tbddataloggerhistoricos + vwtipos + tbdcaddataloggerdestinos + tbdcaddataloggerfinalidades + tbdcaddataloggers",

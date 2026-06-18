@@ -1,19 +1,19 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "18/06/2026 00:54:22",
+  "geradoEm": "18/06/2026 01:09:31",
   "summary": {
     "ARES": {
       "totalEstoque": null,
       "loggersTransito": 132,
       "loggersEntregues": 2,
       "loggersRetornados": 1,
-      "registrosEntregas": 5678,
+      "registrosEntregas": 5682,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "18/06/2026 00:53:46",
-      "totalRegistros": 5678
+      "ultimaAtualizacao": "18/06/2026 01:08:46",
+      "totalRegistros": 5682
     },
     "ARES COM SONDA": {
       "totalEstoque": null,
@@ -30,16 +30,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 1144,
-      "loggersEntregues": 4711,
+      "loggersTransito": 1156,
+      "loggersEntregues": 4709,
       "loggersRetornados": 1925,
-      "registrosEntregas": 57107,
+      "registrosEntregas": 57124,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "18/06/2026 00:53:46",
-      "totalRegistros": 57107
+      "ultimaAtualizacao": "18/06/2026 01:08:46",
+      "totalRegistros": 57124
     },
     "SHIELD": {
       "totalEstoque": null,
@@ -69,16 +69,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 1276,
-      "loggersEntregues": 4713,
+      "loggersTransito": 1288,
+      "loggersEntregues": 4711,
       "loggersRetornados": 1926,
-      "registrosEntregas": 62785,
+      "registrosEntregas": 62806,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "18/06/2026 00:53:46",
-      "totalRegistros": 62785
+      "ultimaAtualizacao": "18/06/2026 01:08:46",
+      "totalRegistros": 62806
     }
   },
   "fonteRetorno": "AURA PostgreSQL public.tbddataloggerhistoricos + vwtipos + tbdcaddataloggerdestinos + tbdcaddataloggerfinalidades + tbdcaddataloggers",

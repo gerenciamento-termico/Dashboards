@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "19/06/2026 07:26:10",
+  "geradoEm": "19/06/2026 07:41:18",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -113,9 +113,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           436,
           517,
-          582,
+          584,
           1836,
-          4351
+          4349
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -150,8 +150,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           233,
           298,
           397,
-          550,
-          3840
+          552,
+          3838
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -292,8 +292,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           233,
           298,
           407,
-          551,
-          3892
+          553,
+          3890
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -328,8 +328,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           306,
           399,
           403,
-          575,
-          3989
+          577,
+          3987
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -364,8 +364,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           356,
           397,
-          550,
-          3844
+          552,
+          3842
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -399,9 +399,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           321,
           420,
-          556,
+          558,
           1295,
-          4146
+          4144
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -630,8 +630,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           306,
           413,
           450,
-          576,
-          4041
+          578,
+          4039
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -666,8 +666,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           356,
           407,
-          551,
-          3896
+          553,
+          3894
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -701,9 +701,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           321,
           430,
-          557,
+          559,
           1346,
-          4198
+          4196
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -738,8 +738,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           403,
           429,
           533,
-          575,
-          3993
+          577,
+          3991
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -773,9 +773,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           394,
           426,
-          581,
+          583,
           1651,
-          4295
+          4293
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -809,9 +809,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           420,
           444,
-          556,
+          558,
           1429,
-          4150
+          4148
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -985,9 +985,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           413,
           429,
-          576,
+          578,
           584,
-          4045
+          4043
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -1021,9 +1021,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           394,
           436,
-          582,
+          584,
           1702,
-          4347
+          4345
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -1057,9 +1057,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           430,
           444,
-          557,
+          559,
           1480,
-          4202
+          4200
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"
@@ -1093,9 +1093,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           298,
           426,
           517,
-          581,
+          583,
           1785,
-          4299
+          4297
         ]
       },
       "ultimaAtualizacao": "19/06/2026 07:21"

@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "21/06/2026 11:05:26",
+  "geradoEm": "21/06/2026 11:20:10",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -33,13 +33,13 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "loggersTransito": 684,
       "loggersEntregues": 5312,
       "loggersRetornados": 2674,
-      "registrosEntregas": 58127,
+      "registrosEntregas": 58129,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "21/06/2026 10:58:37",
-      "totalRegistros": 58127
+      "ultimaAtualizacao": "21/06/2026 11:13:37",
+      "totalRegistros": 58129
     },
     "SHIELD": {
       "totalEstoque": null,
@@ -72,13 +72,13 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "loggersTransito": 753,
       "loggersEntregues": 5389,
       "loggersRetornados": 2683,
-      "registrosEntregas": 63830,
+      "registrosEntregas": 63832,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "21/06/2026 10:58:37",
-      "totalRegistros": 63830
+      "ultimaAtualizacao": "21/06/2026 11:13:37",
+      "totalRegistros": 63832
     }
   },
   "fonteRetorno": "AURA PostgreSQL public.tbddataloggerhistoricos + vwtipos + tbdcaddataloggerdestinos + tbdcaddataloggerfinalidades + tbdcaddataloggers",
@@ -87,7 +87,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ALL": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 222,
+      "embAguardandoExpedicao": 221,
       "status": {
         "labels": [
           "TRANSPORTE",
@@ -123,7 +123,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 195,
+      "embAguardandoExpedicao": 194,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -265,7 +265,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|ARES COM SONDA": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 205,
+      "embAguardandoExpedicao": 204,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -301,7 +301,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|SENSOR VTC": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 197,
+      "embAguardandoExpedicao": 196,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -337,7 +337,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|SHIELD": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 195,
+      "embAguardandoExpedicao": 194,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -373,7 +373,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|SYOS": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 210,
+      "embAguardandoExpedicao": 209,
       "status": {
         "labels": [
           "MANUTENÇÃO",
@@ -603,7 +603,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|ARES COM SONDA|SENSOR VTC": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 207,
+      "embAguardandoExpedicao": 206,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -639,7 +639,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|ARES COM SONDA|SHIELD": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 205,
+      "embAguardandoExpedicao": 204,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -675,7 +675,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|ARES COM SONDA|SYOS": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 220,
+      "embAguardandoExpedicao": 219,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -711,7 +711,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|SENSOR VTC|SHIELD": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 197,
+      "embAguardandoExpedicao": 196,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -747,7 +747,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|SENSOR VTC|SYOS": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 212,
+      "embAguardandoExpedicao": 211,
       "status": {
         "labels": [
           "MANUTENÇÃO",
@@ -783,7 +783,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|SHIELD|SYOS": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 210,
+      "embAguardandoExpedicao": 209,
       "status": {
         "labels": [
           "TRANSPORTE",
@@ -959,7 +959,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|ARES COM SONDA|SENSOR VTC|SHIELD": {
       "aptoUso": 522,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 207,
+      "embAguardandoExpedicao": 206,
       "status": {
         "labels": [
           "QUALIDADE",
@@ -995,7 +995,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|ARES COM SONDA|SENSOR VTC|SYOS": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 222,
+      "embAguardandoExpedicao": 221,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -1031,7 +1031,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|ARES COM SONDA|SHIELD|SYOS": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 220,
+      "embAguardandoExpedicao": 219,
       "status": {
         "labels": [
           "TRANSPORTE",
@@ -1067,7 +1067,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ARES|SENSOR VTC|SHIELD|SYOS": {
       "aptoUso": 526,
       "aguardandoRecebimento": 177,
-      "embAguardandoExpedicao": 212,
+      "embAguardandoExpedicao": 211,
       "status": {
         "labels": [
           "TRANSPORTE",

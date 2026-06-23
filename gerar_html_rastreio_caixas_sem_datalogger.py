@@ -1,4 +1,4 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 
 import json
 import os
@@ -74,35 +74,30 @@ def _build_pg_url(cfg: dict) -> URL:
     )
 
 
+DB_SUCCESS_INFO = {"fonte": "", "horario": ""}
+
 def _read_pg(sql: str) -> pd.DataFrame:
+    global DB_SUCCESS_INFO
     errors: list[str] = []
-    max_retries = 3
     for label, cfg in _pg_configs():
         if not all([cfg.get("host"), cfg.get("database"), cfg.get("user"), cfg.get("password")]):
             errors.append(f"{label}: configuracao incompleta")
             continue
-        
-        for attempt in range(1, max_retries + 1):
-            try:
-                print(f"[rastreio] Tentando conexao {label}... (tentativa {attempt}/{max_retries})")
-                engine = create_engine(
-                    _build_pg_url(cfg),
-                    pool_pre_ping=True,
-                    connect_args={"connect_timeout": 30, "options": "-c statement_timeout=120000"},
-                )
-                with engine.connect() as conn:
-                    result = pd.read_sql(text(sql), conn)
-                    print(f"[rastreio] Sucesso em {label}")
-                    return result
-            except Exception as exc:
-                error_msg = f"{label} (tentativa {attempt}): {type(exc).__name__}"
-                print(f"[rastreio] Erro: {error_msg}")
-                errors.append(error_msg)
-                if attempt < max_retries:
-                    import time
-                    time.sleep(2)  # Aguardar 2 segundos antes de retry
-                continue
-    
+        try:
+            print(f"[rastreio] Tentando conexao {label}...")
+            engine = create_engine(
+                _build_pg_url(cfg),
+                pool_pre_ping=True,
+                connect_args={"connect_timeout": 12},
+            )
+            with engine.connect() as conn:
+                df = pd.read_sql(text(sql), conn)
+                DB_SUCCESS_INFO["fonte"] = label
+                DB_SUCCESS_INFO["horario"] = datetime.now().strftime("%d/%m/%Y %H:%M")
+                return df
+        except Exception as exc:
+            errors.append(f"{label}: {type(exc).__name__}")
+            continue
     raise RuntimeError("Nao foi possivel consultar o PostgreSQL. Tentativas: " + "; ".join(errors))
 
 
@@ -281,17 +276,12 @@ def _top_summary(rows: list[dict], first_col: str, limit: int = 3) -> str:
 def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
     generated_at = now_for_coleta(df)
     gerado = format_generated_at(generated_at)
-    
-    # Calcular última atualização dos dados baseado em dt_coletaefetiva
-    ultima_coleta = pd.NaT
-    if not df.empty and "dt_coletaefetiva" in df.columns:
-        ultima_coleta = df["dt_coletaefetiva"].max()
-    ultima_coleta_str = (
-        ultima_coleta.strftime("%d/%m/%Y %H:%M:%S")
-        if pd.notna(ultima_coleta)
-        else "Sem dados"
-    )
-    
+    consultado_em = DB_SUCCESS_INFO.get("horario", "")
+    fonte = DB_SUCCESS_INFO.get("fonte", "")
+
+    raw_max = pd.to_datetime(df['dt_coletaefetiva'], errors='coerce').max()
+    disponivel_ate = raw_max.strftime("%d/%m/%Y %H:%M") if pd.notna(raw_max) else "--"
+
     summary = build_summary(df, generated_at)
     validate_business_rules(df, summary)
 
@@ -833,8 +823,10 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       <h1>Rastreio de Caixas sem Datalogger</h1>
       <div class="sub">Caixas coletadas em vtc_stage.documentos com LPN preenchido, data de coleta valida, sem logger vinculado e ds_tipo filtrado para caixa, ignorando pallets.</div>
       <div class="pill-row">
-        <span class="pill">Ultima coleta: {ultima_coleta_str}</span>
-        <span class="pill">Gerado em {gerado}</span>
+        <span class="pill">Gerado em: {gerado}</span>
+        <span class="pill">Conex&atilde;o com banco: {fonte} OK &agrave;s {consultado_em}</span>
+        <span class="pill">Dados disponiveis ate: {disponivel_ate}</span>
+        <span class="pill">Fonte: {fonte}</span>
         <span class="pill">Caixa = cd_lpn unico</span>
         <span class="pill">Logger = cd_referencia</span>
         <span class="pill">Periodo 24h/48h por dt_coletaefetiva</span>
@@ -1282,4 +1274,3 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-

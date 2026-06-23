@@ -76,22 +76,33 @@ def _build_pg_url(cfg: dict) -> URL:
 
 def _read_pg(sql: str) -> pd.DataFrame:
     errors: list[str] = []
+    max_retries = 3
     for label, cfg in _pg_configs():
         if not all([cfg.get("host"), cfg.get("database"), cfg.get("user"), cfg.get("password")]):
             errors.append(f"{label}: configuracao incompleta")
             continue
-        try:
-            print(f"[rastreio] Tentando conexao {label}...")
-            engine = create_engine(
-                _build_pg_url(cfg),
-                pool_pre_ping=True,
-                connect_args={"connect_timeout": 12, "options": "-c statement_timeout=60000"},
-            )
-            with engine.connect() as conn:
-                return pd.read_sql(text(sql), conn)
-        except Exception as exc:
-            errors.append(f"{label}: {type(exc).__name__}")
-            continue
+        
+        for attempt in range(1, max_retries + 1):
+            try:
+                print(f"[rastreio] Tentando conexao {label}... (tentativa {attempt}/{max_retries})")
+                engine = create_engine(
+                    _build_pg_url(cfg),
+                    pool_pre_ping=True,
+                    connect_args={"connect_timeout": 30, "options": "-c statement_timeout=120000"},
+                )
+                with engine.connect() as conn:
+                    result = pd.read_sql(text(sql), conn)
+                    print(f"[rastreio] Sucesso em {label}")
+                    return result
+            except Exception as exc:
+                error_msg = f"{label} (tentativa {attempt}): {type(exc).__name__}"
+                print(f"[rastreio] Erro: {error_msg}")
+                errors.append(error_msg)
+                if attempt < max_retries:
+                    import time
+                    time.sleep(2)  # Aguardar 2 segundos antes de retry
+                continue
+    
     raise RuntimeError("Nao foi possivel consultar o PostgreSQL. Tentativas: " + "; ".join(errors))
 
 
@@ -1270,5 +1281,15 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except RuntimeError as e:
+        # Se falhar conexão ao banco, reutilizar arquivo anterior
+        if "PostgreSQL" in str(e) and OUTPUT_HTML.exists():
+            print(f"[rastreio] AVISO: Erro de conexao ao banco. Mantendo arquivo anterior.")
+            print(f"[rastreio] Erro: {e}")
+            print(f"[rastreio] Arquivo anterior conservado: {OUTPUT_HTML.name}")
+            # Não re-raise - deixar o BAT continuar com arquivo anterior
+        else:
+            raise
 

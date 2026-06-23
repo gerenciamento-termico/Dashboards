@@ -823,10 +823,9 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       <h1>Rastreio de Caixas sem Datalogger</h1>
       <div class="sub">Caixas coletadas em vtc_stage.documentos com LPN preenchido, data de coleta valida, sem logger vinculado e ds_tipo filtrado para caixa, ignorando pallets.</div>
       <div class="pill-row">
-        <span class="pill">Gerado em: {gerado}</span>
-        <span class="pill">Conex&atilde;o com banco: {fonte} OK &agrave;s {consultado_em}</span>
-        <span class="pill">Dados disponiveis ate: {disponivel_ate}</span>
+        <span class="pill">Atualizado em: {gerado}</span>
         <span class="pill">Fonte: {fonte}</span>
+        <span class="pill">&Uacute;ltima coleta sem logger: {disponivel_ate}</span>
         <span class="pill">Caixa = cd_lpn unico</span>
         <span class="pill">Logger = cd_referencia</span>
         <span class="pill">Periodo 24h/48h por dt_coletaefetiva</span>

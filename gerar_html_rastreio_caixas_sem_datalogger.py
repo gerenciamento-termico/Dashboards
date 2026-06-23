@@ -1281,15 +1281,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    try:
-        main()
-    except RuntimeError as e:
-        # Se falhar conexão ao banco, reutilizar arquivo anterior
-        if "PostgreSQL" in str(e) and OUTPUT_HTML.exists():
-            print(f"[rastreio] AVISO: Erro de conexao ao banco. Mantendo arquivo anterior.")
-            print(f"[rastreio] Erro: {e}")
-            print(f"[rastreio] Arquivo anterior conservado: {OUTPUT_HTML.name}")
-            # Não re-raise - deixar o BAT continuar com arquivo anterior
-        else:
-            raise
+    main()
 

@@ -821,19 +821,16 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
     <div class="hero">
       <div class="eyebrow">Banco Aura</div>
       <h1>Rastreio de Caixas sem Datalogger</h1>
-      <div class="sub">Caixas coletadas em vtc_stage.documentos com LPN preenchido, data de coleta valida, sem logger vinculado e ds_tipo filtrado para caixa, ignorando pallets.</div>
+      <div class="sub">Visao das caixas operacionais sem datalogger vinculado.</div>
       <div class="pill-row">
         <span class="pill">Atualizado em: {gerado}</span>
-        <span class="pill">Fonte: {fonte}</span>
         <span class="pill">&Uacute;ltima coleta sem logger: {disponivel_ate}</span>
-        <span class="pill">Caixa = cd_lpn unico</span>
-        <span class="pill">Logger = cd_referencia</span>
-        <span class="pill">Periodo 24h/48h por dt_coletaefetiva</span>
+        <span class="pill">Fonte: {fonte}</span>
       </div>
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="label">Total de caixas sem datalogger</div><div class="value" id="kpi-total">{fmt_int(summary["total_caixas"])}</div><div class="foot">COUNT(DISTINCT cd_lpn)</div></div>
+      <div class="kpi"><div class="label">Total de caixas sem datalogger</div><div class="value" id="kpi-total">{fmt_int(summary["total_caixas"])}</div><div class="foot">Caixas operacionais</div></div>
       <div class="kpi"><div class="label">Pedidos com caixas sem datalogger</div><div class="value" id="kpi-pedidos">{fmt_int(summary["total_pedidos"])}</div><div class="foot">COUNT(DISTINCT nr_pedido)</div></div>
       <div class="kpi"><div class="label">Caixas sem datalogger 24h</div><div class="value" id="kpi-24">{fmt_int(summary["caixas_24h"])}</div><div class="foot">Base: dt_coletaefetiva</div></div>
       <div class="kpi"><div class="label">Caixas sem datalogger 48h</div><div class="value" id="kpi-48">{fmt_int(summary["caixas_48h"])}</div><div class="foot">Base: dt_coletaefetiva</div></div>
@@ -909,7 +906,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       </div>
     </div>
 
-    <div class="footer">Fonte: vtc_stage.documentos. Regras: cd_lpn como caixa unica, cd_referencia vazio/nulo como sem datalogger, dt_coletaefetiva obrigatoria e ds_tipo usado para considerar somente caixas e ignorar pallets.</div>
+    <div class="footer">Regra: considera caixas com romaneio e LPN preenchidos, sem datalogger vinculado.</div>
   </div>
 
   <script>

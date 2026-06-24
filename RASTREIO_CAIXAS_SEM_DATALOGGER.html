@@ -524,20 +524,16 @@
     <div class="hero">
       <div class="eyebrow">Banco Aura</div>
       <h1>Rastreio de Caixas sem Datalogger</h1>
-      <div class="sub">Caixas coletadas em vtc_stage.documentos com romaneio e LPN preenchidos, data de coleta valida, sem logger vinculado e ds_tipo filtrado para caixa, ignorando pallets.</div>
+      <div class="sub">Visao das caixas operacionais sem datalogger vinculado.</div>
       <div class="pill-row">
         <span class="pill">Atualizado em: 24/06/2026 11:28</span>
-        <span class="pill">Fonte: AURA_DB</span>
         <span class="pill">&Uacute;ltima coleta sem logger: 20/06/2026 22:21</span>
-        <span class="pill">Chave operacional = nr_romaneio + cd_lpn</span>
-        <span class="pill">Romaneio obrigat&oacute;rio</span>
-        <span class="pill">Logger = cd_referencia</span>
-        <span class="pill">Periodo 24h/48h por dt_coletaefetiva</span>
+        <span class="pill">Fonte: AURA_DB</span>
       </div>
     </div>
 
     <div class="kpis">
-      <div class="kpi"><div class="label">Total de caixas sem datalogger</div><div class="value" id="kpi-total">44</div><div class="foot">Chave: nr_romaneio + cd_lpn</div></div>
+      <div class="kpi"><div class="label">Total de caixas sem datalogger</div><div class="value" id="kpi-total">44</div><div class="foot">Caixas operacionais</div></div>
       <div class="kpi"><div class="label">Pedidos com caixas sem datalogger</div><div class="value" id="kpi-pedidos">40</div><div class="foot">COUNT(DISTINCT nr_pedido)</div></div>
       <div class="kpi"><div class="label">Caixas sem datalogger 24h</div><div class="value" id="kpi-24">0</div><div class="foot">Base: dt_coletaefetiva</div></div>
       <div class="kpi"><div class="label">Caixas sem datalogger 48h</div><div class="value" id="kpi-48">0</div><div class="foot">Base: dt_coletaefetiva</div></div>
@@ -614,7 +610,7 @@
       </div>
     </div>
 
-    <div class="footer">Fonte: vtc_stage.documentos. Regras: chave operacional nr_romaneio + cd_lpn, romaneio obrigatorio, cd_referencia vazio/nulo como sem datalogger, dt_coletaefetiva obrigatoria e ds_tipo usado para considerar somente caixas e ignorar pallets.</div>
+    <div class="footer">Regra: considera caixas com romaneio e LPN preenchidos, sem datalogger vinculado.</div>
   </div>
 
   <script>

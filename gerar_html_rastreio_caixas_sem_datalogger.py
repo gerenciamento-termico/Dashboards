@@ -38,6 +38,17 @@ def clean_text(series: pd.Series) -> pd.Series:
     return series.fillna("").astype(str).str.strip()
 
 
+def to_brasilia_datetime(series: pd.Series) -> pd.Series:
+    return pd.to_datetime(series, errors="coerce", utc=True).dt.tz_convert(BRASILIA_TZ)
+
+
+def format_brasilia_timestamp(value: object, fmt: str) -> str:
+    ts = pd.to_datetime(value, errors="coerce", utc=True)
+    if pd.isna(ts):
+        return "--"
+    return ts.tz_convert(BRASILIA_TZ).strftime(fmt)
+
+
 def _pg_configs() -> list[tuple[str, dict]]:
     return [
         (
@@ -121,8 +132,10 @@ def load_raw_data() -> pd.DataFrame:
     sql = """
     SELECT
         nr_pedido::text AS nr_pedido,
+        nr_romaneio::text AS nr_romaneio,
         cd_uf::text AS cd_uf,
         dt_coletaefetiva,
+        to_char(dt_coletaefetivaembarque AT TIME ZONE 'America/Sao_Paulo', 'DD/MM/YYYY HH24:MI:SS') AS data_coleta_embarque,
         cd_lpn::text AS cd_lpn,
         cd_referencia::text AS cd_referencia,
         ds_tipo::text AS ds_tipo,
@@ -130,6 +143,8 @@ def load_raw_data() -> pd.DataFrame:
         ds_descricaocliente::text AS ds_descricaocliente
     FROM vtc_stage.documentos
     WHERE dt_coletaefetiva IS NOT NULL
+      AND nr_romaneio IS NOT NULL
+      AND TRIM(nr_romaneio::text) <> ''
       AND cd_lpn IS NOT NULL
       AND TRIM(cd_lpn) <> ''
       AND (
@@ -140,6 +155,18 @@ def load_raw_data() -> pd.DataFrame:
       AND TRIM(ds_tipo) <> ''
       AND UPPER(TRIM(ds_tipo)) LIKE '%CAIXA%'
       AND UPPER(TRIM(ds_tipo)) NOT LIKE '%PALLET%'
+      AND NOT EXISTS (
+          SELECT 1
+          FROM vtc_stage.documentos ref
+          WHERE ref.nr_romaneio IS NOT NULL
+            AND TRIM(ref.nr_romaneio::text) <> ''
+            AND ref.cd_lpn IS NOT NULL
+            AND TRIM(ref.cd_lpn) <> ''
+            AND ref.cd_referencia IS NOT NULL
+            AND TRIM(ref.cd_referencia) <> ''
+            AND ref.nr_romaneio::text = documentos.nr_romaneio::text
+            AND ref.cd_lpn::text = documentos.cd_lpn::text
+      )
     ORDER BY dt_coletaefetiva DESC
     """
     return _read_pg(sql)
@@ -147,15 +174,23 @@ def load_raw_data() -> pd.DataFrame:
 
 def prepare_data(df: pd.DataFrame) -> pd.DataFrame:
     out = df.copy()
-    for col in ["nr_pedido", "cd_uf", "cd_lpn", "cd_referencia", "ds_tipo", "ds_tag", "ds_descricaocliente"]:
+    for col in ["nr_pedido", "nr_romaneio", "cd_uf", "cd_lpn", "cd_referencia", "ds_tipo", "ds_tag", "ds_descricaocliente"]:
         if col not in out.columns:
             out[col] = ""
         out[col] = clean_text(out[col])
+    if "data_coleta_embarque" not in out.columns:
+        if "dt_coletaefetivaembarque" in out.columns:
+            out["data_coleta_embarque"] = to_brasilia_datetime(out["dt_coletaefetivaembarque"]).dt.strftime("%d/%m/%Y %H:%M:%S").fillna("")
+        else:
+            out["data_coleta_embarque"] = ""
+    else:
+        out["data_coleta_embarque"] = clean_text(out["data_coleta_embarque"])
 
-    out["dt_coletaefetiva"] = pd.to_datetime(out.get("dt_coletaefetiva"), errors="coerce")
+    out["dt_coletaefetiva"] = pd.to_datetime(out.get("dt_coletaefetiva"), errors="coerce", utc=True)
     out["_tipo_norm"] = out["ds_tipo"].map(normalize_text)
     out = out[
         out["dt_coletaefetiva"].notna()
+        & out["nr_romaneio"].ne("")
         & out["cd_lpn"].ne("")
         & out["cd_referencia"].eq("")
         & out["_tipo_norm"].str.contains("CAIXA", regex=False, na=False)
@@ -163,12 +198,12 @@ def prepare_data(df: pd.DataFrame) -> pd.DataFrame:
     ].copy()
 
     out = (
-        out.sort_values(["dt_coletaefetiva", "nr_pedido", "cd_lpn"], ascending=[False, True, True])
-        .drop_duplicates(subset=["cd_lpn"], keep="first")
+        out.sort_values(["dt_coletaefetiva", "nr_pedido", "nr_romaneio", "cd_lpn"], ascending=[False, True, True, True])
+        .drop_duplicates(subset=["nr_romaneio", "cd_lpn"], keep="first")
         .reset_index(drop=True)
     )
     out["Status do logger"] = "Sem datalogger"
-    out["Data da coleta"] = out["dt_coletaefetiva"].dt.strftime("%d/%m/%Y %H:%M:%S").fillna("")
+    out["Data da coleta"] = to_brasilia_datetime(out["dt_coletaefetiva"]).dt.strftime("%d/%m/%Y %H:%M:%S").fillna("")
     out["_coleta_ts"] = out["dt_coletaefetiva"].apply(lambda dt: int(dt.timestamp() * 1000) if pd.notna(dt) else 0)
     return out
 
@@ -181,24 +216,24 @@ def build_summary(df: pd.DataFrame, generated_at: pd.Timestamp) -> dict:
 
     by_uf = (
         df.assign(cd_uf=df["cd_uf"].replace("", "SEM UF"))
-        .groupby("cd_uf", as_index=False)["cd_lpn"]
-        .nunique()
-        .rename(columns={"cd_uf": "UF", "cd_lpn": "Caixas"})
+        .groupby("cd_uf", as_index=False)
+        .size()
+        .rename(columns={"cd_uf": "UF", "size": "Caixas"})
         .sort_values(["Caixas", "UF"], ascending=[False, True])
     )
     by_tipo = (
         df.assign(ds_tipo=df["ds_tipo"].replace("", "SEM TIPO"))
-        .groupby("ds_tipo", as_index=False)["cd_lpn"]
-        .nunique()
-        .rename(columns={"ds_tipo": "Tipo de caixa", "cd_lpn": "Caixas"})
+        .groupby("ds_tipo", as_index=False)
+        .size()
+        .rename(columns={"ds_tipo": "Tipo de caixa", "size": "Caixas"})
         .sort_values(["Caixas", "Tipo de caixa"], ascending=[False, True])
     )
 
     return {
-        "total_caixas": int(df["cd_lpn"].nunique()),
+        "total_caixas": int(len(df)),
         "total_pedidos": int(df.loc[df["nr_pedido"].ne(""), "nr_pedido"].nunique()),
-        "caixas_24h": int(last_24["cd_lpn"].nunique()),
-        "caixas_48h": int(last_48["cd_lpn"].nunique()),
+        "caixas_24h": int(len(last_24)),
+        "caixas_48h": int(len(last_48)),
         "ufs_afetadas": int(df.loc[df["cd_uf"].ne(""), "cd_uf"].nunique()),
         "linhas_tabela": int(len(df)),
         "total_por_uf": by_uf.to_dict(orient="records"),
@@ -209,14 +244,18 @@ def build_summary(df: pd.DataFrame, generated_at: pd.Timestamp) -> dict:
 def build_rows(df: pd.DataFrame) -> list[dict]:
     view = df.copy()
     view["Pedido"] = view["nr_pedido"]
+    view["Romaneio"] = view["nr_romaneio"]
     view["UF"] = view["cd_uf"]
+    view["Data Coleta Embarque"] = view["data_coleta_embarque"]
     view["Tipo de caixa"] = view["ds_tipo"]
     view["LPN"] = view["cd_lpn"]
     view["Logger/Datalogger"] = view["cd_referencia"]
     cols = [
         "Pedido",
+        "Romaneio",
         "UF",
         "Data da coleta",
+        "Data Coleta Embarque",
         "Tipo de caixa",
         "LPN",
         "Logger/Datalogger",
@@ -243,8 +282,10 @@ def format_generated_at(value: pd.Timestamp) -> str:
 
 
 def validate_business_rules(df: pd.DataFrame, summary: dict) -> None:
-    if df["cd_lpn"].duplicated().any():
-        raise RuntimeError("Tabela contem LPN duplicado; a pagina deve exibir uma linha por caixa.")
+    if df.duplicated(subset=["nr_romaneio", "cd_lpn"]).any():
+        raise RuntimeError("Tabela contem par nr_romaneio + cd_lpn duplicado; a pagina deve exibir uma linha por caixa operacional.")
+    if df["nr_romaneio"].eq("").any():
+        raise RuntimeError("Tabela contem caixa sem nr_romaneio.")
     if df["cd_lpn"].eq("").any():
         raise RuntimeError("Tabela contem caixa sem cd_lpn.")
     if df["dt_coletaefetiva"].isna().any():
@@ -257,7 +298,7 @@ def validate_business_rules(df: pd.DataFrame, summary: dict) -> None:
     if not tipo_norm.str.contains("CAIXA", regex=False, na=False).all() and not df.empty:
         raise RuntimeError("Filtro de ds_tipo falhou: ha registro que nao representa caixa.")
     if int(summary["total_caixas"]) != int(len(df)):
-        raise RuntimeError("Card Total de caixas sem datalogger nao bate com a tabela deduplicada por LPN.")
+        raise RuntimeError("Card Total de caixas sem datalogger nao bate com a tabela deduplicada por nr_romaneio + cd_lpn.")
 
 
 def _top_summary(rows: list[dict], first_col: str, limit: int = 3) -> str:
@@ -279,8 +320,8 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
     consultado_em = DB_SUCCESS_INFO.get("horario", "")
     fonte = DB_SUCCESS_INFO.get("fonte", "")
 
-    raw_max = pd.to_datetime(df['dt_coletaefetiva'], errors='coerce').max()
-    disponivel_ate = raw_max.strftime("%d/%m/%Y %H:%M") if pd.notna(raw_max) else "--"
+    raw_max = pd.to_datetime(df['dt_coletaefetiva'], errors='coerce', utc=True).max()
+    disponivel_ate = format_brasilia_timestamp(raw_max, "%d/%m/%Y %H:%M")
 
     summary = build_summary(df, generated_at)
     validate_business_rules(df, summary)
@@ -859,7 +900,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       <div class="section-head">
         <div>
           <h2>Detalhe das caixas</h2>
-          <p id="detail-summary">{fmt_int(len(rows))} caixa(s) exibidas. A tabela usa uma linha por LPN.</p>
+          <p id="detail-summary">{fmt_int(len(rows))} caixa(s) exibidas. A tabela usa uma linha por nr_romaneio + cd_lpn.</p>
         </div>
       </div>
       <div class="filter-row">
@@ -877,7 +918,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
         </div>
         <div class="filter-box">
           <div class="filter-label">Busca</div>
-          <input id="filter-search" class="search-input" type="search" placeholder="Pedido, LPN, UF ou tipo">
+          <input id="filter-search" class="search-input" type="search" placeholder="Pedido, romaneio, LPN, UF ou tipo">
         </div>
         <div class="filter-box">
           <div class="filter-label">&nbsp;</div>
@@ -893,8 +934,10 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
           <thead>
             <tr>
               <th>Pedido</th>
+              <th>Romaneio</th>
               <th>UF</th>
               <th>Data da coleta</th>
+              <th>Data Coleta Embarque</th>
               <th>Tipo de caixa</th>
               <th>LPN</th>
               <th>Logger/Datalogger</th>
@@ -1020,7 +1063,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
         if (uf && clean(row.UF) !== uf) return false;
         if (tipo && clean(row["Tipo de caixa"]) !== tipo) return false;
         if (!q) return true;
-        const haystack = [row.Pedido, row.UF, row["Data da coleta"], row["Tipo de caixa"], row.LPN, row["Status do logger"]]
+        const haystack = [row.Pedido, row.Romaneio, row.UF, row["Data da coleta"], row["Tipo de caixa"], row.LPN, row["Status do logger"]]
           .map(clean)
           .join(" ")
           .toLocaleLowerCase("pt-BR");
@@ -1032,17 +1075,19 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       const applied = [];
       if (clean(els.uf.value)) applied.push("UF " + clean(els.uf.value));
       if (clean(quickState.tipo)) applied.push(clean(quickState.tipo));
-      els.summary.textContent = formatInt(rows.length) + " caixa(s) exibidas" + (applied.length ? " para " + applied.join(" + ") : "") + ". A tabela usa uma linha por LPN.";
+      els.summary.textContent = formatInt(rows.length) + " caixa(s) exibidas" + (applied.length ? " para " + applied.join(" + ") : "") + ". A tabela usa uma linha por nr_romaneio + cd_lpn.";
       if (!rows.length) {{
-        els.tbody.innerHTML = '<tr><td colspan="7">Sem registros neste recorte.</td></tr>';
+        els.tbody.innerHTML = '<tr><td colspan="9">Sem registros neste recorte.</td></tr>';
         return;
       }}
       let html = "";
       rows.forEach((row) => {{
         html += "<tr>";
         html += "<td>" + escapeHtml(row.Pedido) + "</td>";
+        html += "<td>" + escapeHtml(row.Romaneio) + "</td>";
         html += "<td>" + escapeHtml(row.UF) + "</td>";
         html += "<td>" + escapeHtml(row["Data da coleta"]) + "</td>";
+        html += "<td>" + escapeHtml(row["Data Coleta Embarque"]) + "</td>";
         html += "<td>" + escapeHtml(row["Tipo de caixa"]) + "</td>";
         html += "<td>" + escapeHtml(row.LPN) + "</td>";
         html += "<td>" + escapeHtml(row["Logger/Datalogger"]) + "</td>";
@@ -1155,7 +1200,7 @@ def build_page(df: pd.DataFrame, tipo_distribution: pd.DataFrame) -> str:
       return new Blob(chunks, {{ type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" }});
     }}
     function buildWorksheetXml(rows) {{
-      const headers = ["Pedido", "UF", "Data da coleta", "Tipo de caixa", "LPN", "Logger/Datalogger", "Status do logger"];
+      const headers = ["Pedido", "Romaneio", "UF", "Data da coleta", "Data Coleta Embarque", "Tipo de caixa", "LPN", "Logger/Datalogger", "Status do logger"];
       const data = [headers, ...rows.map((row) => headers.map((header) => clean(row[header])))];
       const sheetRows = data.map((cells, rowIndex) => {{
         const cellXml = cells.map((value, colIndex) => {{

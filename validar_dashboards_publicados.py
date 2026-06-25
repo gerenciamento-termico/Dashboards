@@ -51,7 +51,7 @@ GENERATED_HTML = {
     },
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html": {
         "min_size": 20_000,
-        "markers": ["Gerado em", "const SUMMARY", "const TABLE_ROWS", "const DS_TIPO_VALUES"],
+        "markers": ["Atualizado em", "const SUMMARY", "const TABLE_ROWS", "const DS_TIPO_VALUES"],
     },
     "GESTAO_DISPOSITIVOS.html": {
         "min_size": 20_000,
@@ -487,40 +487,47 @@ def _validate_rastreio(cycle_start: float | None) -> None:
     if not isinstance(tipo_values, list):
         raise RuntimeError("RASTREIO_CAIXAS_SEM_DATALOGGER.html sem DS_TIPO_VALUES valido")
 
-    lpns: set[str] = set()
+    caixa_keys: set[tuple[str, str]] = set()
     pedidos: set[str] = set()
     ufs: set[str] = set()
     for row in rows:
         if not isinstance(row, dict):
             raise RuntimeError("RASTREIO_CAIXAS_SEM_DATALOGGER.html contem linha invalida")
         lpn = str(row.get("LPN") or "").strip()
+        romaneio = str(row.get("Romaneio") or "").strip()
         pedido = str(row.get("Pedido") or "").strip()
         uf = str(row.get("UF") or "").strip()
         logger = str(row.get("Logger/Datalogger") or "").strip()
         tipo = str(row.get("Tipo de caixa") or "").strip().upper()
         data = str(row.get("Data da coleta") or "").strip()
+        data_embarque = str(row.get("Data Coleta Embarque") or "").strip()
         status = str(row.get("Status do logger") or "").strip()
         if not lpn:
             raise RuntimeError("RASTREIO_CAIXAS_SEM_DATALOGGER.html contem linha sem LPN")
-        if lpn in lpns:
-            raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem LPN duplicado: {lpn}")
+        if not romaneio:
+            raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem linha sem Romaneio para LPN {lpn}")
+        caixa_key = (romaneio, lpn)
+        if caixa_key in caixa_keys:
+            raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem par Romaneio + LPN duplicado: {romaneio} + {lpn}")
         if logger:
             raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem logger preenchido para LPN {lpn}")
         if not data:
             raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem coleta vazia para LPN {lpn}")
+        if data_embarque and not re.fullmatch(r"\d{2}/\d{2}/\d{4} \d{2}:\d{2}:\d{2}", data_embarque):
+            raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem Data Coleta Embarque em formato inesperado para LPN {lpn}")
         if "PALLET" in tipo:
             raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem pallet em ds_tipo para LPN {lpn}")
         if "CAIXA" not in tipo:
             raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem ds_tipo que nao representa caixa para LPN {lpn}")
         if status != "Sem datalogger":
             raise RuntimeError(f"RASTREIO_CAIXAS_SEM_DATALOGGER.html contem status inesperado para LPN {lpn}")
-        lpns.add(lpn)
+        caixa_keys.add(caixa_key)
         if pedido:
             pedidos.add(pedido)
         if uf:
             ufs.add(uf)
 
-    if _as_int(summary.get("total_caixas")) != len(lpns):
+    if _as_int(summary.get("total_caixas")) != len(caixa_keys):
         raise RuntimeError("RASTREIO_CAIXAS_SEM_DATALOGGER.html: card total de caixas nao bate com tabela")
     if _as_int(summary.get("linhas_tabela")) != len(rows):
         raise RuntimeError("RASTREIO_CAIXAS_SEM_DATALOGGER.html: linhas_tabela nao bate com TABLE_ROWS")
@@ -535,7 +542,7 @@ def _validate_rastreio(cycle_start: float | None) -> None:
 
     _print(
         "[html] RASTREIO_CAIXAS_SEM_DATALOGGER.html OK: "
-        f"caixas={len(lpns)} pedidos={len(pedidos)} ufs={len(ufs)} "
+        f"caixas={len(caixa_keys)} pedidos={len(pedidos)} ufs={len(ufs)} "
         "ds_tipo=CAIXA sem PALLET"
     )
 

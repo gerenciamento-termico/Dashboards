@@ -302,6 +302,30 @@ function Test-PublishedFiles {
     }
 }
 
+function Test-FreshRequiredFiles {
+    param(
+        [string]$Label,
+        [string[]]$Paths,
+        [datetime]$CycleStart,
+        [int]$MinSizeBytes = 1
+    )
+
+    foreach ($path in $Paths) {
+        if (-not (Test-Path -LiteralPath $path -PathType Leaf)) {
+            throw ("{0}: arquivo obrigatorio ausente: {1}" -f $Label, $path)
+        }
+
+        $item = Get-Item -LiteralPath $path
+        if ($item.Length -lt $MinSizeBytes) {
+            throw ("{0}: arquivo invalido: {1} ({2} bytes)" -f $Label, $path, $item.Length)
+        }
+
+        if ($item.LastWriteTime -lt $CycleStart.AddMinutes(-1)) {
+            throw ("{0}: arquivo nao foi atualizado neste ciclo: {1} (modificado {2})" -f $Label, $path, $item.LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss"))
+        }
+    }
+}
+
 function Copy-PublishedFile {
     param(
         [string]$Source,
@@ -419,7 +443,13 @@ function Write-GitSnapshot {
 
 function Test-GitBlockingState {
     $status = Invoke-GitCapture -Arguments @("status", "--porcelain=v1", "--branch")
-    Write-GitLines -Title "[GIT] Status antes do pull:" -Lines $status.Output
+    $displayStatus = @($status.Output | Where-Object {
+        $_ -notmatch "ESPECIFICACAO_CONTA_CORRENTE_DISPOSITIVOS\.md" -and
+        $_ -notmatch "LEVANTAMENTO_CONTA_CORRENTE_DISPOSITIVOS\.md" -and
+        $_ -notmatch "backup_restore_" -and
+        $_ -notmatch "test_db\d*\.py"
+    })
+    Write-GitLines -Title "[GIT] Status antes do pull:" -Lines $displayStatus
 
     $unmerged = @($status.Output | Where-Object { $_ -match '^(DD|AU|UD|UA|DU|AA|UU)\s+' })
     if ($unmerged.Count -gt 0) {
@@ -476,7 +506,13 @@ function Publish-Changes {
     }
 
     Write-Status "[GIT] Status antes do stage" "OK" Gray
-    $statusLines = @(& git -C $PublishDir status --porcelain --untracked-files=all)
+    $statusLinesRaw = @(& git -C $PublishDir status --porcelain --untracked-files=all)
+    $statusLines = @($statusLinesRaw | Where-Object {
+        $_ -notmatch "ESPECIFICACAO_CONTA_CORRENTE_DISPOSITIVOS\.md" -and
+        $_ -notmatch "LEVANTAMENTO_CONTA_CORRENTE_DISPOSITIVOS\.md" -and
+        $_ -notmatch "backup_restore_" -and
+        $_ -notmatch "test_db\d*\.py"
+    })
     if ($statusLines.Count -eq 0) {
         Write-Host "      sem alteracoes no working tree" -ForegroundColor DarkGray
         Write-Log "      sem alteracoes no working tree"
@@ -580,12 +616,37 @@ function Run-Cycle {
             Add-StepFailure -Failures $stepFailures -Name "Controle Entregas" -Message "falha ao gerar; arquivo anterior sera preservado se existir"
         }
 
-        if (-not (Invoke-Step "[3/6] Reversa" {
+        $reversaOk = $true
+        try {
+            $snapshotDir = Join-Path (Split-Path $StreamlitDir) "snapshot_reversa"
+            $reqSnaps = @("base_loggers.pkl", "base_agentes.pkl", "recebimento_resumo.pkl", "base_destinatarios.pkl")
+            $reqSnapPaths = @($reqSnaps | ForEach-Object { Join-Path $snapshotDir $_ })
+
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_snapshot_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_snapshot_reversa.py"
+            Test-FreshRequiredFiles -Label "SNAPSHOT REVERSA" -Paths $reqSnapPaths -CycleStart $cycleStart -MinSizeBytes 1024
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_modelo_final_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_modelo_final_reversa.py"
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_reversa.py")) -WorkingDirectory $PublishDir -Name "gerar_html_reversa.py"
-        })) {
-            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao atualizar dados/HTML; ciclo sera interrompido para evitar publicar arquivo antigo"
+
+            $modeloFinal = Join-Path $snapshotDir "modelo_final.pkl"
+            Test-FreshRequiredFiles -Label "MODELO REVERSA" -Paths @($modeloFinal) -CycleStart $cycleStart -MinSizeBytes 1024
+
+            $linhas = & $script:PythonExe -c "import pandas as pd; print(len(pd.read_pickle(r'$modeloFinal')))"
+            $modTime = (Get-Item $modeloFinal).LastWriteTime.ToString("yyyy-MM-dd HH:mm")
+
+            Write-Status "[3/6] Reversa" ("OK - SNAPSHOT {0} | linhas={1}" -f $modTime, $linhas) Green
+        } catch {
+            $err = $_.Exception.Message
+            if ($err -match "SNAPSHOT REVERSA AUSENTE/INVALIDO" -or $err -match "FileNotFoundError") {
+                Write-Status "[3/6] Reversa" "ERRO - SNAPSHOT REVERSA AUSENTE/INVALIDO" Red
+            } else {
+                Write-Status "[3/6] Reversa" "ERRO" Red
+            }
+            Write-Log ("ERRO DETALHE: " + $err)
+            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao atualizar snapshots/modelo/HTML; ciclo sera interrompido para evitar publicar dado antigo"
+            $reversaOk = $false
+        }
+
+        if (-not $reversaOk) {
             $ok = $false
         }
 
@@ -665,7 +726,8 @@ function Run-Cycle {
         Write-Log "Ciclo finalizado com erro. Nada foi publicado."
     }
 
-    Write-Log ("Proximo ciclo previsto: {0}" -f ((Get-Date).AddSeconds($IntervalSec).ToString("yyyy-MM-dd HH:mm:ss")))
+    $nextCycleAt = $cycleStart.AddSeconds($IntervalSec)
+    Write-Log ("Proximo ciclo previsto: {0}" -f ($nextCycleAt.ToString("yyyy-MM-dd HH:mm:ss")))
     return $ok
 }
 
@@ -718,13 +780,18 @@ try {
     }
 
     do {
+        $loopStartedAt = Get-Date
         $cycleOk = Run-Cycle
         if ($Mode -eq "ONCE") {
             if ($cycleOk) { exit 0 } else { exit 1 }
         }
+        $nextRunAt = $loopStartedAt.AddSeconds($IntervalSec)
+        $sleepSeconds = [int][Math]::Max(0, [Math]::Ceiling(($nextRunAt - (Get-Date)).TotalSeconds))
         Write-Host ""
-        Write-Host "Proxima atualizacao em 10 minutos... Pressione Ctrl+C para parar."
-        Start-Sleep -Seconds $IntervalSec
+        Write-Host ("Proxima atualizacao em {0} segundos ({1}). Pressione Ctrl+C para parar." -f $sleepSeconds, $nextRunAt.ToString("HH:mm:ss"))
+        if ($sleepSeconds -gt 0) {
+            Start-Sleep -Seconds $sleepSeconds
+        }
     } while ($true)
 } finally {
     $mutex.ReleaseMutex() | Out-Null

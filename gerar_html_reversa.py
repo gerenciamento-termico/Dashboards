@@ -455,7 +455,7 @@ footer{margin-top:24px;font-size:.75rem;color:#556070;text-align:right;}
 # ── HTML template ─────────────────────────────────────────────────────────────
 
 def generate_html(all_rows: list[list[str]], tipos: list[str],
-                  ufs: list[str], agentes: list[str], gerado: str, hist_last: str) -> str:
+                  ufs: list[str], agentes: list[str], gerado: str, hist_last: str, snapshot_time: str) -> str:
     all_rows_json = json.dumps(all_rows, ensure_ascii=False, default=str)
     headers_json = json.dumps(TABLE_HEADERS, ensure_ascii=False)
     btn_labels = {
@@ -514,6 +514,14 @@ def generate_html(all_rows: list[list[str]], tipos: list[str],
   {tipo_btns_html}
 </div>
 
+<div class="meta-strip">
+  <strong>Periodo aplicado:</strong> <span id="meta-period">--</span><br>
+  <strong>Agente aplicado:</strong> <span id="meta-agente">Todos os agentes</span> &nbsp;|&nbsp;
+  <strong>UF aplicada:</strong> <span id="meta-uf">Todas as UFs</span> &nbsp;|&nbsp;
+  <strong>Ultima atualizacao do historico:</strong> {hist_last}<br>
+  <strong>Snapshot atualizado em:</strong> {snapshot_time} &nbsp;|&nbsp; <strong>Ultima atualizacao da tela:</strong> {gerado}
+</div>
+
 <div class="filter-row">
   <span class="tipo-label-sm">Filtro por Agente</span>
   <input id="agente-input" class="agent-input" type="text" list="agente-options"
@@ -530,13 +538,6 @@ def generate_html(all_rows: list[list[str]], tipos: list[str],
     <option value="">Todas as UFs</option>
     {uf_options_html}
   </select>
-</div>
-
-<div class="meta-strip">
-  <strong>Periodo aplicado:</strong> <span id="meta-period">--</span><br>
-  <strong>Agente aplicado:</strong> <span id="meta-agente">Todos os agentes</span> &nbsp;|&nbsp;
-  <strong>UF aplicada:</strong> <span id="meta-uf">Todas as UFs</span> &nbsp;|&nbsp;
-  <strong>Ultima atualizacao do historico:</strong> {hist_last} &nbsp;|&nbsp; <strong>Ultima atualizacao da tela:</strong> {gerado}
 </div>
 
 <div class="kpi-grid">
@@ -818,7 +819,7 @@ function uniquePedidoLoggerRows(rows){{
   return Array.from(byKey.values());
 }}
 
-function computePeriodData(rows, days){{
+function computePeriodData(rows, days, periodStart, periodEnd){{
   rows = uniquePedidoLoggerRows(rows);
   const pedidos = new Set();
   let loggers = 0;
@@ -831,7 +832,6 @@ function computePeriodData(rows, days){{
   const trendCounts = new Map();
   const rec7ByDay = new Map();
 
-  const dates = [];
   const today = new Date();
   today.setHours(0, 0, 0, 0);
   const start7 = new Date(today);
@@ -860,7 +860,6 @@ function computePeriodData(rows, days){{
     if (ufDestino) ufCounts.set(ufDestino, (ufCounts.get(ufDestino) || 0) + 1);
 
     if (dtEntrega) {{
-      dates.push(dtEntrega);
       const wk = startOfWeek(dtEntrega);
       const key = `${{wk.getFullYear()}}-${{String(wk.getMonth() + 1).padStart(2, "0")}}-${{String(wk.getDate()).padStart(2, "0")}}`;
       trendCounts.set(key, (trendCounts.get(key) || 0) + 1);
@@ -873,10 +872,8 @@ function computePeriodData(rows, days){{
     }}
   }}
 
-  const minDate = dates.length ? new Date(Math.min(...dates.map(d => d.getTime()))) : null;
-  const maxDate = dates.length ? new Date(Math.max(...dates.map(d => d.getTime()))) : null;
-  const periodTxt = minDate && maxDate
-    ? `${{formatBrDate(minDate)}} ate ${{formatBrDate(maxDate)}}`
+  const periodTxt = periodStart && periodEnd
+    ? `${{formatBrDate(periodStart)}} ate ${{formatBrDate(periodEnd)}}`
     : `Ultimos ${{days}} dias`;
 
   const trendEntries = Array.from(trendCounts.entries())
@@ -945,7 +942,7 @@ function renderAll(days, tipo){{
       (!_currentUf || normalizeUf(r[3]) === _currentUf) &&
       matchesAgente(r[6], _currentAgente);
   }});
-  const computed = computePeriodData(rows, days);
+  const computed = computePeriodData(rows, days, cutoff, today);
 
   document.getElementById("meta-period").textContent     = computed.period_txt;
   document.getElementById("meta-agente").textContent     = _currentAgente || "Todos os agentes";
@@ -1056,20 +1053,21 @@ def main():
         print(f"[reversa] Deduplicacao Pedido+Logger: {before_dedupe} -> {len(model_full)} registros")
         print(f"[reversa] Modelo completo: {len(model_full)} registros")
     except MemoryError:
-        print("[reversa] Memoria insuficiente ao carregar os snapshots brutos.")
-        print("[reversa] Usando modelo_final.pkl pronto para gerar o HTML.")
-        model_full = pd.read_pickle(SNAPSHOT_DIR / "modelo_final.pkl")
-        if "MOTORISTA" not in model_full.columns:
-            model_full["MOTORISTA"] = ""
-        if "_data_entrega_dt" not in model_full.columns:
-            model_full["_data_entrega_dt"] = pd.to_datetime(model_full.get("Data de Entrega"), errors="coerce")
-        model_full = model_full.copy()
-        before_dedupe = len(model_full)
-        model_full = dedupe_pedido_logger(model_full)
-        print(f"[reversa] Deduplicacao Pedido+Logger: {before_dedupe} -> {len(model_full)} registros")
-        print(f"[reversa] Modelo pronto: {len(model_full)} registros")
+        raise RuntimeError(
+            "[reversa] Memoria insuficiente ao carregar snapshots atualizados; abortando para nao usar fallback local."
+        )
 
     gerado = datetime.now().strftime("%d/%m/%Y %H:%M:%S")
+
+    # Obter a data do snapshot consumido
+    try:
+        mod_ts = (SNAPSHOT_DIR / "modelo_final.pkl").stat().st_mtime
+    except FileNotFoundError:
+        try:
+            mod_ts = (SNAPSHOT_DIR / "base_loggers.pkl").stat().st_mtime
+        except FileNotFoundError:
+            mod_ts = datetime.now().timestamp()
+    snapshot_time = datetime.fromtimestamp(mod_ts).strftime("%d/%m/%Y %H:%M:%S")
 
     # Ultima atualizacao do historico = max(Ultimo_Historico) do modelo completo
     hist_ts = pd.to_datetime(model_full.get("Ultimo_Historico"), errors="coerce").max()
@@ -1114,7 +1112,7 @@ def main():
     all_rows = _build_all_rows(model_full)
     print(f"[reversa] Dataset unico para navegação: {len(all_rows)} registros")
 
-    html = generate_html(all_rows, tipos, ufs, agentes, gerado, hist_last)
+    html = generate_html(all_rows, tipos, ufs, agentes, gerado, hist_last, snapshot_time)
     OUTPUT_FILE.write_text(html, encoding="utf-8")
     print(f"[reversa] HTML salvo: {OUTPUT_FILE}")
 

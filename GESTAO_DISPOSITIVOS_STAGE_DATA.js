@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "06/07/2026 07:36:17",
+  "geradoEm": "06/07/2026 07:46:10",
   "summary": {
     "ARES": {
       "totalEstoque": null,

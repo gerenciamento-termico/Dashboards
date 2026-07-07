@@ -14,6 +14,7 @@ $PackageDir = Resolve-Path (Join-Path $ScriptDir "..")
 $StreamlitDir = Join-Path $PackageDir "streamlit"
 $DevDir = Join-Path $PackageDir "EM DESENVOLVIMENTO"
 $IndicadorDir = "C:\Users\Administrador\Documents\Indicador-VTCBOX"
+$IndicadorCaixaVelhaDir = "C:\Users\Administrador\Documents\Indicador-CaixaVelha130L"
 $LogDir = Join-Path $ScriptDir "logs"
 $IntervalSec = 600
 $StepTimeoutSec = 300
@@ -32,7 +33,9 @@ $PublishFiles = @(
     "GESTAO_DISPOSITIVOS_STAGE_DATA.js",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "INDICADOR_VTCBOX.html",
-    "relatorio_analitico_vtcbox.xlsx"
+    "relatorio_analitico_vtcbox.xlsx",
+    "INDICADOR_CAIXA_VELHA_130L.html",
+    "relatorio_analitico_caixa_velha_130l.xlsx"
 )
 
 $DashboardFiles = @(
@@ -45,7 +48,9 @@ $DashboardFiles = @(
     "GESTAO_DISPOSITIVOS.html",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "INDICADOR_VTCBOX.html",
-    "relatorio_analitico_vtcbox.xlsx"
+    "relatorio_analitico_vtcbox.xlsx",
+    "INDICADOR_CAIXA_VELHA_130L.html",
+    "relatorio_analitico_caixa_velha_130l.xlsx"
 )
 
 $Urls = @(
@@ -56,7 +61,9 @@ $Urls = @(
     "https://luan9753.github.io/banco-aura-dashboard/GESTAO_DISPOSITIVOS.html",
     "https://luan9753.github.io/banco-aura-dashboard/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_VTCBOX.html",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_vtcbox.xlsx"
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_vtcbox.xlsx",
+    "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_VELHA_130L.html",
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_velha_130l.xlsx"
 )
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
@@ -523,7 +530,11 @@ function Publish-Changes {
         }
     }
 
-    $normalFiles = $PublishFiles | Where-Object { $_ -ne "relatorio_analitico_vtcbox.xlsx" }
+    $forcedFiles = @(
+        "relatorio_analitico_vtcbox.xlsx",
+        "relatorio_analitico_caixa_velha_130l.xlsx"
+    )
+    $normalFiles = $PublishFiles | Where-Object { $forcedFiles -notcontains $_ }
     # Somente inclua no git add os arquivos que existem no disco para evitar falha quando
     # arquivos opcionais (ex: aura-hub.html) estiverem ausentes.
     $existingNormalFiles = @()
@@ -536,11 +547,13 @@ function Publish-Changes {
         Write-Log "Nenhum dos arquivos normais existem no disco; pulando git add para esses arquivos."
     }
 
-    # relatorio_analitico_vtcbox.xlsx deve ser forçado apenas se existir
-    if (Test-Path -LiteralPath (Join-Path $PublishDir "relatorio_analitico_vtcbox.xlsx")) {
-        Invoke-LoggedProcess -FilePath "git" -Arguments @("add", "-f", "--", "relatorio_analitico_vtcbox.xlsx") -WorkingDirectory $PublishDir -Name "git add -f relatorio xlsx" -TimeoutSec 60 -Quiet
-    } else {
-        Write-Log "relatorio_analitico_vtcbox.xlsx ausente; pulando git add -f."
+    # Relatorios XLSX devem ser forcados apenas se existirem.
+    foreach ($forcedFile in $forcedFiles) {
+        if (Test-Path -LiteralPath (Join-Path $PublishDir $forcedFile)) {
+            Invoke-LoggedProcess -FilePath "git" -Arguments @("add", "-f", "--", $forcedFile) -WorkingDirectory $PublishDir -Name ("git add -f {0}" -f $forcedFile) -TimeoutSec 60 -Quiet
+        } else {
+            Write-Log ("{0} ausente; pulando git add -f." -f $forcedFile)
+        }
     }
 
     $staged = @(& git -C $PublishDir diff --cached --name-only)
@@ -673,6 +686,14 @@ function Run-Cycle {
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Indicador VTCBOX" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
         }
+
+        if (-not (Invoke-Step "[7/7] Indicador Caixa Velha 130L" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $IndicadorCaixaVelhaDir "gerar_indicador.py")) -WorkingDirectory $IndicadorCaixaVelhaDir -Name "Indicador Caixa Velha 130L gerar_indicador.py"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixaVelhaDir "INDICADOR_CAIXA_VELHA_130L.html") -DestinationName "INDICADOR_CAIXA_VELHA_130L.html"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixaVelhaDir "relatorio_analitico_caixa_velha_130l.xlsx") -DestinationName "relatorio_analitico_caixa_velha_130l.xlsx"
+        })) {
+            Add-StepFailure -Failures $stepFailures -Name "Indicador Caixa Velha 130L" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
+        }
     }
 
     if ($ok) {
@@ -752,7 +773,8 @@ function Run-Check {
         (Join-Path $DevDir "exportar_vtc_stage_gestao.py"),
         (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html"),
         (Join-Path $PublishDir "gerenciamento_termico.html"),
-        (Join-Path $IndicadorDir "gerar_indicador.py")
+        (Join-Path $IndicadorDir "gerar_indicador.py"),
+        (Join-Path $IndicadorCaixaVelhaDir "gerar_indicador.py")
     )
     foreach ($path in $required) {
         if (-not (Test-Path -LiteralPath $path)) {

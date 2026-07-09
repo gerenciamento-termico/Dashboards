@@ -8,7 +8,7 @@
     :root { color-scheme: dark; --bg:#0b1118; --panel:#151d28; --panel2:#101722; --line:#283548; --text:#edf3f8; --muted:#9cadbf; --blue:#5aa7ff; --green:#49d17d; --orange:#ff9f43; --neutral:#263241; --selected:#f8d66d; }
     * { box-sizing: border-box; }
     body { margin:0; font-family: Segoe UI, Arial, sans-serif; background:var(--bg); color:var(--text); }
-    .wrap { max-width:1280px; margin:0 auto; padding:24px; }
+    .wrap { max-width:1500px; margin:0 auto; padding:24px; }
     header { padding:26px 0 22px; border-bottom:1px solid var(--line); margin-bottom:22px; }
     h1 { margin:0 0 8px; font-size:34px; letter-spacing:0; }
     .sub { color:var(--muted); }
@@ -22,7 +22,7 @@
     .bar-label { display:flex; justify-content:space-between; margin:12px 0 6px; color:var(--muted); }
     .track { height:20px; background:#223044; border-radius:999px; overflow:hidden; }
     .fill-green { height:100%; width:92.5%; background:var(--green); }
-    .split { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+    .split { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:16px; }
     @media (max-width:900px) { .split { grid-template-columns:1fr; } .wrap { padding:16px; } h1 { font-size:28px; } }
     .panel h2 { margin:0; padding:14px 16px; border-bottom:1px solid var(--line); font-size:18px; }
     .map-panel { margin-bottom:16px; overflow:hidden; }
@@ -67,7 +67,7 @@
     .swatch { width:30px; height:12px; border-radius:999px; border:1px solid rgba(255,255,255,.2); }
     .table-wrap { max-height:460px; overflow:auto; }
     table { width:100%; border-collapse:collapse; font-size:14px; }
-    th, td { padding:10px 12px; border-bottom:1px solid var(--line); text-align:left; }
+    th, td { padding:9px 10px; border-bottom:1px solid var(--line); text-align:left; }
     th { position:sticky; top:0; background:var(--panel2); color:var(--muted); font-size:11px; text-transform:uppercase; }
     tr:hover td { background:#1b2634; }
     footer { margin-top:18px; color:var(--muted); font-size:13px; }
@@ -77,7 +77,7 @@
   <div class="wrap">
     <header>
       <h1>Indicador Caixa Velha 130L</h1>
-      <div class="sub">CAIXA 130L COM BERÇO | Coletas desde 10/06/2026 | Fonte: vtc_stage.documentos | Atualizado em 09/07/2026 16:13:08</div>
+      <div class="sub">CAIXA 130L COM BERÇO | Coletas desde 10/06/2026 | Fonte: vtc_stage.documentos | Atualizado em 09/07/2026 16:23:02</div>
     </header>
 
     <section class="grid">

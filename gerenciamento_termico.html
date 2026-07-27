@@ -260,6 +260,10 @@ body{
 .card:nth-child(4){animation-delay:0.75s}
 .card:nth-child(5){animation-delay:0.85s}
 .card:nth-child(6){animation-delay:0.95s}
+.card:nth-child(7){animation-delay:1.05s}
+.card:nth-child(8){animation-delay:1.15s}
+.card:nth-child(9){animation-delay:1.25s}
+.card:nth-child(10){animation-delay:1.35s}
 
 .card::before{
   content:'';position:absolute;
@@ -499,7 +503,7 @@ body{
 <main class="container">
   <div class="section-header">
     <div class="section-label"><i class="fas fa-th-large" style="margin-right:0.4rem"></i> Paineis Gerenciais / Operacionais</div>
-    <div class="section-count">7 ativos</div>
+    <div class="section-count">10 ativos</div>
   </div>
 
   <div class="grid" id="cardGrid">
@@ -541,6 +545,72 @@ body{
         <span class="tag"><i class="fas fa-box" style="margin-right:0.3rem;font-size:0.6rem"></i>33L</span>
         <span class="tag"><i class="fas fa-barcode" style="margin-right:0.3rem;font-size:0.6rem"></i>LPNs</span>
         <span class="tag"><i class="fas fa-map-location-dot" style="margin-right:0.3rem;font-size:0.6rem"></i>UF</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="card" data-search="caixa velha 130l caixa 130l entregas lpn uf berco pfizer gelo seco" onclick="window.open('https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_VELHA_130L.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-boxes-stacked"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Indicador Performance Caixa 130L</h3>
+      <p>Monitoramento completo de entregas das caixas 130L. Acompanhe pedidos, LPNs e taxa de entrega por UF em tempo real.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-boxes-stacked" style="margin-right:0.3rem;font-size:0.6rem"></i>130L</span>
+        <span class="tag"><i class="fas fa-barcode" style="margin-right:0.3rem;font-size:0.6rem"></i>LPNs</span>
+        <span class="tag"><i class="fas fa-map-location-dot" style="margin-right:0.3rem;font-size:0.6rem"></i>UF</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="card" data-search="caixa 42l entregas lpn uf indicador performance" onclick="window.open('https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_42L.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-box"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Indicador Performance Caixa 42L</h3>
+      <p>Monitoramento completo de entregas da caixa 42L. Acompanhe pedidos, LPNs e taxa de entrega por UF em tempo real.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-box" style="margin-right:0.3rem;font-size:0.6rem"></i>42L</span>
+        <span class="tag"><i class="fas fa-barcode" style="margin-right:0.3rem;font-size:0.6rem"></i>LPNs</span>
+        <span class="tag"><i class="fas fa-map-location-dot" style="margin-right:0.3rem;font-size:0.6rem"></i>UF</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="card" data-search="indicador geral caixas consolidado vtcbox 130l 33l 42l filtro exportacao csv xlsx" onclick="window.open('https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXAS_GERAL.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-layer-group"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Indicador Geral de Caixas</h3>
+      <p>Consolidado dos indicadores de caixas, com filtro por tipo e exportações CSV e XLSX correspondentes à seleção operacional.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-layer-group" style="margin-right:0.3rem;font-size:0.6rem"></i>Consolidado</span>
+        <span class="tag"><i class="fas fa-filter" style="margin-right:0.3rem;font-size:0.6rem"></i>Filtros</span>
+        <span class="tag"><i class="fas fa-file-export" style="margin-right:0.3rem;font-size:0.6rem"></i>Exportação</span>
       </div>
       <div class="card-footer">
         <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>

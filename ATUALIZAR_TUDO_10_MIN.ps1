@@ -15,6 +15,8 @@ $StreamlitDir = Join-Path $PackageDir "streamlit"
 $DevDir = Join-Path $PackageDir "EM DESENVOLVIMENTO"
 $IndicadorDir = "C:\Users\Administrador\Documents\Indicador-VTCBOX"
 $IndicadorCaixaVelhaDir = "C:\Users\Administrador\Documents\Indicador-CaixaVelha130L"
+$IndicadorCaixa33LDir = "C:\Users\Administrador\Documents\Indicador-Caixa33L"
+$IndicadorCaixa42LDir = "C:\Users\Administrador\Documents\Indicador-Caixa42L"
 $LogDir = Join-Path $ScriptDir "logs"
 $IntervalSec = 600
 $StepTimeoutSec = 300
@@ -34,8 +36,16 @@ $PublishFiles = @(
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "INDICADOR_VTCBOX.html",
     "relatorio_analitico_vtcbox.xlsx",
+    "relatorio_analitico_vtcbox.csv",
     "INDICADOR_CAIXA_VELHA_130L.html",
-    "relatorio_analitico_caixa_velha_130l.xlsx"
+    "relatorio_analitico_caixa_velha_130l.xlsx",
+    "relatorio_analitico_caixa_velha_130l.csv",
+    "INDICADOR_CAIXA_33L.html",
+    "relatorio_analitico_caixa_33l.xlsx",
+    "relatorio_analitico_caixa_33l.csv",
+    "INDICADOR_CAIXA_42L.html",
+    "relatorio_analitico_caixa_42l.xlsx",
+    "relatorio_analitico_caixa_42l.csv"
 )
 
 $DashboardFiles = @(
@@ -49,8 +59,16 @@ $DashboardFiles = @(
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "INDICADOR_VTCBOX.html",
     "relatorio_analitico_vtcbox.xlsx",
+    "relatorio_analitico_vtcbox.csv",
     "INDICADOR_CAIXA_VELHA_130L.html",
-    "relatorio_analitico_caixa_velha_130l.xlsx"
+    "relatorio_analitico_caixa_velha_130l.xlsx",
+    "relatorio_analitico_caixa_velha_130l.csv",
+    "INDICADOR_CAIXA_33L.html",
+    "relatorio_analitico_caixa_33l.xlsx",
+    "relatorio_analitico_caixa_33l.csv",
+    "INDICADOR_CAIXA_42L.html",
+    "relatorio_analitico_caixa_42l.xlsx",
+    "relatorio_analitico_caixa_42l.csv"
 )
 
 $Urls = @(
@@ -62,8 +80,16 @@ $Urls = @(
     "https://luan9753.github.io/banco-aura-dashboard/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_VTCBOX.html",
     "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_vtcbox.xlsx",
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_vtcbox.csv",
     "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_VELHA_130L.html",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_velha_130l.xlsx"
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_velha_130l.xlsx",
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_velha_130l.csv",
+    "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_33L.html",
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_33l.xlsx",
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_33l.csv",
+    "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_42L.html",
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_42l.xlsx",
+    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_42l.csv"
 )
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
@@ -117,10 +143,18 @@ function Invoke-LoggedProcess {
     $outFile = Join-Path $env:TEMP ("aura_step_{0}_{1}.out" -f $PID, ([guid]::NewGuid().ToString("N")))
     $errFile = Join-Path $env:TEMP ("aura_step_{0}_{1}.err" -f $PID, ([guid]::NewGuid().ToString("N")))
     try {
-        $process = Start-Process -FilePath $FilePath -ArgumentList $argLine -WorkingDirectory $WorkingDirectory -NoNewWindow -PassThru -Wait -RedirectStandardOutput $outFile -RedirectStandardError $errFile
+        $process = Start-Process -FilePath $FilePath -ArgumentList $argLine -WorkingDirectory $WorkingDirectory -NoNewWindow -PassThru -RedirectStandardOutput $outFile -RedirectStandardError $errFile
     } catch {
         Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
         throw ("Nao foi possivel iniciar {0}: {1}" -f $Name, $_.Exception.Message)
+    }
+
+    if (-not $process.WaitForExit($TimeoutSec * 1000)) {
+        try {
+            Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+        } catch {}
+        Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
+        throw ("{0} excedeu timeout de {1}s" -f $Name, $TimeoutSec)
     }
 
     $stdout = if (Test-Path $outFile) { Get-Content -LiteralPath $outFile -Raw -ErrorAction SilentlyContinue } else { "" }
@@ -129,7 +163,8 @@ function Invoke-LoggedProcess {
     if ($stderr) { $stderr.TrimEnd() -split "`r?`n" | ForEach-Object { Write-Log ("ERR: " + $_) } }
     Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
 
-    $exitCode = $process.ExitCode
+    $process.Refresh()
+    $exitCode = if ($null -eq $process.ExitCode) { 0 } else { [int]$process.ExitCode }
     if ($exitCode -ne 0) {
         throw ("{0} falhou com codigo {1}" -f $Name, $exitCode)
     }
@@ -532,7 +567,13 @@ function Publish-Changes {
 
     $forcedFiles = @(
         "relatorio_analitico_vtcbox.xlsx",
-        "relatorio_analitico_caixa_velha_130l.xlsx"
+        "relatorio_analitico_vtcbox.csv",
+        "relatorio_analitico_caixa_velha_130l.xlsx",
+        "relatorio_analitico_caixa_velha_130l.csv",
+        "relatorio_analitico_caixa_33l.xlsx",
+        "relatorio_analitico_caixa_33l.csv",
+        "relatorio_analitico_caixa_42l.xlsx",
+        "relatorio_analitico_caixa_42l.csv"
     )
     $normalFiles = $PublishFiles | Where-Object { $forcedFiles -notcontains $_ }
     # Somente inclua no git add os arquivos que existem no disco para evitar falha quando
@@ -617,13 +658,13 @@ function Run-Cycle {
     }
 
     if ($ok) {
-        if (-not (Invoke-Step "[1/7] Estoque" {
+        if (-not (Invoke-Step "[1/9] Estoque" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_estoque.py")) -WorkingDirectory $PublishDir -Name "gerar_html_estoque.py"
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Estoque" -Message "falha ao conectar/gerar; ESTOQUE_DATALOGGERS.html anterior sera preservado"
         }
 
-        if (-not (Invoke-Step "[2/7] Controle Entregas" {
+        if (-not (Invoke-Step "[2/9] Controle Entregas" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_controle_entregas.py")) -WorkingDirectory $PublishDir -Name "gerar_html_controle_entregas.py"
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Controle Entregas" -Message "falha ao gerar; arquivo anterior sera preservado se existir"
@@ -631,31 +672,24 @@ function Run-Cycle {
 
         $reversaOk = $true
         try {
-            $snapshotDir = Join-Path (Split-Path $StreamlitDir) "snapshot_reversa"
-            $reqSnaps = @("base_loggers.pkl", "base_agentes.pkl", "recebimento_resumo.pkl", "base_destinatarios.pkl")
-            $reqSnapPaths = @($reqSnaps | ForEach-Object { Join-Path $snapshotDir $_ })
+            Write-Status "[3/9] Reversa" "GERANDO - fontes STAGE/dtbPortal/dtbTransporte" Yellow
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_reversa.py")) -WorkingDirectory $PublishDir -Name "gerar_html_reversa.py" -TimeoutSec 420
 
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_snapshot_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_snapshot_reversa.py"
-            Test-FreshRequiredFiles -Label "SNAPSHOT REVERSA" -Paths $reqSnapPaths -CycleStart $cycleStart -MinSizeBytes 1024
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_modelo_final_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_modelo_final_reversa.py"
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_reversa.py")) -WorkingDirectory $PublishDir -Name "gerar_html_reversa.py"
+            $reversaHtml = Join-Path $PublishDir "REVERSA_DATALOGGERS.html"
+            $reversaManifest = Join-Path $PublishDir "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json"
+            Test-FreshRequiredFiles -Label "HTML REVERSA" -Paths @($reversaHtml, $reversaManifest) -CycleStart $cycleStart -MinSizeBytes 1024
 
-            $modeloFinal = Join-Path $snapshotDir "modelo_final.pkl"
-            Test-FreshRequiredFiles -Label "MODELO REVERSA" -Paths @($modeloFinal) -CycleStart $cycleStart -MinSizeBytes 1024
+            $manifest = Get-Content -LiteralPath $reversaManifest -Raw -Encoding UTF8 | ConvertFrom-Json
+            $linhas = $manifest.camada_operacional.linhas_operacionais_finais
+            $status = $manifest.fail_closed.status
+            $modTime = (Get-Item $reversaHtml).LastWriteTime.ToString("yyyy-MM-dd HH:mm")
 
-            $linhas = & $script:PythonExe -c "import pandas as pd; print(len(pd.read_pickle(r'$modeloFinal')))"
-            $modTime = (Get-Item $modeloFinal).LastWriteTime.ToString("yyyy-MM-dd HH:mm")
-
-            Write-Status "[3/6] Reversa" ("OK - SNAPSHOT {0} | linhas={1}" -f $modTime, $linhas) Green
+            Write-Status "[3/9] Reversa" ("OK - {0} | linhas={1} | {2}" -f $modTime, $linhas, $status) Green
         } catch {
             $err = $_.Exception.Message
-            if ($err -match "SNAPSHOT REVERSA AUSENTE/INVALIDO" -or $err -match "FileNotFoundError") {
-                Write-Status "[3/6] Reversa" "ERRO - SNAPSHOT REVERSA AUSENTE/INVALIDO" Red
-            } else {
-                Write-Status "[3/6] Reversa" "ERRO" Red
-            }
+            Write-Status "[3/9] Reversa" "ERRO" Red
             Write-Log ("ERRO DETALHE: " + $err)
-            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao atualizar snapshots/modelo/HTML; ciclo sera interrompido para evitar publicar dado antigo"
+            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao gerar REVERSA_DATALOGGERS.html com fontes STAGE; ciclo sera interrompido para evitar publicar dado antigo"
             $reversaOk = $false
         }
 
@@ -663,7 +697,7 @@ function Run-Cycle {
             $ok = $false
         }
 
-        if (-not (Invoke-Step "[4/6] Gestao Dispositivos" {
+        if (-not (Invoke-Step "[4/9] Gestao Dispositivos" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $DevDir "exportar_vtc_stage_gestao.py")) -WorkingDirectory $DevDir -Name "exportar_vtc_stage_gestao.py"
             Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html") -DestinationName "GESTAO_DISPOSITIVOS.html"
             Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js") -DestinationName "GESTAO_DISPOSITIVOS_STAGE_DATA.js"
@@ -672,27 +706,47 @@ function Run-Cycle {
             $ok = $false
         }
 
-        if (-not (Invoke-Step "[5/6] Rastreio Caixas Sem Logger" {
+        if (-not (Invoke-Step "[5/9] Rastreio Caixas Sem Logger" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_rastreio_caixas_sem_datalogger.py")) -WorkingDirectory $PublishDir -Name "gerar_html_rastreio_caixas_sem_datalogger.py"
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Rastreio Caixas Sem Logger" -Message "falha ao gerar; ciclo sera interrompido para evitar publicar arquivo antigo"
             $ok = $false
         }
 
-        if (-not (Invoke-Step "[6/6] Indicador VTCBOX" {
+        if (-not (Invoke-Step "[6/9] Indicador VTCBOX" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $IndicadorDir "gerar_indicador.py")) -WorkingDirectory $IndicadorDir -Name "Indicador VTCBOX gerar_indicador.py"
             Copy-PublishedFile -Source (Join-Path $IndicadorDir "INDICADOR_VTCBOX.html") -DestinationName "INDICADOR_VTCBOX.html"
             Copy-PublishedFile -Source (Join-Path $IndicadorDir "relatorio_analitico_vtcbox.xlsx") -DestinationName "relatorio_analitico_vtcbox.xlsx"
+            Copy-PublishedFile -Source (Join-Path $IndicadorDir "relatorio_analitico_vtcbox.csv") -DestinationName "relatorio_analitico_vtcbox.csv"
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Indicador VTCBOX" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
         }
 
-        if (-not (Invoke-Step "[7/7] Indicador Caixa Velha 130L" {
+        if (-not (Invoke-Step "[7/9] Indicador Caixa Velha 130L" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $IndicadorCaixaVelhaDir "gerar_indicador.py")) -WorkingDirectory $IndicadorCaixaVelhaDir -Name "Indicador Caixa Velha 130L gerar_indicador.py"
             Copy-PublishedFile -Source (Join-Path $IndicadorCaixaVelhaDir "INDICADOR_CAIXA_VELHA_130L.html") -DestinationName "INDICADOR_CAIXA_VELHA_130L.html"
             Copy-PublishedFile -Source (Join-Path $IndicadorCaixaVelhaDir "relatorio_analitico_caixa_velha_130l.xlsx") -DestinationName "relatorio_analitico_caixa_velha_130l.xlsx"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixaVelhaDir "relatorio_analitico_caixa_velha_130l.csv") -DestinationName "relatorio_analitico_caixa_velha_130l.csv"
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Indicador Caixa Velha 130L" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
+        }
+
+        if (-not (Invoke-Step "[8/9] Indicador Caixa 33L" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $IndicadorCaixa33LDir "gerar_indicador.py")) -WorkingDirectory $IndicadorCaixa33LDir -Name "Indicador Caixa 33L gerar_indicador.py"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixa33LDir "INDICADOR_CAIXA_33L.html") -DestinationName "INDICADOR_CAIXA_33L.html"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixa33LDir "relatorio_analitico_caixa_33l.xlsx") -DestinationName "relatorio_analitico_caixa_33l.xlsx"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixa33LDir "relatorio_analitico_caixa_33l.csv") -DestinationName "relatorio_analitico_caixa_33l.csv"
+        })) {
+            Add-StepFailure -Failures $stepFailures -Name "Indicador Caixa 33L" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
+        }
+
+        if (-not (Invoke-Step "[9/9] Indicador Caixa 42L" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $IndicadorCaixa42LDir "gerar_indicador.py")) -WorkingDirectory $IndicadorCaixa42LDir -Name "Indicador Caixa 42L gerar_indicador.py"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixa42LDir "INDICADOR_CAIXA_42L.html") -DestinationName "INDICADOR_CAIXA_42L.html"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixa42LDir "relatorio_analitico_caixa_42l.xlsx") -DestinationName "relatorio_analitico_caixa_42l.xlsx"
+            Copy-PublishedFile -Source (Join-Path $IndicadorCaixa42LDir "relatorio_analitico_caixa_42l.csv") -DestinationName "relatorio_analitico_caixa_42l.csv"
+        })) {
+            Add-StepFailure -Failures $stepFailures -Name "Indicador Caixa 42L" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
         }
     }
 
@@ -766,6 +820,8 @@ function Run-Check {
         (Join-Path $PublishDir "gerar_html_estoque.py"),
         (Join-Path $PublishDir "gerar_html_controle_entregas.py"),
         (Join-Path $PublishDir "gerar_html_reversa.py"),
+        (Join-Path $PublishDir "gerar_snapshot_reversa_vtc_stage.py"),
+        (Join-Path $PublishDir "gerar_html_reversa_vtc_stage_hibrido_aderente_original.py"),
         (Join-Path $PublishDir "gerar_html_rastreio_caixas_sem_datalogger.py"),
         (Join-Path $StreamlitDir "gerar_snapshot_reversa.py"),
         (Join-Path $StreamlitDir "gerar_modelo_final_reversa.py"),
@@ -774,7 +830,9 @@ function Run-Check {
         (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html"),
         (Join-Path $PublishDir "gerenciamento_termico.html"),
         (Join-Path $IndicadorDir "gerar_indicador.py"),
-        (Join-Path $IndicadorCaixaVelhaDir "gerar_indicador.py")
+        (Join-Path $IndicadorCaixaVelhaDir "gerar_indicador.py"),
+        (Join-Path $IndicadorCaixa33LDir "gerar_indicador.py"),
+        (Join-Path $IndicadorCaixa42LDir "gerar_indicador.py")
     )
     foreach ($path in $required) {
         if (-not (Test-Path -LiteralPath $path)) {

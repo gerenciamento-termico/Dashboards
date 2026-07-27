@@ -17,6 +17,7 @@ $IndicadorDir = "C:\Users\Administrador\Documents\Indicador-VTCBOX"
 $IndicadorCaixaVelhaDir = "C:\Users\Administrador\Documents\Indicador-CaixaVelha130L"
 $IndicadorCaixa33LDir = "C:\Users\Administrador\Documents\Indicador-Caixa33L"
 $IndicadorCaixa42LDir = "C:\Users\Administrador\Documents\Indicador-Caixa42L"
+$IndicadorCaixasGeralDir = "C:\Users\Administrador\Documents\Indicador-CaixasGeral"
 $LogDir = Join-Path $ScriptDir "logs"
 $IntervalSec = 600
 $StepTimeoutSec = 300
@@ -91,6 +92,23 @@ $Urls = @(
     "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_42l.xlsx",
     "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_42l.csv"
 )
+
+$IndicadorCaixasGeralPublishFiles = @(
+    "INDICADOR_CAIXAS_GERAL.html",
+    "relatorio_analitico_caixas_geral.xlsx",
+    "relatorio_analitico_caixas_geral.csv",
+    "relatorio_analitico_caixas_vtcbox.xlsx",
+    "relatorio_analitico_caixas_vtcbox.csv",
+    "relatorio_analitico_caixas_130l.xlsx",
+    "relatorio_analitico_caixas_130l.csv",
+    "relatorio_analitico_caixas_33l.xlsx",
+    "relatorio_analitico_caixas_33l.csv",
+    "relatorio_analitico_caixas_42l.xlsx",
+    "relatorio_analitico_caixas_42l.csv"
+)
+$PublishFiles += $IndicadorCaixasGeralPublishFiles
+$DashboardFiles += $IndicadorCaixasGeralPublishFiles
+$Urls += $IndicadorCaixasGeralPublishFiles | ForEach-Object { "https://luan9753.github.io/banco-aura-dashboard/$_" }
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 $LogFile = Join-Path $LogDir ("atualizar_tudo_{0}.log" -f (Get-Date -Format "yyyyMMdd"))
@@ -575,6 +593,7 @@ function Publish-Changes {
         "relatorio_analitico_caixa_42l.xlsx",
         "relatorio_analitico_caixa_42l.csv"
     )
+    $forcedFiles += $IndicadorCaixasGeralPublishFiles | Where-Object { $_ -like "*.xlsx" -or $_ -like "*.csv" }
     $normalFiles = $PublishFiles | Where-Object { $forcedFiles -notcontains $_ }
     # Somente inclua no git add os arquivos que existem no disco para evitar falha quando
     # arquivos opcionais (ex: aura-hub.html) estiverem ausentes.
@@ -748,6 +767,15 @@ function Run-Cycle {
         })) {
             Add-StepFailure -Failures $stepFailures -Name "Indicador Caixa 42L" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
         }
+
+        if (-not (Invoke-Step "[10/10] Indicador Geral de Caixas" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $IndicadorCaixasGeralDir "gerar_indicador.py")) -WorkingDirectory $IndicadorCaixasGeralDir -Name "Indicador Geral de Caixas gerar_indicador.py"
+            foreach ($file in $IndicadorCaixasGeralPublishFiles) {
+                Copy-PublishedFile -Source (Join-Path $IndicadorCaixasGeralDir $file) -DestinationName $file
+            }
+        })) {
+            Add-StepFailure -Failures $stepFailures -Name "Indicador Geral de Caixas" -Message "falha ao gerar/copiar; arquivos anteriores serao preservados se existirem"
+        }
     }
 
     if ($ok) {
@@ -832,7 +860,8 @@ function Run-Check {
         (Join-Path $IndicadorDir "gerar_indicador.py"),
         (Join-Path $IndicadorCaixaVelhaDir "gerar_indicador.py"),
         (Join-Path $IndicadorCaixa33LDir "gerar_indicador.py"),
-        (Join-Path $IndicadorCaixa42LDir "gerar_indicador.py")
+        (Join-Path $IndicadorCaixa42LDir "gerar_indicador.py"),
+        (Join-Path $IndicadorCaixasGeralDir "gerar_indicador.py")
     )
     foreach ($path in $required) {
         if (-not (Test-Path -LiteralPath $path)) {

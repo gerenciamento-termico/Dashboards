@@ -692,7 +692,6 @@ function Run-Cycle {
         $reversaOk = $true
         try {
             Write-Status "[3/9] Reversa" "GERANDO - fontes STAGE/dtbPortal/dtbTransporte" Yellow
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $StreamlitDir "gerar_snapshot_reversa.py")) -WorkingDirectory $StreamlitDir -Name "gerar_snapshot_reversa.py" -TimeoutSec 420
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_reversa.py")) -WorkingDirectory $PublishDir -Name "gerar_html_reversa.py" -TimeoutSec 420
 
             $reversaHtml = Join-Path $PublishDir "REVERSA_DATALOGGERS.html"

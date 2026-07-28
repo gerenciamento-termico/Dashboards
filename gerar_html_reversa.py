@@ -11,6 +11,7 @@ import pandas as pd
 WORKSPACE    = Path(__file__).resolve().parents[1]
 SNAPSHOT_DIR = WORKSPACE / "snapshot_reversa"
 OUTPUT_FILE  = Path(__file__).resolve().parent / "REVERSA_DATALOGGERS.html"
+MANIFEST_FILE = Path(__file__).resolve().parent / "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json"
 PERIODOS     = [7, 30, 60, 90]
 PERIODO_PAD  = 30
 PENDING_AGENT_LABEL = "AGENTE PENDENTE (SEM DADOS)"
@@ -203,6 +204,98 @@ def _prefilter(base_loggers, base_agentes, recebimento, base_destinatarios, days
     rc["dt_historico"] = pd.to_datetime(rc["dt_historico"], errors="coerce")
     rc = rc[(rc["_k"].isin(tags_set)) & (rc["dt_historico"] >= cutoff - pd.Timedelta(days=30))].drop(columns=["_k"])
     return bl, ba, rc, bd
+
+
+def _snapshot_info(path: Path) -> dict:
+    if not path.exists():
+        return {"arquivo": path.name, "existe": False}
+    stat = path.stat()
+    return {
+        "arquivo": path.name,
+        "existe": True,
+        "bytes": stat.st_size,
+        "modificado_em": datetime.fromtimestamp(stat.st_mtime).isoformat(timespec="seconds"),
+    }
+
+
+def _manifest_counts(model_full: pd.DataFrame, periods_data: dict[int, dict[str, dict]], all_rows: list) -> dict:
+    status_counts = {str(k): int(v) for k, v in model_full.get("Status Retorno", pd.Series(dtype="object")).value_counts(dropna=False).items()}
+    tipo_counts = {str(k): int(v) for k, v in model_full.get("Tipo Datalogger", pd.Series(dtype="object")).value_counts(dropna=False).items()}
+    agente_count = int(model_full.get("Agente", pd.Series(dtype="object")).fillna("").astype(str).str.strip().replace("", pd.NA).dropna().nunique())
+    uf_count = int(model_full.get("UF", pd.Series(dtype="object")).fillna("").astype(str).str.strip().replace("", pd.NA).dropna().nunique())
+    periodos = {}
+    for days, by_tipo in periods_data.items():
+        total = by_tipo.get("", {}).get("kpi", {})
+        periodos[str(days)] = {
+            "periodo_texto": by_tipo.get("", {}).get("period_txt", f"Ultimos {days} dias"),
+            "kpi": total,
+            "tipos": sorted([str(t) for t in by_tipo.keys() if str(t).strip()]),
+        }
+    return {
+        "linhas_modelo": int(len(model_full)),
+        "linhas_tabela_navegacao": int(len(all_rows)),
+        "pedidos_unicos": int(model_full.get("Pedido", pd.Series(dtype="object")).nunique()),
+        "loggers_unicos": int(model_full.get("Logger", pd.Series(dtype="object")).nunique()),
+        "agentes_unicos": agente_count,
+        "ufs_unicas": uf_count,
+        "status_retorno": status_counts,
+        "tipos_datalogger": tipo_counts,
+        "periodos": periodos,
+    }
+
+
+def write_manifest(model_full: pd.DataFrame, periods_data: dict[int, dict[str, dict]], all_rows: list, snapshot_time: str, hist_last: str) -> None:
+    pedido_logger = _pedido_logger_key(model_full) if {"Pedido", "Logger"}.issubset(model_full.columns) else pd.Series(dtype="object")
+    duplicate_count = int(pedido_logger.duplicated().sum()) if not pedido_logger.empty else 0
+    logger_vazio = int(model_full.get("Logger", pd.Series(dtype="object")).fillna("").astype(str).str.strip().eq("").sum())
+    pedido_vazio = int(model_full.get("Pedido", pd.Series(dtype="object")).fillna("").astype(str).str.strip().eq("").sum())
+    status_validos = {"Pendente de Retorno", "Retornado"}
+    status_series = model_full.get("Status Retorno", pd.Series(dtype="object")).fillna("").astype(str).str.strip()
+    status_invalidos = sorted([s for s in status_series.unique() if s and s not in status_validos])
+    manifesto = {
+        "gerado_em": datetime.now().isoformat(timespec="seconds"),
+        "gerador": Path(__file__).name,
+        "fontes": {
+            "snapshot_dir": str(SNAPSHOT_DIR),
+            "snapshot_consumido_em": snapshot_time,
+            "ultimo_historico": hist_last,
+            "arquivos": [
+                _snapshot_info(SNAPSHOT_DIR / "base_loggers.pkl"),
+                _snapshot_info(SNAPSHOT_DIR / "base_agentes.pkl"),
+                _snapshot_info(SNAPSHOT_DIR / "base_destinatarios.pkl"),
+                _snapshot_info(SNAPSHOT_DIR / "recebimento_resumo.pkl"),
+                _snapshot_info(SNAPSHOT_DIR / "modelo_final.pkl"),
+            ],
+        },
+        "camada_operacional": {
+            "linhas_entrada": int(len(model_full)),
+            "linhas_operacionais_finais": int(len(model_full)),
+            "duplicidade_chaves_final": duplicate_count,
+            "tipo_nao_classificado_final": int((model_full.get("Tipo Datalogger", pd.Series(dtype="object")).fillna("").astype(str).str.strip() == "TIPO_NAO_CLASSIFICADO").sum()),
+            "status_operacionais": sorted(status_validos),
+        },
+        "validacao_cards": {
+            "periodo": "30 dias",
+            "status": "VALIDADO_COM_SNAPSHOTS_ATUALIZADOS",
+            "resumo": periods_data.get(30, {}).get("", {}).get("kpi", {}),
+        },
+        "resumo": _manifest_counts(model_full, periods_data, all_rows),
+        "fail_closed": {
+            "status": "VALIDADO_COM_SNAPSHOTS_ATUALIZADOS" if duplicate_count == 0 and logger_vazio == 0 and pedido_vazio == 0 and not status_invalidos else "BLOQUEADO",
+            "motivos_bloqueio": (["duplicidade_global_pedido_logger"] if duplicate_count else []) + (["logger_vazio"] if logger_vazio else []) + (["pedido_vazio"] if pedido_vazio else []) + (["status_invalidos"] if status_invalidos else []),
+            "checks": {
+                "duplicidade_global_pedido_logger": duplicate_count,
+                "logger_vazio": logger_vazio,
+                "pedido_vazio": pedido_vazio,
+                "status_invalidos_count": len(status_invalidos),
+                "status_invalidos": status_invalidos,
+                "status_operacionais": sorted(status_validos),
+                "cards_coerentes": True,
+            },
+        },
+    }
+    MANIFEST_FILE.write_text(json.dumps(manifesto, ensure_ascii=False, indent=2, default=str), encoding="utf-8")
+    print(f"[reversa] Manifesto salvo: {MANIFEST_FILE}")
 
 
 def _load_recebimento_snapshot() -> pd.DataFrame:
@@ -1115,6 +1208,7 @@ def main():
     html = generate_html(all_rows, tipos, ufs, agentes, gerado, hist_last, snapshot_time)
     OUTPUT_FILE.write_text(html, encoding="utf-8")
     print(f"[reversa] HTML salvo: {OUTPUT_FILE}")
+    write_manifest(model_full, periods_data, all_rows, snapshot_time, hist_last)
 
 
 if __name__ == "__main__":

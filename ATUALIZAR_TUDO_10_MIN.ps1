@@ -18,6 +18,7 @@ $IndicadorCaixaVelhaDir = "C:\Users\Administrador\Documents\Indicador-CaixaVelha
 $IndicadorCaixa33LDir = "C:\Users\Administrador\Documents\Indicador-Caixa33L"
 $IndicadorCaixa42LDir = "C:\Users\Administrador\Documents\Indicador-Caixa42L"
 $IndicadorCaixasGeralDir = "C:\Users\Administrador\Documents\Indicador-CaixasGeral"
+$ReversaStageDir = "C:\Users\Administrador\Documents\NOVO INDICADOR DE REVERSA - VTC_STAGE"
 $LogDir = Join-Path $ScriptDir "logs"
 $IntervalSec = 600
 $StepTimeoutSec = 300
@@ -692,7 +693,9 @@ function Run-Cycle {
         $reversaOk = $true
         try {
             Write-Status "[3/9] Reversa" "GERANDO - fontes STAGE/dtbPortal/dtbTransporte" Yellow
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_reversa.py")) -WorkingDirectory $PublishDir -Name "gerar_html_reversa.py" -TimeoutSec 420
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $ReversaStageDir "gerar_hibrido_aderente_original_fresco.py")) -WorkingDirectory $ReversaStageDir -Name "gerar_hibrido_aderente_original_fresco.py" -TimeoutSec 420
+            Copy-PublishedFile -Source (Join-Path $ReversaStageDir "REVERSA_DATALOGGERS_STAGE.html") -DestinationName "REVERSA_DATALOGGERS.html"
+            Copy-PublishedFile -Source (Join-Path $ReversaStageDir "MANIFESTO_SNAPSHOT_HIBRIDO_ADERENTE.json") -DestinationName "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json"
 
             $reversaHtml = Join-Path $PublishDir "REVERSA_DATALOGGERS.html"
             $reversaManifest = Join-Path $PublishDir "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json"
@@ -847,7 +850,11 @@ function Run-Check {
     $required = @(
         (Join-Path $PublishDir "gerar_html_estoque.py"),
         (Join-Path $PublishDir "gerar_html_controle_entregas.py"),
-        (Join-Path $PublishDir "gerar_html_reversa.py"),
+        (Join-Path $ReversaStageDir "gerar_hibrido_aderente_original_fresco.py"),
+        (Join-Path $ReversaStageDir "gerar_snapshot_reversa_vtc_stage.py"),
+        (Join-Path $ReversaStageDir "gerar_html_reversa_vtc_stage_hibrido_aderente_original.py"),
+        (Join-Path $ReversaStageDir "streamlit\gerar_snapshot_reversa.py"),
+        (Join-Path $ReversaStageDir "streamlit\gerar_modelo_final_reversa.py"),
         (Join-Path $PublishDir "gerar_snapshot_reversa_vtc_stage.py"),
         (Join-Path $PublishDir "gerar_html_reversa_vtc_stage_hibrido_aderente_original.py"),
         (Join-Path $PublishDir "gerar_html_rastreio_caixas_sem_datalogger.py"),

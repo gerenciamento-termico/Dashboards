@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "31/07/2026 03:20:01",
+  "geradoEm": "31/07/2026 03:29:50",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -30,16 +30,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 467,
+      "loggersTransito": 469,
       "loggersEntregues": 4607,
       "loggersRetornados": 1228,
-      "registrosEntregas": 90365,
+      "registrosEntregas": 90374,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
       "ultimaAtualizacao": "30/07/2026 22:26:35",
-      "totalRegistros": 90365
+      "totalRegistros": 90374
     },
     "SHIELD": {
       "totalEstoque": null,
@@ -69,16 +69,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 468,
+      "loggersTransito": 470,
       "loggersEntregues": 4609,
       "loggersRetornados": 1228,
-      "registrosEntregas": 97303,
+      "registrosEntregas": 97312,
       "registrosEstoque": 0,
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
       "ultimaAtualizacao": "30/07/2026 22:26:35",
-      "totalRegistros": 97303
+      "totalRegistros": 97312
     }
   },
   "fonteRetorno": "AURA PostgreSQL public.tbddataloggerhistoricos + vwtipos + tbdcaddataloggerdestinos + tbdcaddataloggerfinalidades + tbdcaddataloggers",

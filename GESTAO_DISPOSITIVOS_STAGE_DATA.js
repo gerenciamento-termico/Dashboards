@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "09/08/2026 21:33:54",
+  "geradoEm": "09/08/2026 21:43:42",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -85,9 +85,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "operacionalEstoqueFonte": "ESTOQUE_DATALOGGERS.html :: const STATES",
   "operacionalEstoque": {
     "ALL": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "TRANSPORTE",
@@ -107,23 +107,23 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           143,
           150,
-          239,
+          245,
           278,
           372,
           402,
-          550,
+          544,
           576,
           813,
           2465,
           3287
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -146,15 +146,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           181,
           190,
           205,
-          234,
+          240,
           369,
-          547,
+          541,
           576,
           662,
           2919
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES COM SONDA": {
       "aptoUso": 0,
@@ -267,9 +267,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "ultimaAtualizacao": "06/08/2026 11:21"
     },
     "ARES|ARES COM SONDA": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -291,21 +291,21 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           181,
           190,
-          234,
+          240,
           340,
           371,
-          547,
+          541,
           576,
           703,
           3015
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|SENSOR VTC": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -327,29 +327,29 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           181,
           205,
-          237,
+          243,
           381,
-          548,
+          542,
           576,
           618,
           720,
           3051
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|SHIELD": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
           "CF - Aguar. Receber",
           "TRANSPORTE",
           "QUALIDADE",
-          "CÂMARA FRIA",
           "MANUTENÇÃO",
+          "CÂMARA FRIA",
           "Sem Mapeamento",
           "RETORNANDO - GRU",
           "CF - Apto ao Uso",
@@ -362,22 +362,22 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           103,
           137,
           189,
-          235,
           237,
+          241,
           310,
           386,
-          548,
+          542,
           576,
           981,
           2952
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|SYOS": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -398,17 +398,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           150,
           205,
-          235,
+          241,
           265,
           270,
           371,
-          548,
+          542,
           576,
           2047,
           3026
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES COM SONDA|SENSOR VTC": {
       "aptoUso": 0,
@@ -607,9 +607,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "ultimaAtualizacao": "06/08/2026 11:21"
     },
     "ARES|ARES COM SONDA|SENSOR VTC": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -630,22 +630,22 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           103,
           137,
           181,
-          237,
+          243,
           340,
           383,
-          548,
+          542,
           576,
           618,
           761,
           3147
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|ARES COM SONDA|SHIELD": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -666,22 +666,22 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           103,
           137,
           189,
-          235,
+          241,
           310,
           372,
           388,
-          548,
+          542,
           576,
           1022,
           3048
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|ARES COM SONDA|SYOS": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -701,23 +701,23 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           133,
           137,
           150,
-          235,
+          241,
           265,
           270,
           340,
           373,
-          548,
+          542,
           576,
           2088,
           3122
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|SENSOR VTC|SHIELD": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -739,21 +739,21 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           189,
           237,
-          238,
+          244,
           398,
-          549,
+          543,
           576,
           738,
           1039,
           3084
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|SENSOR VTC|SYOS": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -774,29 +774,29 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           150,
           205,
-          238,
+          244,
           270,
           383,
-          549,
+          543,
           576,
           693,
           2105,
           3158
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|SHIELD|SYOS": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "TRANSPORTE",
           "ESTOQUE - BSB",
           "ESTOQUE - CAMPINAS",
-          "CÂMARA FRIA",
           "MANUTENÇÃO",
+          "CÂMARA FRIA",
           "QUALIDADE",
           "Sem Mapeamento",
           "RETORNANDO - GRU",
@@ -809,18 +809,18 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           143,
           150,
-          236,
           237,
+          242,
           278,
           385,
           388,
-          549,
+          543,
           576,
           2366,
           3059
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES COM SONDA|SENSOR VTC|SHIELD": {
       "aptoUso": 0,
@@ -963,9 +963,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "ultimaAtualizacao": "06/08/2026 11:21"
     },
     "ARES|ARES COM SONDA|SENSOR VTC|SHIELD": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -986,22 +986,22 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           103,
           137,
           189,
-          238,
+          244,
           372,
           400,
-          549,
+          543,
           576,
           738,
           1080,
           3180
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|ARES COM SONDA|SENSOR VTC|SYOS": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "ESTOQUE - BSB",
@@ -1021,23 +1021,23 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           133,
           137,
           150,
-          238,
+          244,
           270,
           340,
           385,
-          549,
+          543,
           576,
           693,
           2146,
           3254
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|ARES COM SONDA|SHIELD|SYOS": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "TRANSPORTE",
@@ -1057,23 +1057,23 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           137,
           143,
           150,
-          236,
+          242,
           278,
           372,
           385,
           390,
-          549,
+          543,
           576,
           2407,
           3155
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES|SENSOR VTC|SHIELD|SYOS": {
-      "aptoUso": 541,
+      "aptoUso": 535,
       "aguardandoRecebimento": 96,
-      "embAguardandoExpedicao": 98,
+      "embAguardandoExpedicao": 104,
       "status": {
         "labels": [
           "TRANSPORTE",
@@ -1094,17 +1094,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           143,
           150,
           237,
-          239,
+          245,
           278,
           400,
-          550,
+          544,
           576,
           813,
           2424,
           3191
         ]
       },
-      "ultimaAtualizacao": "09/08/2026 21:30"
+      "ultimaAtualizacao": "09/08/2026 21:35"
     },
     "ARES COM SONDA|SENSOR VTC|SHIELD|SYOS": {
       "aptoUso": 0,

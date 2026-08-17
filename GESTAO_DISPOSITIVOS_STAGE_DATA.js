@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "17/08/2026 19:19:11",
+  "geradoEm": "17/08/2026 19:29:28",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -30,9 +30,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 548,
-      "loggersEntregues": 3249,
-      "loggersRetornados": 1519,
+      "loggersTransito": 500,
+      "loggersEntregues": 3268,
+      "loggersRetornados": 1490,
       "registrosEntregas": 95245,
       "registrosEstoque": 0,
       "semStatus": 0,
@@ -69,9 +69,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 548,
-      "loggersEntregues": 3251,
-      "loggersRetornados": 1520,
+      "loggersTransito": 500,
+      "loggersEntregues": 3270,
+      "loggersRetornados": 1491,
       "registrosEntregas": 102183,
       "registrosEstoque": 0,
       "semStatus": 0,
@@ -107,7 +107,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           146,
           147,
           150,
-          172,
+          203,
           203,
           250,
           387,
@@ -115,7 +115,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           654,
           1110,
           2605,
-          3067
+          3036
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -128,9 +128,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         "labels": [
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
           "TRANSPORTE",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "MANUTENÇÃO",
           "Sem Mapeamento",
@@ -142,16 +142,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         "values": [
           15,
           56,
-          138,
           141,
           147,
+          169,
           182,
           217,
           483,
           531,
           614,
           881,
-          2774
+          2743
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -280,9 +280,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         "labels": [
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
-          "RETORNANDO - GRU",
           "TRANSPORTE",
           "CÂMARA FRIA",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "MANUTENÇÃO",
           "Sem Mapeamento",
@@ -294,16 +294,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         "values": [
           15,
           56,
-          140,
           147,
           163,
+          171,
           182,
           355,
           485,
           535,
           614,
           882,
-          2881
+          2850
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -317,8 +317,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
           "TRANSPORTE",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "MANUTENÇÃO",
           "CF - Apto ao Uso",
@@ -331,15 +331,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           15,
           56,
           147,
-          151,
           166,
+          182,
           182,
           217,
           581,
           614,
           908,
           968,
-          2806
+          2775
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -353,9 +353,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
           "TRANSPORTE",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
           "QUALIDADE",
+          "RETORNANDO - GRU",
           "MANUTENÇÃO",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -368,14 +368,14 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           66,
           147,
           155,
-          155,
           185,
+          186,
           249,
           599,
           608,
           614,
           1104,
-          2826
+          2795
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -387,10 +387,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - BSB",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
           "TRANSPORTE",
           "ESTOQUE - CAMPINAS",
+          "RETORNANDO - GRU",
           "MANUTENÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -401,17 +401,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           136,
-          140,
           142,
           147,
           150,
+          171,
           217,
           247,
           532,
           558,
           614,
           2294,
-          2876
+          2845
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -621,8 +621,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
           "TRANSPORTE",
-          "RETORNANDO - GRU",
           "QUALIDADE",
+          "RETORNANDO - GRU",
           "CÂMARA FRIA",
           "MANUTENÇÃO",
           "CF - Apto ao Uso",
@@ -635,15 +635,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           15,
           56,
           147,
-          153,
           182,
+          184,
           188,
           355,
           585,
           614,
           910,
           969,
-          2913
+          2882
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -657,9 +657,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
           "TRANSPORTE",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
           "QUALIDADE",
+          "RETORNANDO - GRU",
           "MANUTENÇÃO",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -671,15 +671,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           15,
           66,
           147,
-          157,
           177,
           185,
+          188,
           387,
           603,
           610,
           614,
           1105,
-          2933
+          2902
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -691,10 +691,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - BSB",
-          "RETORNANDO - GRU",
           "TRANSPORTE",
           "ESTOQUE - CAMPINAS",
           "CÂMARA FRIA",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "MANUTENÇÃO",
           "CF - Apto ao Uso",
@@ -705,17 +705,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           136,
-          142,
           147,
           150,
           164,
+          173,
           247,
           355,
           536,
           560,
           614,
           2295,
-          2983
+          2952
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -729,9 +729,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
           "TRANSPORTE",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
           "QUALIDADE",
+          "RETORNANDO - GRU",
           "MANUTENÇÃO",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
@@ -743,15 +743,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           15,
           66,
           147,
-          168,
           180,
           185,
+          199,
           249,
           614,
           649,
           1033,
           1191,
-          2858
+          2827
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -765,8 +765,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - BSB",
           "TRANSPORTE",
           "ESTOQUE - CAMPINAS",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
+          "RETORNANDO - GRU",
           "MANUTENÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -779,15 +779,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           136,
           147,
           150,
-          153,
           167,
+          184,
           217,
           247,
           582,
           614,
           983,
           2381,
-          2908
+          2877
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -816,14 +816,14 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           147,
           150,
           156,
-          157,
+          188,
           249,
           250,
           600,
           614,
           683,
           2517,
-          2928
+          2897
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -977,8 +977,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "CF - Aguar. Receber",
           "ESTOQUE - BSB",
           "TRANSPORTE",
-          "RETORNANDO - GRU",
           "QUALIDADE",
+          "RETORNANDO - GRU",
           "CÂMARA FRIA",
           "MANUTENÇÃO",
           "CALIBRAÇÃO",
@@ -991,15 +991,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           15,
           66,
           147,
-          170,
           185,
+          201,
           202,
           387,
           614,
           653,
           1035,
           1192,
-          2965
+          2934
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -1027,7 +1027,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           136,
           147,
           150,
-          155,
+          186,
           189,
           247,
           355,
@@ -1035,7 +1035,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           614,
           985,
           2382,
-          3015
+          2984
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -1049,8 +1049,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - BSB",
           "TRANSPORTE",
           "ESTOQUE - CAMPINAS",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "MANUTENÇÃO",
           "CF - Apto ao Uso",
@@ -1063,15 +1063,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           146,
           147,
           150,
-          159,
           178,
+          190,
           250,
           387,
           604,
           614,
           685,
           2518,
-          3035
+          3004
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"
@@ -1085,8 +1085,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - BSB",
           "TRANSPORTE",
           "ESTOQUE - CAMPINAS",
-          "RETORNANDO - GRU",
           "CÂMARA FRIA",
+          "RETORNANDO - GRU",
           "MANUTENÇÃO",
           "QUALIDADE",
           "CALIBRAÇÃO",
@@ -1099,15 +1099,15 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           146,
           147,
           150,
-          170,
           181,
+          201,
           249,
           250,
           614,
           650,
           1108,
           2604,
-          2960
+          2929
         ]
       },
       "ultimaAtualizacao": "17/08/2026 20:35"

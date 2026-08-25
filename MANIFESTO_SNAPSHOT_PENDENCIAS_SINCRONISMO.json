@@ -1,19 +1,22 @@
 {
-  "gerado_em": "2026-08-25T17:21:24",
-  "snapshot_em": "2026-08-25T17:21:24",
+  "gerado_em": "2026-08-25T18:52:45",
+  "snapshot_em": "2026-08-25T18:52:45",
   "status": "VALIDADO_COM_FONTES_FRESCAS",
-  "linhas": 452,
+  "linhas": 547,
   "ufs": 25,
   "fontes_visiveis": [
+    "Mongo ares-prod",
     "dtbPortal",
     "portal VTC"
   ],
   "fontes_aplicadas": [
-    "planilha auditada",
+    "csv organizado",
     "reversa",
+    "mongo lastSyncDate",
+    "portal VTC",
     "dtbPortal"
   ],
-  "origem": "SEM_SYNC_ATUALIZADO_2026-08-25_1152.xlsx",
+  "origem": "sem_sync_ares_589_pendente.csv",
   "arquivos": [
     "PENDENCIAS_SINCRONISMO.html",
     "PENDENCIAS_SINCRONISMO.csv",

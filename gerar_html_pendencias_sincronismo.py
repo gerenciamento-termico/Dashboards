@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+import os
 import re
 import unicodedata
 from datetime import datetime
@@ -26,6 +27,8 @@ OUT_CSV = WORKSPACE / "PENDENCIAS_SINCRONISMO.csv"
 OUT_XLSX = WORKSPACE / "PENDENCIAS_SINCRONISMO.xlsx"
 OUT_MANIFEST = WORKSPACE / "MANIFESTO_SNAPSHOT_PENDENCIAS_SINCRONISMO.json"
 SEED_HTML = Path(r"C:\Users\Administrador\Downloads\SEM_SYNC_POR_UF.html")
+SEED_CSV = Path(r"C:\Users\Administrador\Downloads\sem_sync_ares_589_pendente.csv")
+STAGE_DIR = Path(r"C:\Users\Administrador\Documents\NOVO INDICADOR DE REVERSA - VTC_STAGE")
 DESKTOP_DIR = Path(r"C:\Users\Administrador\Desktop\LISTA SEM SINCRONIZAÇÃO")
 REVERSA_HTML = WORKSPACE / "REVERSA_DATALOGGERS.html"
 SYNC_TOLERANCE = pd.Timedelta(minutes=15)
@@ -135,6 +138,158 @@ def extract_json_array(text: str, prefix: str) -> list:
     if not match:
         return []
     return json.loads(match.group(1))
+
+
+def latest_organized_csv() -> Path | None:
+    candidates = [SEED_CSV, WORKSPACE / SEED_CSV.name]
+    existing = [path for path in candidates if path.exists()]
+    return max(existing, key=lambda path: path.stat().st_mtime) if existing else None
+
+
+def fmt_date(value: object) -> str:
+    ts = pd.to_datetime(value, dayfirst=True, errors="coerce")
+    if pd.isna(ts):
+        return ""
+    if ts.hour == 0 and ts.minute == 0 and ts.second == 0:
+        return ts.strftime("%d/%m/%Y")
+    return ts.strftime("%d/%m/%Y %H:%M")
+
+
+def records_from_organized_csv(path: Path) -> list[dict]:
+    source = pd.read_csv(path, encoding="utf-8-sig", sep=";")
+    records = []
+    for _, row in source.iterrows():
+        prefix = str(row.get("prefixo") or "").strip().upper()
+        records.append(
+            {
+                "Pedido": str(row.get("Pedido") or "").strip(),
+                "Logger": str(row.get("Logger") or "").strip(),
+                "UF": "",
+                "Coleta": fmt_date(row.get("dia_coleta")),
+                "Entrega": fmt_date(row.get("dia_entrega")),
+                "Último Sync": fmt_date(row.get("ultimo_sincronismo")),
+                "Dias sem sync": 0,
+                "Em GRU?": "NÃO",
+                "Localização": "",
+                "Situação atual": "",
+                "Responsável atual": "",
+                "Tipo": "ARES" if prefix in {"A", "TA", "AS"} else str(row.get("tipo_short") or ""),
+                "Atualização dtbPortal": "",
+                "Ação sugerida": "VALIDAR COM RESPONSÁVEL ATUAL",
+                "Última ação portal": "",
+                "Último histórico portal": "",
+                "Movimentos portal": 0,
+                "LPN": "",
+                "Chegada cliente": "",
+                "CTE": "",
+                "Observação portal": "",
+                "Tag no dtbPortal": str(row.get("Logger") or "").strip(),
+            }
+        )
+    return records
+
+
+def mongo_name_lookup_values(names: list[str]) -> list[str]:
+    out = set()
+    for name in names:
+        name = (name or "").strip()
+        if not name:
+            continue
+        out.add(name)
+        out.add(name + " ")
+        match = re.fullmatch(r"(AS)(\d+)", name, flags=re.I)
+        if match:
+            hyphen = match.group(1).upper() + "-" + match.group(2)
+            out.add(hyphen)
+            out.add(hyphen + " ")
+    return sorted(out)
+
+
+def fetch_last_sync_by_logger(loggers: list[str]) -> dict[str, pd.Timestamp]:
+    for path in [STAGE_DIR / ".env.ares_mongo", STAGE_DIR / ".env", WORKSPACE / ".env"]:
+        env = load_env(path)
+        for key, value in env.items():
+            os.environ.setdefault(key, value)
+    uri = (os.getenv("ARES_MONGO_URI") or os.getenv("ARES_MONGODB_URI") or "").strip()
+    db_name = (os.getenv("ARES_MONGO_DB") or "ares-prod").strip()
+    if not uri:
+        raise RuntimeError("ARES_MONGO_URI ausente")
+    from pymongo import MongoClient
+
+    names = sorted({norm_tag(item) for item in loggers if norm_tag(item)})
+    client = MongoClient(uri, serverSelectionTimeoutMS=25000, connectTimeoutMS=25000)
+    try:
+        client.admin.command("ping")
+        col = client[db_name]["beacon_devices"]
+        mapping: dict[str, pd.Timestamp] = {}
+        lookup = mongo_name_lookup_values(names)
+        for index in range(0, len(lookup), 2000):
+            part = lookup[index : index + 2000]
+            for doc in col.find({"name": {"$in": part}}, {"name": 1, "lastSyncDate": 1}):
+                key = norm_tag(doc.get("name"))
+                if not key:
+                    continue
+                ts = pd.to_datetime(doc.get("lastSyncDate"), errors="coerce", utc=True)
+                if pd.isna(ts):
+                    continue
+                mapping[key] = ts.tz_convert("America/Sao_Paulo").tz_localize(None)
+        return mapping
+    finally:
+        client.close()
+
+
+def refresh_mongo_and_drop_synced(records: list[dict], pagina_em: datetime) -> tuple[list[dict], int]:
+    mapping = fetch_last_sync_by_logger([rec.get("Logger") or "" for rec in records])
+    kept = []
+    dropped = 0
+    for rec in records:
+        rec = dict(rec)
+        logger = norm_tag(rec.get("Logger"))
+        sync = mapping.get(logger, pd.NaT)
+        entrega = parse_br(rec.get("Entrega"))
+        if pd.notna(sync):
+            rec["Último Sync"] = fmt_stamp(sync.to_pydatetime())
+        if pd.notna(entrega) and pd.notna(sync) and sync >= (entrega - SYNC_TOLERANCE):
+            dropped += 1
+            continue
+        if pd.notna(entrega):
+            rec["Dias sem sync"] = int((pd.Timestamp(pagina_em) - entrega).total_seconds() // 86400)
+        kept.append(rec)
+    return kept, dropped
+
+
+def enrich_uf_vtc(records: list[dict]) -> bool:
+    env = load_env(WORKSPACE / ".env.vtc_stage")
+    pedidos = sorted({str(rec.get("Pedido") or "").strip() for rec in records if rec.get("Pedido")})
+    if not env.get("VTC_STAGE_HOST") or not pedidos:
+        return False
+    url = URL.create(
+        "postgresql+psycopg2",
+        username=env["VTC_STAGE_USER"],
+        password=env["VTC_STAGE_PASSWORD"],
+        host=env["VTC_STAGE_HOST"],
+        port=int(env.get("VTC_STAGE_PORT") or 5432),
+        database=env["VTC_STAGE_NAME"],
+    )
+    query = text(
+        """
+        SELECT TRIM(nr_pedido::text) AS pedido, MAX(NULLIF(TRIM(cd_uf), '')) AS uf
+        FROM vtc_stage.documentos
+        WHERE TRIM(nr_pedido::text) IN :peds
+        GROUP BY TRIM(nr_pedido::text)
+        """
+    ).bindparams(bindparam("peds", expanding=True))
+    engine = create_engine(url, pool_pre_ping=True)
+    uf_map: dict[str, str] = {}
+    with engine.connect() as connection:
+        for row in connection.execute(query, {"peds": pedidos}):
+            if row[1]:
+                uf_map[str(row[0])] = str(row[1]).strip().upper()
+    if not uf_map:
+        return False
+    for rec in records:
+        rec["UF"] = rec.get("UF") or uf_map.get(str(rec.get("Pedido") or "").strip(), "")
+    return True
 
 
 def load_seed_records() -> tuple[list[dict], str]:
@@ -249,23 +404,13 @@ def overlay_reversa(records: list[dict], pagina_em: datetime) -> tuple[list[dict
             kept.append(rec)
             continue
         used = True
-        status = str(row[11] or "")
-        if status == "Sincronizado":
-            continue
         rec = dict(rec)
-        if row[5]:
-            rec["Entrega"] = row[5]
-        if row[9]:
-            rec["Último Sync"] = row[9]
         if row[13]:
             rec["UF"] = rec.get("UF") or row[13]
         elif row[12]:
             rec["UF"] = rec.get("UF") or row[12]
         if row[1]:
             rec["LPN"] = rec.get("LPN") or row[1]
-        entrega = parse_br(rec.get("Entrega"))
-        if pd.notna(entrega):
-            rec["Dias sem sync"] = int((pd.Timestamp(pagina_em) - entrega).total_seconds() // 86400)
         kept.append(rec)
     return kept, used
 
@@ -326,6 +471,11 @@ def refresh_dtbportal(records: list[dict]) -> bool:
         rec["Responsável atual"] = str(getattr(row, "ds_responsavel", "") or rec.get("Responsável atual") or "")
         rec["Tipo"] = rec.get("Tipo") or str(getattr(row, "ds_tipodatalogger", "") or "")
         rec["Tag no dtbPortal"] = str(getattr(row, "tag_portal", "") or rec.get("Tag no dtbPortal") or "")
+        finalidade = str(getattr(row, "ds_finalidade", "") or "").strip()
+        status_rec = str(getattr(row, "ds_statusrecebimento", "") or "").strip()
+        rec["Situação atual"] = rec.get("Situação atual") or finalidade or status_rec
+        if not rec.get("Situação atual") and "AGENTE" in norm_text(rec.get("Responsável atual")):
+            rec["Situação atual"] = "AGENTE"
         atual = pd.to_datetime(getattr(row, "dt_atualizacao", None), errors="coerce")
         if pd.notna(atual):
             rec["Atualização dtbPortal"] = atual.strftime("%d/%m/%y %H:%M")
@@ -412,7 +562,7 @@ def write_html(records: list[dict], pagina_em: datetime, snapshot_em: str) -> No
     meta = {
         "pagina_em": pagina_txt,
         "snapshot_em": snap_txt,
-        "fontes": ["dtbPortal", "portal VTC"],
+        "fontes": ["Mongo ares-prod", "dtbPortal", "portal VTC"],
         "linhas": len(records),
     }
     html = (
@@ -428,25 +578,31 @@ def main() -> None:
     SNAPSHOT_DIR.mkdir(exist_ok=True)
     pagina_em = now_brt()
     live_bits: list[str] = []
-    records, snapshot_em = load_seed_records()
-    origem = "snapshot local"
-
-    audit_files = []
-    if DESKTOP_DIR.exists():
-        audit_files = [
-            path
-            for path in DESKTOP_DIR.glob("SEM_SYNC_ATUALIZADO_*.xlsx")
-            if not path.name.startswith("~$")
-        ]
-    if audit_files:
-        latest = max(audit_files, key=lambda path: path.stat().st_mtime)
-        try:
-            records = records_from_audit_xlsx(latest)
-            snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
-            origem = latest.name
-            live_bits.append("planilha auditada")
-        except Exception as exc:
-            print(f"AVISO: nao foi possivel ler {latest.name}: {exc}")
+    organized = latest_organized_csv()
+    if organized:
+        records = records_from_organized_csv(organized)
+        snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
+        origem = organized.name
+        live_bits.append("csv organizado")
+    else:
+        records, snapshot_em = load_seed_records()
+        origem = "snapshot local"
+        audit_files = []
+        if DESKTOP_DIR.exists():
+            audit_files = [
+                path
+                for path in DESKTOP_DIR.glob("SEM_SYNC_ATUALIZADO_*.xlsx")
+                if not path.name.startswith("~$")
+            ]
+        if audit_files:
+            latest = max(audit_files, key=lambda path: path.stat().st_mtime)
+            try:
+                records = records_from_audit_xlsx(latest)
+                snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
+                origem = latest.name
+                live_bits.append("planilha auditada")
+            except Exception as exc:
+                print(f"AVISO: nao foi possivel ler {latest.name}: {exc}")
 
     try:
         records, used = overlay_reversa(records, pagina_em)
@@ -455,6 +611,21 @@ def main() -> None:
             snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
     except Exception as exc:
         print(f"AVISO: overlay da reversa nao aplicado: {exc}")
+
+    try:
+        records, dropped = refresh_mongo_and_drop_synced(records, pagina_em)
+        live_bits.append("mongo lastSyncDate")
+        snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
+        print(f"Mongo: {dropped} ja sincronizados removidos | {len(records)} pendentes")
+    except Exception as exc:
+        print(f"AVISO: mongo nao atualizado: {exc}")
+
+    try:
+        if enrich_uf_vtc(records):
+            live_bits.append("portal VTC")
+            snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
+    except Exception as exc:
+        print(f"AVISO: UF VTC nao atualizada: {exc}")
 
     try:
         if refresh_dtbportal(records):
@@ -498,7 +669,7 @@ def main() -> None:
         "status": status,
         "linhas": len(records),
         "ufs": len({r.get("UF") for r in records if r.get("UF") and r.get("UF") != "SEM UF"}),
-        "fontes_visiveis": ["dtbPortal", "portal VTC"],
+        "fontes_visiveis": ["Mongo ares-prod", "dtbPortal", "portal VTC"],
         "fontes_aplicadas": live_bits,
         "origem": origem,
         "arquivos": [

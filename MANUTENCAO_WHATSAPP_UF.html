@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Manutenção de caixa no WhatsApp × volume × CF</title>
+<style>
+  :root {
+    --fg: #E4E4E4; --fg2: rgba(228,228,228,.55); --fg3: rgba(228,228,228,.37);
+    --bg: #181818; --fill: rgba(228,228,228,.07); --fill2: rgba(228,228,228,.12);
+    --stroke: rgba(228,228,228,.20); --stroke2: rgba(228,228,228,.12);
+    --accent: #599CE7; --danger: #FC6B83; --warning: #E2C08D; --success: #3FA266; --info: #599CE7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--fg); padding: 28px 32px 48px; line-height: 1.45; }
+  .page { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+  h1 { font-size: 24px; font-weight: 590; }
+  h2 { font-size: 18px; font-weight: 590; }
+  h3 { font-size: 16px; font-weight: 590; }
+  .sub { color: var(--fg2); font-size: 14px; }
+  .muted { color: var(--fg2); font-size: 12px; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+  .stat .v { font-size: 22px; font-weight: 590; }
+  .stat .l { font-size: 12px; color: var(--fg2); margin-top: 4px; }
+  .stat.danger .v { color: var(--danger); }
+  .stat.warning .v { color: var(--warning); }
+  .callout { border: 1px solid var(--stroke); background: var(--fill); border-radius: 8px; padding: 12px 14px; }
+  .callout .t { font-weight: 590; font-size: 13px; color: var(--danger); margin-bottom: 4px; }
+  .callout p { font-size: 13px; color: var(--fg2); }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .hbar-row { display: grid; grid-template-columns: 36px 1fr 52px; gap: 8px; align-items: center; font-size: 12px; }
+  .track { height: 10px; background: var(--fill2); border-radius: 2px; overflow: hidden; }
+  .track span { display: block; height: 100%; border-radius: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .table-wrap { border: 1px solid var(--stroke); border-radius: 8px; overflow: auto; }
+  th { text-align: left; font-weight: 590; color: var(--fg2); padding: 9px 12px; border-bottom: 1px solid var(--stroke); }
+  td { padding: 8px 12px; border-bottom: 1px solid var(--stroke2); }
+  tr.stripe td { background: var(--fill); }
+  .r { text-align: right; }
+  .dot { display: inline-block; width: 7px; height: 7px; border-radius: 99px; margin-right: 8px; }
+  .dot.danger { background: var(--danger); } .dot.warning { background: var(--warning); }
+  .dot.info { background: var(--info); } .dot.success { background: var(--success); } .dot.neutral { background: var(--fg3); }
+  .card { border: 1px solid var(--stroke); border-radius: 8px; }
+  .card-h { padding: 10px 14px; border-bottom: 1px solid var(--stroke2); font-size: 12px; color: var(--fg2); font-weight: 590; }
+  .card-b { padding: 12px 14px; font-size: 14px; }
+  @media (max-width: 860px) { .stats, .charts { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div>
+    <h1>Manutenção de caixa no WhatsApp × volume × CF</h1>
+    <p class="sub" style="margin-top:6px">20/08/2026 13:40 BRT. 77 conversas, 44.207 mensagens em C:\WHATSAPP. Pedido GTM = troca de Gelox / manutenção de caixa, confirmado com “Pode seguir” (Luan / GTM). Volume = VTC_STAGE LPN 01–19/08. CF = Forms CSV (4), SP descartada.</p>
+  </div>
+  <div class="stats">
+    <div class="stat warning"><div class="v">361</div><div class="l">Pedidos GTM de Gelox/caixa</div></div>
+    <div class="stat"><div class="v">165</div><div class="l">Confirmações (Pode seguir / Luan)</div></div>
+    <div class="stat danger"><div class="v">131</div><div class="l">Mensagens de excursão</div></div>
+    <div class="stat"><div class="v">1.213</div><div class="l">Fotos Temperaturas Belém (PA)</div></div>
+  </div>
+  <div class="callout">
+    <div class="t">Sem CF comprovada, quem mais pede manutenção não é quem mais recebe volume</div>
+    <p>MG, SC e RS lideram entrega. A manutenção pedida pelo GTM concentra em PA, PB, AC, AM, PI e MS — sem câmara 2–8 °C (AC declarou CF, mas a faixa é freezer/ambiente). SC quase não aparece no WhatsApp (0 pedido GTM) apesar de 244 volumes.</p>
+  </div>
+  <div class="charts">
+    <div>
+      <h3>Quem mais recebe volume (01–19/08)</h3>
+      <div id="c-vol"></div>
+      <p class="muted">Fonte: vtc_stage.documentos · LPN único · sem pallet</p>
+    </div>
+    <div>
+      <h3>Pedidos GTM de troca de Gelox / caixa</h3>
+      <div id="c-gtm"></div>
+      <p class="muted">Fonte: TXT WhatsApp · conta Gerenciamento Térmico</p>
+    </div>
+  </div>
+  <h2>Cruzamento — sem CF 2–8 °C comprovada</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>UF</th><th class="r">Vol. ago</th><th class="r">GTM Gelox</th><th class="r">Confirmadas</th><th class="r">Excursão</th><th>CF na ponta</th><th class="r">GTM / 100 vol</th></tr></thead>
+      <tbody>
+        <tr class="stripe"><td><span class="dot danger"></span>AC</td><td class="r">44</td><td class="r">31</td><td class="r">13</td><td class="r">4</td><td>Declarou CF, não é 2–8</td><td class="r">70,5</td></tr>
+        <tr><td><span class="dot danger"></span>AM</td><td class="r">44</td><td class="r">19</td><td class="r">9</td><td class="r">7</td><td>Sem CF</td><td class="r">43,2</td></tr>
+        <tr class="stripe"><td><span class="dot danger"></span>MS</td><td class="r">59</td><td class="r">14</td><td class="r">9</td><td class="r">8</td><td>Sem CF e sem freezer</td><td class="r">23,7</td></tr>
+        <tr><td><span class="dot warning"></span>AL</td><td class="r">38</td><td class="r">8</td><td class="r">7</td><td class="r">2</td><td>Sem CF</td><td class="r">21,1</td></tr>
+        <tr class="stripe"><td><span class="dot warning"></span>PI</td><td class="r">98</td><td class="r">18</td><td class="r">7</td><td class="r">6</td><td>Sem CF · freezer não madura</td><td class="r">18,4</td></tr>
+        <tr><td><span class="dot danger"></span>PB</td><td class="r">132</td><td class="r">23</td><td class="r">8</td><td class="r">5</td><td>Sem CF</td><td class="r">17,4</td></tr>
+        <tr class="stripe"><td><span class="dot danger"></span>PA</td><td class="r">223</td><td class="r">30</td><td class="r">7</td><td class="r">17</td><td>Sem CF</td><td class="r">13,5</td></tr>
+        <tr><td><span class="dot warning"></span>SE</td><td class="r">106</td><td class="r">12</td><td class="r">3</td><td class="r">7</td><td>Sem CF</td><td class="r">11,3</td></tr>
+        <tr class="stripe"><td><span class="dot info"></span>RN</td><td class="r">230</td><td class="r">17</td><td class="r">8</td><td class="r">2</td><td>Sem CF</td><td class="r">7,4</td></tr>
+        <tr><td><span class="dot warning"></span>CE</td><td class="r">179</td><td class="r">13</td><td class="r">5</td><td class="r">5</td><td>Sem CF · maturação lenta</td><td class="r">7,3</td></tr>
+        <tr class="stripe"><td><span class="dot info"></span>MG</td><td class="r">351</td><td class="r">19</td><td class="r">8</td><td class="r">10</td><td>Sem CF (só Contagem)</td><td class="r">5,4</td></tr>
+        <tr><td><span class="dot warning"></span>GO</td><td class="r">174</td><td class="r">9</td><td class="r">5</td><td class="r">11</td><td>Sem CF · freezer compartilhado</td><td class="r">5,2</td></tr>
+        <tr class="stripe"><td><span class="dot warning"></span>MA</td><td class="r">206</td><td class="r">10</td><td class="r">5</td><td class="r">1</td><td>Sem CF · Gelox não madura</td><td class="r">4,9</td></tr>
+        <tr><td><span class="dot info"></span>BA</td><td class="r">246</td><td class="r">11</td><td class="r">2</td><td class="r">3</td><td>Sem CF · freezer sem sonda</td><td class="r">4,5</td></tr>
+        <tr class="stripe"><td><span class="dot neutral"></span>RS</td><td class="r">214</td><td class="r">3</td><td class="r">0</td><td class="r">0</td><td>Sem CF</td><td class="r">1,4</td></tr>
+        <tr><td><span class="dot neutral"></span>ES</td><td class="r">175</td><td class="r">3</td><td class="r">2</td><td class="r">2</td><td>Sem CF</td><td class="r">1,7</td></tr>
+        <tr class="stripe"><td><span class="dot neutral"></span>SC</td><td class="r">244</td><td class="r">0</td><td class="r">0</td><td class="r">0</td><td>Sem CF</td><td class="r">0,0</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="muted">Taxa = pedidos GTM de Gelox/caixa por 100 volumes. AC/AM: pouco volume, muita manutenção. PA: volume alto + 17 excursões + 1.213 fotos em Temperaturas Belém. SC/RS/ES recebem muito e quase não pedem manutenção nestas conversas.</p>
+  <h2>Controle — já têm CF 2–8 °C</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>UF</th><th class="r">Vol. ago</th><th class="r">GTM Gelox</th><th class="r">Confirmadas</th><th class="r">Excursão</th><th>Leitura</th></tr></thead>
+      <tbody>
+        <tr class="stripe"><td><span class="dot info"></span>PE</td><td class="r">257</td><td class="r">18</td><td class="r">13</td><td class="r">9</td><td>Tem CF e mesmo assim troca Gelox (7,0 / 100 vol)</td></tr>
+        <tr><td><span class="dot info"></span>RJ</td><td class="r">116</td><td class="r">16</td><td class="r">7</td><td class="r">2</td><td>Tem CF; taxa 13,8 — caixa chega da origem precisando de placa</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <h2>Mongo ARES — loggers citados no WhatsApp em 18/08</h2>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Logger</th><th>WhatsApp</th><th>Mongo</th><th>Bate?</th></tr></thead>
+      <tbody>
+        <tr class="stripe"><td><span class="dot danger"></span>A6632</td><td>Excursão p/ Henrique</td><td>20,0 a 24,2 °C</td><td>Sim — fora de 2–8</td></tr>
+        <tr><td><span class="dot info"></span>A3470 / A6303 / A9467</td><td>CE Iara 10h12: próximo ou acima de 8°</td><td>3,7 a 6,8 °C no fim do recorte</td><td>Voltou à faixa depois da manutenção</td></tr>
+        <tr class="stripe"><td><span class="dot success"></span>A0191 / A3116</td><td>PB tela de sync 19–20/08</td><td>lastSync 19/08 15:01 e 20/08 13:30</td><td>Sync bate</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="card">
+    <div class="card-h">Protocolo GTM / Luan</div>
+    <div class="card-b">Técnico manda foto. GTM pede troca de 3–4 Gelox a 0,5–1,5 °C nas caixas ≥ 7–8 °C. Luan ou a conta GTM responde “Pode seguir”. 1.199 áudios; a autorização está no texto. Grupo Temperaturas Belém = 1.213 fotos de PA (sem CF).</div>
+  </div>
+</div>
+<script>
+function hbar(el, rows, color) {
+  const m = Math.max(...rows.map(r => r[1]));
+  el.innerHTML = rows.map(([lab,n]) =>
+    `<div class="hbar-row"><span>${lab}</span><div class="track"><span style="width:${(100*n/m).toFixed(1)}%;background:${color}"></span></div><span class="r">${n}</span></div>`
+  ).join("");
+}
+hbar(document.getElementById("c-vol"), [["MG",351],["PE",257],["BA",246],["SC",244],["RN",230],["PA",223],["RS",214],["MA",206],["CE",179],["ES",175],["GO",174],["PB",132]], "#599CE7");
+hbar(document.getElementById("c-gtm"), [["AC",31],["PA",30],["PB",23],["MG",19],["AM",19],["PI",18],["PE",18],["RN",17],["RJ",16],["MS",14],["CE",13],["SE",12]], "#E2C08D");
+</script>
+</body>
+</html>

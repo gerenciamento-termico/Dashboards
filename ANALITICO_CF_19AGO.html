@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Analítico CF e sincronismo — pedido 19/08</title>
+<style>
+  :root {
+    --fg: #E4E4E4;
+    --fg2: rgba(228,228,228,.55);
+    --fg3: rgba(228,228,228,.37);
+    --bg: #181818;
+    --fill: rgba(228,228,228,.07);
+    --fill2: rgba(228,228,228,.12);
+    --stroke: rgba(228,228,228,.20);
+    --accent: #599CE7;
+    --danger: #FC6B83;
+    --warning: #E2C08D;
+    --success: #3FA266;
+    --info: #599CE7;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: "Segoe UI", system-ui, sans-serif;
+    background: var(--bg); color: var(--fg);
+    padding: 28px 32px 48px; line-height: 1.45;
+  }
+  .page { max-width: 1180px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px; }
+  h1 { font-size: 24px; font-weight: 590; }
+  h2 { font-size: 18px; font-weight: 590; margin-top: 4px; }
+  h3 { font-size: 16px; font-weight: 590; }
+  .sub { color: var(--fg2); font-size: 14px; }
+  .muted { color: var(--fg2); font-size: 12px; }
+  .tiny { color: var(--fg3); font-size: 12px; }
+  .body { font-size: 14px; }
+  .stats { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 16px; }
+  .stat .v { font-size: 22px; font-weight: 590; }
+  .stat .l { font-size: 12px; color: var(--fg2); margin-top: 4px; }
+  .stat.danger .v { color: var(--danger); }
+  .stat.warning .v { color: var(--warning); }
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill {
+    border: 1px solid var(--stroke); background: transparent; color: var(--fg);
+    border-radius: 999px; padding: 5px 12px; font-size: 13px; cursor: pointer;
+  }
+  .pill.active { background: var(--fill2); border-color: var(--fg); }
+  .panel { display: none; flex-direction: column; gap: 18px; }
+  .panel.active { display: flex; }
+  .callout {
+    border: 1px solid var(--stroke); background: var(--fill);
+    border-radius: 8px; padding: 12px 14px; display: flex; gap: 10px;
+  }
+  .callout .bar { width: 3px; border-radius: 2px; flex-shrink: 0; }
+  .callout.warn .bar { background: var(--warning); }
+  .callout.info .bar { background: var(--info); }
+  .callout .t { font-weight: 590; font-size: 13px; margin-bottom: 4px; }
+  .callout.warn .t { color: var(--warning); }
+  .callout.info .t { color: var(--info); }
+  .callout p { font-size: 13px; color: var(--fg2); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  .table-wrap { border: 1px solid var(--stroke); border-radius: 8px; overflow: auto; }
+  th, td { padding: 8px 10px; text-align: left; border-bottom: 1px solid var(--stroke); }
+  th { color: var(--fg2); font-weight: 500; }
+  .r { text-align: right; }
+  tr.stripe { background: var(--fill); }
+  .dot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; margin-right: 8px; }
+  .dot.danger { background: var(--danger); }
+  .dot.warning { background: var(--warning); }
+  .dot.info { background: var(--info); }
+  .dot.success { background: var(--success); }
+  .dot.neutral { background: var(--fg3); }
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .hbar { display: flex; flex-direction: column; gap: 6px; }
+  .hbar-row { display: grid; grid-template-columns: 36px 1fr 48px; gap: 8px; align-items: center; font-size: 12px; }
+  .hbar-row .track { height: 10px; background: var(--fill2); border-radius: 2px; overflow: hidden; }
+  .hbar-row .track span { display: block; height: 100%; }
+  .vbar { display: flex; gap: 8px; align-items: flex-end; height: 140px; }
+  .vbar .col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .vbar .bar { width: 100%; border-radius: 2px 2px 0 0; }
+  .vbar .lab, .vbar .n { font-size: 11px; color: var(--fg2); }
+  @media (max-width: 800px) { .stats, .charts { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="page">
+  <div>
+    <h1>Analítico: prioridade de CF e sincronismo</h1>
+    <p class="sub">Pedido de 19/08 10:43–10:44. Ontem = 18/08. Sex/sáb = 14–15/08. Gerado 20/08/2026 14:00 BRT.</p>
+  </div>
+
+  <div class="stats">
+    <div class="stat"><div class="v">MG 294</div><div class="l">1º destino de volume (01–18/08)</div></div>
+    <div class="stat warning"><div class="v">AC / PA</div><div class="l">Mais manutenção GTM (Gelox/caixa)</div></div>
+    <div class="stat"><div class="v">28 / 32</div><div class="l">Pedidos / vol. sex-sáb → 18/08</div></div>
+    <div class="stat danger"><div class="v">1.136</div><div class="l">Pendentes de sync (30d)</div></div>
+  </div>
+
+  <div class="pills">
+    <button class="pill active" data-tab="cruzamento">1 e 2 · Cruzar para CF</button>
+    <button class="pill" data-tab="weekend">3 · Sex/sáb → 18/08</button>
+    <button class="pill" data-tab="sync">4 · Sync por UF</button>
+  </div>
+
+  <div class="panel active" id="tab-cruzamento">
+    <div class="callout warn">
+      <div class="bar"></div>
+      <div>
+        <div class="t">Objetivo: ordem de instalação das CFs</div>
+        <p>Item 1 = quem mais recebe volume. Item 2 = quem mais faz manutenção térmica na ponta (pedido GTM de Gelox/caixa no WhatsApp). PE e RJ já têm CF 2–8 °C e saem da fila. Packing de origem GRU não conta como manutenção no destino.</p>
+      </div>
+    </div>
+    <div class="charts">
+      <div>
+        <h3>1. Estados que mais recebem volumes</h3>
+        <div class="hbar" id="chart-vol"></div>
+        <p class="tiny">VTC_STAGE · dt_entregaefetiva 01–18/08 · LPN único · sem pallet</p>
+      </div>
+      <div>
+        <h3>2. Estados que mais fazem manutenção</h3>
+        <div class="hbar" id="chart-gtm"></div>
+        <p class="tiny">WhatsApp · Gerenciamento Térmico · 361 pedidos · 165 “Pode seguir”</p>
+      </div>
+    </div>
+    <h2>Cruzamento 1 × 2 — ordem de CF</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th class="r">#</th><th>UF</th><th class="r">Vol. 01–18</th><th class="r">GTM Gelox</th>
+            <th class="r">GTM / 100 vol</th><th>CF 2–8</th><th>Por quê</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="stripe"><td class="r"><span class="dot danger"></span>1</td><td>MG</td><td class="r">294</td><td class="r">19</td><td class="r">6,5</td><td>Não</td><td>Mais volume do Brasil + manutenção diária em Contagem</td></tr>
+          <tr><td class="r"><span class="dot danger"></span>2</td><td>PA</td><td class="r">168</td><td class="r">30</td><td class="r">17,9</td><td>Não</td><td>2º em manutenção, 17 excursões, 1.213 fotos em Belém</td></tr>
+          <tr class="stripe"><td class="r"><span class="dot danger"></span>3</td><td>RN</td><td class="r">228</td><td class="r">17</td><td class="r">7,5</td><td>Não</td><td>2º em volume, sem técnico VTC na lista de agosto</td></tr>
+          <tr><td class="r"><span class="dot warning"></span>4</td><td>PB</td><td class="r">130</td><td class="r">23</td><td class="r">17,7</td><td>Não</td><td>3º em manutenção com volume médio</td></tr>
+          <tr class="stripe"><td class="r"><span class="dot info"></span>5</td><td>CE</td><td class="r">170</td><td class="r">13</td><td class="r">7,6</td><td>Não</td><td>Volume alto + GTM; sync já melhorou com Iara</td></tr>
+          <tr><td class="r"><span class="dot warning"></span>6</td><td>PI</td><td class="r">94</td><td class="r">18</td><td class="r">19,1</td><td>Não</td><td>Muita manutenção por volume; freezer não madura</td></tr>
+          <tr class="stripe"><td class="r"><span class="dot warning"></span>7</td><td>MA</td><td class="r">155</td><td class="r">10</td><td class="r">6,5</td><td>Não</td><td>Volume + pior sync da turma de agosto (47%)</td></tr>
+          <tr><td class="r"><span class="dot danger"></span>8</td><td>MS</td><td class="r">52</td><td class="r">14</td><td class="r">26,9</td><td>Não</td><td>Sem CF e sem freezer; taxa alta</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="muted">Fora da 1ª leva de volume, mas com manutenção intensa: AC (31 GTM / 38 LPN — declarou CF, faixa não é 2–8) e AM (19 GTM / 44 LPN). SC (227 LPN) e RS (193) recebem muito e quase não pedem Gelox nestas conversas — CF ainda falta, urgência térmica menor. PE (208 / 18 GTM) e RJ (101 / 16 GTM) já têm câmara 2–8 °C.</p>
+  </div>
+
+  <div class="panel" id="tab-weekend">
+    <div class="callout info">
+      <div class="bar"></div>
+      <div>
+        <div class="t">Ontem = 18/08 · expedidos sex/sáb = 14–15/08</div>
+        <p>86 pedidos / 124 volumes embarcaram no fim de semana. Destes, 28 pedidos (32 volumes) foram entregues na terça 18/08. 22 são 33L = demanda judicial. Manutenção na ponta confirmada no WhatsApp em 7 desses pedidos (5 em 18/08, 2 na véspera 17/08).</p>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">124</div><div class="l">Volumes embarcados 14–15/08</div></div>
+      <div class="stat"><div class="v">32</div><div class="l">Entregues em 18/08</div></div>
+      <div class="stat warning"><div class="v">22</div><div class="l">33L judicial no recorte 18/08</div></div>
+      <div class="stat"><div class="v">7</div><div class="l">Com manutenção GTM confirmada</div></div>
+    </div>
+    <h2>Com manutenção térmica confirmada (WhatsApp)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pedido</th><th>UF</th><th class="r">Vol.</th><th>Tipo</th><th>Embarque</th><th>Manutenção</th></tr></thead>
+        <tbody>
+          <tr class="stripe"><td><span class="dot warning"></span>564399</td><td>MG</td><td class="r">3</td><td>130L</td><td>15/08</td><td>18/08 Contagem · A5482 / 130L</td></tr>
+          <tr><td><span class="dot warning"></span>564541</td><td>MG</td><td class="r">1</td><td>130L</td><td>15/08</td><td>18/08 Ponte Nova · Pode seguir 07:19</td></tr>
+          <tr class="stripe"><td><span class="dot warning"></span>564441</td><td>MG</td><td class="r">1</td><td>33L judicial</td><td>15/08</td><td>18/08 A0651 · troca de placas</td></tr>
+          <tr><td><span class="dot warning"></span>564408</td><td>MG</td><td class="r">1</td><td>33L judicial</td><td>15/08</td><td>18/08 A5860 · troca de placas</td></tr>
+          <tr class="stripe"><td><span class="dot warning"></span>564339</td><td>MG</td><td class="r">1</td><td>33L judicial</td><td>15/08</td><td>18/08 lote Divinópolis</td></tr>
+          <tr><td><span class="dot info"></span>564536</td><td>MS</td><td class="r">1</td><td>130L</td><td>15/08</td><td>17/08 Andréia · Dourados</td></tr>
+          <tr class="stripe"><td><span class="dot info"></span>564333</td><td>MS</td><td class="r">1</td><td>33L judicial</td><td>15/08</td><td>17/08 mesmo lote Dourados</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h2>Demais entregues em 18/08 (embarque 14–15/08)</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>Pedido</th><th>UF</th><th class="r">Vol.</th><th>Tipo</th><th>Embarque</th><th>GTM WhatsApp</th></tr></thead>
+        <tbody id="tb-weekend"></tbody>
+      </table>
+    </div>
+    <p class="tiny">Fonte: VTC_STAGE dt_coletaefetivaembarque (BRT) + dt_entregaefetiva. 33L = demanda judicial.</p>
+  </div>
+
+  <div class="panel" id="tab-sync">
+    <div class="callout warn">
+      <div class="bar"></div>
+      <div>
+        <div class="t">Pendência = lastSync ainda antes da entrega</div>
+        <p>Mesma regra da reversa: Mongo lastSyncDate versus dt_entregaefetiva (15 min). Objetivo: ver se técnico na ponta (contratados 1–19/08) acelerou o sincronismo. Extração 19/08 17:45 BRT.</p>
+      </div>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="v">7.831</div><div class="l">Loggers 30d (desde 20/07)</div></div>
+      <div class="stat danger"><div class="v">14,5%</div><div class="l">Pendência 30d</div></div>
+      <div class="stat danger"><div class="v">1.136</div><div class="l">Saldo pendente</div></div>
+      <div class="stat"><div class="v">83%</div><div class="l">Sync depois da entrega</div></div>
+    </div>
+    <h2>Janela lastSync vs entrega (30d)</h2>
+    <div class="vbar" id="chart-buckets"></div>
+    <h2>Pendência de agosto por UF — técnico na ponta</h2>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>UF</th><th>Técnico 1–19/08</th><th class="r">Jul %</th><th class="r">Ago %</th><th class="r">Loggers ago</th><th>Efeito</th></tr></thead>
+        <tbody>
+          <tr class="stripe"><td><span class="dot success"></span>CE</td><td>Iara</td><td class="r">28,7%</td><td class="r">7,9%</td><td class="r">165</td><td>Melhorou</td></tr>
+          <tr><td><span class="dot success"></span>ES</td><td>Vivian</td><td class="r">8,0%</td><td class="r">1,2%</td><td class="r">165</td><td>Melhorou</td></tr>
+          <tr class="stripe"><td><span class="dot success"></span>MS</td><td>Andréia</td><td class="r">12,9%</td><td class="r">4,2%</td><td class="r">48</td><td>Melhorou</td></tr>
+          <tr><td><span class="dot info"></span>GO</td><td>Késia</td><td class="r">6,0%</td><td class="r">5,6%</td><td class="r">161</td><td>Estável</td></tr>
+          <tr class="stripe"><td><span class="dot info"></span>BA</td><td>Raiana</td><td class="r">1,9%</td><td class="r">4,5%</td><td class="r">132</td><td>Estável</td></tr>
+          <tr><td><span class="dot warning"></span>PR</td><td>Elzane</td><td class="r">6,8%</td><td class="r">12,7%</td><td class="r">55</td><td>Leve piora</td></tr>
+          <tr class="stripe"><td><span class="dot danger"></span>SC</td><td>Tatiane</td><td class="r">4,6%</td><td class="r">23,0%</td><td class="r">217</td><td>Piorou</td></tr>
+          <tr><td><span class="dot danger"></span>PB</td><td>Jerssica</td><td class="r">10,5%</td><td class="r">31,2%</td><td class="r">125</td><td>Piorou</td></tr>
+          <tr class="stripe"><td><span class="dot danger"></span>RS</td><td>Paulo</td><td class="r">5,6%</td><td class="r">30,5%</td><td class="r">187</td><td>Piorou</td></tr>
+          <tr><td><span class="dot danger"></span>PA</td><td>Thaís</td><td class="r">1,6%</td><td class="r">34,1%</td><td class="r">164</td><td>Piorou</td></tr>
+          <tr class="stripe"><td><span class="dot danger"></span>MA</td><td>Leila</td><td class="r">13,2%</td><td class="r">47,1%</td><td class="r">153</td><td>Piorou</td></tr>
+          <tr><td><span class="dot danger"></span>SE</td><td>Grasielle</td><td class="r">0,0%</td><td class="r">58,5%</td><td class="r">65</td><td>Piorou (n baixo)</td></tr>
+          <tr class="stripe"><td><span class="dot danger"></span>PI</td><td>Danilo</td><td class="r">52,5%</td><td class="r">70,8%</td><td class="r">89</td><td>Já era ruim</td></tr>
+          <tr><td><span class="dot warning"></span>AL</td><td>Rosana</td><td class="r">1,0%</td><td class="r">14,8%</td><td class="r">27</td><td>n baixo</td></tr>
+          <tr class="stripe"><td><span class="dot neutral"></span>AP</td><td>Beatriz</td><td class="r">0,0%</td><td class="r">12,0%</td><td class="r">25</td><td>Sem CF</td></tr>
+          <tr><td><span class="dot warning"></span>RN</td><td>Sem técnico VTC</td><td class="r">—</td><td class="r">21,0%</td><td class="r">224 vol</td><td>2º destino, sem cobertura</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <h3>Maiores saldos pendentes (30d)</h3>
+    <div class="hbar" id="chart-pend"></div>
+    <p class="body">Técnico na ponta não basta sozinho. Melhorou em CE, ES e MS. Piorou em MA, PI, PA, RS, SC, PB e SE — bases sem CF 2–8 e com reclamação de bateria/app no Forms. CE ainda aparece no saldo 30d (89) porque julho foi ruim; a taxa de agosto já caiu para 7,9%.</p>
+  </div>
+</div>
+<script>
+const VOL = [["MG",294],["RN",228],["SC",227],["PE",208],["RS",193],["SP",182],["ES",171],["CE",170],["PA",168],["MA",155],["GO",141],["BA",136]];
+const GTM = [["AC",31],["PA",30],["PB",23],["MG",19],["AM",19],["PI",18],["PE",18],["RN",17],["RJ",16],["MS",14],["CE",13],["SE",12]];
+const BUCKETS = [["1h",268],["2h",56],["3h",33],["4h",35],[">4h",634],["Depois",6525],["Sem",280]];
+const PEND = [["PI",125],["MA",95],["CE",89],["PB",72],["RS",68],["RN",68],["TO",61],["PA",58],["SC",58],["RJ",46]];
+const REST = [
+  ["564388","RS","3","130L","15/08","Sem registro"],
+  ["564419","PE","1","130L","15/08","Citado 18/08 (Afogados); troca não amarrada"],
+  ["564532","CE","1","130L","15/08","Citado entrega; sem Gelox"],
+  ["564321","PI","1","33L judicial","15/08","Sem registro"],
+  ["564324","GO","1","33L judicial","15/08","Sem registro"],
+  ["564335","RN","1","33L judicial","15/08","Sem registro"],
+  ["564340","BA","1","33L judicial","15/08","Sem registro"],
+  ["564344","AL","1","33L judicial","15/08","Sem registro"],
+  ["564352","PR","1","33L judicial","15/08","Sem registro"],
+  ["564367","SC","1","33L judicial","15/08","Sem registro"],
+  ["564372","PR","1","33L judicial","15/08","Sem registro"],
+  ["564375","PR","1","33L judicial","15/08","Sem registro"],
+  ["564378","PB","1","33L judicial","15/08","Sem registro"],
+  ["564400","PR","1","33L judicial","15/08","Sem registro"],
+  ["564402","DF","1","33L judicial","15/08","Sem registro"],
+  ["564410","GO","1","33L judicial","15/08","Sem registro"],
+  ["564414","MG","1","33L judicial","15/08","Foto 17/08 SJDR"],
+  ["564448","PR","1","33L judicial","15/08","Sem registro"],
+  ["564454","RS","1","33L judicial","15/08","Sem registro"],
+  ["564458","PI","1","33L judicial","15/08","Sem registro"],
+  ["564525","PE","1","33L judicial","15/08","Logger A8952 em 17/08"]
+];
+function hbar(el, rows, color) {
+  const m = Math.max(...rows.map(r => r[1]));
+  el.innerHTML = rows.map(([lab, n]) =>
+    `<div class="hbar-row"><span>${lab}</span><div class="track"><span style="width:${(100*n/m).toFixed(1)}%;background:${color}"></span></div><span class="r">${n}</span></div>`
+  ).join("");
+}
+function vbar(el, rows, color) {
+  const m = Math.max(...rows.map(r => r[1]));
+  el.innerHTML = rows.map(([lab, n]) =>
+    `<div class="col"><span class="n">${n}</span><div class="bar" style="height:${Math.max(4, 110*n/m)}px;background:${color}"></div><span class="lab">${lab}</span></div>`
+  ).join("");
+}
+hbar(document.getElementById("chart-vol"), VOL, "#599CE7");
+hbar(document.getElementById("chart-gtm"), GTM, "#E2C08D");
+hbar(document.getElementById("chart-pend"), PEND, "#FC6B83");
+vbar(document.getElementById("chart-buckets"), BUCKETS, "#599CE7");
+document.getElementById("tb-weekend").innerHTML = REST.map((r, i) =>
+  `<tr class="${i%2===0?"stripe":""}"><td>${r[0]}</td><td>${r[1]}</td><td class="r">${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td><td>${r[5]}</td></tr>`
+).join("");
+document.querySelectorAll(".pill").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".pill").forEach(b => b.classList.remove("active"));
+    document.querySelectorAll(".panel").forEach(p => p.classList.remove("active"));
+    btn.classList.add("active");
+    document.getElementById("tab-" + btn.dataset.tab).classList.add("active");
+  });
+});
+</script>
+</body>
+</html>

@@ -24,9 +24,42 @@ $IntervalSec = 600
 $StepTimeoutSec = 300
 $GitRemote = "origin"
 $GitBranch = "main"
-$ExpectedRemote = "banco-aura-dashboard.git"
+$ExpectedRemote = "gerenciamento-termico/Dashboards.git"
+$GitHubRepoUrl = "https://github.com/gerenciamento-termico/Dashboards.git"
+$GitHubPagesBase = "https://gerenciamento-termico.github.io/Dashboards"
+
+function Import-DotEnvFile {
+    param([string]$Path)
+    if (-not (Test-Path -LiteralPath $Path)) { return }
+    Get-Content -LiteralPath $Path -Encoding UTF8 | ForEach-Object {
+        $line = $_.Trim()
+        if (-not $line -or $line.StartsWith("#")) { return }
+        $eq = $line.IndexOf("=")
+        if ($eq -lt 1) { return }
+        $name = $line.Substring(0, $eq).Trim().TrimStart([char]0xFEFF)
+        $value = $line.Substring($eq + 1).Trim()
+        if ($value.Length -ge 2 -and (
+            ($value.StartsWith('"') -and $value.EndsWith('"')) -or
+            ($value.StartsWith("'") -and $value.EndsWith("'"))
+        )) {
+            $value = $value.Substring(1, $value.Length - 2)
+        }
+        [System.Environment]::SetEnvironmentVariable($name, $value, "Process")
+    }
+}
+
+Import-DotEnvFile (Join-Path $ScriptDir "hub_share.env")
+Import-DotEnvFile (Join-Path $ScriptDir ".env")
+
+$HubSharePath = if ($env:AURA_HUB_SHARE) { $env:AURA_HUB_SHARE } else { "" }
+$HubGitUser = if ($env:AURA_HUB_USER) { $env:AURA_HUB_USER } else { "gerenciamento-termico" }
+$HubShareUser = $HubGitUser
+$HubSharePassword = [string]$env:AURA_HUB_PASSWORD
+if ($env:AURA_HUB_GIT_URL) { $GitHubRepoUrl = $env:AURA_HUB_GIT_URL }
+if ($env:AURA_HUB_PAGES_BASE) { $GitHubPagesBase = $env:AURA_HUB_PAGES_BASE.TrimEnd("/") }
 
 $PublishFiles = @(
+    ".nojekyll",
     "gerenciamento_termico.html",
     "ESTOQUE_DATALOGGERS.html",
     "CONTROLE_ENTREGAS_20D.html",
@@ -74,24 +107,24 @@ $DashboardFiles = @(
 )
 
 $Urls = @(
-    "https://luan9753.github.io/banco-aura-dashboard/gerenciamento_termico.html",
-    "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
-    "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
-    "https://luan9753.github.io/banco-aura-dashboard/REVERSA_DATALOGGERS.html",
-    "https://luan9753.github.io/banco-aura-dashboard/GESTAO_DISPOSITIVOS.html",
-    "https://luan9753.github.io/banco-aura-dashboard/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-    "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_VTCBOX.html",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_vtcbox.xlsx",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_vtcbox.csv",
-    "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_VELHA_130L.html",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_velha_130l.xlsx",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_velha_130l.csv",
-    "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_33L.html",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_33l.xlsx",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_33l.csv",
-    "https://luan9753.github.io/banco-aura-dashboard/INDICADOR_CAIXA_42L.html",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_42l.xlsx",
-    "https://luan9753.github.io/banco-aura-dashboard/relatorio_analitico_caixa_42l.csv"
+    "$GitHubPagesBase/gerenciamento_termico.html",
+    "$GitHubPagesBase/ESTOQUE_DATALOGGERS.html",
+    "$GitHubPagesBase/CONTROLE_ENTREGAS_20D.html",
+    "$GitHubPagesBase/REVERSA_DATALOGGERS.html",
+    "$GitHubPagesBase/GESTAO_DISPOSITIVOS.html",
+    "$GitHubPagesBase/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
+    "$GitHubPagesBase/INDICADOR_VTCBOX.html",
+    "$GitHubPagesBase/relatorio_analitico_vtcbox.xlsx",
+    "$GitHubPagesBase/relatorio_analitico_vtcbox.csv",
+    "$GitHubPagesBase/INDICADOR_CAIXA_VELHA_130L.html",
+    "$GitHubPagesBase/relatorio_analitico_caixa_velha_130l.xlsx",
+    "$GitHubPagesBase/relatorio_analitico_caixa_velha_130l.csv",
+    "$GitHubPagesBase/INDICADOR_CAIXA_33L.html",
+    "$GitHubPagesBase/relatorio_analitico_caixa_33l.xlsx",
+    "$GitHubPagesBase/relatorio_analitico_caixa_33l.csv",
+    "$GitHubPagesBase/INDICADOR_CAIXA_42L.html",
+    "$GitHubPagesBase/relatorio_analitico_caixa_42l.xlsx",
+    "$GitHubPagesBase/relatorio_analitico_caixa_42l.csv"
 )
 
 $IndicadorCaixasGeralPublishFiles = @(
@@ -109,7 +142,22 @@ $IndicadorCaixasGeralPublishFiles = @(
 )
 $PublishFiles += $IndicadorCaixasGeralPublishFiles
 $DashboardFiles += $IndicadorCaixasGeralPublishFiles
-$Urls += $IndicadorCaixasGeralPublishFiles | ForEach-Object { "https://luan9753.github.io/banco-aura-dashboard/$_" }
+$Urls += $IndicadorCaixasGeralPublishFiles | ForEach-Object { "$GitHubPagesBase/$_" }
+
+$ExtraPagesFiles = @(
+    "index.html",
+    "HTMLACOMPANHAMENTO.html",
+    "indicador_produtividade.html",
+    "VOLUME_MANUTENCAO_TERMICA.html",
+    "VOLUME_MANUTENCAO_TERMICA_COMPLETO.html",
+    "ANALITICO_CF_19AGO.html",
+    "ANALITICO_COORDENADORES.html",
+    "ANALITICO_SINCRONISMO.html",
+    "PRIORIDADE_CF_SINCRONISMO.html",
+    "MANUTENCAO_WHATSAPP_UF.html"
+)
+$PublishFiles += $ExtraPagesFiles
+$Urls += $ExtraPagesFiles | ForEach-Object { "$GitHubPagesBase/$_" }
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 $LogFile = Join-Path $LogDir ("atualizar_tudo_{0}.log" -f (Get-Date -Format "yyyyMMdd"))
@@ -156,7 +204,7 @@ function Invoke-LoggedProcess {
 
     $argLine = ($Arguments | ForEach-Object { Quote-Arg $_ }) -join " "
 
-    Write-Log ("RUN: {0} {1}" -f $FilePath, $argLine)
+    Write-Log ("RUN: {0} {1}" -f $FilePath, (Protect-SensitiveText $argLine))
     Write-Log ("CWD: {0}" -f $WorkingDirectory)
 
     $outFile = Join-Path $env:TEMP ("aura_step_{0}_{1}.out" -f $PID, ([guid]::NewGuid().ToString("N")))
@@ -178,14 +226,37 @@ function Invoke-LoggedProcess {
 
     $stdout = if (Test-Path $outFile) { Get-Content -LiteralPath $outFile -Raw -ErrorAction SilentlyContinue } else { "" }
     $stderr = if (Test-Path $errFile) { Get-Content -LiteralPath $errFile -Raw -ErrorAction SilentlyContinue } else { "" }
-    if ($stdout) { $stdout.TrimEnd() -split "`r?`n" | ForEach-Object { Write-Log $_ } }
-    if ($stderr) { $stderr.TrimEnd() -split "`r?`n" | ForEach-Object { Write-Log ("ERR: " + $_) } }
+    if ($stdout) { $stdout.TrimEnd() -split "`r?`n" | ForEach-Object { Write-Log (Protect-SensitiveText $_) } }
+    if ($stderr) { $stderr.TrimEnd() -split "`r?`n" | ForEach-Object { Write-Log ("ERR: " + (Protect-SensitiveText $_)) } }
     Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
 
     $process.Refresh()
-    $exitCode = if ($null -eq $process.ExitCode) { 0 } else { [int]$process.ExitCode }
+    if ($null -eq $process.ExitCode) {
+        # Start-Process as vezes nao preenche ExitCode em comandos muito rapidos.
+        $exitCode = 0
+    } else {
+        $exitCode = [int]$process.ExitCode
+    }
+
+    $combined = "{0}`n{1}" -f [string]$stdout, [string]$stderr
+    $isGit = ($FilePath -eq "git") -or ($Name -like "git *")
+    $isPythonVersion = ($Name -like '*python*' -or ($Arguments -contains '--version')) -and ($combined -match 'Python \d+\.\d+')
+    if ($isGit -and $combined -match 'fatal:|could not read Username|Authentication failed|error: failed to execute prompt') {
+        $exitCode = 1
+    }
+    if (-not $isGit -and -not $isPythonVersion -and $combined -match 'Traceback \(most recent call last\)|RuntimeError:') {
+        $exitCode = 1
+    }
+    if ($Name -like '*fresco*' -and $combined -notmatch 'STATUS VALIDADO_COM_FONTES_FRESCAS') {
+        $exitCode = 1
+    }
+    if ($isPythonVersion) {
+        $exitCode = 0
+    }
     if ($exitCode -ne 0) {
-        throw ("{0} falhou com codigo {1}" -f $Name, $exitCode)
+        $detail = Protect-SensitiveText (($combined.Trim() -replace '\s+', ' '))
+        if ($detail.Length -gt 400) { $detail = $detail.Substring(0, 400) }
+        throw ("{0} falhou com codigo {1}: {2}" -f $Name, $exitCode, $detail)
     }
 
     if (-not $Quiet -and $stdout) {
@@ -195,14 +266,18 @@ function Invoke-LoggedProcess {
 
 function Select-Python {
     $candidates = @(
-        (Join-Path $PackageDir ".venv\Scripts\python.exe"),
         "C:\Users\Administrador\AppData\Local\Programs\Python\Python311\python.exe",
+        (Join-Path $PackageDir ".venv\Scripts\python.exe"),
         "python",
         "py"
     )
     foreach ($candidate in $candidates) {
+        if ($candidate -like '*\*' -and -not (Test-Path -LiteralPath $candidate)) {
+            continue
+        }
         try {
             Invoke-LoggedProcess -FilePath $candidate -Arguments @("--version") -Name "python --version" -TimeoutSec 30 -Quiet
+            Write-Log ("Python selecionado: {0}" -f $candidate)
             return $candidate
         } catch {
             Write-Log ("Python candidato falhou: {0} - {1}" -f $candidate, $_.Exception.Message)
@@ -216,6 +291,7 @@ function Test-Repo {
         throw "Repositorio Git nao encontrado em $PublishDir"
     }
     Invoke-LoggedProcess -FilePath "git" -Arguments @("rev-parse", "--is-inside-work-tree") -WorkingDirectory $PublishDir -Name "git rev-parse" -TimeoutSec 30 -Quiet
+    Ensure-HubRemote
     $remote = (& git -C $PublishDir remote get-url origin 2>$null)
     if (-not $remote -or ($remote -notlike "*$ExpectedRemote*")) {
         throw "Remote origin inesperado: $remote"
@@ -276,6 +352,8 @@ function Get-MinFileSize {
     param(
         [string]$RelativePath
     )
+    if ($RelativePath -ieq "CONTROLE_ENTREGAS_20D.csv") { return 128 }
+    if ($RelativePath -ieq "index.html") { return 200 }
     if ($RelativePath -like "*.xlsx") { return 1024 }
     if ($RelativePath -like "*.js") { return 1024 }
     return 5120
@@ -397,8 +475,96 @@ function Copy-PublishedFile {
     }
     $destination = Join-Path $PublishDir $DestinationName
     Copy-Item -LiteralPath $Source -Destination $destination -Force
-    (Get-Item -LiteralPath $destination).LastWriteTime = Get-Date
     Write-Log ("COPIADO: {0} -> {1}" -f $Source, $destination)
+}
+
+function Invoke-NetUse {
+    param(
+        [string[]]$Arguments
+    )
+    $outFile = Join-Path $env:TEMP ("aura_netuse_{0}_{1}.out" -f $PID, ([guid]::NewGuid().ToString("N")))
+    $errFile = Join-Path $env:TEMP ("aura_netuse_{0}_{1}.err" -f $PID, ([guid]::NewGuid().ToString("N")))
+    try {
+        $process = Start-Process -FilePath "net.exe" -ArgumentList $Arguments -NoNewWindow -Wait -PassThru -RedirectStandardOutput $outFile -RedirectStandardError $errFile
+        $stdout = if (Test-Path -LiteralPath $outFile) { [string](Get-Content -LiteralPath $outFile -Raw -ErrorAction SilentlyContinue) } else { "" }
+        $stderr = if (Test-Path -LiteralPath $errFile) { [string](Get-Content -LiteralPath $errFile -Raw -ErrorAction SilentlyContinue) } else { "" }
+        return [pscustomobject]@{
+            ExitCode = $process.ExitCode
+            Output = (Protect-SensitiveText (($stdout + "`n" + $stderr).Trim()))
+        }
+    } finally {
+        Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
+    }
+}
+
+function Connect-HubShare {
+    if (Test-Path -LiteralPath $HubSharePath) {
+        Write-Log ("HUB: pasta acessivel: {0}" -f $HubSharePath)
+        return
+    }
+
+    if (-not $HubSharePassword) {
+        throw "Senha do hub nao encontrada. Preencha AURA_HUB_PASSWORD em hub_share.env"
+    }
+
+    $deleteResult = Invoke-NetUse -Arguments @("use", $HubSharePath, "/delete", "/y")
+    Write-Log ("HUB: limpeza de conexao anterior codigo={0}" -f $deleteResult.ExitCode)
+
+    $usersToTry = @($HubShareUser)
+    if ($HubShareUser -notmatch '\\') {
+        $usersToTry += ("gerenciamento-termico\{0}" -f $HubShareUser)
+        $usersToTry += (".\{0}" -f $HubShareUser)
+    }
+    if ($usersToTry -notcontains "Gtm") {
+        $usersToTry += "Gtm"
+        $usersToTry += "gerenciamento-termico\Gtm"
+    }
+
+    $lastError = ""
+    foreach ($user in $usersToTry) {
+        Write-Log ("HUB: tentando conectar em {0} com usuario {1}" -f $HubSharePath, $user)
+        $result = Invoke-NetUse -Arguments @("use", $HubSharePath, $HubSharePassword, "/user:$user", "/persistent:no")
+        if ($result.ExitCode -eq 0 -or (Test-Path -LiteralPath $HubSharePath)) {
+            Write-Log ("HUB: conectado em {0} com usuario {1}" -f $HubSharePath, $user)
+            return
+        }
+        $lastError = $result.Output
+        Write-Log ("HUB: falha usuario {0} codigo={1} {2}" -f $user, $result.ExitCode, $lastError)
+    }
+
+    throw ("Nao foi possivel conectar em {0}: {1}" -f $HubSharePath, $lastError)
+}
+
+function Publish-ToHubShare {
+    Connect-HubShare
+    if (-not (Test-Path -LiteralPath $HubSharePath)) {
+        throw "Pasta do hub inacessivel: $HubSharePath"
+    }
+
+    $files = @($PublishFiles)
+    foreach ($extra in @("GESTAO_DISPOSITIVOS_STAGE_DATA.js", "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json")) {
+        if ($files -notcontains $extra) { $files += $extra }
+    }
+
+    $copied = 0
+    foreach ($file in $files) {
+        $src = Join-Path $PublishDir $file
+        if (-not (Test-Path -LiteralPath $src)) {
+            Write-Log ("HUB: origem ausente, pulando {0}" -f $file)
+            continue
+        }
+        $dest = Join-Path $HubSharePath $file
+        $tmp = $dest + ".tmp"
+        Copy-Item -LiteralPath $src -Destination $tmp -Force
+        Move-Item -LiteralPath $tmp -Destination $dest -Force
+        $copied++
+        Write-Log ("HUB COPIADO: {0} -> {1}" -f $src, $dest)
+    }
+
+    if ($copied -eq 0) {
+        throw "Nenhum arquivo foi copiado para $HubSharePath"
+    }
+    Write-Status "[HUB] Publicacao em gerenciamento-termico/Dashboards" ("OK - {0} arquivos" -f $copied) Green
 }
 
 function Protect-SensitiveText {
@@ -406,8 +572,80 @@ function Protect-SensitiveText {
     if ($null -eq $Text) { return "" }
     $safe = $Text -replace '(https://)([^/\s:@]+):([^@/\s]+)@', '$1***:***@'
     $safe = $safe -replace '(https://)([^@/\s]+)@', '$1***@'
+    $safe = $safe -replace 'Authorization:\s*Basic\s+\S+', 'Authorization: Basic ***'
+    $safe = $safe -replace 'http\.extraHeader=Authorization: Basic \S+', 'http.extraHeader=Authorization: Basic ***'
     $safe = $safe -replace '(token|password|senha|secret|api[_-]?key)(["'']?\s*[:=]\s*["'']?)[^"''\s]+', '$1$2***'
     return $safe
+}
+
+function Get-GitAuthenticatedRemoteUrl {
+    if (-not $HubSharePassword) {
+        throw "Senha do GitHub ausente. Preencha AURA_HUB_PASSWORD em hub_share.env"
+    }
+    $gitUser = $HubGitUser
+    if ($HubSharePassword -like "github_pat_*" -or $HubSharePassword -like "ghp_*") {
+        $gitUser = "x-access-token"
+    }
+    $user = [uri]::EscapeDataString($gitUser)
+    $pass = [uri]::EscapeDataString($HubSharePassword)
+    $remote = ($GitHubRepoUrl -replace '^https://', '')
+    return ("https://{0}:{1}@{2}" -f $user, $pass, $remote)
+}
+
+function Get-GitAuthPrefix {
+    return @()
+}
+
+function Get-GitHubPushAdvice {
+    param([string]$Detail)
+    $text = [string]$Detail
+    if ($text -match 'Password authentication is not supported|Invalid username or token|Authentication failed') {
+        return @"
+GitHub recusou o login. Senha de conta (mesmo a do Google) nao autentica git push.
+No hub_share.env use AURA_HUB_USER=gerenciamento-termico e AURA_HUB_PASSWORD=Personal Access Token.
+"@
+    }
+    if ($text -match 'Permission to .* denied|returned error: 403') {
+        return @"
+O token autenticou como gerenciamento-termico, mas nao tem permissao de GRAVAR em gerenciamento-termico/Dashboards.
+Edite o token em https://github.com/settings/personal-access-tokens
+  Repository access = Dashboards
+  Contents = Read and write
+  Pages = Write
+Salve. O proximo ciclo publica em https://gerenciamento-termico.github.io/Dashboards/
+"@
+    }
+    return (Protect-SensitiveText $text)
+}
+
+function Enable-GitHubPages {
+    if (-not $HubSharePassword) { return }
+    $headers = @{
+        Authorization = ("Bearer {0}" -f $HubSharePassword)
+        Accept = "application/vnd.github+json"
+        "User-Agent" = "AuraDashboards"
+        "X-GitHub-Api-Version" = "2022-11-28"
+    }
+    $body = @{ source = @{ branch = "main"; path = "/" } } | ConvertTo-Json -Compress
+    try {
+        Invoke-RestMethod -Method Put -Uri "https://api.github.com/repos/gerenciamento-termico/Dashboards/pages" -Headers $headers -Body $body -ContentType "application/json" | Out-Null
+        Write-Log "[GIT] GitHub Pages habilitado em main /"
+        Write-Status "[GIT] GitHub Pages" "OK" Green
+    } catch {
+        Write-Log ("[GIT] GitHub Pages aviso: {0}" -f (Protect-SensitiveText $_.Exception.Message))
+        Write-Host "[GIT] GitHub Pages nao foi habilitado pela API. Ligue em Settings > Pages > branch main, pasta /." -ForegroundColor Yellow
+    }
+}
+
+function Ensure-HubRemote {
+    $current = (& git -C $PublishDir remote get-url origin 2>$null)
+    if ($current -eq $GitHubRepoUrl) { return }
+    if ($current) {
+        Write-Log ("[GIT] Atualizando origin de {0} para {1}" -f (Protect-SensitiveText $current), $GitHubRepoUrl)
+        Invoke-LoggedProcess -FilePath "git" -Arguments @("remote", "set-url", "origin", $GitHubRepoUrl) -WorkingDirectory $PublishDir -Name "git remote set-url origin" -TimeoutSec 30 -Quiet
+    } else {
+        Invoke-LoggedProcess -FilePath "git" -Arguments @("remote", "add", "origin", $GitHubRepoUrl) -WorkingDirectory $PublishDir -Name "git remote add origin" -TimeoutSec 30 -Quiet
+    }
 }
 
 function Invoke-GitCapture {
@@ -420,8 +658,12 @@ function Invoke-GitCapture {
     try {
         $process = Start-Process -FilePath "git" -ArgumentList $argLine -WorkingDirectory $PublishDir -NoNewWindow -PassThru -Wait -RedirectStandardOutput $outFile -RedirectStandardError $errFile
         $exitCode = $process.ExitCode
+        if ($null -eq $exitCode) { $exitCode = 1 }
         $stdout = if (Test-Path -LiteralPath $outFile) { [string](Get-Content -LiteralPath $outFile -Raw -ErrorAction SilentlyContinue) } else { "" }
         $stderr = if (Test-Path -LiteralPath $errFile) { [string](Get-Content -LiteralPath $errFile -Raw -ErrorAction SilentlyContinue) } else { "" }
+        if ($exitCode -eq 0 -and ("{0}`n{1}" -f $stdout, $stderr) -match 'fatal:|could not read Username|Authentication failed') {
+            $exitCode = 1
+        }
         if ($stdout) {
             foreach ($line in @($stdout.TrimEnd() -split "`r?`n")) {
                 if ($line) { [void]$lines.Add((Protect-SensitiveText ([string]$line))) }
@@ -536,9 +778,31 @@ function Test-GitBlockingState {
 function Sync-GitBeforeCycle {
     Write-GitSnapshot
     Test-GitBlockingState
+    Ensure-HubRemote
 
-    $pullArgs = @("pull", "--rebase", "--autostash", $GitRemote, $GitBranch)
-    $commandLine = "git " + (($pullArgs | ForEach-Object { Quote-Arg $_ }) -join " ")
+    $probe = Invoke-GitCapture -Arguments @("ls-remote", "--heads", (Get-GitAuthenticatedRemoteUrl), $GitBranch)
+    $probeText = ($probe.Output -join "`n")
+    if ($probe.ExitCode -ne 0) {
+        Write-GitLines -Title "[GIT] ls-remote:" -Lines $probe.Output
+        if ($probeText -match '403|401|Authentication failed|Permission to .* denied|Invalid username or token') {
+            Write-Host "[GIT] Token sem permissao de leitura/escrita no remoto; pull ignorado. O push vai falhar ate o token ter Contents: Read and write." -ForegroundColor Yellow
+            Write-Log "[GIT] ls-remote recusado por permissao do token; pull ignorado."
+            return
+        }
+        Write-Host "[GIT] Remoto inacessivel; pull ignorado." -ForegroundColor Yellow
+        Write-Log "[GIT] ls-remote falhou; pull ignorado."
+        return
+    }
+
+    $hasRemoteBranch = $probeText -match [regex]::Escape($GitBranch)
+    if (-not $hasRemoteBranch) {
+        Write-Host "[GIT] Remoto sem branch main ainda; pull ignorado (primeiro envio para gerenciamento-termico/Dashboards)." -ForegroundColor Yellow
+        Write-Log "[GIT] Remoto sem branch main; pull ignorado."
+        return
+    }
+
+    $pullArgs = @("pull", "--rebase", "--autostash", (Get-GitAuthenticatedRemoteUrl), $GitBranch)
+    $commandLine = Protect-SensitiveText ("git " + (($pullArgs | ForEach-Object { Quote-Arg $_ }) -join " "))
     Write-Host ("[GIT] Executando: {0}" -f $commandLine) -ForegroundColor Gray
     Write-Log ("[GIT] Executando: {0}" -f $commandLine)
 
@@ -563,7 +827,9 @@ function Sync-GitBeforeCycle {
 function Publish-Changes {
     $preStaged = @(& git -C $PublishDir diff --cached --name-only)
     if ($preStaged.Count -gt 0) {
-        throw "Ja existem arquivos staged antes do ciclo: $($preStaged -join ', ')"
+        Write-Status "[GIT] Limpando stage anterior" "OK" Yellow
+        Write-Log ("[GIT] Stage anterior sera ignorado e nao publicado: " + ($preStaged -join ", "))
+        Invoke-LoggedProcess -FilePath "git" -Arguments @("reset", "--mixed", "HEAD") -WorkingDirectory $PublishDir -Name "git reset --mixed" -TimeoutSec 60 -Quiet
     }
 
     Write-Status "[GIT] Status antes do stage" "OK" Gray
@@ -572,7 +838,9 @@ function Publish-Changes {
         $_ -notmatch "ESPECIFICACAO_CONTA_CORRENTE_DISPOSITIVOS\.md" -and
         $_ -notmatch "LEVANTAMENTO_CONTA_CORRENTE_DISPOSITIVOS\.md" -and
         $_ -notmatch "backup_restore_" -and
-        $_ -notmatch "test_db\d*\.py"
+        $_ -notmatch "test_db\d*\.py" -and
+        $_ -notmatch "(^| )\.env" -and
+        $_ -notmatch "hub_share\.env"
     })
     if ($statusLines.Count -eq 0) {
         Write-Host "      sem alteracoes no working tree" -ForegroundColor DarkGray
@@ -624,6 +892,20 @@ function Publish-Changes {
         throw "Stage contem arquivo fora do escopo: $($bad -join ', ')"
     }
 
+    $envStaged = @($staged | Where-Object {
+        $name = Split-Path $_ -Leaf
+        $name -ne ".env.example" -and (
+            $name -eq ".env" -or
+            $name -like ".env.*" -or
+            $name -like "*.env" -or
+            $name -eq "hub_share.env"
+        )
+    })
+    if ($envStaged.Count -gt 0) {
+        & git -C $PublishDir restore --staged -- $PublishFiles 2>$null
+        throw "Arquivo .env nao pode ser publicado (fica so local): $($envStaged -join ', ')"
+    }
+
     if ($staged.Count -eq 0) {
         Write-Status "[GIT] Nenhuma alteracao para publicar" "OK" Yellow
         return
@@ -646,7 +928,12 @@ function Publish-Changes {
 
     $stamp = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
     Invoke-LoggedProcess -FilePath "git" -Arguments @("commit", "-m", "Atualiza dashboards Aura - $stamp") -WorkingDirectory $PublishDir -Name "git commit" -TimeoutSec 120
-    Invoke-LoggedProcess -FilePath "git" -Arguments @("push", $GitRemote, "HEAD:$GitBranch") -WorkingDirectory $PublishDir -Name "git push" -TimeoutSec 180
+    try {
+        Invoke-LoggedProcess -FilePath "git" -Arguments @("-c", "credential.helper=", "push", (Get-GitAuthenticatedRemoteUrl), "HEAD:$GitBranch") -WorkingDirectory $PublishDir -Name "git push" -TimeoutSec 180
+    } catch {
+        throw (Get-GitHubPushAdvice -Detail $_.Exception.Message)
+    }
+    Enable-GitHubPages
     Write-Status "[GIT] Commit e push" "OK" Green
 }
 
@@ -665,6 +952,8 @@ function Run-Cycle {
     Write-Log "============================================================"
     Write-Log "AURA DASHBOARDS - CICLO INICIADO"
     Write-Log ("Modo: {0}" -f $Mode)
+    Write-Log ("Hub destino Git: {0}" -f $GitHubRepoUrl)
+    Write-Host ("Hub destino Git: {0}" -f $GitHubRepoUrl)
 
     try {
         $script:PythonExe = Select-Python
@@ -692,18 +981,28 @@ function Run-Cycle {
 
         $reversaOk = $true
         try {
-            Write-Status "[3/9] Reversa" "GERANDO - fontes STAGE/dtbPortal/dtbTransporte" Yellow
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $ReversaStageDir "gerar_hibrido_aderente_original_fresco.py")) -WorkingDirectory $ReversaStageDir -Name "gerar_hibrido_aderente_original_fresco.py" -TimeoutSec 420
-            Copy-PublishedFile -Source (Join-Path $ReversaStageDir "REVERSA_DATALOGGERS_STAGE.html") -DestinationName "REVERSA_DATALOGGERS.html"
-            Copy-PublishedFile -Source (Join-Path $ReversaStageDir "MANIFESTO_SNAPSHOT_HIBRIDO_ADERENTE.json") -DestinationName "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json"
+            Write-Status "[3/9] Reversa" "GERANDO - fontes STAGE/dtbPortal/dtbTransporte/MongoARES" Yellow
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $ReversaStageDir "gerar_hibrido_aderente_original_fresco.py")) -WorkingDirectory $ReversaStageDir -Name "gerar_hibrido_aderente_original_fresco.py" -TimeoutSec 480
+
+            $srcManifest = Join-Path $ReversaStageDir "MANIFESTO_SNAPSHOT_HIBRIDO_ADERENTE.json"
+            $srcHtml = Join-Path $ReversaStageDir "REVERSA_DATALOGGERS_STAGE.html"
+            $manifest = Get-Content -LiteralPath $srcManifest -Raw -Encoding UTF8 | ConvertFrom-Json
+            $linhas = $manifest.camada_operacional.linhas_operacionais_finais
+            $status = $manifest.fail_closed.status
+            $geradoEm = [datetime]$manifest.gerado_em
+            if ($geradoEm -lt $cycleStart.AddMinutes(-2)) {
+                throw ("Snapshot da reversa esta velho (gerado_em={0}); extracao fresca falhou e o HTML antigo nao sera copiado." -f $geradoEm.ToString("yyyy-MM-dd HH:mm:ss"))
+            }
+            if ($status -ne "VALIDADO_COM_FONTES_FRESCAS") {
+                throw ("Snapshot da reversa nao validado: {0}" -f $status)
+            }
+
+            Copy-PublishedFile -Source $srcHtml -DestinationName "REVERSA_DATALOGGERS.html"
+            Copy-PublishedFile -Source $srcManifest -DestinationName "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json"
 
             $reversaHtml = Join-Path $PublishDir "REVERSA_DATALOGGERS.html"
             $reversaManifest = Join-Path $PublishDir "MANIFESTO_SNAPSHOT_REVERSA_DATALOGGERS.json"
             Test-FreshRequiredFiles -Label "HTML REVERSA" -Paths @($reversaHtml, $reversaManifest) -CycleStart $cycleStart -MinSizeBytes 1024
-
-            $manifest = Get-Content -LiteralPath $reversaManifest -Raw -Encoding UTF8 | ConvertFrom-Json
-            $linhas = $manifest.camada_operacional.linhas_operacionais_finais
-            $status = $manifest.fail_closed.status
             $modTime = (Get-Item $reversaHtml).LastWriteTime.ToString("yyyy-MM-dd HH:mm")
 
             Write-Status "[3/9] Reversa" ("OK - {0} | linhas={1} | {2}" -f $modTime, $linhas, $status) Green
@@ -711,12 +1010,13 @@ function Run-Cycle {
             $err = $_.Exception.Message
             Write-Status "[3/9] Reversa" "ERRO" Red
             Write-Log ("ERRO DETALHE: " + $err)
-            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao gerar REVERSA_DATALOGGERS.html com fontes STAGE; ciclo sera interrompido para evitar publicar dado antigo"
+            Add-StepFailure -Failures $stepFailures -Name "Reversa" -Message "falha ao gerar com fontes STAGE; HTML anterior sera preservado"
             $reversaOk = $false
         }
 
         if (-not $reversaOk) {
-            $ok = $false
+            Write-Host "AVISO: Reversa nao atualizada neste ciclo. Os demais dashboards seguem." -ForegroundColor Yellow
+            Write-Log "AVISO: Reversa nao atualizada neste ciclo. Os demais dashboards seguem."
         }
 
         if (-not (Invoke-Step "[4/9] Gestao Dispositivos" {
@@ -724,8 +1024,7 @@ function Run-Cycle {
             Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html") -DestinationName "GESTAO_DISPOSITIVOS.html"
             Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS_STAGE_DATA.js") -DestinationName "GESTAO_DISPOSITIVOS_STAGE_DATA.js"
         })) {
-            Add-StepFailure -Failures $stepFailures -Name "Gestao Dispositivos" -Message "falha ao gerar/copiar Stage; ciclo sera interrompido para evitar publicar dado antigo"
-            $ok = $false
+            Add-StepFailure -Failures $stepFailures -Name "Gestao Dispositivos" -Message "falha ao gerar/copiar Stage; HTML anterior sera preservado"
         }
 
         if (-not (Invoke-Step "[5/9] Rastreio Caixas Sem Logger" {
@@ -792,8 +1091,8 @@ function Run-Cycle {
     $blockGestao = $stepFailures | Where-Object { $_ -match "^Gestao" }
 
     if ($blockEstoque -or $blockGestao) {
-        Write-Host "AVISO: Falha identificada no Estoque ou Gestão de Dispositivos. Esses arquivos não serão atualizados neste ciclo, mas os demais dashboards seguirão normalmente." -ForegroundColor Yellow
-        Write-Log "AVISO: Falha identificada no Estoque ou Gestão de Dispositivos. Esses arquivos não serão atualizados neste ciclo, mas os demais dashboards seguirão normalmente."
+        Write-Host "AVISO: Falha no Estoque ou Gestao de Dispositivos. Esses arquivos nao serao atualizados neste ciclo; os demais seguem." -ForegroundColor Yellow
+        Write-Log "AVISO: Falha no Estoque ou Gestao de Dispositivos. Esses arquivos nao serao atualizados neste ciclo; os demais seguem."
     }
 
     if ($ok) {
@@ -879,6 +1178,15 @@ function Run-Check {
     $pyCacheDir = Join-Path $env:TEMP "aura_pycache_check"
     New-Item -ItemType Directory -Force -Path $pyCacheDir | Out-Null
     Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments (@("-X", "pycache_prefix=$pyCacheDir", "-m", "py_compile") + ($required | Where-Object { $_ -like "*.py" })) -WorkingDirectory $PublishDir -Name "py_compile scripts" -TimeoutSec 120 -Quiet
+
+    Ensure-HubRemote
+    $remote = (& git -C $PublishDir remote get-url origin 2>$null)
+    Write-Host ("[OK] Git origin: {0}" -f $remote) -ForegroundColor Green
+    Write-Log ("CHECK origin OK: {0}" -f $remote)
+    if (-not $HubSharePassword) {
+        Write-Host "[AVISO] AURA_HUB_PASSWORD ausente em hub_share.env; o push para gerenciamento-termico/Dashboards vai falhar." -ForegroundColor Yellow
+    }
+
     Write-Host "[OK] CHECK concluido. Nenhum commit/push foi feito." -ForegroundColor Green
     Write-Log "CHECK concluido."
 }
@@ -886,6 +1194,7 @@ function Run-Check {
 $mutex = New-Object System.Threading.Mutex($false, "Global\AuraDashboardsUpdate10Min")
 if (-not $mutex.WaitOne(0)) {
     Write-Host "Ja existe uma instancia do atualizador unificado em execucao." -ForegroundColor Yellow
+    Write-Host "Feche a janela antiga do ATUALIZAR_TUDO_10_MIN.bat e abra de novo." -ForegroundColor Yellow
     exit 1
 }
 

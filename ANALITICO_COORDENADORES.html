@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coordenadores — levantamento manual</title>
+<style>
+  :root {
+    --bg: #f4f3ef;
+    --paper: #fff;
+    --ink: #1c1917;
+    --muted: #6b6560;
+    --line: #e4e1db;
+    --ok: #166534;
+    --bad: #991b1b;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Segoe UI", system-ui, sans-serif; background: var(--bg); color: var(--ink); line-height: 1.45; }
+  .wrap { max-width: 860px; margin: 0 auto; padding: 40px 24px 80px; }
+  .kicker { font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  h1 { font-size: 26px; font-weight: 600; margin: 6px 0 8px; }
+  .lead { color: var(--muted); font-size: 15px; margin-bottom: 24px; }
+  .nums { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 28px; }
+  .num { background: var(--paper); border: 1px solid var(--line); padding: 16px 18px; }
+  .num b { display: block; font-size: 28px; font-weight: 650; }
+  .num span { color: var(--muted); font-size: 13px; }
+  .num.ok b { color: var(--ok); }
+  .num.bad b { color: var(--bad); }
+  h2 { font-size: 16px; font-weight: 600; margin: 28px 0 10px; }
+  .block { background: var(--paper); border: 1px solid var(--line); }
+  .head { padding: 12px 16px; font-size: 13px; color: var(--muted); border-bottom: 1px solid var(--line); background: #fafaf8; }
+  .head b { color: var(--ink); }
+  .row { display: grid; grid-template-columns: 1fr auto auto; gap: 12px; padding: 10px 16px; border-bottom: 1px solid var(--line); font-size: 14px; align-items: start; }
+  .row:last-child { border-bottom: none; }
+  .sub { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .mac { font-family: Consolas, "Cascadia Mono", monospace; font-size: 12px; color: var(--muted); }
+  .st { font-size: 12px; white-space: nowrap; }
+  .st.ok { color: var(--ok); }
+  .st.bad { color: var(--bad); }
+  .st.wait { color: var(--muted); }
+  footer { margin-top: 32px; font-size: 12px; color: var(--muted); }
+  @media (max-width: 700px) {
+    .nums { grid-template-columns: 1fr; }
+    .row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="kicker">Levantamento manual de campo · 24/08/2026</div>
+  <h1>Coordenadores no ar</h1>
+  <p class="lead">Tudo o que foi conferido na ponta. Nada de cadastro ARES nesta folha.</p>
+
+  <div class="nums">
+    <div class="num ok"><b>30</b><span>MACs funcionando</span></div>
+    <div class="num bad"><b>1</b><span>MAC que não funciona</span></div>
+    <div class="num"><b>2</b><span>bases sem coordenador</span></div>
+  </div>
+
+  <h2>1. Foz Express — um coordenador para o Nordeste</h2>
+  <div class="block">
+    <div class="head">IMEI <b>863427045141018</b> · MAC <span class="mac">D0:EF:76:5B:1F:1C</span></div>
+    <div class="row"><div>Rosana MCZ · Maceió (AL)</div><div></div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Dayane PE BASE (PE)</div><div></div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Iara Ntlogo · Ceará (CE)</div><div></div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Danilo Aeroneiva · Piauí (PI)</div><div></div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Leila SLZ · Maranhão (MA)</div><div></div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Neto CSM · Rio Grande do Norte (RN)</div><div></div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Raina SSA · Bahia (BA)<div class="sub">Apenas da secretaria</div></div><div></div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Jerssica JPA (PB)<div class="sub">Apenas na secretaria</div></div><div></div><div class="st ok">Sim</div></div>
+  </div>
+
+  <h2>2. Agente confirma que possui</h2>
+  <div class="block">
+    <div class="row"><div>MCP / AACR Cargas (AP)<div class="sub">Mesmo MAC nas duas etiquetas</div></div><div class="mac">FC:E8:C0:72:63:60</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>CWB (PR)</div><div class="mac">D0:EF:76:59:42:24</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>CWB (PR)</div><div class="mac">FC:E8:C0:73:D8:D8</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>CWB (PR)</div><div class="mac">D0:EF:76:59:4F:A0</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>GR Transportes (AM)</div><div class="mac">D0:EF:76:59:4F:68</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>Transbilling (TO)</div><div class="mac">FC:E8:C0:71:E6:48</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>J Pimentel · BVB (RR)</div><div class="mac">FC:E8:C0:71:D3:00</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>AG XAP · Chapecó (SC)</div><div class="mac">FC:E8:C0:72:62:64</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>AG XAP · Chapecó (SC)</div><div class="mac">FC:E8:C0:71:EC:84</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Gritsch FLN / TGEX (SC)</div><div class="mac">FC:E8:C0:72:4A:64</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>Gritsch FLN / TGEX (SC)</div><div class="mac">FC:E8:C0:71:F2:48</div><div class="st ok">Possui</div></div>
+    <div class="row"><div>Gritsch FLN / TGEX (SC)</div><div class="mac">D0:EF:76:5B:1A:F0</div><div class="st ok">Possui</div></div>
+  </div>
+
+  <h2>3. Teste MAC a MAC — Sudeste</h2>
+  <div class="block">
+    <div class="row"><div>Contagem</div><div class="mac">FC:E8:C0:71:D7:DC</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Contagem</div><div class="mac">D0:EF:76:5A:EF:B8</div><div class="st bad">Não</div></div>
+    <div class="row"><div>Vitória</div><div class="mac">D0:EF:76:5A:ED:04</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Vitória</div><div class="mac">FC:E8:C0:73:C9:08</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">D0:EF:76:5A:F2:94</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">D0:EF:76:5B:0E:90</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">FC:E8:C0:72:C1:C0</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">D0:EF:76:59:E4:A0</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">FC:E8:C0:73:02:F0</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">FC:E8:C0:72:C7:C4</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">D0:EF:76:5A:EC:84</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro</div><div class="mac">D0:EF:76:5A:6B:30</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Rio de Janeiro · secretaria estadual Niterói</div><div class="mac">FC:E8:C0:71:DE:70</div><div class="st ok">Sim</div></div>
+  </div>
+
+  <h2>4. Testados agora</h2>
+  <div class="block">
+    <div class="row"><div>Brasília (DF)<div class="sub">Testado em campo · MAC não informado</div></div><div class="mac">—</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Goiânia (GO)</div><div class="mac">D0:EF:76:5B:05:00</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Goiânia (GO)</div><div class="mac">FC:E8:C0:72:C3:B0</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Mato Grosso (MT)</div><div class="mac">D0:EF:76:5B:12:0C</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>Mato Grosso (MT)</div><div class="mac">FC:E8:C0:72:14:24</div><div class="st ok">Sim</div></div>
+    <div class="row"><div>AJU · Aracaju (SE)</div><div class="mac">D0:EF:76:5A:ED:28</div><div class="st ok">Sim</div></div>
+  </div>
+
+  <h2>5. Não tem ou ainda não testou</h2>
+  <div class="block">
+    <div class="row"><div>Rio Branco (AC)</div><div></div><div class="st bad">Não tem coordenador</div></div>
+    <div class="row"><div>Rodotec Roraima</div><div></div><div class="st bad">Não possui</div></div>
+    <div class="row"><div>Mato Grosso do Sul (MS)</div><div></div><div class="st wait">Não testado</div></div>
+    <div class="row"><div>Belém (PA)</div><div></div><div class="st wait">Não testado</div></div>
+    <div class="row"><div>Campinas (SP)</div><div></div><div class="st wait">Ainda não testou</div></div>
+  </div>
+
+  <footer>
+    Campo 24/08. Goiânia MAC corrigido de DO: para D0:. XAP (Chapecó): os dois confirmados. Brasília sem MAC na cola.
+  </footer>
+</div>
+</body>
+</html>

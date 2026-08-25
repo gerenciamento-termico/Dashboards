@@ -1,0 +1,22 @@
+{
+  "gerado_em": "2026-08-25T17:21:24",
+  "snapshot_em": "2026-08-25T17:21:24",
+  "status": "VALIDADO_COM_FONTES_FRESCAS",
+  "linhas": 452,
+  "ufs": 25,
+  "fontes_visiveis": [
+    "dtbPortal",
+    "portal VTC"
+  ],
+  "fontes_aplicadas": [
+    "planilha auditada",
+    "reversa",
+    "dtbPortal"
+  ],
+  "origem": "SEM_SYNC_ATUALIZADO_2026-08-25_1152.xlsx",
+  "arquivos": [
+    "PENDENCIAS_SINCRONISMO.html",
+    "PENDENCIAS_SINCRONISMO.csv",
+    "PENDENCIAS_SINCRONISMO.xlsx"
+  ]
+}

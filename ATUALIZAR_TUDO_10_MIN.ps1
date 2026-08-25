@@ -145,19 +145,20 @@ $DashboardFiles += $IndicadorCaixasGeralPublishFiles
 $Urls += $IndicadorCaixasGeralPublishFiles | ForEach-Object { "$GitHubPagesBase/$_" }
 
 $ExtraPagesFiles = @(
-    "index.html",
-    "HTMLACOMPANHAMENTO.html",
-    "indicador_produtividade.html",
-    "VOLUME_MANUTENCAO_TERMICA.html",
-    "VOLUME_MANUTENCAO_TERMICA_COMPLETO.html",
-    "ANALITICO_CF_19AGO.html",
-    "ANALITICO_COORDENADORES.html",
-    "ANALITICO_SINCRONISMO.html",
-    "PRIORIDADE_CF_SINCRONISMO.html",
-    "MANUTENCAO_WHATSAPP_UF.html"
+    "index.html"
 )
 $PublishFiles += $ExtraPagesFiles
 $Urls += $ExtraPagesFiles | ForEach-Object { "$GitHubPagesBase/$_" }
+
+$PendenciasSincronismoFiles = @(
+    "PENDENCIAS_SINCRONISMO.html",
+    "PENDENCIAS_SINCRONISMO.csv",
+    "PENDENCIAS_SINCRONISMO.xlsx",
+    "MANIFESTO_SNAPSHOT_PENDENCIAS_SINCRONISMO.json"
+)
+$PublishFiles += $PendenciasSincronismoFiles
+$DashboardFiles += @("PENDENCIAS_SINCRONISMO.html", "PENDENCIAS_SINCRONISMO.csv")
+$Urls += @("$GitHubPagesBase/PENDENCIAS_SINCRONISMO.html")
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 $LogFile = Join-Path $LogDir ("atualizar_tudo_{0}.log" -f (Get-Date -Format "yyyyMMdd"))
@@ -863,6 +864,7 @@ function Publish-Changes {
         "relatorio_analitico_caixa_42l.csv"
     )
     $forcedFiles += $IndicadorCaixasGeralPublishFiles | Where-Object { $_ -like "*.xlsx" -or $_ -like "*.csv" }
+    $forcedFiles += @("PENDENCIAS_SINCRONISMO.xlsx")
     $normalFiles = $PublishFiles | Where-Object { $forcedFiles -notcontains $_ }
     # Somente inclua no git add os arquivos que existem no disco para evitar falha quando
     # arquivos opcionais (ex: aura-hub.html) estiverem ausentes.
@@ -1019,6 +1021,16 @@ function Run-Cycle {
             Write-Log "AVISO: Reversa nao atualizada neste ciclo. Os demais dashboards seguem."
         }
 
+        if (-not (Invoke-Step "[3b] Pendencias de Sincronismo" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_pendencias_sincronismo.py")) -WorkingDirectory $PublishDir -Name "gerar_html_pendencias_sincronismo.py" -TimeoutSec 240
+            Test-FreshRequiredFiles -Label "HTML PENDENCIAS SINCRONISMO" -Paths @(
+                (Join-Path $PublishDir "PENDENCIAS_SINCRONISMO.html"),
+                (Join-Path $PublishDir "PENDENCIAS_SINCRONISMO.csv")
+            ) -CycleStart $cycleStart -MinSizeBytes 1024
+        })) {
+            Add-StepFailure -Failures $stepFailures -Name "Pendencias de Sincronismo" -Message "falha ao gerar; HTML/CSV anteriores serao preservados se existirem"
+        }
+
         if (-not (Invoke-Step "[4/9] Gestao Dispositivos" {
             Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $DevDir "exportar_vtc_stage_gestao.py")) -WorkingDirectory $DevDir -Name "exportar_vtc_stage_gestao.py"
             Copy-PublishedFile -Source (Join-Path $DevDir "GESTAO_DISPOSITIVOS.html") -DestinationName "GESTAO_DISPOSITIVOS.html"
@@ -1157,6 +1169,7 @@ function Run-Check {
         (Join-Path $PublishDir "gerar_snapshot_reversa_vtc_stage.py"),
         (Join-Path $PublishDir "gerar_html_reversa_vtc_stage_hibrido_aderente_original.py"),
         (Join-Path $PublishDir "gerar_html_rastreio_caixas_sem_datalogger.py"),
+        (Join-Path $PublishDir "gerar_html_pendencias_sincronismo.py"),
         (Join-Path $StreamlitDir "gerar_snapshot_reversa.py"),
         (Join-Path $StreamlitDir "gerar_modelo_final_reversa.py"),
         (Join-Path $DevDir "exportar_planilha_gestao_dispositivos.py"),

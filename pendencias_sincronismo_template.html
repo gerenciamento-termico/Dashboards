@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pendências de Sincronismo</title>
+<style>
+:root {
+  --bg:#f4f6fa; --card:#ffffff; --text:#1c2733; --muted:#5c6b7a;
+  --line:#dde4ec; --blue:#1f4e78; --ok:#2e7d32; --warn:#b26a00; --danger:#b3261e; --teal:#0f766e;
+}
+* { box-sizing:border-box; }
+body {
+  margin:0; color:var(--text);
+  font-family:"Segoe UI",Arial,sans-serif;
+  background:var(--bg);
+}
+.wrap { max-width:1500px; margin:0 auto; padding:0 0 40px; }
+.hero {
+  background:var(--blue); color:#fff; padding:18px 28px 20px;
+}
+.eyebrow { font-size:12px; font-weight:700; letter-spacing:.08em; text-transform:uppercase; opacity:.85; }
+h1 { margin:8px 0 6px; font-size:22px; line-height:1.2; }
+.sub { margin:0; font-size:13px; line-height:1.5; opacity:.88; max-width:1100px; }
+.meta-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:14px; }
+.pill {
+  display:inline-flex; align-items:center; gap:8px;
+  border:1px solid rgba(255,255,255,.22); border-radius:999px; padding:6px 12px;
+  font-size:12px; color:rgba(255,255,255,.88); background:rgba(255,255,255,.08);
+}
+.pill b { color:#fff; font-weight:700; }
+.pill.warn { border-color:#fbbf24; color:#fde68a; }
+.toolbar { display:flex; flex-wrap:wrap; gap:10px; align-items:center; margin-top:16px; }
+.seg { display:flex; background:rgba(0,0,0,.18); border:1px solid rgba(255,255,255,.18); border-radius:10px; overflow:hidden; }
+.seg button {
+  appearance:none; border:0; background:transparent; color:rgba(255,255,255,.8);
+  padding:9px 16px; font-weight:700; cursor:pointer; font-size:13px;
+}
+.seg button.active { background:#fff; color:var(--blue); }
+.btn {
+  appearance:none; border:1px solid rgba(255,255,255,.28); background:rgba(255,255,255,.12);
+  color:#fff; border-radius:10px; padding:9px 14px; font-weight:700;
+  cursor:pointer; font-size:13px;
+}
+.btn:hover { background:#fff; color:var(--blue); }
+.btn.ghost { background:transparent; }
+.kpis { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:14px; margin:20px 28px; }
+.kpi {
+  background:var(--card); border:1px solid var(--line); border-radius:10px; padding:14px 18px;
+}
+.kpi .label { color:var(--muted); font-size:12px; text-transform:uppercase; letter-spacing:.04em; }
+.kpi .value { font-size:30px; font-weight:700; margin-top:4px; color:var(--blue); }
+.kpi .hint { color:var(--muted); font-size:12px; margin-top:4px; }
+.kpi.danger .value { color:var(--danger); }
+.kpi.warn .value { color:var(--warn); }
+.kpi.ok .value { color:var(--ok); }
+.kpi.teal .value { color:var(--teal); }
+.panel {
+  background:var(--card); border:1px solid var(--line); border-radius:10px;
+  padding:0; margin:0 28px 20px;
+}
+.panel-h {
+  display:flex; align-items:center; justify-content:space-between; gap:12px;
+  padding:14px 18px; cursor:pointer; user-select:none;
+}
+.panel-h h2 { margin:0; font-size:15px; color:var(--blue); }
+.panel-h .side { color:var(--muted); font-size:12px; }
+.chev {
+  width:28px; height:28px; border-radius:8px; border:1px solid var(--line);
+  display:grid; place-items:center; transition:transform .18s ease; color:var(--blue);
+}
+.panel.collapsed .chev { transform:rotate(-90deg); }
+.panel.collapsed .panel-b { display:none; }
+.panel-b { padding:0 18px 16px; }
+.bars { display:flex; flex-direction:column; gap:7px; }
+.bar-row { display:grid; grid-template-columns:42px 1fr 58px; gap:8px; align-items:center; font-size:12px; }
+.track { height:12px; background:#eef2f7; border-radius:6px; overflow:hidden; }
+.track span { display:block; height:100%; background:linear-gradient(90deg,#4a86c8,#1f4e78); min-width:3px; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th, td { padding:7px 9px; border-bottom:1px solid var(--line); text-align:left; white-space:nowrap; }
+th { background:#eef2f7; color:var(--blue); font-weight:700; position:sticky; top:0; }
+td.num, th.num { text-align:right; }
+.tablewrap { max-height:560px; overflow:auto; border:1px solid var(--line); border-radius:8px; }
+.uf-row { cursor:pointer; }
+.uf-row:hover td, .uf-row.ativa td, tr.linha:hover td, tr.ativa td { background:#e8f0fa; }
+.filters { display:flex; flex-wrap:wrap; gap:10px; margin:0 0 12px; }
+.filters input, .filters select {
+  background:#fff; color:var(--text); border:1px solid var(--line);
+  border-radius:8px; padding:8px 10px; min-width:170px; font-size:13px;
+}
+.count { color:var(--muted); font-size:12.5px; margin:0 0 8px; }
+.badge { display:inline-block; padding:2px 9px; border-radius:20px; font-size:11.5px; font-weight:600; }
+.b-gru { background:#e2f0d9; color:var(--ok); }
+.b-fora { background:#fce4d6; color:var(--danger); }
+.b-ret { background:#fff2cc; color:var(--warn); }
+tr.linha { cursor:pointer; }
+tr.detalhe td { background:#f7fafd; padding:12px 16px; white-space:normal; }
+.detalhe-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(210px,1fr)); gap:8px 22px; }
+.detalhe-grid div { font-size:12.5px; white-space:normal; }
+.detalhe-grid span { display:block; color:var(--muted); font-size:10.5px; text-transform:uppercase; letter-spacing:.05em; margin-bottom:1px; }
+td.el { max-width:170px; overflow:hidden; text-overflow:ellipsis; }
+td.wrap { white-space:normal; min-width:150px; }
+@media (max-width:1100px) { .kpis { grid-template-columns:repeat(3,minmax(0,1fr)); } }
+@media (max-width:700px) {
+  .kpis, .panel { margin-left:14px; margin-right:14px; }
+  .kpis { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  .hero { padding:16px 14px 18px; }
+  h1 { font-size:20px; }
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="eyebrow">Gerenciamento térmico · operacional</div>
+    <h1>Pendências de Sincronismo</h1>
+    <p class="sub">Visão executiva das pendências de sincronismo após a entrega. O recorte de 30 ou 60 dias é aplicado só nesta página, sem nova consulta ao banco.</p>
+    <div class="meta-row">
+      <div class="pill">Página atualizada <b id="paginaEm">__PAGINA_EM__</b></div>
+      <div class="pill" id="pillSnapshot">Snapshot <b id="snapshotEm">__SNAPSHOT_EM__</b></div>
+      <div class="pill">Fontes <b>dtbPortal</b> · <b>portal VTC</b></div>
+    </div>
+    <div class="toolbar">
+      <div class="seg" id="periodos">
+        <button data-days="30">30 dias</button>
+        <button data-days="60" class="active">60 dias</button>
+      </div>
+      <button class="btn" id="btnCsv">Baixar CSV</button>
+      <button class="btn" id="btnXlsx">Baixar XLSX</button>
+      <button class="btn ghost" id="btnLimpar">Limpar filtros</button>
+    </div>
+  </section>
+
+  <section class="kpis" id="kpis"></section>
+
+  <section class="panel collapsed" id="panelUf">
+    <div class="panel-h" id="toggleUf">
+      <div>
+        <h2>Resumo por UF</h2>
+        <div class="side" id="ufHint">Clique na seta para expandir a grade</div>
+      </div>
+      <div class="chev" aria-hidden="true">▾</div>
+    </div>
+    <div class="panel-b">
+      <div class="bars" id="ufBars"></div>
+      <div class="tablewrap" style="margin-top:12px">
+        <table>
+          <thead>
+            <tr>
+              <th>UF</th><th class="num">Pendências</th><th class="num">Em GRU</th>
+              <th class="num">Fora</th><th class="num">Retornando</th>
+              <th class="num">Dias máx.</th><th class="num">Média</th>
+            </tr>
+          </thead>
+          <tbody id="resumoBody"></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <div class="panel-h" style="cursor:default">
+      <h2>Detalhe operacional</h2>
+      <div class="side">Clique na linha para abrir o histórico</div>
+    </div>
+    <div class="panel-b">
+      <div class="filters">
+        <input id="fBusca" type="text" placeholder="Buscar logger, pedido, LPN...">
+        <select id="fUf"><option value="">UF (todas)</option></select>
+        <select id="fLoc"><option value="">Localização (todas)</option></select>
+        <select id="fAcao"><option value="">Ação (todas)</option></select>
+      </div>
+      <div class="count" id="contador"></div>
+      <div class="tablewrap">
+        <table id="tabela">
+          <thead>
+            <tr>
+              <th>UF</th><th>Pedido</th><th>Logger</th><th>Entrega</th>
+              <th>Último sync</th><th class="num">Dias</th><th>Localização</th>
+              <th>Situação</th><th>Responsável</th><th>Ação sugerida</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+</div>
+<script>
+const DADOS = __DADOS_JSON__;
+const META = __META_JSON__;
+const COLS = [
+  "Pedido","Logger","UF","Coleta","Entrega","Último Sync","Dias sem sync","Em GRU?",
+  "Localização","Situação atual","Responsável atual","Tipo","Atualização dtbPortal",
+  "Ação sugerida","LPN","CTE","Tag no dtbPortal","Observação portal"
+];
+let periodo = 60;
+let ufAtiva = "";
+let ultimaLista = [];
+
+function parseBr(value) {
+  const raw = String(value || "").trim();
+  const m = raw.match(/^(\d{2})\/(\d{2})\/(\d{2,4})(?:\s+(\d{2}):(\d{2}))?/);
+  if (!m) return null;
+  let year = Number(m[3]);
+  if (year < 100) year += 2000;
+  return new Date(year, Number(m[2]) - 1, Number(m[1]), Number(m[4] || 0), Number(m[5] || 0));
+}
+function entregaDe(row) { return parseBr(row["Entrega"]) || parseBr(row["Coleta"]); }
+function inPeriod(row) {
+  if (!periodo) return true;
+  const dt = entregaDe(row);
+  if (!dt) return false;
+  const ref = parseBr(META.pagina_em) || new Date();
+  return ((ref - dt) / 86400000) <= periodo;
+}
+function badge(loc) {
+  const value = String(loc || "");
+  if (value === "EM GRU") return "<span class='badge b-gru'>EM GRU</span>";
+  if (value.indexOf("RETORNANDO") === 0) return "<span class='badge b-ret'>RETORNANDO</span>";
+  return "<span class='badge b-fora'>FORA DE GRU</span>";
+}
+function esc(value) {
+  return String(value ?? "").replace(/[&<>"']/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[ch]));
+}
+function baseFiltrada() {
+  const busca = document.getElementById("fBusca").value.trim().toUpperCase();
+  const uf = document.getElementById("fUf").value;
+  const loc = document.getElementById("fLoc").value;
+  const acao = document.getElementById("fAcao").value;
+  return DADOS.filter(r => {
+    if (!inPeriod(r)) return false;
+    if (ufAtiva && String(r["UF"]) !== ufAtiva) return false;
+    if (uf && String(r["UF"]) !== uf) return false;
+    if (loc && String(r["Localização"]) !== loc) return false;
+    if (acao && String(r["Ação sugerida"]) !== acao) return false;
+    if (busca) {
+      const blob = [r["Logger"], r["Pedido"], r["LPN"], r["Responsável atual"]].join(" ").toUpperCase();
+      if (!blob.includes(busca)) return false;
+    }
+    return true;
+  });
+}
+function resumoUf(rows) {
+  const map = new Map();
+  for (const r of rows) {
+    const uf = r["UF"] || "SEM UF";
+    if (!map.has(uf)) map.set(uf, {UF:uf, total:0, gru:0, fora:0, ret:0, max:0, soma:0});
+    const item = map.get(uf);
+    const dias = Number(r["Dias sem sync"]) || 0;
+    item.total += 1;
+    item.soma += dias;
+    if (dias > item.max) item.max = dias;
+    if (r["Em GRU?"] === "SIM") item.gru += 1;
+    else if (String(r["Localização"] || "").indexOf("RETORNANDO") === 0) item.ret += 1;
+    else item.fora += 1;
+  }
+  return [...map.values()].sort((a,b) => b.total - a.total);
+}
+function renderKpis(rows) {
+  const ufs = new Set(rows.map(r => r["UF"]).filter(Boolean));
+  const gru = rows.filter(r => r["Em GRU?"] === "SIM").length;
+  const ret = rows.filter(r => String(r["Localização"] || "").indexOf("RETORNANDO") === 0).length;
+  const fora = rows.length - gru - ret;
+  const d30 = rows.filter(r => (Number(r["Dias sem sync"]) || 0) <= 30).length;
+  const d60 = rows.filter(r => { const d = Number(r["Dias sem sync"]) || 0; return d > 30 && d <= 60; }).length;
+  const dMais = rows.filter(r => (Number(r["Dias sem sync"]) || 0) > 60).length;
+  const media = rows.length ? (rows.reduce((s,r) => s + (Number(r["Dias sem sync"]) || 0), 0) / rows.length) : 0;
+  const top = resumoUf(rows)[0];
+  const acoes = new Map();
+  for (const r of rows) acoes.set(r["Ação sugerida"] || "—", (acoes.get(r["Ação sugerida"] || "—") || 0) + 1);
+  const topAcao = [...acoes.entries()].sort((a,b) => b[1]-a[1])[0];
+  const cards = [
+    ["Pendências", rows.length, "recorte " + periodo + " dias", "danger"],
+    ["UFs afetadas", ufs.size, top ? ("maior volume: " + top.UF + " · " + top.total) : "—", ""],
+    ["Fora de GRU", fora, gru + " em GRU", "warn"],
+    ["Retornando a GRU", ret, "ainda não recebidos", "teal"],
+    ["Até 30 dias", d30, d60 + " em 31–60d", ""],
+    ["Acima de 60 dias", dMais, "média " + media.toFixed(1).replace(".", ",") + "d", "danger"],
+    ["Em GRU", gru, "sincronizar na base", "ok"],
+    ["Ação principal", topAcao ? topAcao[1] : 0, topAcao ? String(topAcao[0]) : "—", ""]
+  ];
+  document.getElementById("kpis").innerHTML = cards.map(([label, value, hint, klass]) =>
+    `<article class="kpi ${klass}"><div class="label">${label}</div><div class="value">${value}</div><div class="hint">${esc(hint)}</div></article>`
+  ).join("");
+}
+function renderUf(rows) {
+  const resumo = resumoUf(rows);
+  const max = Math.max(1, ...resumo.map(r => r.total));
+  document.getElementById("ufHint").textContent = resumo.length + " UFs no recorte · clique na UF para filtrar o detalhe";
+  document.getElementById("ufBars").innerHTML = resumo.slice(0, 8).map(r =>
+    `<div class="bar-row"><div>${esc(r.UF)}</div><div class="track"><span style="width:${(r.total/max*100).toFixed(0)}%"></span></div><div class="num">${r.total}</div></div>`
+  ).join("");
+  document.getElementById("resumoBody").innerHTML = resumo.map(r =>
+    `<tr class="uf-row${ufAtiva===r.UF?' ativa':''}" data-uf="${esc(r.UF)}">
+      <td><b>${esc(r.UF)}</b></td>
+      <td class="num">${r.total}</td>
+      <td class="num">${r.gru}</td>
+      <td class="num">${r.fora}</td>
+      <td class="num">${r.ret}</td>
+      <td class="num">${r.max}</td>
+      <td class="num">${(r.soma/r.total).toFixed(1).replace(".", ",")}</td>
+    </tr>`
+  ).join("");
+}
+function renderTabela(rows) {
+  rows = rows.slice().sort((a,b) => {
+    if (a["UF"] !== b["UF"]) return String(a["UF"]).localeCompare(String(b["UF"]));
+    return (Number(b["Dias sem sync"])||0) - (Number(a["Dias sem sync"])||0);
+  });
+  ultimaLista = rows;
+  const tbody = document.querySelector("#tabela tbody");
+  tbody.innerHTML = rows.map((r,i) => `<tr class="linha" data-i="${i}">
+    <td><b>${esc(r["UF"])}</b></td>
+    <td>${esc(r["Pedido"])}</td>
+    <td><b>${esc(r["Logger"])}</b></td>
+    <td>${esc(r["Entrega"])}</td>
+    <td>${esc(r["Último Sync"])}</td>
+    <td class="num">${esc(r["Dias sem sync"])}</td>
+    <td>${badge(r["Localização"])}</td>
+    <td>${esc(r["Situação atual"])}</td>
+    <td class="el" title="${esc(r["Responsável atual"])}">${esc(r["Responsável atual"])}</td>
+    <td class="wrap">${esc(r["Ação sugerida"])}</td>
+  </tr>`).join("");
+  document.getElementById("contador").textContent =
+    rows.length + " de " + DADOS.length + " pendências no snapshot — clique na linha para ver o detalhe";
+}
+function render() {
+  const rows = baseFiltrada();
+  renderKpis(rows);
+  renderUf(rows);
+  renderTabela(rows);
+}
+function download(name, blob) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url; a.download = name; a.click();
+  URL.revokeObjectURL(url);
+}
+function exportCsv() {
+  const rows = ultimaLista.length ? ultimaLista : baseFiltrada();
+  const lines = [COLS.join(";")].concat(rows.map(r => COLS.map(c => `"${String(r[c] ?? "").replace(/"/g,'""')}"`).join(";")));
+  download("pendencias_sincronismo.csv", new Blob(["\ufeff"+lines.join("\n")], {type:"text/csv;charset=utf-8"}));
+}
+function colLetter(i) {
+  let n = i, s = "";
+  while (n >= 0) { s = String.fromCharCode(65 + (n % 26)) + s; n = Math.floor(n / 26) - 1; }
+  return s;
+}
+function xmlEsc(v) { return String(v ?? "").replace(/[&<>]/g, ch => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[ch])); }
+function crc32(bytes) {
+  let c = ~0;
+  for (let i = 0; i < bytes.length; i++) {
+    c ^= bytes[i];
+    for (let k = 0; k < 8; k++) c = (c >>> 1) ^ (0xedb88320 & -(c & 1));
+  }
+  return ~c >>> 0;
+}
+function u16(n) { return new Uint8Array([n & 255, (n >>> 8) & 255]); }
+function u32(n) { return new Uint8Array([n & 255, (n >>> 8) & 255, (n >>> 16) & 255, (n >>> 24) & 255]); }
+function cat(parts) {
+  const size = parts.reduce((s,p)=>s+p.length,0);
+  const out = new Uint8Array(size);
+  let o = 0;
+  for (const p of parts) { out.set(p, o); o += p.length; }
+  return out;
+}
+function zip(files) {
+  const enc = new TextEncoder();
+  const locals = []; const centrals = [];
+  let offset = 0;
+  for (const file of files) {
+    const name = enc.encode(file.name);
+    const data = enc.encode(file.content);
+    const crc = crc32(data);
+    const local = cat([
+      u32(0x04034b50), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0),
+      name, data
+    ]);
+    locals.push(local);
+    const central = cat([
+      u32(0x02014b50), u16(20), u16(20), u16(0), u16(0), u16(0), u16(0),
+      u32(crc), u32(data.length), u32(data.length), u16(name.length), u16(0),
+      u16(0), u16(0), u16(0), u32(0), u32(offset), name
+    ]);
+    centrals.push(central);
+    offset += local.length;
+  }
+  const central = cat(centrals);
+  const end = cat([
+    u32(0x06054b50), u16(0), u16(0), u16(files.length), u16(files.length),
+    u32(central.length), u32(offset), u16(0)
+  ]);
+  return new Blob([cat([...locals, central, end])], {type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+}
+function exportXlsx() {
+  const rows = ultimaLista.length ? ultimaLista : baseFiltrada();
+  const data = [COLS, ...rows.map(r => COLS.map(c => r[c] ?? ""))];
+  const sheetRows = data.map((cells, ri) => {
+    const xml = cells.map((value, ci) => `<c r="${colLetter(ci)}${ri+1}" t="inlineStr"><is><t>${xmlEsc(value)}</t></is></c>`).join("");
+    return `<row r="${ri+1}">${xml}</row>`;
+  }).join("");
+  const sheet = '<?xml version="1.0" encoding="UTF-8"?><worksheet xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main"><sheetData>' + sheetRows + '</sheetData></worksheet>';
+  const files = [
+    {name:"[Content_Types].xml", content:'<?xml version="1.0" encoding="UTF-8"?><Types xmlns="http://schemas.openxmlformats.org/package/2006/content-types"><Default Extension="rels" ContentType="application/vnd.openxmlformats-package.relationships+xml"/><Default Extension="xml" ContentType="application/xml"/><Override PartName="/xl/workbook.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet.main+xml"/><Override PartName="/xl/worksheets/sheet1.xml" ContentType="application/vnd.openxmlformats-officedocument.spreadsheetml.worksheet+xml"/></Types>'},
+    {name:"_rels/.rels", content:'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/officeDocument" Target="xl/workbook.xml"/></Relationships>'},
+    {name:"xl/workbook.xml", content:'<?xml version="1.0" encoding="UTF-8"?><workbook xmlns="http://schemas.openxmlformats.org/spreadsheetml/2006/main" xmlns:r="http://schemas.openxmlformats.org/officeDocument/2006/relationships"><sheets><sheet name="Pendencias" sheetId="1" r:id="rId1"/></sheets></workbook>'},
+    {name:"xl/_rels/workbook.xml.rels", content:'<?xml version="1.0" encoding="UTF-8"?><Relationships xmlns="http://schemas.openxmlformats.org/package/2006/relationships"><Relationship Id="rId1" Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/worksheet" Target="worksheets/sheet1.xml"/></Relationships>'},
+    {name:"xl/worksheets/sheet1.xml", content:sheet}
+  ];
+  download("pendencias_sincronismo.xlsx", zip(files));
+}
+function fillSelect(id, values) {
+  const sel = document.getElementById(id);
+  values.forEach(v => { const o = document.createElement("option"); o.value = v; o.textContent = v; sel.appendChild(o); });
+}
+fillSelect("fUf", [...new Set(DADOS.map(r => r["UF"]).filter(Boolean))].sort());
+fillSelect("fLoc", [...new Set(DADOS.map(r => r["Localização"]).filter(Boolean))].sort());
+fillSelect("fAcao", [...new Set(DADOS.map(r => r["Ação sugerida"]).filter(Boolean))].sort());
+
+document.getElementById("periodos").addEventListener("click", ev => {
+  const btn = ev.target.closest("button");
+  if (!btn) return;
+  periodo = Number(btn.dataset.days);
+  document.querySelectorAll("#periodos button").forEach(b => b.classList.toggle("active", b === btn));
+  render();
+});
+document.getElementById("toggleUf").addEventListener("click", () => {
+  document.getElementById("panelUf").classList.toggle("collapsed");
+});
+document.getElementById("resumoBody").addEventListener("click", ev => {
+  const linha = ev.target.closest("tr.uf-row");
+  if (!linha) return;
+  ufAtiva = (ufAtiva === linha.dataset.uf) ? "" : linha.dataset.uf;
+  document.getElementById("fUf").value = ufAtiva;
+  render();
+  document.getElementById("tabela").scrollIntoView({behavior:"smooth", block:"start"});
+});
+document.querySelector("#tabela tbody").addEventListener("click", ev => {
+  const linha = ev.target.closest("tr.linha");
+  if (!linha) return;
+  const next = linha.nextElementSibling;
+  if (next && next.classList.contains("detalhe")) { next.remove(); linha.classList.remove("ativa"); return; }
+  document.querySelectorAll("tr.detalhe").forEach(el => el.remove());
+  document.querySelectorAll("#tabela tr.ativa").forEach(el => el.classList.remove("ativa"));
+  const r = ultimaLista[Number(linha.dataset.i)];
+  const campos = [
+    ["Coleta","Coleta"],["Em GRU?","Em GRU"],["Tipo","Tipo"],["Tag no dtbPortal","Tag no portal"],
+    ["Atualização dtbPortal","Atualização portal"],["Última ação portal","Última ação"],
+    ["Último histórico portal","Último histórico"],["Movimentos portal","Movimentos"],
+    ["LPN","LPN"],["Chegada cliente","Chegada ao cliente"],["CTE","CTE"],["Observação portal","Observação"]
+  ];
+  const itens = campos.filter(([k]) => String(r[k] ?? "").trim() !== "")
+    .map(([k,l]) => `<div><span>${l}</span>${esc(r[k])}</div>`).join("");
+  const tr = document.createElement("tr");
+  tr.className = "detalhe";
+  tr.innerHTML = `<td colspan="10"><div class="detalhe-grid">${itens}</div></td>`;
+  linha.classList.add("ativa");
+  linha.after(tr);
+});
+["fBusca","fUf","fLoc","fAcao"].forEach(id => {
+  document.getElementById(id).addEventListener(id === "fBusca" ? "input" : "change", () => {
+    if (id === "fUf") ufAtiva = document.getElementById("fUf").value;
+    render();
+  });
+});
+document.getElementById("btnCsv").addEventListener("click", exportCsv);
+document.getElementById("btnXlsx").addEventListener("click", exportXlsx);
+document.getElementById("btnLimpar").addEventListener("click", () => {
+  ufAtiva = "";
+  document.getElementById("fBusca").value = "";
+  document.getElementById("fUf").value = "";
+  document.getElementById("fLoc").value = "";
+  document.getElementById("fAcao").value = "";
+  render();
+});
+(function stampFreshness() {
+  const pagina = parseBr(META.pagina_em);
+  const snap = parseBr(META.snapshot_em);
+  const pill = document.getElementById("pillSnapshot");
+  if (pagina && snap && ((pagina - snap) / 60000) > 20) {
+    pill.classList.add("warn");
+    pill.title = "O snapshot de dados está mais antigo que a geração desta página.";
+  }
+})();
+render();
+</script>
+</body>
+</html>

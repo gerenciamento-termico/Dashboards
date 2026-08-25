@@ -159,6 +159,8 @@ $PendenciasSincronismoFiles = @(
 $PublishFiles += $PendenciasSincronismoFiles
 $DashboardFiles += @("PENDENCIAS_SINCRONISMO.html", "PENDENCIAS_SINCRONISMO.csv")
 $Urls += @("$GitHubPagesBase/PENDENCIAS_SINCRONISMO.html")
+$PendenciasSeedCsv = Join-Path $PublishDir "sem_sync_ares_589_pendente.csv"
+$PendenciasSeedCsvDownloads = "C:\Users\Administrador\Downloads\sem_sync_ares_589_pendente.csv"
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 $LogFile = Join-Path $LogDir ("atualizar_tudo_{0}.log" -f (Get-Date -Format "yyyyMMdd"))
@@ -825,6 +827,32 @@ function Sync-GitBeforeCycle {
     Write-Log "[GIT] Resultado: OK"
 }
 
+function Update-PendenciasSeedCsv {
+    $candidates = New-Object System.Collections.Generic.List[string]
+    if (Test-Path -LiteralPath $PendenciasSeedCsvDownloads) {
+        $candidates.Add($PendenciasSeedCsvDownloads)
+    }
+    $downloads = "C:\Users\Administrador\Downloads"
+    if (Test-Path -LiteralPath $downloads) {
+        Get-ChildItem -LiteralPath $downloads -Filter "sem_sync_ares*.csv" -ErrorAction SilentlyContinue | ForEach-Object { $candidates.Add($_.FullName) }
+    }
+    $desktop = "C:\Users\Administrador\Desktop\LISTA SEM SINCRONIZAÇÃO"
+    if (Test-Path -LiteralPath $desktop) {
+        Get-ChildItem -LiteralPath $desktop -Filter "sem_sync_ares*.csv" -ErrorAction SilentlyContinue | ForEach-Object { $candidates.Add($_.FullName) }
+    }
+    if ($candidates.Count -eq 0) {
+        if (Test-Path -LiteralPath $PendenciasSeedCsv) {
+            Write-Log ("PENDENCIAS SEED: reusando {0}" -f $PendenciasSeedCsv)
+            return
+        }
+        throw "CSV organizado de pendencias ausente. Coloque sem_sync_ares_589_pendente.csv em Downloads."
+    }
+    $latest = $candidates | Get-Unique | ForEach-Object { Get-Item -LiteralPath $_ } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
+    Copy-Item -LiteralPath $latest.FullName -Destination $PendenciasSeedCsv -Force
+    Write-Log ("PENDENCIAS SEED: {0} -> {1}" -f $latest.FullName, $PendenciasSeedCsv)
+    Write-Status "[3b] Seed CSV organizado" $latest.Name Green
+}
+
 function Publish-Changes {
     $preStaged = @(& git -C $PublishDir diff --cached --name-only)
     if ($preStaged.Count -gt 0) {
@@ -1022,7 +1050,8 @@ function Run-Cycle {
         }
 
         if (-not (Invoke-Step "[3b] Pendencias de Sincronismo" {
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_pendencias_sincronismo.py")) -WorkingDirectory $PublishDir -Name "gerar_html_pendencias_sincronismo.py" -TimeoutSec 240
+            Update-PendenciasSeedCsv
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_pendencias_sincronismo.py")) -WorkingDirectory $PublishDir -Name "gerar_html_pendencias_sincronismo.py" -TimeoutSec 360
             Test-FreshRequiredFiles -Label "HTML PENDENCIAS SINCRONISMO" -Paths @(
                 (Join-Path $PublishDir "PENDENCIAS_SINCRONISMO.html"),
                 (Join-Path $PublishDir "PENDENCIAS_SINCRONISMO.csv")

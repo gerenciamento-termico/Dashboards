@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-08-25T18:52:45",
-  "snapshot_em": "2026-08-25T18:52:45",
+  "gerado_em": "2026-08-25T19:05:34",
+  "snapshot_em": "2026-08-25T19:05:34",
   "status": "VALIDADO_COM_FONTES_FRESCAS",
   "linhas": 547,
   "ufs": 25,
@@ -16,7 +16,7 @@
     "portal VTC",
     "dtbPortal"
   ],
-  "origem": "sem_sync_ares_589_pendente.csv",
+  "origem": "sem_sync_ares_589_pendente (1).csv",
   "arquivos": [
     "PENDENCIAS_SINCRONISMO.html",
     "PENDENCIAS_SINCRONISMO.csv",

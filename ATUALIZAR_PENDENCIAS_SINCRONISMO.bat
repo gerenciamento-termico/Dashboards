@@ -13,7 +13,17 @@ echo ============================================================
 echo Pasta: %CD%
 echo Inicio: %date% %time%
 echo.
-echo Gerando snapshot, HTML, CSV e XLSX...
+echo Gerando snapshot, HTML, CSV e XLSX a partir do CSV organizado...
+if exist "%USERPROFILE%\Downloads\sem_sync_ares_589_pendente.csv" (
+  copy /Y "%USERPROFILE%\Downloads\sem_sync_ares_589_pendente.csv" "%CD%\sem_sync_ares_589_pendente.csv" >nul
+  echo Seed: Downloads\sem_sync_ares_589_pendente.csv
+) else if exist "%CD%\sem_sync_ares_589_pendente.csv" (
+  echo Seed: sem_sync_ares_589_pendente.csv local
+) else (
+  echo CSV organizado nao encontrado em Downloads.
+  pause
+  exit /b 1
+)
 py ".\gerar_html_pendencias_sincronismo.py"
 if errorlevel 1 (
   echo Falha ao gerar Pendencias de Sincronismo.

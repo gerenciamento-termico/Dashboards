@@ -27,7 +27,8 @@ OUT_CSV = WORKSPACE / "PENDENCIAS_SINCRONISMO.csv"
 OUT_XLSX = WORKSPACE / "PENDENCIAS_SINCRONISMO.xlsx"
 OUT_MANIFEST = WORKSPACE / "MANIFESTO_SNAPSHOT_PENDENCIAS_SINCRONISMO.json"
 SEED_HTML = Path(r"C:\Users\Administrador\Downloads\SEM_SYNC_POR_UF.html")
-SEED_CSV = Path(r"C:\Users\Administrador\Downloads\sem_sync_ares_589_pendente.csv")
+SEED_CSV_DOWNLOADS = Path(r"C:\Users\Administrador\Downloads\sem_sync_ares_589_pendente.csv")
+SEED_CSV_LOCAL = WORKSPACE / "sem_sync_ares_589_pendente.csv"
 STAGE_DIR = Path(r"C:\Users\Administrador\Documents\NOVO INDICADOR DE REVERSA - VTC_STAGE")
 DESKTOP_DIR = Path(r"C:\Users\Administrador\Desktop\LISTA SEM SINCRONIZAÇÃO")
 REVERSA_HTML = WORKSPACE / "REVERSA_DATALOGGERS.html"
@@ -141,8 +142,14 @@ def extract_json_array(text: str, prefix: str) -> list:
 
 
 def latest_organized_csv() -> Path | None:
-    candidates = [SEED_CSV, WORKSPACE / SEED_CSV.name]
-    existing = [path for path in candidates if path.exists()]
+    candidates = [SEED_CSV_LOCAL, SEED_CSV_DOWNLOADS]
+    downloads = Path(r"C:\Users\Administrador\Downloads")
+    if downloads.exists():
+        candidates.extend(sorted(downloads.glob("sem_sync_ares*.csv"), key=lambda path: path.stat().st_mtime, reverse=True))
+    if DESKTOP_DIR.exists():
+        candidates.extend(DESKTOP_DIR.glob("sem_sync_ares*.csv"))
+        candidates.extend(DESKTOP_DIR.glob("SEM_SYNC_ATUALIZADO_*.csv"))
+    existing = [path for path in candidates if path.exists() and not path.name.startswith("~$")]
     return max(existing, key=lambda path: path.stat().st_mtime) if existing else None
 
 

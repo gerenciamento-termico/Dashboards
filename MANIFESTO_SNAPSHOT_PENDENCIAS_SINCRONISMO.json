@@ -1,22 +1,51 @@
 {
-  "gerado_em": "2026-08-25T19:05:34",
-  "snapshot_em": "2026-08-25T19:05:34",
-  "status": "VALIDADO_COM_FONTES_FRESCAS",
-  "linhas": 547,
-  "ufs": 25,
-  "fontes_visiveis": [
-    "Mongo ares-prod",
-    "dtbPortal",
-    "portal VTC"
-  ],
-  "fontes_aplicadas": [
-    "csv organizado",
-    "reversa",
+  "gerado_em": "2026-08-26T10:00:07",
+  "snapshot_em": "2026-08-26T10:00:07",
+  "status": "VALIDADO",
+  "linhas": 1022,
+  "ufs": 26,
+  "regras": {
+    "sync": "lastSyncDate BRT >= entrega VTC (fallback reversa) - 15 min",
+    "gru": "EM ESTOQUE + SALDO DE ESTOQUE + RECEBIDO",
+    "recebido_cliente": "dt_chegadacliente",
+    "dedup": "1 logger = 1 lastSyncDate; viagem = entrega VTC mais recente"
+  },
+  "contagens": {
+    "localizacao": {
+      "FORA DE GRU": 872,
+      "CÂMARA FRIA (GRU)": 35,
+      "EM GRU": 85,
+      "RETORNANDO PARA GRU (NÃO RECEBIDO)": 30
+    },
+    "situacao": {
+      "AGENTE": 832,
+      "CÂMARA FRIA": 35,
+      "ESTOQUE - GRU": 85,
+      "RETORNANDO - GRU": 30,
+      "MANUTENÇÃO": 40
+    },
+    "viagem_vtc": {
+      "ENTREGUE": 831,
+      "RECEBIDO NO CLIENTE": 191
+    },
+    "em_gru": 85,
+    "loggers": 1022,
+    "pipeline": {
+      "vtc_match": 20830,
+      "viagens_descartadas_logger": 15402,
+      "universo_loggers": 5428,
+      "PENDENTE": 1022,
+      "SINCRONIZADO": 4406,
+      "sem_lastsync": 1
+    }
+  },
+  "erros_validacao": {},
+  "fontes": [
+    "reversa VTC",
+    "vtc_stage.documentos",
     "mongo lastSyncDate",
-    "portal VTC",
     "dtbPortal"
   ],
-  "origem": "sem_sync_ares_589_pendente (1).csv",
   "arquivos": [
     "PENDENCIAS_SINCRONISMO.html",
     "PENDENCIAS_SINCRONISMO.csv",

@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-08-26T17:49:08",
-  "snapshot_em": "2026-08-26T17:49:08",
+  "gerado_em": "2026-08-26T17:59:13",
+  "snapshot_em": "2026-08-26T17:59:13",
   "status": "VALIDADO",
   "linhas": 957,
   "ufs": 26,
@@ -21,8 +21,8 @@
       "AGENTE": 827,
       "CÂMARA FRIA - PACKING": 30,
       "RETORNANDO - GRU": 30,
-      "CÂMARA FRIA": 13,
-      "CÂMARA FRIA - PEDIDOS": 5,
+      "CÂMARA FRIA - PEDIDOS": 16,
+      "CÂMARA FRIA": 2,
       "MANUTENÇÃO": 41,
       "ESTOQUE - GRU": 11
     },
@@ -30,7 +30,7 @@
       "ENTREGUE": 813,
       "RECEBIDO NO CLIENTE": 144
     },
-    "em_gru": 47,
+    "em_gru": 58,
     "loggers": 957,
     "pipeline": {
       "vtc_match": 20830,

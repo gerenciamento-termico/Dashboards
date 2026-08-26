@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-08-26T14:29:43",
-  "snapshot_em": "2026-08-26T14:29:43",
+  "gerado_em": "2026-08-26T14:39:13",
+  "snapshot_em": "2026-08-26T14:39:13",
   "status": "VALIDADO",
   "linhas": 964,
   "ufs": 26,
   "regras": {
     "sync": "lastSyncDate BRT >= entrega VTC (fallback reversa) - 15 min",
-    "gru": "EM ESTOQUE + SALDO DE ESTOQUE + RECEBIDO",
+    "gru": "EM ESTOQUE+SALDO+RECEBIDO ou CÂMARA FRIA+RECEBIDO",
     "recebido_cliente": "dt_chegadacliente",
     "dedup": "1 logger = 1 lastSyncDate; viagem = entrega VTC mais recente"
   },
@@ -19,16 +19,18 @@
     },
     "situacao": {
       "AGENTE": 829,
-      "CÂMARA FRIA": 35,
+      "CÂMARA FRIA - PEDIDOS": 16,
       "RETORNANDO - GRU": 30,
       "ESTOQUE - GRU": 30,
+      "CÂMARA FRIA": 1,
+      "CÂMARA FRIA - PACKING": 18,
       "MANUTENÇÃO": 40
     },
     "viagem_vtc": {
       "ENTREGUE": 815,
       "RECEBIDO NO CLIENTE": 149
     },
-    "em_gru": 30,
+    "em_gru": 65,
     "loggers": 964,
     "pipeline": {
       "vtc_match": 20830,

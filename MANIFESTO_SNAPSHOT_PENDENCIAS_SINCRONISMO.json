@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-08-27T05:39:19",
-  "snapshot_em": "2026-08-27T05:39:19",
+  "gerado_em": "2026-08-27T05:49:10",
+  "snapshot_em": "2026-08-27T05:49:10",
   "status": "VALIDADO",
   "linhas": 956,
   "ufs": 26,
@@ -13,16 +13,16 @@
   "contagens": {
     "localizacao": {
       "RETORNANDO PARA GRU (NÃO RECEBIDO)": 89,
-      "FORA DE GRU": 831,
-      "CÂMARA FRIA (GRU)": 25,
+      "FORA DE GRU": 832,
+      "CÂMARA FRIA (GRU)": 24,
       "EM GRU": 11
     },
     "situacao": {
       "RETORNANDO - GRU": 89,
-      "AGENTE": 790,
+      "AGENTE": 791,
       "CÂMARA FRIA - PEDIDOS": 5,
-      "CÂMARA FRIA - PACKING": 19,
       "CÂMARA FRIA": 1,
+      "CÂMARA FRIA - PACKING": 18,
       "MANUTENÇÃO": 41,
       "ESTOQUE - GRU": 11
     },
@@ -30,7 +30,7 @@
       "ENTREGUE": 812,
       "RECEBIDO NO CLIENTE": 144
     },
-    "em_gru": 36,
+    "em_gru": 35,
     "loggers": 956,
     "pipeline": {
       "vtc_match": 20805,

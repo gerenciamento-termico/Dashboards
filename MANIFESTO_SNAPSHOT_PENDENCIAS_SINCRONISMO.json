@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-08-27T01:49:20",
-  "snapshot_em": "2026-08-27T01:49:20",
+  "gerado_em": "2026-08-27T01:59:23",
+  "snapshot_em": "2026-08-27T01:59:23",
   "status": "VALIDADO",
   "linhas": 956,
   "ufs": 26,
@@ -20,8 +20,8 @@
     "situacao": {
       "RETORNANDO - GRU": 89,
       "AGENTE": 781,
-      "CÂMARA FRIA - PEDIDOS": 7,
-      "CÂMARA FRIA - PACKING": 26,
+      "CÂMARA FRIA - PEDIDOS": 6,
+      "CÂMARA FRIA - PACKING": 27,
       "CÂMARA FRIA": 1,
       "MANUTENÇÃO": 41,
       "ESTOQUE - GRU": 11

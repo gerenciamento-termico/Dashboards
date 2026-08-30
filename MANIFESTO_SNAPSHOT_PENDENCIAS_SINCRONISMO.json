@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-08-30T04:27:02",
-  "snapshot_em": "2026-08-30T04:27:02",
+  "gerado_em": "2026-08-30T04:35:32",
+  "snapshot_em": "2026-08-30T04:35:32",
   "status": "VALIDADO_COM_ERROS",
   "linhas": 1430,
   "ufs": 27,
@@ -32,8 +32,8 @@
     "em_gru": 34,
     "loggers": 1430,
     "pipeline": {
-      "vtc_match": 22464,
-      "viagens_descartadas_logger": 16996,
+      "vtc_match": 22463,
+      "viagens_descartadas_logger": 16995,
       "universo_loggers": 5468,
       "SINCRONIZADO": 4038,
       "PENDENTE": 1430,

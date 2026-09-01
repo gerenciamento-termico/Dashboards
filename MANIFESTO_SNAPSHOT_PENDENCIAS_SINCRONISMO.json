@@ -1,8 +1,8 @@
 {
-  "gerado_em": "2026-09-01T16:13:34",
-  "snapshot_em": "2026-09-01T16:13:34",
+  "gerado_em": "2026-09-01T16:22:49",
+  "snapshot_em": "2026-09-01T16:22:49",
   "status": "VALIDADO_COM_ERROS",
-  "linhas": 1443,
+  "linhas": 1472,
   "ufs": 26,
   "regras": {
     "sync": "lastSyncDate BRT >= entrega VTC (fallback reversa) - 15 min",
@@ -12,30 +12,30 @@
   },
   "contagens": {
     "localizacao": {
-      "FORA DE GRU": 1329,
-      "RETORNANDO PARA GRU (NÃO RECEBIDO)": 81,
+      "FORA DE GRU": 1339,
+      "RETORNANDO PARA GRU (NÃO RECEBIDO)": 100,
       "EM GRU": 12,
       "CÂMARA FRIA (GRU)": 21
     },
     "situacao": {
-      "AGENTE": 1287,
-      "RETORNANDO - GRU": 81,
+      "AGENTE": 1297,
+      "RETORNANDO - GRU": 100,
       "ESTOQUE - GRU": 12,
       "CÂMARA FRIA - PACKING": 21,
       "MANUTENÇÃO": 42
     },
     "viagem_vtc": {
-      "ENTREGUE": 1260,
+      "ENTREGUE": 1289,
       "RECEBIDO NO CLIENTE": 183
     },
     "em_gru": 33,
-    "loggers": 1443,
+    "loggers": 1472,
     "pipeline": {
-      "vtc_match": 22648,
-      "viagens_descartadas_logger": 17161,
-      "universo_loggers": 5487,
-      "PENDENTE": 1443,
-      "SINCRONIZADO": 4044,
+      "vtc_match": 22677,
+      "viagens_descartadas_logger": 17189,
+      "universo_loggers": 5488,
+      "PENDENTE": 1472,
+      "SINCRONIZADO": 4016,
       "sem_lastsync": 1
     }
   },

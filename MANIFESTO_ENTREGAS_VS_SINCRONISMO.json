@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T20:21:25",
+  "gerado_em": "2026-09-03T20:38:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,8 +14,8 @@
     "pares_janela": 5576,
     "pedidos_janela": 1039,
     "loggers_ares_janela": 5185,
-    "pendentes_janela": 1174,
-    "sem_embarque_efetiva": 69,
+    "pendentes_janela": 1161,
+    "sem_embarque_efetiva": 58,
     "com_embarque_efetiva": 5016,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
@@ -26,8 +26,8 @@
       "linhas": 1091
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 334,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 144,
+      "VTCLOG - GRU": 329,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 137,
       "THE - AERONEIVA EXPRESS": 128,
       "JPA - LIDER CARGAS": 72,
       "AJU - CASSIMIRO TRANSPORTES": 60,
@@ -39,13 +39,13 @@
     },
     "top10_ufs_pendencias": {
       "RS": 224,
-      "MA": 146,
+      "MA": 138,
       "PI": 128,
       "PB": 73,
       "AL": 61,
       "SE": 58,
       "PA": 57,
-      "SP": 52,
+      "SP": 47,
       "MG": 46,
       "TO": 40
     }
@@ -81,11 +81,11 @@
       "dia_full": "17/08/2026",
       "pedidos": 81,
       "loggers": 241,
-      "sincronizados": 198,
-      "pendentes": 28,
-      "sem_embarque": 15,
-      "pedidos_pendentes": 15,
-      "pct": 11.6
+      "sincronizados": 210,
+      "pendentes": 27,
+      "sem_embarque": 4,
+      "pedidos_pendentes": 14,
+      "pct": 11.2
     },
     {
       "dia_iso": "2026-08-18",
@@ -105,11 +105,11 @@
       "dia_full": "19/08/2026",
       "pedidos": 95,
       "loggers": 332,
-      "sincronizados": 304,
-      "pendentes": 28,
+      "sincronizados": 310,
+      "pendentes": 22,
       "sem_embarque": 0,
-      "pedidos_pendentes": 18,
-      "pct": 8.4
+      "pedidos_pendentes": 17,
+      "pct": 6.6
     },
     {
       "dia_iso": "2026-08-20",
@@ -117,11 +117,11 @@
       "dia_full": "20/08/2026",
       "pedidos": 50,
       "loggers": 204,
-      "sincronizados": 192,
-      "pendentes": 12,
+      "sincronizados": 193,
+      "pendentes": 11,
       "sem_embarque": 0,
-      "pedidos_pendentes": 9,
-      "pct": 5.9
+      "pedidos_pendentes": 8,
+      "pct": 5.4
     },
     {
       "dia_iso": "2026-08-21",
@@ -285,11 +285,11 @@
       "dia_full": "03/09/2026",
       "pedidos": 63,
       "loggers": 334,
-      "sincronizados": 178,
-      "pendentes": 120,
+      "sincronizados": 183,
+      "pendentes": 115,
       "sem_embarque": 36,
-      "pedidos_pendentes": 37,
-      "pct": 35.9
+      "pedidos_pendentes": 33,
+      "pct": 34.4
     }
   ],
   "erros_validacao": {},

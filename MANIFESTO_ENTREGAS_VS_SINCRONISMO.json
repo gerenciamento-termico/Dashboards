@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T19:52:41",
+  "gerado_em": "2026-09-03T20:05:30",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -12,7 +12,7 @@
     "pares_janela": 5576,
     "pedidos_janela": 1039,
     "loggers_ares_janela": 5185,
-    "pendentes_janela": 1291,
+    "pendentes_janela": 1251,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
     "pedidos_com_agente": 5570,
@@ -26,24 +26,24 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 183,
       "THE - AERONEIVA EXPRESS": 128,
       "JPA - LIDER CARGAS": 72,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 67,
       "AJU - CASSIMIRO TRANSPORTES": 60,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
       "FOR - NT TRANSPORTE LTDA": 52,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 42,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 33
+      "BVB - J PIMENTEL S. CUNHA LTDA": 33,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 28
     },
     "top10_ufs_pendencias": {
       "RS": 224,
       "MA": 186,
       "PI": 128,
       "PB": 73,
-      "AM": 67,
       "AL": 61,
       "SE": 58,
       "PA": 58,
       "CE": 52,
-      "SP": 52
+      "SP": 52,
+      "MG": 47
     }
   },
   "serie_diaria": [
@@ -262,10 +262,10 @@
       "dia_full": "03/09/2026",
       "pedidos": 63,
       "loggers": 334,
-      "sincronizados": 138,
-      "pendentes": 196,
-      "pedidos_pendentes": 38,
-      "pct": 58.7
+      "sincronizados": 178,
+      "pendentes": 156,
+      "pedidos_pendentes": 37,
+      "pct": 46.7
     }
   ],
   "erros_validacao": {},

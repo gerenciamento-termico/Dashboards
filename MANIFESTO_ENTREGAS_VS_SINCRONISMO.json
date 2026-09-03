@@ -1,32 +1,38 @@
 {
-  "gerado_em": "2026-09-03T17:41:04",
+  "gerado_em": "2026-09-03T17:51:49",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
     "entregue": "vtc_stage.documentos.dt_entregaefetiva no dia (BRT), 1 linha por pedido+logger",
     "pendente_sync": "logger ARES sem lastSyncDate >= entrega - 15 min (nem >= chegada cliente - 15 min)",
     "escopo_sync": "somente ARES/ARES COM SONDA (tags A/TA/AS); demais tipos nao avaliados",
-    "agente": "enriquecimento por pedido via REVERSA_DATALOGGERS.html publicada (fallback SEM AGENTE)"
+    "agente": "Reversa por pedido; fallback Vinculo.xlsx Base (pedido+logger) e Base ESL (pedido)"
   },
   "contagens": {
-    "pares_janela": 5546,
-    "pedidos_janela": 1023,
-    "loggers_ares_janela": 5155,
-    "pendentes_janela": 1286,
+    "pares_janela": 5547,
+    "pedidos_janela": 1024,
+    "loggers_ares_janela": 5156,
+    "pendentes_janela": 1287,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 4989,
+    "pedidos_com_agente": 5547,
+    "vinculo": {
+      "base_pl": 4105,
+      "base_pedido": 623,
+      "esl_pedido": 81952,
+      "conflitos": 1235
+    },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 303,
+      "VTCLOG - GRU": 336,
       "SLZ - REIS CAVALCANTE EXPRESSO": 183,
-      "SEM AGENTE": 138,
+      "THE - AERONEIVA EXPRESS": 128,
       "JPA - LIDER CARGAS": 72,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 67,
-      "THE - AERONEIVA EXPRESS": 63,
       "AJU - CASSIMIRO TRANSPORTES": 60,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
       "FOR - NT TRANSPORTE LTDA": 52,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 42
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 42,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 32
     },
     "top10_ufs_pendencias": {
       "RS": 224,
@@ -255,19 +261,20 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 47,
-      "loggers": 304,
+      "pedidos": 48,
+      "loggers": 305,
       "sincronizados": 113,
-      "pendentes": 191,
-      "pedidos_pendentes": 34,
-      "pct": 62.8
+      "pendentes": 192,
+      "pedidos_pendentes": 35,
+      "pct": 63.0
     }
   ],
   "erros_validacao": {},
   "fontes": [
     "vtc_stage.documentos",
     "mongo ares-prod lastSyncDate",
-    "REVERSA_DATALOGGERS.html (agente)"
+    "REVERSA_DATALOGGERS.html (agente)",
+    "Vinculo.xlsx Base/Base ESL (agente)"
   ],
   "arquivos": [
     "ENTREGAS_VS_SINCRONISMO.html",

@@ -1,12 +1,12 @@
 {
-  "gerado_em": "2026-09-03T18:00:45",
+  "gerado_em": "2026-09-03T18:11:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
     "entregue": "vtc_stage.documentos.dt_entregaefetiva no dia (BRT), 1 linha por pedido+logger",
     "pendente_sync": "logger ARES sem lastSyncDate >= entrega - 15 min (nem >= chegada cliente - 15 min)",
     "escopo_sync": "somente ARES/ARES COM SONDA (tags A/TA/AS); demais tipos nao avaliados",
-    "agente": "Reversa por pedido; fallback Vinculo.xlsx Base (pedido+logger) e Base ESL (pedido)"
+    "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido"
   },
   "contagens": {
     "pares_janela": 5547,
@@ -15,12 +15,11 @@
     "pendentes_janela": 1287,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5547,
-    "vinculo": {
-      "base_pl": 4105,
-      "base_pedido": 623,
-      "esl_pedido": 81959,
-      "conflitos": 1235
+    "pedidos_com_agente": 5541,
+    "dtbtransporte": {
+      "consultados": 1024,
+      "mapeados": 1018,
+      "linhas": 1076
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 336,
@@ -273,8 +272,8 @@
   "fontes": [
     "vtc_stage.documentos",
     "mongo ares-prod lastSyncDate",
-    "REVERSA_DATALOGGERS.html (agente)",
-    "Vinculo.xlsx Base/Base ESL (agente)"
+    "dtbTransporte tbdMovimento (agente)",
+    "REVERSA_DATALOGGERS.html (agente fallback)"
   ],
   "arquivos": [
     "ENTREGAS_VS_SINCRONISMO.html",

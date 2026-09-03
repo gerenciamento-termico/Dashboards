@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T17:20:15",
+  "gerado_em": "2026-09-03T17:32:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -9,13 +9,13 @@
     "agente": "enriquecimento por pedido via REVERSA_DATALOGGERS.html publicada (fallback SEM AGENTE)"
   },
   "contagens": {
-    "pares_janela": 5543,
-    "pedidos_janela": 1020,
-    "loggers_ares_janela": 5152,
-    "pendentes_janela": 1285,
+    "pares_janela": 5546,
+    "pedidos_janela": 1023,
+    "loggers_ares_janela": 5155,
+    "pendentes_janela": 1286,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 4986,
+    "pedidos_com_agente": 4988,
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 303,
       "SLZ - REIS CAVALCANTE EXPRESSO": 183,
@@ -255,12 +255,12 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 44,
-      "loggers": 301,
-      "sincronizados": 111,
-      "pendentes": 190,
-      "pedidos_pendentes": 33,
-      "pct": 63.1
+      "pedidos": 47,
+      "loggers": 304,
+      "sincronizados": 113,
+      "pendentes": 191,
+      "pedidos_pendentes": 34,
+      "pct": 62.8
     }
   ],
   "erros_validacao": {},

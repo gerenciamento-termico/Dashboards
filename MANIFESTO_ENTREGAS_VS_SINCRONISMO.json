@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T17:51:49",
+  "gerado_em": "2026-09-03T18:00:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,7 +19,7 @@
     "vinculo": {
       "base_pl": 4105,
       "base_pedido": 623,
-      "esl_pedido": 81952,
+      "esl_pedido": 81959,
       "conflitos": 1235
     },
     "top10_agentes_pendencias": {

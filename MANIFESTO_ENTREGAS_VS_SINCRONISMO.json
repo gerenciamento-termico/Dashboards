@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T17:09:40",
+  "gerado_em": "2026-09-03T17:20:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -9,24 +9,24 @@
     "agente": "enriquecimento por pedido via REVERSA_DATALOGGERS.html publicada (fallback SEM AGENTE)"
   },
   "contagens": {
-    "pares_janela": 5542,
-    "pedidos_janela": 1019,
-    "loggers_ares_janela": 5151,
+    "pares_janela": 5543,
+    "pedidos_janela": 1020,
+    "loggers_ares_janela": 5152,
     "pendentes_janela": 1285,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 4946,
+    "pedidos_com_agente": 4986,
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 304,
+      "VTCLOG - GRU": 303,
       "SLZ - REIS CAVALCANTE EXPRESSO": 183,
-      "SEM AGENTE": 177,
+      "SEM AGENTE": 138,
       "JPA - LIDER CARGAS": 72,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 67,
       "THE - AERONEIVA EXPRESS": 63,
       "AJU - CASSIMIRO TRANSPORTES": 60,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 42,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 32
+      "FOR - NT TRANSPORTE LTDA": 52,
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 42
     },
     "top10_ufs_pendencias": {
       "RS": 224,
@@ -37,8 +37,8 @@
       "AL": 61,
       "SE": 58,
       "PA": 58,
-      "SP": 53,
-      "CE": 52
+      "CE": 52,
+      "SP": 52
     }
   },
   "serie_diaria": [
@@ -244,12 +244,12 @@
       "dia_iso": "2026-09-02",
       "dia": "02/09",
       "dia_full": "02/09/2026",
-      "pedidos": 73,
-      "loggers": 352,
+      "pedidos": 74,
+      "loggers": 353,
       "sincronizados": 247,
-      "pendentes": 105,
-      "pedidos_pendentes": 31,
-      "pct": 29.8
+      "pendentes": 106,
+      "pedidos_pendentes": 32,
+      "pct": 30.0
     },
     {
       "dia_iso": "2026-09-03",
@@ -257,10 +257,10 @@
       "dia_full": "03/09/2026",
       "pedidos": 44,
       "loggers": 301,
-      "sincronizados": 110,
-      "pendentes": 191,
-      "pedidos_pendentes": 34,
-      "pct": 63.5
+      "sincronizados": 111,
+      "pendentes": 190,
+      "pedidos_pendentes": 33,
+      "pct": 63.1
     }
   ],
   "erros_validacao": {},

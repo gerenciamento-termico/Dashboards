@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-03T02:45:59",
-  "snapshot_em": "2026-09-03T02:45:59",
+  "gerado_em": "2026-09-03T02:56:06",
+  "snapshot_em": "2026-09-03T02:56:06",
   "status": "VALIDADO_COM_ERROS",
   "linhas": 1487,
   "ufs": 26,
@@ -12,15 +12,15 @@
   },
   "contagens": {
     "localizacao": {
-      "FORA DE GRU": 1322,
+      "FORA DE GRU": 1320,
       "CÂMARA FRIA (GRU)": 25,
-      "RETORNANDO PARA GRU (NÃO RECEBIDO)": 120,
+      "RETORNANDO PARA GRU (NÃO RECEBIDO)": 122,
       "EM GRU": 20
     },
     "situacao": {
-      "AGENTE": 1280,
+      "AGENTE": 1278,
       "CÂMARA FRIA - PACKING": 20,
-      "RETORNANDO - GRU": 120,
+      "RETORNANDO - GRU": 122,
       "ESTOQUE - GRU": 20,
       "CÂMARA FRIA - PEDIDOS": 5,
       "MANUTENÇÃO": 42

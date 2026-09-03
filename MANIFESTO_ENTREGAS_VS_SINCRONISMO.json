@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T17:32:55",
+  "gerado_em": "2026-09-03T17:41:04",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,7 +15,7 @@
     "pendentes_janela": 1286,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 4988,
+    "pedidos_com_agente": 4989,
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 303,
       "SLZ - REIS CAVALCANTE EXPRESSO": 183,

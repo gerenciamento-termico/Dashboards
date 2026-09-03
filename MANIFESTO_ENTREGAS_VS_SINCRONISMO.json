@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T19:06:56",
+  "gerado_em": "2026-09-03T19:18:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -9,17 +9,17 @@
     "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido"
   },
   "contagens": {
-    "pares_janela": 5566,
-    "pedidos_janela": 1033,
-    "loggers_ares_janela": 5175,
-    "pendentes_janela": 1290,
+    "pares_janela": 5575,
+    "pedidos_janela": 1038,
+    "loggers_ares_janela": 5184,
+    "pendentes_janela": 1291,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5560,
+    "pedidos_com_agente": 5569,
     "dtbtransporte": {
-      "consultados": 1033,
-      "mapeados": 1027,
-      "linhas": 1085
+      "consultados": 1038,
+      "mapeados": 1032,
+      "linhas": 1090
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 336,
@@ -31,7 +31,7 @@
       "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
       "FOR - NT TRANSPORTE LTDA": 52,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 42,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 32
+      "BVB - J PIMENTEL S. CUNHA LTDA": 33
     },
     "top10_ufs_pendencias": {
       "RS": 224,
@@ -260,12 +260,12 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 57,
-      "loggers": 324,
-      "sincronizados": 129,
-      "pendentes": 195,
-      "pedidos_pendentes": 37,
-      "pct": 60.2
+      "pedidos": 62,
+      "loggers": 333,
+      "sincronizados": 137,
+      "pendentes": 196,
+      "pedidos_pendentes": 38,
+      "pct": 58.9
     }
   ],
   "erros_validacao": {},

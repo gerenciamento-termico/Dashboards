@@ -1,0 +1,276 @@
+{
+  "gerado_em": "2026-09-03T17:01:34",
+  "status": "VALIDADO",
+  "janela_dias": 20,
+  "regras": {
+    "entregue": "vtc_stage.documentos.dt_entregaefetiva no dia (BRT), 1 linha por pedido+logger",
+    "pendente_sync": "logger ARES sem lastSyncDate >= entrega - 15 min (nem >= chegada cliente - 15 min)",
+    "escopo_sync": "somente ARES/ARES COM SONDA (tags A/TA/AS); demais tipos nao avaliados",
+    "agente": "enriquecimento por pedido via REVERSA_DATALOGGERS.html publicada (fallback SEM AGENTE)"
+  },
+  "contagens": {
+    "pares_janela": 5542,
+    "pedidos_janela": 1019,
+    "loggers_ares_janela": 5151,
+    "pendentes_janela": 1286,
+    "loggers_sem_lastsync": 0,
+    "nao_avaliados": 0,
+    "pedidos_com_agente": 4946,
+    "top10_agentes_pendencias": {
+      "VTCLOG - GRU": 305,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 183,
+      "SEM AGENTE": 177,
+      "JPA - LIDER CARGAS": 72,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 67,
+      "THE - AERONEIVA EXPRESS": 63,
+      "AJU - CASSIMIRO TRANSPORTES": 60,
+      "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 42,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 32
+    },
+    "top10_ufs_pendencias": {
+      "RS": 224,
+      "MA": 186,
+      "PI": 128,
+      "PB": 73,
+      "AM": 67,
+      "AL": 61,
+      "SE": 58,
+      "PA": 58,
+      "SP": 54,
+      "CE": 52
+    }
+  },
+  "serie_diaria": [
+    {
+      "dia_iso": "2026-08-15",
+      "dia": "15/08",
+      "dia_full": "15/08/2026",
+      "pedidos": 3,
+      "loggers": 3,
+      "sincronizados": 3,
+      "pendentes": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0
+    },
+    {
+      "dia_iso": "2026-08-16",
+      "dia": "16/08",
+      "dia_full": "16/08/2026",
+      "pedidos": 2,
+      "loggers": 2,
+      "sincronizados": 2,
+      "pendentes": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0
+    },
+    {
+      "dia_iso": "2026-08-17",
+      "dia": "17/08",
+      "dia_full": "17/08/2026",
+      "pedidos": 81,
+      "loggers": 241,
+      "sincronizados": 192,
+      "pendentes": 49,
+      "pedidos_pendentes": 17,
+      "pct": 20.3
+    },
+    {
+      "dia_iso": "2026-08-18",
+      "dia": "18/08",
+      "dia_full": "18/08/2026",
+      "pedidos": 107,
+      "loggers": 258,
+      "sincronizados": 214,
+      "pendentes": 44,
+      "pedidos_pendentes": 12,
+      "pct": 17.1
+    },
+    {
+      "dia_iso": "2026-08-19",
+      "dia": "19/08",
+      "dia_full": "19/08/2026",
+      "pedidos": 95,
+      "loggers": 332,
+      "sincronizados": 304,
+      "pendentes": 28,
+      "pedidos_pendentes": 18,
+      "pct": 8.4
+    },
+    {
+      "dia_iso": "2026-08-20",
+      "dia": "20/08",
+      "dia_full": "20/08/2026",
+      "pedidos": 50,
+      "loggers": 204,
+      "sincronizados": 192,
+      "pendentes": 12,
+      "pedidos_pendentes": 9,
+      "pct": 5.9
+    },
+    {
+      "dia_iso": "2026-08-21",
+      "dia": "21/08",
+      "dia_full": "21/08/2026",
+      "pedidos": 49,
+      "loggers": 145,
+      "sincronizados": 125,
+      "pendentes": 20,
+      "pedidos_pendentes": 12,
+      "pct": 13.8
+    },
+    {
+      "dia_iso": "2026-08-22",
+      "dia": "22/08",
+      "dia_full": "22/08/2026",
+      "pedidos": 1,
+      "loggers": 1,
+      "sincronizados": 1,
+      "pendentes": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0
+    },
+    {
+      "dia_iso": "2026-08-23",
+      "dia": "23/08",
+      "dia_full": "23/08/2026",
+      "pedidos": 0,
+      "loggers": 0,
+      "sincronizados": 0,
+      "pendentes": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0
+    },
+    {
+      "dia_iso": "2026-08-24",
+      "dia": "24/08",
+      "dia_full": "24/08/2026",
+      "pedidos": 70,
+      "loggers": 712,
+      "sincronizados": 667,
+      "pendentes": 45,
+      "pedidos_pendentes": 16,
+      "pct": 6.3
+    },
+    {
+      "dia_iso": "2026-08-25",
+      "dia": "25/08",
+      "dia_full": "25/08/2026",
+      "pedidos": 108,
+      "loggers": 314,
+      "sincronizados": 292,
+      "pendentes": 22,
+      "pedidos_pendentes": 17,
+      "pct": 7.0
+    },
+    {
+      "dia_iso": "2026-08-26",
+      "dia": "26/08",
+      "dia_full": "26/08/2026",
+      "pedidos": 55,
+      "loggers": 437,
+      "sincronizados": 358,
+      "pendentes": 79,
+      "pedidos_pendentes": 19,
+      "pct": 18.1
+    },
+    {
+      "dia_iso": "2026-08-27",
+      "dia": "27/08",
+      "dia_full": "27/08/2026",
+      "pedidos": 89,
+      "loggers": 535,
+      "sincronizados": 444,
+      "pendentes": 91,
+      "pedidos_pendentes": 37,
+      "pct": 17.0
+    },
+    {
+      "dia_iso": "2026-08-28",
+      "dia": "28/08",
+      "dia_full": "28/08/2026",
+      "pedidos": 86,
+      "loggers": 685,
+      "sincronizados": 328,
+      "pendentes": 357,
+      "pedidos_pendentes": 42,
+      "pct": 52.1
+    },
+    {
+      "dia_iso": "2026-08-29",
+      "dia": "29/08",
+      "dia_full": "29/08/2026",
+      "pedidos": 6,
+      "loggers": 6,
+      "sincronizados": 4,
+      "pendentes": 2,
+      "pedidos_pendentes": 2,
+      "pct": 33.3
+    },
+    {
+      "dia_iso": "2026-08-30",
+      "dia": "30/08",
+      "dia_full": "30/08/2026",
+      "pedidos": 0,
+      "loggers": 0,
+      "sincronizados": 0,
+      "pendentes": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0
+    },
+    {
+      "dia_iso": "2026-08-31",
+      "dia": "31/08",
+      "dia_full": "31/08/2026",
+      "pedidos": 39,
+      "loggers": 186,
+      "sincronizados": 116,
+      "pendentes": 70,
+      "pedidos_pendentes": 20,
+      "pct": 37.6
+    },
+    {
+      "dia_iso": "2026-09-01",
+      "dia": "01/09",
+      "dia_full": "01/09/2026",
+      "pedidos": 61,
+      "loggers": 437,
+      "sincronizados": 267,
+      "pendentes": 170,
+      "pedidos_pendentes": 28,
+      "pct": 38.9
+    },
+    {
+      "dia_iso": "2026-09-02",
+      "dia": "02/09",
+      "dia_full": "02/09/2026",
+      "pedidos": 73,
+      "loggers": 352,
+      "sincronizados": 247,
+      "pendentes": 105,
+      "pedidos_pendentes": 31,
+      "pct": 29.8
+    },
+    {
+      "dia_iso": "2026-09-03",
+      "dia": "03/09",
+      "dia_full": "03/09/2026",
+      "pedidos": 44,
+      "loggers": 301,
+      "sincronizados": 109,
+      "pendentes": 192,
+      "pedidos_pendentes": 35,
+      "pct": 63.8
+    }
+  ],
+  "erros_validacao": {},
+  "fontes": [
+    "vtc_stage.documentos",
+    "mongo ares-prod lastSyncDate",
+    "REVERSA_DATALOGGERS.html (agente)"
+  ],
+  "arquivos": [
+    "ENTREGAS_VS_SINCRONISMO.html",
+    "ENTREGAS_VS_SINCRONISMO.csv"
+  ]
+}

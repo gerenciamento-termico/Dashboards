@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T19:27:46",
+  "gerado_em": "2026-09-03T19:40:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -9,17 +9,17 @@
     "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido"
   },
   "contagens": {
-    "pares_janela": 5575,
-    "pedidos_janela": 1038,
-    "loggers_ares_janela": 5184,
+    "pares_janela": 5576,
+    "pedidos_janela": 1039,
+    "loggers_ares_janela": 5185,
     "pendentes_janela": 1291,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5569,
+    "pedidos_com_agente": 5570,
     "dtbtransporte": {
-      "consultados": 1038,
-      "mapeados": 1032,
-      "linhas": 1090
+      "consultados": 1039,
+      "mapeados": 1033,
+      "linhas": 1091
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 336,
@@ -260,12 +260,12 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 62,
-      "loggers": 333,
-      "sincronizados": 137,
+      "pedidos": 63,
+      "loggers": 334,
+      "sincronizados": 138,
       "pendentes": 196,
       "pedidos_pendentes": 38,
-      "pct": 58.9
+      "pct": 58.7
     }
   ],
   "erros_validacao": {},

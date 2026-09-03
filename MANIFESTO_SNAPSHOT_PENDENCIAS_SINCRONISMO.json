@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-03T02:56:06",
-  "snapshot_em": "2026-09-03T02:56:06",
+  "gerado_em": "2026-09-03T03:06:14",
+  "snapshot_em": "2026-09-03T03:06:14",
   "status": "VALIDADO_COM_ERROS",
   "linhas": 1487,
   "ufs": 26,
@@ -19,10 +19,10 @@
     },
     "situacao": {
       "AGENTE": 1278,
-      "CÂMARA FRIA - PACKING": 20,
+      "CÂMARA FRIA - PACKING": 23,
       "RETORNANDO - GRU": 122,
       "ESTOQUE - GRU": 20,
-      "CÂMARA FRIA - PEDIDOS": 5,
+      "CÂMARA FRIA - PEDIDOS": 2,
       "MANUTENÇÃO": 42
     },
     "viagem_vtc": {

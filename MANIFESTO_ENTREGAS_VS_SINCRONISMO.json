@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T17:01:34",
+  "gerado_em": "2026-09-03T17:09:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -12,12 +12,12 @@
     "pares_janela": 5542,
     "pedidos_janela": 1019,
     "loggers_ares_janela": 5151,
-    "pendentes_janela": 1286,
+    "pendentes_janela": 1285,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
     "pedidos_com_agente": 4946,
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 305,
+      "VTCLOG - GRU": 304,
       "SLZ - REIS CAVALCANTE EXPRESSO": 183,
       "SEM AGENTE": 177,
       "JPA - LIDER CARGAS": 72,
@@ -37,7 +37,7 @@
       "AL": 61,
       "SE": 58,
       "PA": 58,
-      "SP": 54,
+      "SP": 53,
       "CE": 52
     }
   },
@@ -257,10 +257,10 @@
       "dia_full": "03/09/2026",
       "pedidos": 44,
       "loggers": 301,
-      "sincronizados": 109,
-      "pendentes": 192,
-      "pedidos_pendentes": 35,
-      "pct": 63.8
+      "sincronizados": 110,
+      "pendentes": 191,
+      "pedidos_pendentes": 34,
+      "pct": 63.5
     }
   ],
   "erros_validacao": {},

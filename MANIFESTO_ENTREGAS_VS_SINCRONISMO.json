@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T08:57:47",
+  "gerado_em": "2026-09-04T09:10:35",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,7 +14,7 @@
     "pares_janela": 5590,
     "pedidos_janela": 1043,
     "loggers_ares_janela": 5199,
-    "pendentes_janela": 1152,
+    "pendentes_janela": 1138,
     "sem_embarque_efetiva": 54,
     "com_embarque_efetiva": 5030,
     "loggers_sem_lastsync": 0,
@@ -35,7 +35,7 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 40,
       "FOR - NT TRANSPORTE LTDA": 31,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 27,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 27
+      "PVH - RODOTEC": 25
     },
     "top10_ufs_pendencias": {
       "RS": 224,
@@ -273,11 +273,11 @@
       "dia_full": "03/09/2026",
       "pedidos": 69,
       "loggers": 350,
-      "sincronizados": 198,
-      "pendentes": 116,
+      "sincronizados": 212,
+      "pendentes": 102,
       "sem_embarque": 36,
       "pedidos_pendentes": 33,
-      "pct": 33.1
+      "pct": 29.1
     },
     {
       "dia_iso": "2026-09-04",

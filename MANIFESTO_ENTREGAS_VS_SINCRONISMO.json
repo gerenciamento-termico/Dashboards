@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T16:58:35",
+  "gerado_em": "2026-09-04T17:11:16",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6298,
-    "pedidos_janela": 1109,
-    "loggers_ares_janela": 5873,
-    "loggers_ares_antes_dedup": 5905,
+    "pares_janela": 6326,
+    "pedidos_janela": 1113,
+    "loggers_ares_janela": 5901,
+    "loggers_ares_antes_dedup": 5933,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1374,
-    "cobranca_gru_janela": 67,
-    "sem_embarque_efetiva": 202,
-    "com_embarque_efetiva": 5703,
+    "pendentes_janela": 1385,
+    "cobranca_gru_janela": 62,
+    "sem_embarque_efetiva": 215,
+    "com_embarque_efetiva": 5718,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 202,
-    "pedidos_com_agente": 6292,
+    "nao_avaliados": 215,
+    "pedidos_com_agente": 6320,
     "dtbtransporte": {
-      "consultados": 1109,
-      "mapeados": 1103,
-      "linhas": 1186
+      "consultados": 1113,
+      "mapeados": 1107,
+      "linhas": 1190
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 294,
@@ -42,7 +42,7 @@
       "MCZ - MCZ EXPRESS SERVICE LTDA": 63,
       "MCP - A A CARVALHO ROCHA ME": 53,
       "SSA - LUTY LOG": 50,
-      "FOR - NT TRANSPORTE LTDA": 31
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 35
     },
     "top10_ufs_pendencias": {
       "RS": 222,
@@ -207,10 +207,10 @@
       "dia_full": "27/08/2026",
       "pedidos": 90,
       "loggers": 537,
-      "sincronizados": 449,
+      "sincronizados": 450,
       "pendentes": 84,
       "sem_embarque": 0,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 31,
       "pct": 15.6
     },
@@ -220,10 +220,10 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 275,
+      "sincronizados": 278,
       "pendentes": 339,
       "sem_embarque": 1,
-      "cobranca_gru": 7,
+      "cobranca_gru": 4,
       "pedidos_pendentes": 34,
       "pct": 54.6
     },
@@ -272,10 +272,10 @@
       "dia_full": "01/09/2026",
       "pedidos": 63,
       "loggers": 424,
-      "sincronizados": 207,
+      "sincronizados": 208,
       "pendentes": 213,
       "sem_embarque": 0,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 25,
       "pct": 50.2
     },
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 46,
-      "loggers": 280,
-      "sincronizados": 118,
-      "pendentes": 160,
-      "sem_embarque": 52,
+      "pedidos": 49,
+      "loggers": 295,
+      "sincronizados": 122,
+      "pendentes": 171,
+      "sem_embarque": 65,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 32,
-      "pct": 57.1
+      "pedidos_pendentes": 31,
+      "pct": 58.0
     }
   ],
   "erros_validacao": {},

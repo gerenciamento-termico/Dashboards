@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T12:18:51",
+  "gerado_em": "2026-09-04T12:31:19",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio do VTC (viagem da caixa). Visivel na grade e no filtro; nao prova saida. A data da viagem e a entrega efetiva embarque daquele romaneio"
   },
   "contagens": {
-    "pares_janela": 6025,
-    "pedidos_janela": 1068,
-    "loggers_ares_janela": 5606,
-    "loggers_ares_antes_dedup": 5634,
+    "pares_janela": 6089,
+    "pedidos_janela": 1070,
+    "loggers_ares_janela": 5669,
+    "loggers_ares_antes_dedup": 5697,
     "dedup_dia_logger": 28,
-    "pendentes_janela": 1286,
-    "cobranca_gru_janela": 62,
-    "sem_embarque_efetiva": 181,
-    "com_embarque_efetiva": 5453,
+    "pendentes_janela": 1310,
+    "cobranca_gru_janela": 63,
+    "sem_embarque_efetiva": 201,
+    "com_embarque_efetiva": 5496,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 181,
-    "pedidos_com_agente": 6019,
+    "nao_avaliados": 201,
+    "pedidos_com_agente": 6083,
     "dtbtransporte": {
-      "consultados": 1068,
-      "mapeados": 1062,
-      "linhas": 1143
+      "consultados": 1070,
+      "mapeados": 1064,
+      "linhas": 1146
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 292,
@@ -41,8 +41,8 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 78,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 58,
       "MCP - A A CARVALHO ROCHA ME": 50,
-      "FOR - NT TRANSPORTE LTDA": 31,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 29
+      "SSA - LUTY LOG": 40,
+      "FOR - NT TRANSPORTE LTDA": 31
     },
     "top10_ufs_pendencias": {
       "RS": 222,
@@ -54,7 +54,7 @@
       "AL": 59,
       "PA": 57,
       "AP": 50,
-      "SP": 38
+      "BA": 48
     }
   },
   "serie_diaria": [
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 11,
-      "loggers": 119,
-      "sincronizados": 27,
-      "pendentes": 61,
-      "sem_embarque": 31,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 10,
-      "pct": 51.3
+      "pedidos": 13,
+      "loggers": 182,
+      "sincronizados": 45,
+      "pendentes": 85,
+      "sem_embarque": 51,
+      "cobranca_gru": 1,
+      "pedidos_pendentes": 12,
+      "pct": 46.7
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T13:09:02",
+  "gerado_em": "2026-09-04T13:27:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,31 +15,31 @@
     "romaneio": "nr_romaneio do VTC (viagem da caixa). Visivel na grade e no filtro; nao prova saida. A data da viagem e a entrega efetiva embarque daquele romaneio"
   },
   "contagens": {
-    "pares_janela": 6159,
-    "pedidos_janela": 1074,
-    "loggers_ares_janela": 5739,
-    "loggers_ares_antes_dedup": 5767,
+    "pares_janela": 6173,
+    "pedidos_janela": 1077,
+    "loggers_ares_janela": 5753,
+    "loggers_ares_antes_dedup": 5781,
     "dedup_dia_logger": 28,
-    "pendentes_janela": 1325,
+    "pendentes_janela": 1342,
     "cobranca_gru_janela": 63,
-    "sem_embarque_efetiva": 255,
-    "com_embarque_efetiva": 5512,
+    "sem_embarque_efetiva": 252,
+    "com_embarque_efetiva": 5529,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 255,
-    "pedidos_com_agente": 6153,
+    "nao_avaliados": 252,
+    "pedidos_com_agente": 6167,
     "dtbtransporte": {
-      "consultados": 1074,
-      "mapeados": 1068,
-      "linhas": 1151
+      "consultados": 1077,
+      "mapeados": 1071,
+      "linhas": 1154
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 292,
       "THE - AERONEIVA EXPRESS": 147,
       "AJU - CASSIMIRO TRANSPORTES": 133,
       "SLZ - REIS CAVALCANTE EXPRESSO": 125,
-      "JPA - LIDER CARGAS": 100,
+      "JPA - LIDER CARGAS": 104,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 78,
-      "MCZ - MCZ EXPRESS SERVICE LTDA": 58,
+      "MCZ - MCZ EXPRESS SERVICE LTDA": 71,
       "MCP - A A CARVALHO ROCHA ME": 50,
       "SSA - LUTY LOG": 40,
       "FOR - NT TRANSPORTE LTDA": 31
@@ -49,9 +49,9 @@
       "PI": 147,
       "SE": 131,
       "MA": 125,
-      "PB": 101,
+      "PB": 105,
       "TO": 78,
-      "AL": 59,
+      "AL": 72,
       "PA": 57,
       "AP": 50,
       "BA": 48
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 15,
-      "loggers": 252,
+      "pedidos": 18,
+      "loggers": 266,
       "sincronizados": 46,
-      "pendentes": 100,
-      "sem_embarque": 105,
+      "pendentes": 117,
+      "sem_embarque": 102,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 13,
-      "pct": 39.7
+      "pedidos_pendentes": 16,
+      "pct": 44.0
     }
   ],
   "erros_validacao": {},

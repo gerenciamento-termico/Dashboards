@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T10:25:45",
+  "gerado_em": "2026-09-04T10:35:07",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,30 +14,30 @@
     "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)"
   },
   "contagens": {
-    "pares_janela": 5623,
-    "pedidos_janela": 1049,
-    "loggers_ares_janela": 5203,
-    "loggers_ares_antes_dedup": 5232,
+    "pares_janela": 5624,
+    "pedidos_janela": 1050,
+    "loggers_ares_janela": 5204,
+    "loggers_ares_antes_dedup": 5233,
     "dedup_dia_logger": 29,
-    "pendentes_janela": 1059,
+    "pendentes_janela": 1058,
     "cobranca_gru_janela": 64,
     "sem_embarque_efetiva": 64,
-    "com_embarque_efetiva": 5053,
+    "com_embarque_efetiva": 5054,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5617,
+    "pedidos_com_agente": 5618,
     "dtbtransporte": {
-      "consultados": 1049,
-      "mapeados": 1043,
-      "linhas": 1102
+      "consultados": 1050,
+      "mapeados": 1044,
+      "linhas": 1103
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 289,
+      "VTCLOG - GRU": 290,
       "SLZ - REIS CAVALCANTE EXPRESSO": 134,
       "THE - AERONEIVA EXPRESS": 127,
       "JPA - LIDER CARGAS": 72,
       "AJU - CASSIMIRO TRANSPORTES": 62,
-      "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
+      "MCZ - MCZ EXPRESS SERVICE LTDA": 58,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 39,
       "FOR - NT TRANSPORTE LTDA": 29,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 27,
@@ -48,11 +48,11 @@
       "MA": 134,
       "PI": 127,
       "PB": 73,
-      "AL": 61,
       "SE": 60,
+      "AL": 59,
       "PA": 57,
       "TO": 39,
-      "SP": 35,
+      "SP": 36,
       "CE": 29
     }
   },
@@ -284,12 +284,12 @@
       "dia_full": "02/09/2026",
       "pedidos": 74,
       "loggers": 349,
-      "sincronizados": 248,
-      "pendentes": 95,
+      "sincronizados": 250,
+      "pendentes": 93,
       "sem_embarque": 2,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 24,
-      "pct": 27.2
+      "pedidos_pendentes": 23,
+      "pct": 26.6
     },
     {
       "dia_iso": "2026-09-03",
@@ -308,14 +308,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 5,
-      "loggers": 32,
+      "pedidos": 6,
+      "loggers": 33,
       "sincronizados": 16,
-      "pendentes": 6,
+      "pendentes": 7,
       "sem_embarque": 10,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 4,
-      "pct": 18.8
+      "pedidos_pendentes": 5,
+      "pct": 21.2
     }
   ],
   "erros_validacao": {},

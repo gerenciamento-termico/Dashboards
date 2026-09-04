@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T17:31:17",
+  "gerado_em": "2026-09-04T17:41:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,12 +20,12 @@
     "loggers_ares_janela": 5940,
     "loggers_ares_antes_dedup": 5972,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1398,
+    "pendentes_janela": 1426,
     "cobranca_gru_janela": 62,
-    "sem_embarque_efetiva": 235,
-    "com_embarque_efetiva": 5737,
+    "sem_embarque_efetiva": 201,
+    "com_embarque_efetiva": 5771,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 235,
+    "nao_avaliados": 201,
     "pedidos_com_agente": 6359,
     "dtbtransporte": {
       "consultados": 1121,
@@ -42,7 +42,7 @@
       "MCZ - MCZ EXPRESS SERVICE LTDA": 63,
       "MCP - A A CARVALHO ROCHA ME": 53,
       "SSA - LUTY LOG": 50,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 35
+      "NAT - CSM CARGO": 40
     },
     "top10_ufs_pendencias": {
       "RS": 222,
@@ -233,12 +233,12 @@
       "dia_full": "29/08/2026",
       "pedidos": 6,
       "loggers": 6,
-      "sincronizados": 4,
-      "pendentes": 2,
+      "sincronizados": 5,
+      "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 2,
-      "pct": 33.3
+      "pedidos_pendentes": 1,
+      "pct": 16.7
     },
     {
       "dia_iso": "2026-08-30",
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 52,
-      "loggers": 314,
-      "sincronizados": 128,
-      "pendentes": 184,
-      "sem_embarque": 85,
+      "pedidos": 59,
+      "loggers": 348,
+      "sincronizados": 133,
+      "pendentes": 213,
+      "sem_embarque": 51,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 33,
-      "pct": 58.6
+      "pedidos_pendentes": 38,
+      "pct": 61.2
     }
   ],
   "erros_validacao": {},

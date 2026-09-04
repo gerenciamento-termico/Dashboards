@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-03T21:27:11",
+  "gerado_em": "2026-09-03T21:47:07",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,8 +14,8 @@
     "pares_janela": 5580,
     "pedidos_janela": 1041,
     "loggers_ares_janela": 5189,
-    "pendentes_janela": 1162,
-    "sem_embarque_efetiva": 55,
+    "pendentes_janela": 1161,
+    "sem_embarque_efetiva": 54,
     "com_embarque_efetiva": 5020,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
@@ -27,7 +27,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 329,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 134,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 133,
       "THE - AERONEIVA EXPRESS": 128,
       "JPA - LIDER CARGAS": 72,
       "AJU - CASSIMIRO TRANSPORTES": 60,
@@ -39,7 +39,7 @@
     },
     "top10_ufs_pendencias": {
       "RS": 224,
-      "MA": 135,
+      "MA": 134,
       "PI": 128,
       "PB": 73,
       "AL": 61,
@@ -81,9 +81,9 @@
       "dia_full": "17/08/2026",
       "pedidos": 81,
       "loggers": 241,
-      "sincronizados": 213,
+      "sincronizados": 214,
       "pendentes": 27,
-      "sem_embarque": 1,
+      "sem_embarque": 0,
       "pedidos_pendentes": 14,
       "pct": 11.2
     },
@@ -129,11 +129,11 @@
       "dia_full": "21/08/2026",
       "pedidos": 49,
       "loggers": 145,
-      "sincronizados": 126,
-      "pendentes": 19,
+      "sincronizados": 127,
+      "pendentes": 18,
       "sem_embarque": 0,
       "pedidos_pendentes": 12,
-      "pct": 13.1
+      "pct": 12.4
     },
     {
       "dia_iso": "2026-08-22",

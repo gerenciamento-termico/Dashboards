@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T07:27:06",
+  "gerado_em": "2026-09-04T07:37:00",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,7 +14,7 @@
     "pares_janela": 5577,
     "pedidos_janela": 1038,
     "loggers_ares_janela": 5186,
-    "pendentes_janela": 1158,
+    "pendentes_janela": 1157,
     "sem_embarque_efetiva": 54,
     "com_embarque_efetiva": 5017,
     "loggers_sem_lastsync": 0,
@@ -33,7 +33,7 @@
       "AJU - CASSIMIRO TRANSPORTES": 60,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 40,
-      "FOR - NT TRANSPORTE LTDA": 33,
+      "FOR - NT TRANSPORTE LTDA": 32,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 27,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 27
     },
@@ -201,11 +201,11 @@
       "dia_full": "28/08/2026",
       "pedidos": 86,
       "loggers": 685,
-      "sincronizados": 328,
-      "pendentes": 354,
+      "sincronizados": 329,
+      "pendentes": 353,
       "sem_embarque": 3,
       "pedidos_pendentes": 41,
-      "pct": 51.7
+      "pct": 51.5
     },
     {
       "dia_iso": "2026-08-29",

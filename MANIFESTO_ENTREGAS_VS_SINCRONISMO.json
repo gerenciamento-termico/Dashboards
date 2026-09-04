@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T11:06:37",
+  "gerado_em": "2026-09-04T11:20:31",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -11,25 +11,26 @@
     "sem_embarque": "ARES sem dt_entregaefetivaembarque fica fora da cobranca (patio / margem segura)",
     "escopo_sync": "somente ARES/ARES COM SONDA (tags A/TA/AS); demais tipos nao avaliados",
     "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido",
-    "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)"
+    "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)",
+    "romaneio": "nr_romaneio do VTC (viagem da caixa). Visivel na grade e no filtro; nao prova saida e nao altera cobranca. Entrega efetiva do VTC e a mesma em todos os romaneios do pedido"
   },
   "contagens": {
-    "pares_janela": 5647,
-    "pedidos_janela": 1052,
-    "loggers_ares_janela": 5227,
-    "loggers_ares_antes_dedup": 5256,
+    "pares_janela": 5650,
+    "pedidos_janela": 1055,
+    "loggers_ares_janela": 5230,
+    "loggers_ares_antes_dedup": 5259,
     "dedup_dia_logger": 29,
-    "pendentes_janela": 1081,
+    "pendentes_janela": 1082,
     "cobranca_gru_janela": 63,
-    "sem_embarque_efetiva": 64,
-    "com_embarque_efetiva": 5077,
+    "sem_embarque_efetiva": 66,
+    "com_embarque_efetiva": 5078,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5641,
+    "pedidos_com_agente": 5644,
     "dtbtransporte": {
-      "consultados": 1052,
-      "mapeados": 1046,
-      "linhas": 1105
+      "consultados": 1055,
+      "mapeados": 1049,
+      "linhas": 1108
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 291,
@@ -41,7 +42,7 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 39,
       "MCP - A A CARVALHO ROCHA ME": 37,
       "FOR - NT TRANSPORTE LTDA": 29,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 27
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 28
     },
     "top10_ufs_pendencias": {
       "RS": 221,
@@ -295,14 +296,14 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 71,
-      "loggers": 351,
+      "pedidos": 74,
+      "loggers": 354,
       "sincronizados": 216,
-      "pendentes": 98,
-      "sem_embarque": 36,
+      "pendentes": 99,
+      "sem_embarque": 38,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 31,
-      "pct": 27.9
+      "pedidos_pendentes": 32,
+      "pct": 28.0
     },
     {
       "dia_iso": "2026-09-04",

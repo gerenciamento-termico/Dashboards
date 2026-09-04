@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T09:44:30",
+  "gerado_em": "2026-09-04T09:54:11",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -13,20 +13,20 @@
     "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido"
   },
   "contagens": {
-    "pares_janela": 5618,
-    "pedidos_janela": 1045,
-    "loggers_ares_janela": 5227,
-    "pendentes_janela": 1070,
+    "pares_janela": 5620,
+    "pedidos_janela": 1047,
+    "loggers_ares_janela": 5229,
+    "pendentes_janela": 1069,
     "cobranca_gru_janela": 68,
-    "sem_embarque_efetiva": 64,
+    "sem_embarque_efetiva": 66,
     "com_embarque_efetiva": 5048,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5612,
+    "pedidos_com_agente": 5614,
     "dtbtransporte": {
-      "consultados": 1045,
-      "mapeados": 1039,
-      "linhas": 1098
+      "consultados": 1047,
+      "mapeados": 1041,
+      "linhas": 1100
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 297,
@@ -292,14 +292,14 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 69,
-      "loggers": 350,
-      "sincronizados": 215,
-      "pendentes": 98,
-      "sem_embarque": 36,
+      "pedidos": 71,
+      "loggers": 352,
+      "sincronizados": 216,
+      "pendentes": 97,
+      "sem_embarque": 38,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 31,
-      "pct": 28.0
+      "pedidos_pendentes": 30,
+      "pct": 27.6
     },
     {
       "dia_iso": "2026-09-04",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T18:32:56",
+  "gerado_em": "2026-09-04T18:55:08",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6365,
-    "pedidos_janela": 1121,
-    "loggers_ares_janela": 5940,
-    "loggers_ares_antes_dedup": 5972,
+    "pares_janela": 6408,
+    "pedidos_janela": 1124,
+    "loggers_ares_janela": 5983,
+    "loggers_ares_antes_dedup": 6015,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1426,
+    "pendentes_janela": 1458,
     "cobranca_gru_janela": 62,
     "sem_embarque_efetiva": 201,
-    "com_embarque_efetiva": 5771,
+    "com_embarque_efetiva": 5814,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 201,
-    "pedidos_com_agente": 6359,
+    "pedidos_com_agente": 6402,
     "dtbtransporte": {
-      "consultados": 1121,
-      "mapeados": 1115,
-      "linhas": 1198
+      "consultados": 1124,
+      "mapeados": 1118,
+      "linhas": 1201
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 294,
@@ -40,9 +40,9 @@
       "JPA - LIDER CARGAS": 104,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 78,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 63,
+      "VTCLOG - REC": 60,
       "MCP - A A CARVALHO ROCHA ME": 53,
-      "SSA - LUTY LOG": 50,
-      "NAT - CSM CARGO": 40
+      "SSA - LUTY LOG": 50
     },
     "top10_ufs_pendencias": {
       "RS": 222,
@@ -52,9 +52,9 @@
       "PB": 105,
       "TO": 78,
       "AL": 64,
+      "PE": 61,
       "BA": 58,
-      "PA": 58,
-      "AP": 53
+      "PA": 58
     }
   },
   "serie_diaria": [
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 59,
-      "loggers": 348,
-      "sincronizados": 133,
-      "pendentes": 213,
+      "pedidos": 62,
+      "loggers": 391,
+      "sincronizados": 144,
+      "pendentes": 245,
       "sem_embarque": 51,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 38,
-      "pct": 61.2
+      "pedidos_pendentes": 41,
+      "pct": 62.7
     }
   ],
   "erros_validacao": {},

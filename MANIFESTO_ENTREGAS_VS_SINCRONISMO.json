@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T10:05:27",
+  "gerado_em": "2026-09-04T10:15:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -13,27 +13,27 @@
     "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido"
   },
   "contagens": {
-    "pares_janela": 5620,
-    "pedidos_janela": 1047,
-    "loggers_ares_janela": 5229,
-    "pendentes_janela": 1068,
+    "pares_janela": 5623,
+    "pedidos_janela": 1049,
+    "loggers_ares_janela": 5232,
+    "pendentes_janela": 1073,
     "cobranca_gru_janela": 68,
-    "sem_embarque_efetiva": 66,
-    "com_embarque_efetiva": 5048,
+    "sem_embarque_efetiva": 64,
+    "com_embarque_efetiva": 5053,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5614,
+    "pedidos_com_agente": 5617,
     "dtbtransporte": {
-      "consultados": 1047,
-      "mapeados": 1041,
-      "linhas": 1100
+      "consultados": 1049,
+      "mapeados": 1043,
+      "linhas": 1102
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 297,
+      "VTCLOG - GRU": 298,
       "SLZ - REIS CAVALCANTE EXPRESSO": 134,
       "THE - AERONEIVA EXPRESS": 128,
       "JPA - LIDER CARGAS": 72,
-      "AJU - CASSIMIRO TRANSPORTES": 60,
+      "AJU - CASSIMIRO TRANSPORTES": 62,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 60,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 39,
       "FOR - NT TRANSPORTE LTDA": 29,
@@ -41,12 +41,12 @@
       "PVH - RODOTEC": 25
     },
     "top10_ufs_pendencias": {
-      "RS": 220,
+      "RS": 221,
       "MA": 134,
       "PI": 128,
       "PB": 73,
       "AL": 61,
-      "SE": 58,
+      "SE": 60,
       "PA": 57,
       "SP": 40,
       "TO": 39,
@@ -295,24 +295,24 @@
       "pedidos": 71,
       "loggers": 352,
       "sincronizados": 216,
-      "pendentes": 97,
-      "sem_embarque": 38,
+      "pendentes": 99,
+      "sem_embarque": 36,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 30,
-      "pct": 27.6
+      "pedidos_pendentes": 32,
+      "pct": 28.1
     },
     {
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 3,
-      "loggers": 29,
+      "pedidos": 5,
+      "loggers": 32,
       "sincronizados": 16,
-      "pendentes": 3,
+      "pendentes": 6,
       "sem_embarque": 10,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 2,
-      "pct": 10.3
+      "pedidos_pendentes": 4,
+      "pct": 18.8
     }
   ],
   "erros_validacao": {},

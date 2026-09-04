@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T12:31:19",
+  "gerado_em": "2026-09-04T12:42:02",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio do VTC (viagem da caixa). Visivel na grade e no filtro; nao prova saida. A data da viagem e a entrega efetiva embarque daquele romaneio"
   },
   "contagens": {
-    "pares_janela": 6089,
-    "pedidos_janela": 1070,
-    "loggers_ares_janela": 5669,
-    "loggers_ares_antes_dedup": 5697,
+    "pares_janela": 6105,
+    "pedidos_janela": 1072,
+    "loggers_ares_janela": 5685,
+    "loggers_ares_antes_dedup": 5713,
     "dedup_dia_logger": 28,
     "pendentes_janela": 1310,
     "cobranca_gru_janela": 63,
-    "sem_embarque_efetiva": 201,
+    "sem_embarque_efetiva": 217,
     "com_embarque_efetiva": 5496,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 201,
-    "pedidos_com_agente": 6083,
+    "nao_avaliados": 217,
+    "pedidos_com_agente": 6099,
     "dtbtransporte": {
-      "consultados": 1070,
-      "mapeados": 1064,
-      "linhas": 1146
+      "consultados": 1072,
+      "mapeados": 1066,
+      "linhas": 1148
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 292,
@@ -310,13 +310,13 @@
       "dia": "04/09",
       "dia_full": "04/09/2026",
       "pedidos": 13,
-      "loggers": 182,
+      "loggers": 198,
       "sincronizados": 45,
       "pendentes": 85,
-      "sem_embarque": 51,
+      "sem_embarque": 67,
       "cobranca_gru": 1,
       "pedidos_pendentes": 12,
-      "pct": 46.7
+      "pct": 42.9
     }
   ],
   "erros_validacao": {},

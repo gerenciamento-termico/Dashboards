@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T07:47:02",
+  "gerado_em": "2026-09-04T07:57:07",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,9 +14,9 @@
     "pares_janela": 5586,
     "pedidos_janela": 1039,
     "loggers_ares_janela": 5195,
-    "pendentes_janela": 1157,
+    "pendentes_janela": 1155,
     "sem_embarque_efetiva": 54,
-    "com_embarque_efetiva": 5017,
+    "com_embarque_efetiva": 5026,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
     "pedidos_com_agente": 5580,
@@ -249,11 +249,11 @@
       "dia_full": "01/09/2026",
       "pedidos": 61,
       "loggers": 437,
-      "sincronizados": 267,
-      "pendentes": 170,
+      "sincronizados": 268,
+      "pendentes": 169,
       "sem_embarque": 0,
-      "pedidos_pendentes": 28,
-      "pct": 38.9
+      "pedidos_pendentes": 27,
+      "pct": 38.7
     },
     {
       "dia_iso": "2026-09-02",
@@ -261,11 +261,11 @@
       "dia_full": "02/09/2026",
       "pedidos": 74,
       "loggers": 353,
-      "sincronizados": 248,
-      "pendentes": 103,
+      "sincronizados": 249,
+      "pendentes": 102,
       "sem_embarque": 2,
-      "pedidos_pendentes": 30,
-      "pct": 29.2
+      "pedidos_pendentes": 29,
+      "pct": 28.9
     },
     {
       "dia_iso": "2026-09-03",

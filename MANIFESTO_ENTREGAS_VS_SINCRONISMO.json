@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T16:26:31",
+  "gerado_em": "2026-09-04T16:36:08",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6284,
-    "pedidos_janela": 1103,
-    "loggers_ares_janela": 5859,
-    "loggers_ares_antes_dedup": 5891,
+    "pares_janela": 6294,
+    "pedidos_janela": 1107,
+    "loggers_ares_janela": 5869,
+    "loggers_ares_antes_dedup": 5901,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1383,
-    "cobranca_gru_janela": 72,
+    "pendentes_janela": 1376,
+    "cobranca_gru_janela": 68,
     "sem_embarque_efetiva": 201,
-    "com_embarque_efetiva": 5690,
+    "com_embarque_efetiva": 5700,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 201,
-    "pedidos_com_agente": 6278,
+    "pedidos_com_agente": 6288,
     "dtbtransporte": {
-      "consultados": 1103,
-      "mapeados": 1097,
-      "linhas": 1180
+      "consultados": 1107,
+      "mapeados": 1101,
+      "linhas": 1184
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 294,
@@ -272,10 +272,10 @@
       "dia_full": "01/09/2026",
       "pedidos": 63,
       "loggers": 424,
-      "sincronizados": 205,
+      "sincronizados": 207,
       "pendentes": 213,
       "sem_embarque": 0,
-      "cobranca_gru": 6,
+      "cobranca_gru": 4,
       "pedidos_pendentes": 25,
       "pct": 50.2
     },
@@ -298,10 +298,10 @@
       "dia_full": "03/09/2026",
       "pedidos": 81,
       "loggers": 375,
-      "sincronizados": 251,
+      "sincronizados": 253,
       "pendentes": 119,
       "sem_embarque": 59,
-      "cobranca_gru": 5,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 35,
       "pct": 31.7
     },
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 41,
-      "loggers": 267,
-      "sincronizados": 96,
-      "pendentes": 169,
+      "pedidos": 45,
+      "loggers": 277,
+      "sincronizados": 113,
+      "pendentes": 162,
       "sem_embarque": 51,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 30,
-      "pct": 63.3
+      "pedidos_pendentes": 32,
+      "pct": 58.5
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T12:06:18",
+  "gerado_em": "2026-09-04T12:18:51",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio do VTC (viagem da caixa). Visivel na grade e no filtro; nao prova saida. A data da viagem e a entrega efetiva embarque daquele romaneio"
   },
   "contagens": {
-    "pares_janela": 5991,
-    "pedidos_janela": 1067,
-    "loggers_ares_janela": 5572,
-    "loggers_ares_antes_dedup": 5600,
+    "pares_janela": 6025,
+    "pedidos_janela": 1068,
+    "loggers_ares_janela": 5606,
+    "loggers_ares_antes_dedup": 5634,
     "dedup_dia_logger": 28,
-    "pendentes_janela": 1290,
+    "pendentes_janela": 1286,
     "cobranca_gru_janela": 62,
-    "sem_embarque_efetiva": 160,
-    "com_embarque_efetiva": 5440,
+    "sem_embarque_efetiva": 181,
+    "com_embarque_efetiva": 5453,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 160,
-    "pedidos_com_agente": 5985,
+    "nao_avaliados": 181,
+    "pedidos_com_agente": 6019,
     "dtbtransporte": {
-      "consultados": 1067,
-      "mapeados": 1061,
-      "linhas": 1141
+      "consultados": 1068,
+      "mapeados": 1062,
+      "linhas": 1143
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 292,
@@ -272,12 +272,12 @@
       "dia_full": "01/09/2026",
       "pedidos": 63,
       "loggers": 424,
-      "sincronizados": 204,
-      "pendentes": 217,
+      "sincronizados": 205,
+      "pendentes": 216,
       "sem_embarque": 0,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 29,
-      "pct": 51.2
+      "pedidos_pendentes": 28,
+      "pct": 50.9
     },
     {
       "dia_iso": "2026-09-02",
@@ -298,25 +298,25 @@
       "dia_full": "03/09/2026",
       "pedidos": 76,
       "loggers": 380,
-      "sincronizados": 194,
-      "pendentes": 126,
+      "sincronizados": 199,
+      "pendentes": 121,
       "sem_embarque": 59,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 36,
-      "pct": 33.2
+      "pedidos_pendentes": 34,
+      "pct": 31.8
     },
     {
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 10,
-      "loggers": 85,
-      "sincronizados": 16,
-      "pendentes": 59,
-      "sem_embarque": 10,
+      "pedidos": 11,
+      "loggers": 119,
+      "sincronizados": 27,
+      "pendentes": 61,
+      "sem_embarque": 31,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 9,
-      "pct": 69.4
+      "pedidos_pendentes": 10,
+      "pct": 51.3
     }
   ],
   "erros_validacao": {},

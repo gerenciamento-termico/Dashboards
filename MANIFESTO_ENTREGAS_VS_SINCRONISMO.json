@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T10:45:47",
+  "gerado_em": "2026-09-04T10:55:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,25 +14,25 @@
     "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)"
   },
   "contagens": {
-    "pares_janela": 5646,
-    "pedidos_janela": 1051,
-    "loggers_ares_janela": 5226,
-    "loggers_ares_antes_dedup": 5255,
+    "pares_janela": 5647,
+    "pedidos_janela": 1052,
+    "loggers_ares_janela": 5227,
+    "loggers_ares_antes_dedup": 5256,
     "dedup_dia_logger": 29,
-    "pendentes_janela": 1080,
+    "pendentes_janela": 1081,
     "cobranca_gru_janela": 63,
     "sem_embarque_efetiva": 64,
-    "com_embarque_efetiva": 5076,
+    "com_embarque_efetiva": 5077,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5640,
+    "pedidos_com_agente": 5641,
     "dtbtransporte": {
-      "consultados": 1051,
-      "mapeados": 1045,
-      "linhas": 1104
+      "consultados": 1052,
+      "mapeados": 1046,
+      "linhas": 1105
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 290,
+      "VTCLOG - GRU": 291,
       "SLZ - REIS CAVALCANTE EXPRESSO": 134,
       "THE - AERONEIVA EXPRESS": 127,
       "JPA - LIDER CARGAS": 72,
@@ -52,8 +52,8 @@
       "AL": 59,
       "PA": 57,
       "TO": 39,
-      "AP": 37,
-      "SP": 36
+      "SP": 37,
+      "AP": 37
     }
   },
   "serie_diaria": [
@@ -308,14 +308,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 7,
-      "loggers": 55,
+      "pedidos": 8,
+      "loggers": 56,
       "sincronizados": 16,
-      "pendentes": 29,
+      "pendentes": 30,
       "sem_embarque": 10,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 6,
-      "pct": 52.7
+      "pedidos_pendentes": 7,
+      "pct": 53.6
     }
   ],
   "erros_validacao": {},

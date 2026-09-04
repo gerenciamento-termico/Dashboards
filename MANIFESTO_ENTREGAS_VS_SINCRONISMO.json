@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T16:11:22",
+  "gerado_em": "2026-09-04T16:26:31",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,27 +15,27 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6257,
-    "pedidos_janela": 1101,
-    "loggers_ares_janela": 5833,
-    "loggers_ares_antes_dedup": 5865,
+    "pares_janela": 6284,
+    "pedidos_janela": 1103,
+    "loggers_ares_janela": 5859,
+    "loggers_ares_antes_dedup": 5891,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1356,
+    "pendentes_janela": 1383,
     "cobranca_gru_janela": 72,
-    "sem_embarque_efetiva": 202,
-    "com_embarque_efetiva": 5663,
+    "sem_embarque_efetiva": 201,
+    "com_embarque_efetiva": 5690,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 202,
-    "pedidos_com_agente": 6251,
+    "nao_avaliados": 201,
+    "pedidos_com_agente": 6278,
     "dtbtransporte": {
-      "consultados": 1101,
-      "mapeados": 1095,
-      "linhas": 1178
+      "consultados": 1103,
+      "mapeados": 1097,
+      "linhas": 1180
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 294,
+      "AJU - CASSIMIRO TRANSPORTES": 159,
       "THE - AERONEIVA EXPRESS": 147,
-      "AJU - CASSIMIRO TRANSPORTES": 133,
       "SLZ - REIS CAVALCANTE EXPRESSO": 126,
       "JPA - LIDER CARGAS": 104,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 78,
@@ -46,14 +46,14 @@
     },
     "top10_ufs_pendencias": {
       "RS": 222,
+      "SE": 157,
       "PI": 147,
-      "SE": 131,
       "MA": 126,
       "PB": 105,
       "TO": 78,
       "AL": 64,
       "BA": 58,
-      "PA": 57,
+      "PA": 58,
       "AP": 50
     }
   },
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 38,
-      "loggers": 240,
+      "pedidos": 41,
+      "loggers": 267,
       "sincronizados": 96,
-      "pendentes": 142,
-      "sem_embarque": 52,
+      "pendentes": 169,
+      "sem_embarque": 51,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 27,
-      "pct": 59.2
+      "pedidos_pendentes": 30,
+      "pct": 63.3
     }
   ],
   "erros_validacao": {},

@@ -1,39 +1,39 @@
 {
-  "gerado_em": "2026-09-04T13:27:45",
+  "gerado_em": "2026-09-04T13:45:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
     "entregue": "vtc_stage.documentos.dt_entregaefetivaembarque no dia (BRT), 1 linha por pedido+logger",
-    "saiu_gru": "dt_entregaefetivaembarque preenchida; nr_romaneio nao prova saida",
+    "saiu_gru": "dt_entregaefetivaembarque preenchida E nr_romaneio preenchido. Sem romaneio e trava: nao saiu. Romaneio sozinho nao prova entrega",
     "pendente_sync": "ARES sem lastSyncDate >= entrega efetiva embarque - 15 min (nem >= chegada - 15 min)",
     "cobranca_agente": "pendente de sync + saiu + nao esta Em GRU agora + sem estoque/restauracao depois desta entrega efetiva embarque",
     "cobranca_gru": "pendente de sync + saiu + (Em GRU agora OU estoque/restauracao depois desta entrega efetiva embarque). Linha permanece visivel; nao some. Nao usa retornando nem restauracao no mesmo dia antes da entrega",
-    "sem_embarque": "ARES sem dt_entregaefetivaembarque fica fora da cobranca (patio / margem segura)",
+    "sem_embarque": "ARES sem dt_entregaefetivaembarque OU sem nr_romaneio fica fora da cobranca (patio / trava)",
     "escopo_sync": "somente ARES/ARES COM SONDA (tags A/TA/AS); demais tipos nao avaliados",
     "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido",
     "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)",
-    "romaneio": "nr_romaneio do VTC (viagem da caixa). Visivel na grade e no filtro; nao prova saida. A data da viagem e a entrega efetiva embarque daquele romaneio"
+    "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6173,
-    "pedidos_janela": 1077,
+    "pares_janela": 6177,
+    "pedidos_janela": 1081,
     "loggers_ares_janela": 5753,
-    "loggers_ares_antes_dedup": 5781,
-    "dedup_dia_logger": 28,
-    "pendentes_janela": 1342,
+    "loggers_ares_antes_dedup": 5785,
+    "dedup_dia_logger": 32,
+    "pendentes_janela": 1343,
     "cobranca_gru_janela": 63,
     "sem_embarque_efetiva": 252,
-    "com_embarque_efetiva": 5529,
+    "com_embarque_efetiva": 5533,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 252,
-    "pedidos_com_agente": 6167,
+    "pedidos_com_agente": 6171,
     "dtbtransporte": {
-      "consultados": 1077,
-      "mapeados": 1071,
-      "linhas": 1154
+      "consultados": 1081,
+      "mapeados": 1075,
+      "linhas": 1158
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 292,
+      "VTCLOG - GRU": 293,
       "THE - AERONEIVA EXPRESS": 147,
       "AJU - CASSIMIRO TRANSPORTES": 133,
       "SLZ - REIS CAVALCANTE EXPRESSO": 125,
@@ -76,13 +76,13 @@
       "dia": "17/08",
       "dia_full": "17/08/2026",
       "pedidos": 81,
-      "loggers": 267,
+      "loggers": 247,
       "sincronizados": 223,
       "pendentes": 22,
       "sem_embarque": 20,
       "cobranca_gru": 2,
       "pedidos_pendentes": 9,
-      "pct": 8.2
+      "pct": 8.9
     },
     {
       "dia_iso": "2026-08-18",
@@ -167,7 +167,7 @@
       "dia": "24/08",
       "dia_full": "24/08/2026",
       "pedidos": 69,
-      "loggers": 711,
+      "loggers": 709,
       "sincronizados": 665,
       "pendentes": 13,
       "sem_embarque": 2,
@@ -193,13 +193,13 @@
       "dia": "26/08",
       "dia_full": "26/08/2026",
       "pedidos": 59,
-      "loggers": 430,
+      "loggers": 411,
       "sincronizados": 314,
       "pendentes": 97,
       "sem_embarque": 19,
       "cobranca_gru": 0,
       "pedidos_pendentes": 20,
-      "pct": 22.6
+      "pct": 23.6
     },
     {
       "dia_iso": "2026-08-27",
@@ -219,13 +219,13 @@
       "dia": "28/08",
       "dia_full": "28/08/2026",
       "pedidos": 87,
-      "loggers": 622,
+      "loggers": 621,
       "sincronizados": 271,
       "pendentes": 342,
       "sem_embarque": 1,
       "cobranca_gru": 8,
       "pedidos_pendentes": 37,
-      "pct": 55.0
+      "pct": 55.1
     },
     {
       "dia_iso": "2026-08-29",
@@ -258,13 +258,13 @@
       "dia": "31/08",
       "dia_full": "31/08/2026",
       "pedidos": 44,
-      "loggers": 216,
+      "loggers": 202,
       "sincronizados": 147,
       "pendentes": 54,
       "sem_embarque": 14,
       "cobranca_gru": 1,
       "pedidos_pendentes": 20,
-      "pct": 25.0
+      "pct": 26.7
     },
     {
       "dia_iso": "2026-09-01",
@@ -284,39 +284,39 @@
       "dia": "02/09",
       "dia_full": "02/09/2026",
       "pedidos": 78,
-      "loggers": 426,
+      "loggers": 391,
       "sincronizados": 248,
       "pendentes": 139,
       "sem_embarque": 35,
       "cobranca_gru": 4,
       "pedidos_pendentes": 28,
-      "pct": 32.6
+      "pct": 35.5
     },
     {
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
       "pedidos": 76,
-      "loggers": 380,
+      "loggers": 321,
       "sincronizados": 199,
       "pendentes": 121,
       "sem_embarque": 59,
       "cobranca_gru": 1,
       "pedidos_pendentes": 34,
-      "pct": 31.8
+      "pct": 37.7
     },
     {
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 18,
-      "loggers": 266,
+      "pedidos": 22,
+      "loggers": 165,
       "sincronizados": 46,
-      "pendentes": 117,
-      "sem_embarque": 102,
+      "pendentes": 118,
+      "sem_embarque": 101,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 16,
-      "pct": 44.0
+      "pedidos_pendentes": 17,
+      "pct": 71.5
     }
   ],
   "erros_validacao": {},

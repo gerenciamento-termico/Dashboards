@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T14:44:32",
+  "gerado_em": "2026-09-04T14:54:24",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6191,
-    "pedidos_janela": 1089,
-    "loggers_ares_janela": 5767,
-    "loggers_ares_antes_dedup": 5799,
+    "pares_janela": 6196,
+    "pedidos_janela": 1090,
+    "loggers_ares_janela": 5772,
+    "loggers_ares_antes_dedup": 5804,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1332,
+    "pendentes_janela": 1338,
     "cobranca_gru_janela": 71,
-    "sem_embarque_efetiva": 252,
-    "com_embarque_efetiva": 5547,
+    "sem_embarque_efetiva": 251,
+    "com_embarque_efetiva": 5553,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 252,
-    "pedidos_com_agente": 6185,
+    "nao_avaliados": 251,
+    "pedidos_com_agente": 6190,
     "dtbtransporte": {
-      "consultados": 1089,
-      "mapeados": 1083,
-      "linhas": 1166
+      "consultados": 1090,
+      "mapeados": 1084,
+      "linhas": 1167
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 293,
@@ -296,27 +296,27 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 79,
-      "loggers": 324,
+      "pedidos": 80,
+      "loggers": 325,
       "sincronizados": 199,
-      "pendentes": 120,
-      "sem_embarque": 60,
+      "pendentes": 121,
+      "sem_embarque": 59,
       "cobranca_gru": 5,
-      "pedidos_pendentes": 33,
-      "pct": 37.0
+      "pedidos_pendentes": 34,
+      "pct": 37.2
     },
     {
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 27,
-      "loggers": 175,
+      "pedidos": 28,
+      "loggers": 180,
       "sincronizados": 57,
-      "pendentes": 117,
+      "pendentes": 122,
       "sem_embarque": 101,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 20,
-      "pct": 66.9
+      "pedidos_pendentes": 21,
+      "pct": 67.8
     }
   ],
   "erros_validacao": {},

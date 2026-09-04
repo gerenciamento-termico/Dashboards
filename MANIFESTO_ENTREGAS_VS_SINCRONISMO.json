@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T11:54:34",
+  "gerado_em": "2026-09-04T12:06:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,28 +15,28 @@
     "romaneio": "nr_romaneio do VTC (viagem da caixa). Visivel na grade e no filtro; nao prova saida. A data da viagem e a entrega efetiva embarque daquele romaneio"
   },
   "contagens": {
-    "pares_janela": 5963,
-    "pedidos_janela": 1066,
-    "loggers_ares_janela": 5544,
-    "loggers_ares_antes_dedup": 5572,
+    "pares_janela": 5991,
+    "pedidos_janela": 1067,
+    "loggers_ares_janela": 5572,
+    "loggers_ares_antes_dedup": 5600,
     "dedup_dia_logger": 28,
-    "pendentes_janela": 1262,
+    "pendentes_janela": 1290,
     "cobranca_gru_janela": 62,
     "sem_embarque_efetiva": 160,
-    "com_embarque_efetiva": 5412,
+    "com_embarque_efetiva": 5440,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 160,
-    "pedidos_com_agente": 5957,
+    "pedidos_com_agente": 5985,
     "dtbtransporte": {
-      "consultados": 1066,
-      "mapeados": 1060,
-      "linhas": 1140
+      "consultados": 1067,
+      "mapeados": 1061,
+      "linhas": 1141
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 292,
       "THE - AERONEIVA EXPRESS": 147,
+      "AJU - CASSIMIRO TRANSPORTES": 133,
       "SLZ - REIS CAVALCANTE EXPRESSO": 125,
-      "AJU - CASSIMIRO TRANSPORTES": 105,
       "JPA - LIDER CARGAS": 84,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 78,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 58,
@@ -47,8 +47,8 @@
     "top10_ufs_pendencias": {
       "RS": 222,
       "PI": 147,
+      "SE": 131,
       "MA": 125,
-      "SE": 103,
       "PB": 85,
       "TO": 78,
       "AL": 59,
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 9,
-      "loggers": 57,
+      "pedidos": 10,
+      "loggers": 85,
       "sincronizados": 16,
-      "pendentes": 31,
+      "pendentes": 59,
       "sem_embarque": 10,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 8,
-      "pct": 54.4
+      "pedidos_pendentes": 9,
+      "pct": 69.4
     }
   ],
   "erros_validacao": {},

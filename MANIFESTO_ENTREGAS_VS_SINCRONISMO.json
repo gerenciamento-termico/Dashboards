@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T13:45:53",
+  "gerado_em": "2026-09-04T13:56:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,25 +15,25 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6177,
-    "pedidos_janela": 1081,
-    "loggers_ares_janela": 5753,
-    "loggers_ares_antes_dedup": 5785,
+    "pares_janela": 6178,
+    "pedidos_janela": 1082,
+    "loggers_ares_janela": 5754,
+    "loggers_ares_antes_dedup": 5786,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1343,
+    "pendentes_janela": 1344,
     "cobranca_gru_janela": 63,
-    "sem_embarque_efetiva": 252,
-    "com_embarque_efetiva": 5533,
+    "sem_embarque_efetiva": 251,
+    "com_embarque_efetiva": 5535,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 252,
-    "pedidos_com_agente": 6171,
+    "nao_avaliados": 251,
+    "pedidos_com_agente": 6172,
     "dtbtransporte": {
-      "consultados": 1081,
-      "mapeados": 1075,
-      "linhas": 1158
+      "consultados": 1082,
+      "mapeados": 1076,
+      "linhas": 1159
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 293,
+      "VTCLOG - GRU": 294,
       "THE - AERONEIVA EXPRESS": 147,
       "AJU - CASSIMIRO TRANSPORTES": 133,
       "SLZ - REIS CAVALCANTE EXPRESSO": 125,
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 22,
-      "loggers": 165,
+      "pedidos": 24,
+      "loggers": 166,
       "sincronizados": 46,
-      "pendentes": 118,
+      "pendentes": 119,
       "sem_embarque": 101,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 17,
-      "pct": 71.5
+      "pedidos_pendentes": 18,
+      "pct": 71.7
     }
   ],
   "erros_validacao": {},

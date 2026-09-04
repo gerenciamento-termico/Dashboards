@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T10:35:07",
+  "gerado_em": "2026-09-04T10:45:47",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,22 +14,22 @@
     "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)"
   },
   "contagens": {
-    "pares_janela": 5624,
-    "pedidos_janela": 1050,
-    "loggers_ares_janela": 5204,
-    "loggers_ares_antes_dedup": 5233,
+    "pares_janela": 5646,
+    "pedidos_janela": 1051,
+    "loggers_ares_janela": 5226,
+    "loggers_ares_antes_dedup": 5255,
     "dedup_dia_logger": 29,
-    "pendentes_janela": 1058,
-    "cobranca_gru_janela": 64,
+    "pendentes_janela": 1080,
+    "cobranca_gru_janela": 63,
     "sem_embarque_efetiva": 64,
-    "com_embarque_efetiva": 5054,
+    "com_embarque_efetiva": 5076,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 0,
-    "pedidos_com_agente": 5618,
+    "pedidos_com_agente": 5640,
     "dtbtransporte": {
-      "consultados": 1050,
-      "mapeados": 1044,
-      "linhas": 1103
+      "consultados": 1051,
+      "mapeados": 1045,
+      "linhas": 1104
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 290,
@@ -39,9 +39,9 @@
       "AJU - CASSIMIRO TRANSPORTES": 62,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 58,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 39,
+      "MCP - A A CARVALHO ROCHA ME": 37,
       "FOR - NT TRANSPORTE LTDA": 29,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 27,
-      "PVH - RODOTEC": 25
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 27
     },
     "top10_ufs_pendencias": {
       "RS": 221,
@@ -52,8 +52,8 @@
       "AL": 59,
       "PA": 57,
       "TO": 39,
-      "SP": 36,
-      "CE": 29
+      "AP": 37,
+      "SP": 36
     }
   },
   "serie_diaria": [
@@ -219,10 +219,10 @@
       "dia_full": "28/08/2026",
       "pedidos": 86,
       "loggers": 684,
-      "sincronizados": 329,
+      "sincronizados": 330,
       "pendentes": 344,
       "sem_embarque": 3,
-      "cobranca_gru": 8,
+      "cobranca_gru": 7,
       "pedidos_pendentes": 37,
       "pct": 50.3
     },
@@ -308,14 +308,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 6,
-      "loggers": 33,
+      "pedidos": 7,
+      "loggers": 55,
       "sincronizados": 16,
-      "pendentes": 7,
+      "pendentes": 29,
       "sem_embarque": 10,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 5,
-      "pct": 21.2
+      "pedidos_pendentes": 6,
+      "pct": 52.7
     }
   ],
   "erros_validacao": {},

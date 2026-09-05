@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-05T16:08:06",
+  "gerado_em": "2026-09-05T16:18:02",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,8 +20,8 @@
     "loggers_ares_janela": 6032,
     "loggers_ares_antes_dedup": 6064,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1306,
-    "cobranca_gru_janela": 70,
+    "pendentes_janela": 1304,
+    "cobranca_gru_janela": 72,
     "sem_embarque_efetiva": 171,
     "com_embarque_efetiva": 5893,
     "loggers_sem_lastsync": 0,
@@ -45,7 +45,7 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 35
     },
     "top10_ufs_pendencias": {
-      "RS": 222,
+      "RS": 220,
       "PI": 147,
       "MA": 136,
       "SE": 117,
@@ -65,11 +65,11 @@
       "pedidos": 81,
       "loggers": 247,
       "sincronizados": 223,
-      "pendentes": 22,
+      "pendentes": 21,
       "sem_embarque": 20,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 9,
-      "pct": 8.9
+      "cobranca_gru": 3,
+      "pedidos_pendentes": 8,
+      "pct": 8.5
     },
     {
       "dia_iso": "2026-08-18",
@@ -260,11 +260,11 @@
       "pedidos": 63,
       "loggers": 424,
       "sincronizados": 309,
-      "pendentes": 110,
+      "pendentes": 109,
       "sem_embarque": 0,
-      "cobranca_gru": 5,
-      "pedidos_pendentes": 14,
-      "pct": 25.9
+      "cobranca_gru": 6,
+      "pedidos_pendentes": 13,
+      "pct": 25.7
     },
     {
       "dia_iso": "2026-09-02",

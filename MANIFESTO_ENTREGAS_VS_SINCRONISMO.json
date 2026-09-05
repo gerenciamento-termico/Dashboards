@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-05T14:48:07",
+  "gerado_em": "2026-09-05T14:58:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,7 +20,7 @@
     "loggers_ares_janela": 6032,
     "loggers_ares_antes_dedup": 6064,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1400,
+    "pendentes_janela": 1398,
     "cobranca_gru_janela": 64,
     "sem_embarque_efetiva": 171,
     "com_embarque_efetiva": 5893,
@@ -40,7 +40,7 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "JPA - LIDER CARGAS": 92,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 63,
-      "VTCLOG - REC": 60,
+      "VTCLOG - REC": 58,
       "MCP - A A CARVALHO ROCHA ME": 53,
       "SSA - LUTY LOG": 48
     },
@@ -52,7 +52,7 @@
       "PB": 93,
       "TO": 93,
       "AL": 64,
-      "PE": 61,
+      "PE": 59,
       "PA": 58,
       "BA": 56
     }
@@ -181,12 +181,12 @@
       "dia_full": "26/08/2026",
       "pedidos": 59,
       "loggers": 411,
-      "sincronizados": 321,
-      "pendentes": 90,
+      "sincronizados": 323,
+      "pendentes": 88,
       "sem_embarque": 19,
       "cobranca_gru": 0,
       "pedidos_pendentes": 17,
-      "pct": 21.9
+      "pct": 21.4
     },
     {
       "dia_iso": "2026-08-27",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-05T11:27:51",
+  "gerado_em": "2026-09-05T11:37:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,7 +20,7 @@
     "loggers_ares_janela": 6029,
     "loggers_ares_antes_dedup": 6061,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1423,
+    "pendentes_janela": 1422,
     "cobranca_gru_janela": 62,
     "sem_embarque_efetiva": 171,
     "com_embarque_efetiva": 5890,
@@ -42,7 +42,7 @@
       "MCZ - MCZ EXPRESS SERVICE LTDA": 63,
       "VTCLOG - REC": 60,
       "MCP - A A CARVALHO ROCHA ME": 53,
-      "SSA - LUTY LOG": 49
+      "SSA - LUTY LOG": 48
     },
     "top10_ufs_pendencias": {
       "RS": 222,
@@ -54,7 +54,7 @@
       "AL": 64,
       "PE": 61,
       "PA": 58,
-      "BA": 57
+      "BA": 56
     }
   },
   "serie_diaria": [
@@ -298,12 +298,12 @@
       "dia_full": "04/09/2026",
       "pedidos": 73,
       "loggers": 468,
-      "sincronizados": 195,
-      "pendentes": 271,
+      "sincronizados": 196,
+      "pendentes": 270,
       "sem_embarque": 41,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 44,
-      "pct": 57.9
+      "pedidos_pendentes": 43,
+      "pct": 57.7
     },
     {
       "dia_iso": "2026-09-05",

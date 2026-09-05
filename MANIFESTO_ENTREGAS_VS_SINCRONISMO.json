@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-04T21:07:32",
+  "gerado_em": "2026-09-04T21:17:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6430,
-    "pedidos_janela": 1131,
-    "loggers_ares_janela": 6005,
-    "loggers_ares_antes_dedup": 6037,
+    "pares_janela": 6451,
+    "pedidos_janela": 1132,
+    "loggers_ares_janela": 6025,
+    "loggers_ares_antes_dedup": 6057,
     "dedup_dia_logger": 32,
     "pendentes_janela": 1509,
     "cobranca_gru_janela": 62,
-    "sem_embarque_efetiva": 171,
+    "sem_embarque_efetiva": 191,
     "com_embarque_efetiva": 5866,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 171,
-    "pedidos_com_agente": 6424,
+    "nao_avaliados": 191,
+    "pedidos_com_agente": 6445,
     "dtbtransporte": {
-      "consultados": 1131,
-      "mapeados": 1125,
-      "linhas": 1208
+      "consultados": 1132,
+      "mapeados": 1126,
+      "linhas": 1209
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 294,
@@ -313,7 +313,7 @@
       "loggers": 443,
       "sincronizados": 145,
       "pendentes": 296,
-      "sem_embarque": 41,
+      "sem_embarque": 61,
       "cobranca_gru": 2,
       "pedidos_pendentes": 48,
       "pct": 66.8

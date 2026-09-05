@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-05T09:57:46",
+  "gerado_em": "2026-09-05T10:07:32",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,7 +20,7 @@
     "loggers_ares_janela": 6024,
     "loggers_ares_antes_dedup": 6056,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1463,
+    "pendentes_janela": 1461,
     "cobranca_gru_janela": 62,
     "sem_embarque_efetiva": 171,
     "com_embarque_efetiva": 5885,
@@ -33,7 +33,7 @@
       "linhas": 1208
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 287,
+      "VTCLOG - GRU": 286,
       "AJU - CASSIMIRO TRANSPORTES": 159,
       "THE - AERONEIVA EXPRESS": 147,
       "SLZ - REIS CAVALCANTE EXPRESSO": 136,
@@ -259,12 +259,12 @@
       "dia_full": "01/09/2026",
       "pedidos": 63,
       "loggers": 424,
-      "sincronizados": 210,
-      "pendentes": 211,
+      "sincronizados": 211,
+      "pendentes": 210,
       "sem_embarque": 0,
       "cobranca_gru": 3,
       "pedidos_pendentes": 25,
-      "pct": 49.8
+      "pct": 49.5
     },
     {
       "dia_iso": "2026-09-02",
@@ -298,12 +298,12 @@
       "dia_full": "04/09/2026",
       "pedidos": 72,
       "loggers": 464,
-      "sincronizados": 191,
-      "pendentes": 271,
+      "sincronizados": 192,
+      "pendentes": 270,
       "sem_embarque": 41,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 46,
-      "pct": 58.4
+      "pedidos_pendentes": 45,
+      "pct": 58.2
     },
     {
       "dia_iso": "2026-09-05",

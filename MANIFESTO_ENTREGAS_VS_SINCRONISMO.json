@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-05T11:17:41",
+  "gerado_em": "2026-09-05T11:27:51",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -21,7 +21,7 @@
     "loggers_ares_antes_dedup": 6061,
     "dedup_dia_logger": 32,
     "pendentes_janela": 1423,
-    "cobranca_gru_janela": 63,
+    "cobranca_gru_janela": 62,
     "sem_embarque_efetiva": 171,
     "com_embarque_efetiva": 5890,
     "loggers_sem_lastsync": 0,
@@ -259,10 +259,10 @@
       "dia_full": "01/09/2026",
       "pedidos": 63,
       "loggers": 424,
-      "sincronizados": 235,
+      "sincronizados": 236,
       "pendentes": 185,
       "sem_embarque": 0,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 23,
       "pct": 43.6
     },

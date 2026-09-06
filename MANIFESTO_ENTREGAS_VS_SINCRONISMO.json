@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-05T22:19:36",
+  "gerado_em": "2026-09-05T22:29:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,18 +15,18 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6459,
+    "pares_janela": 6479,
     "pedidos_janela": 1137,
-    "loggers_ares_janela": 6033,
-    "loggers_ares_antes_dedup": 6065,
+    "loggers_ares_janela": 6053,
+    "loggers_ares_antes_dedup": 6085,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 1304,
+    "pendentes_janela": 1324,
     "cobranca_gru_janela": 72,
     "sem_embarque_efetiva": 171,
-    "com_embarque_efetiva": 5894,
+    "com_embarque_efetiva": 5914,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 171,
-    "pedidos_com_agente": 6453,
+    "pedidos_com_agente": 6473,
     "dtbtransporte": {
       "consultados": 1137,
       "mapeados": 1131,
@@ -34,7 +34,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 285,
-      "THE - AERONEIVA EXPRESS": 147,
+      "THE - AERONEIVA EXPRESS": 167,
       "SLZ - REIS CAVALCANTE EXPRESSO": 136,
       "AJU - CASSIMIRO TRANSPORTES": 119,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
@@ -46,7 +46,7 @@
     },
     "top10_ufs_pendencias": {
       "RS": 220,
-      "PI": 147,
+      "PI": 167,
       "MA": 136,
       "SE": 117,
       "PB": 93,
@@ -283,14 +283,14 @@
       "dia_iso": "2026-09-03",
       "dia": "03/09",
       "dia_full": "03/09/2026",
-      "pedidos": 81,
-      "loggers": 375,
+      "pedidos": 82,
+      "loggers": 395,
       "sincronizados": 267,
-      "pendentes": 105,
+      "pendentes": 125,
       "sem_embarque": 39,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 28,
-      "pct": 28.0
+      "pedidos_pendentes": 29,
+      "pct": 31.6
     },
     {
       "dia_iso": "2026-09-04",

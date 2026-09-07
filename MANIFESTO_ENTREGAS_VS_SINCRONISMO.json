@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-07T15:48:30",
+  "gerado_em": "2026-09-07T15:58:13",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,7 +20,7 @@
     "loggers_ares_janela": 5574,
     "loggers_ares_antes_dedup": 5597,
     "dedup_dia_logger": 23,
-    "pendentes_janela": 1041,
+    "pendentes_janela": 1040,
     "cobranca_gru_janela": 312,
     "sem_embarque_efetiva": 235,
     "com_embarque_efetiva": 5362,
@@ -40,7 +40,7 @@
       "JPA - LIDER CARGAS": 86,
       "VTCLOG - GRU": 76,
       "VTCLOG - REC": 55,
-      "SSA - LUTY LOG": 48,
+      "SSA - LUTY LOG": 47,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
       "NAT - CSM CARGO": 34
     },
@@ -52,7 +52,7 @@
       "PB": 87,
       "PA": 58,
       "PE": 56,
-      "BA": 55,
+      "BA": 54,
       "SC": 35,
       "RN": 34
     }
@@ -272,12 +272,12 @@
       "dia_full": "04/09/2026",
       "pedidos": 74,
       "loggers": 469,
-      "sincronizados": 197,
-      "pendentes": 268,
+      "sincronizados": 198,
+      "pendentes": 267,
       "sem_embarque": 125,
       "cobranca_gru": 4,
       "pedidos_pendentes": 42,
-      "pct": 57.1
+      "pct": 56.9
     },
     {
       "dia_iso": "2026-09-05",

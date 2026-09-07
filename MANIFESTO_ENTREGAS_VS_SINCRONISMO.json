@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-07T14:48:13",
+  "gerado_em": "2026-09-07T14:58:27",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,8 +20,8 @@
     "loggers_ares_janela": 5574,
     "loggers_ares_antes_dedup": 5597,
     "dedup_dia_logger": 23,
-    "pendentes_janela": 1185,
-    "cobranca_gru_janela": 168,
+    "pendentes_janela": 1041,
+    "cobranca_gru_janela": 312,
     "sem_embarque_efetiva": 235,
     "com_embarque_efetiva": 5362,
     "loggers_sem_lastsync": 0,
@@ -33,19 +33,18 @@
       "linhas": 1026
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 219,
       "THE - AERONEIVA EXPRESS": 149,
       "SLZ - REIS CAVALCANTE EXPRESSO": 136,
       "AJU - CASSIMIRO TRANSPORTES": 118,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "JPA - LIDER CARGAS": 86,
+      "VTCLOG - GRU": 76,
       "VTCLOG - REC": 55,
       "SSA - LUTY LOG": 48,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
       "NAT - CSM CARGO": 34
     },
     "top10_ufs_pendencias": {
-      "RS": 154,
       "PI": 149,
       "MA": 136,
       "SE": 116,
@@ -54,7 +53,8 @@
       "PA": 58,
       "PE": 56,
       "BA": 55,
-      "SC": 35
+      "SC": 35,
+      "RN": 34
     }
   },
   "serie_diaria": [
@@ -156,11 +156,11 @@
       "pedidos": 59,
       "loggers": 411,
       "sincronizados": 326,
-      "pendentes": 83,
+      "pendentes": 82,
       "sem_embarque": 19,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 16,
-      "pct": 20.2
+      "cobranca_gru": 3,
+      "pedidos_pendentes": 15,
+      "pct": 20.0
     },
     {
       "dia_iso": "2026-08-27",
@@ -182,11 +182,11 @@
       "pedidos": 87,
       "loggers": 621,
       "sincronizados": 282,
-      "pendentes": 273,
+      "pendentes": 135,
       "sem_embarque": 1,
-      "cobranca_gru": 66,
-      "pedidos_pendentes": 30,
-      "pct": 44.0
+      "cobranca_gru": 204,
+      "pedidos_pendentes": 29,
+      "pct": 21.7
     },
     {
       "dia_iso": "2026-08-29",
@@ -234,11 +234,11 @@
       "pedidos": 63,
       "loggers": 424,
       "sincronizados": 309,
-      "pendentes": 86,
+      "pendentes": 81,
       "sem_embarque": 0,
-      "cobranca_gru": 29,
-      "pedidos_pendentes": 12,
-      "pct": 20.3
+      "cobranca_gru": 34,
+      "pedidos_pendentes": 11,
+      "pct": 19.1
     },
     {
       "dia_iso": "2026-09-02",

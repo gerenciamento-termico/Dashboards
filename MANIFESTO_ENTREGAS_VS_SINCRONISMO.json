@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T12:06:23",
+  "gerado_em": "2026-09-08T12:18:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,7 +20,7 @@
     "loggers_ares_janela": 5275,
     "loggers_ares_antes_dedup": 5296,
     "dedup_dia_logger": 21,
-    "pendentes_janela": 968,
+    "pendentes_janela": 948,
     "cobranca_gru_janela": 308,
     "sem_embarque_efetiva": 256,
     "com_embarque_efetiva": 5040,
@@ -40,9 +40,9 @@
       "VTCLOG - GRU": 74,
       "VTCLOG - REC": 55,
       "SSA - LUTY LOG": 45,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
-      "NAT - CSM CARGO": 33
+      "NAT - CSM CARGO": 33,
+      "PVH - RODOTEC": 32
     },
     "top10_ufs_pendencias": {
       "PI": 143,
@@ -52,9 +52,9 @@
       "PA": 57,
       "PE": 56,
       "BA": 50,
-      "AM": 41,
       "SC": 35,
-      "RN": 33
+      "RN": 33,
+      "RO": 32
     }
   },
   "serie_diaria": [
@@ -311,12 +311,12 @@
       "dia_full": "08/09/2026",
       "pedidos": 10,
       "loggers": 78,
-      "sincronizados": 12,
-      "pendentes": 66,
+      "sincronizados": 32,
+      "pendentes": 46,
       "sem_embarque": 21,
       "cobranca_gru": 0,
       "pedidos_pendentes": 6,
-      "pct": 84.6
+      "pct": 59.0
     }
   ],
   "erros_validacao": {},

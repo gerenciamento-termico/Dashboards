@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T13:17:04",
+  "gerado_em": "2026-09-08T13:27:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,12 +20,12 @@
     "loggers_ares_janela": 5367,
     "loggers_ares_antes_dedup": 5389,
     "dedup_dia_logger": 22,
-    "pendentes_janela": 952,
+    "pendentes_janela": 992,
     "cobranca_gru_janela": 325,
-    "sem_embarque_efetiva": 318,
-    "com_embarque_efetiva": 5071,
+    "sem_embarque_efetiva": 278,
+    "com_embarque_efetiva": 5111,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 318,
+    "nao_avaliados": 278,
     "pedidos_com_agente": 5671,
     "dtbtransporte": {
       "consultados": 877,
@@ -38,23 +38,23 @@
       "AJU - CASSIMIRO TRANSPORTES": 118,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 74,
+      "JPA - LIDER CARGAS": 65,
       "VTCLOG - REC": 55,
       "SSA - LUTY LOG": 45,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
-      "NAT - CSM CARGO": 33,
-      "PVH - RODOTEC": 32
+      "NAT - CSM CARGO": 33
     },
     "top10_ufs_pendencias": {
       "PI": 143,
       "MA": 136,
       "SE": 116,
       "TO": 93,
+      "PB": 66,
       "PA": 57,
       "PE": 56,
       "BA": 50,
       "SC": 35,
-      "RN": 33,
-      "RO": 32
+      "RN": 33
     }
   },
   "serie_diaria": [
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 15,
-      "loggers": 108,
+      "pedidos": 16,
+      "loggers": 148,
       "sincronizados": 41,
-      "pendentes": 50,
-      "sem_embarque": 102,
+      "pendentes": 90,
+      "sem_embarque": 62,
       "cobranca_gru": 17,
-      "pedidos_pendentes": 10,
-      "pct": 46.3
+      "pedidos_pendentes": 11,
+      "pct": 60.8
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T10:02:52",
+  "gerado_em": "2026-09-08T10:13:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,26 +15,26 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5476,
-    "pedidos_janela": 859,
-    "loggers_ares_janela": 5172,
-    "loggers_ares_antes_dedup": 5193,
+    "pares_janela": 5495,
+    "pedidos_janela": 861,
+    "loggers_ares_janela": 5191,
+    "loggers_ares_antes_dedup": 5212,
     "dedup_dia_logger": 21,
-    "pendentes_janela": 904,
+    "pendentes_janela": 908,
     "cobranca_gru_janela": 308,
-    "sem_embarque_efetiva": 239,
-    "com_embarque_efetiva": 4954,
+    "sem_embarque_efetiva": 254,
+    "com_embarque_efetiva": 4958,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 239,
-    "pedidos_com_agente": 5474,
+    "nao_avaliados": 254,
+    "pedidos_com_agente": 5493,
     "dtbtransporte": {
-      "consultados": 859,
-      "mapeados": 857,
-      "linhas": 927
+      "consultados": 861,
+      "mapeados": 859,
+      "linhas": 929
     },
     "top10_agentes_pendencias": {
       "SLZ - REIS CAVALCANTE EXPRESSO": 136,
-      "THE - AERONEIVA EXPRESS": 125,
+      "THE - AERONEIVA EXPRESS": 129,
       "AJU - CASSIMIRO TRANSPORTES": 118,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 75,
@@ -46,7 +46,7 @@
     },
     "top10_ufs_pendencias": {
       "MA": 136,
-      "PI": 125,
+      "PI": 129,
       "SE": 116,
       "TO": 93,
       "PA": 57,
@@ -257,14 +257,14 @@
       "dia_iso": "2026-09-04",
       "dia": "04/09",
       "dia_full": "04/09/2026",
-      "pedidos": 74,
-      "loggers": 469,
+      "pedidos": 75,
+      "loggers": 473,
       "sincronizados": 250,
-      "pendentes": 215,
-      "sem_embarque": 129,
+      "pendentes": 219,
+      "sem_embarque": 144,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 36,
-      "pct": 45.8
+      "pedidos_pendentes": 37,
+      "pct": 46.3
     },
     {
       "dia_iso": "2026-09-05",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T09:11:44",
+  "gerado_em": "2026-09-08T09:22:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,7 +20,7 @@
     "loggers_ares_janela": 5167,
     "loggers_ares_antes_dedup": 5188,
     "dedup_dia_logger": 21,
-    "pendentes_janela": 923,
+    "pendentes_janela": 917,
     "cobranca_gru_janela": 308,
     "sem_embarque_efetiva": 235,
     "com_embarque_efetiva": 4953,
@@ -39,7 +39,7 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 75,
       "VTCLOG - REC": 55,
-      "SSA - LUTY LOG": 44,
+      "SSA - LUTY LOG": 41,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
       "NAT - CSM CARGO": 34,
       "RBR - RODOTEC": 28
@@ -51,7 +51,7 @@
       "TO": 93,
       "PA": 57,
       "PE": 56,
-      "BA": 49,
+      "BA": 46,
       "SC": 35,
       "RN": 34,
       "SP": 29
@@ -259,12 +259,12 @@
       "dia_full": "04/09/2026",
       "pedidos": 74,
       "loggers": 469,
-      "sincronizados": 244,
-      "pendentes": 221,
+      "sincronizados": 250,
+      "pendentes": 215,
       "sem_embarque": 125,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 37,
-      "pct": 47.1
+      "pedidos_pendentes": 36,
+      "pct": 45.8
     },
     {
       "dia_iso": "2026-09-05",

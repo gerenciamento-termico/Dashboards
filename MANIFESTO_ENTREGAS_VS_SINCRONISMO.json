@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T18:04:40",
+  "gerado_em": "2026-09-08T18:14:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,12 +20,12 @@
     "loggers_ares_janela": 5640,
     "loggers_ares_antes_dedup": 5666,
     "dedup_dia_logger": 26,
-    "pendentes_janela": 975,
+    "pendentes_janela": 977,
     "cobranca_gru_janela": 335,
-    "sem_embarque_efetiva": 291,
-    "com_embarque_efetiva": 5375,
+    "sem_embarque_efetiva": 245,
+    "com_embarque_efetiva": 5421,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 291,
+    "nao_avaliados": 245,
     "pedidos_com_agente": 5949,
     "dtbtransporte": {
       "consultados": 908,
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 42,
-      "loggers": 353,
-      "sincronizados": 240,
-      "pendentes": 95,
-      "sem_embarque": 107,
+      "pedidos": 45,
+      "loggers": 399,
+      "sincronizados": 284,
+      "pendentes": 97,
+      "sem_embarque": 61,
       "cobranca_gru": 18,
-      "pedidos_pendentes": 26,
-      "pct": 26.9
+      "pedidos_pendentes": 27,
+      "pct": 24.3
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T13:57:37",
+  "gerado_em": "2026-09-08T14:09:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5679,
-    "pedidos_janela": 881,
-    "loggers_ares_janela": 5372,
-    "loggers_ares_antes_dedup": 5395,
+    "pares_janela": 5711,
+    "pedidos_janela": 882,
+    "loggers_ares_janela": 5404,
+    "loggers_ares_antes_dedup": 5427,
     "dedup_dia_logger": 23,
-    "pendentes_janela": 990,
+    "pendentes_janela": 982,
     "cobranca_gru_janela": 330,
-    "sem_embarque_efetiva": 273,
-    "com_embarque_efetiva": 5122,
+    "sem_embarque_efetiva": 285,
+    "com_embarque_efetiva": 5142,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 273,
-    "pedidos_com_agente": 5677,
+    "nao_avaliados": 285,
+    "pedidos_com_agente": 5709,
     "dtbtransporte": {
-      "consultados": 881,
-      "mapeados": 879,
-      "linhas": 953
+      "consultados": 882,
+      "mapeados": 880,
+      "linhas": 955
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 143,
@@ -39,7 +39,7 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 75,
       "JPA - LIDER CARGAS": 65,
-      "VTCLOG - REC": 55,
+      "VTCLOG - REC": 48,
       "SSA - LUTY LOG": 45,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
       "NAT - CSM CARGO": 33
@@ -51,8 +51,8 @@
       "TO": 93,
       "PB": 66,
       "PA": 57,
-      "PE": 56,
       "BA": 50,
+      "PE": 49,
       "SC": 35,
       "RN": 33
     }
@@ -259,12 +259,12 @@
       "dia_full": "04/09/2026",
       "pedidos": 80,
       "loggers": 483,
-      "sincronizados": 253,
-      "pendentes": 221,
+      "sincronizados": 260,
+      "pendentes": 214,
       "sem_embarque": 125,
       "cobranca_gru": 9,
       "pedidos_pendentes": 40,
-      "pct": 45.8
+      "pct": 44.3
     },
     {
       "dia_iso": "2026-09-05",
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 20,
-      "loggers": 153,
-      "sincronizados": 48,
-      "pendentes": 88,
-      "sem_embarque": 62,
+      "pedidos": 21,
+      "loggers": 173,
+      "sincronizados": 69,
+      "pendentes": 87,
+      "sem_embarque": 74,
       "cobranca_gru": 17,
       "pedidos_pendentes": 13,
-      "pct": 57.5
+      "pct": 50.3
     }
   ],
   "erros_validacao": {},

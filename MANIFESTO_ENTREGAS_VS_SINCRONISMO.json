@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T14:49:55",
+  "gerado_em": "2026-09-08T15:00:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5745,
-    "pedidos_janela": 883,
+    "pares_janela": 5747,
+    "pedidos_janela": 884,
     "loggers_ares_janela": 5438,
-    "loggers_ares_antes_dedup": 5461,
-    "dedup_dia_logger": 23,
-    "pendentes_janela": 953,
+    "loggers_ares_antes_dedup": 5462,
+    "dedup_dia_logger": 24,
+    "pendentes_janela": 952,
     "cobranca_gru_janela": 335,
-    "sem_embarque_efetiva": 236,
+    "sem_embarque_efetiva": 237,
     "com_embarque_efetiva": 5225,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 236,
-    "pedidos_com_agente": 5743,
+    "nao_avaliados": 237,
+    "pedidos_com_agente": 5745,
     "dtbtransporte": {
-      "consultados": 883,
-      "mapeados": 881,
-      "linhas": 957
+      "consultados": 884,
+      "mapeados": 882,
+      "linhas": 958
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 143,
@@ -38,7 +38,7 @@
       "AJU - CASSIMIRO TRANSPORTES": 118,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 75,
-      "SSA - LUTY LOG": 72,
+      "SSA - LUTY LOG": 71,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
       "NAT - CSM CARGO": 33,
       "PVH - RODOTEC": 32,
@@ -49,7 +49,7 @@
       "MA": 136,
       "SE": 116,
       "TO": 93,
-      "BA": 77,
+      "BA": 76,
       "PA": 57,
       "SC": 35,
       "RN": 33,
@@ -311,12 +311,12 @@
       "dia_full": "08/09/2026",
       "pedidos": 23,
       "loggers": 251,
-      "sincronizados": 154,
-      "pendentes": 80,
+      "sincronizados": 155,
+      "pendentes": 79,
       "sem_embarque": 74,
       "cobranca_gru": 17,
       "pedidos_pendentes": 15,
-      "pct": 31.9
+      "pct": 31.5
     }
   ],
   "erros_validacao": {},

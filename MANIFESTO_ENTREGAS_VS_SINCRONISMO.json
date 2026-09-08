@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T11:45:08",
+  "gerado_em": "2026-09-08T11:55:26",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5573,
-    "pedidos_janela": 869,
-    "loggers_ares_janela": 5269,
-    "loggers_ares_antes_dedup": 5290,
+    "pares_janela": 5575,
+    "pedidos_janela": 870,
+    "loggers_ares_janela": 5271,
+    "loggers_ares_antes_dedup": 5292,
     "dedup_dia_logger": 21,
-    "pendentes_janela": 963,
+    "pendentes_janela": 966,
     "cobranca_gru_janela": 308,
-    "sem_embarque_efetiva": 257,
-    "com_embarque_efetiva": 5033,
+    "sem_embarque_efetiva": 255,
+    "com_embarque_efetiva": 5037,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 257,
-    "pedidos_com_agente": 5571,
+    "nao_avaliados": 255,
+    "pedidos_com_agente": 5573,
     "dtbtransporte": {
-      "consultados": 869,
-      "mapeados": 867,
-      "linhas": 938
+      "consultados": 870,
+      "mapeados": 868,
+      "linhas": 939
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 143,
@@ -259,12 +259,12 @@
       "dia_full": "04/09/2026",
       "pedidos": 79,
       "loggers": 478,
-      "sincronizados": 252,
-      "pendentes": 222,
+      "sincronizados": 253,
+      "pendentes": 221,
       "sem_embarque": 125,
       "cobranca_gru": 4,
       "pedidos_pendentes": 40,
-      "pct": 46.4
+      "pct": 46.2
     },
     {
       "dia_iso": "2026-09-05",
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 6,
-      "loggers": 71,
+      "pedidos": 8,
+      "loggers": 75,
       "sincronizados": 11,
-      "pendentes": 60,
-      "sem_embarque": 22,
+      "pendentes": 64,
+      "sem_embarque": 20,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 3,
-      "pct": 84.5
+      "pedidos_pendentes": 5,
+      "pct": 85.3
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-08T14:40:50",
+  "gerado_em": "2026-09-08T14:49:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,8 +20,8 @@
     "loggers_ares_janela": 5438,
     "loggers_ares_antes_dedup": 5461,
     "dedup_dia_logger": 23,
-    "pendentes_janela": 989,
-    "cobranca_gru_janela": 336,
+    "pendentes_janela": 953,
+    "cobranca_gru_janela": 335,
     "sem_embarque_efetiva": 236,
     "com_embarque_efetiva": 5225,
     "loggers_sem_lastsync": 0,
@@ -39,10 +39,10 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 75,
       "SSA - LUTY LOG": 72,
-      "JPA - LIDER CARGAS": 65,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
       "NAT - CSM CARGO": 33,
-      "PVH - RODOTEC": 32
+      "PVH - RODOTEC": 32,
+      "JPA - LIDER CARGAS": 31
     },
     "top10_ufs_pendencias": {
       "PI": 143,
@@ -50,11 +50,11 @@
       "SE": 116,
       "TO": 93,
       "BA": 77,
-      "PB": 66,
       "PA": 57,
       "SC": 35,
       "RN": 33,
-      "RO": 32
+      "RO": 32,
+      "PB": 32
     }
   },
   "serie_diaria": [
@@ -155,10 +155,10 @@
       "dia_full": "27/08/2026",
       "pedidos": 90,
       "loggers": 537,
-      "sincronizados": 453,
+      "sincronizados": 454,
       "pendentes": 80,
       "sem_embarque": 0,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 28,
       "pct": 14.9
     },
@@ -259,12 +259,12 @@
       "dia_full": "04/09/2026",
       "pedidos": 80,
       "loggers": 488,
-      "sincronizados": 279,
-      "pendentes": 195,
+      "sincronizados": 281,
+      "pendentes": 193,
       "sem_embarque": 81,
       "cobranca_gru": 14,
       "pedidos_pendentes": 39,
-      "pct": 40.0
+      "pct": 39.5
     },
     {
       "dia_iso": "2026-09-05",
@@ -311,12 +311,12 @@
       "dia_full": "08/09/2026",
       "pedidos": 23,
       "loggers": 251,
-      "sincronizados": 120,
-      "pendentes": 114,
+      "sincronizados": 154,
+      "pendentes": 80,
       "sem_embarque": 74,
       "cobranca_gru": 17,
       "pedidos_pendentes": 15,
-      "pct": 45.4
+      "pct": 31.9
     }
   ],
   "erros_validacao": {},

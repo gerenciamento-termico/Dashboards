@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-08T12:46:56",
-  "snapshot_em": "2026-09-08T12:46:56",
+  "gerado_em": "2026-09-08T12:56:33",
+  "snapshot_em": "2026-09-08T12:56:33",
   "status": "VALIDADO",
   "linhas": 1514,
   "ufs": 27,
@@ -27,8 +27,8 @@
       "MANUTENÇÃO": 43
     },
     "viagem_vtc": {
-      "ENTREGUE": 1190,
-      "RECEBIDO NO CLIENTE": 324
+      "ENTREGUE": 1189,
+      "RECEBIDO NO CLIENTE": 325
     },
     "em_gru": 261,
     "loggers": 1514,

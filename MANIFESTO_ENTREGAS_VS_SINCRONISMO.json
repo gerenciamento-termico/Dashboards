@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-09T13:30:38",
+  "gerado_em": "2026-09-09T13:40:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5787,
-    "pedidos_janela": 891,
-    "loggers_ares_janela": 5541,
-    "loggers_ares_antes_dedup": 5571,
+    "pares_janela": 5789,
+    "pedidos_janela": 892,
+    "loggers_ares_janela": 5543,
+    "loggers_ares_antes_dedup": 5573,
     "dedup_dia_logger": 30,
-    "pendentes_janela": 1008,
+    "pendentes_janela": 1007,
     "cobranca_gru_janela": 310,
     "sem_embarque_efetiva": 142,
-    "com_embarque_efetiva": 5429,
+    "com_embarque_efetiva": 5431,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 142,
-    "pedidos_com_agente": 5785,
+    "pedidos_com_agente": 5787,
     "dtbtransporte": {
-      "consultados": 891,
-      "mapeados": 889,
-      "linhas": 964
+      "consultados": 892,
+      "mapeados": 890,
+      "linhas": 965
     },
     "top10_agentes_pendencias": {
       "SLZ - REIS CAVALCANTE EXPRESSO": 154,
@@ -39,8 +39,8 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 82,
       "SSA - LUTY LOG": 60,
-      "NAT - CSM CARGO": 33,
       "CGB - JR TRANSPORTES": 33,
+      "NAT - CSM CARGO": 32,
       "PVH - RODOTEC": 31,
       "FOR - NT TRANSPORTE LTDA": 31
     },
@@ -51,8 +51,8 @@
       "TO": 93,
       "PA": 77,
       "BA": 65,
-      "RN": 33,
       "MT": 33,
+      "RN": 32,
       "SP": 31,
       "PB": 31
     }
@@ -155,12 +155,12 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 299,
-      "pendentes": 130,
+      "sincronizados": 300,
+      "pendentes": 129,
       "sem_embarque": 1,
       "cobranca_gru": 192,
-      "pedidos_pendentes": 26,
-      "pct": 20.9
+      "pedidos_pendentes": 25,
+      "pct": 20.8
     },
     {
       "dia_iso": "2026-08-29",
@@ -296,14 +296,14 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 57,
-      "loggers": 542,
-      "sincronizados": 393,
+      "pedidos": 58,
+      "loggers": 544,
+      "sincronizados": 395,
       "pendentes": 131,
       "sem_embarque": 41,
       "cobranca_gru": 18,
       "pedidos_pendentes": 31,
-      "pct": 24.2
+      "pct": 24.1
     },
     {
       "dia_iso": "2026-09-09",

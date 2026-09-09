@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-09T12:01:16",
+  "gerado_em": "2026-09-09T12:10:41",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,29 +15,29 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5749,
-    "pedidos_janela": 882,
-    "loggers_ares_janela": 5508,
-    "loggers_ares_antes_dedup": 5536,
-    "dedup_dia_logger": 28,
-    "pendentes_janela": 958,
+    "pares_janela": 5761,
+    "pedidos_janela": 885,
+    "loggers_ares_janela": 5519,
+    "loggers_ares_antes_dedup": 5548,
+    "dedup_dia_logger": 29,
+    "pendentes_janela": 960,
     "cobranca_gru_janela": 336,
-    "sem_embarque_efetiva": 205,
-    "com_embarque_efetiva": 5331,
+    "sem_embarque_efetiva": 214,
+    "com_embarque_efetiva": 5334,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 205,
-    "pedidos_com_agente": 5747,
+    "nao_avaliados": 214,
+    "pedidos_com_agente": 5759,
     "dtbtransporte": {
-      "consultados": 882,
-      "mapeados": 880,
-      "linhas": 955
+      "consultados": 885,
+      "mapeados": 883,
+      "linhas": 958
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 141,
       "SLZ - REIS CAVALCANTE EXPRESSO": 134,
       "AJU - CASSIMIRO TRANSPORTES": 118,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
-      "VTCLOG - GRU": 79,
+      "VTCLOG - GRU": 81,
       "SSA - LUTY LOG": 47,
       "NAT - CSM CARGO": 33,
       "PVH - RODOTEC": 31,
@@ -52,9 +52,9 @@
       "PA": 77,
       "BA": 52,
       "RN": 33,
+      "PB": 31,
       "RO": 31,
-      "CE": 31,
-      "SP": 30
+      "CE": 31
     }
   },
   "serie_diaria": [
@@ -300,7 +300,7 @@
       "loggers": 491,
       "sincronizados": 356,
       "pendentes": 117,
-      "sem_embarque": 41,
+      "sem_embarque": 52,
       "cobranca_gru": 18,
       "pedidos_pendentes": 29,
       "pct": 23.8
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-09",
       "dia": "09/09",
       "dia_full": "09/09/2026",
-      "pedidos": 9,
-      "loggers": 36,
+      "pedidos": 12,
+      "loggers": 38,
       "sincronizados": 32,
-      "pendentes": 4,
-      "sem_embarque": 2,
+      "pendentes": 6,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 3,
-      "pct": 11.1
+      "pedidos_pendentes": 5,
+      "pct": 15.8
     }
   ],
   "erros_validacao": {},

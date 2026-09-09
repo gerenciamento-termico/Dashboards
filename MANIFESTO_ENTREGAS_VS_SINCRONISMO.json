@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-09T12:21:01",
+  "gerado_em": "2026-09-09T12:31:28",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5761,
-    "pedidos_janela": 885,
+    "pares_janela": 5762,
+    "pedidos_janela": 886,
     "loggers_ares_janela": 5519,
-    "loggers_ares_antes_dedup": 5548,
-    "dedup_dia_logger": 29,
+    "loggers_ares_antes_dedup": 5549,
+    "dedup_dia_logger": 30,
     "pendentes_janela": 996,
     "cobranca_gru_janela": 336,
-    "sem_embarque_efetiva": 142,
+    "sem_embarque_efetiva": 143,
     "com_embarque_efetiva": 5406,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 142,
-    "pedidos_com_agente": 5759,
+    "nao_avaliados": 143,
+    "pedidos_com_agente": 5760,
     "dtbtransporte": {
-      "consultados": 885,
-      "mapeados": 883,
-      "linhas": 958
+      "consultados": 886,
+      "mapeados": 884,
+      "linhas": 959
     },
     "top10_agentes_pendencias": {
       "SLZ - REIS CAVALCANTE EXPRESSO": 154,

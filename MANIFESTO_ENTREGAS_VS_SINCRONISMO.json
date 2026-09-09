@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-09T10:39:35",
+  "gerado_em": "2026-09-09T10:52:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5730,
-    "pedidos_janela": 875,
-    "loggers_ares_janela": 5492,
-    "loggers_ares_antes_dedup": 5519,
+    "pares_janela": 5732,
+    "pedidos_janela": 876,
+    "loggers_ares_janela": 5494,
+    "loggers_ares_antes_dedup": 5521,
     "dedup_dia_logger": 27,
-    "pendentes_janela": 961,
+    "pendentes_janela": 960,
     "cobranca_gru_janela": 336,
-    "sem_embarque_efetiva": 203,
-    "com_embarque_efetiva": 5316,
+    "sem_embarque_efetiva": 202,
+    "com_embarque_efetiva": 5319,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 203,
-    "pedidos_com_agente": 5728,
+    "nao_avaliados": 202,
+    "pedidos_com_agente": 5730,
     "dtbtransporte": {
-      "consultados": 875,
-      "mapeados": 873,
-      "linhas": 947
+      "consultados": 876,
+      "mapeados": 874,
+      "linhas": 948
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 141,
@@ -296,14 +296,14 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 54,
-      "loggers": 489,
-      "sincronizados": 352,
+      "pedidos": 56,
+      "loggers": 492,
+      "sincronizados": 355,
       "pendentes": 119,
-      "sem_embarque": 42,
+      "sem_embarque": 41,
       "cobranca_gru": 18,
       "pedidos_pendentes": 29,
-      "pct": 24.3
+      "pct": 24.2
     },
     {
       "dia_iso": "2026-09-09",
@@ -311,12 +311,12 @@
       "dia_full": "09/09/2026",
       "pedidos": 5,
       "loggers": 23,
-      "sincronizados": 19,
-      "pendentes": 4,
+      "sincronizados": 20,
+      "pendentes": 3,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
-      "pct": 17.4
+      "pct": 13.0
     }
   ],
   "erros_validacao": {},

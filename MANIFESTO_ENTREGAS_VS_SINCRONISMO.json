@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-09T11:10:38",
+  "gerado_em": "2026-09-09T11:20:44",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,29 +15,29 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5732,
-    "pedidos_janela": 876,
-    "loggers_ares_janela": 5494,
-    "loggers_ares_antes_dedup": 5521,
+    "pares_janela": 5735,
+    "pedidos_janela": 877,
+    "loggers_ares_janela": 5496,
+    "loggers_ares_antes_dedup": 5523,
     "dedup_dia_logger": 27,
-    "pendentes_janela": 957,
+    "pendentes_janela": 958,
     "cobranca_gru_janela": 336,
-    "sem_embarque_efetiva": 202,
-    "com_embarque_efetiva": 5319,
+    "sem_embarque_efetiva": 203,
+    "com_embarque_efetiva": 5320,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 202,
-    "pedidos_com_agente": 5730,
+    "nao_avaliados": 203,
+    "pedidos_com_agente": 5733,
     "dtbtransporte": {
-      "consultados": 876,
-      "mapeados": 874,
-      "linhas": 948
+      "consultados": 877,
+      "mapeados": 875,
+      "linhas": 950
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 141,
       "SLZ - REIS CAVALCANTE EXPRESSO": 134,
       "AJU - CASSIMIRO TRANSPORTES": 118,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
-      "VTCLOG - GRU": 78,
+      "VTCLOG - GRU": 79,
       "SSA - LUTY LOG": 47,
       "NAT - CSM CARGO": 33,
       "PVH - RODOTEC": 31,
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-09",
       "dia": "09/09",
       "dia_full": "09/09/2026",
-      "pedidos": 6,
-      "loggers": 24,
+      "pedidos": 7,
+      "loggers": 25,
       "sincronizados": 21,
-      "pendentes": 3,
-      "sem_embarque": 0,
+      "pendentes": 4,
+      "sem_embarque": 1,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 2,
-      "pct": 12.5
+      "pedidos_pendentes": 3,
+      "pct": 16.0
     }
   ],
   "erros_validacao": {},

@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-09T14:48:37",
-  "snapshot_em": "2026-09-09T14:48:37",
+  "gerado_em": "2026-09-09T15:08:48",
+  "snapshot_em": "2026-09-09T15:08:48",
   "status": "VALIDADO",
   "linhas": 1479,
   "ufs": 27,
@@ -27,14 +27,14 @@
       "MANUTENÇÃO": 42
     },
     "viagem_vtc": {
-      "RECEBIDO NO CLIENTE": 297,
-      "ENTREGUE": 1182
+      "ENTREGUE": 1182,
+      "RECEBIDO NO CLIENTE": 297
     },
     "em_gru": 184,
     "loggers": 1479,
     "pipeline": {
-      "vtc_match": 22515,
-      "viagens_descartadas_logger": 17008,
+      "vtc_match": 22516,
+      "viagens_descartadas_logger": 17009,
       "universo_loggers": 5507,
       "PENDENTE": 1479,
       "SINCRONIZADO": 4028,

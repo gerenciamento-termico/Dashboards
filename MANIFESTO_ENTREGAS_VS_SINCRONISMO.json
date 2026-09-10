@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T19:00:45",
+  "gerado_em": "2026-09-10T19:11:41",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,12 +20,12 @@
     "loggers_ares_janela": 6087,
     "loggers_ares_antes_dedup": 6121,
     "dedup_dia_logger": 34,
-    "pendentes_janela": 787,
+    "pendentes_janela": 788,
     "cobranca_gru_janela": 189,
-    "sem_embarque_efetiva": 217,
-    "com_embarque_efetiva": 5904,
+    "sem_embarque_efetiva": 213,
+    "com_embarque_efetiva": 5908,
     "loggers_sem_lastsync": 106,
-    "nao_avaliados": 217,
+    "nao_avaliados": 213,
     "pedidos_com_agente": 6332,
     "dtbtransporte": {
       "consultados": 958,
@@ -36,7 +36,7 @@
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 73,
-      "SSA - LUTY LOG": 47,
+      "SSA - LUTY LOG": 48,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
       "CGB - JR TRANSPORTES": 33,
@@ -47,7 +47,7 @@
     "top10_ufs_pendencias": {
       "PI": 121,
       "TO": 93,
-      "BA": 54,
+      "BA": 55,
       "PA": 48,
       "PB": 36,
       "AC": 36,
@@ -283,14 +283,14 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 59,
-      "loggers": 545,
-      "sincronizados": 436,
-      "pendentes": 105,
-      "sem_embarque": 28,
+      "pedidos": 60,
+      "loggers": 547,
+      "sincronizados": 437,
+      "pendentes": 106,
+      "sem_embarque": 26,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 29,
-      "pct": 19.3
+      "pedidos_pendentes": 30,
+      "pct": 19.4
     },
     {
       "dia_iso": "2026-09-09",
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 86,
-      "loggers": 487,
-      "sincronizados": 333,
+      "pedidos": 88,
+      "loggers": 489,
+      "sincronizados": 335,
       "pendentes": 137,
-      "sem_embarque": 60,
+      "sem_embarque": 58,
       "cobranca_gru": 17,
       "pedidos_pendentes": 56,
-      "pct": 28.1
+      "pct": 28.0
     }
   ],
   "erros_validacao": {},

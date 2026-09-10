@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T16:58:19",
+  "gerado_em": "2026-09-10T17:09:00",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,46 +15,46 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6153,
-    "pedidos_janela": 925,
-    "loggers_ares_janela": 5910,
-    "loggers_ares_antes_dedup": 5941,
+    "pares_janela": 6154,
+    "pedidos_janela": 926,
+    "loggers_ares_janela": 5911,
+    "loggers_ares_antes_dedup": 5942,
     "dedup_dia_logger": 31,
-    "pendentes_janela": 825,
-    "cobranca_gru_janela": 183,
-    "sem_embarque_efetiva": 272,
+    "pendentes_janela": 786,
+    "cobranca_gru_janela": 182,
+    "sem_embarque_efetiva": 273,
     "com_embarque_efetiva": 5669,
     "loggers_sem_lastsync": 111,
-    "nao_avaliados": 272,
-    "pedidos_com_agente": 6152,
+    "nao_avaliados": 273,
+    "pedidos_com_agente": 6153,
     "dtbtransporte": {
-      "consultados": 925,
-      "mapeados": 924,
-      "linhas": 1002
+      "consultados": 926,
+      "mapeados": 925,
+      "linhas": 1003
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG CNF - CONTAGEM": 58,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 58,
       "VTCLOG - GRU": 57,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 55,
       "SSA - LUTY LOG": 43,
-      "CGR - LH TRANSPORTES": 43,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
-      "CGB - JR TRANSPORTES": 33
+      "CGB - JR TRANSPORTES": 33,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 32
     },
     "top10_ufs_pendencias": {
       "PI": 121,
       "TO": 93,
       "MG": 64,
-      "AM": 58,
+      "AM": 55,
       "BA": 50,
-      "MS": 44,
       "PA": 42,
       "PB": 36,
       "AC": 36,
-      "MT": 34
+      "MT": 34,
+      "SP": 33
     }
   },
   "serie_diaria": [
@@ -285,10 +285,10 @@
       "dia_full": "08/09/2026",
       "pedidos": 59,
       "loggers": 545,
-      "sincronizados": 435,
+      "sincronizados": 436,
       "pendentes": 105,
       "sem_embarque": 26,
-      "cobranca_gru": 5,
+      "cobranca_gru": 4,
       "pedidos_pendentes": 29,
       "pct": 19.3
     },
@@ -311,12 +311,12 @@
       "dia_full": "10/09/2026",
       "pedidos": 50,
       "loggers": 260,
-      "sincronizados": 85,
-      "pendentes": 175,
-      "sem_embarque": 83,
+      "sincronizados": 124,
+      "pendentes": 136,
+      "sem_embarque": 84,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 29,
-      "pct": 67.3
+      "pedidos_pendentes": 25,
+      "pct": 52.3
     }
   ],
   "erros_validacao": {},

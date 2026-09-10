@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T14:48:24",
+  "gerado_em": "2026-09-10T15:02:36",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5898,
-    "pedidos_janela": 901,
-    "loggers_ares_janela": 5659,
-    "loggers_ares_antes_dedup": 5687,
+    "pares_janela": 5899,
+    "pedidos_janela": 902,
+    "loggers_ares_janela": 5660,
+    "loggers_ares_antes_dedup": 5688,
     "dedup_dia_logger": 28,
-    "pendentes_janela": 824,
-    "cobranca_gru_janela": 112,
-    "sem_embarque_efetiva": 190,
-    "com_embarque_efetiva": 5497,
+    "pendentes_janela": 825,
+    "cobranca_gru_janela": 110,
+    "sem_embarque_efetiva": 189,
+    "com_embarque_efetiva": 5499,
     "loggers_sem_lastsync": 63,
-    "nao_avaliados": 190,
-    "pedidos_com_agente": 5897,
+    "nao_avaliados": 189,
+    "pedidos_com_agente": 5898,
     "dtbtransporte": {
-      "consultados": 901,
-      "mapeados": 900,
-      "linhas": 974
+      "consultados": 902,
+      "mapeados": 901,
+      "linhas": 975
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
@@ -207,10 +207,10 @@
       "dia_full": "02/09/2026",
       "pedidos": 78,
       "loggers": 414,
-      "sincronizados": 361,
+      "sincronizados": 362,
       "pendentes": 32,
       "sem_embarque": 2,
-      "cobranca_gru": 21,
+      "cobranca_gru": 20,
       "pedidos_pendentes": 13,
       "pct": 7.7
     },
@@ -233,10 +233,10 @@
       "dia_full": "04/09/2026",
       "pedidos": 81,
       "loggers": 489,
-      "sincronizados": 361,
+      "sincronizados": 362,
       "pendentes": 124,
       "sem_embarque": 89,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 33,
       "pct": 25.4
     },
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 30,
-      "loggers": 92,
+      "pedidos": 32,
+      "loggers": 93,
       "sincronizados": 20,
-      "pendentes": 72,
+      "pendentes": 73,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 20,
-      "pct": 78.3
+      "pedidos_pendentes": 21,
+      "pct": 78.5
     }
   ],
   "erros_validacao": {},

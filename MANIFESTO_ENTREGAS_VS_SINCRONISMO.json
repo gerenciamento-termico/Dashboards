@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T16:04:20",
+  "gerado_em": "2026-09-10T16:14:32",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,46 +15,46 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5933,
-    "pedidos_janela": 912,
-    "loggers_ares_janela": 5690,
-    "loggers_ares_antes_dedup": 5721,
+    "pares_janela": 5934,
+    "pedidos_janela": 913,
+    "loggers_ares_janela": 5691,
+    "loggers_ares_antes_dedup": 5722,
     "dedup_dia_logger": 31,
-    "pendentes_janela": 797,
-    "cobranca_gru_janela": 138,
-    "sem_embarque_efetiva": 189,
+    "pendentes_janela": 729,
+    "cobranca_gru_janela": 206,
+    "sem_embarque_efetiva": 190,
     "com_embarque_efetiva": 5532,
     "loggers_sem_lastsync": 65,
-    "nao_avaliados": 189,
-    "pedidos_com_agente": 5932,
+    "nao_avaliados": 190,
+    "pedidos_com_agente": 5933,
     "dtbtransporte": {
-      "consultados": 912,
-      "mapeados": 911,
-      "linhas": 985
+      "consultados": 913,
+      "mapeados": 912,
+      "linhas": 986
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 76,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 63,
-      "VTCLOG - GRU": 58,
+      "VTCLOG - GRU": 57,
       "SSA - LUTY LOG": 43,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
       "CGB - JR TRANSPORTES": 33,
-      "FOR - NT TRANSPORTE LTDA": 31
+      "FOR - NT TRANSPORTE LTDA": 31,
+      "VTCLOG - REC": 27
     },
     "top10_ufs_pendencias": {
       "PI": 121,
       "TO": 93,
-      "MA": 76,
       "AM": 63,
-      "PA": 61,
       "BA": 50,
+      "PA": 44,
       "PB": 36,
       "AC": 36,
       "MT": 34,
-      "SP": 34
+      "SP": 33,
+      "CE": 31
     }
   },
   "serie_diaria": [
@@ -91,11 +91,11 @@
       "pedidos": 69,
       "loggers": 709,
       "sincronizados": 687,
-      "pendentes": 9,
+      "pendentes": 8,
       "sem_embarque": 2,
-      "cobranca_gru": 13,
-      "pedidos_pendentes": 7,
-      "pct": 1.3
+      "cobranca_gru": 14,
+      "pedidos_pendentes": 6,
+      "pct": 1.1
     },
     {
       "dia_iso": "2026-08-25",
@@ -104,11 +104,11 @@
       "pedidos": 110,
       "loggers": 329,
       "sincronizados": 315,
-      "pendentes": 12,
+      "pendentes": 10,
       "sem_embarque": 0,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 9,
-      "pct": 3.6
+      "cobranca_gru": 4,
+      "pedidos_pendentes": 8,
+      "pct": 3.0
     },
     {
       "dia_iso": "2026-08-26",
@@ -117,11 +117,11 @@
       "pedidos": 59,
       "loggers": 411,
       "sincronizados": 333,
-      "pendentes": 72,
+      "pendentes": 47,
       "sem_embarque": 19,
-      "cobranca_gru": 6,
-      "pedidos_pendentes": 13,
-      "pct": 17.5
+      "cobranca_gru": 31,
+      "pedidos_pendentes": 11,
+      "pct": 11.4
     },
     {
       "dia_iso": "2026-08-27",
@@ -130,11 +130,11 @@
       "pedidos": 90,
       "loggers": 537,
       "sincronizados": 463,
-      "pendentes": 65,
+      "pendentes": 51,
       "sem_embarque": 0,
-      "cobranca_gru": 9,
-      "pedidos_pendentes": 26,
-      "pct": 12.1
+      "cobranca_gru": 23,
+      "pedidos_pendentes": 22,
+      "pct": 9.5
     },
     {
       "dia_iso": "2026-08-28",
@@ -143,11 +143,11 @@
       "pedidos": 87,
       "loggers": 621,
       "sincronizados": 472,
-      "pendentes": 113,
+      "pendentes": 87,
       "sem_embarque": 1,
-      "cobranca_gru": 36,
-      "pedidos_pendentes": 24,
-      "pct": 18.2
+      "cobranca_gru": 62,
+      "pedidos_pendentes": 22,
+      "pct": 14.0
     },
     {
       "dia_iso": "2026-08-29",
@@ -313,7 +313,7 @@
       "loggers": 123,
       "sincronizados": 47,
       "pendentes": 76,
-      "sem_embarque": 0,
+      "sem_embarque": 1,
       "cobranca_gru": 0,
       "pedidos_pendentes": 23,
       "pct": 61.8

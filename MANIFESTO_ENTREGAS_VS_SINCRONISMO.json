@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T14:05:54",
+  "gerado_em": "2026-09-10T14:16:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5891,
-    "pedidos_janela": 894,
-    "loggers_ares_janela": 5657,
-    "loggers_ares_antes_dedup": 5680,
-    "dedup_dia_logger": 23,
+    "pares_janela": 5894,
+    "pedidos_janela": 897,
+    "loggers_ares_janela": 5659,
+    "loggers_ares_antes_dedup": 5683,
+    "dedup_dia_logger": 24,
     "pendentes_janela": 821,
-    "cobranca_gru_janela": 115,
-    "sem_embarque_efetiva": 190,
+    "cobranca_gru_janela": 112,
+    "sem_embarque_efetiva": 193,
     "com_embarque_efetiva": 5490,
-    "loggers_sem_lastsync": 62,
-    "nao_avaliados": 190,
-    "pedidos_com_agente": 5890,
+    "loggers_sem_lastsync": 63,
+    "nao_avaliados": 193,
+    "pedidos_com_agente": 5893,
     "dtbtransporte": {
-      "consultados": 894,
-      "mapeados": 893,
-      "linhas": 967
+      "consultados": 897,
+      "mapeados": 896,
+      "linhas": 970
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
@@ -142,10 +142,10 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 471,
+      "sincronizados": 472,
       "pendentes": 127,
       "sem_embarque": 1,
-      "cobranca_gru": 23,
+      "cobranca_gru": 22,
       "pedidos_pendentes": 24,
       "pct": 20.5
     },
@@ -207,10 +207,10 @@
       "dia_full": "02/09/2026",
       "pedidos": 78,
       "loggers": 414,
-      "sincronizados": 360,
+      "sincronizados": 361,
       "pendentes": 32,
       "sem_embarque": 2,
-      "cobranca_gru": 22,
+      "cobranca_gru": 21,
       "pedidos_pendentes": 13,
       "pct": 7.7
     },
@@ -233,10 +233,10 @@
       "dia_full": "04/09/2026",
       "pedidos": 81,
       "loggers": 489,
-      "sincronizados": 360,
+      "sincronizados": 361,
       "pendentes": 124,
       "sem_embarque": 89,
-      "cobranca_gru": 5,
+      "cobranca_gru": 4,
       "pedidos_pendentes": 33,
       "pct": 25.4
     },
@@ -313,7 +313,7 @@
       "loggers": 89,
       "sincronizados": 20,
       "pendentes": 69,
-      "sem_embarque": 0,
+      "sem_embarque": 2,
       "cobranca_gru": 0,
       "pedidos_pendentes": 17,
       "pct": 77.5

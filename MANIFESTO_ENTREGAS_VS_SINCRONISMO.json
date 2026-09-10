@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T14:16:42",
+  "gerado_em": "2026-09-10T14:27:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -17,15 +17,15 @@
   "contagens": {
     "pares_janela": 5894,
     "pedidos_janela": 897,
-    "loggers_ares_janela": 5659,
+    "loggers_ares_janela": 5658,
     "loggers_ares_antes_dedup": 5683,
-    "dedup_dia_logger": 24,
-    "pendentes_janela": 821,
+    "dedup_dia_logger": 25,
+    "pendentes_janela": 823,
     "cobranca_gru_janela": 112,
-    "sem_embarque_efetiva": 193,
-    "com_embarque_efetiva": 5490,
+    "sem_embarque_efetiva": 189,
+    "com_embarque_efetiva": 5494,
     "loggers_sem_lastsync": 63,
-    "nao_avaliados": 193,
+    "nao_avaliados": 189,
     "pedidos_com_agente": 5893,
     "dtbtransporte": {
       "consultados": 897,
@@ -37,7 +37,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 104,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 63,
-      "VTCLOG - GRU": 56,
+      "VTCLOG - GRU": 57,
       "SSA - LUTY LOG": 43,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
@@ -287,7 +287,7 @@
       "loggers": 545,
       "sincronizados": 435,
       "pendentes": 105,
-      "sem_embarque": 27,
+      "sem_embarque": 26,
       "cobranca_gru": 5,
       "pedidos_pendentes": 29,
       "pct": 19.3
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 23,
-      "loggers": 89,
+      "pedidos": 27,
+      "loggers": 91,
       "sincronizados": 20,
-      "pendentes": 69,
-      "sem_embarque": 2,
+      "pendentes": 71,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 17,
-      "pct": 77.5
+      "pedidos_pendentes": 19,
+      "pct": 78.0
     }
   ],
   "erros_validacao": {},

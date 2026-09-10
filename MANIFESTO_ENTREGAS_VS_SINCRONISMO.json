@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T13:16:06",
+  "gerado_em": "2026-09-10T13:26:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5880,
-    "pedidos_janela": 891,
-    "loggers_ares_janela": 5646,
-    "loggers_ares_antes_dedup": 5669,
+    "pares_janela": 5881,
+    "pedidos_janela": 892,
+    "loggers_ares_janela": 5647,
+    "loggers_ares_antes_dedup": 5670,
     "dedup_dia_logger": 23,
-    "pendentes_janela": 816,
+    "pendentes_janela": 818,
     "cobranca_gru_janela": 122,
-    "sem_embarque_efetiva": 191,
-    "com_embarque_efetiva": 5478,
+    "sem_embarque_efetiva": 190,
+    "com_embarque_efetiva": 5480,
     "loggers_sem_lastsync": 62,
-    "nao_avaliados": 191,
-    "pedidos_com_agente": 5879,
+    "nao_avaliados": 190,
+    "pedidos_com_agente": 5880,
     "dtbtransporte": {
-      "consultados": 891,
-      "mapeados": 890,
-      "linhas": 964
+      "consultados": 892,
+      "mapeados": 891,
+      "linhas": 965
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
@@ -38,7 +38,7 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 63,
       "VTCLOG - GRU": 56,
-      "SSA - LUTY LOG": 42,
+      "SSA - LUTY LOG": 43,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
       "CGB - JR TRANSPORTES": 33,
@@ -50,7 +50,7 @@
       "TO": 93,
       "PA": 64,
       "AM": 63,
-      "BA": 49,
+      "BA": 50,
       "PB": 36,
       "AC": 36,
       "MT": 34,
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 19,
-      "loggers": 77,
+      "pedidos": 21,
+      "loggers": 79,
       "sincronizados": 13,
-      "pendentes": 64,
-      "sem_embarque": 1,
+      "pendentes": 66,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 14,
-      "pct": 83.1
+      "pedidos_pendentes": 16,
+      "pct": 83.5
     }
   ],
   "erros_validacao": {},

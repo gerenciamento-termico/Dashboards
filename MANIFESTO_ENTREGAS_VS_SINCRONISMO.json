@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T15:34:12",
+  "gerado_em": "2026-09-10T15:43:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5902,
-    "pedidos_janela": 905,
-    "loggers_ares_janela": 5663,
-    "loggers_ares_antes_dedup": 5691,
-    "dedup_dia_logger": 28,
-    "pendentes_janela": 825,
-    "cobranca_gru_janela": 110,
-    "sem_embarque_efetiva": 190,
-    "com_embarque_efetiva": 5501,
-    "loggers_sem_lastsync": 63,
-    "nao_avaliados": 190,
-    "pedidos_com_agente": 5901,
+    "pares_janela": 5932,
+    "pedidos_janela": 911,
+    "loggers_ares_janela": 5689,
+    "loggers_ares_antes_dedup": 5720,
+    "dedup_dia_logger": 31,
+    "pendentes_janela": 827,
+    "cobranca_gru_janela": 108,
+    "sem_embarque_efetiva": 198,
+    "com_embarque_efetiva": 5522,
+    "loggers_sem_lastsync": 66,
+    "nao_avaliados": 198,
+    "pedidos_com_agente": 5931,
     "dtbtransporte": {
-      "consultados": 905,
-      "mapeados": 904,
-      "linhas": 978
+      "consultados": 911,
+      "mapeados": 910,
+      "linhas": 984
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
@@ -298,10 +298,10 @@
       "dia_full": "09/09/2026",
       "pedidos": 49,
       "loggers": 226,
-      "sincronizados": 155,
+      "sincronizados": 157,
       "pendentes": 64,
       "sem_embarque": 14,
-      "cobranca_gru": 7,
+      "cobranca_gru": 5,
       "pedidos_pendentes": 24,
       "pct": 28.3
     },
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 34,
-      "loggers": 95,
-      "sincronizados": 22,
-      "pendentes": 73,
-      "sem_embarque": 1,
+      "pedidos": 36,
+      "loggers": 116,
+      "sincronizados": 41,
+      "pendentes": 75,
+      "sem_embarque": 6,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 21,
-      "pct": 76.8
+      "pedidos_pendentes": 22,
+      "pct": 64.7
     }
   ],
   "erros_validacao": {},

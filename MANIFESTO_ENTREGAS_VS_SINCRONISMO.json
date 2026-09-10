@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T17:40:45",
+  "gerado_em": "2026-09-10T17:50:26",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,46 +15,46 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6292,
-    "pedidos_janela": 936,
-    "loggers_ares_janela": 6048,
-    "loggers_ares_antes_dedup": 6080,
+    "pares_janela": 6312,
+    "pedidos_janela": 945,
+    "loggers_ares_janela": 6068,
+    "loggers_ares_antes_dedup": 6100,
     "dedup_dia_logger": 32,
-    "pendentes_janela": 828,
+    "pendentes_janela": 784,
     "cobranca_gru_janela": 189,
-    "sem_embarque_efetiva": 240,
-    "com_embarque_efetiva": 5840,
-    "loggers_sem_lastsync": 120,
-    "nao_avaliados": 240,
-    "pedidos_com_agente": 6291,
+    "sem_embarque_efetiva": 228,
+    "com_embarque_efetiva": 5872,
+    "loggers_sem_lastsync": 98,
+    "nao_avaliados": 228,
+    "pedidos_com_agente": 6311,
     "dtbtransporte": {
-      "consultados": 936,
-      "mapeados": 935,
-      "linhas": 1014
+      "consultados": 945,
+      "mapeados": 944,
+      "linhas": 1023
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
-      "VTCLOG - GRU": 59,
-      "VTCLOG CNF - CONTAGEM": 58,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 52,
-      "SSA - LUTY LOG": 46,
+      "VTCLOG - GRU": 60,
+      "SSA - LUTY LOG": 47,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 34,
       "CGB - JR TRANSPORTES": 33,
-      "PVH - RODOTEC": 32
+      "PVH - RODOTEC": 32,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 32
     },
     "top10_ufs_pendencias": {
       "PI": 121,
       "TO": 93,
-      "MG": 65,
-      "BA": 53,
-      "AM": 52,
+      "BA": 54,
       "PA": 48,
       "PB": 36,
       "AC": 36,
       "MT": 34,
-      "SP": 34
+      "SP": 34,
+      "AM": 34,
+      "MG": 33
     }
   },
   "serie_diaria": [
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 65,
-      "loggers": 424,
-      "sincronizados": 229,
-      "pendentes": 178,
-      "sem_embarque": 86,
+      "pedidos": 71,
+      "loggers": 456,
+      "sincronizados": 305,
+      "pendentes": 134,
+      "sem_embarque": 74,
       "cobranca_gru": 17,
-      "pedidos_pendentes": 37,
-      "pct": 42.0
+      "pedidos_pendentes": 43,
+      "pct": 29.4
     }
   ],
   "erros_validacao": {},

@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-10T15:52:50",
-  "snapshot_em": "2026-09-10T15:52:50",
+  "gerado_em": "2026-09-10T16:03:55",
+  "snapshot_em": "2026-09-10T16:03:55",
   "status": "VALIDADO",
   "linhas": 1164,
   "ufs": 27,
@@ -12,16 +12,16 @@
   },
   "contagens": {
     "localizacao": {
-      "FORA DE GRU": 948,
+      "FORA DE GRU": 944,
       "CÂMARA FRIA (GRU)": 16,
-      "RETORNANDO PARA GRU (NÃO RECEBIDO)": 124,
-      "EM GRU": 76
+      "RETORNANDO PARA GRU (NÃO RECEBIDO)": 114,
+      "EM GRU": 90
     },
     "situacao": {
-      "AGENTE": 904,
+      "AGENTE": 900,
       "CÂMARA FRIA - PACKING": 15,
-      "RETORNANDO - GRU": 124,
-      "ESTOQUE - GRU": 76,
+      "RETORNANDO - GRU": 114,
+      "ESTOQUE - GRU": 90,
       "CÂMARA FRIA": 1,
       "MANUTENÇÃO": 44
     },
@@ -29,14 +29,14 @@
       "RECEBIDO NO CLIENTE": 213,
       "ENTREGUE": 951
     },
-    "em_gru": 92,
+    "em_gru": 106,
     "loggers": 1164,
     "pipeline": {
-      "vtc_match": 22775,
+      "vtc_match": 22776,
       "viagens_descartadas_logger": 17121,
-      "universo_loggers": 5654,
-      "SINCRONIZADO": 4490,
-      "sem_lastsync": 63,
+      "universo_loggers": 5655,
+      "SINCRONIZADO": 4491,
+      "sem_lastsync": 62,
       "PENDENTE": 1164
     }
   },

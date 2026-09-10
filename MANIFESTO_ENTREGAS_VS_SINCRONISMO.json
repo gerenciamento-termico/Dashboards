@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T15:14:22",
+  "gerado_em": "2026-09-10T15:23:19",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 5899,
-    "pedidos_janela": 902,
-    "loggers_ares_janela": 5660,
-    "loggers_ares_antes_dedup": 5688,
+    "pares_janela": 5901,
+    "pedidos_janela": 904,
+    "loggers_ares_janela": 5662,
+    "loggers_ares_antes_dedup": 5690,
     "dedup_dia_logger": 28,
     "pendentes_janela": 825,
     "cobranca_gru_janela": 110,
     "sem_embarque_efetiva": 189,
-    "com_embarque_efetiva": 5499,
+    "com_embarque_efetiva": 5501,
     "loggers_sem_lastsync": 63,
     "nao_avaliados": 189,
-    "pedidos_com_agente": 5898,
+    "pedidos_com_agente": 5900,
     "dtbtransporte": {
-      "consultados": 902,
-      "mapeados": 901,
-      "linhas": 975
+      "consultados": 904,
+      "mapeados": 903,
+      "linhas": 977
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 32,
-      "loggers": 93,
-      "sincronizados": 20,
+      "pedidos": 34,
+      "loggers": 95,
+      "sincronizados": 22,
       "pendentes": 73,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 21,
-      "pct": 78.5
+      "pct": 76.8
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-10T12:36:08",
+  "gerado_em": "2026-09-10T12:45:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,8 +20,8 @@
     "loggers_ares_janela": 5642,
     "loggers_ares_antes_dedup": 5665,
     "dedup_dia_logger": 23,
-    "pendentes_janela": 830,
-    "cobranca_gru_janela": 108,
+    "pendentes_janela": 821,
+    "cobranca_gru_janela": 117,
     "sem_embarque_efetiva": 190,
     "com_embarque_efetiva": 5475,
     "loggers_sem_lastsync": 62,
@@ -37,7 +37,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 103,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 63,
-      "VTCLOG - GRU": 61,
+      "VTCLOG - GRU": 57,
       "SSA - LUTY LOG": 42,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
@@ -51,10 +51,10 @@
       "PA": 64,
       "AM": 63,
       "BA": 49,
-      "SP": 38,
       "PB": 36,
       "AC": 36,
-      "MT": 34
+      "MT": 34,
+      "SP": 34
     }
   },
   "serie_diaria": [
@@ -208,11 +208,11 @@
       "pedidos": 78,
       "loggers": 414,
       "sincronizados": 357,
-      "pendentes": 39,
+      "pendentes": 37,
       "sem_embarque": 2,
-      "cobranca_gru": 18,
+      "cobranca_gru": 20,
       "pedidos_pendentes": 14,
-      "pct": 9.4
+      "pct": 8.9
     },
     {
       "dia_iso": "2026-09-03",
@@ -234,11 +234,11 @@
       "pedidos": 81,
       "loggers": 489,
       "sincronizados": 359,
-      "pendentes": 128,
+      "pendentes": 125,
       "sem_embarque": 89,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 35,
-      "pct": 26.2
+      "cobranca_gru": 5,
+      "pedidos_pendentes": 34,
+      "pct": 25.6
     },
     {
       "dia_iso": "2026-09-05",
@@ -299,11 +299,11 @@
       "pedidos": 49,
       "loggers": 226,
       "sincronizados": 155,
-      "pendentes": 69,
+      "pendentes": 65,
       "sem_embarque": 14,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 28,
-      "pct": 30.5
+      "cobranca_gru": 6,
+      "pedidos_pendentes": 25,
+      "pct": 28.8
     },
     {
       "dia_iso": "2026-09-10",

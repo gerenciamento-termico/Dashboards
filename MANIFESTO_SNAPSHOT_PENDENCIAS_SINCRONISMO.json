@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-10T23:07:57",
-  "snapshot_em": "2026-09-10T23:07:57",
+  "gerado_em": "2026-09-10T23:18:15",
+  "snapshot_em": "2026-09-10T23:18:15",
   "status": "VALIDADO",
   "linhas": 1172,
   "ufs": 27,
@@ -32,12 +32,12 @@
     "em_gru": 152,
     "loggers": 1172,
     "pipeline": {
-      "vtc_match": 23150,
-      "viagens_descartadas_logger": 17303,
-      "universo_loggers": 5847,
+      "vtc_match": 23164,
+      "viagens_descartadas_logger": 17316,
+      "universo_loggers": 5848,
       "PENDENTE": 1172,
-      "SINCRONIZADO": 4675,
-      "sem_lastsync": 93
+      "SINCRONIZADO": 4676,
+      "sem_lastsync": 94
     }
   },
   "erros_validacao": {},

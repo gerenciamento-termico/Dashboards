@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T13:09:11",
+  "gerado_em": "2026-09-11T13:19:06",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,12 +20,12 @@
     "loggers_ares_janela": 6342,
     "loggers_ares_antes_dedup": 6388,
     "dedup_dia_logger": 46,
-    "pendentes_janela": 698,
-    "cobranca_gru_janela": 151,
-    "sem_embarque_efetiva": 303,
-    "com_embarque_efetiva": 6085,
+    "pendentes_janela": 697,
+    "cobranca_gru_janela": 150,
+    "sem_embarque_efetiva": 286,
+    "com_embarque_efetiva": 6102,
     "loggers_sem_lastsync": 72,
-    "nao_avaliados": 303,
+    "nao_avaliados": 286,
     "pedidos_com_agente": 6599,
     "dtbtransporte": {
       "consultados": 991,
@@ -36,7 +36,7 @@
       "THE - AERONEIVA EXPRESS": 121,
       "VTCLOG - GRU": 56,
       "SSA - LUTY LOG": 47,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 42,
       "RBR - RODOTEC": 36,
       "CGB - JR TRANSPORTES": 34,
       "JPA - LIDER CARGAS": 34,
@@ -48,7 +48,7 @@
       "PI": 122,
       "BA": 54,
       "PA": 48,
-      "AM": 41,
+      "AM": 42,
       "PB": 36,
       "AC": 36,
       "MT": 34,
@@ -194,12 +194,12 @@
       "dia_full": "02/09/2026",
       "pedidos": 78,
       "loggers": 414,
-      "sincronizados": 377,
-      "pendentes": 20,
+      "sincronizados": 378,
+      "pendentes": 19,
       "sem_embarque": 2,
       "cobranca_gru": 17,
       "pedidos_pendentes": 12,
-      "pct": 4.8
+      "pct": 4.6
     },
     {
       "dia_iso": "2026-09-03",
@@ -221,11 +221,11 @@
       "pedidos": 81,
       "loggers": 510,
       "sincronizados": 395,
-      "pendentes": 112,
+      "pendentes": 111,
       "sem_embarque": 88,
-      "cobranca_gru": 3,
-      "pedidos_pendentes": 31,
-      "pct": 22.0
+      "cobranca_gru": 4,
+      "pedidos_pendentes": 30,
+      "pct": 21.8
     },
     {
       "dia_iso": "2026-09-05",
@@ -233,10 +233,10 @@
       "dia_full": "05/09/2026",
       "pedidos": 6,
       "loggers": 49,
-      "sincronizados": 28,
+      "sincronizados": 30,
       "pendentes": 4,
       "sem_embarque": 20,
-      "cobranca_gru": 17,
+      "cobranca_gru": 15,
       "pedidos_pendentes": 1,
       "pct": 8.2
     },
@@ -310,13 +310,13 @@
       "dia": "11/09",
       "dia_full": "11/09/2026",
       "pedidos": 16,
-      "loggers": 42,
-      "sincronizados": 32,
-      "pendentes": 10,
-      "sem_embarque": 17,
+      "loggers": 59,
+      "sincronizados": 48,
+      "pendentes": 11,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 8,
-      "pct": 23.8
+      "pct": 18.6
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T10:25:02",
+  "gerado_em": "2026-09-11T10:34:30",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,27 +15,27 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6483,
-    "pedidos_janela": 971,
-    "loggers_ares_janela": 6230,
-    "loggers_ares_antes_dedup": 6272,
+    "pares_janela": 6484,
+    "pedidos_janela": 972,
+    "loggers_ares_janela": 6231,
+    "loggers_ares_antes_dedup": 6273,
     "dedup_dia_logger": 42,
-    "pendentes_janela": 798,
-    "cobranca_gru_janela": 163,
-    "sem_embarque_efetiva": 304,
+    "pendentes_janela": 797,
+    "cobranca_gru_janela": 158,
+    "sem_embarque_efetiva": 305,
     "com_embarque_efetiva": 5968,
-    "loggers_sem_lastsync": 87,
-    "nao_avaliados": 304,
-    "pedidos_com_agente": 6482,
+    "loggers_sem_lastsync": 86,
+    "nao_avaliados": 305,
+    "pedidos_com_agente": 6483,
     "dtbtransporte": {
-      "consultados": 971,
-      "mapeados": 970,
-      "linhas": 1050
+      "consultados": 972,
+      "mapeados": 971,
+      "linhas": 1051
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
-      "VTCLOG - GRU": 70,
+      "VTCLOG - GRU": 69,
       "SSA - LUTY LOG": 47,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
       "RBR - RODOTEC": 36,
@@ -103,10 +103,10 @@
       "dia_full": "26/08/2026",
       "pedidos": 59,
       "loggers": 411,
-      "sincronizados": 350,
+      "sincronizados": 352,
       "pendentes": 47,
       "sem_embarque": 19,
-      "cobranca_gru": 14,
+      "cobranca_gru": 12,
       "pedidos_pendentes": 11,
       "pct": 11.4
     },
@@ -116,10 +116,10 @@
       "dia_full": "27/08/2026",
       "pedidos": 90,
       "loggers": 537,
-      "sincronizados": 473,
+      "sincronizados": 474,
       "pendentes": 51,
       "sem_embarque": 0,
-      "cobranca_gru": 13,
+      "cobranca_gru": 12,
       "pedidos_pendentes": 22,
       "pct": 9.5
     },
@@ -129,10 +129,10 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 495,
+      "sincronizados": 497,
       "pendentes": 83,
       "sem_embarque": 1,
-      "cobranca_gru": 43,
+      "cobranca_gru": 41,
       "pedidos_pendentes": 20,
       "pct": 13.4
     },
@@ -285,12 +285,12 @@
       "dia_full": "09/09/2026",
       "pedidos": 49,
       "loggers": 226,
-      "sincronizados": 160,
-      "pendentes": 62,
+      "sincronizados": 161,
+      "pendentes": 61,
       "sem_embarque": 14,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 22,
-      "pct": 27.4
+      "pedidos_pendentes": 21,
+      "pct": 27.0
     },
     {
       "dia_iso": "2026-09-10",
@@ -300,7 +300,7 @@
       "loggers": 524,
       "sincronizados": 369,
       "pendentes": 147,
-      "sem_embarque": 58,
+      "sem_embarque": 59,
       "cobranca_gru": 8,
       "pedidos_pendentes": 51,
       "pct": 28.1

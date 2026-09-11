@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T12:02:16",
+  "gerado_em": "2026-09-11T12:11:37",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,8 +20,8 @@
     "loggers_ares_janela": 6328,
     "loggers_ares_antes_dedup": 6370,
     "dedup_dia_logger": 42,
-    "pendentes_janela": 731,
-    "cobranca_gru_janela": 145,
+    "pendentes_janela": 717,
+    "cobranca_gru_janela": 158,
     "sem_embarque_efetiva": 303,
     "com_embarque_efetiva": 6067,
     "loggers_sem_lastsync": 90,
@@ -129,10 +129,10 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 526,
+      "sincronizados": 527,
       "pendentes": 60,
       "sem_embarque": 1,
-      "cobranca_gru": 35,
+      "cobranca_gru": 34,
       "pedidos_pendentes": 19,
       "pct": 9.7
     },
@@ -208,11 +208,11 @@
       "pedidos": 83,
       "loggers": 413,
       "sincronizados": 343,
-      "pendentes": 52,
+      "pendentes": 51,
       "sem_embarque": 27,
-      "cobranca_gru": 18,
-      "pedidos_pendentes": 14,
-      "pct": 12.6
+      "cobranca_gru": 19,
+      "pedidos_pendentes": 13,
+      "pct": 12.3
     },
     {
       "dia_iso": "2026-09-04",
@@ -221,11 +221,11 @@
       "pedidos": 81,
       "loggers": 510,
       "sincronizados": 395,
-      "pendentes": 113,
+      "pendentes": 112,
       "sem_embarque": 88,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 32,
-      "pct": 22.2
+      "cobranca_gru": 3,
+      "pedidos_pendentes": 31,
+      "pct": 22.0
     },
     {
       "dia_iso": "2026-09-05",
@@ -234,11 +234,11 @@
       "pedidos": 6,
       "loggers": 49,
       "sincronizados": 28,
-      "pendentes": 15,
+      "pendentes": 9,
       "sem_embarque": 20,
-      "cobranca_gru": 6,
+      "cobranca_gru": 12,
       "pedidos_pendentes": 2,
-      "pct": 30.6
+      "pct": 18.4
     },
     {
       "dia_iso": "2026-09-06",
@@ -273,11 +273,11 @@
       "pedidos": 60,
       "loggers": 547,
       "sincronizados": 438,
-      "pendentes": 105,
+      "pendentes": 99,
       "sem_embarque": 53,
-      "cobranca_gru": 4,
-      "pedidos_pendentes": 29,
-      "pct": 19.2
+      "cobranca_gru": 10,
+      "pedidos_pendentes": 27,
+      "pct": 18.1
     },
     {
       "dia_iso": "2026-09-09",

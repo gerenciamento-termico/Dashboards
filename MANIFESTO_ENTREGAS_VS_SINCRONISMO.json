@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T08:18:38",
+  "gerado_em": "2026-09-11T08:28:35",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,29 +15,29 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6436,
-    "pedidos_janela": 961,
-    "loggers_ares_janela": 6188,
-    "loggers_ares_antes_dedup": 6226,
+    "pares_janela": 6437,
+    "pedidos_janela": 962,
+    "loggers_ares_janela": 6189,
+    "loggers_ares_antes_dedup": 6227,
     "dedup_dia_logger": 38,
     "pendentes_janela": 813,
     "cobranca_gru_janela": 179,
     "sem_embarque_efetiva": 287,
-    "com_embarque_efetiva": 5939,
-    "loggers_sem_lastsync": 105,
+    "com_embarque_efetiva": 5940,
+    "loggers_sem_lastsync": 102,
     "nao_avaliados": 287,
-    "pedidos_com_agente": 6435,
+    "pedidos_com_agente": 6436,
     "dtbtransporte": {
-      "consultados": 961,
-      "mapeados": 960,
-      "linhas": 1039
+      "consultados": 962,
+      "mapeados": 961,
+      "linhas": 1040
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 73,
       "SSA - LUTY LOG": 47,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 40,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
       "CGB - JR TRANSPORTES": 33,
@@ -49,7 +49,7 @@
       "TO": 93,
       "BA": 54,
       "PA": 48,
-      "AM": 41,
+      "AM": 40,
       "PB": 36,
       "AC": 36,
       "MT": 34,
@@ -298,25 +298,25 @@
       "dia_full": "10/09/2026",
       "pedidos": 92,
       "loggers": 521,
-      "sincronizados": 352,
-      "pendentes": 162,
+      "sincronizados": 353,
+      "pendentes": 161,
       "sem_embarque": 58,
       "cobranca_gru": 7,
       "pedidos_pendentes": 53,
-      "pct": 31.1
+      "pct": 30.9
     },
     {
       "dia_iso": "2026-09-11",
       "dia": "11/09",
       "dia_full": "11/09/2026",
-      "pedidos": 0,
-      "loggers": 0,
+      "pedidos": 1,
+      "loggers": 1,
       "sincronizados": 0,
-      "pendentes": 0,
+      "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 0,
-      "pct": 0.0
+      "pedidos_pendentes": 1,
+      "pct": 100.0
     }
   ],
   "erros_validacao": {},

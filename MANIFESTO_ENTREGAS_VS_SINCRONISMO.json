@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T19:19:28",
+  "gerado_em": "2026-09-11T19:34:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -16,7 +16,7 @@
     "latencia_t0": "T0 = dt_chegadacliente so se for anterior a dt_entregaefetivaembarque; senao embarque (BRT). Cobre lancamento atrasado. So quem saiu. Patio fora",
     "latencia_primeiro_sync": "menor createdAt em ares-prod.beacon_devices_logs >= T0 (BRT). Sem tolerancia de 15 min (essa vale so na classificacao pendente). Nao usa lastSyncDate",
     "latencia_media": "media/mediana/P90 so de quem teve 1o sync no agente (antes de estoque/restauracao depois deste embarque). Pendente e so-GRU ficam fora da media",
-    "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Faixa Ocultos operacao no HTML"
+    "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
     "pares_janela": 6938,
@@ -24,6 +24,9 @@
     "loggers_ares_janela": 6589,
     "loggers_ares_antes_dedup": 6727,
     "dedup_dia_logger": 46,
+    "ocultos_operacao": 92,
+    "ocultos_lista": 92,
+    "ocultos_ausentes": 0,
     "pendentes_janela": 752,
     "cobranca_gru_janela": 162,
     "sem_embarque_efetiva": 346,
@@ -67,10 +70,7 @@
       "media_horas": 2.01,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
-    },
-    "ocultos_operacao": 92,
-    "ocultos_lista": 92,
-    "ocultos_ausentes": 0
+    }
   },
   "serie_diaria": [
     {

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T14:40:08",
+  "gerado_em": "2026-09-11T14:51:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,22 +15,22 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6606,
-    "pedidos_janela": 996,
-    "loggers_ares_janela": 6349,
-    "loggers_ares_antes_dedup": 6395,
+    "pares_janela": 6614,
+    "pedidos_janela": 998,
+    "loggers_ares_janela": 6357,
+    "loggers_ares_antes_dedup": 6403,
     "dedup_dia_logger": 46,
-    "pendentes_janela": 754,
-    "cobranca_gru_janela": 149,
-    "sem_embarque_efetiva": 234,
-    "com_embarque_efetiva": 6161,
+    "pendentes_janela": 755,
+    "cobranca_gru_janela": 150,
+    "sem_embarque_efetiva": 233,
+    "com_embarque_efetiva": 6170,
     "loggers_sem_lastsync": 60,
-    "nao_avaliados": 234,
-    "pedidos_com_agente": 6606,
+    "nao_avaliados": 233,
+    "pedidos_com_agente": 6614,
     "dtbtransporte": {
-      "consultados": 996,
-      "mapeados": 996,
-      "linhas": 1076
+      "consultados": 998,
+      "mapeados": 998,
+      "linhas": 1078
     },
     "top10_agentes_pendencias": {
       "VTCLOG CNF - CONTAGEM": 110,
@@ -309,14 +309,14 @@
       "dia_iso": "2026-09-11",
       "dia": "11/09",
       "dia_full": "11/09/2026",
-      "pedidos": 22,
-      "loggers": 178,
-      "sincronizados": 55,
-      "pendentes": 123,
-      "sem_embarque": 1,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 11,
-      "pct": 69.1
+      "pedidos": 25,
+      "loggers": 187,
+      "sincronizados": 62,
+      "pendentes": 124,
+      "sem_embarque": 0,
+      "cobranca_gru": 1,
+      "pedidos_pendentes": 12,
+      "pct": 66.3
     }
   ],
   "erros_validacao": {},

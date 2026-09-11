@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T19:04:54",
+  "gerado_em": "2026-09-11T19:19:28",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,58 +15,62 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega",
     "latencia_t0": "T0 = dt_chegadacliente so se for anterior a dt_entregaefetivaembarque; senao embarque (BRT). Cobre lancamento atrasado. So quem saiu. Patio fora",
     "latencia_primeiro_sync": "menor createdAt em ares-prod.beacon_devices_logs >= T0 (BRT). Sem tolerancia de 15 min (essa vale so na classificacao pendente). Nao usa lastSyncDate",
-    "latencia_media": "media/mediana/P90 so de quem teve 1o sync no agente (antes de estoque/restauracao depois deste embarque). Pendente e so-GRU ficam fora da media"
+    "latencia_media": "media/mediana/P90 so de quem teve 1o sync no agente (antes de estoque/restauracao depois deste embarque). Pendente e so-GRU ficam fora da media",
+    "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Faixa Ocultos operacao no HTML"
   },
   "contagens": {
-    "pares_janela": 6937,
-    "pedidos_janela": 1062,
-    "loggers_ares_janela": 6680,
-    "loggers_ares_antes_dedup": 6726,
+    "pares_janela": 6938,
+    "pedidos_janela": 1063,
+    "loggers_ares_janela": 6589,
+    "loggers_ares_antes_dedup": 6727,
     "dedup_dia_logger": 46,
-    "pendentes_janela": 842,
+    "pendentes_janela": 752,
     "cobranca_gru_janela": 162,
-    "sem_embarque_efetiva": 348,
-    "com_embarque_efetiva": 6378,
+    "sem_embarque_efetiva": 346,
+    "com_embarque_efetiva": 6381,
     "loggers_sem_lastsync": 110,
-    "nao_avaliados": 348,
-    "pedidos_com_agente": 6937,
+    "nao_avaliados": 346,
+    "pedidos_com_agente": 6938,
     "dtbtransporte": {
-      "consultados": 1062,
-      "mapeados": 1062,
-      "linhas": 1146
+      "consultados": 1063,
+      "mapeados": 1063,
+      "linhas": 1147
     },
     "top10_agentes_pendencias": {
-      "VTCLOG CNF - CONTAGEM": 111,
       "THE - AERONEIVA EXPRESS": 98,
       "VTCLOG - GRU": 67,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 57,
-      "SSA - LUTY LOG": 55,
+      "SSA - LUTY LOG": 56,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 53,
       "CGB - JR TRANSPORTES": 36,
       "JPA - LIDER CARGAS": 34,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 29,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 28
     },
     "top10_ufs_pendencias": {
-      "MG": 118,
       "PI": 99,
-      "BA": 62,
+      "BA": 63,
       "PR": 59,
       "AM": 57,
       "PA": 52,
-      "SC": 37,
+      "SC": 38,
       "MT": 36,
       "PB": 36,
-      "SP": 35
+      "SP": 35,
+      "MA": 33
     },
     "latencia": {
-      "n_agente": 4815,
+      "n_agente": 4816,
       "n_so_gru": 99,
-      "n_sem_primeiro_sync": 1421,
+      "n_sem_primeiro_sync": 1331,
       "media_horas": 2.01,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
-    }
+    },
+    "ocultos_operacao": 92,
+    "ocultos_lista": 92,
+    "ocultos_ausentes": 0
   },
   "serie_diaria": [
     {
@@ -377,15 +381,15 @@
       "dia_iso": "2026-09-08",
       "dia": "08/09",
       "dia_full": "08/09/2026",
-      "pedidos": 60,
-      "loggers": 547,
-      "sincronizados": 450,
+      "pedidos": 61,
+      "loggers": 548,
+      "sincronizados": 451,
       "pendentes": 86,
-      "sem_embarque": 54,
+      "sem_embarque": 53,
       "cobranca_gru": 11,
       "pedidos_pendentes": 22,
       "pct": 15.7,
-      "n_latencia": 390,
+      "n_latencia": 391,
       "media_horas": 0.08,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
@@ -396,20 +400,20 @@
       "dia_iso": "2026-09-09",
       "dia": "09/09",
       "dia_full": "09/09/2026",
-      "pedidos": 50,
-      "loggers": 227,
+      "pedidos": 51,
+      "loggers": 228,
       "sincronizados": 174,
-      "pendentes": 49,
-      "sem_embarque": 14,
+      "pendentes": 50,
+      "sem_embarque": 13,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 16,
-      "pct": 21.6,
+      "pedidos_pendentes": 17,
+      "pct": 21.9,
       "n_latencia": 152,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 75
+      "n_sem_primeiro_sync": 76
     },
     {
       "dia_iso": "2026-09-10",
@@ -434,20 +438,20 @@
       "dia_iso": "2026-09-11",
       "dia": "11/09",
       "dia_full": "11/09/2026",
-      "pedidos": 85,
-      "loggers": 401,
+      "pedidos": 86,
+      "loggers": 310,
       "sincronizados": 134,
-      "pendentes": 259,
+      "pendentes": 168,
       "sem_embarque": 141,
       "cobranca_gru": 8,
-      "pedidos_pendentes": 54,
-      "pct": 64.6,
+      "pedidos_pendentes": 53,
+      "pct": 54.2,
       "n_latencia": 114,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 287
+      "n_sem_primeiro_sync": 196
     }
   ],
   "erros_validacao": {},
@@ -458,10 +462,565 @@
     "dtbTransporte tbdMovimento (agente)",
     "dtbPortal vwTabelaMovDataloggers (Em GRU agora)",
     "dtbPortal tbddataloggerhistoricos (estoque/restauracao depois da entrega)",
-    "REVERSA_DATALOGGERS.html (agente fallback)"
+    "REVERSA_DATALOGGERS.html (agente fallback)",
+    "ocultos_operacao_entregas_vs.json (excecao pontual)"
   ],
   "arquivos": [
     "ENTREGAS_VS_SINCRONISMO.html",
     "ENTREGAS_VS_SINCRONISMO.csv"
+  ],
+  "ocultos_operacao": [
+    {
+      "pedido": "567565",
+      "logger": "0741700059",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700063",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700069",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700072",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700073",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700081",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700087",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700122",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700163",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700167",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700175",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700178",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "564577",
+      "logger": "0741700185",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700197",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700204",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700215",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700224",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700237",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700242",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700247",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700249",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700252",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700254",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700282",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700286",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700287",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700337",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700338",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700350",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700396",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700401",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700404",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700443",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700444",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700446",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700450",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700461",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700471",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700480",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700490",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700508",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700516",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700529",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700535",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700551",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700584",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700676",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700715",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700722",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700727",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700736",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700748",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700765",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700767",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700783",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567728",
+      "logger": "0741700796",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700818",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700844",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700860",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700865",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700872",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700879",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700889",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700898",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700908",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700915",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700920",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700940",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700954",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700967",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "0741700991",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A0902",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A1630",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A1904",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A3366",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A4041",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A5019",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A5508",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A5693",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A5777",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A6647",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A7058",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A7164",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A8281",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A8469",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A8975",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A9569",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "A9583",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "TA0324",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "TA0765",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "TA0844",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    },
+    {
+      "pedido": "567565",
+      "logger": "TA0974",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — embarque lançado após a entrega real"
+    }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T16:12:36",
+  "gerado_em": "2026-09-11T16:23:54",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -18,27 +18,27 @@
     "latencia_media": "media/mediana/P90 so de quem teve 1o sync no agente (antes de estoque/restauracao depois deste embarque). Pendente e so-GRU ficam fora da media"
   },
   "contagens": {
-    "pares_janela": 6653,
-    "pedidos_janela": 1010,
-    "loggers_ares_janela": 6396,
-    "loggers_ares_antes_dedup": 6442,
+    "pares_janela": 6656,
+    "pedidos_janela": 1013,
+    "loggers_ares_janela": 6399,
+    "loggers_ares_antes_dedup": 6445,
     "dedup_dia_logger": 46,
-    "pendentes_janela": 779,
+    "pendentes_janela": 783,
     "cobranca_gru_janela": 175,
-    "sem_embarque_efetiva": 210,
-    "com_embarque_efetiva": 6232,
+    "sem_embarque_efetiva": 206,
+    "com_embarque_efetiva": 6239,
     "loggers_sem_lastsync": 73,
-    "nao_avaliados": 210,
-    "pedidos_com_agente": 6653,
+    "nao_avaliados": 206,
+    "pedidos_com_agente": 6656,
     "dtbtransporte": {
-      "consultados": 1010,
-      "mapeados": 1010,
-      "linhas": 1090
+      "consultados": 1013,
+      "mapeados": 1013,
+      "linhas": 1093
     },
     "top10_agentes_pendencias": {
-      "VTCLOG CNF - CONTAGEM": 110,
+      "VTCLOG CNF - CONTAGEM": 111,
       "THE - AERONEIVA EXPRESS": 85,
-      "VTCLOG - GRU": 59,
+      "VTCLOG - GRU": 63,
       "SSA - LUTY LOG": 55,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 54,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 53,
@@ -48,7 +48,7 @@
       "AJU - CASSIMIRO TRANSPORTES": 29
     },
     "top10_ufs_pendencias": {
-      "MG": 116,
+      "MG": 117,
       "PI": 86,
       "BA": 62,
       "PR": 59,
@@ -57,12 +57,12 @@
       "PB": 36,
       "MT": 34,
       "SC": 33,
-      "MA": 31
+      "SP": 31
     },
     "latencia": {
-      "n_agente": 4727,
+      "n_agente": 4729,
       "n_so_gru": 97,
-      "n_sem_primeiro_sync": 1365,
+      "n_sem_primeiro_sync": 1370,
       "media_horas": 2.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -434,20 +434,20 @@
       "dia_iso": "2026-09-11",
       "dia": "11/09",
       "dia_full": "11/09/2026",
-      "pedidos": 37,
-      "loggers": 269,
-      "sincronizados": 75,
-      "pendentes": 185,
-      "sem_embarque": 5,
+      "pedidos": 41,
+      "loggers": 276,
+      "sincronizados": 78,
+      "pendentes": 189,
+      "sem_embarque": 1,
       "cobranca_gru": 9,
-      "pedidos_pendentes": 21,
-      "pct": 68.8,
-      "n_latencia": 69,
+      "pedidos_pendentes": 22,
+      "pct": 68.5,
+      "n_latencia": 71,
       "media_horas": 0.04,
       "mediana_horas": 0.03,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 200
+      "n_sem_primeiro_sync": 205
     }
   ],
   "erros_validacao": {},

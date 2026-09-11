@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T19:53:35",
+  "gerado_em": "2026-09-11T20:02:51",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 752,
+    "pendentes_janela": 748,
     "cobranca_gru_janela": 162,
     "sem_embarque_efetiva": 346,
     "com_embarque_efetiva": 6381,
@@ -42,9 +42,9 @@
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 98,
       "VTCLOG - GRU": 67,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 57,
       "SSA - LUTY LOG": 56,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 53,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 53,
       "CGB - JR TRANSPORTES": 36,
       "JPA - LIDER CARGAS": 34,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
@@ -55,7 +55,7 @@
       "PI": 99,
       "BA": 63,
       "PR": 59,
-      "AM": 57,
+      "AM": 53,
       "PA": 52,
       "SC": 38,
       "MT": 36,
@@ -64,9 +64,9 @@
       "MA": 33
     },
     "latencia": {
-      "n_agente": 4816,
+      "n_agente": 4820,
       "n_so_gru": 99,
-      "n_sem_primeiro_sync": 1331,
+      "n_sem_primeiro_sync": 1327,
       "media_horas": 2.01,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "10/09/2026",
       "pedidos": 106,
       "loggers": 570,
-      "sincronizados": 449,
-      "pendentes": 113,
+      "sincronizados": 453,
+      "pendentes": 109,
       "sem_embarque": 5,
       "cobranca_gru": 8,
       "pedidos_pendentes": 39,
-      "pct": 19.8,
-      "n_latencia": 420,
+      "pct": 19.1,
+      "n_latencia": 424,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 150
+      "n_sem_primeiro_sync": 146
     },
     {
       "dia_iso": "2026-09-11",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T07:58:51",
+  "gerado_em": "2026-09-11T08:08:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,11 +20,11 @@
     "loggers_ares_janela": 6188,
     "loggers_ares_antes_dedup": 6226,
     "dedup_dia_logger": 38,
-    "pendentes_janela": 816,
+    "pendentes_janela": 814,
     "cobranca_gru_janela": 179,
     "sem_embarque_efetiva": 287,
     "com_embarque_efetiva": 5939,
-    "loggers_sem_lastsync": 109,
+    "loggers_sem_lastsync": 105,
     "nao_avaliados": 287,
     "pedidos_com_agente": 6435,
     "dtbtransporte": {
@@ -36,18 +36,18 @@
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
       "VTCLOG - GRU": 73,
-      "SSA - LUTY LOG": 48,
+      "SSA - LUTY LOG": 47,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
       "RBR - RODOTEC": 36,
       "JPA - LIDER CARGAS": 34,
       "CGB - JR TRANSPORTES": 33,
       "PVH - RODOTEC": 32,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 32
+      "FOR - NT TRANSPORTE LTDA": 31
     },
     "top10_ufs_pendencias": {
       "PI": 121,
       "TO": 93,
-      "BA": 55,
+      "BA": 54,
       "PA": 48,
       "AM": 41,
       "PB": 36,
@@ -298,12 +298,12 @@
       "dia_full": "10/09/2026",
       "pedidos": 92,
       "loggers": 521,
-      "sincronizados": 349,
-      "pendentes": 165,
+      "sincronizados": 351,
+      "pendentes": 163,
       "sem_embarque": 58,
       "cobranca_gru": 7,
-      "pedidos_pendentes": 56,
-      "pct": 31.7
+      "pedidos_pendentes": 54,
+      "pct": 31.3
     },
     {
       "dia_iso": "2026-09-11",

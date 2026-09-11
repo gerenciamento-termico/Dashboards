@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T00:08:19",
+  "gerado_em": "2026-09-11T00:18:16",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -15,18 +15,18 @@
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega"
   },
   "contagens": {
-    "pares_janela": 6430,
+    "pares_janela": 6434,
     "pedidos_janela": 961,
-    "loggers_ares_janela": 6181,
-    "loggers_ares_antes_dedup": 6219,
+    "loggers_ares_janela": 6185,
+    "loggers_ares_antes_dedup": 6223,
     "dedup_dia_logger": 38,
     "pendentes_janela": 821,
     "cobranca_gru_janela": 179,
-    "sem_embarque_efetiva": 280,
+    "sem_embarque_efetiva": 284,
     "com_embarque_efetiva": 5939,
     "loggers_sem_lastsync": 112,
-    "nao_avaliados": 280,
-    "pedidos_com_agente": 6429,
+    "nao_avaliados": 284,
+    "pedidos_com_agente": 6433,
     "dtbtransporte": {
       "consultados": 961,
       "mapeados": 960,
@@ -209,7 +209,7 @@
       "loggers": 413,
       "sincronizados": 341,
       "pendentes": 54,
-      "sem_embarque": 20,
+      "sem_embarque": 24,
       "cobranca_gru": 18,
       "pedidos_pendentes": 16,
       "pct": 13.1

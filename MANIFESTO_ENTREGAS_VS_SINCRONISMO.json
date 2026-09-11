@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T09:36:41",
+  "gerado_em": "2026-09-11T09:46:49",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,11 +20,11 @@
     "loggers_ares_janela": 6191,
     "loggers_ares_antes_dedup": 6229,
     "dedup_dia_logger": 38,
-    "pendentes_janela": 810,
-    "cobranca_gru_janela": 175,
+    "pendentes_janela": 809,
+    "cobranca_gru_janela": 168,
     "sem_embarque_efetiva": 287,
     "com_embarque_efetiva": 5942,
-    "loggers_sem_lastsync": 101,
+    "loggers_sem_lastsync": 93,
     "nao_avaliados": 287,
     "pedidos_com_agente": 6438,
     "dtbtransporte": {
@@ -35,7 +35,7 @@
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
-      "VTCLOG - GRU": 71,
+      "VTCLOG - GRU": 70,
       "SSA - LUTY LOG": 47,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 40,
       "RBR - RODOTEC": 36,
@@ -54,7 +54,7 @@
       "AC": 36,
       "MT": 34,
       "SC": 33,
-      "SP": 32
+      "RO": 32
     }
   },
   "serie_diaria": [
@@ -77,10 +77,10 @@
       "dia_full": "24/08/2026",
       "pedidos": 69,
       "loggers": 709,
-      "sincronizados": 687,
+      "sincronizados": 689,
       "pendentes": 8,
       "sem_embarque": 2,
-      "cobranca_gru": 14,
+      "cobranca_gru": 12,
       "pedidos_pendentes": 6,
       "pct": 1.1
     },
@@ -103,10 +103,10 @@
       "dia_full": "26/08/2026",
       "pedidos": 59,
       "loggers": 411,
-      "sincronizados": 345,
+      "sincronizados": 348,
       "pendentes": 47,
       "sem_embarque": 19,
-      "cobranca_gru": 19,
+      "cobranca_gru": 16,
       "pedidos_pendentes": 11,
       "pct": 11.4
     },
@@ -129,12 +129,12 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 490,
-      "pendentes": 84,
+      "sincronizados": 493,
+      "pendentes": 83,
       "sem_embarque": 1,
-      "cobranca_gru": 47,
+      "cobranca_gru": 45,
       "pedidos_pendentes": 20,
-      "pct": 13.5
+      "pct": 13.4
     },
     {
       "dia_iso": "2026-08-29",

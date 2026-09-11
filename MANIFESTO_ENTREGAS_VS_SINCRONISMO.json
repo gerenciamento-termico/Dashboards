@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T18:43:16",
+  "gerado_em": "2026-09-11T18:53:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -18,22 +18,22 @@
     "latencia_media": "media/mediana/P90 so de quem teve 1o sync no agente (antes de estoque/restauracao depois deste embarque). Pendente e so-GRU ficam fora da media"
   },
   "contagens": {
-    "pares_janela": 6928,
-    "pedidos_janela": 1058,
-    "loggers_ares_janela": 6671,
-    "loggers_ares_antes_dedup": 6717,
+    "pares_janela": 6937,
+    "pedidos_janela": 1062,
+    "loggers_ares_janela": 6680,
+    "loggers_ares_antes_dedup": 6726,
     "dedup_dia_logger": 46,
-    "pendentes_janela": 836,
+    "pendentes_janela": 842,
     "cobranca_gru_janela": 162,
-    "sem_embarque_efetiva": 346,
-    "com_embarque_efetiva": 6371,
+    "sem_embarque_efetiva": 348,
+    "com_embarque_efetiva": 6378,
     "loggers_sem_lastsync": 110,
-    "nao_avaliados": 346,
-    "pedidos_com_agente": 6928,
+    "nao_avaliados": 348,
+    "pedidos_com_agente": 6937,
     "dtbtransporte": {
-      "consultados": 1058,
-      "mapeados": 1058,
-      "linhas": 1142
+      "consultados": 1062,
+      "mapeados": 1062,
+      "linhas": 1146
     },
     "top10_agentes_pendencias": {
       "VTCLOG CNF - CONTAGEM": 111,
@@ -45,7 +45,7 @@
       "CGB - JR TRANSPORTES": 36,
       "JPA - LIDER CARGAS": 34,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 29
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 28
     },
     "top10_ufs_pendencias": {
       "MG": 118,
@@ -53,8 +53,8 @@
       "BA": 62,
       "PR": 59,
       "AM": 57,
-      "PA": 46,
-      "SC": 38,
+      "PA": 52,
+      "SC": 37,
       "MT": 36,
       "PB": 36,
       "SP": 35
@@ -62,7 +62,7 @@
     "latencia": {
       "n_agente": 4815,
       "n_so_gru": 99,
-      "n_sem_primeiro_sync": 1414,
+      "n_sem_primeiro_sync": 1421,
       "media_horas": 2.01,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -381,7 +381,7 @@
       "loggers": 547,
       "sincronizados": 450,
       "pendentes": 86,
-      "sem_embarque": 53,
+      "sem_embarque": 54,
       "cobranca_gru": 11,
       "pedidos_pendentes": 22,
       "pct": 15.7,
@@ -400,7 +400,7 @@
       "loggers": 227,
       "sincronizados": 174,
       "pendentes": 49,
-      "sem_embarque": 13,
+      "sem_embarque": 14,
       "cobranca_gru": 4,
       "pedidos_pendentes": 16,
       "pct": 21.6,
@@ -417,12 +417,12 @@
       "dia_full": "10/09/2026",
       "pedidos": 106,
       "loggers": 570,
-      "sincronizados": 448,
-      "pendentes": 114,
+      "sincronizados": 449,
+      "pendentes": 113,
       "sem_embarque": 5,
       "cobranca_gru": 8,
-      "pedidos_pendentes": 40,
-      "pct": 20.0,
+      "pedidos_pendentes": 39,
+      "pct": 19.8,
       "n_latencia": 420,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
@@ -434,20 +434,20 @@
       "dia_iso": "2026-09-11",
       "dia": "11/09",
       "dia_full": "11/09/2026",
-      "pedidos": 83,
-      "loggers": 394,
+      "pedidos": 85,
+      "loggers": 401,
       "sincronizados": 134,
-      "pendentes": 252,
+      "pendentes": 259,
       "sem_embarque": 141,
       "cobranca_gru": 8,
-      "pedidos_pendentes": 52,
-      "pct": 64.0,
+      "pedidos_pendentes": 54,
+      "pct": 64.6,
       "n_latencia": 114,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 280
+      "n_sem_primeiro_sync": 287
     }
   ],
   "erros_validacao": {},

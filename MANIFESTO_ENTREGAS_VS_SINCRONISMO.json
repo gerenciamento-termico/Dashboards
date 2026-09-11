@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T20:13:58",
+  "gerado_em": "2026-09-11T20:24:02",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 748,
+    "pendentes_janela": 735,
     "cobranca_gru_janela": 162,
     "sem_embarque_efetiva": 346,
     "com_embarque_efetiva": 6381,
@@ -44,7 +44,7 @@
       "VTCLOG - GRU": 67,
       "SSA - LUTY LOG": 56,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 53,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 53,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 40,
       "CGB - JR TRANSPORTES": 36,
       "JPA - LIDER CARGAS": 34,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
@@ -55,8 +55,8 @@
       "PI": 99,
       "BA": 63,
       "PR": 59,
-      "AM": 53,
       "PA": 52,
+      "AM": 40,
       "SC": 38,
       "MT": 36,
       "PB": 36,
@@ -64,10 +64,10 @@
       "MA": 33
     },
     "latencia": {
-      "n_agente": 4820,
+      "n_agente": 4832,
       "n_so_gru": 99,
-      "n_sem_primeiro_sync": 1327,
-      "media_horas": 2.01,
+      "n_sem_primeiro_sync": 1315,
+      "media_horas": 2.0,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -421,18 +421,18 @@
       "dia_full": "10/09/2026",
       "pedidos": 106,
       "loggers": 570,
-      "sincronizados": 453,
-      "pendentes": 109,
+      "sincronizados": 464,
+      "pendentes": 98,
       "sem_embarque": 5,
       "cobranca_gru": 8,
       "pedidos_pendentes": 39,
-      "pct": 19.1,
-      "n_latencia": 424,
+      "pct": 17.2,
+      "n_latencia": 434,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 146
+      "n_sem_primeiro_sync": 136
     },
     {
       "dia_iso": "2026-09-11",
@@ -440,18 +440,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 86,
       "loggers": 310,
-      "sincronizados": 134,
-      "pendentes": 168,
+      "sincronizados": 136,
+      "pendentes": 166,
       "sem_embarque": 141,
       "cobranca_gru": 8,
-      "pedidos_pendentes": 53,
-      "pct": 54.2,
-      "n_latencia": 114,
+      "pedidos_pendentes": 51,
+      "pct": 53.5,
+      "n_latencia": 116,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 196
+      "n_sem_primeiro_sync": 194
     }
   ],
   "erros_validacao": {},

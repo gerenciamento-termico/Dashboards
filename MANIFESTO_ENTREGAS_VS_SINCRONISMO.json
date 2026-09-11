@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T10:34:30",
+  "gerado_em": "2026-09-11T10:48:57",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -20,12 +20,12 @@
     "loggers_ares_janela": 6231,
     "loggers_ares_antes_dedup": 6273,
     "dedup_dia_logger": 42,
-    "pendentes_janela": 797,
+    "pendentes_janela": 796,
     "cobranca_gru_janela": 158,
-    "sem_embarque_efetiva": 305,
-    "com_embarque_efetiva": 5968,
+    "sem_embarque_efetiva": 304,
+    "com_embarque_efetiva": 5969,
     "loggers_sem_lastsync": 86,
-    "nao_avaliados": 305,
+    "nao_avaliados": 304,
     "pedidos_com_agente": 6483,
     "dtbtransporte": {
       "consultados": 972,
@@ -35,7 +35,7 @@
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 121,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 93,
-      "VTCLOG - GRU": 69,
+      "VTCLOG - GRU": 67,
       "SSA - LUTY LOG": 47,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
       "RBR - RODOTEC": 36,
@@ -272,12 +272,12 @@
       "dia_full": "08/09/2026",
       "pedidos": 60,
       "loggers": 547,
-      "sincronizados": 437,
-      "pendentes": 106,
+      "sincronizados": 438,
+      "pendentes": 105,
       "sem_embarque": 53,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 30,
-      "pct": 19.4
+      "pedidos_pendentes": 29,
+      "pct": 19.2
     },
     {
       "dia_iso": "2026-09-09",
@@ -296,14 +296,14 @@
       "dia_iso": "2026-09-10",
       "dia": "10/09",
       "dia_full": "10/09/2026",
-      "pedidos": 99,
-      "loggers": 524,
-      "sincronizados": 369,
+      "pedidos": 100,
+      "loggers": 525,
+      "sincronizados": 370,
       "pendentes": 147,
-      "sem_embarque": 59,
+      "sem_embarque": 58,
       "cobranca_gru": 8,
       "pedidos_pendentes": 51,
-      "pct": 28.1
+      "pct": 28.0
     },
     {
       "dia_iso": "2026-09-11",

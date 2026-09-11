@@ -1,6 +1,6 @@
 {
-  "gerado_em": "2026-09-11T06:58:04",
-  "snapshot_em": "2026-09-11T06:58:04",
+  "gerado_em": "2026-09-11T07:08:26",
+  "snapshot_em": "2026-09-11T07:08:26",
   "status": "VALIDADO",
   "linhas": 1172,
   "ufs": 27,
@@ -37,7 +37,7 @@
       "universo_loggers": 5851,
       "PENDENTE": 1172,
       "SINCRONIZADO": 4679,
-      "sem_lastsync": 95
+      "sem_lastsync": 94
     }
   },
   "erros_validacao": {},

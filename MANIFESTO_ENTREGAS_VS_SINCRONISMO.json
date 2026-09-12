@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-12T09:35:10",
+  "gerado_em": "2026-09-12T09:45:13",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6938,
-    "pedidos_janela": 1063,
-    "loggers_ares_janela": 6589,
-    "loggers_ares_antes_dedup": 6727,
+    "pares_janela": 6949,
+    "pedidos_janela": 1064,
+    "loggers_ares_janela": 6600,
+    "loggers_ares_antes_dedup": 6738,
     "dedup_dia_logger": 46,
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 727,
+    "pendentes_janela": 728,
     "cobranca_gru_janela": 162,
     "sem_embarque_efetiva": 346,
-    "com_embarque_efetiva": 6381,
+    "com_embarque_efetiva": 6392,
     "loggers_sem_lastsync": 110,
     "nao_avaliados": 346,
-    "pedidos_com_agente": 6938,
+    "pedidos_com_agente": 6949,
     "dtbtransporte": {
-      "consultados": 1063,
-      "mapeados": 1063,
-      "linhas": 1147
+      "consultados": 1064,
+      "mapeados": 1064,
+      "linhas": 1148
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 93,
@@ -64,10 +64,10 @@
       "MA": 33
     },
     "latencia": {
-      "n_agente": 4839,
+      "n_agente": 4849,
       "n_so_gru": 99,
-      "n_sem_primeiro_sync": 1308,
-      "media_horas": 2.0,
+      "n_sem_primeiro_sync": 1309,
+      "media_horas": 1.99,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-12",
       "dia": "12/09",
       "dia_full": "12/09/2026",
-      "pedidos": 0,
-      "loggers": 0,
-      "sincronizados": 0,
-      "pendentes": 0,
+      "pedidos": 1,
+      "loggers": 11,
+      "sincronizados": 10,
+      "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 0,
-      "pct": 0.0,
-      "n_latencia": 0,
-      "media_horas": null,
-      "mediana_horas": null,
-      "p90_horas": null,
+      "pedidos_pendentes": 1,
+      "pct": 9.1,
+      "n_latencia": 10,
+      "media_horas": 0.04,
+      "mediana_horas": 0.04,
+      "p90_horas": 0.06,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 0
+      "n_sem_primeiro_sync": 1
     }
   ],
   "erros_validacao": {},

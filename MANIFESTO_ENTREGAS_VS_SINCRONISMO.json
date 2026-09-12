@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-12T11:15:08",
+  "gerado_em": "2026-09-12T11:25:12",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 715,
-    "cobranca_gru_janela": 168,
+    "pendentes_janela": 712,
+    "cobranca_gru_janela": 171,
     "sem_embarque_efetiva": 346,
     "com_embarque_efetiva": 6392,
     "loggers_sem_lastsync": 108,
@@ -47,9 +47,9 @@
       "CGB - JR TRANSPORTES": 36,
       "JPA - LIDER CARGAS": 34,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 31,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 29,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 28
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 28,
+      "AJU - CASSIMIRO TRANSPORTES": 28
     },
     "top10_ufs_pendencias": {
       "PI": 94,
@@ -60,8 +60,8 @@
       "MT": 36,
       "PB": 36,
       "MA": 33,
-      "AM": 31,
-      "TO": 28
+      "TO": 28,
+      "SP": 28
     },
     "latencia": {
       "n_agente": 4856,
@@ -422,11 +422,11 @@
       "pedidos": 86,
       "loggers": 310,
       "sincronizados": 141,
-      "pendentes": 155,
+      "pendentes": 152,
       "sem_embarque": 141,
-      "cobranca_gru": 14,
+      "cobranca_gru": 17,
       "pedidos_pendentes": 49,
-      "pct": 50.0,
+      "pct": 49.0,
       "n_latencia": 120,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

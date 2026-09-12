@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-11T23:54:40",
+  "gerado_em": "2026-09-12T00:05:03",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -73,25 +73,6 @@
     }
   },
   "serie_diaria": [
-    {
-      "dia_iso": "2026-08-23",
-      "dia": "23/08",
-      "dia_full": "23/08/2026",
-      "pedidos": 0,
-      "loggers": 0,
-      "sincronizados": 0,
-      "pendentes": 0,
-      "sem_embarque": 0,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 0,
-      "pct": 0.0,
-      "n_latencia": 0,
-      "media_horas": null,
-      "mediana_horas": null,
-      "p90_horas": null,
-      "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 0
-    },
     {
       "dia_iso": "2026-08-24",
       "dia": "24/08",
@@ -452,6 +433,25 @@
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 194
+    },
+    {
+      "dia_iso": "2026-09-12",
+      "dia": "12/09",
+      "dia_full": "12/09/2026",
+      "pedidos": 0,
+      "loggers": 0,
+      "sincronizados": 0,
+      "pendentes": 0,
+      "sem_embarque": 0,
+      "cobranca_gru": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0,
+      "n_latencia": 0,
+      "media_horas": null,
+      "mediana_horas": null,
+      "p90_horas": null,
+      "n_sync_so_gru": 0,
+      "n_sem_primeiro_sync": 0
     }
   ],
   "erros_validacao": {},

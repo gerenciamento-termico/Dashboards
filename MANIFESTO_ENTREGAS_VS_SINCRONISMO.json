@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-12T12:35:07",
+  "gerado_em": "2026-09-12T12:45:03",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6952,
-    "pedidos_janela": 1065,
-    "loggers_ares_janela": 6603,
-    "loggers_ares_antes_dedup": 6741,
-    "dedup_dia_logger": 46,
+    "pares_janela": 6958,
+    "pedidos_janela": 1071,
+    "loggers_ares_janela": 6607,
+    "loggers_ares_antes_dedup": 6747,
+    "dedup_dia_logger": 48,
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
     "pendentes_janela": 709,
     "cobranca_gru_janela": 174,
-    "sem_embarque_efetiva": 346,
+    "sem_embarque_efetiva": 352,
     "com_embarque_efetiva": 6395,
     "loggers_sem_lastsync": 108,
-    "nao_avaliados": 346,
-    "pedidos_com_agente": 6952,
+    "nao_avaliados": 352,
+    "pedidos_com_agente": 6958,
     "dtbtransporte": {
-      "consultados": 1065,
-      "mapeados": 1065,
-      "linhas": 1149
+      "consultados": 1071,
+      "mapeados": 1071,
+      "linhas": 1155
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 93,
@@ -423,7 +423,7 @@
       "loggers": 310,
       "sincronizados": 141,
       "pendentes": 149,
-      "sem_embarque": 141,
+      "sem_embarque": 144,
       "cobranca_gru": 20,
       "pedidos_pendentes": 48,
       "pct": 48.1,
@@ -442,7 +442,7 @@
       "loggers": 14,
       "sincronizados": 13,
       "pendentes": 1,
-      "sem_embarque": 0,
+      "sem_embarque": 1,
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
       "pct": 7.1,

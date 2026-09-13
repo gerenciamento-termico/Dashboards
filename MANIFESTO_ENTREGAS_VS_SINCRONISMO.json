@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-13T04:37:11",
+  "gerado_em": "2026-09-13T04:46:48",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -37,7 +37,7 @@
     "dtbtransporte": {
       "consultados": 1006,
       "mapeados": 1006,
-      "linhas": 1087
+      "linhas": 1088
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 93,

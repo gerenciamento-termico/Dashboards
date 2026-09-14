@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-13T21:32:35",
+  "gerado_em": "2026-09-13T21:41:49",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,21 +19,21 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6268,
+    "pares_janela": 6269,
     "pedidos_janela": 1006,
-    "loggers_ares_janela": 5919,
-    "loggers_ares_antes_dedup": 6059,
+    "loggers_ares_janela": 5920,
+    "loggers_ares_antes_dedup": 6060,
     "dedup_dia_logger": 48,
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
     "pendentes_janela": 694,
     "cobranca_gru_janela": 169,
-    "sem_embarque_efetiva": 363,
+    "sem_embarque_efetiva": 364,
     "com_embarque_efetiva": 5696,
     "loggers_sem_lastsync": 103,
-    "nao_avaliados": 363,
-    "pedidos_com_agente": 6268,
+    "nao_avaliados": 364,
+    "pedidos_com_agente": 6269,
     "dtbtransporte": {
       "consultados": 1006,
       "mapeados": 1006,
@@ -271,7 +271,7 @@
       "loggers": 489,
       "sincronizados": 380,
       "pendentes": 104,
-      "sem_embarque": 79,
+      "sem_embarque": 80,
       "cobranca_gru": 5,
       "pedidos_pendentes": 28,
       "pct": 21.3,

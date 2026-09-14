@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T12:06:06",
+  "gerado_em": "2026-09-14T12:20:43",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,37 +19,37 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6187,
-    "pedidos_janela": 929,
-    "loggers_ares_janela": 5846,
-    "loggers_ares_antes_dedup": 6003,
+    "pares_janela": 6198,
+    "pedidos_janela": 931,
+    "loggers_ares_janela": 5845,
+    "loggers_ares_antes_dedup": 6014,
     "dedup_dia_logger": 48,
-    "ocultos_operacao": 109,
-    "ocultos_lista": 109,
+    "ocultos_operacao": 121,
+    "ocultos_lista": 121,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 655,
+    "pendentes_janela": 638,
     "cobranca_gru_janela": 199,
     "sem_embarque_efetiva": 428,
-    "com_embarque_efetiva": 5575,
+    "com_embarque_efetiva": 5586,
     "loggers_sem_lastsync": 115,
     "nao_avaliados": 428,
-    "pedidos_com_agente": 6187,
+    "pedidos_com_agente": 6198,
     "dtbtransporte": {
-      "consultados": 929,
-      "mapeados": 929,
-      "linhas": 1018
+      "consultados": 931,
+      "mapeados": 931,
+      "linhas": 1020
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 93,
       "SSA - LUTY LOG": 62,
-      "VTCLOG - GRU": 52,
+      "VTCLOG - GRU": 53,
       "JPA - LIDER CARGAS": 41,
-      "AJU - CASSIMIRO TRANSPORTES": 40,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 37,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
       "NAT - CSM CARGO": 31,
       "RBR - RODOTEC": 30,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 30
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 30,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 28
     },
     "top10_ufs_pendencias": {
       "PI": 94,
@@ -57,17 +57,17 @@
       "PA": 52,
       "PB": 43,
       "PR": 42,
-      "SE": 40,
       "SC": 38,
       "MA": 33,
       "RN": 32,
-      "AC": 30
+      "AC": 30,
+      "AM": 30
     },
     "latencia": {
-      "n_agente": 4083,
+      "n_agente": 4098,
       "n_so_gru": 79,
-      "n_sem_primeiro_sync": 1259,
-      "media_horas": 1.01,
+      "n_sem_primeiro_sync": 1243,
+      "media_horas": 1.0,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
     }
@@ -269,18 +269,18 @@
       "dia_full": "05/09/2026",
       "pedidos": 6,
       "loggers": 49,
-      "sincronizados": 42,
-      "pendentes": 4,
+      "sincronizados": 44,
+      "pendentes": 2,
       "sem_embarque": 20,
       "cobranca_gru": 3,
       "pedidos_pendentes": 1,
-      "pct": 8.2,
-      "n_latencia": 40,
-      "media_horas": 1.76,
+      "pct": 4.1,
+      "n_latencia": 42,
+      "media_horas": 1.68,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 9
+      "n_sem_primeiro_sync": 7
     },
     {
       "dia_iso": "2026-09-06",
@@ -326,18 +326,18 @@
       "dia_full": "08/09/2026",
       "pedidos": 61,
       "loggers": 528,
-      "sincronizados": 434,
-      "pendentes": 67,
+      "sincronizados": 438,
+      "pendentes": 63,
       "sem_embarque": 0,
       "cobranca_gru": 27,
-      "pedidos_pendentes": 17,
-      "pct": 12.7,
-      "n_latencia": 377,
+      "pedidos_pendentes": 14,
+      "pct": 11.9,
+      "n_latencia": 380,
       "media_horas": 0.08,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 150
+      "n_sem_primeiro_sync": 147
     },
     {
       "dia_iso": "2026-09-09",
@@ -381,20 +381,20 @@
       "dia_iso": "2026-09-11",
       "dia": "11/09",
       "dia_full": "11/09/2026",
-      "pedidos": 107,
-      "loggers": 438,
-      "sincronizados": 271,
-      "pendentes": 129,
+      "pedidos": 108,
+      "loggers": 436,
+      "sincronizados": 281,
+      "pendentes": 117,
       "sem_embarque": 290,
       "cobranca_gru": 38,
       "pedidos_pendentes": 48,
-      "pct": 29.5,
-      "n_latencia": 251,
+      "pct": 26.8,
+      "n_latencia": 261,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 187
+      "n_sem_primeiro_sync": 175
     },
     {
       "dia_iso": "2026-09-12",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-14",
       "dia": "14/09",
       "dia_full": "14/09/2026",
-      "pedidos": 13,
-      "loggers": 86,
+      "pedidos": 14,
+      "loggers": 87,
       "sincronizados": 55,
-      "pendentes": 31,
+      "pendentes": 32,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 6,
-      "pct": 36.0,
+      "pedidos_pendentes": 7,
+      "pct": 36.8,
       "n_latencia": 19,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 67
+      "n_sem_primeiro_sync": 68
     }
   ],
   "erros_validacao": {},
@@ -515,6 +515,12 @@
     {
       "pedido": "567565",
       "logger": "0741700087",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566322",
+      "logger": "0741700097",
       "dia": "2026-09-11",
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
@@ -705,6 +711,18 @@
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
     {
+      "pedido": "566322",
+      "logger": "0741700357",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566322",
+      "logger": "0741700364",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
       "pedido": "567565",
       "logger": "0741700396",
       "dia": "2026-09-11",
@@ -719,6 +737,24 @@
     {
       "pedido": "567565",
       "logger": "0741700404",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566322",
+      "logger": "0741700416",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566322",
+      "logger": "0741700430",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566322",
+      "logger": "0741700441",
       "dia": "2026-09-11",
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
@@ -765,6 +801,12 @@
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
     {
+      "pedido": "566322",
+      "logger": "0741700474",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
       "pedido": "567565",
       "logger": "0741700480",
       "dia": "2026-09-11",
@@ -789,6 +831,12 @@
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
     {
+      "pedido": "566322",
+      "logger": "0741700525",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
       "pedido": "567565",
       "logger": "0741700529",
       "dia": "2026-09-11",
@@ -803,6 +851,12 @@
     {
       "pedido": "567565",
       "logger": "0741700551",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566322",
+      "logger": "0741700552",
       "dia": "2026-09-11",
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
@@ -855,6 +909,12 @@
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
     {
+      "pedido": "566322",
+      "logger": "0741700761",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
       "pedido": "567565",
       "logger": "0741700765",
       "dia": "2026-09-11",
@@ -873,6 +933,12 @@
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
     {
+      "pedido": "566322",
+      "logger": "0741700787",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
       "pedido": "567728",
       "logger": "0741700796",
       "dia": "2026-09-11",
@@ -881,6 +947,12 @@
     {
       "pedido": "564748",
       "logger": "0741700804",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566322",
+      "logger": "0741700805",
       "dia": "2026-09-11",
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },

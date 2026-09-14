@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-13T21:20:16",
+  "gerado_em": "2026-09-13T21:32:35",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,21 +19,21 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6260,
+    "pares_janela": 6268,
     "pedidos_janela": 1006,
-    "loggers_ares_janela": 5912,
-    "loggers_ares_antes_dedup": 6051,
-    "dedup_dia_logger": 47,
+    "loggers_ares_janela": 5919,
+    "loggers_ares_antes_dedup": 6059,
+    "dedup_dia_logger": 48,
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
     "pendentes_janela": 694,
     "cobranca_gru_janela": 169,
-    "sem_embarque_efetiva": 355,
+    "sem_embarque_efetiva": 363,
     "com_embarque_efetiva": 5696,
     "loggers_sem_lastsync": 103,
-    "nao_avaliados": 355,
-    "pedidos_com_agente": 6260,
+    "nao_avaliados": 363,
+    "pedidos_com_agente": 6268,
     "dtbtransporte": {
       "consultados": 1006,
       "mapeados": 1006,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4216,
       "n_so_gru": 73,
-      "n_sem_primeiro_sync": 1271,
+      "n_sem_primeiro_sync": 1270,
       "media_horas": 1.24,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -268,19 +268,19 @@
       "dia": "04/09",
       "dia_full": "04/09/2026",
       "pedidos": 80,
-      "loggers": 490,
-      "sincronizados": 381,
+      "loggers": 489,
+      "sincronizados": 380,
       "pendentes": 104,
-      "sem_embarque": 71,
+      "sem_embarque": 79,
       "cobranca_gru": 5,
       "pedidos_pendentes": 28,
-      "pct": 21.2,
+      "pct": 21.3,
       "n_latencia": 347,
       "media_horas": 0.34,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 140
+      "n_sem_primeiro_sync": 139
     },
     {
       "dia_iso": "2026-09-05",

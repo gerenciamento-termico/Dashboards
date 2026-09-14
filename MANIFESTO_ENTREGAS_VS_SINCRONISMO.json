@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T05:15:48",
+  "gerado_em": "2026-09-14T05:25:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 686,
+    "pendentes_janela": 685,
     "cobranca_gru_janela": 165,
     "sem_embarque_efetiva": 364,
     "com_embarque_efetiva": 5367,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 93,
       "SSA - LUTY LOG": 56,
-      "VTCLOG - GRU": 54,
+      "VTCLOG - GRU": 53,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 52,
       "JPA - LIDER CARGAS": 33,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
@@ -64,9 +64,9 @@
       "RN": 27
     },
     "latencia": {
-      "n_agente": 3916,
+      "n_agente": 3917,
       "n_so_gru": 63,
-      "n_sem_primeiro_sync": 1251,
+      "n_sem_primeiro_sync": 1250,
       "media_horas": 1.03,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -402,18 +402,18 @@
       "dia_full": "12/09/2026",
       "pedidos": 10,
       "loggers": 20,
-      "sincronizados": 16,
-      "pendentes": 4,
+      "sincronizados": 17,
+      "pendentes": 3,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 4,
-      "pct": 20.0,
-      "n_latencia": 16,
+      "pedidos_pendentes": 3,
+      "pct": 15.0,
+      "n_latencia": 17,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
-      "p90_horas": 0.08,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 4
+      "n_sem_primeiro_sync": 3
     },
     {
       "dia_iso": "2026-09-13",

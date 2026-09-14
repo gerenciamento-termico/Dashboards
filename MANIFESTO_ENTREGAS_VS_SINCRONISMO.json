@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T18:54:53",
+  "gerado_em": "2026-09-14T19:03:08",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6392,
-    "pedidos_janela": 982,
-    "loggers_ares_janela": 6044,
-    "loggers_ares_antes_dedup": 6208,
+    "pares_janela": 6393,
+    "pedidos_janela": 983,
+    "loggers_ares_janela": 6045,
+    "loggers_ares_antes_dedup": 6209,
     "dedup_dia_logger": 50,
     "ocultos_operacao": 114,
     "ocultos_lista": 114,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 692,
+    "pendentes_janela": 688,
     "cobranca_gru_janela": 238,
-    "sem_embarque_efetiva": 410,
+    "sem_embarque_efetiva": 411,
     "com_embarque_efetiva": 5798,
     "loggers_sem_lastsync": 118,
-    "nao_avaliados": 410,
-    "pedidos_com_agente": 6392,
+    "nao_avaliados": 411,
+    "pedidos_com_agente": 6393,
     "dtbtransporte": {
-      "consultados": 982,
-      "mapeados": 982,
-      "linhas": 1073
+      "consultados": 983,
+      "mapeados": 983,
+      "linhas": 1074
     },
     "top10_agentes_pendencias": {
       "NAT - CSM CARGO": 101,
@@ -64,9 +64,9 @@
       "SP": 29
     },
     "latencia": {
-      "n_agente": 4220,
+      "n_agente": 4223,
       "n_so_gru": 75,
-      "n_sem_primeiro_sync": 1343,
+      "n_sem_primeiro_sync": 1340,
       "media_horas": 1.53,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -383,18 +383,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 112,
       "loggers": 443,
-      "sincronizados": 293,
-      "pendentes": 103,
+      "sincronizados": 297,
+      "pendentes": 99,
       "sem_embarque": 234,
       "cobranca_gru": 47,
-      "pedidos_pendentes": 45,
-      "pct": 23.3,
-      "n_latencia": 278,
+      "pedidos_pendentes": 44,
+      "pct": 22.3,
+      "n_latencia": 281,
       "media_horas": 0.31,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 165
+      "n_sem_primeiro_sync": 162
     },
     {
       "dia_iso": "2026-09-12",
@@ -442,7 +442,7 @@
       "loggers": 315,
       "sincronizados": 144,
       "pendentes": 155,
-      "sem_embarque": 1,
+      "sem_embarque": 2,
       "cobranca_gru": 16,
       "pedidos_pendentes": 30,
       "pct": 49.2,

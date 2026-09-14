@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T12:57:45",
+  "gerado_em": "2026-09-14T13:09:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,54 +19,54 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6202,
-    "pedidos_janela": 933,
-    "loggers_ares_janela": 5861,
-    "loggers_ares_antes_dedup": 6018,
+    "pares_janela": 6209,
+    "pedidos_janela": 934,
+    "loggers_ares_janela": 5863,
+    "loggers_ares_antes_dedup": 6025,
     "dedup_dia_logger": 48,
-    "ocultos_operacao": 109,
-    "ocultos_lista": 109,
+    "ocultos_operacao": 114,
+    "ocultos_lista": 114,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 649,
-    "cobranca_gru_janela": 187,
+    "pendentes_janela": 664,
+    "cobranca_gru_janela": 180,
     "sem_embarque_efetiva": 428,
-    "com_embarque_efetiva": 5590,
+    "com_embarque_efetiva": 5597,
     "loggers_sem_lastsync": 114,
     "nao_avaliados": 428,
-    "pedidos_com_agente": 6202,
+    "pedidos_com_agente": 6209,
     "dtbtransporte": {
-      "consultados": 933,
-      "mapeados": 933,
-      "linhas": 1022
+      "consultados": 934,
+      "mapeados": 934,
+      "linhas": 1023
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 93,
       "SSA - LUTY LOG": 62,
       "VTCLOG - GRU": 53,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 50,
       "JPA - LIDER CARGAS": 41,
       "AJU - CASSIMIRO TRANSPORTES": 40,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 37,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
       "NAT - CSM CARGO": 31,
-      "RBR - RODOTEC": 30,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 30
+      "RBR - RODOTEC": 30
     },
     "top10_ufs_pendencias": {
       "PI": 94,
       "BA": 67,
-      "PA": 52,
+      "AM": 50,
+      "PA": 47,
       "PB": 43,
       "PR": 42,
       "SE": 40,
       "SC": 38,
       "MA": 33,
-      "RN": 32,
-      "AC": 30
+      "RN": 32
     },
     "latencia": {
-      "n_agente": 4111,
+      "n_agente": 4096,
       "n_so_gru": 79,
-      "n_sem_primeiro_sync": 1246,
+      "n_sem_primeiro_sync": 1263,
       "media_horas": 1.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -79,18 +79,18 @@
       "dia_full": "26/08/2026",
       "pedidos": 59,
       "loggers": 411,
-      "sincronizados": 376,
+      "sincronizados": 377,
       "pendentes": 20,
       "sem_embarque": 19,
-      "cobranca_gru": 15,
+      "cobranca_gru": 14,
       "pedidos_pendentes": 6,
       "pct": 4.9,
-      "n_latencia": 322,
-      "media_horas": 5.12,
+      "n_latencia": 324,
+      "media_horas": 5.09,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 16,
-      "n_sem_primeiro_sync": 73
+      "n_sem_primeiro_sync": 71
     },
     {
       "dia_iso": "2026-08-27",
@@ -117,18 +117,18 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 558,
+      "sincronizados": 559,
       "pendentes": 32,
       "sem_embarque": 1,
-      "cobranca_gru": 31,
+      "cobranca_gru": 30,
       "pedidos_pendentes": 12,
       "pct": 5.2,
-      "n_latencia": 503,
+      "n_latencia": 504,
       "media_horas": 0.71,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 18,
-      "n_sem_primeiro_sync": 100
+      "n_sem_primeiro_sync": 99
     },
     {
       "dia_iso": "2026-08-29",
@@ -174,10 +174,10 @@
       "dia_full": "31/08/2026",
       "pedidos": 43,
       "loggers": 187,
-      "sincronizados": 177,
+      "sincronizados": 178,
       "pendentes": 8,
       "sem_embarque": 0,
-      "cobranca_gru": 2,
+      "cobranca_gru": 1,
       "pedidos_pendentes": 8,
       "pct": 4.3,
       "n_latencia": 160,
@@ -250,10 +250,10 @@
       "dia_full": "04/09/2026",
       "pedidos": 80,
       "loggers": 489,
-      "sincronizados": 380,
+      "sincronizados": 382,
       "pendentes": 104,
       "sem_embarque": 61,
-      "cobranca_gru": 5,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 28,
       "pct": 21.3,
       "n_latencia": 347,
@@ -326,18 +326,18 @@
       "dia_full": "08/09/2026",
       "pedidos": 61,
       "loggers": 528,
-      "sincronizados": 439,
+      "sincronizados": 440,
       "pendentes": 63,
       "sem_embarque": 0,
-      "cobranca_gru": 26,
+      "cobranca_gru": 25,
       "pedidos_pendentes": 14,
       "pct": 11.9,
-      "n_latencia": 380,
+      "n_latencia": 381,
       "media_horas": 0.08,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 147
+      "n_sem_primeiro_sync": 146
     },
     {
       "dia_iso": "2026-09-09",
@@ -382,19 +382,19 @@
       "dia": "11/09",
       "dia_full": "11/09/2026",
       "pedidos": 108,
-      "loggers": 448,
-      "sincronizados": 282,
-      "pendentes": 128,
+      "loggers": 423,
+      "sincronizados": 263,
+      "pendentes": 123,
       "sem_embarque": 290,
-      "cobranca_gru": 38,
+      "cobranca_gru": 37,
       "pedidos_pendentes": 48,
-      "pct": 28.6,
-      "n_latencia": 261,
+      "pct": 29.1,
+      "n_latencia": 242,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 187
+      "n_sem_primeiro_sync": 181
     },
     {
       "dia_iso": "2026-09-12",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-14",
       "dia": "14/09",
       "dia_full": "14/09/2026",
-      "pedidos": 16,
-      "loggers": 91,
-      "sincronizados": 59,
-      "pendentes": 32,
+      "pedidos": 18,
+      "loggers": 118,
+      "sincronizados": 66,
+      "pendentes": 52,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 7,
-      "pct": 35.2,
+      "pedidos_pendentes": 8,
+      "pct": 44.1,
       "n_latencia": 23,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 68
+      "n_sem_primeiro_sync": 95
     }
   ],
   "erros_validacao": {},
@@ -611,6 +611,12 @@
     {
       "pedido": "567565",
       "logger": "0741700237",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566820",
+      "logger": "0741700240",
       "dia": "2026-09-11",
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
@@ -807,6 +813,12 @@
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
     {
+      "pedido": "566820",
+      "logger": "0741700562",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
       "pedido": "567565",
       "logger": "0741700584",
       "dia": "2026-09-11",
@@ -839,6 +851,12 @@
     {
       "pedido": "567565",
       "logger": "0741700736",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566820",
+      "logger": "0741700741",
       "dia": "2026-09-11",
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
@@ -939,6 +957,12 @@
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },
     {
+      "pedido": "566820",
+      "logger": "0741700883",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
       "pedido": "567565",
       "logger": "0741700889",
       "dia": "2026-09-11",
@@ -971,6 +995,12 @@
     {
       "pedido": "567565",
       "logger": "0741700940",
+      "dia": "2026-09-11",
+      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+    },
+    {
+      "pedido": "566820",
+      "logger": "0741700944",
       "dia": "2026-09-11",
       "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
     },

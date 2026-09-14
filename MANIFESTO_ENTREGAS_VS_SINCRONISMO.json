@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T08:06:03",
+  "gerado_em": "2026-09-14T08:15:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 92,
     "ocultos_lista": 92,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 663,
-    "cobranca_gru_janela": 184,
+    "pendentes_janela": 660,
+    "cobranca_gru_janela": 187,
     "sem_embarque_efetiva": 364,
     "com_embarque_efetiva": 5367,
     "loggers_sem_lastsync": 102,
@@ -48,8 +48,8 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 30,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 28,
-      "CGB - JR TRANSPORTES": 28,
-      "AJU - CASSIMIRO TRANSPORTES": 28
+      "AJU - CASSIMIRO TRANSPORTES": 28,
+      "NAT - CSM CARGO": 26
     },
     "top10_ufs_pendencias": {
       "PI": 94,
@@ -60,13 +60,13 @@
       "PB": 35,
       "MA": 33,
       "AM": 30,
-      "MT": 28,
-      "RN": 27
+      "RN": 27,
+      "SE": 26
     },
     "latencia": {
       "n_agente": 3921,
-      "n_so_gru": 63,
-      "n_sem_primeiro_sync": 1246,
+      "n_so_gru": 64,
+      "n_sem_primeiro_sync": 1245,
       "media_horas": 1.03,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -118,17 +118,17 @@
       "pedidos": 87,
       "loggers": 621,
       "sincronizados": 550,
-      "pendentes": 45,
+      "pendentes": 43,
       "sem_embarque": 1,
-      "cobranca_gru": 26,
+      "cobranca_gru": 28,
       "pedidos_pendentes": 16,
-      "pct": 7.2,
+      "pct": 6.9,
       "n_latencia": 496,
       "media_horas": 0.72,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 16,
-      "n_sem_primeiro_sync": 109
+      "n_sync_so_gru": 17,
+      "n_sem_primeiro_sync": 108
     },
     {
       "dia_iso": "2026-08-29",
@@ -327,11 +327,11 @@
       "pedidos": 61,
       "loggers": 548,
       "sincronizados": 453,
-      "pendentes": 78,
+      "pendentes": 77,
       "sem_embarque": 53,
-      "cobranca_gru": 17,
+      "cobranca_gru": 18,
       "pedidos_pendentes": 20,
-      "pct": 14.2,
+      "pct": 14.1,
       "n_latencia": 393,
       "media_horas": 0.08,
       "mediana_horas": 0.04,

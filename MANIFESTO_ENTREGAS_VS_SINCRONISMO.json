@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T18:40:33",
+  "gerado_em": "2026-09-14T18:54:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,30 +19,30 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6389,
-    "pedidos_janela": 979,
-    "loggers_ares_janela": 6041,
-    "loggers_ares_antes_dedup": 6205,
+    "pares_janela": 6392,
+    "pedidos_janela": 982,
+    "loggers_ares_janela": 6044,
+    "loggers_ares_antes_dedup": 6208,
     "dedup_dia_logger": 50,
     "ocultos_operacao": 114,
     "ocultos_lista": 114,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 691,
+    "pendentes_janela": 692,
     "cobranca_gru_janela": 238,
-    "sem_embarque_efetiva": 409,
-    "com_embarque_efetiva": 5796,
+    "sem_embarque_efetiva": 410,
+    "com_embarque_efetiva": 5798,
     "loggers_sem_lastsync": 118,
-    "nao_avaliados": 409,
-    "pedidos_com_agente": 6389,
+    "nao_avaliados": 410,
+    "pedidos_com_agente": 6392,
     "dtbtransporte": {
-      "consultados": 979,
-      "mapeados": 979,
-      "linhas": 1070
+      "consultados": 982,
+      "mapeados": 982,
+      "linhas": 1073
     },
     "top10_agentes_pendencias": {
       "NAT - CSM CARGO": 101,
       "THE - AERONEIVA EXPRESS": 97,
-      "VTCLOG - GRU": 61,
+      "VTCLOG - GRU": 62,
       "AJU - CASSIMIRO TRANSPORTES": 60,
       "SSA - LUTY LOG": 54,
       "JPA - LIDER CARGAS": 40,
@@ -61,12 +61,12 @@
       "MA": 33,
       "SC": 31,
       "AC": 30,
-      "SP": 28
+      "SP": 29
     },
     "latencia": {
-      "n_agente": 4219,
+      "n_agente": 4220,
       "n_so_gru": 75,
-      "n_sem_primeiro_sync": 1342,
+      "n_sem_primeiro_sync": 1343,
       "media_horas": 1.53,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-14",
       "dia": "14/09",
       "dia_full": "14/09/2026",
-      "pedidos": 59,
-      "loggers": 313,
-      "sincronizados": 143,
-      "pendentes": 154,
-      "sem_embarque": 0,
+      "pedidos": 61,
+      "loggers": 315,
+      "sincronizados": 144,
+      "pendentes": 155,
+      "sem_embarque": 1,
       "cobranca_gru": 16,
-      "pedidos_pendentes": 29,
+      "pedidos_pendentes": 30,
       "pct": 49.2,
-      "n_latencia": 95,
+      "n_latencia": 96,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 218
+      "n_sem_primeiro_sync": 219
     }
   ],
   "erros_validacao": {},
@@ -463,11 +463,13 @@
     "dtbPortal vwTabelaMovDataloggers (Em GRU agora)",
     "dtbPortal tbddataloggerhistoricos (estoque/restauracao depois da entrega)",
     "REVERSA_DATALOGGERS.html (agente fallback)",
-    "ocultos_operacao_entregas_vs.json (excecao pontual)"
+    "ocultos_operacao_entregas_vs.json (excecao pontual)",
+    "ocorrencias_operacionais.json (diario operacional)"
   ],
   "arquivos": [
     "ENTREGAS_VS_SINCRONISMO.html",
-    "ENTREGAS_VS_SINCRONISMO.csv"
+    "ENTREGAS_VS_SINCRONISMO.csv",
+    "ocorrencias_operacionais.json"
   ],
   "ocultos_operacao": [
     {

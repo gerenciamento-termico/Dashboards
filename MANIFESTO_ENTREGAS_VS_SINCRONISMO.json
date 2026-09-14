@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T16:14:01",
+  "gerado_em": "2026-09-14T16:26:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,10 +28,10 @@
     "ocultos_lista": 114,
     "ocultos_ausentes": 0,
     "pendentes_janela": 645,
-    "cobranca_gru_janela": 252,
+    "cobranca_gru_janela": 248,
     "sem_embarque_efetiva": 409,
     "com_embarque_efetiva": 5689,
-    "loggers_sem_lastsync": 119,
+    "loggers_sem_lastsync": 118,
     "nao_avaliados": 409,
     "pedidos_com_agente": 6282,
     "dtbtransporte": {
@@ -64,9 +64,9 @@
       "RO": 27
     },
     "latencia": {
-      "n_agente": 4141,
+      "n_agente": 4144,
       "n_so_gru": 77,
-      "n_sem_primeiro_sync": 1311,
+      "n_sem_primeiro_sync": 1308,
       "media_horas": 1.42,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -364,18 +364,18 @@
       "dia_full": "10/09/2026",
       "pedidos": 107,
       "loggers": 573,
-      "sincronizados": 486,
+      "sincronizados": 489,
       "pendentes": 60,
       "sem_embarque": 5,
-      "cobranca_gru": 27,
+      "cobranca_gru": 24,
       "pedidos_pendentes": 31,
       "pct": 10.5,
-      "n_latencia": 456,
+      "n_latencia": 458,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 116
+      "n_sem_primeiro_sync": 114
     },
     {
       "dia_iso": "2026-09-11",
@@ -440,18 +440,18 @@
       "dia_full": "14/09/2026",
       "pedidos": 43,
       "loggers": 218,
-      "sincronizados": 93,
+      "sincronizados": 94,
       "pendentes": 106,
       "sem_embarque": 0,
-      "cobranca_gru": 19,
+      "cobranca_gru": 18,
       "pedidos_pendentes": 21,
       "pct": 48.6,
-      "n_latencia": 50,
+      "n_latencia": 51,
       "media_horas": 0.05,
-      "mediana_horas": 0.04,
-      "p90_horas": 0.07,
+      "mediana_horas": 0.05,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 168
+      "n_sem_primeiro_sync": 167
     }
   ],
   "erros_validacao": {},

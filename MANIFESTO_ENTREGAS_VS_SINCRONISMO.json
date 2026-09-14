@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T17:42:47",
+  "gerado_em": "2026-09-14T17:55:33",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,30 +19,30 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6386,
-    "pedidos_janela": 976,
-    "loggers_ares_janela": 6038,
-    "loggers_ares_antes_dedup": 6202,
+    "pares_janela": 6389,
+    "pedidos_janela": 979,
+    "loggers_ares_janela": 6041,
+    "loggers_ares_antes_dedup": 6205,
     "dedup_dia_logger": 50,
     "ocultos_operacao": 114,
     "ocultos_lista": 114,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 693,
+    "pendentes_janela": 695,
     "cobranca_gru_janela": 238,
     "sem_embarque_efetiva": 409,
-    "com_embarque_efetiva": 5793,
+    "com_embarque_efetiva": 5796,
     "loggers_sem_lastsync": 118,
     "nao_avaliados": 409,
-    "pedidos_com_agente": 6386,
+    "pedidos_com_agente": 6389,
     "dtbtransporte": {
-      "consultados": 976,
-      "mapeados": 976,
-      "linhas": 1067
+      "consultados": 979,
+      "mapeados": 979,
+      "linhas": 1070
     },
     "top10_agentes_pendencias": {
       "NAT - CSM CARGO": 101,
       "THE - AERONEIVA EXPRESS": 97,
-      "VTCLOG - GRU": 60,
+      "VTCLOG - GRU": 61,
       "AJU - CASSIMIRO TRANSPORTES": 60,
       "SSA - LUTY LOG": 54,
       "JPA - LIDER CARGAS": 41,
@@ -61,12 +61,12 @@
       "MA": 33,
       "SC": 31,
       "AC": 30,
-      "SP": 27
+      "SP": 28
     },
     "latencia": {
       "n_agente": 4207,
       "n_so_gru": 75,
-      "n_sem_primeiro_sync": 1351,
+      "n_sem_primeiro_sync": 1354,
       "media_horas": 1.53,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -381,20 +381,20 @@
       "dia_iso": "2026-09-11",
       "dia": "11/09",
       "dia_full": "11/09/2026",
-      "pedidos": 111,
-      "loggers": 442,
+      "pedidos": 112,
+      "loggers": 443,
       "sincronizados": 290,
-      "pendentes": 105,
+      "pendentes": 106,
       "sem_embarque": 234,
       "cobranca_gru": 47,
-      "pedidos_pendentes": 44,
-      "pct": 23.8,
+      "pedidos_pendentes": 45,
+      "pct": 23.9,
       "n_latencia": 267,
       "media_horas": 0.32,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 175
+      "n_sem_primeiro_sync": 176
     },
     {
       "dia_iso": "2026-09-12",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-14",
       "dia": "14/09",
       "dia_full": "14/09/2026",
-      "pedidos": 57,
-      "loggers": 311,
-      "sincronizados": 142,
-      "pendentes": 153,
+      "pedidos": 59,
+      "loggers": 313,
+      "sincronizados": 143,
+      "pendentes": 154,
       "sem_embarque": 0,
       "cobranca_gru": 16,
-      "pedidos_pendentes": 28,
+      "pedidos_pendentes": 29,
       "pct": 49.2,
       "n_latencia": 95,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 216
+      "n_sem_primeiro_sync": 218
     }
   ],
   "erros_validacao": {},
@@ -474,685 +474,685 @@
       "pedido": "564748",
       "logger": "0741700036",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700059",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700063",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700069",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700072",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700073",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700081",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700087",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700122",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700154",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700163",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700167",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700175",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700178",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700180",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564577",
       "logger": "0741700185",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700197",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700200",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700202",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700204",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700215",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700221",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700224",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700237",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "566820",
       "logger": "0741700240",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700242",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700247",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700249",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700252",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700254",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700282",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700286",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700287",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700296",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700305",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700333",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700337",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700338",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700350",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700353",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700396",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700401",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700404",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700443",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700444",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700446",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700450",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700461",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700464",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700471",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700480",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700490",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700508",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700516",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700529",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700535",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700551",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "566820",
       "logger": "0741700562",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700584",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700676",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700715",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700722",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700727",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700736",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "566820",
       "logger": "0741700741",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700748",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700756",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700765",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700767",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700783",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567728",
       "logger": "0741700796",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700804",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700806",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700809",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700818",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700844",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700860",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700865",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700872",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700874",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700879",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "566820",
       "logger": "0741700883",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700889",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700898",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700908",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700915",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700920",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700940",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "566820",
       "logger": "0741700944",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700954",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700967",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "0741700991",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "564748",
       "logger": "0741700996",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A0902",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A1630",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A1904",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A3366",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A4041",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A5019",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A5508",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A5693",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A5777",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A6647",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A7058",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A7164",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A8281",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A8469",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A8975",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A9569",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "A9583",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "TA0324",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "TA0765",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "TA0844",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
       "pedido": "567565",
       "logger": "TA0974",
       "dia": "2026-09-11",
-      "motivo": "erro operacional — dt_entregaefetivaembarque lançada após a entrega real"
+      "motivo": "lançamento errado no aplicativo de entregas"
     }
   ]
 }

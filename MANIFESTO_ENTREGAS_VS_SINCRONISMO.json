@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T18:06:12",
+  "gerado_em": "2026-09-14T18:26:38",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 114,
     "ocultos_lista": 114,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 692,
+    "pendentes_janela": 691,
     "cobranca_gru_janela": 238,
     "sem_embarque_efetiva": 409,
     "com_embarque_efetiva": 5796,
@@ -45,7 +45,7 @@
       "VTCLOG - GRU": 61,
       "AJU - CASSIMIRO TRANSPORTES": 60,
       "SSA - LUTY LOG": 54,
-      "JPA - LIDER CARGAS": 41,
+      "JPA - LIDER CARGAS": 40,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
       "RBR - RODOTEC": 30,
       "PVH - RODOTEC": 27,
@@ -57,16 +57,16 @@
       "SE": 60,
       "BA": 59,
       "PA": 49,
-      "PB": 43,
+      "PB": 42,
       "MA": 33,
       "SC": 31,
       "AC": 30,
       "SP": 28
     },
     "latencia": {
-      "n_agente": 4210,
+      "n_agente": 4219,
       "n_so_gru": 75,
-      "n_sem_primeiro_sync": 1351,
+      "n_sem_primeiro_sync": 1342,
       "media_horas": 1.53,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -231,18 +231,18 @@
       "dia_full": "03/09/2026",
       "pedidos": 83,
       "loggers": 413,
-      "sincronizados": 349,
-      "pendentes": 46,
+      "sincronizados": 350,
+      "pendentes": 45,
       "sem_embarque": 27,
       "cobranca_gru": 18,
       "pedidos_pendentes": 8,
-      "pct": 11.1,
-      "n_latencia": 314,
+      "pct": 10.9,
+      "n_latencia": 315,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 96
+      "n_sem_primeiro_sync": 95
     },
     {
       "dia_iso": "2026-09-04",
@@ -389,12 +389,12 @@
       "cobranca_gru": 47,
       "pedidos_pendentes": 45,
       "pct": 23.3,
-      "n_latencia": 270,
-      "media_horas": 0.32,
+      "n_latencia": 278,
+      "media_horas": 0.31,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 173
+      "n_sem_primeiro_sync": 165
     },
     {
       "dia_iso": "2026-09-12",

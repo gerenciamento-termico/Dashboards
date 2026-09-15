@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T22:13:52",
+  "gerado_em": "2026-09-14T22:29:14",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -463,13 +463,11 @@
     "dtbPortal vwTabelaMovDataloggers (Em GRU agora)",
     "dtbPortal tbddataloggerhistoricos (estoque/restauracao depois da entrega)",
     "REVERSA_DATALOGGERS.html (agente fallback)",
-    "ocultos_operacao_entregas_vs.json (excecao pontual)",
-    "ocorrencias_operacionais.json (diario operacional)"
+    "ocultos_operacao_entregas_vs.json (excecao pontual)"
   ],
   "arquivos": [
     "ENTREGAS_VS_SINCRONISMO.html",
-    "ENTREGAS_VS_SINCRONISMO.csv",
-    "ocorrencias_operacionais.json"
+    "ENTREGAS_VS_SINCRONISMO.csv"
   ],
   "ocultos_operacao": [
     {

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T16:33:51",
+  "gerado_em": "2026-09-15T16:38:58",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 162,
     "ocultos_lista": 162,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 597,
+    "pendentes_janela": 596,
     "cobranca_gru_janela": 119,
     "sem_embarque_efetiva": 229,
     "com_embarque_efetiva": 5701,
@@ -48,7 +48,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 32,
       "RBR - RODOTEC": 30,
       "PVH - RODOTEC": 27,
-      "JPA - LIDER CARGAS": 27,
+      "JPA - LIDER CARGAS": 26,
       "FOR - NT TRANSPORTE LTDA": 21
     },
     "top10_ufs_pendencias": {
@@ -60,13 +60,13 @@
       "MA": 32,
       "AC": 30,
       "SP": 29,
-      "PB": 28,
-      "RO": 27
+      "RO": 27,
+      "PB": 27
     },
     "latencia": {
-      "n_agente": 4310,
+      "n_agente": 4312,
       "n_so_gru": 93,
-      "n_sem_primeiro_sync": 1091,
+      "n_sem_primeiro_sync": 1089,
       "media_horas": 1.17,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -212,18 +212,18 @@
       "dia_full": "03/09/2026",
       "pedidos": 83,
       "loggers": 413,
-      "sincronizados": 365,
-      "pendentes": 34,
+      "sincronizados": 366,
+      "pendentes": 33,
       "sem_embarque": 27,
       "cobranca_gru": 14,
       "pedidos_pendentes": 8,
-      "pct": 8.2,
-      "n_latencia": 326,
+      "pct": 8.0,
+      "n_latencia": 327,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 9,
-      "n_sem_primeiro_sync": 78
+      "n_sem_primeiro_sync": 77
     },
     {
       "dia_iso": "2026-09-04",
@@ -332,12 +332,12 @@
       "cobranca_gru": 4,
       "pedidos_pendentes": 16,
       "pct": 23.1,
-      "n_latencia": 139,
+      "n_latencia": 140,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 68
+      "n_sem_primeiro_sync": 67
     },
     {
       "dia_iso": "2026-09-10",

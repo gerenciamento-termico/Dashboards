@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "15/09/2026 09:35:09",
+  "geradoEm": "15/09/2026 09:46:22",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -112,10 +112,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           295,
           405,
           422,
-          430,
+          431,
           1094,
           3525,
-          3609
+          3608
         ]
       },
       "ultimaAtualizacao": "15/09/2026 11:36"
@@ -146,11 +146,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           141,
           216,
           294,
-          310,
+          311,
           380,
           408,
           691,
-          2257,
+          2256,
           3423
         ]
       },
@@ -278,9 +278,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           294,
           380,
           414,
-          426,
+          427,
           691,
-          2363,
+          2362,
           3441
         ]
       },
@@ -312,11 +312,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           141,
           216,
           295,
-          310,
+          311,
           380,
           414,
           1091,
-          2396,
+          2395,
           3468
         ]
       },
@@ -348,11 +348,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           141,
           216,
           294,
-          314,
+          315,
           392,
           409,
           691,
-          2386,
+          2385,
           3427
         ]
       },
@@ -384,11 +384,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           143,
           216,
           294,
-          310,
+          311,
           393,
           409,
           694,
-          3235,
+          3234,
           3458
         ]
       },
@@ -590,9 +590,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           295,
           380,
           420,
-          426,
+          427,
           1091,
-          2502,
+          2501,
           3486
         ]
       },
@@ -626,9 +626,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           294,
           392,
           415,
-          430,
+          431,
           691,
-          2492,
+          2491,
           3445
         ]
       },
@@ -662,9 +662,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           294,
           393,
           415,
-          426,
+          427,
           694,
-          3341,
+          3340,
           3476
         ]
       },
@@ -696,11 +696,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           141,
           216,
           295,
-          314,
+          315,
           392,
           415,
           1091,
-          2525,
+          2524,
           3472
         ]
       },
@@ -732,11 +732,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           143,
           216,
           295,
-          310,
+          311,
           393,
           415,
           1094,
-          3374,
+          3373,
           3503
         ]
       },
@@ -768,11 +768,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           143,
           216,
           294,
-          314,
+          315,
           405,
           410,
           694,
-          3364,
+          3363,
           3462
         ]
       },
@@ -932,9 +932,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           295,
           392,
           421,
-          430,
+          431,
           1091,
-          2631,
+          2630,
           3490
         ]
       },
@@ -968,9 +968,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           295,
           393,
           421,
-          426,
+          427,
           1094,
-          3480,
+          3479,
           3521
         ]
       },
@@ -1004,9 +1004,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           294,
           405,
           416,
-          430,
+          431,
           694,
-          3470,
+          3469,
           3480
         ]
       },
@@ -1038,11 +1038,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           143,
           216,
           295,
-          314,
+          315,
           405,
           416,
           1094,
-          3503,
+          3502,
           3507
         ]
       },

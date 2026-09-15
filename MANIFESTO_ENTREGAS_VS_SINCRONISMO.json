@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T10:20:24",
+  "gerado_em": "2026-09-15T10:39:47",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -21,14 +21,14 @@
   "contagens": {
     "pares_janela": 5959,
     "pedidos_janela": 942,
-    "loggers_ares_janela": 5670,
+    "loggers_ares_janela": 5661,
     "loggers_ares_antes_dedup": 5835,
     "dedup_dia_logger": 49,
-    "ocultos_operacao": 116,
-    "ocultos_lista": 116,
+    "ocultos_operacao": 125,
+    "ocultos_lista": 125,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 699,
-    "cobranca_gru_janela": 196,
+    "pendentes_janela": 687,
+    "cobranca_gru_janela": 192,
     "sem_embarque_efetiva": 318,
     "com_embarque_efetiva": 5517,
     "loggers_sem_lastsync": 98,
@@ -43,8 +43,8 @@
       "NAT - CSM CARGO": 85,
       "THE - AERONEIVA EXPRESS": 79,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 70,
-      "AJU - CASSIMIRO TRANSPORTES": 69,
       "VTCLOG - GRU": 60,
+      "AJU - CASSIMIRO TRANSPORTES": 60,
       "SSA - LUTY LOG": 55,
       "SLZ - REIS CAVALCANTE EXPRESSO": 32,
       "RBR - RODOTEC": 30,
@@ -55,7 +55,7 @@
       "RN": 86,
       "SC": 82,
       "PI": 80,
-      "SE": 69,
+      "SE": 60,
       "BA": 59,
       "PA": 49,
       "MA": 32,
@@ -64,10 +64,10 @@
       "RO": 27
     },
     "latencia": {
-      "n_agente": 4005,
+      "n_agente": 4025,
       "n_so_gru": 77,
-      "n_sem_primeiro_sync": 1274,
-      "media_horas": 1.24,
+      "n_sem_primeiro_sync": 1245,
+      "media_horas": 1.23,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -193,10 +193,10 @@
       "dia_full": "02/09/2026",
       "pedidos": 78,
       "loggers": 414,
-      "sincronizados": 383,
+      "sincronizados": 384,
       "pendentes": 14,
       "sem_embarque": 2,
-      "cobranca_gru": 17,
+      "cobranca_gru": 16,
       "pedidos_pendentes": 10,
       "pct": 3.4,
       "n_latencia": 337,
@@ -345,10 +345,10 @@
       "dia_full": "10/09/2026",
       "pedidos": 107,
       "loggers": 573,
-      "sincronizados": 496,
+      "sincronizados": 498,
       "pendentes": 58,
       "sem_embarque": 5,
-      "cobranca_gru": 19,
+      "cobranca_gru": 17,
       "pedidos_pendentes": 30,
       "pct": 10.1,
       "n_latencia": 462,
@@ -364,18 +364,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 112,
       "loggers": 443,
-      "sincronizados": 321,
-      "pendentes": 84,
+      "sincronizados": 323,
+      "pendentes": 83,
       "sem_embarque": 182,
-      "cobranca_gru": 38,
+      "cobranca_gru": 37,
       "pedidos_pendentes": 43,
-      "pct": 19.0,
-      "n_latencia": 305,
-      "media_horas": 0.29,
+      "pct": 18.7,
+      "n_latencia": 307,
+      "media_horas": 0.28,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 138
+      "n_sem_primeiro_sync": 136
     },
     {
       "dia_iso": "2026-09-12",
@@ -420,19 +420,19 @@
       "dia": "14/09",
       "dia_full": "14/09/2026",
       "pedidos": 77,
-      "loggers": 392,
-      "sincronizados": 195,
-      "pendentes": 184,
+      "loggers": 383,
+      "sincronizados": 197,
+      "pendentes": 173,
       "sem_embarque": 0,
       "cobranca_gru": 13,
-      "pedidos_pendentes": 39,
-      "pct": 46.9,
-      "n_latencia": 154,
+      "pedidos_pendentes": 35,
+      "pct": 45.2,
+      "n_latencia": 156,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 238
+      "n_sem_primeiro_sync": 227
     },
     {
       "dia_iso": "2026-09-15",
@@ -446,12 +446,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
       "pct": 61.5,
-      "n_latencia": 3,
-      "media_horas": 0.03,
+      "n_latencia": 19,
+      "media_horas": 0.04,
       "mediana_horas": 0.03,
-      "p90_horas": 0.04,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 49
+      "n_sem_primeiro_sync": 33
     }
   ],
   "erros_validacao": {},
@@ -1163,6 +1163,60 @@
     {
       "pedido": "566892",
       "logger": "A1069",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567484",
+      "logger": "A5345",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566892",
+      "logger": "A5731",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567059",
+      "logger": "A6855",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566298",
+      "logger": "A7050",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566298",
+      "logger": "A8664",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566298",
+      "logger": "A8744",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566892",
+      "logger": "TA0936",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567059",
+      "logger": "TA1124",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566298",
+      "logger": "TA1133",
       "dia": "2026-09-14",
       "motivo": "lançamento errado no aplicativo de entregas"
     }

@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "15/09/2026 08:53:07",
+  "geradoEm": "15/09/2026 09:12:41",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -38,7 +38,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "15/09/2026 08:24:31",
+      "ultimaAtualizacao": "15/09/2026 08:54:31",
       "totalRegistros": 108358
     },
     "SHIELD": {
@@ -77,7 +77,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "semStatus": 0,
       "semData": 0,
       "estoqueSemQuantidade": 0,
-      "ultimaAtualizacao": "15/09/2026 08:24:31",
+      "ultimaAtualizacao": "15/09/2026 08:54:31",
       "totalRegistros": 115295
     }
   },
@@ -109,11 +109,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          298,
+          352,
           405,
           422,
           430,
-          1149,
+          1095,
           3519,
           3551
         ]
@@ -131,8 +131,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -145,11 +145,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          297,
           310,
+          351,
           380,
           408,
-          746,
+          692,
           2199,
           3417
         ]
@@ -275,11 +275,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          297,
+          351,
           380,
           414,
           426,
-          746,
+          692,
           2305,
           3435
         ]
@@ -297,8 +297,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -311,11 +311,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          298,
           310,
+          352,
           380,
           414,
-          1146,
+          1092,
           2338,
           3462
         ]
@@ -333,8 +333,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -347,11 +347,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          297,
           314,
+          351,
           392,
           409,
-          746,
+          692,
           2328,
           3421
         ]
@@ -369,8 +369,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -383,11 +383,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          297,
           310,
+          351,
           393,
           409,
-          749,
+          695,
           3177,
           3452
         ]
@@ -587,11 +587,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          298,
+          352,
           380,
           420,
           426,
-          1146,
+          1092,
           2444,
           3480
         ]
@@ -623,11 +623,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          297,
+          351,
           392,
           415,
           430,
-          746,
+          692,
           2434,
           3439
         ]
@@ -659,11 +659,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          297,
+          351,
           393,
           415,
           426,
-          749,
+          695,
           3283,
           3470
         ]
@@ -681,8 +681,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -695,11 +695,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          298,
           314,
+          352,
           392,
           415,
-          1146,
+          1092,
           2467,
           3466
         ]
@@ -717,8 +717,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -731,11 +731,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          298,
           310,
+          352,
           393,
           415,
-          1149,
+          1095,
           3316,
           3497
         ]
@@ -753,8 +753,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -767,11 +767,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          297,
           314,
+          351,
           405,
           410,
-          749,
+          695,
           3306,
           3456
         ]
@@ -929,11 +929,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           147,
           216,
-          298,
+          352,
           392,
           421,
           430,
-          1146,
+          1092,
           2573,
           3484
         ]
@@ -965,11 +965,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          298,
+          352,
           393,
           421,
           426,
-          1149,
+          1095,
           3422,
           3515
         ]
@@ -1001,11 +1001,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          297,
+          351,
           405,
           416,
           430,
-          749,
+          695,
           3412,
           3474
         ]
@@ -1023,8 +1023,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "ESTOQUE - GIG",
           "TRANSPORTE",
           "CALIBRAÇÃO",
-          "RETORNANDO - GRU",
           "MANUTENÇÃO",
+          "RETORNANDO - GRU",
           "QUALIDADE",
           "CF - Apto ao Uso",
           "Sem Mapeamento",
@@ -1037,11 +1037,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           149,
           216,
-          298,
           314,
+          352,
           405,
           416,
-          1149,
+          1095,
           3445,
           3501
         ]

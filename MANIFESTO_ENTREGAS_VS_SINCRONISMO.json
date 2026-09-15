@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T11:32:52",
+  "gerado_em": "2026-09-15T11:38:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -64,10 +64,10 @@
       "RO": 27
     },
     "latencia": {
-      "n_agente": 4032,
+      "n_agente": 4067,
       "n_so_gru": 84,
-      "n_sem_primeiro_sync": 1236,
-      "media_horas": 1.23,
+      "n_sem_primeiro_sync": 1201,
+      "media_horas": 1.22,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -218,12 +218,12 @@
       "cobranca_gru": 17,
       "pedidos_pendentes": 8,
       "pct": 8.7,
-      "n_latencia": 320,
+      "n_latencia": 323,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 9,
-      "n_sem_primeiro_sync": 84
+      "n_sem_primeiro_sync": 81
     },
     {
       "dia_iso": "2026-09-04",
@@ -237,12 +237,12 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 27,
       "pct": 20.9,
-      "n_latencia": 343,
-      "media_horas": 0.7,
+      "n_latencia": 350,
+      "media_horas": 0.69,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 5,
-      "n_sem_primeiro_sync": 141
+      "n_sem_primeiro_sync": 134
     },
     {
       "dia_iso": "2026-09-05",
@@ -313,12 +313,12 @@
       "cobranca_gru": 21,
       "pedidos_pendentes": 10,
       "pct": 9.1,
-      "n_latencia": 385,
+      "n_latencia": 390,
       "media_horas": 0.12,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 4,
-      "n_sem_primeiro_sync": 139
+      "n_sem_primeiro_sync": 134
     },
     {
       "dia_iso": "2026-09-09",
@@ -332,12 +332,12 @@
       "cobranca_gru": 5,
       "pedidos_pendentes": 16,
       "pct": 23.1,
-      "n_latencia": 135,
+      "n_latencia": 136,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 72
+      "n_sem_primeiro_sync": 71
     },
     {
       "dia_iso": "2026-09-10",
@@ -370,12 +370,12 @@
       "cobranca_gru": 36,
       "pedidos_pendentes": 43,
       "pct": 17.5,
-      "n_latencia": 315,
-      "media_horas": 0.28,
+      "n_latencia": 330,
+      "media_horas": 0.27,
       "mediana_horas": 0.04,
-      "p90_horas": 0.08,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 148
+      "n_sem_primeiro_sync": 133
     },
     {
       "dia_iso": "2026-09-12",
@@ -427,12 +427,12 @@
       "cobranca_gru": 9,
       "pedidos_pendentes": 34,
       "pct": 41.8,
-      "n_latencia": 158,
+      "n_latencia": 161,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 208
+      "n_sem_primeiro_sync": 205
     },
     {
       "dia_iso": "2026-09-15",
@@ -446,12 +446,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
       "pct": 61.1,
-      "n_latencia": 19,
+      "n_latencia": 20,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 35
+      "n_sem_primeiro_sync": 34
     }
   ],
   "erros_validacao": {},

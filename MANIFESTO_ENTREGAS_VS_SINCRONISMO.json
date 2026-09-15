@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T16:43:46",
+  "gerado_em": "2026-09-15T16:48:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -21,13 +21,13 @@
   "contagens": {
     "pares_janela": 6084,
     "pedidos_janela": 972,
-    "loggers_ares_janela": 5748,
+    "loggers_ares_janela": 5744,
     "loggers_ares_antes_dedup": 5959,
     "dedup_dia_logger": 49,
-    "ocultos_operacao": 162,
-    "ocultos_lista": 162,
+    "ocultos_operacao": 166,
+    "ocultos_lista": 166,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 596,
+    "pendentes_janela": 590,
     "cobranca_gru_janela": 116,
     "sem_embarque_efetiva": 229,
     "com_embarque_efetiva": 5730,
@@ -48,7 +48,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 32,
       "RBR - RODOTEC": 30,
       "PVH - RODOTEC": 27,
-      "JPA - LIDER CARGAS": 25,
+      "JPA - LIDER CARGAS": 23,
       "FOR - NT TRANSPORTE LTDA": 21
     },
     "top10_ufs_pendencias": {
@@ -61,12 +61,12 @@
       "AC": 30,
       "SP": 29,
       "RO": 27,
-      "PB": 26
+      "PB": 24
     },
     "latencia": {
-      "n_agente": 4317,
+      "n_agente": 4320,
       "n_so_gru": 93,
-      "n_sem_primeiro_sync": 1113,
+      "n_sem_primeiro_sync": 1106,
       "media_horas": 1.17,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -212,18 +212,18 @@
       "dia_full": "03/09/2026",
       "pedidos": 83,
       "loggers": 413,
-      "sincronizados": 368,
-      "pendentes": 32,
+      "sincronizados": 370,
+      "pendentes": 30,
       "sem_embarque": 27,
       "cobranca_gru": 13,
       "pedidos_pendentes": 8,
-      "pct": 7.7,
-      "n_latencia": 329,
+      "pct": 7.3,
+      "n_latencia": 331,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 9,
-      "n_sem_primeiro_sync": 75
+      "n_sem_primeiro_sync": 73
     },
     {
       "dia_iso": "2026-09-04",
@@ -370,12 +370,12 @@
       "cobranca_gru": 20,
       "pedidos_pendentes": 40,
       "pct": 15.1,
-      "n_latencia": 358,
+      "n_latencia": 359,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 105
+      "n_sem_primeiro_sync": 104
     },
     {
       "dia_iso": "2026-09-12",
@@ -420,19 +420,19 @@
       "dia": "14/09",
       "dia_full": "14/09/2026",
       "pedidos": 81,
-      "loggers": 450,
+      "loggers": 446,
       "sincronizados": 349,
-      "pendentes": 98,
+      "pendentes": 94,
       "sem_embarque": 0,
       "cobranca_gru": 3,
       "pedidos_pendentes": 35,
-      "pct": 21.8,
+      "pct": 21.1,
       "n_latencia": 294,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 156
+      "n_sem_primeiro_sync": 152
     },
     {
       "dia_iso": "2026-09-15",
@@ -1275,6 +1275,18 @@
       "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
+      "pedido": "566303",
+      "logger": "0741700484",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566303",
+      "logger": "A0212",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
       "pedido": "566298",
       "logger": "A0256",
       "dia": "2026-09-14",
@@ -1313,6 +1325,18 @@
     {
       "pedido": "566322",
       "logger": "A4473",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566303",
+      "logger": "A4585",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566303",
+      "logger": "A5080",
       "dia": "2026-09-14",
       "motivo": "lançamento errado no aplicativo de entregas"
     },

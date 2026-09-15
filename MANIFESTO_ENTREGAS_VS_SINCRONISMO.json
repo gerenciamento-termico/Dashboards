@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T10:00:24",
+  "gerado_em": "2026-09-15T10:05:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 116,
     "ocultos_lista": 116,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 650,
-    "cobranca_gru_janela": 198,
+    "pendentes_janela": 649,
+    "cobranca_gru_janela": 197,
     "sem_embarque_efetiva": 371,
     "com_embarque_efetiva": 5447,
     "loggers_sem_lastsync": 98,
@@ -40,7 +40,7 @@
       "linhas": 1028
     },
     "top10_agentes_pendencias": {
-      "NAT - CSM CARGO": 88,
+      "NAT - CSM CARGO": 87,
       "THE - AERONEIVA EXPRESS": 79,
       "AJU - CASSIMIRO TRANSPORTES": 69,
       "VTCLOG - GRU": 60,
@@ -52,7 +52,7 @@
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 21
     },
     "top10_ufs_pendencias": {
-      "RN": 89,
+      "RN": 88,
       "PI": 80,
       "SE": 69,
       "BA": 58,
@@ -64,9 +64,9 @@
       "RO": 27
     },
     "latencia": {
-      "n_agente": 3998,
+      "n_agente": 4000,
       "n_so_gru": 77,
-      "n_sem_primeiro_sync": 1211,
+      "n_sem_primeiro_sync": 1209,
       "media_horas": 1.24,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -307,18 +307,18 @@
       "dia_full": "08/09/2026",
       "pedidos": 61,
       "loggers": 528,
-      "sincronizados": 455,
+      "sincronizados": 456,
       "pendentes": 48,
       "sem_embarque": 0,
-      "cobranca_gru": 25,
+      "cobranca_gru": 24,
       "pedidos_pendentes": 10,
       "pct": 9.1,
-      "n_latencia": 386,
+      "n_latencia": 387,
       "media_horas": 0.12,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 139
+      "n_sem_primeiro_sync": 138
     },
     {
       "dia_iso": "2026-09-09",
@@ -364,18 +364,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 112,
       "loggers": 443,
-      "sincronizados": 317,
-      "pendentes": 88,
+      "sincronizados": 318,
+      "pendentes": 87,
       "sem_embarque": 234,
       "cobranca_gru": 38,
       "pedidos_pendentes": 44,
-      "pct": 19.9,
-      "n_latencia": 301,
+      "pct": 19.6,
+      "n_latencia": 302,
       "media_horas": 0.29,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 142
+      "n_sem_primeiro_sync": 141
     },
     {
       "dia_iso": "2026-09-12",

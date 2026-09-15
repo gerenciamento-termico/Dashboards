@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T08:59:51",
+  "gerado_em": "2026-09-15T09:05:16",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -21,13 +21,13 @@
   "contagens": {
     "pares_janela": 5935,
     "pedidos_janela": 936,
-    "loggers_ares_janela": 5647,
+    "loggers_ares_janela": 5646,
     "loggers_ares_antes_dedup": 5811,
     "dedup_dia_logger": 49,
-    "ocultos_operacao": 115,
-    "ocultos_lista": 115,
+    "ocultos_operacao": 116,
+    "ocultos_lista": 116,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 666,
+    "pendentes_janela": 665,
     "cobranca_gru_janela": 209,
     "sem_embarque_efetiva": 370,
     "com_embarque_efetiva": 5441,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "NAT - CSM CARGO": 99,
       "THE - AERONEIVA EXPRESS": 79,
-      "AJU - CASSIMIRO TRANSPORTES": 70,
+      "AJU - CASSIMIRO TRANSPORTES": 69,
       "VTCLOG - GRU": 63,
       "SSA - LUTY LOG": 54,
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
@@ -54,7 +54,7 @@
     "top10_ufs_pendencias": {
       "RN": 100,
       "PI": 80,
-      "SE": 70,
+      "SE": 69,
       "BA": 58,
       "PA": 49,
       "MA": 33,
@@ -64,9 +64,9 @@
       "SP": 28
     },
     "latencia": {
-      "n_agente": 3961,
+      "n_agente": 3965,
       "n_so_gru": 69,
-      "n_sem_primeiro_sync": 1251,
+      "n_sem_primeiro_sync": 1246,
       "media_horas": 1.14,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -420,19 +420,19 @@
       "dia": "14/09",
       "dia_full": "14/09/2026",
       "pedidos": 74,
-      "loggers": 368,
+      "loggers": 367,
       "sincronizados": 190,
-      "pendentes": 164,
+      "pendentes": 163,
       "sem_embarque": 0,
       "cobranca_gru": 14,
       "pedidos_pendentes": 39,
-      "pct": 44.6,
-      "n_latencia": 144,
-      "media_horas": 0.05,
+      "pct": 44.4,
+      "n_latencia": 148,
+      "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 224
+      "n_sem_primeiro_sync": 219
     },
     {
       "dia_iso": "2026-09-15",
@@ -1157,6 +1157,12 @@
     {
       "pedido": "566298",
       "logger": "A0256",
+      "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566892",
+      "logger": "A1069",
       "dia": "2026-09-14",
       "motivo": "lançamento errado no aplicativo de entregas"
     }

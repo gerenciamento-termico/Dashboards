@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T12:58:23",
+  "gerado_em": "2026-09-15T13:02:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,10 +28,10 @@
     "ocultos_lista": 142,
     "ocultos_ausentes": 0,
     "pendentes_janela": 667,
-    "cobranca_gru_janela": 159,
+    "cobranca_gru_janela": 156,
     "sem_embarque_efetiva": 298,
     "com_embarque_efetiva": 5545,
-    "loggers_sem_lastsync": 97,
+    "loggers_sem_lastsync": 96,
     "nao_avaliados": 298,
     "pedidos_com_agente": 5967,
     "dtbtransporte": {
@@ -64,10 +64,10 @@
       "RO": 27
     },
     "latencia": {
-      "n_agente": 4081,
+      "n_agente": 4084,
       "n_so_gru": 84,
-      "n_sem_primeiro_sync": 1193,
-      "media_horas": 1.22,
+      "n_sem_primeiro_sync": 1190,
+      "media_horas": 1.26,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -98,18 +98,18 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 567,
+      "sincronizados": 568,
       "pendentes": 31,
       "sem_embarque": 1,
-      "cobranca_gru": 23,
+      "cobranca_gru": 22,
       "pedidos_pendentes": 12,
       "pct": 5.0,
-      "n_latencia": 517,
-      "media_horas": 2.4,
+      "n_latencia": 518,
+      "media_horas": 2.77,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 19,
-      "n_sem_primeiro_sync": 85
+      "n_sem_primeiro_sync": 84
     },
     {
       "dia_iso": "2026-08-29",
@@ -364,18 +364,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 112,
       "loggers": 463,
-      "sincronizados": 347,
+      "sincronizados": 349,
       "pendentes": 81,
       "sem_embarque": 162,
-      "cobranca_gru": 35,
+      "cobranca_gru": 33,
       "pedidos_pendentes": 43,
       "pct": 17.5,
-      "n_latencia": 331,
+      "n_latencia": 333,
       "media_horas": 0.27,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 132
+      "n_sem_primeiro_sync": 130
     },
     {
       "dia_iso": "2026-09-12",

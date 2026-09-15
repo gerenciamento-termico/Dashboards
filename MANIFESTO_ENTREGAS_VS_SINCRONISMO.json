@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T11:38:18",
+  "gerado_em": "2026-09-15T11:43:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5961,
-    "pedidos_janela": 944,
-    "loggers_ares_janela": 5646,
-    "loggers_ares_antes_dedup": 5837,
+    "pares_janela": 5962,
+    "pedidos_janela": 945,
+    "loggers_ares_janela": 5647,
+    "loggers_ares_antes_dedup": 5838,
     "dedup_dia_logger": 49,
     "ocultos_operacao": 142,
     "ocultos_lista": 142,
@@ -30,14 +30,14 @@
     "pendentes_janela": 666,
     "cobranca_gru_janela": 172,
     "sem_embarque_efetiva": 298,
-    "com_embarque_efetiva": 5539,
+    "com_embarque_efetiva": 5540,
     "loggers_sem_lastsync": 98,
     "nao_avaliados": 298,
-    "pedidos_com_agente": 5961,
+    "pedidos_com_agente": 5962,
     "dtbtransporte": {
-      "consultados": 944,
-      "mapeados": 944,
-      "linhas": 1032
+      "consultados": 945,
+      "mapeados": 945,
+      "linhas": 1033
     },
     "top10_agentes_pendencias": {
       "NAT - CSM CARGO": 85,
@@ -64,7 +64,7 @@
       "RO": 27
     },
     "latencia": {
-      "n_agente": 4067,
+      "n_agente": 4068,
       "n_so_gru": 84,
       "n_sem_primeiro_sync": 1201,
       "media_horas": 1.22,
@@ -438,17 +438,17 @@
       "dia_iso": "2026-09-15",
       "dia": "15/09",
       "dia_full": "15/09/2026",
-      "pedidos": 8,
-      "loggers": 54,
-      "sincronizados": 21,
+      "pedidos": 9,
+      "loggers": 55,
+      "sincronizados": 22,
       "pendentes": 33,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
-      "pct": 61.1,
-      "n_latencia": 20,
+      "pct": 60.0,
+      "n_latencia": 21,
       "media_horas": 0.04,
-      "mediana_horas": 0.04,
+      "mediana_horas": 0.03,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 34

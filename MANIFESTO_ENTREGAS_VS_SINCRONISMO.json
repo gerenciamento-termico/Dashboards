@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T15:58:41",
+  "gerado_em": "2026-09-15T16:03:43",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6020,
-    "pedidos_janela": 963,
-    "loggers_ares_janela": 5705,
-    "loggers_ares_antes_dedup": 5896,
+    "pares_janela": 6024,
+    "pedidos_janela": 964,
+    "loggers_ares_janela": 5709,
+    "loggers_ares_antes_dedup": 5900,
     "dedup_dia_logger": 49,
     "ocultos_operacao": 142,
     "ocultos_lista": 142,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 618,
+    "pendentes_janela": 617,
     "cobranca_gru_janela": 131,
-    "sem_embarque_efetiva": 229,
+    "sem_embarque_efetiva": 233,
     "com_embarque_efetiva": 5667,
     "loggers_sem_lastsync": 93,
-    "nao_avaliados": 229,
-    "pedidos_com_agente": 6020,
+    "nao_avaliados": 233,
+    "pedidos_com_agente": 6024,
     "dtbtransporte": {
-      "consultados": 963,
-      "mapeados": 963,
-      "linhas": 1051
+      "consultados": 964,
+      "mapeados": 964,
+      "linhas": 1052
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 71,
@@ -64,9 +64,9 @@
       "SP": 28
     },
     "latencia": {
-      "n_agente": 4265,
+      "n_agente": 4266,
       "n_so_gru": 91,
-      "n_sem_primeiro_sync": 1124,
+      "n_sem_primeiro_sync": 1123,
       "media_horas": 1.19,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -345,18 +345,18 @@
       "dia_full": "10/09/2026",
       "pedidos": 107,
       "loggers": 573,
-      "sincronizados": 506,
-      "pendentes": 58,
+      "sincronizados": 507,
+      "pendentes": 57,
       "sem_embarque": 5,
       "cobranca_gru": 9,
       "pedidos_pendentes": 30,
-      "pct": 10.1,
-      "n_latencia": 469,
+      "pct": 9.9,
+      "n_latencia": 470,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 101
+      "n_sem_primeiro_sync": 100
     },
     {
       "dia_iso": "2026-09-11",
@@ -442,7 +442,7 @@
       "loggers": 99,
       "sincronizados": 48,
       "pendentes": 51,
-      "sem_embarque": 0,
+      "sem_embarque": 4,
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
       "pct": 51.5,

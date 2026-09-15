@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T14:28:31",
+  "gerado_em": "2026-09-15T14:30:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5982,
-    "pedidos_janela": 955,
-    "loggers_ares_janela": 5667,
-    "loggers_ares_antes_dedup": 5858,
+    "pares_janela": 5983,
+    "pedidos_janela": 956,
+    "loggers_ares_janela": 5668,
+    "loggers_ares_antes_dedup": 5859,
     "dedup_dia_logger": 49,
     "ocultos_operacao": 142,
     "ocultos_lista": 142,
     "ocultos_ausentes": 0,
     "pendentes_janela": 683,
     "cobranca_gru_janela": 148,
-    "sem_embarque_efetiva": 229,
+    "sem_embarque_efetiva": 230,
     "com_embarque_efetiva": 5629,
     "loggers_sem_lastsync": 96,
-    "nao_avaliados": 229,
-    "pedidos_com_agente": 5982,
+    "nao_avaliados": 230,
+    "pedidos_com_agente": 5983,
     "dtbtransporte": {
-      "consultados": 955,
-      "mapeados": 955,
-      "linhas": 1043
+      "consultados": 956,
+      "mapeados": 956,
+      "linhas": 1044
     },
     "top10_agentes_pendencias": {
       "NAT - CSM CARGO": 85,
@@ -442,7 +442,7 @@
       "loggers": 75,
       "sincronizados": 27,
       "pendentes": 48,
-      "sem_embarque": 0,
+      "sem_embarque": 1,
       "cobranca_gru": 0,
       "pedidos_pendentes": 7,
       "pct": 64.0,

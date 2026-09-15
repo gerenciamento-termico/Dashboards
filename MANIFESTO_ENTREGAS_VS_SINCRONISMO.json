@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-14T22:37:12",
+  "gerado_em": "2026-09-14T22:46:11",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 114,
     "ocultos_lista": 114,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 707,
-    "cobranca_gru_janela": 238,
+    "pendentes_janela": 708,
+    "cobranca_gru_janela": 237,
     "sem_embarque_efetiva": 389,
     "com_embarque_efetiva": 5853,
     "loggers_sem_lastsync": 116,
@@ -49,7 +49,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 33,
       "RBR - RODOTEC": 30,
       "PVH - RODOTEC": 27,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 25
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 26
     },
     "top10_ufs_pendencias": {
       "RN": 102,
@@ -384,11 +384,11 @@
       "pedidos": 112,
       "loggers": 443,
       "sincronizados": 297,
-      "pendentes": 99,
+      "pendentes": 100,
       "sem_embarque": 234,
-      "cobranca_gru": 47,
+      "cobranca_gru": 46,
       "pedidos_pendentes": 44,
-      "pct": 22.3,
+      "pct": 22.6,
       "n_latencia": 281,
       "media_horas": 0.31,
       "mediana_horas": 0.04,

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T14:18:29",
+  "gerado_em": "2026-09-15T14:20:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,31 +19,31 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5970,
-    "pedidos_janela": 953,
-    "loggers_ares_janela": 5655,
-    "loggers_ares_antes_dedup": 5846,
+    "pares_janela": 5982,
+    "pedidos_janela": 955,
+    "loggers_ares_janela": 5667,
+    "loggers_ares_antes_dedup": 5858,
     "dedup_dia_logger": 49,
     "ocultos_operacao": 142,
     "ocultos_lista": 142,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 670,
+    "pendentes_janela": 683,
     "cobranca_gru_janela": 148,
-    "sem_embarque_efetiva": 230,
-    "com_embarque_efetiva": 5616,
+    "sem_embarque_efetiva": 229,
+    "com_embarque_efetiva": 5629,
     "loggers_sem_lastsync": 96,
-    "nao_avaliados": 230,
-    "pedidos_com_agente": 5970,
+    "nao_avaliados": 229,
+    "pedidos_com_agente": 5982,
     "dtbtransporte": {
-      "consultados": 953,
-      "mapeados": 953,
-      "linhas": 1041
+      "consultados": 955,
+      "mapeados": 955,
+      "linhas": 1043
     },
     "top10_agentes_pendencias": {
       "NAT - CSM CARGO": 85,
       "THE - AERONEIVA EXPRESS": 79,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 70,
-      "VTCLOG - GRU": 61,
+      "VTCLOG - GRU": 62,
       "SSA - LUTY LOG": 55,
       "AJU - CASSIMIRO TRANSPORTES": 41,
       "SLZ - REIS CAVALCANTE EXPRESSO": 32,
@@ -61,12 +61,12 @@
       "MA": 32,
       "AC": 30,
       "PB": 30,
-      "RO": 27
+      "SP": 27
     },
     "latencia": {
       "n_agente": 4149,
       "n_so_gru": 84,
-      "n_sem_primeiro_sync": 1196,
+      "n_sem_primeiro_sync": 1209,
       "media_horas": 1.2,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-15",
       "dia": "15/09",
       "dia_full": "15/09/2026",
-      "pedidos": 16,
-      "loggers": 62,
+      "pedidos": 19,
+      "loggers": 75,
       "sincronizados": 27,
-      "pendentes": 35,
-      "sem_embarque": 1,
+      "pendentes": 48,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 4,
-      "pct": 56.5,
+      "pedidos_pendentes": 7,
+      "pct": 64.0,
       "n_latencia": 25,
       "media_horas": 0.03,
       "mediana_horas": 0.03,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 37
+      "n_sem_primeiro_sync": 50
     }
   ],
   "erros_validacao": {},

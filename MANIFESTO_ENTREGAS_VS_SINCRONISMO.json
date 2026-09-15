@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-15T09:54:16",
+  "gerado_em": "2026-09-15T10:00:24",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5941,
-    "pedidos_janela": 939,
-    "loggers_ares_janela": 5652,
-    "loggers_ares_antes_dedup": 5817,
+    "pares_janela": 5942,
+    "pedidos_janela": 940,
+    "loggers_ares_janela": 5653,
+    "loggers_ares_antes_dedup": 5818,
     "dedup_dia_logger": 49,
     "ocultos_operacao": 116,
     "ocultos_lista": 116,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 662,
+    "pendentes_janela": 650,
     "cobranca_gru_janela": 198,
-    "sem_embarque_efetiva": 370,
+    "sem_embarque_efetiva": 371,
     "com_embarque_efetiva": 5447,
     "loggers_sem_lastsync": 98,
-    "nao_avaliados": 370,
-    "pedidos_com_agente": 5941,
+    "nao_avaliados": 371,
+    "pedidos_com_agente": 5942,
     "dtbtransporte": {
-      "consultados": 939,
-      "mapeados": 939,
-      "linhas": 1027
+      "consultados": 940,
+      "mapeados": 940,
+      "linhas": 1028
     },
     "top10_agentes_pendencias": {
-      "NAT - CSM CARGO": 99,
+      "NAT - CSM CARGO": 88,
       "THE - AERONEIVA EXPRESS": 79,
       "AJU - CASSIMIRO TRANSPORTES": 69,
       "VTCLOG - GRU": 60,
@@ -52,7 +52,7 @@
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 21
     },
     "top10_ufs_pendencias": {
-      "RN": 100,
+      "RN": 89,
       "PI": 80,
       "SE": 69,
       "BA": 58,
@@ -64,9 +64,9 @@
       "RO": 27
     },
     "latencia": {
-      "n_agente": 3986,
+      "n_agente": 3998,
       "n_so_gru": 77,
-      "n_sem_primeiro_sync": 1223,
+      "n_sem_primeiro_sync": 1211,
       "media_horas": 1.24,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -364,18 +364,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 112,
       "loggers": 443,
-      "sincronizados": 306,
-      "pendentes": 99,
+      "sincronizados": 317,
+      "pendentes": 88,
       "sem_embarque": 234,
       "cobranca_gru": 38,
       "pedidos_pendentes": 44,
-      "pct": 22.3,
-      "n_latencia": 290,
-      "media_horas": 0.3,
+      "pct": 19.9,
+      "n_latencia": 301,
+      "media_horas": 0.29,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 153
+      "n_sem_primeiro_sync": 142
     },
     {
       "dia_iso": "2026-09-12",
@@ -421,18 +421,18 @@
       "dia_full": "14/09/2026",
       "pedidos": 75,
       "loggers": 371,
-      "sincronizados": 194,
-      "pendentes": 164,
-      "sem_embarque": 0,
+      "sincronizados": 195,
+      "pendentes": 163,
+      "sem_embarque": 1,
       "cobranca_gru": 13,
       "pedidos_pendentes": 37,
-      "pct": 44.2,
-      "n_latencia": 153,
+      "pct": 43.9,
+      "n_latencia": 154,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 218
+      "n_sem_primeiro_sync": 217
     },
     {
       "dia_iso": "2026-09-15",

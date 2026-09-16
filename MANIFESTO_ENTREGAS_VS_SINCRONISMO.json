@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T08:03:38",
+  "gerado_em": "2026-09-16T08:10:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5667,
-    "pedidos_janela": 920,
-    "loggers_ares_janela": 5352,
-    "loggers_ares_antes_dedup": 5566,
+    "pares_janela": 5675,
+    "pedidos_janela": 921,
+    "loggers_ares_janela": 5360,
+    "loggers_ares_antes_dedup": 5574,
     "dedup_dia_logger": 48,
     "ocultos_operacao": 166,
     "ocultos_lista": 166,
     "ocultos_ausentes": 0,
     "pendentes_janela": 580,
     "cobranca_gru_janela": 110,
-    "sem_embarque_efetiva": 209,
+    "sem_embarque_efetiva": 217,
     "com_embarque_efetiva": 5357,
     "loggers_sem_lastsync": 88,
-    "nao_avaliados": 209,
-    "pedidos_com_agente": 5667,
+    "nao_avaliados": 217,
+    "pedidos_com_agente": 5675,
     "dtbtransporte": {
-      "consultados": 920,
-      "mapeados": 920,
-      "linhas": 1004
+      "consultados": 921,
+      "mapeados": 921,
+      "linhas": 1005
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 98,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 4035,
-      "n_so_gru": 90,
-      "n_sem_primeiro_sync": 1022,
+      "n_so_gru": 91,
+      "n_sem_primeiro_sync": 1021,
       "media_horas": 1.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -89,8 +89,8 @@
       "media_horas": 2.36,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 23,
-      "n_sem_primeiro_sync": 72
+      "n_sync_so_gru": 24,
+      "n_sem_primeiro_sync": 71
     },
     {
       "dia_iso": "2026-08-29",
@@ -423,7 +423,7 @@
       "loggers": 326,
       "sincronizados": 226,
       "pendentes": 100,
-      "sem_embarque": 0,
+      "sem_embarque": 8,
       "cobranca_gru": 0,
       "pedidos_pendentes": 24,
       "pct": 30.7,

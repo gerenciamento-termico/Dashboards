@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T10:52:54",
+  "gerado_em": "2026-09-16T10:57:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -21,13 +21,13 @@
   "contagens": {
     "pares_janela": 5764,
     "pedidos_janela": 936,
-    "loggers_ares_janela": 5441,
+    "loggers_ares_janela": 5401,
     "loggers_ares_antes_dedup": 5655,
     "dedup_dia_logger": 48,
-    "ocultos_operacao": 166,
-    "ocultos_lista": 166,
+    "ocultos_operacao": 206,
+    "ocultos_lista": 206,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 599,
+    "pendentes_janela": 559,
     "cobranca_gru_janela": 76,
     "sem_embarque_efetiva": 209,
     "com_embarque_efetiva": 5446,
@@ -42,18 +42,17 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 99,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 69,
-      "JPA - LIDER CARGAS": 62,
       "SSA - LUTY LOG": 52,
       "THE - AERONEIVA EXPRESS": 49,
       "SLZ - REIS CAVALCANTE EXPRESSO": 32,
       "RBR - RODOTEC": 29,
       "AJU - CASSIMIRO TRANSPORTES": 25,
+      "JPA - LIDER CARGAS": 22,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 21,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 20
     },
     "top10_ufs_pendencias": {
       "SC": 121,
-      "PB": 63,
       "BA": 57,
       "PI": 50,
       "PA": 49,
@@ -61,12 +60,13 @@
       "AC": 29,
       "SP": 28,
       "SE": 25,
+      "PB": 23,
       "TO": 20
     },
     "latencia": {
       "n_agente": 4150,
       "n_so_gru": 97,
-      "n_sem_primeiro_sync": 989,
+      "n_sem_primeiro_sync": 949,
       "media_horas": 1.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -439,19 +439,19 @@
       "dia": "16/09",
       "dia_full": "16/09/2026",
       "pedidos": 6,
-      "loggers": 49,
+      "loggers": 9,
       "sincronizados": 8,
-      "pendentes": 41,
+      "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 2,
-      "pct": 83.7,
+      "pedidos_pendentes": 1,
+      "pct": 11.1,
       "n_latencia": 8,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 41
+      "n_sem_primeiro_sync": 1
     }
   ],
   "erros_validacao": {},
@@ -1464,6 +1464,246 @@
       "pedido": "566298",
       "logger": "TA1133",
       "dia": "2026-09-14",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A2165",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A2795",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A3106",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A3112",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A3922",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A4778",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A5156",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A5398",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A6387",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A6709",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A6867",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A7237",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A7327",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A7519",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A7785",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A7995",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8001",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8009",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8045",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8156",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8182",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8371",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8491",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8805",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A8860",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A9047",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A9126",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A9364",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A9581",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A9603",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "A9717",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA0039",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA0226",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA0251",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA0338",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA0469",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA0525",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA0607",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA1103",
+      "dia": "2026-09-16",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567972",
+      "logger": "TA1104",
+      "dia": "2026-09-16",
       "motivo": "lançamento errado no aplicativo de entregas"
     }
   ]

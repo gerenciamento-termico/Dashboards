@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T14:13:15",
+  "gerado_em": "2026-09-16T14:17:07",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 4259,
-      "n_so_gru": 103,
-      "n_sem_primeiro_sync": 891,
+      "n_so_gru": 104,
+      "n_sem_primeiro_sync": 890,
       "media_horas": 1.16,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -203,8 +203,8 @@
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 10,
-      "n_sem_primeiro_sync": 60
+      "n_sync_so_gru": 11,
+      "n_sem_primeiro_sync": 59
     },
     {
       "dia_iso": "2026-09-04",

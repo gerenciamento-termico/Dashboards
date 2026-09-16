@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T10:27:49",
+  "gerado_em": "2026-09-16T10:32:49",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5695,
-    "pedidos_janela": 929,
-    "loggers_ares_janela": 5372,
-    "loggers_ares_antes_dedup": 5586,
+    "pares_janela": 5696,
+    "pedidos_janela": 930,
+    "loggers_ares_janela": 5373,
+    "loggers_ares_antes_dedup": 5587,
     "dedup_dia_logger": 48,
     "ocultos_operacao": 166,
     "ocultos_lista": 166,
     "ocultos_ausentes": 0,
     "pendentes_janela": 557,
-    "cobranca_gru_janela": 88,
+    "cobranca_gru_janela": 85,
     "sem_embarque_efetiva": 209,
-    "com_embarque_efetiva": 5377,
+    "com_embarque_efetiva": 5378,
     "loggers_sem_lastsync": 82,
     "nao_avaliados": 209,
-    "pedidos_com_agente": 5695,
+    "pedidos_com_agente": 5696,
     "dtbtransporte": {
-      "consultados": 929,
-      "mapeados": 929,
-      "linhas": 1013
+      "consultados": 930,
+      "mapeados": 930,
+      "linhas": 1014
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 99,
@@ -64,12 +64,12 @@
       "TO": 20
     },
     "latencia": {
-      "n_agente": 4113,
+      "n_agente": 4117,
       "n_so_gru": 92,
-      "n_sem_primeiro_sync": 962,
+      "n_sem_primeiro_sync": 959,
       "media_horas": 1.08,
       "mediana_horas": 0.04,
-      "p90_horas": 0.08
+      "p90_horas": 0.07
     }
   },
   "serie_diaria": [
@@ -79,18 +79,18 @@
       "dia_full": "28/08/2026",
       "pedidos": 87,
       "loggers": 621,
-      "sincronizados": 576,
+      "sincronizados": 577,
       "pendentes": 31,
       "sem_embarque": 1,
-      "cobranca_gru": 14,
+      "cobranca_gru": 13,
       "pedidos_pendentes": 12,
       "pct": 5.0,
-      "n_latencia": 529,
-      "media_horas": 2.71,
+      "n_latencia": 530,
+      "media_horas": 2.7,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 24,
-      "n_sem_primeiro_sync": 68
+      "n_sem_primeiro_sync": 67
     },
     {
       "dia_iso": "2026-08-29",
@@ -155,18 +155,18 @@
       "dia_full": "01/09/2026",
       "pedidos": 63,
       "loggers": 424,
-      "sincronizados": 397,
+      "sincronizados": 398,
       "pendentes": 14,
       "sem_embarque": 0,
-      "cobranca_gru": 13,
+      "cobranca_gru": 12,
       "pedidos_pendentes": 5,
       "pct": 3.3,
-      "n_latencia": 359,
-      "media_horas": 4.96,
+      "n_latencia": 360,
+      "media_horas": 4.94,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 18,
-      "n_sem_primeiro_sync": 47
+      "n_sem_primeiro_sync": 46
     },
     {
       "dia_iso": "2026-09-02",
@@ -288,18 +288,18 @@
       "dia_full": "08/09/2026",
       "pedidos": 61,
       "loggers": 528,
-      "sincronizados": 474,
+      "sincronizados": 475,
       "pendentes": 44,
       "sem_embarque": 0,
-      "cobranca_gru": 10,
+      "cobranca_gru": 9,
       "pedidos_pendentes": 9,
       "pct": 8.3,
-      "n_latencia": 412,
+      "n_latencia": 413,
       "media_horas": 0.11,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 6,
-      "n_sem_primeiro_sync": 110
+      "n_sem_primeiro_sync": 109
     },
     {
       "dia_iso": "2026-09-09",
@@ -438,18 +438,18 @@
       "dia_iso": "2026-09-16",
       "dia": "16/09",
       "dia_full": "16/09/2026",
-      "pedidos": 4,
-      "loggers": 8,
-      "sincronizados": 7,
+      "pedidos": 5,
+      "loggers": 9,
+      "sincronizados": 8,
       "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
-      "pct": 12.5,
-      "n_latencia": 7,
-      "media_horas": 0.04,
+      "pct": 11.1,
+      "n_latencia": 8,
+      "media_horas": 0.05,
       "mediana_horas": 0.05,
-      "p90_horas": 0.06,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 1
     }

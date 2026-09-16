@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "16/09/2026 09:52:26",
+  "geradoEm": "16/09/2026 10:03:04",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -112,9 +112,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           362,
           399,
           439,
-          446,
+          447,
           1052,
-          3085,
+          3084,
           3858
         ]
       },
@@ -145,12 +145,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           141,
           225,
-          311,
+          312,
           337,
           344,
           438,
           649,
-          1898,
+          1897,
           3766
         ]
       },
@@ -276,9 +276,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           344,
           397,
           438,
-          442,
+          443,
           649,
-          1931,
+          1930,
           3788
         ]
       },
@@ -309,12 +309,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           141,
           225,
-          311,
+          312,
           337,
           344,
           439,
           1049,
-          2043,
+          2042,
           3811
         ]
       },
@@ -345,12 +345,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           141,
           225,
-          315,
+          316,
           338,
           353,
           438,
           649,
-          2031,
+          2030,
           3770
         ]
       },
@@ -381,12 +381,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           143,
           225,
-          311,
+          312,
           338,
           353,
           438,
           652,
-          2774,
+          2773,
           3787
         ]
       },
@@ -588,9 +588,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           344,
           397,
           439,
-          442,
+          443,
           1049,
-          2076,
+          2075,
           3833
         ]
       },
@@ -624,9 +624,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           353,
           398,
           438,
-          446,
+          447,
           649,
-          2064,
+          2063,
           3792
         ]
       },
@@ -660,9 +660,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           353,
           398,
           438,
-          442,
+          443,
           652,
-          2807,
+          2806,
           3809
         ]
       },
@@ -693,12 +693,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           70,
           141,
           225,
-          315,
+          316,
           338,
           353,
           439,
           1049,
-          2176,
+          2175,
           3815
         ]
       },
@@ -729,12 +729,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           143,
           225,
-          311,
+          312,
           338,
           353,
           439,
           1052,
-          2919,
+          2918,
           3832
         ]
       },
@@ -765,12 +765,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           143,
           225,
-          315,
+          316,
           339,
           362,
           438,
           652,
-          2907,
+          2906,
           3791
         ]
       },
@@ -930,9 +930,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           353,
           398,
           439,
-          446,
+          447,
           1049,
-          2209,
+          2208,
           3837
         ]
       },
@@ -966,9 +966,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           353,
           398,
           439,
-          442,
+          443,
           1052,
-          2952,
+          2951,
           3854
         ]
       },
@@ -1002,9 +1002,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           362,
           399,
           438,
-          446,
+          447,
           652,
-          2940,
+          2939,
           3813
         ]
       },
@@ -1035,12 +1035,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           120,
           143,
           225,
-          315,
+          316,
           339,
           362,
           439,
           1052,
-          3052,
+          3051,
           3836
         ]
       },

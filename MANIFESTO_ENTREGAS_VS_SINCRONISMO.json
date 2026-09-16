@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T11:27:06",
+  "gerado_em": "2026-09-16T11:32:58",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5909,
-    "pedidos_janela": 941,
-    "loggers_ares_janela": 5545,
-    "loggers_ares_antes_dedup": 5799,
+    "pares_janela": 5910,
+    "pedidos_janela": 942,
+    "loggers_ares_janela": 5546,
+    "loggers_ares_antes_dedup": 5800,
     "dedup_dia_logger": 48,
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
@@ -30,14 +30,14 @@
     "pendentes_janela": 559,
     "cobranca_gru_janela": 64,
     "sem_embarque_efetiva": 340,
-    "com_embarque_efetiva": 5459,
+    "com_embarque_efetiva": 5460,
     "loggers_sem_lastsync": 82,
     "nao_avaliados": 340,
-    "pedidos_com_agente": 5909,
+    "pedidos_com_agente": 5910,
     "dtbtransporte": {
-      "consultados": 941,
-      "mapeados": 941,
-      "linhas": 1029
+      "consultados": 942,
+      "mapeados": 942,
+      "linhas": 1030
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 99,
@@ -64,7 +64,7 @@
       "TO": 20
     },
     "latencia": {
-      "n_agente": 4176,
+      "n_agente": 4177,
       "n_so_gru": 98,
       "n_sem_primeiro_sync": 935,
       "media_horas": 1.15,
@@ -438,15 +438,15 @@
       "dia_iso": "2026-09-16",
       "dia": "16/09",
       "dia_full": "16/09/2026",
-      "pedidos": 9,
-      "loggers": 21,
-      "sincronizados": 10,
+      "pedidos": 10,
+      "loggers": 22,
+      "sincronizados": 11,
       "pendentes": 11,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
-      "pct": 52.4,
-      "n_latencia": 10,
+      "pct": 50.0,
+      "n_latencia": 11,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,

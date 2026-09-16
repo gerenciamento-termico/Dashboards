@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T14:03:15",
+  "gerado_em": "2026-09-16T14:07:05",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,7 +28,7 @@
     "ocultos_lista": 206,
     "ocultos_ausentes": 0,
     "pendentes_janela": 521,
-    "cobranca_gru_janela": 62,
+    "cobranca_gru_janela": 55,
     "sem_embarque_efetiva": 340,
     "com_embarque_efetiva": 5488,
     "loggers_sem_lastsync": 77,
@@ -64,9 +64,9 @@
       "RO": 17
     },
     "latencia": {
-      "n_agente": 4242,
+      "n_agente": 4245,
       "n_so_gru": 103,
-      "n_sem_primeiro_sync": 893,
+      "n_sem_primeiro_sync": 890,
       "media_horas": 1.16,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -193,18 +193,18 @@
       "dia_full": "03/09/2026",
       "pedidos": 83,
       "loggers": 413,
-      "sincronizados": 381,
+      "sincronizados": 383,
       "pendentes": 17,
       "sem_embarque": 27,
-      "cobranca_gru": 15,
+      "cobranca_gru": 13,
       "pedidos_pendentes": 7,
       "pct": 4.1,
-      "n_latencia": 341,
+      "n_latencia": 342,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 10,
-      "n_sem_primeiro_sync": 62
+      "n_sem_primeiro_sync": 61
     },
     {
       "dia_iso": "2026-09-04",
@@ -212,18 +212,18 @@
       "dia_full": "04/09/2026",
       "pedidos": 80,
       "loggers": 469,
-      "sincronizados": 390,
+      "sincronizados": 394,
       "pendentes": 68,
       "sem_embarque": 77,
-      "cobranca_gru": 11,
+      "cobranca_gru": 7,
       "pedidos_pendentes": 24,
       "pct": 14.5,
-      "n_latencia": 355,
-      "media_horas": 0.68,
+      "n_latencia": 357,
+      "media_horas": 0.67,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 5,
-      "n_sem_primeiro_sync": 109
+      "n_sem_primeiro_sync": 107
     },
     {
       "dia_iso": "2026-09-05",
@@ -307,10 +307,10 @@
       "dia_full": "09/09/2026",
       "pedidos": 50,
       "loggers": 208,
-      "sincronizados": 172,
+      "sincronizados": 173,
       "pendentes": 32,
       "sem_embarque": 0,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 13,
       "pct": 15.4,
       "n_latencia": 161,

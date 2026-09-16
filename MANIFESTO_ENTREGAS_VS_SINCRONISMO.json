@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T13:53:13",
+  "gerado_em": "2026-09-16T13:57:02",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 524,
+    "pendentes_janela": 522,
     "cobranca_gru_janela": 65,
     "sem_embarque_efetiva": 340,
     "com_embarque_efetiva": 5488,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 95,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 69,
-      "SSA - LUTY LOG": 54,
+      "SSA - LUTY LOG": 52,
       "THE - AERONEIVA EXPRESS": 33,
       "RBR - RODOTEC": 29,
       "AJU - CASSIMIRO TRANSPORTES": 25,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "SC": 121,
-      "BA": 59,
+      "BA": 57,
       "PA": 38,
       "PI": 34,
       "AC": 29,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 4239,
-      "n_so_gru": 102,
-      "n_sem_primeiro_sync": 897,
+      "n_so_gru": 103,
+      "n_sem_primeiro_sync": 896,
       "media_horas": 1.16,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -298,8 +298,8 @@
       "media_horas": 0.11,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 9,
-      "n_sem_primeiro_sync": 91
+      "n_sync_so_gru": 10,
+      "n_sem_primeiro_sync": 90
     },
     {
       "dia_iso": "2026-09-09",
@@ -440,12 +440,12 @@
       "dia_full": "16/09/2026",
       "pedidos": 22,
       "loggers": 50,
-      "sincronizados": 26,
-      "pendentes": 24,
+      "sincronizados": 28,
+      "pendentes": 22,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 7,
-      "pct": 48.0,
+      "pedidos_pendentes": 5,
+      "pct": 44.0,
       "n_latencia": 23,
       "media_horas": 0.04,
       "mediana_horas": 0.05,

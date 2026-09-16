@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "16/09/2026 17:28:39",
+  "geradoEm": "16/09/2026 17:40:27",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -30,9 +30,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 794,
-      "loggersEntregues": 4711,
-      "loggersRetornados": 1859,
+      "loggersTransito": 793,
+      "loggersEntregues": 4678,
+      "loggersRetornados": 1857,
       "registrosEntregas": 109353,
       "registrosEstoque": 0,
       "semStatus": 0,
@@ -69,9 +69,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 794,
-      "loggersEntregues": 4711,
-      "loggersRetornados": 1859,
+      "loggersTransito": 793,
+      "loggersEntregues": 4678,
+      "loggersRetornados": 1857,
       "registrosEntregas": 116290,
       "registrosEstoque": 0,
       "semStatus": 0,
@@ -90,9 +90,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "QUALIDADE",
@@ -104,17 +104,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          112,
           120,
           145,
+          177,
           248,
           356,
           362,
-          432,
+          430,
           457,
           533,
           1355,
-          2699,
+          2636,
           3352
         ]
       },
@@ -127,8 +127,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -141,16 +141,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          110,
           143,
+          175,
           248,
           294,
           322,
           344,
-          431,
+          429,
           533,
           952,
-          1512,
+          1449,
           3260
         ]
       },
@@ -255,8 +255,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -269,16 +269,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          110,
           143,
+          175,
           248,
           344,
           354,
-          431,
+          429,
           453,
           533,
           952,
-          1545,
+          1482,
           3282
         ]
       },
@@ -291,8 +291,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -305,16 +305,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          110,
           143,
+          175,
           248,
           294,
           322,
           344,
-          432,
+          430,
           533,
           1352,
-          1657,
+          1594,
           3305
         ]
       },
@@ -327,8 +327,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -341,16 +341,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          112,
           143,
+          177,
           248,
           295,
           326,
           353,
-          431,
+          429,
           533,
           952,
-          1645,
+          1582,
           3264
         ]
       },
@@ -362,9 +362,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -376,17 +376,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          110,
           120,
           145,
+          175,
           248,
           295,
           322,
           353,
-          431,
+          429,
           533,
           955,
-          2388,
+          2325,
           3281
         ]
       },
@@ -567,8 +567,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -581,16 +581,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          110,
           143,
+          175,
           248,
           344,
           354,
-          432,
+          430,
           453,
           533,
           1352,
-          1690,
+          1627,
           3327
         ]
       },
@@ -603,8 +603,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -617,16 +617,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          112,
           143,
+          177,
           248,
           353,
           355,
-          431,
+          429,
           457,
           533,
           952,
-          1678,
+          1615,
           3286
         ]
       },
@@ -638,9 +638,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -652,17 +652,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          110,
           120,
           145,
+          175,
           248,
           353,
           355,
-          431,
+          429,
           453,
           533,
           955,
-          2421,
+          2358,
           3303
         ]
       },
@@ -675,8 +675,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -689,16 +689,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          112,
           143,
+          177,
           248,
           295,
           326,
           353,
-          432,
+          430,
           533,
           1352,
-          1790,
+          1727,
           3309
         ]
       },
@@ -710,9 +710,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -724,17 +724,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          110,
           120,
           145,
+          175,
           248,
           295,
           322,
           353,
-          432,
+          430,
           533,
           1355,
-          2533,
+          2470,
           3326
         ]
       },
@@ -746,9 +746,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -760,17 +760,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          112,
           120,
           145,
+          177,
           248,
           296,
           326,
           362,
-          431,
+          429,
           533,
           955,
-          2521,
+          2458,
           3285
         ]
       },
@@ -909,8 +909,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "status": {
         "labels": [
           "ESTOQUE - GIG",
-          "ESTOQUE - BSB",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -923,16 +923,16 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
         ],
         "values": [
           70,
-          112,
           143,
+          177,
           248,
           353,
           355,
-          432,
+          430,
           457,
           533,
           1352,
-          1823,
+          1760,
           3331
         ]
       },
@@ -944,9 +944,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "QUALIDADE",
           "CF - Apto ao Uso",
@@ -958,17 +958,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          110,
           120,
           145,
+          175,
           248,
           353,
           355,
-          432,
+          430,
           453,
           533,
           1355,
-          2566,
+          2503,
           3348
         ]
       },
@@ -980,9 +980,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "QUALIDADE",
@@ -994,17 +994,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          112,
           120,
           145,
+          177,
           248,
           356,
           362,
-          431,
+          429,
           457,
           533,
           955,
-          2554,
+          2491,
           3307
         ]
       },
@@ -1016,9 +1016,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
       "embAguardandoExpedicao": 33,
       "status": {
         "labels": [
-          "ESTOQUE - BSB",
           "ESTOQUE - GIG",
           "TRANSPORTE",
+          "ESTOQUE - BSB",
           "CALIBRAÇÃO",
           "CF - Apto ao Uso",
           "MANUTENÇÃO",
@@ -1030,17 +1030,17 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           "AGENTE"
         ],
         "values": [
-          112,
           120,
           145,
+          177,
           248,
           296,
           326,
           362,
-          432,
+          430,
           533,
           1355,
-          2666,
+          2603,
           3330
         ]
       },

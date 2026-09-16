@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-16T07:33:43",
+  "gerado_em": "2026-09-16T07:40:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 166,
     "ocultos_lista": 166,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 592,
+    "pendentes_janela": 591,
     "cobranca_gru_janela": 110,
     "sem_embarque_efetiva": 209,
     "com_embarque_efetiva": 5357,
@@ -47,8 +47,8 @@
       "AJU - CASSIMIRO TRANSPORTES": 39,
       "RBR - RODOTEC": 38,
       "SLZ - REIS CAVALCANTE EXPRESSO": 32,
-      "JPA - LIDER CARGAS": 22,
       "FOR - NT TRANSPORTE LTDA": 21,
+      "JPA - LIDER CARGAS": 21,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 21
     },
     "top10_ufs_pendencias": {
@@ -61,15 +61,15 @@
       "MA": 32,
       "SP": 27,
       "CE": 23,
-      "PB": 23
+      "PB": 22
     },
     "latencia": {
-      "n_agente": 4024,
+      "n_agente": 4025,
       "n_so_gru": 90,
-      "n_sem_primeiro_sync": 1033,
+      "n_sem_primeiro_sync": 1032,
       "media_horas": 1.05,
       "mediana_horas": 0.04,
-      "p90_horas": 0.07
+      "p90_horas": 0.08
     }
   },
   "serie_diaria": [
@@ -193,18 +193,18 @@
       "dia_full": "03/09/2026",
       "pedidos": 83,
       "loggers": 413,
-      "sincronizados": 371,
-      "pendentes": 29,
+      "sincronizados": 372,
+      "pendentes": 28,
       "sem_embarque": 27,
       "cobranca_gru": 13,
       "pedidos_pendentes": 8,
-      "pct": 7.0,
-      "n_latencia": 332,
+      "pct": 6.8,
+      "n_latencia": 333,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 9,
-      "n_sem_primeiro_sync": 72
+      "n_sem_primeiro_sync": 71
     },
     {
       "dia_iso": "2026-09-04",

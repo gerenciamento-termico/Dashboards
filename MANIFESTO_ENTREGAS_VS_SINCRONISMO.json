@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T18:08:38",
+  "gerado_em": "2026-09-17T18:14:31",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5897,
-    "pedidos_janela": 999,
+    "pares_janela": 5899,
+    "pedidos_janela": 1000,
     "loggers_ares_janela": 5517,
-    "loggers_ares_antes_dedup": 5796,
-    "dedup_dia_logger": 54,
+    "loggers_ares_antes_dedup": 5797,
+    "dedup_dia_logger": 55,
     "ocultos_operacao": 225,
     "ocultos_lista": 225,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 474,
+    "pendentes_janela": 456,
     "cobranca_gru_janela": 46,
     "sem_embarque_efetiva": 409,
-    "com_embarque_efetiva": 5387,
+    "com_embarque_efetiva": 5388,
     "loggers_sem_lastsync": 46,
     "nao_avaliados": 409,
-    "pedidos_com_agente": 5897,
+    "pedidos_com_agente": 5899,
     "dtbtransporte": {
-      "consultados": 999,
-      "mapeados": 999,
-      "linhas": 1091
+      "consultados": 1000,
+      "mapeados": 1000,
+      "linhas": 1092
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 92,
@@ -47,26 +47,26 @@
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "THE - AERONEIVA EXPRESS": 24,
       "JPA - LIDER CARGAS": 21,
-      "STM - TRANSPORTADORA OESTE CARGAS LTDA": 21,
       "SSA - LUTY LOG": 20,
-      "PVH - RODOTEC": 18
+      "PVH - RODOTEC": 18,
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 17
     },
     "top10_ufs_pendencias": {
       "SC": 74,
-      "PA": 40,
       "PE": 37,
       "AC": 30,
       "SE": 26,
       "SP": 25,
       "PI": 25,
       "BA": 25,
+      "PA": 22,
       "PB": 22,
       "PR": 19
     },
     "latencia": {
-      "n_agente": 4173,
+      "n_agente": 4192,
       "n_so_gru": 96,
-      "n_sem_primeiro_sync": 843,
+      "n_sem_primeiro_sync": 825,
       "media_horas": 0.96,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -269,18 +269,18 @@
       "dia_full": "08/09/2026",
       "pedidos": 61,
       "loggers": 528,
-      "sincronizados": 496,
-      "pendentes": 29,
+      "sincronizados": 510,
+      "pendentes": 15,
       "sem_embarque": 0,
       "cobranca_gru": 3,
       "pedidos_pendentes": 5,
-      "pct": 5.5,
-      "n_latencia": 436,
-      "media_horas": 0.27,
+      "pct": 2.8,
+      "n_latencia": 449,
+      "media_horas": 0.26,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 16,
-      "n_sem_primeiro_sync": 76
+      "n_sem_primeiro_sync": 63
     },
     {
       "dia_iso": "2026-09-09",
@@ -288,18 +288,18 @@
       "dia_full": "09/09/2026",
       "pedidos": 50,
       "loggers": 208,
-      "sincronizados": 180,
-      "pendentes": 21,
+      "sincronizados": 183,
+      "pendentes": 18,
       "sem_embarque": 0,
       "cobranca_gru": 7,
       "pedidos_pendentes": 12,
-      "pct": 10.1,
-      "n_latencia": 166,
+      "pct": 8.7,
+      "n_latencia": 169,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 39
+      "n_sem_primeiro_sync": 36
     },
     {
       "dia_iso": "2026-09-10",
@@ -408,12 +408,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 29,
       "pct": 19.5,
-      "n_latencia": 299,
+      "n_latencia": 300,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 96
+      "n_sem_primeiro_sync": 95
     },
     {
       "dia_iso": "2026-09-16",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-17",
       "dia": "17/09",
       "dia_full": "17/09/2026",
-      "pedidos": 93,
-      "loggers": 338,
-      "sincronizados": 257,
-      "pendentes": 74,
-      "sem_embarque": 42,
+      "pedidos": 94,
+      "loggers": 339,
+      "sincronizados": 259,
+      "pendentes": 73,
+      "sem_embarque": 41,
       "cobranca_gru": 7,
       "pedidos_pendentes": 35,
-      "pct": 21.9,
-      "n_latencia": 206,
+      "pct": 21.5,
+      "n_latencia": 208,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
-      "p90_horas": 0.08,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 132
+      "n_sem_primeiro_sync": 131
     }
   ],
   "erros_validacao": {},

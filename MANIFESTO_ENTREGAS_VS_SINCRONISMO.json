@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T19:56:26",
+  "gerado_em": "2026-09-17T19:59:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 224,
     "ocultos_lista": 224,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 479,
+    "pendentes_janela": 478,
     "cobranca_gru_janela": 46,
     "sem_embarque_efetiva": 425,
     "com_embarque_efetiva": 5422,
@@ -48,7 +48,7 @@
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "THE - AERONEIVA EXPRESS": 24,
       "JPA - LIDER CARGAS": 21,
-      "SSA - LUTY LOG": 20,
+      "SSA - LUTY LOG": 19,
       "PVH - RODOTEC": 18
     },
     "top10_ufs_pendencias": {
@@ -59,7 +59,7 @@
       "SE": 26,
       "SP": 25,
       "PI": 25,
-      "BA": 25,
+      "BA": 24,
       "PB": 22,
       "PA": 20
     },
@@ -440,12 +440,12 @@
       "dia_full": "17/09/2026",
       "pedidos": 103,
       "loggers": 373,
-      "sincronizados": 268,
-      "pendentes": 98,
+      "sincronizados": 269,
+      "pendentes": 97,
       "sem_embarque": 58,
       "cobranca_gru": 7,
       "pedidos_pendentes": 40,
-      "pct": 26.3,
+      "pct": 26.0,
       "n_latencia": 235,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

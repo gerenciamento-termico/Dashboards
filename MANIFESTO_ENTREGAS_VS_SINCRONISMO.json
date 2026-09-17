@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T08:46:46",
+  "gerado_em": "2026-09-17T08:50:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 452,
+    "pendentes_janela": 451,
     "cobranca_gru_janela": 35,
-    "sem_embarque_efetiva": 388,
-    "com_embarque_efetiva": 4978,
+    "sem_embarque_efetiva": 387,
+    "com_embarque_efetiva": 4979,
     "loggers_sem_lastsync": 49,
-    "nao_avaliados": 388,
+    "nao_avaliados": 387,
     "pedidos_com_agente": 5465,
     "dtbtransporte": {
       "consultados": 895,
@@ -48,8 +48,8 @@
       "JPA - LIDER CARGAS": 21,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 21,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 21,
-      "PVH - RODOTEC": 16,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 16
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 17,
+      "PVH - RODOTEC": 16
     },
     "top10_ufs_pendencias": {
       "SC": 67,
@@ -61,12 +61,12 @@
       "PI": 23,
       "PB": 22,
       "PR": 19,
-      "RO": 16
+      "TO": 17
     },
     "latencia": {
-      "n_agente": 3873,
-      "n_so_gru": 79,
-      "n_sem_primeiro_sync": 777,
+      "n_agente": 3874,
+      "n_so_gru": 82,
+      "n_sem_primeiro_sync": 774,
       "media_horas": 0.9,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -279,8 +279,8 @@
       "media_horas": 0.11,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 10,
-      "n_sem_primeiro_sync": 86
+      "n_sync_so_gru": 13,
+      "n_sem_primeiro_sync": 83
     },
     {
       "dia_iso": "2026-09-09",
@@ -419,15 +419,15 @@
       "dia_iso": "2026-09-16",
       "dia": "16/09",
       "dia_full": "16/09/2026",
-      "pedidos": 44,
-      "loggers": 160,
-      "sincronizados": 121,
-      "pendentes": 38,
-      "sem_embarque": 1,
+      "pedidos": 45,
+      "loggers": 161,
+      "sincronizados": 123,
+      "pendentes": 37,
+      "sem_embarque": 0,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 15,
-      "pct": 23.8,
-      "n_latencia": 110,
+      "pedidos_pendentes": 16,
+      "pct": 23.0,
+      "n_latencia": 111,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,

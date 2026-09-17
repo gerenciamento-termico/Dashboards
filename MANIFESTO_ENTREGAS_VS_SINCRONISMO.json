@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T16:24:19",
+  "gerado_em": "2026-09-17T16:29:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,7 +28,7 @@
     "ocultos_lista": 206,
     "ocultos_ausentes": 0,
     "pendentes_janela": 486,
-    "cobranca_gru_janela": 55,
+    "cobranca_gru_janela": 54,
     "sem_embarque_efetiva": 382,
     "com_embarque_efetiva": 5323,
     "loggers_sem_lastsync": 46,
@@ -64,10 +64,10 @@
       "PR": 19
     },
     "latencia": {
-      "n_agente": 4117,
+      "n_agente": 4120,
       "n_so_gru": 92,
-      "n_sem_primeiro_sync": 858,
-      "media_horas": 1.03,
+      "n_sem_primeiro_sync": 855,
+      "media_horas": 0.97,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -161,12 +161,12 @@
       "cobranca_gru": 4,
       "pedidos_pendentes": 8,
       "pct": 2.9,
-      "n_latencia": 351,
-      "media_horas": 0.9,
+      "n_latencia": 352,
+      "media_horas": 0.23,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 24,
-      "n_sem_primeiro_sync": 39
+      "n_sem_primeiro_sync": 38
     },
     {
       "dia_iso": "2026-09-03",
@@ -180,12 +180,12 @@
       "cobranca_gru": 12,
       "pedidos_pendentes": 6,
       "pct": 1.7,
-      "n_latencia": 354,
+      "n_latencia": 355,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 12,
-      "n_sem_primeiro_sync": 47
+      "n_sem_primeiro_sync": 46
     },
     {
       "dia_iso": "2026-09-04",
@@ -193,18 +193,18 @@
       "dia_full": "04/09/2026",
       "pedidos": 80,
       "loggers": 469,
-      "sincronizados": 401,
+      "sincronizados": 402,
       "pendentes": 55,
       "sem_embarque": 77,
-      "cobranca_gru": 13,
+      "cobranca_gru": 12,
       "pedidos_pendentes": 20,
       "pct": 11.7,
-      "n_latencia": 365,
+      "n_latencia": 366,
       "media_horas": 0.66,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 9,
-      "n_sem_primeiro_sync": 95
+      "n_sem_primeiro_sync": 94
     },
     {
       "dia_iso": "2026-09-05",

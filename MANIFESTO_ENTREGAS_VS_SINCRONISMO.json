@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T18:29:37",
+  "gerado_em": "2026-09-17T18:34:33",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5899,
-    "pedidos_janela": 1000,
-    "loggers_ares_janela": 5518,
-    "loggers_ares_antes_dedup": 5797,
+    "pares_janela": 5907,
+    "pedidos_janela": 1002,
+    "loggers_ares_janela": 5526,
+    "loggers_ares_antes_dedup": 5805,
     "dedup_dia_logger": 55,
     "ocultos_operacao": 224,
     "ocultos_lista": 224,
     "ocultos_ausentes": 0,
     "pendentes_janela": 456,
     "cobranca_gru_janela": 46,
-    "sem_embarque_efetiva": 408,
+    "sem_embarque_efetiva": 416,
     "com_embarque_efetiva": 5389,
     "loggers_sem_lastsync": 46,
-    "nao_avaliados": 408,
-    "pedidos_com_agente": 5899,
+    "nao_avaliados": 416,
+    "pedidos_com_agente": 5907,
     "dtbtransporte": {
-      "consultados": 1000,
-      "mapeados": 1000,
-      "linhas": 1092
+      "consultados": 1002,
+      "mapeados": 1002,
+      "linhas": 1094
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 92,
@@ -442,7 +442,7 @@
       "loggers": 341,
       "sincronizados": 259,
       "pendentes": 75,
-      "sem_embarque": 40,
+      "sem_embarque": 48,
       "cobranca_gru": 7,
       "pedidos_pendentes": 36,
       "pct": 22.0,

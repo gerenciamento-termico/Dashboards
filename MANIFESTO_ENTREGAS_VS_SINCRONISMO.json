@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T08:36:46",
+  "gerado_em": "2026-09-17T08:40:24",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5464,
-    "pedidos_janela": 894,
-    "loggers_ares_janela": 5112,
-    "loggers_ares_antes_dedup": 5365,
+    "pares_janela": 5465,
+    "pedidos_janela": 895,
+    "loggers_ares_janela": 5113,
+    "loggers_ares_antes_dedup": 5366,
     "dedup_dia_logger": 47,
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
@@ -30,17 +30,17 @@
     "pendentes_janela": 452,
     "cobranca_gru_janela": 35,
     "sem_embarque_efetiva": 388,
-    "com_embarque_efetiva": 4977,
+    "com_embarque_efetiva": 4978,
     "loggers_sem_lastsync": 49,
     "nao_avaliados": 388,
-    "pedidos_com_agente": 5464,
+    "pedidos_com_agente": 5465,
     "dtbtransporte": {
-      "consultados": 894,
-      "mapeados": 894,
-      "linhas": 982
+      "consultados": 895,
+      "mapeados": 895,
+      "linhas": 983
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 91,
+      "VTCLOG - GRU": 90,
       "SSA - LUTY LOG": 52,
       "RBR - RODOTEC": 29,
       "AJU - CASSIMIRO TRANSPORTES": 25,
@@ -49,13 +49,13 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 21,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 21,
       "PVH - RODOTEC": 16,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 15
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 16
     },
     "top10_ufs_pendencias": {
       "SC": 67,
       "BA": 56,
       "PA": 38,
-      "SP": 30,
+      "SP": 29,
       "AC": 29,
       "SE": 25,
       "PI": 23,
@@ -64,7 +64,7 @@
       "RO": 16
     },
     "latencia": {
-      "n_agente": 3872,
+      "n_agente": 3873,
       "n_so_gru": 79,
       "n_sem_primeiro_sync": 777,
       "media_horas": 0.9,
@@ -307,18 +307,18 @@
       "dia_full": "10/09/2026",
       "pedidos": 107,
       "loggers": 573,
-      "sincronizados": 526,
-      "pendentes": 42,
+      "sincronizados": 527,
+      "pendentes": 41,
       "sem_embarque": 5,
       "cobranca_gru": 5,
-      "pedidos_pendentes": 27,
-      "pct": 7.3,
-      "n_latencia": 489,
+      "pedidos_pendentes": 26,
+      "pct": 7.2,
+      "n_latencia": 490,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 4,
-      "n_sem_primeiro_sync": 80
+      "n_sem_primeiro_sync": 79
     },
     {
       "dia_iso": "2026-09-11",
@@ -419,20 +419,20 @@
       "dia_iso": "2026-09-16",
       "dia": "16/09",
       "dia_full": "16/09/2026",
-      "pedidos": 43,
-      "loggers": 159,
+      "pedidos": 44,
+      "loggers": 160,
       "sincronizados": 121,
-      "pendentes": 37,
+      "pendentes": 38,
       "sem_embarque": 1,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 14,
-      "pct": 23.3,
+      "pedidos_pendentes": 15,
+      "pct": 23.8,
       "n_latencia": 110,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 49
+      "n_sem_primeiro_sync": 50
     },
     {
       "dia_iso": "2026-09-17",

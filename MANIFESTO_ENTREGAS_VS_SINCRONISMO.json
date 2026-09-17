@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T15:41:27",
+  "gerado_em": "2026-09-17T15:49:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 486,
-    "cobranca_gru_janela": 57,
+    "pendentes_janela": 485,
+    "cobranca_gru_janela": 56,
     "sem_embarque_efetiva": 371,
     "com_embarque_efetiva": 5279,
     "loggers_sem_lastsync": 46,
@@ -43,7 +43,7 @@
       "VTCLOG - GRU": 97,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 41,
       "VTCLOG - REC": 41,
-      "RBR - RODOTEC": 31,
+      "RBR - RODOTEC": 30,
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "THE - AERONEIVA EXPRESS": 23,
       "JPA - LIDER CARGAS": 21,
@@ -56,7 +56,7 @@
       "PE": 41,
       "PA": 38,
       "SP": 31,
-      "AC": 31,
+      "AC": 30,
       "SE": 26,
       "PI": 24,
       "PB": 22,
@@ -64,9 +64,9 @@
       "PR": 19
     },
     "latencia": {
-      "n_agente": 4069,
-      "n_so_gru": 91,
-      "n_sem_primeiro_sync": 863,
+      "n_agente": 4071,
+      "n_so_gru": 92,
+      "n_sem_primeiro_sync": 860,
       "media_horas": 0.99,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -184,8 +184,8 @@
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 11,
-      "n_sem_primeiro_sync": 50
+      "n_sync_so_gru": 12,
+      "n_sem_primeiro_sync": 49
     },
     {
       "dia_iso": "2026-09-04",
@@ -193,18 +193,18 @@
       "dia_full": "04/09/2026",
       "pedidos": 80,
       "loggers": 469,
-      "sincronizados": 400,
+      "sincronizados": 401,
       "pendentes": 55,
       "sem_embarque": 77,
-      "cobranca_gru": 14,
+      "cobranca_gru": 13,
       "pedidos_pendentes": 20,
       "pct": 11.7,
-      "n_latencia": 364,
+      "n_latencia": 365,
       "media_horas": 0.66,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 9,
-      "n_sem_primeiro_sync": 96
+      "n_sem_primeiro_sync": 95
     },
     {
       "dia_iso": "2026-09-05",
@@ -440,18 +440,18 @@
       "dia_full": "17/09/2026",
       "pedidos": 66,
       "loggers": 257,
-      "sincronizados": 171,
-      "pendentes": 85,
+      "sincronizados": 172,
+      "pendentes": 84,
       "sem_embarque": 4,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 30,
-      "pct": 33.1,
-      "n_latencia": 133,
+      "pedidos_pendentes": 29,
+      "pct": 32.7,
+      "n_latencia": 134,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 124
+      "n_sem_primeiro_sync": 123
     }
   ],
   "erros_validacao": {},

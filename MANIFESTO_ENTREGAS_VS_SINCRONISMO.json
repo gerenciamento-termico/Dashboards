@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T09:36:53",
+  "gerado_em": "2026-09-17T09:42:11",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,31 +19,31 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5467,
-    "pedidos_janela": 897,
-    "loggers_ares_janela": 5115,
-    "loggers_ares_antes_dedup": 5368,
+    "pares_janela": 5468,
+    "pedidos_janela": 898,
+    "loggers_ares_janela": 5116,
+    "loggers_ares_antes_dedup": 5369,
     "dedup_dia_logger": 47,
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 450,
+    "pendentes_janela": 449,
     "cobranca_gru_janela": 32,
     "sem_embarque_efetiva": 387,
-    "com_embarque_efetiva": 4981,
+    "com_embarque_efetiva": 4982,
     "loggers_sem_lastsync": 49,
     "nao_avaliados": 387,
-    "pedidos_com_agente": 5467,
+    "pedidos_com_agente": 5468,
     "dtbtransporte": {
-      "consultados": 897,
-      "mapeados": 897,
-      "linhas": 985
+      "consultados": 898,
+      "mapeados": 898,
+      "linhas": 986
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 90,
       "SSA - LUTY LOG": 52,
       "RBR - RODOTEC": 29,
-      "AJU - CASSIMIRO TRANSPORTES": 25,
+      "AJU - CASSIMIRO TRANSPORTES": 26,
       "THE - AERONEIVA EXPRESS": 22,
       "JPA - LIDER CARGAS": 21,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 21,
@@ -57,16 +57,16 @@
       "PA": 38,
       "SP": 29,
       "AC": 29,
-      "SE": 25,
+      "SE": 26,
       "PI": 23,
       "PB": 22,
       "PR": 19,
       "RO": 17
     },
     "latencia": {
-      "n_agente": 3879,
-      "n_so_gru": 85,
-      "n_sem_primeiro_sync": 768,
+      "n_agente": 3881,
+      "n_so_gru": 86,
+      "n_sem_primeiro_sync": 766,
       "media_horas": 0.9,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -203,8 +203,8 @@
       "media_horas": 0.66,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 6,
-      "n_sem_primeiro_sync": 100
+      "n_sync_so_gru": 7,
+      "n_sem_primeiro_sync": 99
     },
     {
       "dia_iso": "2026-09-05",
@@ -326,18 +326,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 112,
       "loggers": 463,
-      "sincronizados": 403,
-      "pendentes": 56,
+      "sincronizados": 405,
+      "pendentes": 54,
       "sem_embarque": 73,
       "cobranca_gru": 4,
       "pedidos_pendentes": 34,
-      "pct": 12.1,
-      "n_latencia": 389,
+      "pct": 11.7,
+      "n_latencia": 391,
       "media_horas": 0.24,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 74
+      "n_sem_primeiro_sync": 72
     },
     {
       "dia_iso": "2026-09-12",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-17",
       "dia": "17/09",
       "dia_full": "17/09/2026",
-      "pedidos": 2,
-      "loggers": 2,
+      "pedidos": 3,
+      "loggers": 3,
       "sincronizados": 0,
-      "pendentes": 2,
+      "pendentes": 3,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 2,
+      "pedidos_pendentes": 3,
       "pct": 100.0,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 2
+      "n_sem_primeiro_sync": 3
     }
   ],
   "erros_validacao": {},

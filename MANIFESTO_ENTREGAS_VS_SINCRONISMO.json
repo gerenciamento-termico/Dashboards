@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T19:49:39",
+  "gerado_em": "2026-09-17T19:54:39",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 224,
     "ocultos_lista": 224,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 459,
+    "pendentes_janela": 479,
     "cobranca_gru_janela": 46,
-    "sem_embarque_efetiva": 445,
-    "com_embarque_efetiva": 5402,
+    "sem_embarque_efetiva": 425,
+    "com_embarque_efetiva": 5422,
     "loggers_sem_lastsync": 46,
-    "nao_avaliados": 445,
+    "nao_avaliados": 425,
     "pedidos_com_agente": 5950,
     "dtbtransporte": {
       "consultados": 1008,
@@ -44,29 +44,29 @@
       "VTCLOG - REC": 37,
       "RBR - RODOTEC": 30,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 29,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 29,
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "THE - AERONEIVA EXPRESS": 24,
       "JPA - LIDER CARGAS": 21,
       "SSA - LUTY LOG": 20,
-      "PVH - RODOTEC": 18,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 17
+      "PVH - RODOTEC": 18
     },
     "top10_ufs_pendencias": {
       "SC": 75,
       "PE": 37,
       "AC": 30,
+      "MA": 29,
       "SE": 26,
       "SP": 25,
       "PI": 25,
       "BA": 25,
       "PB": 22,
-      "PA": 20,
-      "PR": 20
+      "PA": 20
     },
     "latencia": {
       "n_agente": 4203,
       "n_so_gru": 97,
-      "n_sem_primeiro_sync": 827,
+      "n_sem_primeiro_sync": 847,
       "media_horas": 0.96,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-17",
       "dia": "17/09",
       "dia_full": "17/09/2026",
-      "pedidos": 100,
-      "loggers": 353,
+      "pedidos": 103,
+      "loggers": 373,
       "sincronizados": 268,
-      "pendentes": 78,
-      "sem_embarque": 78,
+      "pendentes": 98,
+      "sem_embarque": 58,
       "cobranca_gru": 7,
-      "pedidos_pendentes": 37,
-      "pct": 22.1,
+      "pedidos_pendentes": 40,
+      "pct": 26.3,
       "n_latencia": 215,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 138
+      "n_sem_primeiro_sync": 158
     }
   ],
   "erros_validacao": {},

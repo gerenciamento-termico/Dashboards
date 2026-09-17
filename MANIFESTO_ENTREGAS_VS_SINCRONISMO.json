@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T18:18:43",
+  "gerado_em": "2026-09-17T18:24:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -21,18 +21,18 @@
   "contagens": {
     "pares_janela": 5899,
     "pedidos_janela": 1000,
-    "loggers_ares_janela": 5517,
+    "loggers_ares_janela": 5518,
     "loggers_ares_antes_dedup": 5797,
     "dedup_dia_logger": 55,
-    "ocultos_operacao": 225,
-    "ocultos_lista": 225,
+    "ocultos_operacao": 224,
+    "ocultos_lista": 224,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 454,
+    "pendentes_janela": 456,
     "cobranca_gru_janela": 46,
-    "sem_embarque_efetiva": 409,
-    "com_embarque_efetiva": 5388,
+    "sem_embarque_efetiva": 408,
+    "com_embarque_efetiva": 5389,
     "loggers_sem_lastsync": 46,
-    "nao_avaliados": 409,
+    "nao_avaliados": 408,
     "pedidos_com_agente": 5899,
     "dtbtransporte": {
       "consultados": 1000,
@@ -43,7 +43,7 @@
       "VTCLOG - GRU": 92,
       "VTCLOG - REC": 37,
       "RBR - RODOTEC": 30,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 28,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 29,
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "THE - AERONEIVA EXPRESS": 24,
       "JPA - LIDER CARGAS": 21,
@@ -52,7 +52,7 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 17
     },
     "top10_ufs_pendencias": {
-      "SC": 74,
+      "SC": 75,
       "PE": 37,
       "AC": 30,
       "SE": 26,
@@ -64,9 +64,9 @@
       "PR": 19
     },
     "latencia": {
-      "n_agente": 4195,
+      "n_agente": 4196,
       "n_so_gru": 96,
-      "n_sem_primeiro_sync": 822,
+      "n_sem_primeiro_sync": 823,
       "media_horas": 0.96,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -275,12 +275,12 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 5,
       "pct": 2.5,
-      "n_latencia": 452,
+      "n_latencia": 453,
       "media_horas": 0.26,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 16,
-      "n_sem_primeiro_sync": 60
+      "n_sem_primeiro_sync": 59
     },
     {
       "dia_iso": "2026-09-09",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-17",
       "dia": "17/09",
       "dia_full": "17/09/2026",
-      "pedidos": 94,
-      "loggers": 339,
+      "pedidos": 95,
+      "loggers": 341,
       "sincronizados": 259,
-      "pendentes": 73,
-      "sem_embarque": 41,
+      "pendentes": 75,
+      "sem_embarque": 40,
       "cobranca_gru": 7,
-      "pedidos_pendentes": 35,
-      "pct": 21.5,
+      "pedidos_pendentes": 36,
+      "pct": 22.0,
       "n_latencia": 208,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 131
+      "n_sem_primeiro_sync": 133
     }
   ],
   "erros_validacao": {},
@@ -1738,6 +1738,12 @@
     },
     {
       "pedido": "566294",
+      "logger": "0741700817",
+      "dia": "2026-09-17",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "566294",
       "logger": "0741700854",
       "dia": "2026-09-17",
       "motivo": "lançamento errado no aplicativo de entregas"
@@ -1793,18 +1799,6 @@
     {
       "pedido": "566294",
       "logger": "A5419",
-      "dia": "2026-09-17",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566294",
-      "logger": "A6090",
-      "dia": "2026-09-17",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566294",
-      "logger": "A9594",
       "dia": "2026-09-17",
       "motivo": "lançamento errado no aplicativo de entregas"
     },

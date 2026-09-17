@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T15:04:15",
+  "gerado_em": "2026-09-17T15:09:10",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 486,
+    "pendentes_janela": 484,
     "cobranca_gru_janela": 59,
     "sem_embarque_efetiva": 370,
     "com_embarque_efetiva": 5266,
@@ -40,7 +40,7 @@
       "linhas": 1054
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 99,
+      "VTCLOG - GRU": 97,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 41,
       "VTCLOG - REC": 41,
       "RBR - RODOTEC": 31,
@@ -55,7 +55,7 @@
       "SC": 87,
       "PE": 41,
       "PA": 38,
-      "SP": 33,
+      "SP": 31,
       "AC": 31,
       "SE": 26,
       "PI": 24,
@@ -64,9 +64,9 @@
       "PR": 19
     },
     "latencia": {
-      "n_agente": 4063,
+      "n_agente": 4065,
       "n_so_gru": 92,
-      "n_sem_primeiro_sync": 855,
+      "n_sem_primeiro_sync": 853,
       "media_horas": 0.95,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "16/09/2026",
       "pedidos": 51,
       "loggers": 171,
-      "sincronizados": 136,
-      "pendentes": 35,
+      "sincronizados": 138,
+      "pendentes": 33,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 16,
-      "pct": 20.5,
-      "n_latencia": 123,
+      "pedidos_pendentes": 14,
+      "pct": 19.3,
+      "n_latencia": 125,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 47
+      "n_sem_primeiro_sync": 45
     },
     {
       "dia_iso": "2026-09-17",

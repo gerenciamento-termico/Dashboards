@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T08:20:15",
+  "gerado_em": "2026-09-17T08:26:44",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5461,
-    "pedidos_janela": 891,
-    "loggers_ares_janela": 5109,
-    "loggers_ares_antes_dedup": 5362,
+    "pares_janela": 5462,
+    "pedidos_janela": 892,
+    "loggers_ares_janela": 5110,
+    "loggers_ares_antes_dedup": 5363,
     "dedup_dia_logger": 47,
     "ocultos_operacao": 206,
     "ocultos_lista": 206,
@@ -30,17 +30,17 @@
     "pendentes_janela": 452,
     "cobranca_gru_janela": 35,
     "sem_embarque_efetiva": 387,
-    "com_embarque_efetiva": 4975,
+    "com_embarque_efetiva": 4976,
     "loggers_sem_lastsync": 49,
     "nao_avaliados": 387,
-    "pedidos_com_agente": 5461,
+    "pedidos_com_agente": 5462,
     "dtbtransporte": {
-      "consultados": 891,
-      "mapeados": 891,
-      "linhas": 979
+      "consultados": 892,
+      "mapeados": 892,
+      "linhas": 980
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 89,
+      "VTCLOG - GRU": 90,
       "SSA - LUTY LOG": 52,
       "RBR - RODOTEC": 29,
       "AJU - CASSIMIRO TRANSPORTES": 25,
@@ -55,8 +55,8 @@
       "SC": 67,
       "BA": 56,
       "PA": 38,
+      "SP": 29,
       "AC": 29,
-      "SP": 28,
       "SE": 25,
       "PI": 23,
       "PB": 22,
@@ -64,7 +64,7 @@
       "RO": 16
     },
     "latencia": {
-      "n_agente": 3870,
+      "n_agente": 3871,
       "n_so_gru": 79,
       "n_sem_primeiro_sync": 777,
       "media_horas": 0.9,
@@ -421,37 +421,37 @@
       "dia_full": "16/09/2026",
       "pedidos": 43,
       "loggers": 159,
-      "sincronizados": 119,
-      "pendentes": 39,
+      "sincronizados": 120,
+      "pendentes": 38,
       "sem_embarque": 0,
       "cobranca_gru": 1,
       "pedidos_pendentes": 14,
-      "pct": 24.5,
-      "n_latencia": 108,
+      "pct": 23.9,
+      "n_latencia": 109,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 51
+      "n_sem_primeiro_sync": 50
     },
     {
       "dia_iso": "2026-09-17",
       "dia": "17/09",
       "dia_full": "17/09/2026",
-      "pedidos": 0,
-      "loggers": 0,
+      "pedidos": 1,
+      "loggers": 1,
       "sincronizados": 0,
-      "pendentes": 0,
+      "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 0,
-      "pct": 0.0,
+      "pedidos_pendentes": 1,
+      "pct": 100.0,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 0
+      "n_sem_primeiro_sync": 1
     }
   ],
   "erros_validacao": {},

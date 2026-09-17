@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-17T18:59:35",
+  "gerado_em": "2026-09-17T19:02:57",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5928,
-    "pedidos_janela": 1003,
-    "loggers_ares_janela": 5546,
-    "loggers_ares_antes_dedup": 5825,
+    "pares_janela": 5929,
+    "pedidos_janela": 1004,
+    "loggers_ares_janela": 5547,
+    "loggers_ares_antes_dedup": 5826,
     "dedup_dia_logger": 55,
     "ocultos_operacao": 224,
     "ocultos_lista": 224,
     "ocultos_ausentes": 0,
     "pendentes_janela": 458,
     "cobranca_gru_janela": 46,
-    "sem_embarque_efetiva": 425,
+    "sem_embarque_efetiva": 426,
     "com_embarque_efetiva": 5400,
     "loggers_sem_lastsync": 46,
-    "nao_avaliados": 425,
-    "pedidos_com_agente": 5928,
+    "nao_avaliados": 426,
+    "pedidos_com_agente": 5929,
     "dtbtransporte": {
-      "consultados": 1003,
-      "mapeados": 1003,
-      "linhas": 1095
+      "consultados": 1004,
+      "mapeados": 1004,
+      "linhas": 1096
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 92,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 4202,
-      "n_so_gru": 96,
-      "n_sem_primeiro_sync": 827,
+      "n_so_gru": 97,
+      "n_sem_primeiro_sync": 826,
       "media_horas": 0.96,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -279,8 +279,8 @@
       "media_horas": 0.26,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 16,
-      "n_sem_primeiro_sync": 59
+      "n_sync_so_gru": 17,
+      "n_sem_primeiro_sync": 58
     },
     {
       "dia_iso": "2026-09-09",
@@ -442,7 +442,7 @@
       "loggers": 351,
       "sincronizados": 267,
       "pendentes": 77,
-      "sem_embarque": 58,
+      "sem_embarque": 59,
       "cobranca_gru": 7,
       "pedidos_pendentes": 36,
       "pct": 21.9,

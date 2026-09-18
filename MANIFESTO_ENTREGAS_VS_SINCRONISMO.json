@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-18T15:28:11",
+  "gerado_em": "2026-09-18T15:33:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6286,
-    "pedidos_janela": 1061,
-    "loggers_ares_janela": 5902,
-    "loggers_ares_antes_dedup": 6180,
+    "pares_janela": 6288,
+    "pedidos_janela": 1062,
+    "loggers_ares_janela": 5904,
+    "loggers_ares_antes_dedup": 6182,
     "dedup_dia_logger": 55,
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
@@ -30,14 +30,14 @@
     "pendentes_janela": 458,
     "cobranca_gru_janela": 21,
     "sem_embarque_efetiva": 516,
-    "com_embarque_efetiva": 5664,
+    "com_embarque_efetiva": 5666,
     "loggers_sem_lastsync": 45,
     "nao_avaliados": 516,
-    "pedidos_com_agente": 6286,
+    "pedidos_com_agente": 6288,
     "dtbtransporte": {
-      "consultados": 1061,
-      "mapeados": 1061,
-      "linhas": 1162
+      "consultados": 1062,
+      "mapeados": 1062,
+      "linhas": 1163
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 55,
@@ -64,7 +64,7 @@
       "PB": 22
     },
     "latencia": {
-      "n_agente": 4483,
+      "n_agente": 4485,
       "n_so_gru": 125,
       "n_sem_primeiro_sync": 782,
       "media_horas": 1.03,
@@ -438,17 +438,17 @@
       "dia_iso": "2026-09-18",
       "dia": "18/09",
       "dia_full": "18/09/2026",
-      "pedidos": 41,
-      "loggers": 185,
-      "sincronizados": 144,
+      "pedidos": 42,
+      "loggers": 187,
+      "sincronizados": 146,
       "pendentes": 40,
       "sem_embarque": 109,
       "cobranca_gru": 1,
       "pedidos_pendentes": 19,
-      "pct": 21.6,
-      "n_latencia": 123,
+      "pct": 21.4,
+      "n_latencia": 125,
       "media_horas": 0.04,
-      "mediana_horas": 0.03,
+      "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 62

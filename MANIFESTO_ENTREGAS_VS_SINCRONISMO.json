@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-18T14:28:16",
+  "gerado_em": "2026-09-18T14:33:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6156,
-    "pedidos_janela": 1052,
-    "loggers_ares_janela": 5773,
-    "loggers_ares_antes_dedup": 6051,
+    "pares_janela": 6159,
+    "pedidos_janela": 1055,
+    "loggers_ares_janela": 5776,
+    "loggers_ares_antes_dedup": 6054,
     "dedup_dia_logger": 55,
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 440,
+    "pendentes_janela": 441,
     "cobranca_gru_janela": 21,
-    "sem_embarque_efetiva": 467,
-    "com_embarque_efetiva": 5584,
+    "sem_embarque_efetiva": 468,
+    "com_embarque_efetiva": 5586,
     "loggers_sem_lastsync": 45,
-    "nao_avaliados": 467,
-    "pedidos_com_agente": 6156,
+    "nao_avaliados": 468,
+    "pedidos_com_agente": 6159,
     "dtbtransporte": {
-      "consultados": 1052,
-      "mapeados": 1052,
-      "linhas": 1149
+      "consultados": 1055,
+      "mapeados": 1055,
+      "linhas": 1152
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 53,
+      "VTCLOG - GRU": 54,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 35,
       "RBR - RODOTEC": 33,
       "THE - AERONEIVA EXPRESS": 31,
@@ -58,7 +58,7 @@
       "SE": 29,
       "MA": 29,
       "RO": 28,
-      "SP": 25,
+      "SP": 26,
       "PR": 23,
       "TO": 23,
       "PB": 22
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4428,
       "n_so_gru": 124,
-      "n_sem_primeiro_sync": 758,
+      "n_sem_primeiro_sync": 760,
       "media_horas": 1.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-18",
       "dia": "18/09",
       "dia_full": "18/09/2026",
-      "pedidos": 32,
-      "loggers": 105,
-      "sincronizados": 87,
-      "pendentes": 17,
-      "sem_embarque": 60,
+      "pedidos": 34,
+      "loggers": 107,
+      "sincronizados": 88,
+      "pendentes": 18,
+      "sem_embarque": 61,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 15,
-      "pct": 16.2,
+      "pedidos_pendentes": 16,
+      "pct": 16.8,
       "n_latencia": 73,
       "media_horas": 0.04,
       "mediana_horas": 0.03,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 32
+      "n_sem_primeiro_sync": 34
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-18T15:07:42",
+  "gerado_em": "2026-09-18T15:13:19",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 437,
+    "pendentes_janela": 438,
     "cobranca_gru_janela": 21,
-    "sem_embarque_efetiva": 498,
-    "com_embarque_efetiva": 5622,
+    "sem_embarque_efetiva": 496,
+    "com_embarque_efetiva": 5624,
     "loggers_sem_lastsync": 45,
-    "nao_avaliados": 498,
+    "nao_avaliados": 496,
     "pedidos_com_agente": 6225,
     "dtbtransporte": {
       "consultados": 1060,
@@ -40,7 +40,7 @@
       "linhas": 1159
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 54,
+      "VTCLOG - GRU": 55,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 35,
       "RBR - RODOTEC": 33,
       "THE - AERONEIVA EXPRESS": 31,
@@ -57,7 +57,7 @@
       "PI": 32,
       "SE": 29,
       "MA": 29,
-      "SP": 26,
+      "SP": 27,
       "RO": 24,
       "PR": 23,
       "TO": 23,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4465,
       "n_so_gru": 124,
-      "n_sem_primeiro_sync": 759,
+      "n_sem_primeiro_sync": 761,
       "media_horas": 1.03,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-18",
       "dia": "18/09",
       "dia_full": "18/09/2026",
-      "pedidos": 37,
-      "loggers": 143,
-      "sincronizados": 123,
-      "pendentes": 19,
-      "sem_embarque": 91,
+      "pedidos": 39,
+      "loggers": 145,
+      "sincronizados": 124,
+      "pendentes": 20,
+      "sem_embarque": 89,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 17,
-      "pct": 13.3,
+      "pedidos_pendentes": 18,
+      "pct": 13.8,
       "n_latencia": 105,
       "media_horas": 0.04,
       "mediana_horas": 0.03,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 38
+      "n_sem_primeiro_sync": 40
     }
   ],
   "erros_validacao": {},

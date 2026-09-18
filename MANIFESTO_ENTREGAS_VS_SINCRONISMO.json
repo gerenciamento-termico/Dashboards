@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-18T10:23:04",
+  "gerado_em": "2026-09-18T10:28:16",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 404,
-    "cobranca_gru_janela": 50,
+    "pendentes_janela": 403,
+    "cobranca_gru_janela": 49,
     "sem_embarque_efetiva": 408,
     "com_embarque_efetiva": 5465,
     "loggers_sem_lastsync": 45,
@@ -40,7 +40,7 @@
       "linhas": 1109
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 50,
+      "VTCLOG - GRU": 49,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 35,
       "RBR - RODOTEC": 30,
       "SLZ - REIS CAVALCANTE EXPRESSO": 29,
@@ -64,9 +64,9 @@
       "BA": 21
     },
     "latencia": {
-      "n_agente": 4323,
+      "n_agente": 4325,
       "n_so_gru": 106,
-      "n_sem_primeiro_sync": 762,
+      "n_sem_primeiro_sync": 760,
       "media_horas": 1.01,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -269,18 +269,18 @@
       "dia_full": "09/09/2026",
       "pedidos": 50,
       "loggers": 208,
-      "sincronizados": 187,
+      "sincronizados": 188,
       "pendentes": 18,
       "sem_embarque": 0,
-      "cobranca_gru": 3,
+      "cobranca_gru": 2,
       "pedidos_pendentes": 12,
       "pct": 8.7,
-      "n_latencia": 170,
+      "n_latencia": 171,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 35
+      "n_sem_primeiro_sync": 34
     },
     {
       "dia_iso": "2026-09-10",
@@ -288,18 +288,18 @@
       "dia_full": "10/09/2026",
       "pedidos": 107,
       "loggers": 573,
-      "sincronizados": 533,
-      "pendentes": 37,
+      "sincronizados": 534,
+      "pendentes": 36,
       "sem_embarque": 5,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 25,
-      "pct": 6.5,
-      "n_latencia": 494,
+      "pedidos_pendentes": 24,
+      "pct": 6.3,
+      "n_latencia": 495,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 6,
-      "n_sem_primeiro_sync": 73
+      "n_sem_primeiro_sync": 72
     },
     {
       "dia_iso": "2026-09-11",

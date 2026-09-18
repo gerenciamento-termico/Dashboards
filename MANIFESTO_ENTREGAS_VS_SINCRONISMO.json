@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-18T20:33:53",
+  "gerado_em": "2026-09-18T20:38:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 437,
+    "pendentes_janela": 436,
     "cobranca_gru_janela": 44,
     "sem_embarque_efetiva": 456,
     "com_embarque_efetiva": 5857,
@@ -48,8 +48,8 @@
       "VTCLOG CNF - CONTAGEM": 27,
       "PVH - RODOTEC": 25,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
-      "FOR - NT TRANSPORTE LTDA": 24,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 23
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 23,
+      "FOR - NT TRANSPORTE LTDA": 23
     },
     "top10_ufs_pendencias": {
       "PR": 42,
@@ -58,15 +58,15 @@
       "MG": 31,
       "SC": 31,
       "MA": 29,
-      "CE": 26,
       "RO": 25,
+      "CE": 25,
       "SP": 24,
       "TO": 23
     },
     "latencia": {
-      "n_agente": 4661,
+      "n_agente": 4662,
       "n_so_gru": 123,
-      "n_sem_primeiro_sync": 793,
+      "n_sem_primeiro_sync": 792,
       "media_horas": 1.3,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 69,
       "loggers": 373,
-      "sincronizados": 293,
-      "pendentes": 79,
+      "sincronizados": 294,
+      "pendentes": 78,
       "sem_embarque": 78,
       "cobranca_gru": 1,
       "pedidos_pendentes": 30,
-      "pct": 21.2,
-      "n_latencia": 265,
+      "pct": 20.9,
+      "n_latencia": 266,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 108
+      "n_sem_primeiro_sync": 107
     }
   ],
   "erros_validacao": {},

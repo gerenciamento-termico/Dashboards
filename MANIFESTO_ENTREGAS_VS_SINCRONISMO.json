@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-18T16:38:29",
+  "gerado_em": "2026-09-18T16:39:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 415,
+    "pendentes_janela": 412,
     "cobranca_gru_janela": 69,
     "sem_embarque_efetiva": 533,
     "com_embarque_efetiva": 5695,
@@ -42,8 +42,8 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 49,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 34,
       "RBR - RODOTEC": 33,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 31,
       "THE - AERONEIVA EXPRESS": 31,
       "SLZ - REIS CAVALCANTE EXPRESSO": 29,
       "PVH - RODOTEC": 24,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "PR": 42,
-      "SC": 41,
+      "SC": 38,
       "AC": 33,
       "PI": 32,
       "MA": 29,
@@ -64,9 +64,9 @@
       "CE": 22
     },
     "latencia": {
-      "n_agente": 4515,
+      "n_agente": 4517,
       "n_so_gru": 118,
-      "n_sem_primeiro_sync": 788,
+      "n_sem_primeiro_sync": 786,
       "media_horas": 1.31,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 49,
       "loggers": 217,
-      "sincronizados": 165,
-      "pendentes": 49,
+      "sincronizados": 168,
+      "pendentes": 46,
       "sem_embarque": 146,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 22,
-      "pct": 22.6,
-      "n_latencia": 142,
+      "pedidos_pendentes": 21,
+      "pct": 21.2,
+      "n_latencia": 144,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 75
+      "n_sem_primeiro_sync": 73
     }
   ],
   "erros_validacao": {},

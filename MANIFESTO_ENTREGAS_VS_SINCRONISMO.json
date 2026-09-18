@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-18T08:40:53",
+  "gerado_em": "2026-09-18T08:51:11",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,30 +19,30 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5950,
-    "pedidos_janela": 1008,
-    "loggers_ares_janela": 5568,
-    "loggers_ares_antes_dedup": 5847,
+    "pares_janela": 5951,
+    "pedidos_janela": 1009,
+    "loggers_ares_janela": 5570,
+    "loggers_ares_antes_dedup": 5848,
     "dedup_dia_logger": 55,
-    "ocultos_operacao": 224,
-    "ocultos_lista": 224,
+    "ocultos_operacao": 223,
+    "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 447,
-    "cobranca_gru_janela": 39,
+    "pendentes_janela": 448,
+    "cobranca_gru_janela": 37,
     "sem_embarque_efetiva": 425,
-    "com_embarque_efetiva": 5422,
+    "com_embarque_efetiva": 5423,
     "loggers_sem_lastsync": 46,
     "nao_avaliados": 425,
-    "pedidos_com_agente": 5950,
+    "pedidos_com_agente": 5951,
     "dtbtransporte": {
-      "consultados": 1008,
-      "mapeados": 1008,
-      "linhas": 1100
+      "consultados": 1009,
+      "mapeados": 1009,
+      "linhas": 1101
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 94,
       "RBR - RODOTEC": 30,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 29,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 30,
       "SLZ - REIS CAVALCANTE EXPRESSO": 29,
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "THE - AERONEIVA EXPRESS": 23,
@@ -52,7 +52,7 @@
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 15
     },
     "top10_ufs_pendencias": {
-      "SC": 75,
+      "SC": 76,
       "AC": 30,
       "MA": 29,
       "SP": 27,
@@ -64,9 +64,9 @@
       "PA": 19
     },
     "latencia": {
-      "n_agente": 4258,
+      "n_agente": 4259,
       "n_so_gru": 101,
-      "n_sem_primeiro_sync": 788,
+      "n_sem_primeiro_sync": 789,
       "media_horas": 0.94,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -155,18 +155,18 @@
       "dia_full": "03/09/2026",
       "pedidos": 83,
       "loggers": 413,
-      "sincronizados": 399,
+      "sincronizados": 400,
       "pendentes": 7,
       "sem_embarque": 27,
-      "cobranca_gru": 7,
+      "cobranca_gru": 6,
       "pedidos_pendentes": 6,
       "pct": 1.7,
-      "n_latencia": 361,
+      "n_latencia": 362,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 13,
-      "n_sem_primeiro_sync": 39
+      "n_sem_primeiro_sync": 38
     },
     {
       "dia_iso": "2026-09-04",
@@ -269,10 +269,10 @@
       "dia_full": "09/09/2026",
       "pedidos": 50,
       "loggers": 208,
-      "sincronizados": 184,
+      "sincronizados": 185,
       "pendentes": 18,
       "sem_embarque": 0,
-      "cobranca_gru": 6,
+      "cobranca_gru": 5,
       "pedidos_pendentes": 12,
       "pct": 8.7,
       "n_latencia": 169,
@@ -420,38 +420,38 @@
       "dia": "17/09",
       "dia_full": "17/09/2026",
       "pedidos": 105,
-      "loggers": 375,
+      "loggers": 376,
       "sincronizados": 305,
-      "pendentes": 65,
+      "pendentes": 66,
       "sem_embarque": 58,
       "cobranca_gru": 5,
       "pedidos_pendentes": 37,
-      "pct": 17.3,
+      "pct": 17.6,
       "n_latencia": 271,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 104
+      "n_sem_primeiro_sync": 105
     },
     {
       "dia_iso": "2026-09-18",
       "dia": "18/09",
       "dia_full": "18/09/2026",
-      "pedidos": 4,
-      "loggers": 4,
-      "sincronizados": 1,
+      "pedidos": 5,
+      "loggers": 5,
+      "sincronizados": 2,
       "pendentes": 2,
       "sem_embarque": 0,
       "cobranca_gru": 1,
       "pedidos_pendentes": 2,
-      "pct": 50.0,
+      "pct": 40.0,
       "n_latencia": 1,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.04,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 3
+      "n_sem_primeiro_sync": 4
     }
   ],
   "erros_validacao": {},
@@ -1733,12 +1733,6 @@
     {
       "pedido": "566294",
       "logger": "0741700670",
-      "dia": "2026-09-17",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566294",
-      "logger": "0741700817",
       "dia": "2026-09-17",
       "motivo": "lançamento errado no aplicativo de entregas"
     },

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-19T13:48:34",
+  "gerado_em": "2026-09-19T13:53:03",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 438,
+    "pendentes_janela": 437,
     "cobranca_gru_janela": 49,
     "sem_embarque_efetiva": 473,
     "com_embarque_efetiva": 5937,
@@ -48,7 +48,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 29,
       "PVH - RODOTEC": 25,
       "JPA - LIDER CARGAS": 21,
-      "FOR - NT TRANSPORTE LTDA": 20,
+      "FOR - NT TRANSPORTE LTDA": 19,
       "RBR - RODOTEC": 17
     },
     "top10_ufs_pendencias": {
@@ -61,12 +61,12 @@
       "SP": 22,
       "PB": 22,
       "SC": 22,
-      "CE": 22
+      "BA": 21
     },
     "latencia": {
-      "n_agente": 4732,
+      "n_agente": 4733,
       "n_so_gru": 126,
-      "n_sem_primeiro_sync": 799,
+      "n_sem_primeiro_sync": 798,
       "media_horas": 1.28,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "19/09/2026",
       "pedidos": 3,
       "loggers": 45,
-      "sincronizados": 43,
-      "pendentes": 2,
+      "sincronizados": 44,
+      "pendentes": 1,
       "sem_embarque": 40,
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
-      "pct": 4.4,
-      "n_latencia": 41,
+      "pct": 2.2,
+      "n_latencia": 42,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 4
+      "n_sem_primeiro_sync": 3
     }
   ],
   "erros_validacao": {},

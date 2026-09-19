@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-19T10:22:21",
+  "gerado_em": "2026-09-19T10:28:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 450,
+    "pendentes_janela": 449,
     "cobranca_gru_janela": 51,
     "sem_embarque_efetiva": 473,
     "com_embarque_efetiva": 5925,
@@ -49,7 +49,7 @@
       "PVH - RODOTEC": 25,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 23,
       "JPA - LIDER CARGAS": 21,
-      "FOR - NT TRANSPORTE LTDA": 21
+      "FOR - NT TRANSPORTE LTDA": 20
     },
     "top10_ufs_pendencias": {
       "PR": 53,
@@ -61,7 +61,7 @@
       "SC": 25,
       "SP": 24,
       "TO": 23,
-      "CE": 23
+      "PB": 22
     },
     "latencia": {
       "n_agente": 4707,
@@ -440,12 +440,12 @@
       "dia_full": "19/09/2026",
       "pedidos": 1,
       "loggers": 43,
-      "sincronizados": 40,
-      "pendentes": 3,
+      "sincronizados": 41,
+      "pendentes": 2,
       "sem_embarque": 40,
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
-      "pct": 7.0,
+      "pct": 4.7,
       "n_latencia": 38,
       "media_horas": 0.04,
       "mediana_horas": 0.05,

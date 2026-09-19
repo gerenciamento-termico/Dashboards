@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-19T16:14:50",
+  "gerado_em": "2026-09-19T16:18:49",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,7 +28,7 @@
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
     "pendentes_janela": 413,
-    "cobranca_gru_janela": 52,
+    "cobranca_gru_janela": 42,
     "sem_embarque_efetiva": 453,
     "com_embarque_efetiva": 5957,
     "loggers_sem_lastsync": 38,
@@ -64,10 +64,10 @@
       "CE": 22
     },
     "latencia": {
-      "n_agente": 4770,
+      "n_agente": 4780,
       "n_so_gru": 126,
-      "n_sem_primeiro_sync": 781,
-      "media_horas": 1.27,
+      "n_sem_primeiro_sync": 771,
+      "media_horas": 1.34,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -104,12 +104,12 @@
       "cobranca_gru": 1,
       "pedidos_pendentes": 3,
       "pct": 2.6,
-      "n_latencia": 379,
-      "media_horas": 7.01,
+      "n_latencia": 380,
+      "media_horas": 7.94,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 18,
-      "n_sem_primeiro_sync": 27
+      "n_sem_primeiro_sync": 26
     },
     {
       "dia_iso": "2026-09-02",
@@ -288,18 +288,18 @@
       "dia_full": "11/09/2026",
       "pedidos": 112,
       "loggers": 463,
-      "sincronizados": 427,
+      "sincronizados": 430,
       "pendentes": 26,
       "sem_embarque": 53,
-      "cobranca_gru": 10,
+      "cobranca_gru": 7,
       "pedidos_pendentes": 23,
       "pct": 5.6,
-      "n_latencia": 413,
+      "n_latencia": 416,
       "media_horas": 0.23,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 47
+      "n_sem_primeiro_sync": 44
     },
     {
       "dia_iso": "2026-09-12",
@@ -421,18 +421,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 73,
       "loggers": 408,
-      "sincronizados": 312,
+      "sincronizados": 319,
       "pendentes": 86,
       "sem_embarque": 55,
-      "cobranca_gru": 10,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 31,
       "pct": 21.1,
-      "n_latencia": 282,
+      "n_latencia": 288,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
-      "p90_horas": 0.08,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 126
+      "n_sem_primeiro_sync": 120
     },
     {
       "dia_iso": "2026-09-19",

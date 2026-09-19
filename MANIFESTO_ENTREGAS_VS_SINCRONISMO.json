@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-19T11:18:22",
+  "gerado_em": "2026-09-19T11:22:28",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,10 +28,10 @@
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
     "pendentes_janela": 459,
-    "cobranca_gru_janela": 49,
+    "cobranca_gru_janela": 48,
     "sem_embarque_efetiva": 473,
     "com_embarque_efetiva": 5936,
-    "loggers_sem_lastsync": 41,
+    "loggers_sem_lastsync": 40,
     "nao_avaliados": 473,
     "pedidos_com_agente": 6516,
     "dtbtransporte": {
@@ -364,10 +364,10 @@
       "dia_full": "15/09/2026",
       "pedidos": 83,
       "loggers": 395,
-      "sincronizados": 361,
+      "sincronizados": 362,
       "pendentes": 30,
       "sem_embarque": 167,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 22,
       "pct": 7.6,
       "n_latencia": 336,

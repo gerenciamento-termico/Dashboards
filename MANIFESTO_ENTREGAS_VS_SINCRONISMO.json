@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-20T03:34:55",
+  "gerado_em": "2026-09-20T03:39:19",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 408,
-    "cobranca_gru_janela": 39,
+    "pendentes_janela": 409,
+    "cobranca_gru_janela": 38,
     "sem_embarque_efetiva": 453,
     "com_embarque_efetiva": 5769,
     "loggers_sem_lastsync": 38,
@@ -40,7 +40,7 @@
       "linhas": 1154
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 48,
+      "VTCLOG - GRU": 49,
       "VTCLOG CNF - CONTAGEM": 41,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 31,
       "THE - AERONEIVA EXPRESS": 31,
@@ -58,10 +58,10 @@
       "TO": 31,
       "MA": 29,
       "RO": 24,
+      "SP": 22,
       "PB": 22,
       "SC": 22,
-      "CE": 22,
-      "SP": 21
+      "CE": 22
     },
     "latencia": {
       "n_agente": 4612,
@@ -403,11 +403,11 @@
       "pedidos": 73,
       "loggers": 408,
       "sincronizados": 320,
-      "pendentes": 86,
+      "pendentes": 87,
       "sem_embarque": 55,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 31,
-      "pct": 21.1,
+      "cobranca_gru": 1,
+      "pedidos_pendentes": 32,
+      "pct": 21.3,
       "n_latencia": 289,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

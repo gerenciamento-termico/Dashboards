@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-21T14:56:40",
+  "gerado_em": "2026-09-21T15:15:36",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -9,7 +9,7 @@
     "cobranca_agente": "pendente de sync + saiu + nao esta Em GRU agora + sem estoque/restauracao depois desta entrega efetiva embarque",
     "cobranca_gru": "pendente de sync + saiu + (Em GRU agora OU estoque/restauracao depois desta entrega efetiva embarque). Linha permanece visivel; nao some. Nao usa retornando nem restauracao no mesmo dia antes da entrega",
     "sem_embarque": "ARES sem dt_entregaefetivaembarque OU sem nr_romaneio fica fora da cobranca (patio / trava)",
-    "escopo_sync": "somente ARES/ARES COM SONDA (tags A/TA/AS e numerico 07417…/V7417…); demais tipos nao avaliados",
+    "escopo_sync": "somente ARES/ARES COM SONDA (tipo do cadastro dtbPortal ds_tipodatalogger; fallback padrao de tag A/TA/AS e numerico 07417…/V7417…); demais tipos nao avaliados",
     "agente": "dtbTransporte tbdMovimento.nr_Referencia/ds_Agente (view ESL); fallback Reversa por pedido",
     "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)",
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega",
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6231,
-    "pedidos_janela": 1033,
-    "loggers_ares_janela": 5829,
-    "loggers_ares_antes_dedup": 6119,
-    "dedup_dia_logger": 67,
+    "pares_janela": 6236,
+    "pedidos_janela": 1037,
+    "loggers_ares_janela": 5832,
+    "loggers_ares_antes_dedup": 6123,
+    "dedup_dia_logger": 68,
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 404,
+    "pendentes_janela": 405,
     "cobranca_gru_janela": 43,
     "sem_embarque_efetiva": 483,
-    "com_embarque_efetiva": 5636,
+    "com_embarque_efetiva": 5640,
     "loggers_sem_lastsync": 59,
     "nao_avaliados": 483,
-    "pedidos_com_agente": 6231,
+    "pedidos_com_agente": 6236,
     "dtbtransporte": {
-      "consultados": 1033,
-      "mapeados": 1033,
-      "linhas": 1133
+      "consultados": 1037,
+      "mapeados": 1037,
+      "linhas": 1137
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 53,
@@ -64,9 +64,9 @@
       "PA": 18
     },
     "latencia": {
-      "n_agente": 4478,
+      "n_agente": 4479,
       "n_so_gru": 122,
-      "n_sem_primeiro_sync": 754,
+      "n_sem_primeiro_sync": 756,
       "media_horas": 0.8,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-21",
       "dia": "21/09",
       "dia_full": "21/09/2026",
-      "pedidos": 33,
-      "loggers": 218,
-      "sincronizados": 164,
-      "pendentes": 51,
+      "pedidos": 37,
+      "loggers": 221,
+      "sincronizados": 166,
+      "pendentes": 52,
       "sem_embarque": 62,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 19,
-      "pct": 23.4,
-      "n_latencia": 144,
+      "pedidos_pendentes": 20,
+      "pct": 23.5,
+      "n_latencia": 145,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 74
+      "n_sem_primeiro_sync": 76
     }
   ],
   "erros_validacao": {},

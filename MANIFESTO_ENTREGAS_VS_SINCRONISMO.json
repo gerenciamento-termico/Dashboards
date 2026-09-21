@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-21T20:04:39",
+  "gerado_em": "2026-09-21T20:15:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,29 +19,29 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6373,
-    "pedidos_janela": 1059,
-    "loggers_ares_janela": 5970,
-    "loggers_ares_antes_dedup": 6262,
+    "pares_janela": 6374,
+    "pedidos_janela": 1060,
+    "loggers_ares_janela": 5971,
+    "loggers_ares_antes_dedup": 6263,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 421,
+    "pendentes_janela": 422,
     "cobranca_gru_janela": 59,
     "sem_embarque_efetiva": 508,
-    "com_embarque_efetiva": 5754,
+    "com_embarque_efetiva": 5755,
     "loggers_sem_lastsync": 61,
     "nao_avaliados": 508,
-    "pedidos_com_agente": 6373,
+    "pedidos_com_agente": 6374,
     "dtbtransporte": {
-      "consultados": 1059,
-      "mapeados": 1059,
-      "linhas": 1161
+      "consultados": 1060,
+      "mapeados": 1060,
+      "linhas": 1162
     },
     "top10_agentes_pendencias": {
       "VTCLOG CNF - CONTAGEM": 94,
-      "VTCLOG - GRU": 54,
+      "VTCLOG - GRU": 55,
       "THE - AERONEIVA EXPRESS": 39,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 31,
       "FOR - NT TRANSPORTE LTDA": 27,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4565,
       "n_so_gru": 120,
-      "n_sem_primeiro_sync": 784,
+      "n_sem_primeiro_sync": 785,
       "media_horas": 0.88,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-21",
       "dia": "21/09",
       "dia_full": "21/09/2026",
-      "pedidos": 59,
-      "loggers": 333,
+      "pedidos": 60,
+      "loggers": 334,
       "sincronizados": 227,
-      "pendentes": 99,
+      "pendentes": 100,
       "sem_embarque": 74,
       "cobranca_gru": 7,
-      "pedidos_pendentes": 25,
-      "pct": 29.7,
+      "pedidos_pendentes": 26,
+      "pct": 29.9,
       "n_latencia": 214,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 119
+      "n_sem_primeiro_sync": 120
     }
   ],
   "erros_validacao": {},

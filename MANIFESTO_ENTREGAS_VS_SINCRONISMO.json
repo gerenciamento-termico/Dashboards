@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-21T18:48:21",
+  "gerado_em": "2026-09-21T19:00:31",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 420,
+    "pendentes_janela": 421,
     "cobranca_gru_janela": 59,
-    "sem_embarque_efetiva": 509,
-    "com_embarque_efetiva": 5753,
+    "sem_embarque_efetiva": 508,
+    "com_embarque_efetiva": 5754,
     "loggers_sem_lastsync": 61,
-    "nao_avaliados": 509,
+    "nao_avaliados": 508,
     "pedidos_com_agente": 6373,
     "dtbtransporte": {
       "consultados": 1059,
@@ -49,7 +49,7 @@
       "PVH - RODOTEC": 19,
       "RBR - RODOTEC": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 16,
-      "BEL - MH FROTA TRANSPORTE": 11
+      "BEL - MH FROTA TRANSPORTE": 12
     },
     "top10_ufs_pendencias": {
       "MG": 97,
@@ -59,14 +59,14 @@
       "CE": 28,
       "PB": 22,
       "SC": 21,
+      "PA": 20,
       "RO": 19,
-      "PA": 19,
       "AC": 17
     },
     "latencia": {
       "n_agente": 4565,
       "n_so_gru": 120,
-      "n_sem_primeiro_sync": 783,
+      "n_sem_primeiro_sync": 784,
       "media_horas": 0.88,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-21",
       "dia": "21/09",
       "dia_full": "21/09/2026",
-      "pedidos": 58,
-      "loggers": 332,
+      "pedidos": 59,
+      "loggers": 333,
       "sincronizados": 227,
-      "pendentes": 98,
-      "sem_embarque": 75,
+      "pendentes": 99,
+      "sem_embarque": 74,
       "cobranca_gru": 7,
-      "pedidos_pendentes": 24,
-      "pct": 29.5,
+      "pedidos_pendentes": 25,
+      "pct": 29.7,
       "n_latencia": 214,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 118
+      "n_sem_primeiro_sync": 119
     }
   ],
   "erros_validacao": {},

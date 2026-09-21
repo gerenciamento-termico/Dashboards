@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-21T11:45:53",
+  "gerado_em": "2026-09-21T11:52:39",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 402,
+    "pendentes_janela": 383,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 440,
     "com_embarque_efetiva": 5474,
@@ -44,12 +44,12 @@
       "VTCLOG CNF - CONTAGEM": 41,
       "THE - AERONEIVA EXPRESS": 39,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 31,
-      "AJU - CASSIMIRO TRANSPORTES": 23,
       "JPA - LIDER CARGAS": 21,
       "FOR - NT TRANSPORTE LTDA": 21,
       "PVH - RODOTEC": 19,
       "RBR - RODOTEC": 17,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 16
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 16,
+      "SSA - LUTY LOG": 15
     },
     "top10_ufs_pendencias": {
       "MG": 44,
@@ -57,16 +57,16 @@
       "TO": 31,
       "SP": 26,
       "CE": 23,
-      "SE": 23,
       "PB": 22,
       "SC": 21,
       "BA": 21,
-      "RO": 19
+      "RO": 19,
+      "PA": 18
     },
     "latencia": {
-      "n_agente": 4345,
+      "n_agente": 4365,
       "n_so_gru": 125,
-      "n_sem_primeiro_sync": 724,
+      "n_sem_primeiro_sync": 704,
       "media_horas": 0.48,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -440,18 +440,18 @@
       "dia_full": "21/09/2026",
       "pedidos": 13,
       "loggers": 58,
-      "sincronizados": 29,
-      "pendentes": 28,
+      "sincronizados": 48,
+      "pendentes": 9,
       "sem_embarque": 0,
       "cobranca_gru": 1,
       "pedidos_pendentes": 8,
-      "pct": 48.3,
-      "n_latencia": 26,
+      "pct": 15.5,
+      "n_latencia": 46,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
-      "p90_horas": 0.07,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 32
+      "n_sem_primeiro_sync": 12
     }
   ],
   "erros_validacao": {},

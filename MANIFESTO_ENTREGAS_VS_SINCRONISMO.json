@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-21T11:37:47",
+  "gerado_em": "2026-09-21T11:42:47",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5995,
-    "pedidos_janela": 1011,
-    "loggers_ares_janela": 5597,
-    "loggers_ares_antes_dedup": 5884,
+    "pares_janela": 6025,
+    "pedidos_janela": 1014,
+    "loggers_ares_janela": 5627,
+    "loggers_ares_antes_dedup": 5914,
     "dedup_dia_logger": 64,
     "ocultos_operacao": 223,
     "ocultos_lista": 223,
     "ocultos_ausentes": 0,
-    "pendentes_janela": 399,
+    "pendentes_janela": 402,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 440,
-    "com_embarque_efetiva": 5444,
+    "com_embarque_efetiva": 5474,
     "loggers_sem_lastsync": 42,
     "nao_avaliados": 440,
-    "pedidos_com_agente": 5995,
+    "pedidos_com_agente": 6025,
     "dtbtransporte": {
-      "consultados": 1011,
-      "mapeados": 1011,
-      "linhas": 1106
+      "consultados": 1014,
+      "mapeados": 1014,
+      "linhas": 1109
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 52,
+      "VTCLOG - GRU": 53,
       "VTCLOG CNF - CONTAGEM": 41,
       "THE - AERONEIVA EXPRESS": 39,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 31,
@@ -55,7 +55,7 @@
       "MG": 44,
       "PI": 40,
       "TO": 31,
-      "SP": 25,
+      "SP": 26,
       "CE": 23,
       "SE": 23,
       "PB": 22,
@@ -64,10 +64,10 @@
       "RO": 19
     },
     "latencia": {
-      "n_agente": 4320,
+      "n_agente": 4345,
       "n_so_gru": 125,
-      "n_sem_primeiro_sync": 719,
-      "media_horas": 0.49,
+      "n_sem_primeiro_sync": 724,
+      "media_horas": 0.48,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
     }
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-21",
       "dia": "21/09",
       "dia_full": "21/09/2026",
-      "pedidos": 10,
-      "loggers": 28,
-      "sincronizados": 2,
-      "pendentes": 25,
+      "pedidos": 13,
+      "loggers": 58,
+      "sincronizados": 29,
+      "pendentes": 28,
       "sem_embarque": 0,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 6,
-      "pct": 89.3,
-      "n_latencia": 1,
-      "media_horas": 0.02,
-      "mediana_horas": 0.02,
-      "p90_horas": 0.02,
+      "pedidos_pendentes": 8,
+      "pct": 48.3,
+      "n_latencia": 26,
+      "media_horas": 0.04,
+      "mediana_horas": 0.04,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 27
+      "n_sem_primeiro_sync": 32
     }
   ],
   "erros_validacao": {},

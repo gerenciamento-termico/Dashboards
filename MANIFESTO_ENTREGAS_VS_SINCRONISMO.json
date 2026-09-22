@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T20:18:12",
+  "gerado_em": "2026-09-22T20:23:12",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 477,
+    "pendentes_janela": 497,
     "cobranca_gru_janela": 49,
-    "sem_embarque_efetiva": 704,
-    "com_embarque_efetiva": 5994,
+    "sem_embarque_efetiva": 684,
+    "com_embarque_efetiva": 6014,
     "loggers_sem_lastsync": 92,
-    "nao_avaliados": 704,
+    "nao_avaliados": 684,
     "pedidos_com_agente": 6785,
     "dtbtransporte": {
       "consultados": 1070,
@@ -40,10 +40,10 @@
       "linhas": 1174
     },
     "top10_agentes_pendencias": {
+      "VTCLOG - REC": 70,
       "THE - AERONEIVA EXPRESS": 65,
       "VTCLOG - GRU": 59,
       "VTCLOG CNF - CONTAGEM": 50,
-      "VTCLOG - REC": 50,
       "NAT - CSM CARGO": 35,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 30,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
@@ -52,9 +52,9 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 16
     },
     "top10_ufs_pendencias": {
+      "PE": 70,
       "PI": 66,
       "MG": 51,
-      "PE": 50,
       "SP": 37,
       "RN": 36,
       "AM": 30,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4691,
       "n_so_gru": 139,
-      "n_sem_primeiro_sync": 871,
+      "n_sem_primeiro_sync": 891,
       "media_horas": 0.9,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -439,19 +439,19 @@
       "dia": "22/09",
       "dia_full": "22/09/2026",
       "pedidos": 77,
-      "loggers": 622,
+      "loggers": 642,
       "sincronizados": 461,
-      "pendentes": 158,
-      "sem_embarque": 88,
+      "pendentes": 178,
+      "sem_embarque": 68,
       "cobranca_gru": 3,
       "pedidos_pendentes": 33,
-      "pct": 25.4,
+      "pct": 27.7,
       "n_latencia": 377,
       "media_horas": 0.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 245
+      "n_sem_primeiro_sync": 265
     }
   ],
   "erros_validacao": {},

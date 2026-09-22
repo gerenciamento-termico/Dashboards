@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T10:02:22",
+  "gerado_em": "2026-09-22T10:07:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -21,13 +21,13 @@
   "contagens": {
     "pares_janela": 6100,
     "pedidos_janela": 991,
-    "loggers_ares_janela": 5723,
+    "loggers_ares_janela": 5722,
     "loggers_ares_antes_dedup": 6016,
     "dedup_dia_logger": 68,
-    "ocultos_operacao": 225,
-    "ocultos_lista": 226,
+    "ocultos_operacao": 226,
+    "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 391,
+    "pendentes_janela": 390,
     "cobranca_gru_janela": 79,
     "sem_embarque_efetiva": 638,
     "com_embarque_efetiva": 5378,
@@ -52,7 +52,7 @@
       "NAT - CSM CARGO": 10
     },
     "top10_ufs_pendencias": {
-      "MG": 96,
+      "MG": 95,
       "PI": 41,
       "SP": 30,
       "TO": 29,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4235,
       "n_so_gru": 104,
-      "n_sem_primeiro_sync": 753,
+      "n_sem_primeiro_sync": 752,
       "media_horas": 0.7,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -230,19 +230,19 @@
       "dia": "11/09",
       "dia_full": "11/09/2026",
       "pedidos": 113,
-      "loggers": 496,
+      "loggers": 495,
       "sincronizados": 465,
-      "pendentes": 22,
+      "pendentes": 21,
       "sem_embarque": 20,
       "cobranca_gru": 9,
-      "pedidos_pendentes": 20,
-      "pct": 4.4,
+      "pedidos_pendentes": 19,
+      "pct": 4.2,
       "n_latencia": 445,
       "media_horas": 0.74,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 8,
-      "n_sem_primeiro_sync": 43
+      "n_sem_primeiro_sync": 42
     },
     {
       "dia_iso": "2026-09-12",
@@ -947,6 +947,12 @@
     {
       "pedido": "567565",
       "logger": "0741700676",
+      "dia": "2026-09-11",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567948",
+      "logger": "0741700678",
       "dia": "2026-09-11",
       "motivo": "lançamento errado no aplicativo de entregas"
     },

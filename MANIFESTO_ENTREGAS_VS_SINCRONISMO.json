@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-21T22:47:49",
+  "gerado_em": "2026-09-21T22:57:30",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -33,15 +33,15 @@
     "com_embarque_efetiva": 5758,
     "loggers_sem_lastsync": 63,
     "nao_avaliados": 554,
-    "pedidos_com_agente": 6422,
+    "pedidos_com_agente": 6419,
     "dtbtransporte": {
       "consultados": 1063,
-      "mapeados": 1063,
-      "linhas": 1165
+      "mapeados": 1062,
+      "linhas": 1162
     },
     "top10_agentes_pendencias": {
       "VTCLOG CNF - CONTAGEM": 94,
-      "VTCLOG - GRU": 56,
+      "VTCLOG - GRU": 55,
       "THE - AERONEIVA EXPRESS": 39,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 31,
       "FOR - NT TRANSPORTE LTDA": 27,

@@ -43,6 +43,19 @@ h1 small{display:block;font-size:.56em;font-weight:600;color:var(--soft);margin-
 .badge{display:inline-flex;align-items:center;justify-content:center;min-width:26px;height:22px;padding:0 9px;border-radius:999px;background:rgba(251,113,133,.16);border:1px solid rgba(251,113,133,.45);color:var(--pend);font-size:.72rem;font-weight:800}
 .dl button{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,#2563c4,#3d8bfd);color:#fff;border:1px solid rgba(157,197,254,.45);border-radius:999px;padding:8px 18px;font-weight:700;font-size:.76rem;cursor:pointer;font-family:inherit;box-shadow:0 6px 16px rgba(37,99,196,.35);transition:filter .15s}
 .dl button:hover{filter:brightness(1.12)}
+.callout{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,rgba(61,139,253,.16),rgba(103,232,249,.07));border:1px solid var(--line2);border-left:4px solid var(--blue);border-radius:14px;padding:14px 16px;margin-bottom:16px;backdrop-filter:blur(8px);box-shadow:0 10px 26px rgba(3,10,20,.3)}
+.callout .ic{font-size:1.2rem;line-height:1.2;flex-shrink:0}
+.callout p{font-size:clamp(.82rem,2.6vw,.92rem);line-height:1.6;color:#dcE9f7}
+.callout b{color:#fff;font-weight:800;background:rgba(61,139,253,.22);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.callout .seq{color:#cfe2f6;font-weight:600}
+.fbar{display:grid;grid-template-columns:minmax(180px,2fr) minmax(140px,1fr) minmax(150px,1fr) auto;gap:8px;margin-bottom:12px}
+.fbar input,.fbar select{width:100%;background:rgba(8,20,36,.55);border:1px solid var(--line2);border-radius:10px;color:var(--txt);font-family:inherit;font-size:.8rem;padding:9px 12px;outline:none;transition:border-color .15s}
+.fbar input:focus,.fbar select:focus{border-color:var(--blue)}
+.fbar input::placeholder{color:#7d99b8}
+.fbar select option{background:#0e2a47;color:#eaf2fb}
+.fbar .limpar{background:transparent;border:1px solid var(--line2);border-radius:10px;color:var(--soft);font-family:inherit;font-size:.78rem;font-weight:600;padding:9px 14px;cursor:pointer;transition:color .15s,border-color .15s}
+.fbar .limpar:hover{color:var(--txt);border-color:var(--blue)}
+@media(max-width:860px){.fbar{grid-template-columns:1fr 1fr}.fbar input{grid-column:1/-1}}
 .wrap{overflow:auto;max-height:64vh;border:1px solid var(--line);border-radius:12px}
 table{width:100%;border-collapse:collapse;font-size:.78rem;white-space:nowrap}
 th{position:sticky;top:0;z-index:1;background:#14304f;color:#cfe2f6;text-align:left;padding:9px 11px;font-size:.64rem;text-transform:uppercase;letter-spacing:.08em}
@@ -77,7 +90,7 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
 <div class="brand">VTC LOG &middot; Gerenciamento Térmico</div>
 <div class="top">
   <h1>CGR - LH TRANSPORTES<small>Pendências de sincronismo dos dataloggers</small></h1>
-  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 18:17</b></div>
+  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 18:22</b></div>
 </div>
 <div class="kpis" id="kpis"></div>
 <div class="panel">

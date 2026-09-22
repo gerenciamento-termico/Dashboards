@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T14:23:21",
+  "gerado_em": "2026-09-22T14:28:10",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 475,
+    "pendentes_janela": 474,
     "cobranca_gru_janela": 60,
     "sem_embarque_efetiva": 762,
     "com_embarque_efetiva": 5594,
@@ -40,7 +40,7 @@
       "linhas": 1132
     },
     "top10_agentes_pendencias": {
-      "VTCLOG CNF - CONTAGEM": 95,
+      "VTCLOG CNF - CONTAGEM": 94,
       "THE - AERONEIVA EXPRESS": 64,
       "VTCLOG - GRU": 58,
       "NAT - CSM CARGO": 35,
@@ -52,7 +52,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 11
     },
     "top10_ufs_pendencias": {
-      "MG": 96,
+      "MG": 95,
       "PI": 65,
       "SP": 37,
       "RN": 36,
@@ -64,10 +64,10 @@
       "AC": 17
     },
     "latencia": {
-      "n_agente": 4360,
+      "n_agente": 4361,
       "n_so_gru": 117,
-      "n_sem_primeiro_sync": 825,
-      "media_horas": 0.88,
+      "n_sem_primeiro_sync": 824,
+      "media_horas": 0.92,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
     }
@@ -218,12 +218,12 @@
       "cobranca_gru": 5,
       "pedidos_pendentes": 18,
       "pct": 4.9,
-      "n_latencia": 499,
-      "media_horas": 0.93,
+      "n_latencia": 500,
+      "media_horas": 1.27,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 12,
-      "n_sem_primeiro_sync": 62
+      "n_sem_primeiro_sync": 61
     },
     {
       "dia_iso": "2026-09-11",
@@ -440,12 +440,12 @@
       "dia_full": "22/09/2026",
       "pedidos": 39,
       "loggers": 223,
-      "sincronizados": 115,
-      "pendentes": 106,
+      "sincronizados": 116,
+      "pendentes": 105,
       "sem_embarque": 126,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 23,
-      "pct": 47.5,
+      "pedidos_pendentes": 22,
+      "pct": 47.1,
       "n_latencia": 98,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

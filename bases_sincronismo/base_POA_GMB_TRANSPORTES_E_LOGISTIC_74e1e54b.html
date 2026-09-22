@@ -1,0 +1,63 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pendências de Sincronismo — POA - GMB TRANSPORTES E LOGISTICA ME</title>
+<style>
+:root{--bg:#0d1f33;--panel:rgba(23,51,80,.72);--line:rgba(140,180,220,.22);--txt:#eaf2fb;--soft:#a9c1da;--pend:#fda4af}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:radial-gradient(1000px 460px at 15% -10%,rgba(90,150,230,.20) 0%,transparent 60%),var(--bg);color:var(--txt);font-family:'Segoe UI',system-ui,sans-serif;padding:18px clamp(12px,3vw,32px) 34px;-webkit-font-smoothing:antialiased}
+.top{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap;margin-bottom:14px}
+h1{font-size:clamp(1rem,2.4vw,1.35rem);font-weight:800;letter-spacing:.01em}
+h1 span{color:#67a5e8}
+.stamp{font-size:.74rem;color:var(--soft);text-align:right;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:8px 12px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:14px}
+.kpi{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi .lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--soft)}
+.kpi .val{font-size:1.7rem;font-weight:800;margin-top:2px}
+.kpi.warn .val{color:#fbbf24}.kpi.bad .val{color:var(--pend)}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.panel h2{font-size:.9rem;font-weight:800;margin-bottom:10px}
+.panel h2 small{color:var(--soft);font-weight:600}
+.dl{margin-bottom:10px}
+.dl button{background:linear-gradient(135deg,#2f6fdb,#3d8bfd);color:#fff;border:1px solid rgba(157,197,254,.5);border-radius:9px;padding:7px 14px;font-weight:600;font-size:.78rem;cursor:pointer;font-family:inherit}
+.wrap{overflow:auto;max-height:64vh;border:1px solid var(--line);border-radius:10px}
+table{width:100%;border-collapse:collapse;font-size:.78rem;white-space:nowrap}
+th{position:sticky;top:0;background:#173350;color:#cfe2f6;text-align:left;padding:8px 10px;font-size:.68rem;text-transform:uppercase;letter-spacing:.06em}
+td{padding:7px 10px;border-top:1px solid rgba(140,180,220,.12)}
+td.num{text-align:right}
+.pill{display:inline-block;background:rgba(251,113,133,.16);border:1px solid rgba(251,113,133,.45);color:var(--pend);border-radius:999px;padding:2px 10px;font-weight:700;font-size:.72rem}
+.ok-big{padding:26px;text-align:center;color:#86efac;font-weight:700}
+.obs{color:var(--soft);font-size:.74rem;margin-top:10px;line-height:1.5}
+footer{color:var(--soft);font-size:.7rem;margin-top:16px;text-align:center}
+</style></head><body>
+<div class="top">
+  <h1>PENDÊNCIAS DE SINCRONISMO <span>&middot;</span> POA - GMB TRANSPORTES E LOGISTICA ME</h1>
+  <div class="stamp"><strong>Atualizado em:</strong> 22/09/2026 17:24<br>Atualização automática a cada ciclo</div>
+</div>
+<div class="kpis" id="kpis"></div>
+<div class="panel">
+<h2>Loggers pendentes de sincronismo <small id="cnt"></small></h2>
+<div class="dl"><button type="button" onclick="baixar()">&#8595; CSV</button></div>
+<div class="wrap"><table><thead><tr>
+<th>#</th><th>Dia</th><th>Pedido</th><th>Romaneio</th><th>Logger</th><th>Tipo</th><th>UF</th><th>Cliente</th><th>Data de entrega</th><th>Último sync</th><th class="num">Dias sem sync</th><th>Situação</th>
+</tr></thead><tbody id="tb"></tbody></table></div>
+<p class="obs">Pendência = entrega lançada no aplicativo sem sincronismo do datalogger depois do horário lançado. Sequência correta: <b>chegou no cliente &rarr; lançou no app &rarr; sincronizou</b>, ainda no cliente. Sincronizou agora? A pendência sai sozinha na próxima atualização.</p>
+</div>
+<footer>VTC LOG &middot; Gerenciamento Térmico &middot; página exclusiva desta base</footer>
+<script>
+const ROWS=[{"d": "2026-09-18", "p": "568488", "ro": "8681", "l": "0741700081", "t": "ARES", "uf": "RS", "ag": "POA - GMB TRANSPORTES E LOGISTICA ME", "cli": "MINISTÉRIO DA SAUDE", "mo": "MultiModal", "e": "18/09/2026 15:41", "emb": "18/09/2026 15:41", "ch": "", "s": "18/09/2026 09:15", "t0": "18/09/2026 15:41", "fs": "", "th": NaN, "lk": "P", "saiu": "S", "st": "P", "cob": "AGENTE", "mot": "", "ds": 4}, {"d": "2026-09-18", "p": "568656", "ro": "8681", "l": "A3139", "t": "ARES", "uf": "RS", "ag": "POA - GMB TRANSPORTES E LOGISTICA ME", "cli": "MINISTÉRIO DA SAUDE", "mo": "MultiModal", "e": "18/09/2026 14:00", "emb": "18/09/2026 14:00", "ch": "", "s": "18/09/2026 09:15", "t0": "18/09/2026 14:00", "fs": "", "th": NaN, "lk": "P", "saiu": "S", "st": "P", "cob": "AGENTE", "mot": "", "ds": 4}, {"d": "2026-09-18", "p": "568775", "ro": "8683", "l": "A1391", "t": "ARES", "uf": "RS", "ag": "POA - GMB TRANSPORTES E LOGISTICA ME", "cli": "MINISTÉRIO DA SAUDE", "mo": "MultiModal", "e": "18/09/2026 10:10", "emb": "18/09/2026 10:10", "ch": "", "s": "17/09/2026 10:04", "t0": "18/09/2026 10:10", "fs": "", "th": NaN, "lk": "P", "saiu": "S", "st": "P", "cob": "AGENTE", "mot": "", "ds": 4}, {"d": "2026-09-18", "p": "568783", "ro": "8681", "l": "A6750", "t": "ARES", "uf": "RS", "ag": "POA - GMB TRANSPORTES E LOGISTICA ME", "cli": "MINISTÉRIO DA SAUDE", "mo": "MultiModal", "e": "18/09/2026 12:00", "emb": "18/09/2026 12:00", "ch": "", "s": "18/09/2026 09:15", "t0": "18/09/2026 12:00", "fs": "", "th": NaN, "lk": "P", "saiu": "S", "st": "P", "cob": "AGENTE", "mot": "", "ds": 4}, {"d": "2026-09-22", "p": "569068", "ro": "8753", "l": "A4226", "t": "ARES", "uf": "RS", "ag": "POA - GMB TRANSPORTES E LOGISTICA ME", "cli": "MINISTÉRIO DA SAUDE", "mo": "MultiModal", "e": "22/09/2026 14:41", "emb": "22/09/2026 14:41", "ch": "", "s": "21/09/2026 16:52", "t0": "22/09/2026 14:41", "fs": "", "th": NaN, "lk": "P", "saiu": "S", "st": "P", "cob": "AGENTE", "mot": "", "ds": 0}];
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function diaBR(iso){return iso?iso.slice(8,10)+'/'+iso.slice(5,7)+'/'+iso.slice(0,4):''}
+function fmtInt(n){return Number(n||0).toLocaleString('pt-BR')}
+const peds=new Set(ROWS.map(r=>r.p));const dias=new Set(ROWS.map(r=>r.d));
+const maisAntigo=ROWS.length?ROWS.map(r=>r.d).sort()[0]:null;
+document.getElementById('kpis').innerHTML=
+ '<div class="kpi bad"><div class="lbl">Loggers pendentes</div><div class="val">'+fmtInt(ROWS.length)+'</div></div>'
++'<div class="kpi warn"><div class="lbl">Pedidos afetados</div><div class="val">'+fmtInt(peds.size)+'</div></div>'
++'<div class="kpi"><div class="lbl">Dias com pendência</div><div class="val">'+fmtInt(dias.size)+'</div></div>'
++'<div class="kpi"><div class="lbl">Pendência mais antiga</div><div class="val" style="font-size:1.15rem">'+(maisAntigo?diaBR(maisAntigo):'—')+'</div></div>';
+document.getElementById('cnt').textContent='('+fmtInt(ROWS.length)+')';
+document.getElementById('tb').innerHTML=ROWS.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+diaBR(r.d)+'</td><td>'+esc(r.p)+'</td><td>'+esc(r.ro||'')+'</td><td>'+esc(r.l)+'</td><td>'+esc(r.t)+'</td><td>'+esc(r.uf)+'</td><td title="'+esc(r.cli)+'">'+esc(r.cli)+'</td><td>'+esc(r.emb||'')+'</td><td>'+(r.s?esc(r.s):'nunca')+'</td><td class="num">'+fmtInt(r.ds)+'</td><td><span class="pill">pendente</span></td></tr>').join('')||'<tr><td colspan="12" class="ok-big">Sem pendências de sincronismo nesta base. Bom trabalho!</td></tr>';
+function csvEsc(v){const s=String(v==null?'':v);return /[;"]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
+function baixar(){const h=['#','Dia','Pedido','Romaneio','Logger','Tipo','UF','Cliente','Data de entrega','Ultimo sync','Dias sem sync'];const m=[h].concat(ROWS.map((r,i)=>[i+1,diaBR(r.d),r.p,r.ro||'',r.l,r.t,r.uf,r.cli,r.emb||'',r.s||'nunca',r.ds]));const nl=String.fromCharCode(13,10);const blob=new Blob([String.fromCharCode(65279)+m.map(x=>x.map(csvEsc).join(';')).join(nl)],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pendencias_sincronismo_base.csv';a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href)},3000)}
+</script></body></html>

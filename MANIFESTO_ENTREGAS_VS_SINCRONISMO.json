@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T17:03:58",
+  "gerado_em": "2026-09-22T17:24:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,54 +19,54 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6536,
-    "pedidos_janela": 1058,
-    "loggers_ares_janela": 6149,
-    "loggers_ares_antes_dedup": 6449,
+    "pares_janela": 6601,
+    "pedidos_janela": 1063,
+    "loggers_ares_janela": 6213,
+    "loggers_ares_antes_dedup": 6513,
     "dedup_dia_logger": 74,
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 450,
+    "pendentes_janela": 465,
     "cobranca_gru_janela": 48,
-    "sem_embarque_efetiva": 715,
-    "com_embarque_efetiva": 5734,
-    "loggers_sem_lastsync": 79,
-    "nao_avaliados": 715,
-    "pedidos_com_agente": 6535,
+    "sem_embarque_efetiva": 755,
+    "com_embarque_efetiva": 5758,
+    "loggers_sem_lastsync": 85,
+    "nao_avaliados": 755,
+    "pedidos_com_agente": 6600,
     "dtbtransporte": {
-      "consultados": 1058,
-      "mapeados": 1057,
-      "linhas": 1158
+      "consultados": 1063,
+      "mapeados": 1062,
+      "linhas": 1165
     },
     "top10_agentes_pendencias": {
       "VTCLOG CNF - CONTAGEM": 98,
       "THE - AERONEIVA EXPRESS": 65,
-      "VTCLOG - GRU": 62,
+      "VTCLOG - GRU": 58,
       "NAT - CSM CARGO": 35,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
       "PVH - RODOTEC": 25,
+      "VTCLOG - REC": 22,
       "RBR - RODOTEC": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 16,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 12,
-      "BEL - MH FROTA TRANSPORTE": 10
+      "SLZ - REIS CAVALCANTE EXPRESSO": 12
     },
     "top10_ufs_pendencias": {
       "MG": 99,
       "PI": 66,
-      "SP": 40,
+      "SP": 36,
       "RN": 36,
       "TO": 29,
       "RO": 25,
+      "PE": 22,
       "SC": 19,
       "PA": 18,
-      "AC": 17,
-      "PR": 14
+      "AC": 17
     },
     "latencia": {
-      "n_agente": 4502,
-      "n_so_gru": 137,
-      "n_sem_primeiro_sync": 802,
+      "n_agente": 4510,
+      "n_so_gru": 138,
+      "n_sem_primeiro_sync": 817,
       "media_horas": 0.93,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -89,8 +89,8 @@
       "media_horas": 4.39,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 18,
-      "n_sem_primeiro_sync": 20
+      "n_sync_so_gru": 19,
+      "n_sem_primeiro_sync": 19
     },
     {
       "dia_iso": "2026-09-04",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-22",
       "dia": "22/09",
       "dia_full": "22/09/2026",
-      "pedidos": 64,
-      "loggers": 362,
-      "sincronizados": 277,
-      "pendentes": 83,
-      "sem_embarque": 99,
+      "pedidos": 69,
+      "loggers": 386,
+      "sincronizados": 286,
+      "pendentes": 98,
+      "sem_embarque": 139,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 32,
-      "pct": 22.9,
-      "n_latencia": 231,
+      "pedidos_pendentes": 28,
+      "pct": 25.4,
+      "n_latencia": 239,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 131
+      "n_sem_primeiro_sync": 147
     }
   ],
   "erros_validacao": {},

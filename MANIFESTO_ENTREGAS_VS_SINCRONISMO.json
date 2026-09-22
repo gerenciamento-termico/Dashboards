@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T11:28:05",
+  "gerado_em": "2026-09-22T11:29:36",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 378,
+    "pendentes_janela": 376,
     "cobranca_gru_janela": 74,
     "sem_embarque_efetiva": 645,
     "com_embarque_efetiva": 5420,
-    "loggers_sem_lastsync": 76,
+    "loggers_sem_lastsync": 75,
     "nao_avaliados": 645,
     "pedidos_com_agente": 6149,
     "dtbtransporte": {
@@ -47,7 +47,7 @@
       "PVH - RODOTEC": 20,
       "RBR - RODOTEC": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 16,
-      "FOR - NT TRANSPORTE LTDA": 13,
+      "FOR - NT TRANSPORTE LTDA": 11,
       "SLZ - REIS CAVALCANTE EXPRESSO": 11,
       "NAT - CSM CARGO": 10
     },
@@ -61,12 +61,12 @@
       "PA": 18,
       "AC": 17,
       "PR": 15,
-      "CE": 14
+      "CE": 12
     },
     "latencia": {
-      "n_agente": 4277,
+      "n_agente": 4278,
       "n_so_gru": 107,
-      "n_sem_primeiro_sync": 746,
+      "n_sem_primeiro_sync": 745,
       "media_horas": 0.82,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -421,18 +421,18 @@
       "dia_full": "21/09/2026",
       "pedidos": 64,
       "loggers": 360,
-      "sincronizados": 271,
-      "pendentes": 84,
+      "sincronizados": 273,
+      "pendentes": 82,
       "sem_embarque": 116,
       "cobranca_gru": 5,
       "pedidos_pendentes": 24,
-      "pct": 23.3,
-      "n_latencia": 255,
+      "pct": 22.8,
+      "n_latencia": 256,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 105
+      "n_sem_primeiro_sync": 104
     },
     {
       "dia_iso": "2026-09-22",

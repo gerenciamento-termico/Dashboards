@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T16:53:39",
+  "gerado_em": "2026-09-22T16:58:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 451,
+    "pendentes_janela": 448,
     "cobranca_gru_janela": 55,
     "sem_embarque_efetiva": 713,
     "com_embarque_efetiva": 5717,
@@ -61,12 +61,12 @@
       "SC": 19,
       "PA": 18,
       "AC": 17,
-      "PR": 15
+      "PR": 14
     },
     "latencia": {
-      "n_agente": 4487,
+      "n_agente": 4490,
       "n_so_gru": 131,
-      "n_sem_primeiro_sync": 806,
+      "n_sem_primeiro_sync": 803,
       "media_horas": 0.94,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -364,18 +364,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 79,
       "loggers": 454,
-      "sincronizados": 354,
-      "pendentes": 90,
+      "sincronizados": 355,
+      "pendentes": 89,
       "sem_embarque": 105,
       "cobranca_gru": 10,
-      "pedidos_pendentes": 29,
-      "pct": 19.8,
-      "n_latencia": 323,
+      "pedidos_pendentes": 28,
+      "pct": 19.6,
+      "n_latencia": 324,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 130
+      "n_sem_primeiro_sync": 129
     },
     {
       "dia_iso": "2026-09-19",
@@ -440,18 +440,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 62,
       "loggers": 345,
-      "sincronizados": 260,
-      "pendentes": 83,
+      "sincronizados": 262,
+      "pendentes": 81,
       "sem_embarque": 97,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 32,
-      "pct": 24.1,
-      "n_latencia": 218,
+      "pedidos_pendentes": 30,
+      "pct": 23.5,
+      "n_latencia": 220,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 127
+      "n_sem_primeiro_sync": 125
     }
   ],
   "erros_validacao": {},

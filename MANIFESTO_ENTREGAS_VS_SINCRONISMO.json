@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T17:34:20",
+  "gerado_em": "2026-09-22T17:39:39",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 467,
+    "pendentes_janela": 452,
     "cobranca_gru_janela": 48,
     "sem_embarque_efetiva": 755,
     "com_embarque_efetiva": 5777,
@@ -40,7 +40,7 @@
       "linhas": 1167
     },
     "top10_agentes_pendencias": {
-      "VTCLOG CNF - CONTAGEM": 98,
+      "VTCLOG CNF - CONTAGEM": 83,
       "THE - AERONEIVA EXPRESS": 65,
       "VTCLOG - GRU": 59,
       "NAT - CSM CARGO": 35,
@@ -52,7 +52,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 12
     },
     "top10_ufs_pendencias": {
-      "MG": 99,
+      "MG": 84,
       "PI": 66,
       "SP": 37,
       "RN": 36,
@@ -64,9 +64,9 @@
       "AC": 17
     },
     "latencia": {
-      "n_agente": 4510,
+      "n_agente": 4528,
       "n_so_gru": 138,
-      "n_sem_primeiro_sync": 836,
+      "n_sem_primeiro_sync": 818,
       "media_horas": 0.93,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "21/09/2026",
       "pedidos": 66,
       "loggers": 350,
-      "sincronizados": 267,
-      "pendentes": 81,
+      "sincronizados": 282,
+      "pendentes": 66,
       "sem_embarque": 94,
       "cobranca_gru": 2,
       "pedidos_pendentes": 24,
-      "pct": 23.1,
-      "n_latencia": 253,
+      "pct": 18.9,
+      "n_latencia": 266,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 97
+      "n_sem_primeiro_sync": 84
     },
     {
       "dia_iso": "2026-09-22",
@@ -446,12 +446,12 @@
       "cobranca_gru": 2,
       "pedidos_pendentes": 30,
       "pct": 24.7,
-      "n_latencia": 239,
+      "n_latencia": 244,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 166
+      "n_sem_primeiro_sync": 161
     }
   ],
   "erros_validacao": {},

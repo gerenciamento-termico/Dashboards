@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T09:48:12",
+  "gerado_em": "2026-09-22T10:02:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,30 +19,30 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6099,
-    "pedidos_janela": 990,
-    "loggers_ares_janela": 5725,
-    "loggers_ares_antes_dedup": 6015,
+    "pares_janela": 6100,
+    "pedidos_janela": 991,
+    "loggers_ares_janela": 5723,
+    "loggers_ares_antes_dedup": 6016,
     "dedup_dia_logger": 68,
-    "ocultos_operacao": 222,
-    "ocultos_lista": 223,
+    "ocultos_operacao": 225,
+    "ocultos_lista": 226,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 393,
-    "cobranca_gru_janela": 83,
-    "sem_embarque_efetiva": 663,
-    "com_embarque_efetiva": 5352,
+    "pendentes_janela": 391,
+    "cobranca_gru_janela": 79,
+    "sem_embarque_efetiva": 638,
+    "com_embarque_efetiva": 5378,
     "loggers_sem_lastsync": 96,
-    "nao_avaliados": 663,
-    "pedidos_com_agente": 6098,
+    "nao_avaliados": 638,
+    "pedidos_com_agente": 6099,
     "dtbtransporte": {
-      "consultados": 990,
-      "mapeados": 989,
-      "linhas": 1085
+      "consultados": 991,
+      "mapeados": 990,
+      "linhas": 1086
     },
     "top10_agentes_pendencias": {
       "VTCLOG CNF - CONTAGEM": 94,
       "VTCLOG - GRU": 53,
-      "THE - AERONEIVA EXPRESS": 39,
+      "THE - AERONEIVA EXPRESS": 40,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
       "FOR - NT TRANSPORTE LTDA": 27,
       "PVH - RODOTEC": 19,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "MG": 96,
-      "PI": 40,
+      "PI": 41,
       "SP": 30,
       "TO": 29,
       "CE": 28,
@@ -64,10 +64,10 @@
       "PR": 15
     },
     "latencia": {
-      "n_agente": 4211,
+      "n_agente": 4235,
       "n_so_gru": 104,
-      "n_sem_primeiro_sync": 754,
-      "media_horas": 0.67,
+      "n_sem_primeiro_sync": 753,
+      "media_horas": 0.7,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
     }
@@ -98,18 +98,18 @@
       "dia_full": "04/09/2026",
       "pedidos": 80,
       "loggers": 469,
-      "sincronizados": 433,
+      "sincronizados": 435,
       "pendentes": 32,
       "sem_embarque": 77,
-      "cobranca_gru": 4,
+      "cobranca_gru": 2,
       "pedidos_pendentes": 14,
       "pct": 6.8,
-      "n_latencia": 387,
+      "n_latencia": 388,
       "media_horas": 0.99,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 14,
-      "n_sem_primeiro_sync": 68
+      "n_sem_primeiro_sync": 67
     },
     {
       "dia_iso": "2026-09-05",
@@ -218,12 +218,12 @@
       "cobranca_gru": 7,
       "pedidos_pendentes": 18,
       "pct": 4.9,
-      "n_latencia": 497,
-      "media_horas": 0.29,
+      "n_latencia": 498,
+      "media_horas": 0.61,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 12,
-      "n_sem_primeiro_sync": 64
+      "n_sem_primeiro_sync": 63
     },
     {
       "dia_iso": "2026-09-11",
@@ -231,10 +231,10 @@
       "dia_full": "11/09/2026",
       "pedidos": 113,
       "loggers": 496,
-      "sincronizados": 464,
+      "sincronizados": 465,
       "pendentes": 22,
       "sem_embarque": 20,
-      "cobranca_gru": 10,
+      "cobranca_gru": 9,
       "pedidos_pendentes": 20,
       "pct": 4.4,
       "n_latencia": 445,
@@ -288,18 +288,18 @@
       "dia_full": "14/09/2026",
       "pedidos": 81,
       "loggers": 446,
-      "sincronizados": 407,
+      "sincronizados": 408,
       "pendentes": 24,
       "sem_embarque": 0,
-      "cobranca_gru": 15,
+      "cobranca_gru": 14,
       "pedidos_pendentes": 17,
       "pct": 5.4,
-      "n_latencia": 365,
+      "n_latencia": 366,
       "media_horas": 0.32,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 2,
-      "n_sem_primeiro_sync": 79
+      "n_sem_primeiro_sync": 78
     },
     {
       "dia_iso": "2026-09-15",
@@ -344,19 +344,19 @@
       "dia": "17/09",
       "dia_full": "17/09/2026",
       "pedidos": 120,
-      "loggers": 437,
+      "loggers": 434,
       "sincronizados": 385,
-      "pendentes": 45,
-      "sem_embarque": 74,
+      "pendentes": 42,
+      "sem_embarque": 75,
       "cobranca_gru": 7,
-      "pedidos_pendentes": 29,
-      "pct": 10.3,
+      "pedidos_pendentes": 28,
+      "pct": 9.7,
       "n_latencia": 353,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 83
+      "n_sem_primeiro_sync": 80
     },
     {
       "dia_iso": "2026-09-18",
@@ -419,20 +419,20 @@
       "dia_iso": "2026-09-21",
       "dia": "21/09",
       "dia_full": "21/09/2026",
-      "pedidos": 62,
-      "loggers": 334,
-      "sincronizados": 231,
-      "pendentes": 97,
-      "sem_embarque": 141,
+      "pedidos": 64,
+      "loggers": 360,
+      "sincronizados": 256,
+      "pendentes": 98,
+      "sem_embarque": 115,
       "cobranca_gru": 6,
-      "pedidos_pendentes": 23,
-      "pct": 29.0,
-      "n_latencia": 218,
+      "pedidos_pendentes": 24,
+      "pct": 27.2,
+      "n_latencia": 239,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 116
+      "n_sem_primeiro_sync": 121
     },
     {
       "dia_iso": "2026-09-22",
@@ -1785,8 +1785,26 @@
       "motivo": "lançamento errado no aplicativo de entregas"
     },
     {
+      "pedido": "567418",
+      "logger": "A5413",
+      "dia": "2026-09-17",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
       "pedido": "566294",
       "logger": "A5419",
+      "dia": "2026-09-17",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567418",
+      "logger": "A6615",
+      "dia": "2026-09-17",
+      "motivo": "lançamento errado no aplicativo de entregas"
+    },
+    {
+      "pedido": "567418",
+      "logger": "A9185",
       "dia": "2026-09-17",
       "motivo": "lançamento errado no aplicativo de entregas"
     },

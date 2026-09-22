@@ -46,7 +46,7 @@ h1 small{display:block;font-size:.56em;font-weight:600;color:var(--soft);margin-
 .callout{display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,rgba(61,139,253,.16),rgba(103,232,249,.07));border:1px solid var(--line2);border-left:4px solid var(--blue);border-radius:14px;padding:14px 16px;margin-bottom:16px;backdrop-filter:blur(8px);box-shadow:0 10px 26px rgba(3,10,20,.3)}
 .callout .ic{font-size:1.2rem;line-height:1.2;flex-shrink:0}
 .callout p{font-size:clamp(.82rem,2.6vw,.92rem);line-height:1.6;color:#dcE9f7}
-.callout b{color:#fff;font-weight:800;background:rgba(61,139,253,.22);border-radius:6px;padding:1px 6px;white-space:nowrap}
+.callout b{color:#fff;font-weight:900;white-space:nowrap;border-bottom:2px solid var(--cyan);padding-bottom:1px}
 .callout .seq{color:#cfe2f6;font-weight:600}
 .fbar{display:grid;grid-template-columns:minmax(180px,2fr) minmax(140px,1fr) minmax(150px,1fr) auto;gap:8px;margin-bottom:12px}
 .fbar input,.fbar select{width:100%;background:rgba(8,20,36,.55);border:1px solid var(--line2);border-radius:10px;color:var(--txt);font-family:inherit;font-size:.8rem;padding:9px 12px;outline:none;transition:border-color .15s}
@@ -65,8 +65,9 @@ td.num{text-align:right}
 .pill{display:inline-block;background:rgba(251,113,133,.14);border:1px solid rgba(251,113,133,.45);color:var(--pend);border-radius:999px;padding:2px 11px;font-weight:700;font-size:.7rem}
 .mono{font-weight:800;letter-spacing:.02em}
 .ok-big{padding:34px 16px;text-align:center;color:#86efac;font-weight:700;font-size:.95rem}
-.cards{display:none;flex-direction:column;gap:10px}
-.card{background:var(--panel2);border:1px solid var(--line);border-radius:14px;padding:13px 14px;box-shadow:0 8px 20px rgba(3,10,20,.3)}
+.cards{display:none;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.card{background:var(--panel2);border:1px solid var(--line);border-radius:16px;padding:14px 15px;box-shadow:0 8px 20px rgba(3,10,20,.3);position:relative;overflow:hidden}
+.card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,#f43f5e,#fb7185);opacity:.7}
 .card .hd{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:11px;padding-bottom:9px;border-bottom:1px solid var(--line)}
 .card .lg{font-size:1.05rem;font-weight:900;letter-spacing:.02em}
 .card .lg small{display:block;font-size:.6rem;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.1em;margin-bottom:2px}
@@ -81,7 +82,7 @@ td.num{text-align:right}
 footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;letter-spacing:.04em}
 @media(max-width:860px){
  .wrap{display:none}
- .cards{display:flex}
+ .cards{display:grid}
  .kpis{grid-template-columns:repeat(2,1fr)}
  .top{align-items:flex-start}
  .stamp{font-size:.66rem;padding:7px 12px}
@@ -90,19 +91,29 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
 <div class="brand">VTC LOG &middot; Gerenciamento Térmico</div>
 <div class="top">
   <h1>PVH - RODOTEC<small>Pendências de sincronismo dos dataloggers</small></h1>
-  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 18:22</b></div>
+  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 18:32</b></div>
 </div>
 <div class="kpis" id="kpis"></div>
+<div class="callout"><span class="ic">&#9888;&#65039;</span><p>Pendência = ausência de sincronismo ou entrega lançada no aplicativo sem sincronismo do datalogger depois do horário lançado. Sequência correta: <span class="seq">chegou no cliente &rarr; lançou no <b>aplicativo de entregas</b> &rarr; sincronizou</span>, ainda no cliente. Sincronizou agora? A pendência sai sozinha na próxima atualização.</p></div>
 <div class="panel">
 <div class="panel-hd">
   <h2>Loggers pendentes <span class="badge" id="cnt"></span></h2>
   <div class="dl"><button type="button" onclick="baixar()">&#8595;&nbsp;Baixar CSV</button></div>
 </div>
+<div class="fbar">
+  <input id="f-busca" placeholder="&#128269; Buscar pedido, logger ou romaneio..." oninput="apply()">
+  <select id="f-pedido" onchange="apply()"><option value="">Todos os pedidos</option></select>
+  <select id="f-ord" onchange="apply()">
+    <option value="rec">Mais recentes</option>
+    <option value="ant">Mais antigos</option>
+    <option value="dias">Mais dias sem sync</option>
+  </select>
+  <button type="button" class="limpar" onclick="limpar()">Limpar</button>
+</div>
 <div class="wrap"><table><thead><tr>
 <th>#</th><th>Dia</th><th>Pedido</th><th>Romaneio</th><th>Logger</th><th>Tipo</th><th>UF</th><th>Cliente</th><th>Data de entrega</th><th>Último sync</th><th class="num">Dias sem sync</th><th>Situação</th>
 </tr></thead><tbody id="tb"></tbody></table></div>
 <div class="cards" id="cards"></div>
-<p class="obs">Pendência = entrega lançada no aplicativo sem sincronismo do datalogger depois do horário lançado. Sequência correta: <b>chegou no cliente &rarr; lançou no app &rarr; sincronizou</b>, ainda no cliente. Sincronizou agora? A pendência sai sozinha na próxima atualização.</p>
 </div>
 <footer>VTC LOG &middot; Gerenciamento Térmico &middot; página exclusiva desta base &middot; atualização automática</footer>
 <script>
@@ -117,9 +128,29 @@ document.getElementById('kpis').innerHTML=
 +'<div class="kpi warn"><div class="lbl">Pedidos afetados</div><div class="val">'+fmtInt(peds.size)+'</div></div>'
 +'<div class="kpi"><div class="lbl">Dias com pendência</div><div class="val">'+fmtInt(dias.size)+'</div></div>'
 +'<div class="kpi"><div class="lbl">Mais antiga</div><div class="val" style="font-size:clamp(1rem,3.4vw,1.25rem)">'+(maisAntigo?diaBR(maisAntigo):'—')+'</div></div>';
-document.getElementById('cnt').textContent=fmtInt(ROWS.length);
-document.getElementById('tb').innerHTML=ROWS.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+diaBR(r.d)+'</td><td>'+esc(r.p)+'</td><td>'+esc(r.ro||'')+'</td><td class="mono">'+esc(r.l)+'</td><td>'+esc(r.t)+'</td><td>'+esc(r.uf)+'</td><td title="'+esc(r.cli)+'">'+esc(r.cli)+'</td><td>'+esc(r.emb||'')+'</td><td>'+(r.s?esc(r.s):'nunca')+'</td><td class="num">'+fmtInt(r.ds)+'</td><td><span class="pill">pendente</span></td></tr>').join('')||'<tr><td colspan="12" class="ok-big">Sem pendências de sincronismo nesta base. Bom trabalho! &#10003;</td></tr>';
-document.getElementById('cards').innerHTML=ROWS.map(function(r,i){return '<div class="card">'
+const selPed=document.getElementById('f-pedido');
+[...new Set(ROWS.map(r=>String(r.p)))].sort().forEach(function(p){const o=document.createElement('option');o.value=p;o.textContent=p;selPed.appendChild(o)});
+let VIEW=ROWS.slice();
+function apply(){
+ const b=document.getElementById('f-busca').value.trim().toUpperCase();
+ const ped=selPed.value;
+ const ord=document.getElementById('f-ord').value;
+ VIEW=ROWS.filter(function(r){
+  if(ped&&String(r.p)!==ped)return false;
+  if(b&&!(String(r.p).toUpperCase().includes(b)||String(r.l||'').toUpperCase().includes(b)||String(r.ro||'').toUpperCase().includes(b)))return false;
+  return true});
+ VIEW.sort(function(a,b2){
+  if(ord==='dias')return Number(b2.ds||0)-Number(a.ds||0)||String(a.l).localeCompare(String(b2.l));
+  const c=String(a.d||'').localeCompare(String(b2.d||''));
+  return (ord==='ant'?c:-c)||String(a.l).localeCompare(String(b2.l))});
+ render();
+}
+function limpar(){document.getElementById('f-busca').value='';selPed.value='';document.getElementById('f-ord').value='rec';apply()}
+function render(){
+ const filtrado=VIEW.length!==ROWS.length;
+ document.getElementById('cnt').textContent=filtrado?fmtInt(VIEW.length)+' de '+fmtInt(ROWS.length):fmtInt(ROWS.length);
+ document.getElementById('tb').innerHTML=VIEW.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+diaBR(r.d)+'</td><td>'+esc(r.p)+'</td><td>'+esc(r.ro||'')+'</td><td class="mono">'+esc(r.l)+'</td><td>'+esc(r.t)+'</td><td>'+esc(r.uf)+'</td><td title="'+esc(r.cli)+'">'+esc(r.cli)+'</td><td>'+esc(r.emb||'')+'</td><td>'+(r.s?esc(r.s):'nunca')+'</td><td class="num">'+fmtInt(r.ds)+'</td><td><span class="pill">pendente</span></td></tr>').join('')||'<tr><td colspan="12" class="ok-big">'+(ROWS.length?'Nenhum resultado para os filtros.':'Sem pendências de sincronismo nesta base. Bom trabalho! &#10003;')+'</td></tr>';
+ document.getElementById('cards').innerHTML=VIEW.map(function(r,i){return '<div class="card">'
  +'<div class="hd"><div class="lg"><small>Logger &middot; '+esc(r.t)+'</small>'+esc(r.l)+'</div><div class="dias">'+fmtInt(r.ds)+' dia(s)<br>sem sync</div></div>'
  +'<div class="gd">'
  +'<div class="f"><div class="k">Pedido</div><div class="v">'+esc(r.p)+'</div></div>'
@@ -129,7 +160,9 @@ document.getElementById('cards').innerHTML=ROWS.map(function(r,i){return '<div c
  +'<div class="f"><div class="k">Data de entrega</div><div class="v">'+esc(r.emb||'—')+'</div></div>'
  +'<div class="f"><div class="k">Último sync</div><div class="v">'+(r.s?esc(r.s):'nunca')+'</div></div>'
  +'<div class="f full"><div class="k">Cliente</div><div class="v">'+esc(r.cli)+'</div></div>'
- +'</div></div>'}).join('')||'<div class="ok-card">Sem pendências de sincronismo nesta base. Bom trabalho! &#10003;</div>';
+ +'</div></div>'}).join('')||'<div class="ok-card">'+(ROWS.length?'Nenhum resultado para os filtros.':'Sem pendências de sincronismo nesta base. Bom trabalho! &#10003;')+'</div>';
+}
 function csvEsc(v){const s=String(v==null?'':v);return /[;"]/.test(s)?'"'+s.replace(/"/g,'""')+'"':s}
-function baixar(){const h=['#','Dia','Pedido','Romaneio','Logger','Tipo','UF','Cliente','Data de entrega','Ultimo sync','Dias sem sync'];const m=[h].concat(ROWS.map((r,i)=>[i+1,diaBR(r.d),r.p,r.ro||'',r.l,r.t,r.uf,r.cli,r.emb||'',r.s||'nunca',r.ds]));const nl=String.fromCharCode(13,10);const blob=new Blob([String.fromCharCode(65279)+m.map(x=>x.map(csvEsc).join(';')).join(nl)],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pendencias_sincronismo_base.csv';a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href)},3000)}
+function baixar(){const h=['#','Dia','Pedido','Romaneio','Logger','Tipo','UF','Cliente','Data de entrega','Ultimo sync','Dias sem sync'];const m=[h].concat(VIEW.map((r,i)=>[i+1,diaBR(r.d),r.p,r.ro||'',r.l,r.t,r.uf,r.cli,r.emb||'',r.s||'nunca',r.ds]));const nl=String.fromCharCode(13,10);const blob=new Blob([String.fromCharCode(65279)+m.map(x=>x.map(csvEsc).join(';')).join(nl)],{type:'text/csv;charset=utf-8'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='pendencias_sincronismo_base.csv';a.style.display='none';document.body.appendChild(a);a.click();setTimeout(function(){document.body.removeChild(a);URL.revokeObjectURL(a.href)},3000)}
+apply();
 </script></body></html>

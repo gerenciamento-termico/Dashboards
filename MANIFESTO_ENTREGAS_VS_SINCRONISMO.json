@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-22T02:04:17",
+  "gerado_em": "2026-09-22T02:14:09",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,21 +19,21 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6031,
+    "pares_janela": 6052,
     "pedidos_janela": 985,
-    "loggers_ares_janela": 5654,
-    "loggers_ares_antes_dedup": 5945,
-    "dedup_dia_logger": 68,
-    "ocultos_operacao": 223,
+    "loggers_ares_janela": 5677,
+    "loggers_ares_antes_dedup": 5968,
+    "dedup_dia_logger": 69,
+    "ocultos_operacao": 222,
     "ocultos_lista": 223,
-    "ocultos_ausentes": 0,
+    "ocultos_ausentes": 1,
     "pendentes_janela": 416,
     "cobranca_gru_janela": 67,
-    "sem_embarque_efetiva": 596,
+    "sem_embarque_efetiva": 619,
     "com_embarque_efetiva": 5349,
-    "loggers_sem_lastsync": 71,
-    "nao_avaliados": 596,
-    "pedidos_com_agente": 6028,
+    "loggers_sem_lastsync": 82,
+    "nao_avaliados": 619,
+    "pedidos_com_agente": 6049,
     "dtbtransporte": {
       "consultados": 985,
       "mapeados": 984,
@@ -347,7 +347,7 @@
       "loggers": 437,
       "sincronizados": 385,
       "pendentes": 45,
-      "sem_embarque": 51,
+      "sem_embarque": 74,
       "cobranca_gru": 7,
       "pedidos_pendentes": 29,
       "pct": 10.3,
@@ -1715,12 +1715,6 @@
     {
       "pedido": "566294",
       "logger": "0741700537",
-      "dia": "2026-09-17",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566294",
-      "logger": "0741700647",
       "dia": "2026-09-17",
       "motivo": "lançamento errado no aplicativo de entregas"
     },

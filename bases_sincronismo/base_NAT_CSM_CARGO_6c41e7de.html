@@ -62,7 +62,7 @@ h1 small{display:block;font-size:.56em;font-weight:600;color:var(--soft);margin-
 .flow-ok{display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.5);color:#86efac;border-radius:999px;padding:8px 16px;font-size:.74rem;font-weight:800}
 .callout.mini .ic{font-size:1rem}
 .callout.mini p{font-size:clamp(.74rem,2.3vw,.84rem);color:#cfeee0}
-.fbar{display:grid;grid-template-columns:minmax(180px,2fr) minmax(140px,1fr) minmax(150px,1fr) auto;gap:8px;margin-bottom:12px}
+.fbar{display:grid;grid-template-columns:minmax(170px,1.8fr) minmax(115px,1fr) minmax(110px,1fr) minmax(90px,.8fr) minmax(130px,1fr) auto;gap:8px;margin-bottom:12px}
 .fbar input,.fbar select{width:100%;background:rgba(8,20,36,.55);border:1px solid var(--line2);border-radius:10px;color:var(--txt);font-family:inherit;font-size:.8rem;padding:9px 12px;outline:none;transition:border-color .15s}
 .fbar input:focus,.fbar select:focus{border-color:var(--blue)}
 .fbar input::placeholder{color:#7d99b8}
@@ -70,6 +70,8 @@ h1 small{display:block;font-size:.56em;font-weight:600;color:var(--soft);margin-
 .fbar .limpar{background:transparent;border:1px solid var(--line2);border-radius:10px;color:var(--soft);font-family:inherit;font-size:.78rem;font-weight:600;padding:9px 14px;cursor:pointer;transition:color .15s,border-color .15s}
 .fbar .limpar:hover{color:var(--txt);border-color:var(--blue)}
 @media(max-width:860px){.fbar{grid-template-columns:1fr 1fr}.fbar input{grid-column:1/-1}}
+th.dias{white-space:normal;max-width:64px;line-height:1.25}
+@media(max-width:1280px){table{font-size:.73rem}th{padding:8px 8px;font-size:.6rem}td{padding:7px 8px}}
 .wrap{overflow:auto;max-height:64vh;border:1px solid var(--line);border-radius:12px}
 table{width:100%;border-collapse:collapse;font-size:.78rem;white-space:nowrap}
 th{position:sticky;top:0;z-index:1;background:#14304f;color:#cfe2f6;text-align:left;padding:9px 11px;font-size:.64rem;text-transform:uppercase;letter-spacing:.08em}
@@ -105,7 +107,7 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
 <div class="brand">VTC LOG &middot; Gerenciamento Térmico</div>
 <div class="top">
   <h1>NAT - CSM CARGO<small>Pendências de sincronismo dos dataloggers</small></h1>
-  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 23:10</b></div>
+  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 23:15</b></div>
 </div>
 <div class="kpis" id="kpis"></div>
 <div class="callout"><span class="ic">&#9888;&#65039;</span><div class="tx">
@@ -132,6 +134,8 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
 <div class="fbar">
   <input id="f-busca" placeholder="&#128269; Buscar pedido, logger ou romaneio..." oninput="apply()">
   <select id="f-pedido" onchange="apply()"><option value="">Todos os pedidos</option></select>
+  <select id="f-rom" onchange="apply()"><option value="">Todos os romaneios</option></select>
+  <select id="f-uf" onchange="apply()"><option value="">Todas UF</option></select>
   <select id="f-ord" onchange="apply()">
     <option value="rec">Mais recentes</option>
     <option value="ant">Mais antigos</option>
@@ -140,7 +144,7 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
   <button type="button" class="limpar" onclick="limpar()">Limpar</button>
 </div>
 <div class="wrap"><table><thead><tr>
-<th>#</th><th>Dia</th><th>Pedido</th><th>Romaneio</th><th>Logger</th><th>Tipo</th><th>UF</th><th>Cliente</th><th>Data de entrega</th><th>Último sync</th><th class="num">Dias sem sync</th><th>Situação</th>
+<th>#</th><th>Dia</th><th>Pedido</th><th>Romaneio</th><th>Logger</th><th>Tipo</th><th>UF</th><th>Cliente</th><th>Data de entrega</th><th>Último sync</th><th class="num dias">Dias sem sync</th>
 </tr></thead><tbody id="tb"></tbody></table></div>
 <div class="cards" id="cards"></div>
 </div>
@@ -158,14 +162,22 @@ document.getElementById('kpis').innerHTML=
 +'<div class="kpi"><div class="lbl">Dias com pendência</div><div class="val">'+fmtInt(dias.size)+'</div></div>'
 +'<div class="kpi cy"><div class="lbl">Mais antiga</div><div class="val" style="font-size:clamp(1rem,3.4vw,1.25rem)">'+(maisAntigo?diaBR(maisAntigo):'—')+'</div></div>';
 const selPed=document.getElementById('f-pedido');
+const selRom=document.getElementById('f-rom');
+const selUf=document.getElementById('f-uf');
 [...new Set(ROWS.map(r=>String(r.p)))].sort().forEach(function(p){const o=document.createElement('option');o.value=p;o.textContent=p;selPed.appendChild(o)});
+[...new Set(ROWS.map(r=>String(r.ro||'')).filter(Boolean))].sort().forEach(function(v){const o=document.createElement('option');o.value=v;o.textContent=v;selRom.appendChild(o)});
+[...new Set(ROWS.map(r=>String(r.uf||'')).filter(Boolean))].sort().forEach(function(v){const o=document.createElement('option');o.value=v;o.textContent=v;selUf.appendChild(o)});
 let VIEW=ROWS.slice();
 function apply(){
  const b=document.getElementById('f-busca').value.trim().toUpperCase();
  const ped=selPed.value;
+ const rom=selRom.value;
+ const uf=selUf.value;
  const ord=document.getElementById('f-ord').value;
  VIEW=ROWS.filter(function(r){
   if(ped&&String(r.p)!==ped)return false;
+  if(rom&&String(r.ro||'')!==rom)return false;
+  if(uf&&String(r.uf||'')!==uf)return false;
   if(b&&!(String(r.p).toUpperCase().includes(b)||String(r.l||'').toUpperCase().includes(b)||String(r.ro||'').toUpperCase().includes(b)))return false;
   return true});
  VIEW.sort(function(a,b2){
@@ -174,11 +186,11 @@ function apply(){
   return (ord==='ant'?c:-c)||String(a.l).localeCompare(String(b2.l))});
  render();
 }
-function limpar(){document.getElementById('f-busca').value='';selPed.value='';document.getElementById('f-ord').value='rec';apply()}
+function limpar(){document.getElementById('f-busca').value='';selPed.value='';selRom.value='';selUf.value='';document.getElementById('f-ord').value='rec';apply()}
 function render(){
  const filtrado=VIEW.length!==ROWS.length;
  document.getElementById('cnt').textContent=filtrado?fmtInt(VIEW.length)+' de '+fmtInt(ROWS.length):fmtInt(ROWS.length);
- document.getElementById('tb').innerHTML=VIEW.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+diaBR(r.d)+'</td><td>'+esc(r.p)+'</td><td>'+esc(r.ro||'')+'</td><td class="mono">'+esc(r.l)+'</td><td>'+esc(r.t)+'</td><td>'+esc(r.uf)+'</td><td title="'+esc(r.cli)+'">'+esc(r.cli)+'</td><td>'+esc(r.emb||'')+'</td><td>'+(r.s?esc(r.s):'nunca')+'</td><td class="num">'+fmtInt(r.ds)+'</td><td><span class="pill">pendente</span></td></tr>').join('')||'<tr><td colspan="12" class="ok-big">'+(ROWS.length?'Nenhum resultado para os filtros.':'Sem pendências de sincronismo nesta base. Bom trabalho! &#10003;')+'</td></tr>';
+ document.getElementById('tb').innerHTML=VIEW.map((r,i)=>'<tr><td>'+(i+1)+'</td><td>'+diaBR(r.d)+'</td><td>'+esc(r.p)+'</td><td>'+esc(r.ro||'')+'</td><td class="mono">'+esc(r.l)+'</td><td>'+esc(r.t)+'</td><td>'+esc(r.uf)+'</td><td title="'+esc(r.cli)+'">'+esc(r.cli)+'</td><td>'+esc(r.emb||'')+'</td><td>'+(r.s?esc(r.s):'nunca')+'</td><td class="num">'+fmtInt(r.ds)+'</td></tr>').join('')||'<tr><td colspan="11" class="ok-big">'+(ROWS.length?'Nenhum resultado para os filtros.':'Sem pendências de sincronismo nesta base. Bom trabalho! &#10003;')+'</td></tr>';
  document.getElementById('cards').innerHTML=VIEW.map(function(r,i){return '<div class="card">'
  +'<div class="hd"><div class="lg"><small>Logger &middot; '+esc(r.t)+'</small>'+esc(r.l)+'</div><div class="dias">'+fmtInt(r.ds)+' dia(s)<br>sem sync</div></div>'
  +'<div class="gd">'

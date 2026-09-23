@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T17:00:22",
+  "gerado_em": "2026-09-23T17:05:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6897,
-    "pedidos_janela": 1079,
-    "loggers_ares_janela": 6465,
-    "loggers_ares_antes_dedup": 6770,
+    "pares_janela": 6914,
+    "pedidos_janela": 1082,
+    "loggers_ares_janela": 6482,
+    "loggers_ares_antes_dedup": 6787,
     "dedup_dia_logger": 79,
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
     "pendentes_janela": 520,
-    "cobranca_gru_janela": 58,
-    "sem_embarque_efetiva": 721,
+    "cobranca_gru_janela": 57,
+    "sem_embarque_efetiva": 738,
     "com_embarque_efetiva": 6049,
     "loggers_sem_lastsync": 85,
-    "nao_avaliados": 721,
-    "pedidos_com_agente": 6897,
+    "nao_avaliados": 738,
+    "pedidos_com_agente": 6914,
     "dtbtransporte": {
-      "consultados": 1079,
-      "mapeados": 1079,
-      "linhas": 1186
+      "consultados": 1082,
+      "mapeados": 1082,
+      "linhas": 1189
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 136,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 4729,
-      "n_so_gru": 134,
-      "n_sem_primeiro_sync": 888,
+      "n_so_gru": 135,
+      "n_sem_primeiro_sync": 887,
       "media_horas": 0.87,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -307,18 +307,18 @@
       "dia_full": "16/09/2026",
       "pedidos": 52,
       "loggers": 179,
-      "sincronizados": 172,
+      "sincronizados": 173,
       "pendentes": 6,
       "sem_embarque": 0,
-      "cobranca_gru": 1,
+      "cobranca_gru": 0,
       "pedidos_pendentes": 6,
       "pct": 3.4,
       "n_latencia": 158,
       "media_horas": 0.37,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 18
+      "n_sync_so_gru": 4,
+      "n_sem_primeiro_sync": 17
     },
     {
       "dia_iso": "2026-09-17",
@@ -404,7 +404,7 @@
       "loggers": 330,
       "sincronizados": 299,
       "pendentes": 26,
-      "sem_embarque": 74,
+      "sem_embarque": 89,
       "cobranca_gru": 5,
       "pedidos_pendentes": 16,
       "pct": 7.9,
@@ -423,7 +423,7 @@
       "loggers": 689,
       "sincronizados": 626,
       "pendentes": 55,
-      "sem_embarque": 61,
+      "sem_embarque": 63,
       "cobranca_gru": 8,
       "pedidos_pendentes": 28,
       "pct": 8.0,

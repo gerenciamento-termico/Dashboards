@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T14:34:27",
+  "gerado_em": "2026-09-23T14:40:07",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 507,
+    "pendentes_janela": 488,
     "cobranca_gru_janela": 56,
     "sem_embarque_efetiva": 664,
     "com_embarque_efetiva": 5899,
@@ -41,8 +41,8 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 141,
-      "VTCLOG - REC": 67,
       "VTCLOG CNF - CONTAGEM": 49,
+      "VTCLOG - REC": 48,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
       "PVH - RODOTEC": 27,
       "JPA - LIDER CARGAS": 24,
@@ -53,8 +53,8 @@
     },
     "top10_ufs_pendencias": {
       "SC": 96,
-      "PE": 67,
       "MG": 51,
+      "PE": 48,
       "SP": 37,
       "TO": 29,
       "RO": 27,
@@ -64,9 +64,9 @@
       "AC": 17
     },
     "latencia": {
-      "n_agente": 4589,
+      "n_agente": 4608,
       "n_so_gru": 132,
-      "n_sem_primeiro_sync": 882,
+      "n_sem_primeiro_sync": 863,
       "media_horas": 0.72,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -421,18 +421,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 101,
       "loggers": 688,
-      "sincronizados": 578,
-      "pendentes": 102,
+      "sincronizados": 597,
+      "pendentes": 83,
       "sem_embarque": 61,
       "cobranca_gru": 8,
       "pedidos_pendentes": 35,
-      "pct": 14.8,
-      "n_latencia": 508,
+      "pct": 12.1,
+      "n_latencia": 527,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 180
+      "n_sem_primeiro_sync": 161
     },
     {
       "dia_iso": "2026-09-23",

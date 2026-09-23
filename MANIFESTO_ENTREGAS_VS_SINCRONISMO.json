@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T14:58:29",
+  "gerado_em": "2026-09-23T15:05:07",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 509,
+    "pendentes_janela": 506,
     "cobranca_gru_janela": 56,
     "sem_embarque_efetiva": 643,
     "com_embarque_efetiva": 5924,
@@ -60,13 +60,13 @@
       "RO": 27,
       "SE": 26,
       "PB": 25,
-      "PR": 20,
-      "PA": 18
+      "PA": 18,
+      "AC": 17
     },
     "latencia": {
-      "n_agente": 4612,
+      "n_agente": 4615,
       "n_so_gru": 132,
-      "n_sem_primeiro_sync": 884,
+      "n_sem_primeiro_sync": 881,
       "media_horas": 0.72,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -345,18 +345,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 79,
       "loggers": 454,
-      "sincronizados": 364,
-      "pendentes": 80,
+      "sincronizados": 365,
+      "pendentes": 79,
       "sem_embarque": 80,
       "cobranca_gru": 10,
       "pedidos_pendentes": 28,
-      "pct": 17.6,
-      "n_latencia": 333,
+      "pct": 17.4,
+      "n_latencia": 334,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 120
+      "n_sem_primeiro_sync": 119
     },
     {
       "dia_iso": "2026-09-19",
@@ -421,18 +421,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 101,
       "loggers": 688,
-      "sincronizados": 597,
-      "pendentes": 83,
+      "sincronizados": 599,
+      "pendentes": 81,
       "sem_embarque": 61,
       "cobranca_gru": 8,
-      "pedidos_pendentes": 35,
-      "pct": 12.1,
-      "n_latencia": 527,
+      "pedidos_pendentes": 33,
+      "pct": 11.8,
+      "n_latencia": 529,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 161
+      "n_sem_primeiro_sync": 159
     },
     {
       "dia_iso": "2026-09-23",

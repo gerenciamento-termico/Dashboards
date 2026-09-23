@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T16:35:19",
+  "gerado_em": "2026-09-23T16:40:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 529,
+    "pendentes_janela": 527,
     "cobranca_gru_janela": 56,
     "sem_embarque_efetiva": 721,
     "com_embarque_efetiva": 6042,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 141,
-      "VTCLOG CNF - CONTAGEM": 47,
+      "VTCLOG CNF - CONTAGEM": 46,
       "FOR - NT TRANSPORTE LTDA": 40,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
       "VTCLOG - REC": 29,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "SC": 96,
-      "MG": 50,
+      "MG": 49,
       "CE": 41,
       "SP": 37,
       "TO": 29,
@@ -64,10 +64,10 @@
       "BA": 21
     },
     "latencia": {
-      "n_agente": 4709,
+      "n_agente": 4715,
       "n_so_gru": 134,
-      "n_sem_primeiro_sync": 903,
-      "media_horas": 0.88,
+      "n_sem_primeiro_sync": 897,
+      "media_horas": 0.87,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -421,18 +421,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 102,
       "loggers": 689,
-      "sincronizados": 622,
-      "pendentes": 59,
+      "sincronizados": 624,
+      "pendentes": 57,
       "sem_embarque": 61,
       "cobranca_gru": 8,
-      "pedidos_pendentes": 31,
-      "pct": 8.6,
-      "n_latencia": 550,
+      "pedidos_pendentes": 29,
+      "pct": 8.3,
+      "n_latencia": 556,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 139
+      "n_sem_primeiro_sync": 133
     },
     {
       "dia_iso": "2026-09-23",

@@ -50,7 +50,15 @@ h1 small{display:block;font-size:.56em;font-weight:600;color:var(--soft);margin-
 .callout b{color:#fff;font-weight:900;white-space:nowrap;border-bottom:2px solid var(--cyan);padding-bottom:1px}
 .callout .seq{color:#cfe2f6;font-weight:600}
 .callout .tx{display:flex;flex-direction:column;gap:9px;flex:1}
-.callout.mini{border-left-color:var(--ok);background:linear-gradient(135deg,rgba(52,211,153,.13),rgba(103,232,249,.05));padding:10px 14px;margin-top:-8px}
+.callout.mini{border-left-color:var(--ok);background:linear-gradient(135deg,rgba(52,211,153,.13),rgba(103,232,249,.05));padding:10px 14px;margin-top:0}
+.flow{background:var(--panel);border:1px solid var(--line2);border-radius:14px;padding:15px 14px 14px;margin:-6px 0 10px;text-align:center;backdrop-filter:blur(8px);box-shadow:0 10px 26px rgba(3,10,20,.3)}
+.flow-title{font-size:.62rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:#8fc0ff;margin-bottom:11px}
+.flow-steps{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px}
+.fstp{display:inline-flex;align-items:center;gap:8px;background:rgba(8,20,36,.62);border:1px solid var(--line2);border-radius:999px;padding:8px 14px;font-size:.76rem;font-weight:700;color:#eaf2fb;text-align:left}
+.fstp .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#2563c4,#3d8bfd);font-size:.64rem;font-weight:900;color:#fff;flex-shrink:0}
+.fstp b{color:#fff;font-weight:900;border-bottom:2px solid var(--cyan);padding-bottom:1px}
+.farr{font-size:1.5rem;font-weight:900;color:var(--cyan);line-height:1;text-shadow:0 0 12px rgba(103,232,249,.5)}
+.flow-ok{margin-top:12px;display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.5);color:#86efac;border-radius:999px;padding:7px 17px;font-size:.74rem;font-weight:800}
 .callout.mini .ic{font-size:1rem}
 .callout.mini p{font-size:clamp(.74rem,2.3vw,.84rem);color:#cfeee0}
 .fbar{display:grid;grid-template-columns:minmax(180px,2fr) minmax(140px,1fr) minmax(150px,1fr) auto;gap:8px;margin-bottom:12px}
@@ -96,13 +104,23 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
 <div class="brand">VTC LOG &middot; Gerenciamento Térmico</div>
 <div class="top">
   <h1>NAT - CSM CARGO<small>Pendências de sincronismo dos dataloggers</small></h1>
-  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 22:04</b></div>
+  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 22:09</b></div>
 </div>
 <div class="kpis" id="kpis"></div>
 <div class="callout"><span class="ic">&#9888;&#65039;</span><div class="tx">
 <p>Pendência = <b>Ausência de sincronismo</b> ou lançamento no APP de entregas após a efetiva entrega dos volumes e sincronização no cliente - por motivo de erro operacional ou falha no aplicativo de entregas.</p>
-<p>Sequência correta: <span class="seq">chegou no cliente &rarr; lançou no <b>aplicativo de entregas</b> &rarr; sincronizou</span>, ainda no cliente. = não gera pendência.</p>
 </div></div>
+<div class="flow">
+  <div class="flow-title">Sequência correta</div>
+  <div class="flow-steps">
+    <span class="fstp"><span class="n">1</span>Chegou no cliente</span>
+    <span class="farr">&rarr;</span>
+    <span class="fstp"><span class="n">2</span>Lançou no <b style="margin-left:4px">aplicativo de entregas</b></span>
+    <span class="farr">&rarr;</span>
+    <span class="fstp"><span class="n">3</span>Sincronizou, ainda no cliente</span>
+  </div>
+  <div class="flow-ok">&#10003;&nbsp;Não gera pendência</div>
+</div>
 <div class="callout mini"><span class="ic">&#128260;</span><p>Sincronizou agora? A pendência sai sozinha na próxima atualização automática dessa página.</p></div>
 <div class="panel">
 <div class="panel-hd">

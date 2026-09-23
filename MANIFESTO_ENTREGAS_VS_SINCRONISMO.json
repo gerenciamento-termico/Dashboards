@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T13:49:59",
+  "gerado_em": "2026-09-23T13:51:19",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 510,
+    "pendentes_janela": 507,
     "cobranca_gru_janela": 59,
     "sem_embarque_efetiva": 664,
     "com_embarque_efetiva": 5880,
@@ -48,8 +48,8 @@
       "JPA - LIDER CARGAS": 24,
       "RBR - RODOTEC": 17,
       "THE - AERONEIVA EXPRESS": 15,
-      "NAT - CSM CARGO": 15,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 14
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 14,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 13
     },
     "top10_ufs_pendencias": {
       "SC": 96,
@@ -64,9 +64,9 @@
       "AC": 17
     },
     "latencia": {
-      "n_agente": 4564,
+      "n_agente": 4567,
       "n_so_gru": 132,
-      "n_sem_primeiro_sync": 888,
+      "n_sem_primeiro_sync": 885,
       "media_horas": 0.71,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -421,18 +421,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 101,
       "loggers": 688,
-      "sincronizados": 575,
-      "pendentes": 105,
+      "sincronizados": 578,
+      "pendentes": 102,
       "sem_embarque": 61,
       "cobranca_gru": 8,
       "pedidos_pendentes": 34,
-      "pct": 15.3,
-      "n_latencia": 505,
+      "pct": 14.8,
+      "n_latencia": 508,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 183
+      "n_sem_primeiro_sync": 180
     },
     {
       "dia_iso": "2026-09-23",

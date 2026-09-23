@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T10:20:39",
+  "gerado_em": "2026-09-23T10:29:36",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 421,
+    "pendentes_janela": 420,
     "cobranca_gru_janela": 70,
     "sem_embarque_efetiva": 672,
     "com_embarque_efetiva": 5645,
@@ -46,7 +46,7 @@
       "NAT - CSM CARGO": 35,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
       "PVH - RODOTEC": 25,
-      "THE - AERONEIVA EXPRESS": 24,
+      "THE - AERONEIVA EXPRESS": 23,
       "RBR - RODOTEC": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 14,
       "SLZ - REIS CAVALCANTE EXPRESSO": 12
@@ -57,16 +57,16 @@
       "RN": 36,
       "SP": 29,
       "TO": 29,
-      "PI": 25,
       "RO": 25,
+      "PI": 24,
       "PA": 18,
       "PR": 18,
       "SC": 17
     },
     "latencia": {
-      "n_agente": 4433,
+      "n_agente": 4434,
       "n_so_gru": 126,
-      "n_sem_primeiro_sync": 798,
+      "n_sem_primeiro_sync": 797,
       "media_horas": 0.74,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -345,18 +345,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 79,
       "loggers": 454,
-      "sincronizados": 360,
-      "pendentes": 84,
+      "sincronizados": 361,
+      "pendentes": 83,
       "sem_embarque": 125,
       "cobranca_gru": 10,
       "pedidos_pendentes": 28,
-      "pct": 18.5,
-      "n_latencia": 329,
+      "pct": 18.3,
+      "n_latencia": 330,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 124
+      "n_sem_primeiro_sync": 123
     },
     {
       "dia_iso": "2026-09-19",

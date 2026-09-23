@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T13:19:01",
+  "gerado_em": "2026-09-23T13:24:56",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6664,
-    "pedidos_janela": 1045,
+    "pares_janela": 6667,
+    "pedidos_janela": 1047,
     "loggers_ares_janela": 6239,
-    "loggers_ares_antes_dedup": 6538,
-    "dedup_dia_logger": 73,
+    "loggers_ares_antes_dedup": 6540,
+    "dedup_dia_logger": 75,
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
     "pendentes_janela": 508,
     "cobranca_gru_janela": 63,
     "sem_embarque_efetiva": 665,
-    "com_embarque_efetiva": 5873,
+    "com_embarque_efetiva": 5875,
     "loggers_sem_lastsync": 83,
     "nao_avaliados": 665,
-    "pedidos_com_agente": 6664,
+    "pedidos_com_agente": 6667,
     "dtbtransporte": {
-      "consultados": 1045,
-      "mapeados": 1045,
-      "linhas": 1149
+      "consultados": 1047,
+      "mapeados": 1047,
+      "linhas": 1151
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 140,
+      "VTCLOG - GRU": 139,
       "VTCLOG - REC": 69,
       "VTCLOG CNF - CONTAGEM": 49,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 4560,
-      "n_so_gru": 130,
-      "n_sem_primeiro_sync": 891,
+      "n_so_gru": 131,
+      "n_sem_primeiro_sync": 890,
       "media_horas": 0.71,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -89,8 +89,8 @@
       "media_horas": 0.98,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 19,
-      "n_sem_primeiro_sync": 57
+      "n_sync_so_gru": 20,
+      "n_sem_primeiro_sync": 56
     },
     {
       "dia_iso": "2026-09-05",
@@ -438,7 +438,7 @@
       "dia_iso": "2026-09-23",
       "dia": "23/09",
       "dia_full": "23/09/2026",
-      "pedidos": 37,
+      "pedidos": 39,
       "loggers": 270,
       "sincronizados": 149,
       "pendentes": 121,

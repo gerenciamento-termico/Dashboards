@@ -49,6 +49,7 @@ h1 small{display:block;font-size:.56em;font-weight:600;color:var(--soft);margin-
 .callout p{font-size:clamp(.82rem,2.6vw,.92rem);line-height:1.6;color:#dcE9f7}
 .callout b{color:#fff;font-weight:900;white-space:nowrap;border-bottom:2px solid var(--cyan);padding-bottom:1px}
 .callout .seq{color:#cfe2f6;font-weight:600}
+.callout .tx{display:flex;flex-direction:column;gap:9px;flex:1}
 .callout.mini{border-left-color:var(--ok);background:linear-gradient(135deg,rgba(52,211,153,.13),rgba(103,232,249,.05));padding:10px 14px;margin-top:-8px}
 .callout.mini .ic{font-size:1rem}
 .callout.mini p{font-size:clamp(.74rem,2.3vw,.84rem);color:#cfeee0}
@@ -95,10 +96,13 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
 <div class="brand">VTC LOG &middot; Gerenciamento Térmico</div>
 <div class="top">
   <h1>CHAPPA BRASIL<small>Pendências de sincronismo dos dataloggers</small></h1>
-  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 21:59</b></div>
+  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 22:04</b></div>
 </div>
 <div class="kpis" id="kpis"></div>
-<div class="callout"><span class="ic">&#9888;&#65039;</span><p>Pendência = Ausência de sincronismo ou lançamento no APP de entregas após a entrega e sincronização efetiva no cliente. Sequência correta: <span class="seq">chegou no cliente &rarr; lançou no <b>aplicativo de entregas</b> &rarr; sincronizou</span>, ainda no cliente.</p></div>
+<div class="callout"><span class="ic">&#9888;&#65039;</span><div class="tx">
+<p>Pendência = <b>Ausência de sincronismo</b> ou lançamento no APP de entregas após a efetiva entrega dos volumes e sincronização no cliente - por motivo de erro operacional ou falha no aplicativo de entregas.</p>
+<p>Sequência correta: <span class="seq">chegou no cliente &rarr; lançou no <b>aplicativo de entregas</b> &rarr; sincronizou</span>, ainda no cliente. = não gera pendência.</p>
+</div></div>
 <div class="callout mini"><span class="ic">&#128260;</span><p>Sincronizou agora? A pendência sai sozinha na próxima atualização automática dessa página.</p></div>
 <div class="panel">
 <div class="panel-hd">

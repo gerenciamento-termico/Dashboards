@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T09:59:33",
+  "gerado_em": "2026-09-23T10:04:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -64,9 +64,9 @@
       "SC": 17
     },
     "latencia": {
-      "n_agente": 4406,
+      "n_agente": 4407,
       "n_so_gru": 126,
-      "n_sem_primeiro_sync": 818,
+      "n_sem_primeiro_sync": 817,
       "media_horas": 0.74,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -427,12 +427,12 @@
       "cobranca_gru": 8,
       "pedidos_pendentes": 28,
       "pct": 21.3,
-      "n_latencia": 462,
+      "n_latencia": 463,
       "media_horas": 0.16,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 219
+      "n_sem_primeiro_sync": 218
     },
     {
       "dia_iso": "2026-09-23",

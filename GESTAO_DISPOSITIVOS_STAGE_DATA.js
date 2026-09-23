@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "23/09/2026 10:23:56",
+  "geradoEm": "23/09/2026 10:37:22",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -30,9 +30,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 1613,
+      "loggersTransito": 1610,
       "loggersEntregues": 4982,
-      "loggersRetornados": 1941,
+      "loggersRetornados": 1940,
       "registrosEntregas": 113672,
       "registrosEstoque": 0,
       "semStatus": 0,
@@ -69,9 +69,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 1613,
+      "loggersTransito": 1610,
       "loggersEntregues": 4982,
-      "loggersRetornados": 1941,
+      "loggersRetornados": 1940,
       "registrosEntregas": 120609,
       "registrosEstoque": 0,
       "semStatus": 0,
@@ -112,10 +112,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           340,
           498,
-          537,
-          1147,
+          547,
+          1148,
           2100,
-          4334
+          4328
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -148,10 +148,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           326,
           363,
-          535,
-          750,
+          545,
+          751,
           1172,
-          4203
+          4197
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -276,10 +276,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           326,
           494,
-          535,
-          750,
+          545,
+          751,
           1189,
-          4287
+          4281
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -312,10 +312,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           326,
           363,
-          537,
-          1146,
+          547,
+          1147,
           1334,
-          4229
+          4223
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -348,10 +348,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           334,
           367,
-          535,
-          750,
+          545,
+          751,
           1295,
-          4203
+          4197
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -384,10 +384,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           332,
           363,
-          535,
-          751,
+          545,
+          752,
           1798,
-          4224
+          4218
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -598,10 +598,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           326,
           494,
-          537,
-          1146,
+          547,
+          1147,
           1351,
-          4313
+          4307
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -634,10 +634,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           334,
           498,
-          535,
-          750,
+          545,
+          751,
           1312,
-          4287
+          4281
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -670,10 +670,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           332,
           494,
-          535,
-          751,
+          545,
+          752,
           1815,
-          4308
+          4302
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -706,10 +706,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           334,
           367,
-          537,
-          1146,
+          547,
+          1147,
           1457,
-          4229
+          4223
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -742,10 +742,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           332,
           363,
-          537,
-          1147,
+          547,
+          1148,
           1960,
-          4250
+          4244
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -778,10 +778,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           340,
           367,
-          535,
-          751,
+          545,
+          752,
           1921,
-          4224
+          4218
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -952,10 +952,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           334,
           498,
-          537,
-          1146,
+          547,
+          1147,
           1474,
-          4313
+          4307
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -988,10 +988,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           332,
           494,
-          537,
-          1147,
+          547,
+          1148,
           1977,
-          4334
+          4328
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -1024,10 +1024,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           340,
           498,
-          535,
-          751,
+          545,
+          752,
           1938,
-          4308
+          4302
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"
@@ -1060,10 +1060,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           326,
           340,
           367,
-          537,
-          1147,
+          547,
+          1148,
           2083,
-          4250
+          4244
         ]
       },
       "ultimaAtualizacao": "23/09/2026 12:41"

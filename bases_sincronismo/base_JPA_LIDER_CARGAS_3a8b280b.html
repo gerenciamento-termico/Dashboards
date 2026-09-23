@@ -58,7 +58,8 @@ h1 small{display:block;font-size:.56em;font-weight:600;color:var(--soft);margin-
 .fstp .n{display:inline-flex;align-items:center;justify-content:center;width:20px;height:20px;border-radius:50%;background:linear-gradient(135deg,#2563c4,#3d8bfd);font-size:.64rem;font-weight:900;color:#fff;flex-shrink:0}
 .fstp b{color:#fff;font-weight:900;border-bottom:2px solid var(--cyan);padding-bottom:1px}
 .farr{font-size:1.5rem;font-weight:900;color:var(--cyan);line-height:1;text-shadow:0 0 12px rgba(103,232,249,.5)}
-.flow-ok{margin-top:12px;display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.5);color:#86efac;border-radius:999px;padding:7px 17px;font-size:.74rem;font-weight:800}
+.farr.eq{font-size:1rem}
+.flow-ok{display:inline-flex;align-items:center;gap:7px;background:rgba(52,211,153,.14);border:1px solid rgba(52,211,153,.5);color:#86efac;border-radius:999px;padding:8px 16px;font-size:.74rem;font-weight:800}
 .callout.mini .ic{font-size:1rem}
 .callout.mini p{font-size:clamp(.74rem,2.3vw,.84rem);color:#cfeee0}
 .fbar{display:grid;grid-template-columns:minmax(180px,2fr) minmax(140px,1fr) minmax(150px,1fr) auto;gap:8px;margin-bottom:12px}
@@ -104,7 +105,7 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
 <div class="brand">VTC LOG &middot; Gerenciamento Térmico</div>
 <div class="top">
   <h1>JPA - LIDER CARGAS<small>Pendências de sincronismo dos dataloggers</small></h1>
-  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 22:19</b></div>
+  <div class="stamp"><span class="dot"></span>Atualizado em <b>22/09/2026 22:29</b></div>
 </div>
 <div class="kpis" id="kpis"></div>
 <div class="callout"><span class="ic">&#9888;&#65039;</span><div class="tx">
@@ -115,11 +116,12 @@ footer{color:var(--soft);font-size:.68rem;margin-top:18px;text-align:center;lett
   <div class="flow-steps">
     <span class="fstp"><span class="n">1</span>Chegou no cliente</span>
     <span class="farr">&rarr;</span>
-    <span class="fstp"><span class="n">2</span>Lançou no <b style="margin-left:4px">aplicativo de entregas</b></span>
+    <span class="fstp"><span class="n">2</span>Lançou no aplicativo de entregas</span>
     <span class="farr">&rarr;</span>
     <span class="fstp"><span class="n">3</span>Sincronizou, ainda no cliente</span>
+    <span class="farr eq">=</span>
+    <span class="flow-ok">&#10003;&nbsp;Não gera pendência</span>
   </div>
-  <div class="flow-ok">&#10003;&nbsp;Não gera pendência</div>
 </div>
 <div class="callout mini"><span class="ic">&#128260;</span><p>Sincronizou agora? A pendência sai sozinha na próxima atualização automática dessa página.</p></div>
 <div class="panel">

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-23T16:50:19",
+  "gerado_em": "2026-09-23T16:55:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6894,
-    "pedidos_janela": 1076,
-    "loggers_ares_janela": 6463,
-    "loggers_ares_antes_dedup": 6767,
-    "dedup_dia_logger": 78,
+    "pares_janela": 6897,
+    "pedidos_janela": 1079,
+    "loggers_ares_janela": 6465,
+    "loggers_ares_antes_dedup": 6770,
+    "dedup_dia_logger": 79,
     "ocultos_operacao": 226,
     "ocultos_lista": 227,
     "ocultos_ausentes": 1,
-    "pendentes_janela": 524,
-    "cobranca_gru_janela": 56,
-    "sem_embarque_efetiva": 725,
-    "com_embarque_efetiva": 6042,
+    "pendentes_janela": 525,
+    "cobranca_gru_janela": 58,
+    "sem_embarque_efetiva": 721,
+    "com_embarque_efetiva": 6049,
     "loggers_sem_lastsync": 86,
-    "nao_avaliados": 725,
-    "pedidos_com_agente": 6894,
+    "nao_avaliados": 721,
+    "pedidos_com_agente": 6897,
     "dtbtransporte": {
-      "consultados": 1076,
-      "mapeados": 1076,
-      "linhas": 1183
+      "consultados": 1079,
+      "mapeados": 1079,
+      "linhas": 1186
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 141,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "SC": 96,
-      "MG": 49,
+      "MG": 50,
       "CE": 41,
       "SP": 37,
       "TO": 29,
@@ -64,9 +64,9 @@
       "BA": 21
     },
     "latencia": {
-      "n_agente": 4718,
+      "n_agente": 4724,
       "n_so_gru": 134,
-      "n_sem_primeiro_sync": 894,
+      "n_sem_primeiro_sync": 893,
       "media_horas": 0.87,
       "mediana_horas": 0.04,
       "p90_horas": 0.07
@@ -427,31 +427,31 @@
       "cobranca_gru": 8,
       "pedidos_pendentes": 28,
       "pct": 8.0,
-      "n_latencia": 558,
+      "n_latencia": 562,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 131
+      "n_sem_primeiro_sync": 127
     },
     {
       "dia_iso": "2026-09-23",
       "dia": "23/09",
       "dia_full": "23/09/2026",
-      "pedidos": 64,
-      "loggers": 434,
-      "sincronizados": 243,
-      "pendentes": 189,
-      "sem_embarque": 119,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 35,
-      "pct": 43.5,
-      "n_latencia": 228,
+      "pedidos": 71,
+      "loggers": 439,
+      "sincronizados": 245,
+      "pendentes": 190,
+      "sem_embarque": 116,
+      "cobranca_gru": 4,
+      "pedidos_pendentes": 36,
+      "pct": 43.3,
+      "n_latencia": 230,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 206
+      "n_sem_primeiro_sync": 209
     }
   ],
   "erros_validacao": {},

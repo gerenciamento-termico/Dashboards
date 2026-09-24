@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T15:40:25",
+  "gerado_em": "2026-09-24T15:40:58",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 658,
+    "pendentes_janela": 659,
     "cobranca_gru_janela": 36,
-    "sem_embarque_efetiva": 923,
-    "com_embarque_efetiva": 6268,
+    "sem_embarque_efetiva": 920,
+    "com_embarque_efetiva": 6271,
     "loggers_sem_lastsync": 151,
-    "nao_avaliados": 923,
+    "nao_avaliados": 920,
     "pedidos_com_agente": 7310,
     "dtbtransporte": {
       "consultados": 1060,
@@ -40,7 +40,7 @@
       "linhas": 1179
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 286,
+      "VTCLOG - GRU": 287,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 27,
@@ -54,7 +54,7 @@
     "top10_ufs_pendencias": {
       "MG": 182,
       "SC": 56,
-      "SP": 53,
+      "SP": 54,
       "TO": 46,
       "AL": 37,
       "MA": 27,
@@ -64,9 +64,9 @@
       "CE": 19
     },
     "latencia": {
-      "n_agente": 4842,
+      "n_agente": 4844,
       "n_so_gru": 157,
-      "n_sem_primeiro_sync": 992,
+      "n_sem_primeiro_sync": 993,
       "media_horas": 0.95,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-24",
       "dia": "24/09",
       "dia_full": "24/09/2026",
-      "pedidos": 46,
-      "loggers": 591,
-      "sincronizados": 287,
-      "pendentes": 304,
-      "sem_embarque": 147,
+      "pedidos": 48,
+      "loggers": 594,
+      "sincronizados": 289,
+      "pendentes": 305,
+      "sem_embarque": 144,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 33,
-      "pct": 51.4,
-      "n_latencia": 228,
+      "pedidos_pendentes": 34,
+      "pct": 51.3,
+      "n_latencia": 230,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 363
+      "n_sem_primeiro_sync": 364
     }
   ],
   "erros_validacao": {},

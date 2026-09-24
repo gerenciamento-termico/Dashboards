@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T14:35:30",
+  "gerado_em": "2026-09-24T14:39:41",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 496,
+    "pendentes_janela": 487,
     "cobranca_gru_janela": 36,
     "sem_embarque_efetiva": 1216,
     "com_embarque_efetiva": 5931,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 133,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 45,
-      "SSA - LUTY LOG": 37,
+      "SSA - LUTY LOG": 28,
       "SLZ - REIS CAVALCANTE EXPRESSO": 27,
       "PVH - RODOTEC": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 26,
@@ -54,8 +54,8 @@
     "top10_ufs_pendencias": {
       "SC": 55,
       "SP": 51,
-      "BA": 47,
       "TO": 45,
+      "BA": 38,
       "RS": 35,
       "MA": 27,
       "RO": 27,
@@ -64,9 +64,9 @@
       "PA": 18
     },
     "latencia": {
-      "n_agente": 4720,
+      "n_agente": 4729,
       "n_so_gru": 157,
-      "n_sem_primeiro_sync": 777,
+      "n_sem_primeiro_sync": 768,
       "media_horas": 0.97,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 34,
       "loggers": 300,
-      "sincronizados": 157,
-      "pendentes": 143,
+      "sincronizados": 166,
+      "pendentes": 134,
       "sem_embarque": 365,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 26,
-      "pct": 47.7,
-      "n_latencia": 150,
+      "pedidos_pendentes": 25,
+      "pct": 44.7,
+      "n_latencia": 159,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 150
+      "n_sem_primeiro_sync": 141
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T08:43:52",
+  "gerado_em": "2026-09-24T09:00:12",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -31,7 +31,7 @@
     "cobranca_gru_janela": 44,
     "sem_embarque_efetiva": 858,
     "com_embarque_efetiva": 5640,
-    "loggers_sem_lastsync": 157,
+    "loggers_sem_lastsync": 156,
     "nao_avaliados": 858,
     "pedidos_com_agente": 6595,
     "dtbtransporte": {
@@ -64,9 +64,9 @@
       "PR": 16
     },
     "latencia": {
-      "n_agente": 4528,
+      "n_agente": 4529,
       "n_so_gru": 118,
-      "n_sem_primeiro_sync": 720,
+      "n_sem_primeiro_sync": 719,
       "media_horas": 0.86,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -408,12 +408,12 @@
       "cobranca_gru": 4,
       "pedidos_pendentes": 29,
       "pct": 7.8,
-      "n_latencia": 580,
+      "n_latencia": 581,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 123
+      "n_sem_primeiro_sync": 122
     },
     {
       "dia_iso": "2026-09-23",

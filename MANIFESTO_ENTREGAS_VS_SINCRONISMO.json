@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T14:24:40",
+  "gerado_em": "2026-09-24T14:29:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 500,
-    "cobranca_gru_janela": 35,
+    "pendentes_janela": 499,
+    "cobranca_gru_janela": 36,
     "sem_embarque_efetiva": 1234,
     "com_embarque_efetiva": 5911,
     "loggers_sem_lastsync": 155,
@@ -47,7 +47,7 @@
       "PVH - RODOTEC": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 26,
       "AJU - CASSIMIRO TRANSPORTES": 26,
-      "FOR - NT TRANSPORTE LTDA": 19,
+      "FOR - NT TRANSPORTE LTDA": 18,
       "BVB - J PIMENTEL S. CUNHA LTDA": 17,
       "RBR - RODOTEC": 15
     },
@@ -60,14 +60,14 @@
       "MA": 27,
       "RO": 27,
       "SE": 26,
-      "CE": 20,
+      "CE": 19,
       "PA": 18
     },
     "latencia": {
-      "n_agente": 4695,
-      "n_so_gru": 159,
+      "n_agente": 4697,
+      "n_so_gru": 157,
       "n_sem_primeiro_sync": 780,
-      "media_horas": 0.91,
+      "media_horas": 0.98,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -142,11 +142,11 @@
       "cobranca_gru": 1,
       "pedidos_pendentes": 3,
       "pct": 1.1,
-      "n_latencia": 465,
-      "media_horas": 3.32,
+      "n_latencia": 466,
+      "media_horas": 3.73,
       "mediana_horas": 0.04,
-      "p90_horas": 0.07,
-      "n_sync_so_gru": 44,
+      "p90_horas": 0.08,
+      "n_sync_so_gru": 43,
       "n_sem_primeiro_sync": 19
     },
     {
@@ -180,11 +180,11 @@
       "cobranca_gru": 5,
       "pedidos_pendentes": 18,
       "pct": 4.9,
-      "n_latencia": 503,
-      "media_horas": 2.26,
+      "n_latencia": 504,
+      "media_horas": 2.47,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 16,
+      "n_sync_so_gru": 15,
       "n_sem_primeiro_sync": 54
     },
     {
@@ -327,11 +327,11 @@
       "pedidos": 79,
       "loggers": 453,
       "sincronizados": 414,
-      "pendentes": 39,
+      "pendentes": 38,
       "sem_embarque": 100,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 24,
-      "pct": 8.6,
+      "cobranca_gru": 1,
+      "pedidos_pendentes": 23,
+      "pct": 8.4,
       "n_latencia": 375,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T18:14:33",
+  "gerado_em": "2026-09-24T18:20:02",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 685,
+    "pendentes_janela": 684,
     "cobranca_gru_janela": 72,
     "sem_embarque_efetiva": 789,
     "com_embarque_efetiva": 6511,
@@ -52,7 +52,7 @@
       "RBR - RODOTEC": 15
     },
     "top10_ufs_pendencias": {
-      "MG": 229,
+      "MG": 228,
       "SP": 49,
       "TO": 46,
       "AL": 37,
@@ -64,9 +64,9 @@
       "BA": 20
     },
     "latencia": {
-      "n_agente": 5024,
+      "n_agente": 5025,
       "n_so_gru": 153,
-      "n_sem_primeiro_sync": 1057,
+      "n_sem_primeiro_sync": 1056,
       "media_horas": 1.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 75,
       "loggers": 860,
-      "sincronizados": 475,
-      "pendentes": 375,
+      "sincronizados": 476,
+      "pendentes": 374,
       "sem_embarque": 83,
       "cobranca_gru": 10,
-      "pedidos_pendentes": 43,
-      "pct": 43.6,
-      "n_latencia": 413,
+      "pedidos_pendentes": 42,
+      "pct": 43.5,
+      "n_latencia": 414,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
-      "p90_horas": 0.07,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 447
+      "n_sem_primeiro_sync": 446
     }
   ],
   "erros_validacao": {},

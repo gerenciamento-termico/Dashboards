@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T08:16:49",
+  "gerado_em": "2026-09-24T08:21:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6566,
-    "pedidos_janela": 1011,
-    "loggers_ares_janela": 6188,
-    "loggers_ares_antes_dedup": 6469,
+    "pares_janela": 6567,
+    "pedidos_janela": 1012,
+    "loggers_ares_janela": 6189,
+    "loggers_ares_antes_dedup": 6470,
     "dedup_dia_logger": 75,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
@@ -30,18 +30,18 @@
     "pendentes_janela": 405,
     "cobranca_gru_janela": 44,
     "sem_embarque_efetiva": 870,
-    "com_embarque_efetiva": 5599,
-    "loggers_sem_lastsync": 157,
+    "com_embarque_efetiva": 5600,
+    "loggers_sem_lastsync": 158,
     "nao_avaliados": 870,
-    "pedidos_com_agente": 6566,
+    "pedidos_com_agente": 6567,
     "dtbtransporte": {
-      "consultados": 1011,
-      "mapeados": 1011,
-      "linhas": 1120
+      "consultados": 1012,
+      "mapeados": 1012,
+      "linhas": 1121
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 77,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 44,
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 45,
       "FOR - NT TRANSPORTE LTDA": 39,
       "VTCLOG - REC": 28,
       "PVH - RODOTEC": 27,
@@ -52,7 +52,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 12
     },
     "top10_ufs_pendencias": {
-      "TO": 44,
+      "TO": 45,
       "SC": 42,
       "CE": 40,
       "PE": 28,
@@ -60,11 +60,11 @@
       "SP": 26,
       "SE": 26,
       "BA": 19,
-      "PA": 19,
+      "PA": 18,
       "PR": 16
     },
     "latencia": {
-      "n_agente": 4488,
+      "n_agente": 4489,
       "n_so_gru": 114,
       "n_sem_primeiro_sync": 723,
       "media_horas": 0.87,
@@ -419,15 +419,15 @@
       "dia_iso": "2026-09-23",
       "dia": "23/09",
       "dia_full": "23/09/2026",
-      "pedidos": 80,
-      "loggers": 466,
-      "sincronizados": 345,
+      "pedidos": 81,
+      "loggers": 467,
+      "sincronizados": 346,
       "pendentes": 116,
       "sem_embarque": 168,
       "cobranca_gru": 5,
       "pedidos_pendentes": 35,
-      "pct": 24.9,
-      "n_latencia": 331,
+      "pct": 24.8,
+      "n_latencia": 332,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,

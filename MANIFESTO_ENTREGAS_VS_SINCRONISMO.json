@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T07:16:50",
+  "gerado_em": "2026-09-24T07:21:44",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 420,
+    "pendentes_janela": 406,
     "cobranca_gru_janela": 44,
     "sem_embarque_efetiva": 870,
     "com_embarque_efetiva": 5599,
@@ -37,7 +37,7 @@
     "dtbtransporte": {
       "consultados": 1011,
       "mapeados": 1011,
-      "linhas": 1118
+      "linhas": 1119
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 77,
@@ -46,10 +46,10 @@
       "VTCLOG - REC": 28,
       "PVH - RODOTEC": 27,
       "AJU - CASSIMIRO TRANSPORTES": 26,
-      "JPA - LIDER CARGAS": 19,
       "RBR - RODOTEC": 15,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
-      "THE - AERONEIVA EXPRESS": 13
+      "THE - AERONEIVA EXPRESS": 13,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 12
     },
     "top10_ufs_pendencias": {
       "TO": 44,
@@ -59,14 +59,14 @@
       "RO": 27,
       "SP": 26,
       "SE": 26,
-      "PB": 20,
       "BA": 19,
-      "PA": 19
+      "PA": 19,
+      "PR": 16
     },
     "latencia": {
-      "n_agente": 4471,
+      "n_agente": 4487,
       "n_so_gru": 114,
-      "n_sem_primeiro_sync": 740,
+      "n_sem_primeiro_sync": 724,
       "media_horas": 0.87,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "23/09/2026",
       "pedidos": 80,
       "loggers": 466,
-      "sincronizados": 330,
-      "pendentes": 131,
+      "sincronizados": 344,
+      "pendentes": 117,
       "sem_embarque": 168,
       "cobranca_gru": 5,
       "pedidos_pendentes": 36,
-      "pct": 28.1,
-      "n_latencia": 314,
+      "pct": 25.1,
+      "n_latencia": 330,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 152
+      "n_sem_primeiro_sync": 136
     },
     {
       "dia_iso": "2026-09-24",

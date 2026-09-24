@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T11:22:41",
+  "gerado_em": "2026-09-24T11:26:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 482,
+    "pendentes_janela": 478,
     "cobranca_gru_janela": 48,
     "sem_embarque_efetiva": 895,
     "com_embarque_efetiva": 5838,
-    "loggers_sem_lastsync": 166,
+    "loggers_sem_lastsync": 163,
     "nao_avaliados": 895,
     "pedidos_com_agente": 6839,
     "dtbtransporte": {
@@ -46,7 +46,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 27,
       "PVH - RODOTEC": 27,
       "AJU - CASSIMIRO TRANSPORTES": 26,
-      "VTCLOG - REC": 24,
+      "VTCLOG - REC": 20,
       "BVB - J PIMENTEL S. CUNHA LTDA": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 16,
       "RBR - RODOTEC": 15
@@ -60,14 +60,14 @@
       "MA": 27,
       "RO": 27,
       "SE": 26,
-      "PE": 24,
+      "PE": 20,
       "BA": 19
     },
     "latencia": {
-      "n_agente": 4613,
+      "n_agente": 4646,
       "n_so_gru": 134,
-      "n_sem_primeiro_sync": 817,
-      "media_horas": 0.89,
+      "n_sem_primeiro_sync": 784,
+      "media_horas": 0.88,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -402,18 +402,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 103,
       "loggers": 703,
-      "sincronizados": 649,
-      "pendentes": 48,
+      "sincronizados": 653,
+      "pendentes": 44,
       "sem_embarque": 159,
       "cobranca_gru": 6,
       "pedidos_pendentes": 26,
-      "pct": 6.8,
-      "n_latencia": 586,
+      "pct": 6.3,
+      "n_latencia": 592,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 117
+      "n_sem_primeiro_sync": 111
     },
     {
       "dia_iso": "2026-09-23",
@@ -446,12 +446,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
       "pct": 46.1,
-      "n_latencia": 77,
+      "n_latencia": 104,
       "media_horas": 0.04,
-      "mediana_horas": 0.05,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 127
+      "n_sem_primeiro_sync": 100
     }
   ],
   "erros_validacao": {},

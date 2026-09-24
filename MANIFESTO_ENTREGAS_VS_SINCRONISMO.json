@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T14:04:38",
+  "gerado_em": "2026-09-24T14:07:23",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 475,
+    "pendentes_janela": 471,
     "cobranca_gru_janela": 33,
     "sem_embarque_efetiva": 896,
     "com_embarque_efetiva": 5880,
@@ -46,7 +46,7 @@
       "PVH - RODOTEC": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 26,
       "AJU - CASSIMIRO TRANSPORTES": 26,
-      "FOR - NT TRANSPORTE LTDA": 25,
+      "FOR - NT TRANSPORTE LTDA": 21,
       "BVB - J PIMENTEL S. CUNHA LTDA": 17,
       "RBR - RODOTEC": 15,
       "THE - AERONEIVA EXPRESS": 13
@@ -58,15 +58,15 @@
       "RS": 35,
       "MA": 27,
       "RO": 27,
-      "CE": 26,
       "SE": 26,
+      "CE": 22,
       "BA": 19,
       "PA": 18
     },
     "latencia": {
-      "n_agente": 4690,
+      "n_agente": 4694,
       "n_so_gru": 160,
-      "n_sem_primeiro_sync": 753,
+      "n_sem_primeiro_sync": 749,
       "media_horas": 0.9,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "23/09/2026",
       "pedidos": 84,
       "loggers": 490,
-      "sincronizados": 392,
-      "pendentes": 93,
+      "sincronizados": 394,
+      "pendentes": 91,
       "sem_embarque": 199,
       "cobranca_gru": 5,
       "pedidos_pendentes": 26,
-      "pct": 19.0,
-      "n_latencia": 382,
+      "pct": 18.6,
+      "n_latencia": 384,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 108
+      "n_sem_primeiro_sync": 106
     },
     {
       "dia_iso": "2026-09-24",
@@ -440,18 +440,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 31,
       "loggers": 249,
-      "sincronizados": 132,
-      "pendentes": 117,
+      "sincronizados": 134,
+      "pendentes": 115,
       "sem_embarque": 25,
       "cobranca_gru": 0,
       "pedidos_pendentes": 23,
-      "pct": 47.0,
-      "n_latencia": 125,
+      "pct": 46.2,
+      "n_latencia": 127,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 124
+      "n_sem_primeiro_sync": 122
     }
   ],
   "erros_validacao": {},

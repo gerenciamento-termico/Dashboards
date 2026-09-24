@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T20:35:11",
+  "gerado_em": "2026-09-24T20:37:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 739,
+    "pendentes_janela": 737,
     "cobranca_gru_janela": 72,
     "sem_embarque_efetiva": 792,
     "com_embarque_efetiva": 6573,
-    "loggers_sem_lastsync": 148,
+    "loggers_sem_lastsync": 147,
     "nao_avaliados": 792,
     "pedidos_com_agente": 7497,
     "dtbtransporte": {
@@ -49,7 +49,7 @@
       "VTCLOG - REC": 26,
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 23,
-      "FOR - NT TRANSPORTE LTDA": 17
+      "BVB - J PIMENTEL S. CUNHA LTDA": 17
     },
     "top10_ufs_pendencias": {
       "MG": 228,
@@ -64,9 +64,9 @@
       "SE": 26
     },
     "latencia": {
-      "n_agente": 5030,
+      "n_agente": 5032,
       "n_so_gru": 153,
-      "n_sem_primeiro_sync": 1113,
+      "n_sem_primeiro_sync": 1111,
       "media_horas": 1.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 79,
       "loggers": 922,
-      "sincronizados": 483,
-      "pendentes": 429,
+      "sincronizados": 485,
+      "pendentes": 427,
       "sem_embarque": 84,
       "cobranca_gru": 10,
       "pedidos_pendentes": 43,
-      "pct": 46.5,
-      "n_latencia": 419,
+      "pct": 46.3,
+      "n_latencia": 421,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 503
+      "n_sem_primeiro_sync": 501
     }
   ],
   "erros_validacao": {},

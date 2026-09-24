@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-24T19:20:03",
+  "gerado_em": "2026-09-24T19:22:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 744,
+    "pendentes_janela": 743,
     "cobranca_gru_janela": 72,
     "sem_embarque_efetiva": 789,
     "com_embarque_efetiva": 6572,
@@ -48,7 +48,7 @@
       "PVH - RODOTEC": 31,
       "VTCLOG - REC": 26,
       "AJU - CASSIMIRO TRANSPORTES": 26,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 23,
       "FOR - NT TRANSPORTE LTDA": 21
     },
     "top10_ufs_pendencias": {
@@ -59,14 +59,14 @@
       "AL": 37,
       "RN": 34,
       "RO": 31,
-      "SC": 27,
+      "SC": 26,
       "PE": 26,
       "SE": 26
     },
     "latencia": {
-      "n_agente": 5026,
+      "n_agente": 5027,
       "n_so_gru": 153,
-      "n_sem_primeiro_sync": 1116,
+      "n_sem_primeiro_sync": 1115,
       "media_horas": 1.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 78,
       "loggers": 921,
-      "sincronizados": 477,
-      "pendentes": 434,
+      "sincronizados": 478,
+      "pendentes": 433,
       "sem_embarque": 83,
       "cobranca_gru": 10,
       "pedidos_pendentes": 44,
-      "pct": 47.1,
-      "n_latencia": 415,
+      "pct": 47.0,
+      "n_latencia": 416,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 506
+      "n_sem_primeiro_sync": 505
     }
   ],
   "erros_validacao": {},

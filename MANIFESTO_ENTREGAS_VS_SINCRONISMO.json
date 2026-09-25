@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T20:07:29",
+  "gerado_em": "2026-09-25T20:14:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 558,
+    "pendentes_janela": 551,
     "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 517,
     "com_embarque_efetiva": 7433,
-    "loggers_sem_lastsync": 99,
+    "loggers_sem_lastsync": 94,
     "nao_avaliados": 517,
     "pedidos_com_agente": 8084,
     "dtbtransporte": {
@@ -40,8 +40,8 @@
       "linhas": 1288
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 90,
       "VTCLOG RIO GALEAO": 84,
+      "VTCLOG - GRU": 83,
       "RBR - RODOTEC": 40,
       "BEL - MH FROTA TRANSPORTE": 39,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
@@ -57,16 +57,16 @@
       "AC": 40,
       "AL": 37,
       "RO": 33,
-      "SP": 33,
       "MG": 32,
       "SC": 27,
       "TO": 27,
+      "SP": 26,
       "RN": 24
     },
     "latencia": {
-      "n_agente": 6018,
+      "n_agente": 6025,
       "n_so_gru": 161,
-      "n_sem_primeiro_sync": 972,
+      "n_sem_primeiro_sync": 965,
       "media_horas": 1.21,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 92,
       "loggers": 956,
-      "sincronizados": 823,
-      "pendentes": 131,
+      "sincronizados": 824,
+      "pendentes": 130,
       "sem_embarque": 20,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 36,
-      "pct": 13.7,
-      "n_latencia": 738,
+      "pedidos_pendentes": 35,
+      "pct": 13.6,
+      "n_latencia": 739,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 218
+      "n_sem_primeiro_sync": 217
     },
     {
       "dia_iso": "2026-09-25",
@@ -440,18 +440,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 75,
       "loggers": 868,
-      "sincronizados": 687,
-      "pendentes": 181,
+      "sincronizados": 693,
+      "pendentes": 175,
       "sem_embarque": 31,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 37,
-      "pct": 20.9,
-      "n_latencia": 615,
+      "pedidos_pendentes": 31,
+      "pct": 20.2,
+      "n_latencia": 621,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 253
+      "n_sem_primeiro_sync": 247
     }
   ],
   "erros_validacao": {},

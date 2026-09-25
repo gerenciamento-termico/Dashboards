@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T17:44:40",
+  "gerado_em": "2026-09-25T17:46:39",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 505,
+    "pendentes_janela": 497,
     "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 726,
     "com_embarque_efetiva": 7120,
@@ -44,9 +44,9 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "SLZ - REIS CAVALCANTE EXPRESSO": 41,
       "RBR - RODOTEC": 40,
-      "VTCLOG - BSB": 38,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
       "PVH - RODOTEC": 33,
+      "VTCLOG - BSB": 30,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
       "SSA - LUTY LOG": 21,
       "BVB - J PIMENTEL S. CUNHA LTDA": 17
@@ -55,18 +55,18 @@
       "TO": 46,
       "MA": 41,
       "AC": 40,
-      "DF": 38,
       "AL": 37,
       "RO": 33,
       "SP": 32,
       "MG": 32,
       "BA": 31,
+      "DF": 30,
       "SC": 27
     },
     "latencia": {
-      "n_agente": 5799,
+      "n_agente": 5806,
       "n_so_gru": 161,
-      "n_sem_primeiro_sync": 878,
+      "n_sem_primeiro_sync": 871,
       "media_horas": 1.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 57,
       "loggers": 555,
-      "sincronizados": 454,
-      "pendentes": 101,
+      "sincronizados": 462,
+      "pendentes": 93,
       "sem_embarque": 76,
       "cobranca_gru": 0,
       "pedidos_pendentes": 30,
-      "pct": 18.2,
-      "n_latencia": 423,
+      "pct": 16.8,
+      "n_latencia": 430,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 132
+      "n_sem_primeiro_sync": 125
     }
   ],
   "erros_validacao": {},

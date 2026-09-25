@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T18:44:29",
+  "gerado_em": "2026-09-25T18:49:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 504,
+    "pendentes_janela": 501,
     "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 643,
     "com_embarque_efetiva": 7286,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 89,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 52,
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 50,
       "RBR - RODOTEC": 40,
       "BEL - MH FROTA TRANSPORTE": 39,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
@@ -52,7 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 17
     },
     "top10_ufs_pendencias": {
-      "TO": 52,
+      "TO": 50,
       "PA": 47,
       "AC": 40,
       "AL": 37,
@@ -64,9 +64,9 @@
       "MA": 23
     },
     "latencia": {
-      "n_agente": 5918,
+      "n_agente": 5929,
       "n_so_gru": 161,
-      "n_sem_primeiro_sync": 925,
+      "n_sem_primeiro_sync": 914,
       "media_horas": 1.23,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -307,18 +307,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 79,
       "loggers": 454,
-      "sincronizados": 420,
-      "pendentes": 34,
+      "sincronizados": 422,
+      "pendentes": 32,
       "sem_embarque": 60,
       "cobranca_gru": 0,
       "pedidos_pendentes": 20,
-      "pct": 7.5,
-      "n_latencia": 380,
+      "pct": 7.0,
+      "n_latencia": 382,
       "media_horas": 0.77,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 18,
-      "n_sem_primeiro_sync": 56
+      "n_sem_primeiro_sync": 54
     },
     {
       "dia_iso": "2026-09-19",
@@ -440,18 +440,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 66,
       "loggers": 721,
-      "sincronizados": 614,
-      "pendentes": 107,
+      "sincronizados": 615,
+      "pendentes": 106,
       "sem_embarque": 52,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 34,
-      "pct": 14.8,
-      "n_latencia": 535,
+      "pedidos_pendentes": 33,
+      "pct": 14.7,
+      "n_latencia": 544,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 186
+      "n_sem_primeiro_sync": 177
     }
   ],
   "erros_validacao": {},

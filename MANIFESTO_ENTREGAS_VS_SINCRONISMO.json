@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T13:21:02",
+  "gerado_em": "2026-09-25T13:29:12",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 7755,
-    "pedidos_janela": 1114,
-    "loggers_ares_janela": 7335,
-    "loggers_ares_antes_dedup": 7622,
+    "pares_janela": 7760,
+    "pedidos_janela": 1119,
+    "loggers_ares_janela": 7340,
+    "loggers_ares_antes_dedup": 7627,
     "dedup_dia_logger": 81,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 485,
+    "pendentes_janela": 488,
     "cobranca_gru_janela": 34,
-    "sem_embarque_efetiva": 768,
-    "com_embarque_efetiva": 6854,
-    "loggers_sem_lastsync": 105,
-    "nao_avaliados": 768,
-    "pedidos_com_agente": 7755,
+    "sem_embarque_efetiva": 770,
+    "com_embarque_efetiva": 6857,
+    "loggers_sem_lastsync": 107,
+    "nao_avaliados": 770,
+    "pedidos_com_agente": 7760,
     "dtbtransporte": {
-      "consultados": 1114,
-      "mapeados": 1114,
-      "linhas": 1239
+      "consultados": 1119,
+      "mapeados": 1119,
+      "linhas": 1244
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 97,
+      "VTCLOG - GRU": 100,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
       "NAT - CSM CARGO": 33,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "TO": 46,
-      "SP": 40,
+      "SP": 43,
       "AL": 37,
       "RN": 34,
       "RO": 32,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 5547,
       "n_so_gru": 166,
-      "n_sem_primeiro_sync": 862,
+      "n_sem_primeiro_sync": 865,
       "media_horas": 1.03,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-25",
       "dia": "25/09",
       "dia_full": "25/09/2026",
-      "pedidos": 25,
-      "loggers": 298,
+      "pedidos": 28,
+      "loggers": 301,
       "sincronizados": 283,
-      "pendentes": 15,
-      "sem_embarque": 81,
+      "pendentes": 18,
+      "sem_embarque": 83,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 15,
-      "pct": 5.0,
+      "pedidos_pendentes": 18,
+      "pct": 6.0,
       "n_latencia": 247,
       "media_horas": 0.04,
       "mediana_horas": 0.03,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 51
+      "n_sem_primeiro_sync": 54
     }
   ],
   "erros_validacao": {},

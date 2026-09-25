@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T15:14:25",
+  "gerado_em": "2026-09-25T15:19:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 522,
+    "pendentes_janela": 504,
     "cobranca_gru_janela": 61,
     "sem_embarque_efetiva": 714,
     "com_embarque_efetiva": 6963,
-    "loggers_sem_lastsync": 98,
+    "loggers_sem_lastsync": 88,
     "nao_avaliados": 714,
     "pedidos_com_agente": 7810,
     "dtbtransporte": {
@@ -45,11 +45,11 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 41,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
       "PVH - RODOTEC": 33,
-      "NAT - CSM CARGO": 32,
+      "NAT - CSM CARGO": 31,
       "SSA - LUTY LOG": 30,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 27,
-      "VTCLOG - REC": 25,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 17
     },
     "top10_ufs_pendencias": {
       "TO": 46,
@@ -58,15 +58,15 @@
       "AL": 37,
       "RO": 33,
       "SP": 33,
-      "RN": 33,
+      "RN": 32,
       "MG": 31,
       "AM": 27,
       "SC": 26
     },
     "latencia": {
-      "n_agente": 5593,
+      "n_agente": 5611,
       "n_so_gru": 161,
-      "n_sem_primeiro_sync": 928,
+      "n_sem_primeiro_sync": 910,
       "media_horas": 1.28,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 90,
       "loggers": 951,
-      "sincronizados": 785,
-      "pendentes": 155,
+      "sincronizados": 803,
+      "pendentes": 137,
       "sem_embarque": 55,
       "cobranca_gru": 11,
       "pedidos_pendentes": 39,
-      "pct": 16.3,
-      "n_latencia": 702,
+      "pct": 14.4,
+      "n_latencia": 720,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 249
+      "n_sem_primeiro_sync": 231
     },
     {
       "dia_iso": "2026-09-25",

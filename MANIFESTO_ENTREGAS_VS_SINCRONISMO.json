@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T09:33:45",
+  "gerado_em": "2026-09-25T09:38:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,10 +28,10 @@
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
     "pendentes_janela": 679,
-    "cobranca_gru_janela": 57,
+    "cobranca_gru_janela": 52,
     "sem_embarque_efetiva": 839,
     "com_embarque_efetiva": 6533,
-    "loggers_sem_lastsync": 140,
+    "loggers_sem_lastsync": 139,
     "nao_avaliados": 839,
     "pedidos_com_agente": 7504,
     "dtbtransporte": {
@@ -64,9 +64,9 @@
       "BA": 19
     },
     "latencia": {
-      "n_agente": 5067,
-      "n_so_gru": 156,
-      "n_sem_primeiro_sync": 1031,
+      "n_agente": 5072,
+      "n_so_gru": 157,
+      "n_sem_primeiro_sync": 1025,
       "media_horas": 1.13,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -298,8 +298,8 @@
       "media_horas": 1.15,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 6,
-      "n_sem_primeiro_sync": 67
+      "n_sync_so_gru": 7,
+      "n_sem_primeiro_sync": 66
     },
     {
       "dia_iso": "2026-09-18",
@@ -402,18 +402,18 @@
       "dia_full": "23/09/2026",
       "pedidos": 85,
       "loggers": 509,
-      "sincronizados": 434,
+      "sincronizados": 438,
       "pendentes": 54,
       "sem_embarque": 113,
-      "cobranca_gru": 21,
+      "cobranca_gru": 17,
       "pedidos_pendentes": 24,
       "pct": 10.6,
-      "n_latencia": 422,
+      "n_latencia": 426,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
-      "p90_horas": 0.07,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 87
+      "n_sem_primeiro_sync": 83
     },
     {
       "dia_iso": "2026-09-24",
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 87,
       "loggers": 928,
-      "sincronizados": 546,
+      "sincronizados": 547,
       "pendentes": 373,
       "sem_embarque": 153,
-      "cobranca_gru": 9,
+      "cobranca_gru": 8,
       "pedidos_pendentes": 42,
       "pct": 40.2,
-      "n_latencia": 482,
+      "n_latencia": 483,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 446
+      "n_sem_primeiro_sync": 445
     },
     {
       "dia_iso": "2026-09-25",

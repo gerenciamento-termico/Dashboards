@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T20:49:47",
+  "gerado_em": "2026-09-25T20:54:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 534,
+    "pendentes_janela": 528,
     "cobranca_gru_janela": 35,
     "sem_embarque_efetiva": 517,
     "com_embarque_efetiva": 7433,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 76,
-      "VTCLOG RIO GALEAO": 74,
+      "VTCLOG RIO GALEAO": 68,
       "RBR - RODOTEC": 40,
       "BEL - MH FROTA TRANSPORTE": 39,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
@@ -52,7 +52,7 @@
       "NAT - CSM CARGO": 23
     },
     "top10_ufs_pendencias": {
-      "RJ": 76,
+      "RJ": 70,
       "PA": 47,
       "AC": 40,
       "AL": 37,
@@ -64,9 +64,9 @@
       "MA": 23
     },
     "latencia": {
-      "n_agente": 6040,
+      "n_agente": 6047,
       "n_so_gru": 161,
-      "n_sem_primeiro_sync": 950,
+      "n_sem_primeiro_sync": 943,
       "media_horas": 1.2,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 75,
       "loggers": 868,
-      "sincronizados": 705,
-      "pendentes": 162,
+      "sincronizados": 711,
+      "pendentes": 156,
       "sem_embarque": 31,
       "cobranca_gru": 1,
       "pedidos_pendentes": 28,
-      "pct": 18.7,
-      "n_latencia": 632,
+      "pct": 18.0,
+      "n_latencia": 639,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 236
+      "n_sem_primeiro_sync": 229
     }
   ],
   "erros_validacao": {},

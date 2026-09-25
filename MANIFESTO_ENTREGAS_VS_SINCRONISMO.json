@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T10:51:03",
+  "gerado_em": "2026-09-25T10:58:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 675,
+    "pendentes_janela": 626,
     "cobranca_gru_janela": 40,
     "sem_embarque_efetiva": 765,
     "com_embarque_efetiva": 6682,
@@ -40,7 +40,7 @@
       "linhas": 1224
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 243,
+      "VTCLOG - GRU": 194,
       "SSA - LUTY LOG": 59,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
@@ -52,7 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 17
     },
     "top10_ufs_pendencias": {
-      "MG": 143,
+      "MG": 94,
       "SP": 74,
       "BA": 69,
       "TO": 46,
@@ -64,10 +64,10 @@
       "SE": 26
     },
     "latencia": {
-      "n_agente": 5221,
-      "n_so_gru": 159,
-      "n_sem_primeiro_sync": 1023,
-      "media_horas": 1.09,
+      "n_agente": 5268,
+      "n_so_gru": 160,
+      "n_sem_primeiro_sync": 975,
+      "media_horas": 1.08,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -260,8 +260,8 @@
       "media_horas": 0.04,
       "mediana_horas": 0.03,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 20,
-      "n_sem_primeiro_sync": 34
+      "n_sync_so_gru": 21,
+      "n_sem_primeiro_sync": 33
     },
     {
       "dia_iso": "2026-09-16",
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 89,
       "loggers": 949,
-      "sincronizados": 663,
-      "pendentes": 281,
+      "sincronizados": 712,
+      "pendentes": 232,
       "sem_embarque": 99,
       "cobranca_gru": 5,
       "pedidos_pendentes": 43,
-      "pct": 29.6,
-      "n_latencia": 588,
+      "pct": 24.4,
+      "n_latencia": 634,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
-      "p90_horas": 0.08,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 361
+      "n_sem_primeiro_sync": 315
     },
     {
       "dia_iso": "2026-09-25",
@@ -446,12 +446,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
       "pct": 70.5,
-      "n_latencia": 35,
-      "media_horas": 0.03,
+      "n_latencia": 36,
+      "media_horas": 0.04,
       "mediana_horas": 0.03,
-      "p90_horas": 0.07,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 94
+      "n_sem_primeiro_sync": 93
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T11:28:56",
+  "gerado_em": "2026-09-25T11:33:56",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 552,
+    "pendentes_janela": 539,
     "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 748,
     "com_embarque_efetiva": 6783,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 97,
-      "SSA - LUTY LOG": 59,
+      "SSA - LUTY LOG": 51,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
       "NAT - CSM CARGO": 33,
@@ -52,7 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 17
     },
     "top10_ufs_pendencias": {
-      "BA": 69,
+      "BA": 61,
       "TO": 46,
       "SP": 40,
       "AL": 37,
@@ -64,9 +64,9 @@
       "PE": 26
     },
     "latencia": {
-      "n_agente": 5437,
-      "n_so_gru": 165,
-      "n_sem_primeiro_sync": 902,
+      "n_agente": 5449,
+      "n_so_gru": 166,
+      "n_sem_primeiro_sync": 889,
       "media_horas": 1.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -298,8 +298,8 @@
       "media_horas": 1.15,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 8,
-      "n_sem_primeiro_sync": 65
+      "n_sync_so_gru": 9,
+      "n_sem_primeiro_sync": 64
     },
     {
       "dia_iso": "2026-09-18",
@@ -440,18 +440,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 18,
       "loggers": 230,
-      "sincronizados": 149,
-      "pendentes": 81,
+      "sincronizados": 162,
+      "pendentes": 68,
       "sem_embarque": 21,
       "cobranca_gru": 0,
       "pedidos_pendentes": 14,
-      "pct": 35.2,
-      "n_latencia": 141,
+      "pct": 29.6,
+      "n_latencia": 153,
       "media_horas": 0.04,
-      "mediana_horas": 0.03,
+      "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 89
+      "n_sem_primeiro_sync": 77
     }
   ],
   "erros_validacao": {},

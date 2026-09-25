@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T17:54:40",
+  "gerado_em": "2026-09-25T17:58:56",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 493,
+    "pendentes_janela": 491,
     "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 702,
     "com_embarque_efetiva": 7145,
@@ -47,7 +47,7 @@
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
       "PVH - RODOTEC": 33,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
-      "SSA - LUTY LOG": 21,
+      "SSA - LUTY LOG": 19,
       "BVB - J PIMENTEL S. CUNHA LTDA": 17,
       "VTCLOG - BSB": 17
     },
@@ -59,15 +59,15 @@
       "RO": 33,
       "SP": 32,
       "MG": 32,
-      "BA": 31,
+      "BA": 29,
       "SC": 27,
       "PA": 23
     },
     "latencia": {
-      "n_agente": 5834,
+      "n_agente": 5839,
       "n_so_gru": 161,
-      "n_sem_primeiro_sync": 868,
-      "media_horas": 1.25,
+      "n_sem_primeiro_sync": 863,
+      "media_horas": 1.24,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -440,18 +440,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 59,
       "loggers": 580,
-      "sincronizados": 491,
-      "pendentes": 89,
+      "sincronizados": 493,
+      "pendentes": 87,
       "sem_embarque": 52,
       "cobranca_gru": 0,
       "pedidos_pendentes": 32,
-      "pct": 15.3,
-      "n_latencia": 458,
+      "pct": 15.0,
+      "n_latencia": 463,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 122
+      "n_sem_primeiro_sync": 117
     }
   ],
   "erros_validacao": {},

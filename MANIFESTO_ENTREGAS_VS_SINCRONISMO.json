@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T10:33:49",
+  "gerado_em": "2026-09-25T10:38:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,10 +28,10 @@
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
     "pendentes_janela": 748,
-    "cobranca_gru_janela": 46,
+    "cobranca_gru_janela": 41,
     "sem_embarque_efetiva": 810,
     "com_embarque_efetiva": 6634,
-    "loggers_sem_lastsync": 151,
+    "loggers_sem_lastsync": 150,
     "nao_avaliados": 810,
     "pedidos_com_agente": 7576,
     "dtbtransporte": {
@@ -64,9 +64,9 @@
       "SE": 26
     },
     "latencia": {
-      "n_agente": 5109,
+      "n_agente": 5113,
       "n_so_gru": 158,
-      "n_sem_primeiro_sync": 1088,
+      "n_sem_primeiro_sync": 1084,
       "media_horas": 1.12,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -402,18 +402,18 @@
       "dia_full": "23/09/2026",
       "pedidos": 85,
       "loggers": 509,
-      "sincronizados": 443,
+      "sincronizados": 446,
       "pendentes": 54,
       "sem_embarque": 113,
-      "cobranca_gru": 12,
+      "cobranca_gru": 9,
       "pedidos_pendentes": 24,
       "pct": 10.6,
-      "n_latencia": 431,
+      "n_latencia": 433,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
-      "p90_horas": 0.07,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 78
+      "n_sem_primeiro_sync": 76
     },
     {
       "dia_iso": "2026-09-24",
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 88,
       "loggers": 929,
-      "sincronizados": 559,
+      "sincronizados": 561,
       "pendentes": 363,
       "sem_embarque": 119,
-      "cobranca_gru": 7,
+      "cobranca_gru": 5,
       "pedidos_pendentes": 41,
       "pct": 39.1,
-      "n_latencia": 495,
+      "n_latencia": 497,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 434
+      "n_sem_primeiro_sync": 432
     },
     {
       "dia_iso": "2026-09-25",

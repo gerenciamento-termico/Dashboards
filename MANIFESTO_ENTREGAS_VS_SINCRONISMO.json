@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T10:48:51",
+  "gerado_em": "2026-09-25T10:51:03",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 7577,
-    "pedidos_janela": 1101,
-    "loggers_ares_janela": 7158,
-    "loggers_ares_antes_dedup": 7445,
+    "pares_janela": 7579,
+    "pedidos_janela": 1103,
+    "loggers_ares_janela": 7160,
+    "loggers_ares_antes_dedup": 7447,
     "dedup_dia_logger": 81,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 682,
+    "pendentes_janela": 675,
     "cobranca_gru_janela": 40,
     "sem_embarque_efetiva": 765,
-    "com_embarque_efetiva": 6680,
+    "com_embarque_efetiva": 6682,
     "loggers_sem_lastsync": 151,
     "nao_avaliados": 765,
-    "pedidos_com_agente": 7577,
+    "pedidos_com_agente": 7579,
     "dtbtransporte": {
-      "consultados": 1101,
-      "mapeados": 1101,
-      "linhas": 1222
+      "consultados": 1103,
+      "mapeados": 1103,
+      "linhas": 1224
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 250,
+      "VTCLOG - GRU": 243,
       "SSA - LUTY LOG": 59,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
@@ -52,8 +52,8 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 17
     },
     "top10_ufs_pendencias": {
-      "MG": 151,
-      "SP": 73,
+      "MG": 143,
+      "SP": 74,
       "BA": 69,
       "TO": 46,
       "AL": 37,
@@ -64,10 +64,10 @@
       "SE": 26
     },
     "latencia": {
-      "n_agente": 5213,
+      "n_agente": 5221,
       "n_so_gru": 159,
-      "n_sem_primeiro_sync": 1029,
-      "media_horas": 1.1,
+      "n_sem_primeiro_sync": 1023,
+      "media_horas": 1.09,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -421,37 +421,37 @@
       "dia_full": "24/09/2026",
       "pedidos": 89,
       "loggers": 949,
-      "sincronizados": 655,
-      "pendentes": 289,
+      "sincronizados": 663,
+      "pendentes": 281,
       "sem_embarque": 99,
       "cobranca_gru": 5,
       "pedidos_pendentes": 43,
-      "pct": 30.5,
-      "n_latencia": 580,
+      "pct": 29.6,
+      "n_latencia": 588,
       "media_horas": 0.04,
-      "mediana_horas": 0.05,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 369
+      "n_sem_primeiro_sync": 361
     },
     {
       "dia_iso": "2026-09-25",
       "dia": "25/09",
       "dia_full": "25/09/2026",
-      "pedidos": 9,
-      "loggers": 127,
-      "sincronizados": 37,
-      "pendentes": 90,
+      "pedidos": 11,
+      "loggers": 129,
+      "sincronizados": 38,
+      "pendentes": 91,
       "sem_embarque": 1,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 9,
-      "pct": 70.9,
+      "pedidos_pendentes": 10,
+      "pct": 70.5,
       "n_latencia": 35,
       "media_horas": 0.03,
       "mediana_horas": 0.03,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 92
+      "n_sem_primeiro_sync": 94
     }
   ],
   "erros_validacao": {},

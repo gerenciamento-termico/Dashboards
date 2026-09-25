@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T09:29:14",
+  "gerado_em": "2026-09-25T09:33:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 684,
+    "pendentes_janela": 679,
     "cobranca_gru_janela": 57,
     "sem_embarque_efetiva": 839,
     "com_embarque_efetiva": 6533,
@@ -49,7 +49,7 @@
       "AJU - CASSIMIRO TRANSPORTES": 26,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
       "BVB - J PIMENTEL S. CUNHA LTDA": 17,
-      "VTCLOG RIO GALEAO": 17
+      "RBR - RODOTEC": 15
     },
     "top10_ufs_pendencias": {
       "MG": 227,
@@ -64,9 +64,9 @@
       "BA": 19
     },
     "latencia": {
-      "n_agente": 5062,
+      "n_agente": 5067,
       "n_so_gru": 156,
-      "n_sem_primeiro_sync": 1036,
+      "n_sem_primeiro_sync": 1031,
       "media_horas": 1.13,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 87,
       "loggers": 928,
-      "sincronizados": 541,
-      "pendentes": 378,
+      "sincronizados": 546,
+      "pendentes": 373,
       "sem_embarque": 153,
       "cobranca_gru": 9,
       "pedidos_pendentes": 42,
-      "pct": 40.7,
-      "n_latencia": 477,
+      "pct": 40.2,
+      "n_latencia": 482,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 451
+      "n_sem_primeiro_sync": 446
     },
     {
       "dia_iso": "2026-09-25",

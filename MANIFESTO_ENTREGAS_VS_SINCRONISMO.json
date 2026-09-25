@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T11:12:55",
+  "gerado_em": "2026-09-25T11:18:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 616,
+    "pendentes_janela": 592,
     "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 799,
     "com_embarque_efetiva": 6731,
@@ -40,7 +40,7 @@
       "linhas": 1229
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 157,
+      "VTCLOG - GRU": 133,
       "SSA - LUTY LOG": 59,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "AJU - CASSIMIRO TRANSPORTES": 43,
@@ -54,19 +54,19 @@
     "top10_ufs_pendencias": {
       "SP": 74,
       "BA": 69,
-      "MG": 57,
       "TO": 46,
       "SE": 43,
       "AL": 37,
       "RN": 34,
+      "MG": 33,
       "RO": 32,
       "SC": 27,
       "PE": 26
     },
     "latencia": {
-      "n_agente": 5328,
-      "n_so_gru": 164,
-      "n_sem_primeiro_sync": 960,
+      "n_agente": 5351,
+      "n_so_gru": 165,
+      "n_sem_primeiro_sync": 936,
       "media_horas": 1.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -317,8 +317,8 @@
       "media_horas": 0.42,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 17,
-      "n_sem_primeiro_sync": 58
+      "n_sync_so_gru": 18,
+      "n_sem_primeiro_sync": 57
     },
     {
       "dia_iso": "2026-09-19",
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 89,
       "loggers": 949,
-      "sincronizados": 753,
-      "pendentes": 194,
+      "sincronizados": 777,
+      "pendentes": 170,
       "sem_embarque": 99,
       "cobranca_gru": 2,
       "pedidos_pendentes": 42,
-      "pct": 20.4,
-      "n_latencia": 670,
+      "pct": 17.9,
+      "n_latencia": 693,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
-      "p90_horas": 0.07,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 279
+      "n_sem_primeiro_sync": 256
     },
     {
       "dia_iso": "2026-09-25",

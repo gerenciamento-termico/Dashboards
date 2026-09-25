@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T10:17:33",
+  "gerado_em": "2026-09-25T10:23:49",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 7574,
-    "pedidos_janela": 1098,
-    "loggers_ares_janela": 7155,
-    "loggers_ares_antes_dedup": 7442,
+    "pares_janela": 7575,
+    "pedidos_janela": 1099,
+    "loggers_ares_janela": 7156,
+    "loggers_ares_antes_dedup": 7443,
     "dedup_dia_logger": 81,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 748,
+    "pendentes_janela": 749,
     "cobranca_gru_janela": 46,
     "sem_embarque_efetiva": 809,
-    "com_embarque_efetiva": 6633,
-    "loggers_sem_lastsync": 150,
+    "com_embarque_efetiva": 6634,
+    "loggers_sem_lastsync": 151,
     "nao_avaliados": 809,
-    "pedidos_com_agente": 7574,
+    "pedidos_com_agente": 7575,
     "dtbtransporte": {
-      "consultados": 1098,
-      "mapeados": 1098,
-      "linhas": 1219
+      "consultados": 1099,
+      "mapeados": 1099,
+      "linhas": 1220
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 325,
+      "VTCLOG - GRU": 326,
       "SSA - LUTY LOG": 50,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 5108,
       "n_so_gru": 158,
-      "n_sem_primeiro_sync": 1088,
+      "n_sem_primeiro_sync": 1089,
       "media_horas": 1.12,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-25",
       "dia": "25/09",
       "dia_full": "25/09/2026",
-      "pedidos": 7,
-      "loggers": 100,
+      "pedidos": 8,
+      "loggers": 101,
       "sincronizados": 20,
-      "pendentes": 80,
+      "pendentes": 81,
       "sem_embarque": 26,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 7,
-      "pct": 80.0,
+      "pedidos_pendentes": 8,
+      "pct": 80.2,
       "n_latencia": 19,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 81
+      "n_sem_primeiro_sync": 82
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T10:13:49",
+  "gerado_em": "2026-09-25T10:17:33",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 749,
-    "cobranca_gru_janela": 47,
+    "pendentes_janela": 748,
+    "cobranca_gru_janela": 46,
     "sem_embarque_efetiva": 809,
     "com_embarque_efetiva": 6633,
-    "loggers_sem_lastsync": 151,
+    "loggers_sem_lastsync": 150,
     "nao_avaliados": 809,
     "pedidos_com_agente": 7574,
     "dtbtransporte": {
@@ -40,7 +40,7 @@
       "linhas": 1219
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 326,
+      "VTCLOG - GRU": 325,
       "SSA - LUTY LOG": 50,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 46,
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "MG": 227,
-      "SP": 73,
+      "SP": 72,
       "BA": 60,
       "TO": 46,
       "AL": 37,
@@ -64,9 +64,9 @@
       "SE": 26
     },
     "latencia": {
-      "n_agente": 5107,
+      "n_agente": 5108,
       "n_so_gru": 158,
-      "n_sem_primeiro_sync": 1089,
+      "n_sem_primeiro_sync": 1088,
       "media_horas": 1.12,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 88,
       "loggers": 929,
-      "sincronizados": 556,
-      "pendentes": 365,
+      "sincronizados": 558,
+      "pendentes": 364,
       "sem_embarque": 118,
-      "cobranca_gru": 8,
-      "pedidos_pendentes": 43,
-      "pct": 39.3,
-      "n_latencia": 493,
+      "cobranca_gru": 7,
+      "pedidos_pendentes": 42,
+      "pct": 39.2,
+      "n_latencia": 494,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 436
+      "n_sem_primeiro_sync": 435
     },
     {
       "dia_iso": "2026-09-25",

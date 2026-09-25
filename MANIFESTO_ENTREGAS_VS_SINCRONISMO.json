@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T11:43:56",
+  "gerado_em": "2026-09-25T11:46:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 538,
+    "pendentes_janela": 537,
     "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 748,
     "com_embarque_efetiva": 6783,
@@ -47,7 +47,7 @@
       "NAT - CSM CARGO": 33,
       "PVH - RODOTEC": 32,
       "AJU - CASSIMIRO TRANSPORTES": 29,
-      "VTCLOG - REC": 26,
+      "VTCLOG - REC": 25,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
       "BVB - J PIMENTEL S. CUNHA LTDA": 17
     },
@@ -61,7 +61,7 @@
       "MG": 31,
       "SE": 29,
       "SC": 27,
-      "PE": 26
+      "PE": 25
     },
     "latencia": {
       "n_agente": 5450,
@@ -383,12 +383,12 @@
       "dia_full": "22/09/2026",
       "pedidos": 104,
       "loggers": 704,
-      "sincronizados": 671,
-      "pendentes": 29,
+      "sincronizados": 672,
+      "pendentes": 28,
       "sem_embarque": 119,
       "cobranca_gru": 4,
       "pedidos_pendentes": 25,
-      "pct": 4.1,
+      "pct": 4.0,
       "n_latencia": 608,
       "media_horas": 0.07,
       "mediana_horas": 0.04,

@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "25/09/2026 20:43:00",
+  "geradoEm": "25/09/2026 20:53:19",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -112,8 +112,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           372,
           501,
           622,
-          632,
-          941,
+          630,
+          943,
           1614,
           4224
         ]
@@ -144,11 +144,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           172,
           175,
           203,
-          231,
+          233,
           250,
           366,
           372,
-          603,
+          601,
           622,
           1036,
           4120
@@ -276,12 +276,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           172,
           175,
           206,
-          239,
+          241,
           250,
           372,
           473,
           622,
-          628,
+          626,
           1036,
           4179
         ]
@@ -313,10 +313,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           175,
           203,
           250,
-          312,
+          314,
           372,
           392,
-          607,
+          605,
           622,
           1489,
           4145
@@ -349,10 +349,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           183,
           203,
           258,
-          289,
+          291,
           368,
           372,
-          603,
+          601,
           622,
           1160,
           4120
@@ -387,9 +387,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           255,
           366,
           372,
-          603,
+          601,
           622,
-          794,
+          796,
           1037,
           4140
         ]
@@ -601,11 +601,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           175,
           206,
           250,
-          320,
+          322,
           372,
           499,
           622,
-          632,
+          630,
           1489,
           4204
         ]
@@ -637,11 +637,11 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           183,
           206,
           258,
-          297,
+          299,
           372,
           475,
           622,
-          628,
+          626,
           1160,
           4179
         ]
@@ -676,8 +676,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           372,
           473,
           622,
-          628,
-          802,
+          626,
+          804,
           1037,
           4199
         ]
@@ -709,10 +709,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           183,
           203,
           258,
-          370,
+          372,
           372,
           394,
-          607,
+          605,
           622,
           1613,
           4145
@@ -747,9 +747,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           255,
           372,
           392,
-          607,
+          605,
           622,
-          875,
+          877,
           1490,
           4165
         ]
@@ -783,9 +783,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           263,
           368,
           372,
-          603,
+          601,
           622,
-          852,
+          854,
           1161,
           4140
         ]
@@ -952,10 +952,10 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           206,
           258,
           372,
-          378,
+          380,
           501,
           622,
-          632,
+          630,
           1613,
           4204
         ]
@@ -990,8 +990,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           372,
           499,
           622,
-          632,
-          883,
+          630,
+          885,
           1490,
           4224
         ]
@@ -1026,8 +1026,8 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           372,
           475,
           622,
-          628,
-          860,
+          626,
+          862,
           1161,
           4199
         ]
@@ -1061,9 +1061,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           263,
           372,
           394,
-          607,
+          605,
           622,
-          933,
+          935,
           1614,
           4165
         ]

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T09:58:47",
+  "gerado_em": "2026-09-25T10:03:47",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -31,7 +31,7 @@
     "cobranca_gru_janela": 47,
     "sem_embarque_efetiva": 805,
     "com_embarque_efetiva": 6571,
-    "loggers_sem_lastsync": 139,
+    "loggers_sem_lastsync": 133,
     "nao_avaliados": 805,
     "pedidos_com_agente": 7508,
     "dtbtransporte": {

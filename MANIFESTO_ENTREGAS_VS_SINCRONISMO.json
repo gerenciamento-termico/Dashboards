@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-25T21:05:00",
+  "gerado_em": "2026-09-25T21:10:01",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 486,
+    "pendentes_janela": 479,
     "cobranca_gru_janela": 35,
     "sem_embarque_efetiva": 517,
     "com_embarque_efetiva": 7433,
@@ -46,10 +46,10 @@
       "MCZ - MCZ EXPRESS SERVICE LTDA": 37,
       "PVH - RODOTEC": 33,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 27,
-      "VTCLOG RIO GALEAO": 26,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
       "SLZ - REIS CAVALCANTE EXPRESSO": 23,
-      "NAT - CSM CARGO": 23
+      "NAT - CSM CARGO": 23,
+      "VTCLOG RIO GALEAO": 19
     },
     "top10_ufs_pendencias": {
       "PA": 47,
@@ -57,16 +57,16 @@
       "AL": 37,
       "RO": 33,
       "MG": 32,
-      "RJ": 28,
       "SC": 27,
       "TO": 27,
       "RN": 24,
-      "MA": 23
+      "MA": 23,
+      "RJ": 21
     },
     "latencia": {
-      "n_agente": 6089,
+      "n_agente": 6097,
       "n_so_gru": 161,
-      "n_sem_primeiro_sync": 901,
+      "n_sem_primeiro_sync": 893,
       "media_horas": 1.19,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -389,12 +389,12 @@
       "cobranca_gru": 4,
       "pedidos_pendentes": 21,
       "pct": 3.4,
-      "n_latencia": 612,
+      "n_latencia": 613,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 92
+      "n_sem_primeiro_sync": 91
     },
     {
       "dia_iso": "2026-09-23",
@@ -440,18 +440,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 75,
       "loggers": 868,
-      "sincronizados": 753,
-      "pendentes": 114,
+      "sincronizados": 760,
+      "pendentes": 107,
       "sem_embarque": 31,
       "cobranca_gru": 1,
       "pedidos_pendentes": 28,
-      "pct": 13.1,
-      "n_latencia": 680,
+      "pct": 12.3,
+      "n_latencia": 687,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 188
+      "n_sem_primeiro_sync": 181
     }
   ],
   "erros_validacao": {},

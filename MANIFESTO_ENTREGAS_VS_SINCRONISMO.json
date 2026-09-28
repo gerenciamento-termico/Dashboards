@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T16:40:16",
+  "gerado_em": "2026-09-28T16:40:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8075,
-    "pedidos_janela": 1155,
-    "loggers_ares_janela": 7634,
-    "loggers_ares_antes_dedup": 7946,
+    "pares_janela": 8076,
+    "pedidos_janela": 1156,
+    "loggers_ares_janela": 7635,
+    "loggers_ares_antes_dedup": 7947,
     "dedup_dia_logger": 106,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
     "pendentes_janela": 484,
     "cobranca_gru_janela": 60,
-    "sem_embarque_efetiva": 594,
-    "com_embarque_efetiva": 7352,
+    "sem_embarque_efetiva": 593,
+    "com_embarque_efetiva": 7354,
     "loggers_sem_lastsync": 79,
-    "nao_avaliados": 594,
-    "pedidos_com_agente": 8075,
+    "nao_avaliados": 593,
+    "pedidos_com_agente": 8076,
     "dtbtransporte": {
-      "consultados": 1155,
-      "mapeados": 1154,
-      "linhas": 1279
+      "consultados": 1156,
+      "mapeados": 1155,
+      "linhas": 1280
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 154,
@@ -64,7 +64,7 @@
       "PI": 18
     },
     "latencia": {
-      "n_agente": 6055,
+      "n_agente": 6056,
       "n_so_gru": 109,
       "n_sem_primeiro_sync": 882,
       "media_horas": 1.63,
@@ -438,15 +438,15 @@
       "dia_iso": "2026-09-28",
       "dia": "28/09",
       "dia_full": "28/09/2026",
-      "pedidos": 29,
-      "loggers": 381,
-      "sincronizados": 200,
+      "pedidos": 31,
+      "loggers": 382,
+      "sincronizados": 201,
       "pendentes": 180,
       "sem_embarque": 3,
       "cobranca_gru": 1,
       "pedidos_pendentes": 22,
-      "pct": 47.2,
-      "n_latencia": 175,
+      "pct": 47.1,
+      "n_latencia": 176,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,

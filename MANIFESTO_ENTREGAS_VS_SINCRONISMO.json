@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T13:43:29",
+  "gerado_em": "2026-09-28T13:48:32",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 318,
-    "cobranca_gru_janela": 56,
+    "pendentes_janela": 316,
+    "cobranca_gru_janela": 58,
     "sem_embarque_efetiva": 683,
     "com_embarque_efetiva": 6946,
     "loggers_sem_lastsync": 77,
@@ -40,7 +40,7 @@
       "linhas": 1248
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 55,
+      "VTCLOG - GRU": 53,
       "RBR - RODOTEC": 40,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 23,
@@ -59,15 +59,15 @@
       "BA": 20,
       "PR": 19,
       "SP": 19,
-      "MG": 19,
+      "MG": 17,
       "PI": 16,
       "RJ": 15
     },
     "latencia": {
-      "n_agente": 5818,
-      "n_so_gru": 114,
+      "n_agente": 5819,
+      "n_so_gru": 113,
       "n_sem_primeiro_sync": 702,
-      "media_horas": 1.49,
+      "media_horas": 1.52,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -180,11 +180,11 @@
       "cobranca_gru": 8,
       "pedidos_pendentes": 12,
       "pct": 3.1,
-      "n_latencia": 386,
-      "media_horas": 2.72,
+      "n_latencia": 387,
+      "media_horas": 3.21,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 21,
+      "n_sync_so_gru": 20,
       "n_sem_primeiro_sync": 39
     },
     {
@@ -365,11 +365,11 @@
       "pedidos": 92,
       "loggers": 953,
       "sincronizados": 858,
-      "pendentes": 75,
+      "pendentes": 73,
       "sem_embarque": 52,
-      "cobranca_gru": 20,
+      "cobranca_gru": 22,
       "pedidos_pendentes": 29,
-      "pct": 7.9,
+      "pct": 7.7,
       "n_latencia": 771,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

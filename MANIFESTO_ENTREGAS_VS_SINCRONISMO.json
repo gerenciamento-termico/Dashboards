@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T14:44:28",
+  "gerado_em": "2026-09-28T14:48:37",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 304,
+    "pendentes_janela": 303,
     "cobranca_gru_janela": 64,
     "sem_embarque_efetiva": 683,
     "com_embarque_efetiva": 6946,
-    "loggers_sem_lastsync": 77,
+    "loggers_sem_lastsync": 76,
     "nao_avaliados": 683,
     "pedidos_com_agente": 7757,
     "dtbtransporte": {
@@ -48,25 +48,25 @@
       "THE - AERONEIVA EXPRESS": 15,
       "VTCLOG RIO GALEAO": 13,
       "BVB - J PIMENTEL S. CUNHA LTDA": 9,
-      "SSA - LUTY LOG": 9,
-      "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 8
+      "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 8,
+      "PVH - RODOTEC": 8
     },
     "top10_ufs_pendencias": {
       "AC": 40,
       "TO": 27,
       "SC": 25,
       "MA": 23,
-      "BA": 20,
       "PR": 19,
+      "BA": 19,
       "SP": 19,
       "PI": 16,
       "RJ": 15,
       "RR": 9
     },
     "latencia": {
-      "n_agente": 5834,
+      "n_agente": 5835,
       "n_so_gru": 108,
-      "n_sem_primeiro_sync": 692,
+      "n_sem_primeiro_sync": 691,
       "media_horas": 1.67,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -345,18 +345,18 @@
       "dia_full": "23/09/2026",
       "pedidos": 86,
       "loggers": 510,
-      "sincronizados": 482,
-      "pendentes": 24,
+      "sincronizados": 483,
+      "pendentes": 23,
       "sem_embarque": 43,
       "cobranca_gru": 4,
       "pedidos_pendentes": 17,
-      "pct": 4.7,
-      "n_latencia": 467,
+      "pct": 4.5,
+      "n_latencia": 468,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 42
+      "n_sem_primeiro_sync": 41
     },
     {
       "dia_iso": "2026-09-24",

@@ -242,9 +242,12 @@ th[data-s]:hover{color:var(--blue)}
 th[data-s]::after{content:" \2195";opacity:.35}
 th[data-s].asc::after{content:" \25B2";opacity:1;color:var(--blue)}
 th[data-s].desc::after{content:" \25BC";opacity:1;color:var(--blue)}
-.frow th{top:38px;padding:5px 6px;height:auto;background:#f1f5f9;border-bottom:1px solid var(--line)}
-.frow input{width:100%;min-width:54px;background:#fff;border:1px solid var(--line);border-radius:6px;color:var(--tx);padding:4px 7px;font-size:.7rem;font-family:inherit}
-.frow input:focus{outline:none;border-color:var(--blue)}
+.colf{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:10px 12px;margin-bottom:10px;box-shadow:var(--shadow)}
+.colf label{display:block;font-size:.58rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;font-weight:700;white-space:nowrap}
+.colf input{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:7px;color:var(--tx);padding:6px 8px;font-size:.74rem;font-family:inherit}
+.colf input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+@media(max-width:1280px){.colf{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:860px){.colf{display:none}}
 td{padding:9px;border-top:1px solid var(--line);white-space:nowrap;vertical-align:middle}
 tbody tr:nth-child(even) td{background:#fafbfd}
 tbody tr:hover td{background:#eff6ff}
@@ -353,25 +356,24 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 
 <div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span class="dica">Dica: clique no t&iacute;tulo da coluna para ordenar (menor &rarr; maior / maior &rarr; menor)</span></div>
 
+<div class="colf">
+  <div><label>Pedido</label><input class="cf" data-col="p" placeholder="pedido"></div>
+  <div><label>AWB</label><input class="cf" data-col="awb" placeholder="AWB"></div>
+  <div><label>Rota</label><input class="cf" data-col="rota" placeholder="GRU, REC..."></div>
+  <div><label>CIA</label><input class="cf" data-col="cia" placeholder="cia"></div>
+  <div><label>Base / Agente</label><input class="cf" data-col="ag" placeholder="base / agente"></div>
+  <div><label>Desembarque</label><input class="cf" data-col="de" placeholder="dd/mm"></div>
+  <div><label>Retirada</label><input class="cf" data-col="re" placeholder="dd/mm"></div>
+  <div><label>&#8805; Horas</label><input class="cf" data-col="h" placeholder="ex.: 24"></div>
+  <div><label>&#8805; Noites</label><input class="cf" data-col="n" placeholder="ex.: 1"></div>
+</div>
+
 <div class="tblwrap">
 <table>
   <thead><tr>
     <th data-s="p">Pedido</th><th data-s="awb">AWB</th><th data-s="rota">Rota</th><th data-s="cia">CIA</th><th data-s="ag">Agente / Base</th>
     <th data-s="vol" title="Volumes da AWB">Vol.</th>
     <th data-s="de">Desembarque</th><th data-s="re">Retirada</th><th data-s="h">Horas</th><th data-s="n">Noites</th><th data-s="st">Status</th>
-  </tr>
-  <tr class="frow">
-    <th><input class="cf" data-col="p" placeholder="pedido"></th>
-    <th><input class="cf" data-col="awb" placeholder="AWB"></th>
-    <th><input class="cf" data-col="rota" placeholder="GRU, REC..."></th>
-    <th><input class="cf" data-col="cia" placeholder="cia"></th>
-    <th><input class="cf" data-col="ag" placeholder="base / agente"></th>
-    <th></th>
-    <th><input class="cf" data-col="de" placeholder="dd/mm"></th>
-    <th><input class="cf" data-col="re" placeholder="dd/mm"></th>
-    <th><input class="cf" data-col="h" placeholder="&#8805; h"></th>
-    <th><input class="cf" data-col="n" placeholder="&#8805; n"></th>
-    <th></th>
   </tr></thead>
   <tbody id="tb"></tbody>
 </table>

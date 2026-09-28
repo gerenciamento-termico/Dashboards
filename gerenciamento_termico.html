@@ -264,6 +264,9 @@ body{
 .card:nth-child(8){animation-delay:1.15s}
 .card:nth-child(9){animation-delay:1.25s}
 .card:nth-child(10){animation-delay:1.35s}
+.card:nth-child(11){animation-delay:1.45s}
+.card:nth-child(12){animation-delay:1.55s}
+.card:nth-child(13){animation-delay:1.65s}
 
 .card::before{
   content:'';position:absolute;
@@ -503,7 +506,7 @@ body{
 <main class="container">
   <div class="section-header">
     <div class="section-label"><i class="fas fa-th-large" style="margin-right:0.4rem"></i> Paineis Gerenciais / Operacionais</div>
-    <div class="section-count">7 ativos</div>
+    <div class="section-count" id="card-count">13 ativos</div>
   </div>
 
   <div class="grid" id="cardGrid">
@@ -684,6 +687,112 @@ body{
       </div>
     </div>
 
+    <!-- Card 8 -->
+    <div class="card" data-search="retirada aeroporto desembarque awb agente carga monitorada datalogger sexta fim de semana criticos volumetria" onclick="window.open('https://gerenciamento-termico.github.io/Dashboards/RETIRADA_AEROPORTO.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-plane-arrival"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Retirada no Aeroporto</h3>
+      <p>Cargas desembarcadas no aeroporto de destino versus retirada pelo agente. Críticos ≥ 24h, volumetria por AWB e ponto crítico de atenção nas sextas-feiras.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-plane-arrival" style="margin-right:0.3rem;font-size:0.6rem"></i>Desembarque x Retirada</span>
+        <span class="tag"><i class="fas fa-triangle-exclamation" style="margin-right:0.3rem;font-size:0.6rem"></i>Críticos ≥ 24h</span>
+        <span class="tag"><i class="fas fa-calendar-week" style="margin-right:0.3rem;font-size:0.6rem"></i>Sextas-feiras</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
+    <!-- Card 9 -->
+    <div class="card" data-search="indicador vtcbox caixa vtc box relatorio analitico csv xlsx" onclick="window.open('https://gerenciamento-termico.github.io/Dashboards/INDICADOR_VTCBOX.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-box"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Indicador VTCBOX</h3>
+      <p>Acompanhamento dedicado das caixas VTCBOX com relatório analítico exportável.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-box" style="margin-right:0.3rem;font-size:0.6rem"></i>VTCBOX</span>
+        <span class="tag"><i class="fas fa-file-export" style="margin-right:0.3rem;font-size:0.6rem"></i>CSV/XLSX</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
+    <!-- Card 10 -->
+    <div class="card" data-search="indicador caixa velha 130l relatorio analitico csv xlsx" onclick="window.open('https://gerenciamento-termico.github.io/Dashboards/INDICADOR_CAIXA_VELHA_130L.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-box-archive"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Indicador Caixa Velha 130L</h3>
+      <p>Acompanhamento dedicado das caixas velhas 130L com relatório analítico exportável.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-box-archive" style="margin-right:0.3rem;font-size:0.6rem"></i>130L</span>
+        <span class="tag"><i class="fas fa-file-export" style="margin-right:0.3rem;font-size:0.6rem"></i>CSV/XLSX</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
+    <!-- Card 11 -->
+    <div class="card" data-search="indicador caixa 33l relatorio analitico csv xlsx" onclick="window.open('https://gerenciamento-termico.github.io/Dashboards/INDICADOR_CAIXA_33L.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-cube"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Indicador Caixa 33L</h3>
+      <p>Acompanhamento dedicado das caixas 33L com relatório analítico exportável.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-cube" style="margin-right:0.3rem;font-size:0.6rem"></i>33L</span>
+        <span class="tag"><i class="fas fa-file-export" style="margin-right:0.3rem;font-size:0.6rem"></i>CSV/XLSX</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
+    <!-- Card 12 -->
+    <div class="card" data-search="indicador caixa 42l relatorio analitico csv xlsx" onclick="window.open('https://gerenciamento-termico.github.io/Dashboards/INDICADOR_CAIXA_42L.html','_blank')">
+      <div class="card-top">
+        <div class="card-icon-wrap">
+          <div class="card-icon-glow"></div>
+          <div class="card-icon"><i class="fas fa-cubes"></i></div>
+        </div>
+        <div class="card-status"><i class="fas fa-circle"></i> Ao Vivo</div>
+      </div>
+      <h3>Indicador Caixa 42L</h3>
+      <p>Acompanhamento dedicado das caixas 42L com relatório analítico exportável.</p>
+      <div class="card-tags">
+        <span class="tag"><i class="fas fa-cubes" style="margin-right:0.3rem;font-size:0.6rem"></i>42L</span>
+        <span class="tag"><i class="fas fa-file-export" style="margin-right:0.3rem;font-size:0.6rem"></i>CSV/XLSX</span>
+      </div>
+      <div class="card-footer">
+        <span class="card-link"><span>Abrir Dashboard</span> <i class="fas fa-arrow-right" style="font-size:0.75rem"></i></span>
+        <div class="card-arrow"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+    </div>
+
   </div>
 </main>
 
@@ -702,6 +811,9 @@ document.querySelectorAll('.card').forEach(card => {
     card.style.setProperty('--mouse-y', (e.clientY - rect.top) + 'px');
   });
 });
+
+// Contador dinamico de paineis
+document.getElementById('card-count').textContent = document.querySelectorAll('.card').length + ' ativos';
 
 // Search filter
 const searchInput = document.getElementById('searchInput');

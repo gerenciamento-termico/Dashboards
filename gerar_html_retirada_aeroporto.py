@@ -146,6 +146,7 @@ def build_model(raw: list[dict]) -> dict:
         },
         "ultima_sexta": ultima_sexta.strftime("%d/%m"),
         "destinos": sorted({r["d"] for r in rows if r["d"]}),
+        "bases": sorted({r["ag"] for r in rows if r["ag"]}),
     }
 
 
@@ -195,20 +196,28 @@ h1 .air{color:var(--cyan)}
 .kpi.vermelho .v{color:var(--red)} .kpi.cy .v{color:var(--cyan)} .kpi.gr .v{color:var(--green)} .kpi.pu .v{color:var(--purple)}
 
 /* filtros */
-.fbar{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1fr auto auto;gap:8px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:14px;align-items:end}
+.fbar{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:14px;margin-bottom:14px;align-items:end}
 .fbar label{display:block;font-size:.62rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;font-weight:700}
-.fbar input,.fbar select{width:100%;background:var(--bg1);border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:8px 10px;font-size:.82rem;font-family:inherit}
+.fbar input,.fbar select{width:100%;background:var(--bg1);border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:8px 10px;font-size:.82rem;font-family:inherit;max-width:100%}
+.fbar select{text-overflow:ellipsis}
 .fbar input:focus,.fbar select:focus{outline:none;border-color:var(--cyan)}
+.fbar .low{display:flex;gap:10px;align-items:center;justify-content:flex-end}
 .btn{background:var(--panel2);border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:8px 14px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit}
 .btn:hover{border-color:var(--cyan);color:var(--cyan)}
-.chk{display:flex;align-items:center;gap:6px;font-size:.75rem;font-weight:700;color:var(--orange);white-space:nowrap;padding-bottom:8px;cursor:pointer}
+.fbar label.chk{display:flex;align-items:center;gap:7px;font-size:.75rem;font-weight:800;color:var(--orange);white-space:nowrap;margin:0 0 8px;padding:0;text-transform:none;letter-spacing:0;cursor:pointer;align-self:end}
+.fbar label.chk input{width:auto}
 .cnt{font-size:.76rem;color:var(--tx2);margin:0 2px 8px}
 
 /* tabela */
-.tblwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:auto}
-table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:900px}
-th{position:sticky;top:0;background:var(--panel2);color:var(--tx2);text-transform:uppercase;font-size:.64rem;letter-spacing:.5px;padding:10px 9px;text-align:left;white-space:nowrap;z-index:2}
+.tblwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:auto;max-height:72vh}
+table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:980px}
+th{position:sticky;top:0;height:36px;background:var(--panel2);color:var(--tx2);text-transform:uppercase;font-size:.64rem;letter-spacing:.5px;padding:8px 9px;text-align:left;white-space:nowrap;z-index:2}
+.frow th{top:36px;padding:5px 6px;height:auto;background:#14283f;border-bottom:1px solid var(--line)}
+.frow input{width:100%;min-width:54px;background:var(--bg1);border:1px solid var(--line);border-radius:6px;color:var(--tx);padding:4px 7px;font-size:.7rem;font-family:inherit}
+.frow input:focus{outline:none;border-color:var(--cyan)}
 td{padding:9px;border-top:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+tbody tr:nth-child(even) td{background:rgba(255,255,255,.015)}
+tbody tr:hover td{background:rgba(57,194,255,.07)}
 tr.crit td{background:rgba(255,93,108,.10)}
 tr.warn td{background:rgba(255,176,32,.07)}
 .badge{display:inline-block;font-size:.62rem;font-weight:800;border-radius:7px;padding:2px 8px;letter-spacing:.4px}
@@ -267,21 +276,35 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 
 <div class="fbar">
   <div><label>Busca (pedido / AWB / agente / CIA)</label><input id="f-busca" type="text" placeholder="Ex.: 569729, RODOTEC..."></div>
-  <div><label>Destino</label><select id="f-dest"><option value="">Todos</option>__DESTINOS__</select></div>
+  <div><label>Base / Agente</label><select id="f-base"><option value="">Todas as bases</option>__BASES__</select></div>
+  <div><label>Destino (aeroporto)</label><select id="f-dest"><option value="">Todos</option>__DESTINOS__</select></div>
   <div><label>Status</label><select id="f-st"><option value="">Todos</option><option value="A" selected>Aguardando retirada</option><option value="R">Retirados</option></select></div>
   <div><label>Per&iacute;odo (desembarque)</label><select id="f-per"><option value="7">7 dias</option><option value="15" selected>15 dias</option><option value="30">30 dias</option></select></div>
   <div><label>Ordena&ccedil;&atilde;o</label><select id="f-ord"><option value="h">Mais horas no aeroporto</option><option value="dn">Desembarque recente</option><option value="da">Desembarque antigo</option></select></div>
   <label class="chk"><input type="checkbox" id="f-sx"> S&oacute; sextas</label>
-  <div style="display:flex;gap:8px"><button class="btn" onclick="limpar()">Limpar</button><button class="btn" onclick="baixarCsv()">CSV</button></div>
+  <div class="low"><button class="btn" onclick="limpar()">Limpar</button><button class="btn" onclick="baixarCsv()">CSV</button></div>
 </div>
 <div class="cnt" id="cnt"></div>
 
 <div class="tblwrap">
 <table>
   <thead><tr>
-    <th>Pedido</th><th>AWB</th><th>Rota</th><th>CIA</th><th>Agente / T&eacute;cnico</th>
+    <th>Pedido</th><th>AWB</th><th>Rota</th><th>CIA</th><th>Agente / Base</th>
     <th title="Volumes da AWB">Vol.</th>
     <th>Desembarque</th><th>Retirada</th><th>Horas</th><th>Noites</th><th>Status</th>
+  </tr>
+  <tr class="frow">
+    <th><input class="cf" data-col="p" placeholder="pedido"></th>
+    <th><input class="cf" data-col="awb" placeholder="AWB"></th>
+    <th><input class="cf" data-col="rota" placeholder="GRU, REC..."></th>
+    <th><input class="cf" data-col="cia" placeholder="cia"></th>
+    <th><input class="cf" data-col="ag" placeholder="base / agente"></th>
+    <th></th>
+    <th><input class="cf" data-col="de" placeholder="dd/mm"></th>
+    <th><input class="cf" data-col="re" placeholder="dd/mm"></th>
+    <th><input class="cf" data-col="h" placeholder="&#8805; h"></th>
+    <th><input class="cf" data-col="n" placeholder="&#8805; n"></th>
+    <th></th>
   </tr></thead>
   <tbody id="tb"></tbody>
 </table>
@@ -304,20 +327,41 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 if (new Date().getDay() === 5) document.getElementById("friday-banner").classList.add("on");
 
 let VIEW = [];
+function matchCols(r, colf){
+  for (const [c, v] of colf){
+    if (c === "h"){ const t = parseFloat(v.replace(",", ".")); if (isNaN(t) || r.h < t) return false; continue; }
+    if (c === "n"){ const t = parseInt(v, 10); if (isNaN(t) || r.n < t) return false; continue; }
+    let alvo;
+    if (c === "rota") alvo = r.o + " " + r.d + " " + r.o + r.d;
+    else if (c === "de") alvo = fmt(r.de);
+    else if (c === "re") alvo = fmt(r.re);
+    else alvo = String(r[c] || "");
+    if (!alvo.toLowerCase().includes(v)) return false;
+  }
+  return true;
+}
 function apply(){
   const q  = document.getElementById("f-busca").value.trim().toLowerCase();
+  const ba = document.getElementById("f-base").value;
   const de = document.getElementById("f-dest").value;
   const st = document.getElementById("f-st").value;
   const per= parseInt(document.getElementById("f-per").value, 10);
   const so = document.getElementById("f-sx").checked;
   const ord= document.getElementById("f-ord").value;
   const corte = new Date(Date.now() - per*86400000);
+  const colf = [];
+  document.querySelectorAll(".cf").forEach(i => {
+    const v = i.value.trim().toLowerCase();
+    if (v) colf.push([i.dataset.col, v]);
+  });
 
   VIEW = R.filter(r => {
     if (new Date(r.de) < corte) return false;
+    if (ba && r.ag !== ba) return false;
     if (de && r.d !== de) return false;
     if (st && r.st !== st) return false;
     if (so && !r.sx) return false;
+    if (colf.length && !matchCols(r, colf)) return false;
     if (q){
       const alvo = (r.p+" "+r.awb+" "+r.ag+" "+r.cia+" "+r.o+" "+r.d).toLowerCase();
       if (!alvo.includes(q)) return false;
@@ -378,11 +422,13 @@ function render(){
 
 function limpar(){
   document.getElementById("f-busca").value = "";
+  document.getElementById("f-base").value = "";
   document.getElementById("f-dest").value = "";
   document.getElementById("f-st").value = "";
   document.getElementById("f-per").value = "15";
   document.getElementById("f-ord").value = "h";
   document.getElementById("f-sx").checked = false;
+  document.querySelectorAll(".cf").forEach(i => { i.value = ""; });
   apply();
 }
 
@@ -398,10 +444,11 @@ function baixarCsv(){
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 3000);
 }
 
-["f-busca","f-dest","f-st","f-per","f-ord","f-sx"].forEach(id => {
+["f-busca","f-base","f-dest","f-st","f-per","f-ord","f-sx"].forEach(id => {
   const el = document.getElementById(id);
   el.addEventListener(el.tagName==="INPUT" && el.type==="text" ? "input" : "change", apply);
 });
+document.querySelectorAll(".cf").forEach(i => i.addEventListener("input", apply));
 apply();
 </script>
 </body>
@@ -410,7 +457,13 @@ apply();
 
 
 def write_html(model: dict) -> None:
+    import html as _html
+
     destinos = "".join(f'<option value="{d}">{d}</option>' for d in model["destinos"])
+    bases = "".join(
+        f'<option value="{_html.escape(b, quote=True)}">{_html.escape(b)}</option>'
+        for b in model["bases"]
+    )
     html = (
         HTML_TEMPLATE
         .replace("__GERADO__", model["gerado_em"])
@@ -425,6 +478,7 @@ def write_html(model: dict) -> None:
         .replace("__K_MD__", str(model["kpi"]["media_7d"]))
         .replace("__ULTSEXTA__", model["ultima_sexta"])
         .replace("__DESTINOS__", destinos)
+        .replace("__BASES__", bases)
         .replace("__ROWS__", json.dumps(model["rows"], ensure_ascii=False, separators=(",", ":")))
     )
     OUT_HTML.write_text(html, encoding="utf-8")

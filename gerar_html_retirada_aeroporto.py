@@ -200,9 +200,8 @@ h1{font-size:1.35rem;font-weight:800;letter-spacing:-.2px}
 .friday{display:none;background:#fef2f2;border:1px solid #fecaca;border-left:5px solid var(--red);border-radius:11px;padding:14px 18px;margin-bottom:14px;font-weight:700;font-size:.92rem;color:#991b1b;box-shadow:var(--shadow);animation:pulse 1.8s ease-in-out infinite}
 .friday.on{display:block}
 @keyframes pulse{0%,100%{box-shadow:var(--shadow)}50%{box-shadow:0 0 0 4px rgba(220,38,38,.12)}}
-.wkend{background:#fffbeb;border:1px solid #fde68a;border-left:5px solid #f59e0b;border-radius:11px;padding:12px 18px;margin-bottom:18px;font-size:.8rem;line-height:1.6;color:#78350f;box-shadow:var(--shadow)}
-.wkend b{color:#b45309}
-.wkend .rl{color:var(--red);font-weight:800}
+.menu-btn{padding:8px 12px;font-size:.95rem;line-height:1;margin-top:2px}
+.app.nosb .sb{display:none}
 
 /* kpis */
 .kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:14px;margin-bottom:18px}
@@ -235,7 +234,7 @@ h1{font-size:1.35rem;font-weight:800;letter-spacing:-.2px}
 .cnt .dica{color:var(--blue)}
 
 /* tabela */
-.tblwrap{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:auto;max-height:72vh;box-shadow:var(--shadow)}
+.tblwrap{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:auto;max-height:78vh;box-shadow:var(--shadow)}
 table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:980px}
 th{position:sticky;top:0;height:38px;background:#f8fafc;color:var(--tx2);text-transform:uppercase;font-size:.63rem;letter-spacing:.5px;padding:9px;text-align:left;white-space:nowrap;z-index:2;border-bottom:1px solid var(--line)}
 th[data-s]{cursor:pointer;user-select:none;transition:color .15s}
@@ -318,17 +317,18 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 
 <main>
 <header class="top">
-  <div>
-    <h1>Retirada no Aeroporto</h1>
-    <div class="sub">Cargas desembarcadas no aeroporto de destino &times; retirada pelo agente de cargas / t&eacute;cnico.
-    Carga parada no aeroporto &eacute; risco t&eacute;rmico: a retirada deve acontecer <b>assim que a carga desembarca</b>.</div>
+  <div style="display:flex;gap:12px;align-items:flex-start">
+    <button class="btn ghost menu-btn" onclick="toggleSb()" title="Esconder / mostrar menu lateral">&#9776;</button>
+    <div>
+      <h1>Retirada no Aeroporto</h1>
+      <div class="sub">Cargas desembarcadas no aeroporto de destino &times; retirada pelo agente de cargas / t&eacute;cnico.
+      Carga parada no aeroporto &eacute; risco t&eacute;rmico: a retirada deve acontecer <b>assim que a carga desembarca</b>.</div>
+    </div>
   </div>
   <div class="upd">Atualizado em <b>__GERADO__</b> &middot; a cada 10 min</div>
 </header>
 
 <div class="friday" id="friday-banner">&#128680; HOJE &Eacute; SEXTA-FEIRA &mdash; PONTO CR&Iacute;TICO: toda carga que desembarcar hoje e n&atilde;o for retirada vai dormir o <u>FIM DE SEMANA INTEIRO</u> no aeroporto. Cobre a retirada AINDA HOJE.</div>
-
-<div class="wkend">&#9888;&#65039; <b>SEXTA-FEIRA &eacute; ponto cr&iacute;tico de aten&ccedil;&atilde;o:</b> carga que desembarca na sexta e n&atilde;o &eacute; retirada no mesmo dia dorme <span class="rl">o fim de semana inteiro</span> no aeroporto &mdash; risco de excurs&atilde;o t&eacute;rmica e ocorr&ecirc;ncia junto ao Gerenciamento T&eacute;rmico. Linhas marcadas com <span class="badge b-sx">SEXTA</span> desembarcaram numa sexta-feira; <span class="badge b-fds">FIM DE SEMANA</span> indica que a carga pernoitou no aeroporto.</div>
 
 <div class="kpis">
   <div class="kpi vermelho"><div class="ic">&#9203;</div><div><div class="v">__K_AG__</div><div class="v2"><b>__K_AG_V__</b> volumes</div><div class="lbl">Aguardando retirada agora</div></div></div>
@@ -393,6 +393,13 @@ const fmt = s => { if(!s) return "\u2014"; const d = new Date(s); return String(
 const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 if (new Date().getDay() === 5) document.getElementById("friday-banner").classList.add("on");
+
+function toggleSb(){
+  const app = document.querySelector(".app");
+  app.classList.toggle("nosb");
+  try { localStorage.setItem("ra_sb_oculto", app.classList.contains("nosb") ? "1" : "0"); } catch(e){}
+}
+try { if (localStorage.getItem("ra_sb_oculto") === "1") document.querySelector(".app").classList.add("nosb"); } catch(e){}
 
 let VIEW = [];
 let SORT = null; /* ordenacao por clique no cabecalho: {col, dir 1|-1} */

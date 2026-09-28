@@ -123,14 +123,25 @@ def build_model(raw: list[dict]) -> dict:
     ret_7d = [r for r in rows if r["st"] == "R" and r["de"] >= (agora - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M")]
     media_7d = round(sum(r["h"] for r in ret_7d) / len(ret_7d), 1) if ret_7d else 0.0
 
+    def _vols(grupo: list[dict]) -> int:
+        """Volumetria correta: VOLUME e por AWB; soma cada AWB distinta uma vez."""
+        por_awb: dict[str, int] = {}
+        for r in grupo:
+            por_awb[r["awb"]] = r["vol"]
+        return sum(por_awb.values())
+
     return {
         "gerado_em": agora.strftime("%d/%m/%Y %H:%M"),
         "rows": sorted(rows, key=lambda r: (r["st"] != "A", -r["h"])),
         "kpi": {
             "aguardando": len(aguardando),
+            "aguardando_vol": _vols(aguardando),
             "criticos": len(criticos),
+            "criticos_vol": _vols(criticos),
             "fds": len(fds_ultima_sexta),
+            "fds_vol": _vols(fds_ultima_sexta),
             "retirados_hoje": len(retirados_hoje),
+            "retirados_hoje_vol": _vols(retirados_hoje),
             "media_7d": media_7d,
         },
         "ultima_sexta": ultima_sexta.strftime("%d/%m"),
@@ -179,6 +190,8 @@ h1 .air{color:var(--cyan)}
 .kpi.pu::before{background:linear-gradient(90deg,var(--purple),#d3b8ff)}
 .kpi .v{font-size:1.9rem;font-weight:900;line-height:1.1}
 .kpi .lbl{font-size:.7rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.6px;margin-top:5px;line-height:1.4}
+.kpi .v2{font-size:.76rem;color:var(--tx2);font-weight:800;margin-top:3px}
+.kpi .v2 b{color:var(--tx)}
 .kpi.vermelho .v{color:var(--red)} .kpi.cy .v{color:var(--cyan)} .kpi.gr .v{color:var(--green)} .kpi.pu .v{color:var(--purple)}
 
 /* filtros */
@@ -245,11 +258,11 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 <div class="wkend">&#9888;&#65039; <b>SEXTA-FEIRA &eacute; ponto cr&iacute;tico de aten&ccedil;&atilde;o:</b> carga que desembarca na sexta e n&atilde;o &eacute; retirada no mesmo dia dorme <span class="rl">o fim de semana inteiro</span> no aeroporto &mdash; risco de excurs&atilde;o t&eacute;rmica e ocorr&ecirc;ncia junto ao Gerenciamento T&eacute;rmico. Linhas marcadas com <span class="badge b-sx">SEXTA</span> desembarcaram numa sexta-feira; <span class="badge b-fds">FIM DE SEMANA</span> indica que a carga pernoitou no aeroporto.</div>
 
 <div class="kpis">
-  <div class="kpi vermelho"><div class="v" id="k-ag">__K_AG__</div><div class="lbl">Aguardando retirada agora</div></div>
-  <div class="kpi vermelho"><div class="v" id="k-cr">__K_CR__</div><div class="lbl">Cr&iacute;ticos &ge; 24h no aeroporto</div></div>
-  <div class="kpi pu"><div class="v" id="k-fds">__K_FDS__</div><div class="lbl">Sexta __ULTSEXTA__: dormiram no aeroporto</div></div>
-  <div class="kpi gr"><div class="v" id="k-rh">__K_RH__</div><div class="lbl">Retirados hoje</div></div>
-  <div class="kpi cy"><div class="v" id="k-md">__K_MD__h</div><div class="lbl">Tempo m&eacute;dio de retirada (7 dias)</div></div>
+  <div class="kpi vermelho"><div class="v" id="k-ag">__K_AG__</div><div class="v2"><b>__K_AG_V__</b> volumes</div><div class="lbl">Aguardando retirada agora</div></div>
+  <div class="kpi vermelho"><div class="v" id="k-cr">__K_CR__</div><div class="v2"><b>__K_CR_V__</b> volumes</div><div class="lbl">Cr&iacute;ticos &ge; 24h no aeroporto</div></div>
+  <div class="kpi pu"><div class="v" id="k-fds">__K_FDS__</div><div class="v2"><b>__K_FDS_V__</b> volumes</div><div class="lbl">Sexta __ULTSEXTA__: dormiram no aeroporto</div></div>
+  <div class="kpi gr"><div class="v" id="k-rh">__K_RH__</div><div class="v2"><b>__K_RH_V__</b> volumes</div><div class="lbl">Retirados hoje</div></div>
+  <div class="kpi cy"><div class="v" id="k-md">__K_MD__h</div><div class="v2">&nbsp;</div><div class="lbl">Tempo m&eacute;dio de retirada (7 dias)</div></div>
 </div>
 
 <div class="fbar">
@@ -267,6 +280,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 <table>
   <thead><tr>
     <th>Pedido</th><th>AWB</th><th>Rota</th><th>CIA</th><th>Agente / T&eacute;cnico</th>
+    <th title="Volumes da AWB">Vol.</th>
     <th>Desembarque</th><th>Retirada</th><th>Horas</th><th>Noites</th><th>Status</th>
   </tr></thead>
   <tbody id="tb"></tbody>
@@ -276,7 +290,8 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 
 <footer>
   VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; Retirada no Aeroporto<br>
-  Crit&eacute;rios: <b style="color:var(--red)">cr&iacute;tico</b> &ge; 24h sem retirada &middot; <b style="color:var(--orange)">aten&ccedil;&atilde;o</b> &ge; 12h &middot; sexta-feira = ponto cr&iacute;tico (risco de fim de semana)
+  Crit&eacute;rios: <b style="color:var(--red)">cr&iacute;tico</b> &ge; 24h sem retirada &middot; <b style="color:var(--orange)">aten&ccedil;&atilde;o</b> &ge; 12h &middot; sexta-feira = ponto cr&iacute;tico (risco de fim de semana)<br>
+  Volumetria: a coluna Vol. &eacute; o total de volumes da AWB; nos KPIs cada AWB &eacute; somada uma &uacute;nica vez (uma AWB pode ter v&aacute;rios pedidos)
 </footer>
 </div>
 
@@ -324,7 +339,10 @@ function badges(r){
 }
 
 function render(){
-  document.getElementById("cnt").textContent = VIEW.length + " registro(s)" + String.fromCharCode(183==183?32:32) + "\u00b7 " + VIEW.filter(r=>r.st==="A").length + " aguardando retirada";
+  const volsAwb = {};
+  VIEW.forEach(r => { volsAwb[r.awb] = r.vol; });
+  const totVol = Object.values(volsAwb).reduce((a,b) => a+b, 0);
+  document.getElementById("cnt").textContent = VIEW.length + " registro(s) \u00b7 " + VIEW.filter(r=>r.st==="A").length + " aguardando retirada \u00b7 " + totVol + " volumes (por AWB)";
   const tb = document.getElementById("tb");
   tb.innerHTML = VIEW.map(r => {
     const cls = r.st==="A" ? (r.h>=24 ? "crit" : (r.h>=12 ? "warn" : "")) : "";
@@ -334,6 +352,7 @@ function render(){
       + '<td class="rota">'+esc(r.o)+' \u2192 '+esc(r.d)+'</td>'
       + '<td>'+esc(r.cia)+'</td>'
       + '<td class="agc" title="'+esc(r.ag)+'">'+esc(r.ag)+'</td>'
+      + '<td><b>'+r.vol+'</b></td>'
       + '<td>'+fmt(r.de)+'</td>'
       + '<td>'+fmt(r.re)+'</td>'
       + '<td class="hrs '+classeH(r)+'">'+r.h.toFixed(1)+'h</td>'
@@ -348,7 +367,7 @@ function render(){
       + '<div class="top"><span class="ped">'+esc(r.p)+'</span><span>'+badges(r)+'</span></div>'
       + '<div class="kv">'
       + '<span class="k">Rota</span><span class="rota">'+esc(r.o)+' \u2192 '+esc(r.d)+' \u00b7 '+esc(r.cia)+'</span>'
-      + '<span class="k">AWB</span><span>'+esc(r.awb)+'</span>'
+      + '<span class="k">AWB</span><span>'+esc(r.awb)+' \u00b7 <b>'+r.vol+'</b> vol.</span>'
       + '<span class="k">Agente</span><span>'+esc(r.ag)+'</span>'
       + '<span class="k">Desembarque</span><span>'+fmt(r.de)+'</span>'
       + '<span class="k">Retirada</span><span>'+fmt(r.re)+'</span>'
@@ -368,8 +387,8 @@ function limpar(){
 }
 
 function baixarCsv(){
-  const cab = ["pedido","awb","origem","destino","cia","agente","desembarque","retirada","horas","noites","status","sexta","fim_de_semana"];
-  const linhas = VIEW.map(r => [r.p,r.awb,r.o,r.d,r.cia,'"'+r.ag.replace(/"/g,'""')+'"',r.de,r.re||"",r.h,r.n,r.st==="A"?"AGUARDANDO":"RETIRADO",r.sx?"SIM":"",r.fds?"SIM":""].join(";"));
+  const cab = ["pedido","awb","volumes_awb","origem","destino","cia","agente","desembarque","retirada","horas","noites","status","sexta","fim_de_semana"];
+  const linhas = VIEW.map(r => [r.p,r.awb,r.vol,r.o,r.d,r.cia,'"'+r.ag.replace(/"/g,'""')+'"',r.de,r.re||"",r.h,r.n,r.st==="A"?"AGUARDANDO":"RETIRADO",r.sx?"SIM":"",r.fds?"SIM":""].join(";"));
   const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -395,6 +414,10 @@ def write_html(model: dict) -> None:
     html = (
         HTML_TEMPLATE
         .replace("__GERADO__", model["gerado_em"])
+        .replace("__K_AG_V__", str(model["kpi"]["aguardando_vol"]))
+        .replace("__K_CR_V__", str(model["kpi"]["criticos_vol"]))
+        .replace("__K_FDS_V__", str(model["kpi"]["fds_vol"]))
+        .replace("__K_RH_V__", str(model["kpi"]["retirados_hoje_vol"]))
         .replace("__K_AG__", str(model["kpi"]["aguardando"]))
         .replace("__K_CR__", str(model["kpi"]["criticos"]))
         .replace("__K_FDS__", str(model["kpi"]["fds"]))

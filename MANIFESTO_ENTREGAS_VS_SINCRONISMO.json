@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T14:58:42",
+  "gerado_em": "2026-09-28T15:00:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 303,
+    "pendentes_janela": 302,
     "cobranca_gru_janela": 64,
     "sem_embarque_efetiva": 683,
     "com_embarque_efetiva": 6946,
@@ -49,7 +49,7 @@
       "VTCLOG RIO GALEAO": 13,
       "BVB - J PIMENTEL S. CUNHA LTDA": 9,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 8,
-      "PVH - RODOTEC": 8
+      "SSA - LUTY LOG": 8
     },
     "top10_ufs_pendencias": {
       "AC": 40,
@@ -231,12 +231,12 @@
       "dia_full": "17/09/2026",
       "pedidos": 121,
       "loggers": 435,
-      "sincronizados": 402,
-      "pendentes": 30,
+      "sincronizados": 403,
+      "pendentes": 29,
       "sem_embarque": 19,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 22,
-      "pct": 6.9,
+      "pedidos_pendentes": 21,
+      "pct": 6.7,
       "n_latencia": 375,
       "media_horas": 2.32,
       "mediana_horas": 0.04,

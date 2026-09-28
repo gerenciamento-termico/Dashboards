@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T10:50:50",
+  "gerado_em": "2026-09-28T10:57:10",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 385,
+    "pendentes_janela": 383,
     "cobranca_gru_janela": 37,
     "sem_embarque_efetiva": 683,
     "com_embarque_efetiva": 6946,
-    "loggers_sem_lastsync": 81,
+    "loggers_sem_lastsync": 80,
     "nao_avaliados": 683,
     "pedidos_com_agente": 7757,
     "dtbtransporte": {
@@ -40,7 +40,7 @@
       "linhas": 1248
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 75,
+      "VTCLOG - GRU": 74,
       "RBR - RODOTEC": 40,
       "PVH - RODOTEC": 29,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 27,
@@ -60,13 +60,13 @@
       "PA": 23,
       "MA": 23,
       "RJ": 21,
-      "PR": 20,
-      "BA": 20
+      "BA": 20,
+      "PR": 19
     },
     "latencia": {
-      "n_agente": 5725,
+      "n_agente": 5726,
       "n_so_gru": 131,
-      "n_sem_primeiro_sync": 778,
+      "n_sem_primeiro_sync": 777,
       "media_horas": 0.94,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -79,18 +79,18 @@
       "dia_full": "09/09/2026",
       "pedidos": 50,
       "loggers": 208,
-      "sincronizados": 199,
-      "pendentes": 8,
+      "sincronizados": 200,
+      "pendentes": 7,
       "sem_embarque": 0,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 8,
-      "pct": 3.8,
-      "n_latencia": 178,
-      "media_horas": 4.27,
+      "pedidos_pendentes": 7,
+      "pct": 3.4,
+      "n_latencia": 179,
+      "media_horas": 4.24,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 13,
-      "n_sem_primeiro_sync": 17
+      "n_sem_primeiro_sync": 16
     },
     {
       "dia_iso": "2026-09-10",
@@ -364,12 +364,12 @@
       "dia_full": "24/09/2026",
       "pedidos": 92,
       "loggers": 953,
-      "sincronizados": 856,
-      "pendentes": 95,
+      "sincronizados": 857,
+      "pendentes": 94,
       "sem_embarque": 52,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 31,
-      "pct": 10.0,
+      "pedidos_pendentes": 30,
+      "pct": 9.9,
       "n_latencia": 770,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

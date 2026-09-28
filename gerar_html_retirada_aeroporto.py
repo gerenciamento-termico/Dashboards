@@ -11,7 +11,7 @@ Publica RETIRADA_AEROPORTO.html (rotina ATUALIZAR_TUDO_10_MIN).
 Enfase especial nas SEXTAS-FEIRAS: carga que desembarca na sexta e nao e
 retirada dorme o fim de semana inteiro no aeroporto (risco termico).
 
-Tema: dashboard-template (sidebar escura + conteudo claro em cards).
+Tema claro premium (cards brancos, icones Font Awesome, abas de filtro rapido).
 """
 from __future__ import annotations
 
@@ -160,128 +160,129 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <title>Retirada no Aeroporto &mdash; VTC LOG</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <style>
 :root{
-  --sb:#0f1e35; --sb2:#16294a; --sbtx:#c3d2e8; --sbmuted:#7e93b4;
-  --bg:#f2f5fa; --card:#ffffff; --line:#e4e9f2; --tx:#1e293b; --tx2:#64748b;
-  --blue:#2563eb; --red:#dc2626; --redbg:#fee2e2; --orange:#d97706; --orangebg:#fef3c7;
-  --green:#16a34a; --greenbg:#dcfce7; --purple:#7c3aed; --purplebg:#ede9fe;
-  --cyan:#0891b2; --cyanbg:#cffafe;
-  --shadow:0 1px 3px rgba(15,30,53,.08), 0 4px 14px rgba(15,30,53,.05);
+  --bg:#eef2f8; --card:#ffffff; --line:#e3e8f0; --tx:#101828; --tx2:#667085;
+  --blue:#2563eb; --blue2:#1d4ed8;
+  --red:#dc2626; --redbg:#fef1f1; --redtile:linear-gradient(135deg,#fecaca,#fee2e2);
+  --orange:#d97706; --orangebg:#fef6e7; --orangetile:linear-gradient(135deg,#fde68a,#fef3c7);
+  --green:#16a34a; --greenbg:#eefcf2; --greentile:linear-gradient(135deg,#bbf7d0,#dcfce7);
+  --purple:#7c3aed; --purplebg:#f4f0fe; --purpletile:linear-gradient(135deg,#ddd0fb,#ede9fe);
+  --cyan:#0891b2; --cyanbg:#ecfbfe; --cyantile:linear-gradient(135deg,#a5f0fc,#cffafe);
+  --bluetile:linear-gradient(135deg,#bfdbfe,#dbeafe);
+  --shadow:0 1px 2px rgba(16,24,40,.06), 0 6px 18px rgba(16,24,40,.05);
+  --shadow2:0 4px 10px rgba(16,24,40,.08), 0 12px 30px rgba(16,24,40,.08);
 }
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
-.app{display:flex;min-height:100vh}
+body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(180deg,#e9eef7 0%,var(--bg) 240px);color:var(--tx);min-height:100vh}
+.wrap{max-width:1680px;margin:0 auto;padding:26px 28px 60px}
 
-/* ===== sidebar ===== */
-.sb{width:232px;min-width:232px;background:linear-gradient(180deg,var(--sb),#0c1930);color:var(--sbtx);display:flex;flex-direction:column;position:sticky;top:0;height:100vh}
-.brand{display:flex;align-items:center;gap:11px;padding:20px 18px 18px;border-bottom:1px solid rgba(255,255,255,.07)}
-.brand .lg{width:40px;height:40px;border-radius:11px;background:linear-gradient(135deg,#2563eb,#0891b2);display:flex;align-items:center;justify-content:center;font-weight:900;color:#fff;font-size:.82rem;letter-spacing:.5px}
-.brand b{display:block;color:#fff;font-size:.92rem;letter-spacing:.3px}
-.brand span{display:block;font-size:.66rem;color:var(--sbmuted);margin-top:2px}
-nav{padding:16px 12px;flex:1}
-.nav-title{font-size:.6rem;text-transform:uppercase;letter-spacing:1px;color:var(--sbmuted);padding:0 8px 8px}
-.nv{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:9px;color:var(--sbtx);font-size:.82rem;font-weight:600;cursor:pointer;margin-bottom:3px;transition:background .15s;text-decoration:none}
-.nv:hover{background:rgba(255,255,255,.06)}
-.nv.active{background:var(--blue);color:#fff}
-.nv .ic{width:20px;text-align:center}
-.sb-foot{padding:14px 18px;border-top:1px solid rgba(255,255,255,.07);font-size:.68rem;color:var(--sbmuted);line-height:1.6}
-.sb-foot b{color:#8fd8ff}
+/* ===== header ===== */
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px}
+.tleft{display:flex;gap:15px;align-items:center}
+.hicon{width:52px;height:52px;min-width:52px;border-radius:15px;background:linear-gradient(135deg,#1d4ed8,#0891b2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;box-shadow:0 6px 16px rgba(29,78,216,.3)}
+h1{font-size:1.42rem;font-weight:800;letter-spacing:-.3px}
+h1 small{display:block;font-size:.68rem;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
+.sub{color:var(--tx2);font-size:.79rem;margin-top:6px;max-width:760px;line-height:1.55}
+.upd{font-size:.73rem;color:var(--tx2);background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 15px;white-space:nowrap;box-shadow:var(--shadow)}
+.upd i{color:var(--blue);margin-right:6px}
+.upd b{color:var(--tx)}
 
-/* ===== conteudo ===== */
-main{flex:1;padding:26px 30px 60px;min-width:0}
-.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-start;gap:10px;margin-bottom:18px}
-h1{font-size:1.35rem;font-weight:800;letter-spacing:-.2px}
-.sub{color:var(--tx2);font-size:.8rem;margin-top:5px;max-width:820px;line-height:1.55}
-.upd{font-size:.72rem;color:var(--tx2);background:var(--card);border:1px solid var(--line);border-radius:9px;padding:7px 13px;white-space:nowrap;box-shadow:var(--shadow)}
-.upd b{color:var(--blue)}
-
-/* banners */
-.friday{display:none;background:#fef2f2;border:1px solid #fecaca;border-left:5px solid var(--red);border-radius:11px;padding:14px 18px;margin-bottom:14px;font-weight:700;font-size:.92rem;color:#991b1b;box-shadow:var(--shadow);animation:pulse 1.8s ease-in-out infinite}
+/* banner sexta (aparece so as sextas) */
+.friday{display:none;background:#fef1f1;border:1px solid #fecaca;border-left:5px solid var(--red);border-radius:12px;padding:14px 18px;margin-bottom:16px;font-weight:700;font-size:.9rem;color:#991b1b;box-shadow:var(--shadow);animation:pulse 1.8s ease-in-out infinite}
 .friday.on{display:block}
+.friday i{margin-right:8px}
 @keyframes pulse{0%,100%{box-shadow:var(--shadow)}50%{box-shadow:0 0 0 4px rgba(220,38,38,.12)}}
-.menu-btn{padding:8px 12px;font-size:.95rem;line-height:1;margin-top:2px}
-.app.nosb .sb{display:none}
 
-/* kpis */
-.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:14px;margin-bottom:18px}
-.kpi{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px;display:flex;gap:13px;align-items:center;box-shadow:var(--shadow)}
-.kpi .ic{width:46px;height:46px;min-width:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.25rem}
-.kpi.vermelho .ic{background:var(--redbg)} .kpi.pu .ic{background:var(--purplebg)}
-.kpi.gr .ic{background:var(--greenbg)} .kpi.cy .ic{background:var(--cyanbg)}
-.kpi .v{font-size:1.5rem;font-weight:800;line-height:1.1}
+/* ===== kpis premium ===== */
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(212px,1fr));gap:14px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:18px;display:flex;gap:14px;align-items:center;box-shadow:var(--shadow);transition:transform .18s, box-shadow .18s}
+.kpi:hover{transform:translateY(-2px);box-shadow:var(--shadow2)}
+.kpi .ic{width:50px;height:50px;min-width:50px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.15rem}
+.kpi.vermelho .ic{background:var(--redtile);color:var(--red)}
+.kpi.pu .ic{background:var(--purpletile);color:var(--purple)}
+.kpi.gr .ic{background:var(--greentile);color:var(--green)}
+.kpi.cy .ic{background:var(--cyantile);color:var(--cyan)}
+.kpi .v{font-size:1.62rem;font-weight:800;line-height:1.05;letter-spacing:-.4px}
 .kpi.vermelho .v{color:var(--red)} .kpi.pu .v{color:var(--purple)} .kpi.gr .v{color:var(--green)} .kpi.cy .v{color:var(--cyan)}
-.kpi .v2{font-size:.7rem;color:var(--tx2);font-weight:700;margin-top:1px}
+.kpi .v2{font-size:.7rem;color:var(--tx2);font-weight:700;margin-top:2px}
 .kpi .v2 b{color:var(--tx)}
-.kpi .lbl{font-size:.66rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-top:3px;line-height:1.35;font-weight:600}
+.kpi .lbl{font-size:.64rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-top:4px;line-height:1.35;font-weight:700}
 
-/* filtros */
-.fcard{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:16px;margin-bottom:14px;box-shadow:var(--shadow)}
+/* ===== abas de filtro rapido (ex-menu lateral) ===== */
+.tabs{display:flex;gap:8px;margin-bottom:14px;overflow-x:auto;padding-bottom:2px}
+.tab{display:inline-flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;color:var(--tx2);padding:9px 17px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;box-shadow:var(--shadow);transition:all .15s}
+.tab:hover{border-color:var(--blue);color:var(--blue)}
+.tab.active{background:linear-gradient(135deg,var(--blue),var(--blue2));border-color:var(--blue2);color:#fff;box-shadow:0 5px 14px rgba(37,99,235,.32)}
+.tab i{font-size:.8rem}
+
+/* ===== filtros ===== */
+.fcard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
 .fbar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:end}
-.fbar label{display:block;font-size:.62rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;font-weight:700}
-.fbar input,.fbar select{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:8px;color:var(--tx);padding:8px 11px;font-size:.82rem;font-family:inherit;max-width:100%}
+.fbar label{display:block;font-size:.61rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;font-weight:700}
+.fbar input,.fbar select{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:9px 12px;font-size:.82rem;font-family:inherit;max-width:100%}
 .fbar select{text-overflow:ellipsis}
 .fbar input:focus,.fbar select:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-.fbar label.chk{display:flex;align-items:center;gap:7px;font-size:.76rem;font-weight:800;color:var(--orange);white-space:nowrap;margin:0 0 8px;padding:0;text-transform:none;letter-spacing:0;cursor:pointer;align-self:end}
+.fbar label.chk{display:flex;align-items:center;gap:7px;font-size:.76rem;font-weight:800;color:var(--orange);white-space:nowrap;margin:0 0 9px;padding:0;text-transform:none;letter-spacing:0;cursor:pointer;align-self:end}
 .fbar label.chk input{width:auto;accent-color:var(--orange)}
 .fbar .low{display:flex;gap:8px;align-items:center;justify-content:flex-end}
-.btn{background:var(--blue);border:1px solid var(--blue);border-radius:8px;color:#fff;padding:8px 16px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;transition:opacity .15s}
-.btn:hover{opacity:.88}
-.btn.ghost{background:#fff;color:var(--tx);border-color:var(--line)}
+.btn{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:1px solid var(--blue2);border-radius:9px;color:#fff;padding:9px 16px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;transition:opacity .15s;box-shadow:0 4px 12px rgba(37,99,235,.25)}
+.btn:hover{opacity:.9}
+.btn.ghost{background:#fff;color:var(--tx);border-color:var(--line);box-shadow:var(--shadow)}
 .btn.ghost:hover{border-color:var(--blue);color:var(--blue);opacity:1}
+
+/* filtros por coluna (fora da grade) */
+.colf{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.colf label{display:block;font-size:.57rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;font-weight:700;white-space:nowrap}
+.colf input{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:8px;color:var(--tx);padding:6px 9px;font-size:.74rem;font-family:inherit}
+.colf input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+
 .cnt{font-size:.75rem;color:var(--tx2);margin:0 2px 10px}
 .cnt b{color:var(--tx)}
 .cnt .dica{color:var(--blue)}
+.cnt .dica i{margin-right:4px}
 
-/* tabela */
-.tblwrap{background:var(--card);border:1px solid var(--line);border-radius:13px;overflow:auto;max-height:78vh;box-shadow:var(--shadow)}
-table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:980px}
-th{position:sticky;top:0;height:38px;background:#f8fafc;color:var(--tx2);text-transform:uppercase;font-size:.63rem;letter-spacing:.5px;padding:9px;text-align:left;white-space:nowrap;z-index:2;border-bottom:1px solid var(--line)}
+/* ===== grade (maior) ===== */
+.tblwrap{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:auto;max-height:84vh;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:1020px}
+th{position:sticky;top:0;height:42px;background:#f8fafc;color:var(--tx2);text-transform:uppercase;font-size:.65rem;letter-spacing:.5px;padding:11px 10px;text-align:left;white-space:nowrap;z-index:2;border-bottom:1px solid var(--line)}
 th[data-s]{cursor:pointer;user-select:none;transition:color .15s}
 th[data-s]:hover{color:var(--blue)}
 th[data-s]::after{content:" \2195";opacity:.35}
 th[data-s].asc::after{content:" \25B2";opacity:1;color:var(--blue)}
 th[data-s].desc::after{content:" \25BC";opacity:1;color:var(--blue)}
-.colf{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:10px 12px;margin-bottom:10px;box-shadow:var(--shadow)}
-.colf label{display:block;font-size:.58rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;font-weight:700;white-space:nowrap}
-.colf input{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:7px;color:var(--tx);padding:6px 8px;font-size:.74rem;font-family:inherit}
-.colf input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
-@media(max-width:1280px){.colf{grid-template-columns:repeat(5,1fr)}}
-@media(max-width:860px){.colf{display:none}}
-td{padding:9px;border-top:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+td{padding:11px 10px;border-top:1px solid var(--line);white-space:nowrap;vertical-align:middle}
 tbody tr:nth-child(even) td{background:#fafbfd}
 tbody tr:hover td{background:#eff6ff}
-tr.crit td{background:#fef2f2}
+tr.crit td{background:#fef1f1}
 tr.crit:hover td{background:#fee2e2}
-tr.warn td{background:#fffbeb}
+tr.warn td{background:#fef6e7}
 tr.warn:hover td{background:#fef3c7}
-.badge{display:inline-block;font-size:.62rem;font-weight:800;border-radius:6px;padding:3px 8px;letter-spacing:.4px}
-.b-ag{background:var(--redbg);color:#b91c1c}
-.b-ok{background:var(--greenbg);color:#15803d}
-.b-sx{background:var(--purplebg);color:var(--purple);margin-left:4px}
-.b-fds{background:var(--orangebg);color:#b45309;margin-left:4px}
+.badge{display:inline-block;font-size:.63rem;font-weight:800;border-radius:7px;padding:3px 9px;letter-spacing:.4px}
+.b-ag{background:#fee2e2;color:#b91c1c}
+.b-ok{background:#dcfce7;color:#15803d}
+.b-sx{background:#ede9fe;color:var(--purple);margin-left:4px}
+.b-fds{background:#fef3c7;color:#b45309;margin-left:4px}
 .hrs{font-weight:800}
 .hrs.c{color:var(--red)} .hrs.w{color:var(--orange)} .hrs.k{color:var(--green)}
 .rota{color:var(--blue);font-weight:700}
-.agc{max-width:230px;overflow:hidden;text-overflow:ellipsis}
+.agc{max-width:250px;overflow:hidden;text-overflow:ellipsis}
 
-/* cards mobile */
+/* ===== cards mobile ===== */
 .cards{display:none}
-.mbar{display:none}
+@media(max-width:1360px){.colf{grid-template-columns:repeat(5,1fr)}}
 @media(max-width:960px){
-  .sb{display:none}
-  .mbar{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--sb);color:#fff;padding:13px 16px;position:sticky;top:0;z-index:30}
-  .mbar .lg{width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,#2563eb,#0891b2);display:flex;align-items:center;justify-content:center;font-weight:900;font-size:.68rem}
-  .mbar b{font-size:.85rem}
-  .mbar span{display:block;font-size:.62rem;color:var(--sbmuted)}
-  .mbar .mupd{font-size:.62rem;color:#8fd8ff;text-align:right;line-height:1.4}
-  .app{display:block}
-  main{padding:16px 12px 50px}
+  .wrap{padding:16px 12px 50px}
+  .fbar{grid-template-columns:1fr 1fr}
+  h1{font-size:1.12rem}
+  .sub{display:none}
 }
 @media(max-width:860px){
   .tblwrap{display:none}
+  .colf{display:none}
   .cards{display:grid;grid-template-columns:1fr;gap:10px}
-  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:13px;padding:14px 14px 12px;overflow:hidden;box-shadow:var(--shadow)}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px 14px 12px;overflow:hidden;box-shadow:var(--shadow)}
   .card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--blue)}
   .card.crit::before{background:var(--red)}
   .card.warn::before{background:var(--orange)}
@@ -289,56 +290,41 @@ tr.warn:hover td{background:#fef3c7}
   .card .ped{font-weight:900;font-size:1.02rem}
   .card .kv{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:.78rem}
   .card .kv .k{color:var(--tx2);font-size:.66rem;text-transform:uppercase;letter-spacing:.4px;padding-top:2px;font-weight:700}
-  .fbar{grid-template-columns:1fr 1fr}
-  h1{font-size:1.1rem}
 }
-footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-height:1.7}
+footer{margin-top:28px;text-align:center;color:var(--tx2);font-size:.7rem;line-height:1.7}
 </style>
 </head>
 <body>
-<div class="mbar">
-  <div style="display:flex;align-items:center;gap:9px"><div class="lg">VTC</div><div><b>Retirada no Aeroporto</b><span>VTC LOG &middot; Gerenciamento T&eacute;rmico</span></div></div>
-  <div class="mupd">Atualizado<br><b>__GERADO__</b></div>
-</div>
-<div class="app">
+<div class="wrap">
 
-<aside class="sb">
-  <div class="brand">
-    <div class="lg">VTC</div>
-    <div><b>VTC LOG</b><span>GERENCIAMENTO T&Eacute;RMICO</span></div>
-  </div>
-  <nav>
-    <div class="nav-title">Retirada no Aeroporto</div>
-    <a class="nv" onclick="preset('', this)"><span class="ic">&#128230;</span> Vis&atilde;o geral</a>
-    <a class="nv active" onclick="preset('A', this)"><span class="ic">&#9203;</span> Aguardando retirada</a>
-    <a class="nv" onclick="preset('crit', this)"><span class="ic">&#128680;</span> Cr&iacute;ticos &ge; 24h</a>
-    <a class="nv" onclick="preset('sx', this)"><span class="ic">&#128197;</span> Sextas-feiras</a>
-    <a class="nv" onclick="preset('R', this)"><span class="ic">&#9989;</span> Retirados</a>
-  </nav>
-  <div class="sb-foot">Atualizado em <b>__GERADO__</b><br>a cada 10 minutos<br>Fonte: Acompanhamento AWB</div>
-</aside>
-
-<main>
 <header class="top">
-  <div style="display:flex;gap:12px;align-items:flex-start">
-    <button class="btn ghost menu-btn" onclick="toggleSb()" title="Esconder / mostrar menu lateral">&#9776;</button>
+  <div class="tleft">
+    <div class="hicon"><i class="fa-solid fa-plane-arrival"></i></div>
     <div>
-      <h1>Retirada no Aeroporto</h1>
+      <h1>Retirada no Aeroporto<small>VTC LOG &middot; Gerenciamento T&eacute;rmico</small></h1>
       <div class="sub">Cargas desembarcadas no aeroporto de destino &times; retirada pelo agente de cargas / t&eacute;cnico.
       Carga parada no aeroporto &eacute; risco t&eacute;rmico: a retirada deve acontecer <b>assim que a carga desembarca</b>.</div>
     </div>
   </div>
-  <div class="upd">Atualizado em <b>__GERADO__</b> &middot; a cada 10 min</div>
+  <div class="upd"><i class="fa-solid fa-rotate"></i>Atualizado em <b>__GERADO__</b> &middot; a cada 10 min</div>
 </header>
 
-<div class="friday" id="friday-banner">&#128680; HOJE &Eacute; SEXTA-FEIRA &mdash; PONTO CR&Iacute;TICO: toda carga que desembarcar hoje e n&atilde;o for retirada vai dormir o <u>FIM DE SEMANA INTEIRO</u> no aeroporto. Cobre a retirada AINDA HOJE.</div>
+<div class="friday" id="friday-banner"><i class="fa-solid fa-circle-exclamation"></i>HOJE &Eacute; SEXTA-FEIRA &mdash; PONTO CR&Iacute;TICO: toda carga que desembarcar hoje e n&atilde;o for retirada vai dormir o <u>FIM DE SEMANA INTEIRO</u> no aeroporto. Cobre a retirada AINDA HOJE.</div>
 
 <div class="kpis">
-  <div class="kpi vermelho"><div class="ic">&#9203;</div><div><div class="v">__K_AG__</div><div class="v2"><b>__K_AG_V__</b> volumes</div><div class="lbl">Aguardando retirada agora</div></div></div>
-  <div class="kpi vermelho"><div class="ic">&#128680;</div><div><div class="v">__K_CR__</div><div class="v2"><b>__K_CR_V__</b> volumes</div><div class="lbl">Cr&iacute;ticos &ge; 24h no aeroporto</div></div></div>
-  <div class="kpi pu"><div class="ic">&#128197;</div><div><div class="v">__K_FDS__</div><div class="v2"><b>__K_FDS_V__</b> volumes</div><div class="lbl">Sexta __ULTSEXTA__: dormiram no aeroporto</div></div></div>
-  <div class="kpi gr"><div class="ic">&#9989;</div><div><div class="v">__K_RH__</div><div class="v2"><b>__K_RH_V__</b> volumes</div><div class="lbl">Retirados hoje</div></div></div>
-  <div class="kpi cy"><div class="ic">&#9201;&#65039;</div><div><div class="v">__K_MD__h</div><div class="v2">&nbsp;</div><div class="lbl">Tempo m&eacute;dio de retirada (7 dias)</div></div></div>
+  <div class="kpi vermelho"><div class="ic"><i class="fa-solid fa-hourglass-half"></i></div><div><div class="v">__K_AG__</div><div class="v2"><b>__K_AG_V__</b> volumes</div><div class="lbl">Aguardando retirada agora</div></div></div>
+  <div class="kpi vermelho"><div class="ic"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="v">__K_CR__</div><div class="v2"><b>__K_CR_V__</b> volumes</div><div class="lbl">Cr&iacute;ticos &ge; 24h no aeroporto</div></div></div>
+  <div class="kpi pu"><div class="ic"><i class="fa-solid fa-calendar-week"></i></div><div><div class="v">__K_FDS__</div><div class="v2"><b>__K_FDS_V__</b> volumes</div><div class="lbl">Sexta __ULTSEXTA__: dormiram no aeroporto</div></div></div>
+  <div class="kpi gr"><div class="ic"><i class="fa-solid fa-circle-check"></i></div><div><div class="v">__K_RH__</div><div class="v2"><b>__K_RH_V__</b> volumes</div><div class="lbl">Retirados hoje</div></div></div>
+  <div class="kpi cy"><div class="ic"><i class="fa-solid fa-stopwatch"></i></div><div><div class="v">__K_MD__h</div><div class="v2">&nbsp;</div><div class="lbl">Tempo m&eacute;dio de retirada (7 dias)</div></div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab" onclick="preset('', this)"><i class="fa-solid fa-table-list"></i> Vis&atilde;o geral</button>
+  <button class="tab active" onclick="preset('A', this)"><i class="fa-solid fa-hourglass-half"></i> Aguardando retirada</button>
+  <button class="tab" onclick="preset('crit', this)"><i class="fa-solid fa-triangle-exclamation"></i> Cr&iacute;ticos &ge; 24h</button>
+  <button class="tab" onclick="preset('sx', this)"><i class="fa-solid fa-calendar-week"></i> Sextas-feiras</button>
+  <button class="tab" onclick="preset('R', this)"><i class="fa-solid fa-circle-check"></i> Retirados</button>
 </div>
 
 <div class="fcard">
@@ -350,11 +336,9 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <div><label>Per&iacute;odo (desembarque)</label><select id="f-per"><option value="7">7 dias</option><option value="15" selected>15 dias</option><option value="30">30 dias</option></select></div>
   <div><label>Ordena&ccedil;&atilde;o</label><select id="f-ord"><option value="h">Mais horas no aeroporto</option><option value="dn">Desembarque recente</option><option value="da">Desembarque antigo</option></select></div>
   <label class="chk"><input type="checkbox" id="f-sx"> S&oacute; sextas</label>
-  <div class="low"><button class="btn ghost" onclick="limpar()">Limpar</button><button class="btn" onclick="baixarCsv()">Baixar CSV</button></div>
+  <div class="low"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> Baixar CSV</button></div>
 </div>
 </div>
-
-<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span class="dica">Dica: clique no t&iacute;tulo da coluna para ordenar (menor &rarr; maior / maior &rarr; menor)</span></div>
 
 <div class="colf">
   <div><label>Pedido</label><input class="cf" data-col="p" placeholder="pedido"></div>
@@ -367,6 +351,8 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <div><label>&#8805; Horas</label><input class="cf" data-col="h" placeholder="ex.: 24"></div>
   <div><label>&#8805; Noites</label><input class="cf" data-col="n" placeholder="ex.: 1"></div>
 </div>
+
+<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span class="dica"><i class="fa-solid fa-arrow-down-wide-short"></i>Clique no t&iacute;tulo da coluna para ordenar (menor &rarr; maior / maior &rarr; menor)</span></div>
 
 <div class="tblwrap">
 <table>
@@ -385,7 +371,6 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   Crit&eacute;rios: <b style="color:var(--red)">cr&iacute;tico</b> &ge; 24h sem retirada &middot; <b style="color:var(--orange)">aten&ccedil;&atilde;o</b> &ge; 12h &middot; sexta-feira = ponto cr&iacute;tico (risco de fim de semana)<br>
   Volumetria: a coluna Vol. &eacute; o total de volumes da AWB; nos KPIs cada AWB &eacute; somada uma &uacute;nica vez (uma AWB pode ter v&aacute;rios pedidos)
 </footer>
-</main>
 </div>
 
 <script>
@@ -395,13 +380,6 @@ const fmt = s => { if(!s) return "\u2014"; const d = new Date(s); return String(
 const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 if (new Date().getDay() === 5) document.getElementById("friday-banner").classList.add("on");
-
-function toggleSb(){
-  const app = document.querySelector(".app");
-  app.classList.toggle("nosb");
-  try { localStorage.setItem("ra_sb_oculto", app.classList.contains("nosb") ? "1" : "0"); } catch(e){}
-}
-try { if (localStorage.getItem("ra_sb_oculto") === "1") document.querySelector(".app").classList.add("nosb"); } catch(e){}
 
 let VIEW = [];
 let SORT = null; /* ordenacao por clique no cabecalho: {col, dir 1|-1} */
@@ -521,7 +499,7 @@ function preset(k, el){
   else if (k === "R") document.getElementById("f-st").value = "R";
   else if (k === "crit"){ document.getElementById("f-st").value = "A"; document.querySelector('.cf[data-col="h"]').value = "24"; }
   else if (k === "sx"){ document.getElementById("f-sx").checked = true; }
-  document.querySelectorAll(".nv").forEach(n => n.classList.remove("active"));
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
   if (el) el.classList.add("active");
   apply();
 }
@@ -537,8 +515,8 @@ function limpar(){
   document.querySelectorAll(".cf").forEach(i => { i.value = ""; });
   SORT = null;
   document.querySelectorAll("th[data-s]").forEach(t => t.classList.remove("asc","desc"));
-  document.querySelectorAll(".nv").forEach(n => n.classList.remove("active"));
-  document.querySelectorAll(".nv")[0].classList.add("active");
+  document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+  document.querySelectorAll(".tab")[0].classList.add("active");
   apply();
 }
 

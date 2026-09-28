@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T14:38:35",
+  "gerado_em": "2026-09-28T14:43:35",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 307,
+    "pendentes_janela": 304,
     "cobranca_gru_janela": 64,
     "sem_embarque_efetiva": 683,
     "com_embarque_efetiva": 6946,
@@ -49,7 +49,7 @@
       "VTCLOG RIO GALEAO": 13,
       "BVB - J PIMENTEL S. CUNHA LTDA": 9,
       "SSA - LUTY LOG": 9,
-      "BEL - MH FROTA TRANSPORTE": 9
+      "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 8
     },
     "top10_ufs_pendencias": {
       "AC": 40,
@@ -61,12 +61,12 @@
       "SP": 19,
       "PI": 16,
       "RJ": 15,
-      "PA": 10
+      "RR": 9
     },
     "latencia": {
-      "n_agente": 5831,
+      "n_agente": 5834,
       "n_so_gru": 108,
-      "n_sem_primeiro_sync": 695,
+      "n_sem_primeiro_sync": 692,
       "media_horas": 1.67,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -383,18 +383,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 79,
       "loggers": 897,
-      "sincronizados": 838,
-      "pendentes": 58,
+      "sincronizados": 841,
+      "pendentes": 55,
       "sem_embarque": 31,
       "cobranca_gru": 1,
       "pedidos_pendentes": 27,
-      "pct": 6.5,
-      "n_latencia": 802,
+      "pct": 6.1,
+      "n_latencia": 805,
       "media_horas": 0.33,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 95
+      "n_sem_primeiro_sync": 92
     },
     {
       "dia_iso": "2026-09-26",

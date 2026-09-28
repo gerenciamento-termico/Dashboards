@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T16:28:29",
+  "gerado_em": "2026-09-28T16:35:14",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8074,
-    "pedidos_janela": 1154,
+    "pares_janela": 8075,
+    "pedidos_janela": 1155,
     "loggers_ares_janela": 7634,
-    "loggers_ares_antes_dedup": 7945,
-    "dedup_dia_logger": 105,
+    "loggers_ares_antes_dedup": 7946,
+    "dedup_dia_logger": 106,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
     "pendentes_janela": 483,
-    "cobranca_gru_janela": 62,
-    "sem_embarque_efetiva": 594,
+    "cobranca_gru_janela": 60,
+    "sem_embarque_efetiva": 595,
     "com_embarque_efetiva": 7351,
     "loggers_sem_lastsync": 79,
-    "nao_avaliados": 594,
-    "pedidos_com_agente": 8074,
+    "nao_avaliados": 595,
+    "pedidos_com_agente": 8075,
     "dtbtransporte": {
-      "consultados": 1154,
-      "mapeados": 1153,
-      "linhas": 1278
+      "consultados": 1155,
+      "mapeados": 1154,
+      "linhas": 1279
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 153,
@@ -64,9 +64,9 @@
       "PI": 18
     },
     "latencia": {
-      "n_agente": 6052,
-      "n_so_gru": 108,
-      "n_sem_primeiro_sync": 885,
+      "n_agente": 6055,
+      "n_so_gru": 109,
+      "n_sem_primeiro_sync": 881,
       "media_horas": 1.63,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -364,18 +364,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 93,
       "loggers": 957,
-      "sincronizados": 866,
+      "sincronizados": 868,
       "pendentes": 65,
       "sem_embarque": 21,
-      "cobranca_gru": 26,
+      "cobranca_gru": 24,
       "pedidos_pendentes": 30,
       "pct": 6.8,
-      "n_latencia": 785,
+      "n_latencia": 788,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 172
+      "n_sync_so_gru": 1,
+      "n_sem_primeiro_sync": 168
     },
     {
       "dia_iso": "2026-09-25",

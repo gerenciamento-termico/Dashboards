@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T11:51:29",
+  "gerado_em": "2026-09-28T11:57:44",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 368,
-    "cobranca_gru_janela": 37,
+    "pendentes_janela": 361,
+    "cobranca_gru_janela": 43,
     "sem_embarque_efetiva": 683,
     "com_embarque_efetiva": 6946,
     "loggers_sem_lastsync": 80,
@@ -46,10 +46,10 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
       "SLZ - REIS CAVALCANTE EXPRESSO": 23,
-      "VTCLOG RIO GALEAO": 19,
       "THE - AERONEIVA EXPRESS": 15,
-      "BEL - MH FROTA TRANSPORTE": 10,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 9
+      "VTCLOG RIO GALEAO": 13,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 9,
+      "SSA - LUTY LOG": 9
     },
     "top10_ufs_pendencias": {
       "AC": 40,
@@ -58,10 +58,10 @@
       "TO": 27,
       "SC": 26,
       "MA": 23,
-      "RJ": 21,
       "BA": 20,
       "PR": 19,
-      "SP": 19
+      "SP": 19,
+      "PI": 16
     },
     "latencia": {
       "n_agente": 5747,
@@ -383,12 +383,12 @@
       "dia_full": "25/09/2026",
       "pedidos": 79,
       "loggers": 897,
-      "sincronizados": 831,
-      "pendentes": 65,
+      "sincronizados": 832,
+      "pendentes": 58,
       "sem_embarque": 31,
-      "cobranca_gru": 1,
-      "pedidos_pendentes": 28,
-      "pct": 7.2,
+      "cobranca_gru": 7,
+      "pedidos_pendentes": 27,
+      "pct": 6.5,
       "n_latencia": 772,
       "media_horas": 0.07,
       "mediana_horas": 0.04,

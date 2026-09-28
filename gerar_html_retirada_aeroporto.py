@@ -23,7 +23,7 @@ from pathlib import Path
 WORKSPACE = Path(__file__).resolve().parent
 sys.path.insert(0, str(WORKSPACE))
 
-from gerar_html_entregas_vs_sincronismo import _sqlserver_cfg  # noqa: E402
+from gerar_html_entregas_vs_sincronismo import _sqlserver_cfg, load_env  # noqa: E402
 
 OUT_HTML = WORKSPACE / "RETIRADA_AEROPORTO.html"
 JANELA_DIAS = 30
@@ -70,7 +70,46 @@ def fetch_rows() -> list[dict]:
         return [dict(zip(cols, raw)) for raw in cur.fetchall()]
 
 
-def build_model(raw: list[dict]) -> dict:
+def fetch_loggers(pedidos: list[str]) -> dict[str, int]:
+    """Quantidade de dataloggers por pedido (vtc_stage.documentos).
+
+    0 = carga seca ou logger nao registrado no stage; por isso filtramos, nao excluimos.
+    """
+    from sqlalchemy import bindparam, create_engine, text
+    from sqlalchemy.engine import URL
+
+    env = load_env(WORKSPACE / ".env.vtc_stage")
+    if not env.get("VTC_STAGE_HOST"):
+        raise RuntimeError("VTC_STAGE ausente (.env.vtc_stage)")
+    url = URL.create(
+        "postgresql+psycopg2",
+        username=env["VTC_STAGE_USER"], password=env["VTC_STAGE_PASSWORD"],
+        host=env["VTC_STAGE_HOST"], port=int(env.get("VTC_STAGE_PORT") or 5432),
+        database=env["VTC_STAGE_NAME"],
+    )
+    query = text(
+        """
+        SELECT TRIM(nr_pedido::text) AS pedido,
+               COUNT(DISTINCT NULLIF(TRIM(ds_tag), '')) AS loggers
+        FROM vtc_stage.documentos
+        WHERE TRIM(nr_pedido::text) IN :peds
+        GROUP BY 1
+        """
+    ).bindparams(bindparam("peds", expanding=True))
+    out: dict[str, int] = {}
+    engine = create_engine(url, pool_pre_ping=True)
+    try:
+        with engine.connect() as conn:
+            for i in range(0, len(pedidos), 500):
+                chunk = pedidos[i : i + 500]
+                for row in conn.execute(query, {"peds": chunk}):
+                    out[str(row[0])] = int(row[1] or 0)
+    finally:
+        engine.dispose()
+    return out
+
+
+def build_model(raw: list[dict], loggers: dict[str, int]) -> dict:
     agora = datetime.now()
 
     # dedup por pedido: mantem o desembarque mais recente; empate -> com retirada
@@ -108,21 +147,25 @@ def build_model(raw: list[dict]) -> dict:
             "n": noites,
             "sx": sexta,
             "fds": bool(sexta and noites >= 1),
+            "lg": loggers.get(p, 0),
         })
 
     # ultima sexta-feira (se hoje e sexta, considera hoje)
     dias_desde_sexta = (agora.weekday() - 4) % 7
     ultima_sexta = (agora - timedelta(days=dias_desde_sexta)).date()
 
-    aguardando = [r for r in rows if r["st"] == "A"]
+    # KPIs consideram apenas carga monitorada (pedidos com datalogger);
+    # carga seca continua disponivel na grade via filtro "Dataloggers: Todos/Sem".
+    monitorados = [r for r in rows if r["lg"] > 0]
+    aguardando = [r for r in monitorados if r["st"] == "A"]
     criticos = [r for r in aguardando if r["h"] >= 24]
     hoje = agora.date().isoformat()
-    retirados_hoje = [r for r in rows if r["re"] and r["re"][:10] == hoje]
+    retirados_hoje = [r for r in monitorados if r["re"] and r["re"][:10] == hoje]
     fds_ultima_sexta = [
-        r for r in rows
+        r for r in monitorados
         if r["sx"] and r["de"][:10] == ultima_sexta.isoformat() and (r["n"] >= 1 or r["st"] == "A")
     ]
-    ret_7d = [r for r in rows if r["st"] == "R" and r["de"] >= (agora - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M")]
+    ret_7d = [r for r in monitorados if r["st"] == "R" and r["de"] >= (agora - timedelta(days=7)).strftime("%Y-%m-%dT%H:%M")]
     media_7d = round(sum(r["h"] for r in ret_7d) / len(ret_7d), 1) if ret_7d else 0.0
 
     def _vols(grupo: list[dict]) -> int:
@@ -219,7 +262,7 @@ h1 small{display:block;font-size:.68rem;font-weight:700;color:var(--tx2);text-tr
 
 /* ===== filtros ===== */
 .fcard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px;margin-bottom:12px;box-shadow:var(--shadow)}
-.fbar{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;align-items:end}
+.fbar{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:end}
 .fbar label{display:block;font-size:.61rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;font-weight:700}
 .fbar input,.fbar select{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:9px 12px;font-size:.82rem;font-family:inherit;max-width:100%}
 .fbar select{text-overflow:ellipsis}
@@ -264,6 +307,7 @@ tr.warn:hover td{background:#fef3c7}
 .b-ok{background:#dcfce7;color:#15803d}
 .b-sx{background:#ede9fe;color:var(--purple);margin-left:4px}
 .b-fds{background:#fef3c7;color:#b45309;margin-left:4px}
+.b-seca{background:#f1f5f9;color:#64748b}
 .hrs{font-weight:800}
 .hrs.c{color:var(--red)} .hrs.w{color:var(--orange)} .hrs.k{color:var(--green)}
 .rota{color:var(--blue);font-weight:700}
@@ -333,6 +377,7 @@ footer{margin-top:28px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <div><label>Base / Agente</label><select id="f-base"><option value="">Todas as bases</option>__BASES__</select></div>
   <div><label>Destino (aeroporto)</label><select id="f-dest"><option value="">Todos</option>__DESTINOS__</select></div>
   <div><label>Status</label><select id="f-st"><option value="">Todos</option><option value="A" selected>Aguardando retirada</option><option value="R">Retirados</option></select></div>
+  <div><label>Dataloggers</label><select id="f-lg"><option value="C" selected>Com logger (monitorada)</option><option value="S">Sem logger (carga seca)</option><option value="">Todos</option></select></div>
   <div><label>Per&iacute;odo (desembarque)</label><select id="f-per"><option value="7">7 dias</option><option value="15" selected>15 dias</option><option value="30">30 dias</option></select></div>
   <div><label>Ordena&ccedil;&atilde;o</label><select id="f-ord"><option value="h">Mais horas no aeroporto</option><option value="dn">Desembarque recente</option><option value="da">Desembarque antigo</option></select></div>
   <label class="chk"><input type="checkbox" id="f-sx"> S&oacute; sextas</label>
@@ -359,6 +404,7 @@ footer{margin-top:28px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <thead><tr>
     <th data-s="p">Pedido</th><th data-s="awb">AWB</th><th data-s="rota">Rota</th><th data-s="cia">CIA</th><th data-s="ag">Agente / Base</th>
     <th data-s="vol" title="Volumes da AWB">Vol.</th>
+    <th data-s="lg" title="Dataloggers no pedido (vtc_stage)">Loggers</th>
     <th data-s="de">Desembarque</th><th data-s="re">Retirada</th><th data-s="h">Horas</th><th data-s="n">Noites</th><th data-s="st">Status</th>
   </tr></thead>
   <tbody id="tb"></tbody>
@@ -369,7 +415,8 @@ footer{margin-top:28px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 <footer>
   VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; Retirada no Aeroporto &middot; Fonte: Acompanhamento AWB (dtbTransporte), mesma base do Tracking A&eacute;reo<br>
   Crit&eacute;rios: <b style="color:var(--red)">cr&iacute;tico</b> &ge; 24h sem retirada &middot; <b style="color:var(--orange)">aten&ccedil;&atilde;o</b> &ge; 12h &middot; sexta-feira = ponto cr&iacute;tico (risco de fim de semana)<br>
-  Volumetria: a coluna Vol. &eacute; o total de volumes da AWB; nos KPIs cada AWB &eacute; somada uma &uacute;nica vez (uma AWB pode ter v&aacute;rios pedidos)
+  Volumetria: a coluna Vol. &eacute; o total de volumes da AWB; nos KPIs cada AWB &eacute; somada uma &uacute;nica vez (uma AWB pode ter v&aacute;rios pedidos)<br>
+  KPIs consideram apenas <b>carga monitorada</b> (pedidos com datalogger no vtc_stage); &quot;SECA&quot; = sem tag registrada &mdash; use o filtro Dataloggers para ver tudo
 </footer>
 </div>
 
@@ -408,6 +455,7 @@ function apply(){
   const ba = document.getElementById("f-base").value;
   const de = document.getElementById("f-dest").value;
   const st = document.getElementById("f-st").value;
+  const lg = document.getElementById("f-lg").value;
   const per= parseInt(document.getElementById("f-per").value, 10);
   const so = document.getElementById("f-sx").checked;
   const ord= document.getElementById("f-ord").value;
@@ -423,6 +471,8 @@ function apply(){
     if (ba && r.ag !== ba) return false;
     if (de && r.d !== de) return false;
     if (st && r.st !== st) return false;
+    if (lg === "C" && r.lg === 0) return false;
+    if (lg === "S" && r.lg > 0) return false;
     if (so && !r.sx) return false;
     if (colf.length && !matchCols(r, colf)) return false;
     if (q){
@@ -468,6 +518,7 @@ function render(){
       + '<td>'+esc(r.cia)+'</td>'
       + '<td class="agc" title="'+esc(r.ag)+'">'+esc(r.ag)+'</td>'
       + '<td><b>'+r.vol+'</b></td>'
+      + '<td>'+(r.lg>0 ? '<b style="color:var(--blue)">'+r.lg+'</b>' : '<span class="badge b-seca">SECA</span>')+'</td>'
       + '<td>'+fmt(r.de)+'</td>'
       + '<td>'+fmt(r.re)+'</td>'
       + '<td class="hrs '+classeH(r)+'">'+r.h.toFixed(1)+'h</td>'
@@ -482,7 +533,7 @@ function render(){
       + '<div class="topo"><span class="ped">'+esc(r.p)+'</span><span>'+badges(r)+'</span></div>'
       + '<div class="kv">'
       + '<span class="k">Rota</span><span class="rota">'+esc(r.o)+' \u2192 '+esc(r.d)+' \u00b7 '+esc(r.cia)+'</span>'
-      + '<span class="k">AWB</span><span>'+esc(r.awb)+' \u00b7 <b>'+r.vol+'</b> vol.</span>'
+      + '<span class="k">AWB</span><span>'+esc(r.awb)+' \u00b7 <b>'+r.vol+'</b> vol. \u00b7 '+(r.lg>0 ? '<b>'+r.lg+'</b> logger'+(r.lg===1?'':'s') : 'carga seca')+'</span>'
       + '<span class="k">Agente</span><span>'+esc(r.ag)+'</span>'
       + '<span class="k">Desembarque</span><span>'+fmt(r.de)+'</span>'
       + '<span class="k">Retirada</span><span>'+fmt(r.re)+'</span>'
@@ -509,6 +560,7 @@ function limpar(){
   document.getElementById("f-base").value = "";
   document.getElementById("f-dest").value = "";
   document.getElementById("f-st").value = "";
+  document.getElementById("f-lg").value = "C";
   document.getElementById("f-per").value = "15";
   document.getElementById("f-ord").value = "h";
   document.getElementById("f-sx").checked = false;
@@ -521,8 +573,8 @@ function limpar(){
 }
 
 function baixarCsv(){
-  const cab = ["pedido","awb","volumes_awb","origem","destino","cia","agente","desembarque","retirada","horas","noites","status","sexta","fim_de_semana"];
-  const linhas = VIEW.map(r => [r.p,r.awb,r.vol,r.o,r.d,r.cia,'"'+r.ag.replace(/"/g,'""')+'"',r.de,r.re||"",r.h,r.n,r.st==="A"?"AGUARDANDO":"RETIRADO",r.sx?"SIM":"",r.fds?"SIM":""].join(";"));
+  const cab = ["pedido","awb","volumes_awb","loggers","origem","destino","cia","agente","desembarque","retirada","horas","noites","status","sexta","fim_de_semana"];
+  const linhas = VIEW.map(r => [r.p,r.awb,r.vol,r.lg,r.o,r.d,r.cia,'"'+r.ag.replace(/"/g,'""')+'"',r.de,r.re||"",r.h,r.n,r.st==="A"?"AGUARDANDO":"RETIRADO",r.sx?"SIM":"",r.fds?"SIM":""].join(";"));
   const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -532,7 +584,7 @@ function baixarCsv(){
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 3000);
 }
 
-["f-busca","f-base","f-dest","f-st","f-per","f-sx"].forEach(id => {
+["f-busca","f-base","f-dest","f-st","f-lg","f-per","f-sx"].forEach(id => {
   const el = document.getElementById(id);
   el.addEventListener(el.tagName==="INPUT" && el.type==="text" ? "input" : "change", apply);
 });
@@ -587,11 +639,14 @@ def write_html(model: dict) -> None:
 
 def main() -> None:
     raw = fetch_rows()
-    model = build_model(raw)
+    pedidos = sorted({str(r["Pedido"]).strip() for r in raw})
+    loggers = fetch_loggers(pedidos)
+    model = build_model(raw, loggers)
     write_html(model)
     k = model["kpi"]
+    monitorados = sum(1 for r in model["rows"] if r["lg"] > 0)
     print(
-        f"OK RETIRADA_AEROPORTO.html | pedidos={len(model['rows'])} | "
+        f"OK RETIRADA_AEROPORTO.html | pedidos={len(model['rows'])} (monitorados={monitorados}) | "
         f"aguardando={k['aguardando']} criticos24h={k['criticos']} "
         f"fds_sexta={k['fds']} retirados_hoje={k['retirados_hoje']} media7d={k['media_7d']}h"
     )

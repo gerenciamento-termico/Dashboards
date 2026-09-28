@@ -212,6 +212,11 @@ h1 .air{color:var(--cyan)}
 .tblwrap{background:var(--panel);border:1px solid var(--line);border-radius:14px;overflow:auto;max-height:72vh}
 table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:980px}
 th{position:sticky;top:0;height:36px;background:var(--panel2);color:var(--tx2);text-transform:uppercase;font-size:.64rem;letter-spacing:.5px;padding:8px 9px;text-align:left;white-space:nowrap;z-index:2}
+th[data-s]{cursor:pointer;user-select:none;transition:color .15s}
+th[data-s]:hover{color:var(--cyan)}
+th[data-s]::after{content:" \2195";opacity:.35}
+th[data-s].asc::after{content:" \25B2";opacity:1;color:var(--cyan)}
+th[data-s].desc::after{content:" \25BC";opacity:1;color:var(--cyan)}
 .frow th{top:36px;padding:5px 6px;height:auto;background:#14283f;border-bottom:1px solid var(--line)}
 .frow input{width:100%;min-width:54px;background:var(--bg1);border:1px solid var(--line);border-radius:6px;color:var(--tx);padding:4px 7px;font-size:.7rem;font-family:inherit}
 .frow input:focus{outline:none;border-color:var(--cyan)}
@@ -284,14 +289,14 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <label class="chk"><input type="checkbox" id="f-sx"> S&oacute; sextas</label>
   <div class="low"><button class="btn" onclick="limpar()">Limpar</button><button class="btn" onclick="baixarCsv()">CSV</button></div>
 </div>
-<div class="cnt" id="cnt"></div>
+<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--cyan)">Dica: clique no t&iacute;tulo da coluna para ordenar (menor &rarr; maior / maior &rarr; menor)</span></div>
 
 <div class="tblwrap">
 <table>
   <thead><tr>
-    <th>Pedido</th><th>AWB</th><th>Rota</th><th>CIA</th><th>Agente / Base</th>
-    <th title="Volumes da AWB">Vol.</th>
-    <th>Desembarque</th><th>Retirada</th><th>Horas</th><th>Noites</th><th>Status</th>
+    <th data-s="p">Pedido</th><th data-s="awb">AWB</th><th data-s="rota">Rota</th><th data-s="cia">CIA</th><th data-s="ag">Agente / Base</th>
+    <th data-s="vol" title="Volumes da AWB">Vol.</th>
+    <th data-s="de">Desembarque</th><th data-s="re">Retirada</th><th data-s="h">Horas</th><th data-s="n">Noites</th><th data-s="st">Status</th>
   </tr>
   <tr class="frow">
     <th><input class="cf" data-col="p" placeholder="pedido"></th>
@@ -327,6 +332,14 @@ const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":
 if (new Date().getDay() === 5) document.getElementById("friday-banner").classList.add("on");
 
 let VIEW = [];
+let SORT = null; /* ordenacao por clique no cabecalho: {col, dir 1|-1} */
+function cmpVal(r, c){
+  if (c === "rota") return r.o + r.d;
+  if (c === "de") return r.de;
+  if (c === "re") return r.re || "";
+  if (c === "st") return r.st;
+  return r[c];
+}
 function matchCols(r, colf){
   for (const [c, v] of colf){
     if (c === "h"){ const t = parseFloat(v.replace(",", ".")); if (isNaN(t) || r.h < t) return false; continue; }
@@ -368,7 +381,15 @@ function apply(){
     }
     return true;
   });
-  if (ord === "h") VIEW.sort((a,b) => (a.st!==b.st) ? (a.st==="A"?-1:1) : b.h-a.h);
+  if (SORT){
+    const col = SORT.col, dir = SORT.dir;
+    VIEW.sort((a,b) => {
+      const va = cmpVal(a, col), vb = cmpVal(b, col);
+      if (typeof va === "number" && typeof vb === "number") return (va - vb) * dir;
+      return String(va).localeCompare(String(vb)) * dir;
+    });
+  }
+  else if (ord === "h") VIEW.sort((a,b) => (a.st!==b.st) ? (a.st==="A"?-1:1) : b.h-a.h);
   else if (ord === "dn") VIEW.sort((a,b) => b.de.localeCompare(a.de));
   else VIEW.sort((a,b) => a.de.localeCompare(b.de));
   render();
@@ -429,6 +450,8 @@ function limpar(){
   document.getElementById("f-ord").value = "h";
   document.getElementById("f-sx").checked = false;
   document.querySelectorAll(".cf").forEach(i => { i.value = ""; });
+  SORT = null;
+  document.querySelectorAll("th[data-s]").forEach(t => t.classList.remove("asc","desc"));
   apply();
 }
 
@@ -444,11 +467,24 @@ function baixarCsv(){
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 3000);
 }
 
-["f-busca","f-base","f-dest","f-st","f-per","f-ord","f-sx"].forEach(id => {
+["f-busca","f-base","f-dest","f-st","f-per","f-sx"].forEach(id => {
   const el = document.getElementById(id);
   el.addEventListener(el.tagName==="INPUT" && el.type==="text" ? "input" : "change", apply);
 });
+document.getElementById("f-ord").addEventListener("change", () => {
+  SORT = null;
+  document.querySelectorAll("th[data-s]").forEach(t => t.classList.remove("asc","desc"));
+  apply();
+});
 document.querySelectorAll(".cf").forEach(i => i.addEventListener("input", apply));
+document.querySelectorAll("th[data-s]").forEach(th => th.addEventListener("click", () => {
+  const c = th.dataset.s;
+  if (SORT && SORT.col === c) SORT.dir = -SORT.dir;
+  else SORT = { col: c, dir: 1 };
+  document.querySelectorAll("th[data-s]").forEach(t => t.classList.remove("asc","desc"));
+  th.classList.add(SORT.dir === 1 ? "asc" : "desc");
+  apply();
+}));
 apply();
 </script>
 </body>

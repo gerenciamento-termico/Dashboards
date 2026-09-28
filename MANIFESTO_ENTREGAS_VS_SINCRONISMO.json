@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-28T11:27:22",
+  "gerado_em": "2026-09-28T11:32:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 372,
+    "pendentes_janela": 368,
     "cobranca_gru_janela": 37,
     "sem_embarque_efetiva": 683,
     "com_embarque_efetiva": 6946,
@@ -48,7 +48,7 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 23,
       "VTCLOG RIO GALEAO": 19,
       "THE - AERONEIVA EXPRESS": 15,
-      "BEL - MH FROTA TRANSPORTE": 14,
+      "BEL - MH FROTA TRANSPORTE": 10,
       "BVB - J PIMENTEL S. CUNHA LTDA": 9
     },
     "top10_ufs_pendencias": {
@@ -64,9 +64,9 @@
       "SP": 19
     },
     "latencia": {
-      "n_agente": 5740,
+      "n_agente": 5747,
       "n_so_gru": 131,
-      "n_sem_primeiro_sync": 763,
+      "n_sem_primeiro_sync": 756,
       "media_horas": 0.95,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -383,18 +383,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 79,
       "loggers": 897,
-      "sincronizados": 827,
-      "pendentes": 69,
+      "sincronizados": 831,
+      "pendentes": 65,
       "sem_embarque": 31,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 29,
-      "pct": 7.7,
-      "n_latencia": 765,
+      "pedidos_pendentes": 28,
+      "pct": 7.2,
+      "n_latencia": 772,
       "media_horas": 0.07,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 132
+      "n_sem_primeiro_sync": 125
     },
     {
       "dia_iso": "2026-09-26",

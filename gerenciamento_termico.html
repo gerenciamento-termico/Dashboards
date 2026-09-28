@@ -344,6 +344,9 @@ body{
   border:1px solid rgba(16,185,129,0.15);
 }
 .card-status i{font-size:0.45rem;animation:pulse 2s ease-in-out infinite}
+.card-status.warn{background:rgba(245,158,11,0.1);color:#f59e0b;border-color:rgba(245,158,11,0.25)}
+.card-status.err{background:rgba(239,68,68,0.1);color:#ef4444;border-color:rgba(239,68,68,0.25)}
+.card-status.err i{animation:none}
 
 .card h3{
   font-size:1.25rem;font-weight:700;
@@ -814,6 +817,50 @@ document.querySelectorAll('.card').forEach(card => {
 
 // Contador dinamico de paineis
 document.getElementById('card-count').textContent = document.querySelectorAll('.card').length + ' ativos';
+
+// Status "Ao Vivo" real: le status_paineis.json publicado pela rotina de 10 min
+function idadeTexto(min){
+  if (min < 60) return Math.max(1, Math.round(min)) + ' min';
+  if (min < 2880) return (min/60).toFixed(min < 600 ? 1 : 0) + ' h';
+  return Math.round(min/1440) + ' d';
+}
+async function atualizarStatusPaineis(){
+  try {
+    const resp = await fetch('status_paineis.json?t=' + Date.now(), {cache: 'no-store'});
+    if (!resp.ok) return;
+    const dados = await resp.json();
+    const mapa = {};
+    (dados.paineis || []).forEach(p => { mapa[p.arquivo.toLowerCase()] = p.atualizado_em; });
+    const agora = new Date();
+    document.querySelectorAll('.card').forEach(card => {
+      const m = (card.getAttribute('onclick') || '').match(/([A-Za-z0-9_]+\.html)/);
+      const badge = card.querySelector('.card-status');
+      if (!m || !badge) return;
+      const ts = mapa[m[1].toLowerCase()];
+      if (!ts) return; // sem info: mantem badge padrao
+      const dt = new Date(ts);
+      const min = (agora - dt) / 60000;
+      badge.classList.remove('warn', 'err');
+      if (min <= 25){
+        badge.innerHTML = '<i class="fas fa-circle"></i> Ao Vivo &middot; ' + idadeTexto(min);
+      } else if (min <= 90){
+        badge.classList.add('warn');
+        badge.innerHTML = '<i class="fas fa-circle"></i> Atrasado &middot; ' + idadeTexto(min);
+      } else {
+        badge.classList.add('err');
+        badge.innerHTML = '<i class="fas fa-circle"></i> Parado &middot; ' + idadeTexto(min);
+      }
+      badge.title = 'Ultima atualizacao: ' + dt.toLocaleString('pt-BR');
+    });
+    if (dados.gerado_em){
+      const g = new Date(dados.gerado_em);
+      document.getElementById('card-count').textContent =
+        document.querySelectorAll('.card').length + ' ativos \u00b7 rotina ' + g.toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'});
+    }
+  } catch(e){ /* offline ou arquivo ausente: badges padrao */ }
+}
+atualizarStatusPaineis();
+setInterval(atualizarStatusPaineis, 60000);
 
 // Search filter
 const searchInput = document.getElementById('searchInput');

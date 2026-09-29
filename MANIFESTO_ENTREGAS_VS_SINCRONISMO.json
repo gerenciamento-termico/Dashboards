@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-29T09:43:20",
+  "gerado_em": "2026-09-29T09:53:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 487,
+    "pendentes_janela": 478,
     "cobranca_gru_janela": 36,
     "sem_embarque_efetiva": 650,
     "com_embarque_efetiva": 7387,
-    "loggers_sem_lastsync": 80,
+    "loggers_sem_lastsync": 78,
     "nao_avaliados": 650,
     "pedidos_com_agente": 8165,
     "dtbtransporte": {
@@ -40,7 +40,7 @@
       "linhas": 1241
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 163,
+      "VTCLOG - GRU": 154,
       "SSA - LUTY LOG": 42,
       "RBR - RODOTEC": 40,
       "THE - AERONEIVA EXPRESS": 35,
@@ -58,15 +58,15 @@
       "AC": 40,
       "PI": 37,
       "TO": 27,
-      "RS": 26,
       "SC": 25,
       "PE": 25,
-      "MA": 24
+      "MA": 24,
+      "RS": 17
     },
     "latencia": {
-      "n_agente": 6171,
+      "n_agente": 6180,
       "n_so_gru": 100,
-      "n_sem_primeiro_sync": 825,
+      "n_sem_primeiro_sync": 816,
       "media_horas": 1.63,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "29/09/2026",
       "pedidos": 3,
       "loggers": 125,
-      "sincronizados": 108,
-      "pendentes": 17,
+      "sincronizados": 117,
+      "pendentes": 8,
       "sem_embarque": 55,
       "cobranca_gru": 0,
       "pedidos_pendentes": 3,
-      "pct": 13.6,
-      "n_latencia": 107,
+      "pct": 6.4,
+      "n_latencia": 116,
       "media_horas": 0.05,
       "mediana_horas": 0.06,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 18
+      "n_sem_primeiro_sync": 9
     }
   ],
   "erros_validacao": {},

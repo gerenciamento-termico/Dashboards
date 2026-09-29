@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-09-29T13:24:04",
+    "gerado_em":  "2026-09-29T13:37:03",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -8,55 +8,55 @@
                     },
                     {
                         "arquivo":  "ESTOQUE_DATALOGGERS.html",
-                        "atualizado_em":  "2026-09-29T13:13:14"
+                        "atualizado_em":  "2026-09-29T13:25:02"
                     },
                     {
                         "arquivo":  "CONTROLE_ENTREGAS_20D.html",
-                        "atualizado_em":  "2026-09-29T13:13:56"
+                        "atualizado_em":  "2026-09-29T13:25:39"
                     },
                     {
                         "arquivo":  "REVERSA_DATALOGGERS.html",
-                        "atualizado_em":  "2026-09-29T13:17:16"
+                        "atualizado_em":  "2026-09-29T13:29:14"
                     },
                     {
                         "arquivo":  "REVERSA_FORTEX.html",
-                        "atualizado_em":  "2026-09-29T13:17:28"
+                        "atualizado_em":  "2026-09-29T13:29:25"
                     },
                     {
                         "arquivo":  "GESTAO_DISPOSITIVOS.html",
-                        "atualizado_em":  "2026-09-29T13:21:27"
+                        "atualizado_em":  "2026-09-29T13:34:24"
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-09-29T13:21:44"
+                        "atualizado_em":  "2026-09-29T13:34:40"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",
-                        "atualizado_em":  "2026-09-29T13:21:55"
+                        "atualizado_em":  "2026-09-29T13:34:51"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXA_VELHA_130L.html",
-                        "atualizado_em":  "2026-09-29T13:22:16"
+                        "atualizado_em":  "2026-09-29T13:35:12"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXA_33L.html",
-                        "atualizado_em":  "2026-09-29T13:22:31"
+                        "atualizado_em":  "2026-09-29T13:35:29"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXA_42L.html",
-                        "atualizado_em":  "2026-09-29T13:22:38"
+                        "atualizado_em":  "2026-09-29T13:35:39"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXAS_GERAL.html",
-                        "atualizado_em":  "2026-09-29T13:22:51"
+                        "atualizado_em":  "2026-09-29T13:35:52"
                     },
                     {
                         "arquivo":  "ENTREGAS_VS_SINCRONISMO.html",
-                        "atualizado_em":  "2026-09-29T13:21:03"
+                        "atualizado_em":  "2026-09-29T13:33:50"
                     },
                     {
                         "arquivo":  "RETIRADA_AEROPORTO.html",
-                        "atualizado_em":  "2026-09-29T13:21:15"
+                        "atualizado_em":  "2026-09-29T13:34:04"
                     }
                 ]
 }

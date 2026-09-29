@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-"""Gera o dashboard Pendencias de Sincronismo e o snapshot associado."""
+"""Pendencias de Sincronismo — um recorte, tres fontes, uma regra por coluna."""
 from __future__ import annotations
 
 import json
 import os
 import re
 import unicodedata
+from collections import Counter
 from datetime import datetime
 from pathlib import Path
 
@@ -26,37 +27,43 @@ OUT_HTML = WORKSPACE / "PENDENCIAS_SINCRONISMO.html"
 OUT_CSV = WORKSPACE / "PENDENCIAS_SINCRONISMO.csv"
 OUT_XLSX = WORKSPACE / "PENDENCIAS_SINCRONISMO.xlsx"
 OUT_MANIFEST = WORKSPACE / "MANIFESTO_SNAPSHOT_PENDENCIAS_SINCRONISMO.json"
-SEED_HTML = Path(r"C:\Users\Administrador\Downloads\SEM_SYNC_POR_UF.html")
-SEED_CSV_DOWNLOADS = Path(r"C:\Users\Administrador\Downloads\sem_sync_ares_589_pendente.csv")
-SEED_CSV_LOCAL = WORKSPACE / "sem_sync_ares_589_pendente.csv"
 STAGE_DIR = Path(r"C:\Users\Administrador\Documents\NOVO INDICADOR DE REVERSA - VTC_STAGE")
-DESKTOP_DIR = Path(r"C:\Users\Administrador\Desktop\LISTA SEM SINCRONIZAÇÃO")
 REVERSA_HTML = WORKSPACE / "REVERSA_DATALOGGERS.html"
+TIPOS_FORCADOS = frozenset({"SENSOR WEB", "SHIELD", "SYOS", "SENSOR VTC", "ELITECH"})
 SYNC_TOLERANCE = pd.Timedelta(minutes=15)
+ARES_NUMERIC_RE = re.compile(r"^(?:0|V)7417\d+$", flags=re.I)
 
 EXPORT_COLS = [
     "Pedido",
     "Logger",
+    "Tipo",
+    "LPN",
     "UF",
+    "Cliente VTC",
     "Coleta",
     "Entrega",
+    "Chegada cliente",
+    "Status viagem VTC",
+    "Romaneio",
+    "Modal",
+    "Embarque",
+    "Desembarque",
+    "AWB",
     "Último Sync",
     "Dias sem sync",
     "Em GRU?",
     "Localização",
     "Situação atual",
     "Responsável atual",
-    "Tipo",
+    "Destino portal",
+    "Finalidade portal",
+    "Status recebimento",
+    "Prova posição",
+    "Tag no dtbPortal",
     "Atualização dtbPortal",
-    "Ação sugerida",
-    "Última ação portal",
-    "Último histórico portal",
-    "Movimentos portal",
-    "LPN",
-    "Chegada cliente",
     "CTE",
     "Observação portal",
-    "Tag no dtbPortal",
+    "Ação sugerida",
 ]
 
 
@@ -64,16 +71,39 @@ def now_brt() -> datetime:
     return pd.Timestamp.now(tz="America/Sao_Paulo").tz_localize(None).to_pydatetime()
 
 
-def fmt_stamp(value: datetime | pd.Timestamp | None) -> str:
+def to_brt(value: object) -> pd.Timestamp:
     if value is None or (isinstance(value, float) and pd.isna(value)):
-        return ""
-    ts = pd.Timestamp(value)
+        return pd.NaT
+    if isinstance(value, datetime) and not isinstance(value, pd.Timestamp):
+        value = pd.Timestamp(value)
+    if isinstance(value, pd.Timestamp):
+        if pd.isna(value):
+            return pd.NaT
+        if value.tzinfo is not None:
+            return value.tz_convert("America/Sao_Paulo").tz_localize(None)
+        return value
+    raw = str(value).strip()
+    if not raw or raw.lower() in {"nan", "nat", "none"}:
+        return pd.NaT
+    parsed = parse_br(raw)
+    if pd.notna(parsed):
+        return parsed
+    ts = pd.to_datetime(raw, errors="coerce", utc=True)
+    if pd.isna(ts):
+        return pd.NaT
+    return ts.tz_convert("America/Sao_Paulo").tz_localize(None)
+
+
+def fmt_ts(value: object) -> str:
+    ts = to_brt(value)
     if pd.isna(ts):
         return ""
+    if ts.hour == 0 and ts.minute == 0 and ts.second == 0:
+        return ts.strftime("%d/%m/%Y")
     return ts.strftime("%d/%m/%Y %H:%M")
 
 
-def parse_br(value: object) -> pd.Timestamp | pd.NaT:
+def parse_br(value: object) -> pd.Timestamp:
     if value is None or (isinstance(value, float) and pd.isna(value)):
         return pd.NaT
     if isinstance(value, pd.Timestamp):
@@ -81,12 +111,26 @@ def parse_br(value: object) -> pd.Timestamp | pd.NaT:
     raw = str(value).strip()
     if not raw or raw.lower() in {"nan", "nat", "none"}:
         return pd.NaT
-    for fmt in ("%d/%m/%Y %H:%M", "%d/%m/%y %H:%M", "%d/%m/%Y", "%d/%m/%y", "%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S"):
+    for fmt, size in (
+        ("%d/%m/%Y %H:%M:%S", 19),
+        ("%d/%m/%Y %H:%M", 16),
+        ("%d/%m/%y %H:%M:%S", 17),
+        ("%d/%m/%y %H:%M", 14),
+        ("%d/%m/%Y", 10),
+        ("%d/%m/%y", 8),
+        ("%Y-%m-%dT%H:%M:%S", 19),
+        ("%Y-%m-%d %H:%M:%S", 19),
+    ):
         try:
-            return pd.Timestamp(datetime.strptime(raw[:19], fmt))
+            return pd.Timestamp(datetime.strptime(raw[:size], fmt))
         except ValueError:
             continue
-    return pd.to_datetime(raw, dayfirst=True, errors="coerce")
+    ts = pd.to_datetime(raw, errors="coerce", dayfirst=True)
+    if pd.isna(ts):
+        return pd.NaT
+    if getattr(ts, "tzinfo", None) is not None:
+        return ts.tz_convert("America/Sao_Paulo").tz_localize(None)
+    return ts
 
 
 def load_env(path: Path) -> dict[str, str]:
@@ -97,8 +141,8 @@ def load_env(path: Path) -> dict[str, str]:
         line = raw.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
-        key, value = line.split("=", 1)
-        values[key.strip()] = value.strip().strip('"').strip("'")
+        key, val = line.split("=", 1)
+        values[key.strip()] = val.strip().strip('"').strip("'")
     return values
 
 
@@ -116,160 +160,204 @@ def norm_tag(value: object) -> str:
     return "S" + match.group(1).zfill(4) if match else tag
 
 
+def is_ares_numeric(logger: str) -> bool:
+    """Novo ARES numérico (ex.: 0741700439, V741701511). Não mistura com SENSOR WEB 3000…/8691…."""
+    return bool(ARES_NUMERIC_RE.match(norm_tag(logger)))
+
+
+def is_forced(tipo: object) -> bool:
+    return norm_text(tipo) in TIPOS_FORCADOS
+
+
+def is_ares(logger: str, tipo: object) -> bool:
+    t = norm_text(tipo)
+    if t in {"ARES", "ARES COM SONDA"}:
+        return True
+    if is_forced(tipo):
+        return False
+    if is_ares_numeric(logger):
+        return True
+    return bool(re.match(r"^(A|TA|AS)\d+", logger or "", flags=re.I))
+
+
+def classify_sync(entrega: pd.Timestamp, sync: pd.Timestamp, chegada: pd.Timestamp, tipo: object) -> str:
+    if is_forced(tipo):
+        return "SINCRONIZADO"
+    if pd.isna(entrega):
+        return "NAO_AVALIADO"
+    if pd.notna(sync) and sync >= (entrega - SYNC_TOLERANCE):
+        return "SINCRONIZADO"
+    if pd.notna(chegada) and pd.notna(sync) and sync >= (chegada - SYNC_TOLERANCE):
+        return "SINCRONIZADO"
+    return "PENDENTE"
+
+
+def classify_viagem_vtc(chegada, entrega, desembarque, embarque, coleta_emb, entrega_emb, romaneio) -> str:
+    if pd.notna(to_brt(chegada)):
+        return "RECEBIDO NO CLIENTE"
+    if pd.notna(to_brt(entrega)):
+        return "ENTREGUE"
+    if pd.notna(to_brt(desembarque)) or pd.notna(to_brt(entrega_emb)):
+        return "EM TRÂNSITO"
+    if pd.notna(to_brt(embarque)) or pd.notna(to_brt(coleta_emb)) or str(romaneio or "").strip():
+        return "EM TRÂNSITO"
+    return "SEM MOVIMENTO VTC"
+
+
+def classify_posicao(destino, finalidade, status_recebimento, responsavel) -> dict[str, str]:
+    dest = str(destino or "").strip()
+    fin = str(finalidade or "").strip()
+    status = str(status_recebimento or "").strip()
+    dest_n = norm_text(dest)
+    fin_n = norm_text(fin)
+    status_n = norm_text(status)
+    resp_n = norm_text(responsavel)
+    prova = " · ".join(part for part in (dest, fin, status) if part) or "sem movimento no dtbPortal"
+    estoque = dest_n == "EM ESTOQUE" or ("ESTOQUE" in dest_n and "GRU" in dest_n)
+    saldo = fin_n in {"SALDO DE ESTOQUE", "SALDO ESTOQUE"} or "SALDO DE ESTOQUE" in fin_n
+    recebido = status_n == "RECEBIDO"
+    if estoque and saldo and recebido:
+        return {"Em GRU?": "SIM", "Localização": "EM GRU", "Situação atual": "ESTOQUE - GRU", "Prova posição": prova}
+    if estoque and saldo:
+        return {
+            "Em GRU?": "NÃO",
+            "Localização": "RETORNANDO PARA GRU (NÃO RECEBIDO)",
+            "Situação atual": "RETORNANDO - GRU",
+            "Prova posição": prova,
+        }
+    if "RETORNANDO" in dest_n or "RETORNANDO" in fin_n or ("REC" in dest_n and "VTC" in dest_n):
+        return {
+            "Em GRU?": "NÃO",
+            "Localização": "RETORNANDO PARA GRU (NÃO RECEBIDO)",
+            "Situação atual": "RETORNANDO - GRU",
+            "Prova posição": prova,
+        }
+    if "CAMARA" in dest_n:
+        if recebido:
+            sit_cam = "CÂMARA FRIA"
+            if "PACKING" in fin_n:
+                sit_cam = "CÂMARA FRIA - PACKING"
+            elif "PEDIDO" in fin_n:
+                sit_cam = "CÂMARA FRIA - PEDIDOS"
+            return {
+                "Em GRU?": "SIM",
+                "Localização": "CÂMARA FRIA (GRU)",
+                "Situação atual": sit_cam,
+                "Prova posição": prova,
+            }
+        return {
+            "Em GRU?": "NÃO",
+            "Localização": "CÂMARA FRIA (GRU)",
+            "Situação atual": "CÂMARA FRIA",
+            "Prova posição": prova,
+        }
+    situacao = ""
+    if "MANUTEN" in fin_n:
+        situacao = "MANUTENÇÃO"
+    elif "AGENTE" in resp_n or "TERCEIRO" in dest_n or "TERCEIRO" in fin_n or "EM ROTA" in fin_n:
+        situacao = "AGENTE"
+    elif dest_n == "TRANSPORTE" or "TRANSITO" in fin_n:
+        situacao = "EM TRÂNSITO"
+    elif fin:
+        situacao = fin.upper()
+    if dest_n in {"TRANSPORTE", "TERCEIROS"} or "TERCEIRO" in dest_n or "AGENTE" in resp_n or "EM ROTA" in fin_n:
+        return {"Em GRU?": "NÃO", "Localização": "FORA DE GRU", "Situação atual": situacao or "FORA DE GRU", "Prova posição": prova}
+    if not dest_n:
+        return {"Em GRU?": "NÃO", "Localização": "SEM POSIÇÃO NO DTBPORTAL", "Situação atual": "SEM POSIÇÃO", "Prova posição": prova}
+    return {
+        "Em GRU?": "NÃO",
+        "Localização": "POSIÇÃO NÃO COMPROVADA EM GRU",
+        "Situação atual": situacao or (fin.upper() if fin else "NÃO COMPROVADA"),
+        "Prova posição": prova,
+    }
+
+
 def acao_sugerida(localizacao: str, situacao: str) -> str:
     loc = norm_text(localizacao)
     sit = norm_text(situacao)
     if loc == "EM GRU":
         return "SINCRONIZAR EM GRU"
+    if "CAMARA" in loc or "CAMARA" in sit:
+        return "VALIDAR NA CÂMARA FRIA"
     if loc.startswith("RETORNANDO"):
         return "ACOMPANHAR RECEBIMENTO EM GRU"
-    if loc.startswith("NAO LOCALIZADO") or loc.startswith("NÃO LOCALIZADO"):
+    if "NAO COMPROVADA" in loc or loc.startswith("SEM POSICAO"):
         return "VALIDAR CADASTRO/POSIÇÃO NO DTBPORTAL"
-    if sit == "AGENTE":
+    if sit in {"AGENTE", "EM TRANSITO"} or "TERCEIRO" in sit or "EM ROTA" in sit:
         return "ACIONAR AGENTE/RESPONSÁVEL"
     if "MANUTEN" in sit:
         return "VALIDAR COM MANUTENÇÃO"
-    if "CAMARA" in sit or "CÂMARA" in sit:
-        return "VALIDAR NA CÂMARA FRIA"
     return "VALIDAR COM RESPONSÁVEL ATUAL"
 
 
-def extract_json_array(text: str, prefix: str) -> list:
-    match = re.search(re.escape(prefix) + r"\s*=\s*(\[.*?\]);", text, re.S)
-    if not match:
-        return []
-    return json.loads(match.group(1))
-
-
-def latest_organized_csv() -> Path | None:
-    candidates = [SEED_CSV_LOCAL, SEED_CSV_DOWNLOADS]
-    downloads = Path(r"C:\Users\Administrador\Downloads")
-    if downloads.exists():
-        candidates.extend(sorted(downloads.glob("sem_sync_ares*.csv"), key=lambda path: path.stat().st_mtime, reverse=True))
-    if DESKTOP_DIR.exists():
-        candidates.extend(DESKTOP_DIR.glob("sem_sync_ares*.csv"))
-        candidates.extend(DESKTOP_DIR.glob("SEM_SYNC_ATUALIZADO_*.csv"))
-    existing = [path for path in candidates if path.exists() and not path.name.startswith("~$")]
-    return max(existing, key=lambda path: path.stat().st_mtime) if existing else None
-
-
-def fmt_date(value: object) -> str:
-    ts = pd.to_datetime(value, dayfirst=True, errors="coerce")
-    if pd.isna(ts):
+def cell(row: list, idx: dict[str, int], name: str) -> str:
+    pos = idx.get(name)
+    if pos is None or pos >= len(row) or row[pos] is None:
         return ""
-    if ts.hour == 0 and ts.minute == 0 and ts.second == 0:
-        return ts.strftime("%d/%m/%Y")
-    return ts.strftime("%d/%m/%Y %H:%M")
+    return str(row[pos]).strip()
 
 
-def records_from_organized_csv(path: Path) -> list[dict]:
-    source = pd.read_csv(path, encoding="utf-8-sig", sep=";")
-    records = []
-    for _, row in source.iterrows():
-        prefix = str(row.get("prefixo") or "").strip().upper()
-        records.append(
-            {
-                "Pedido": str(row.get("Pedido") or "").strip(),
-                "Logger": str(row.get("Logger") or "").strip(),
-                "UF": "",
-                "Coleta": fmt_date(row.get("dia_coleta")),
-                "Entrega": fmt_date(row.get("dia_entrega")),
-                "Último Sync": fmt_date(row.get("ultimo_sincronismo")),
-                "Dias sem sync": 0,
-                "Em GRU?": "NÃO",
-                "Localização": "",
-                "Situação atual": "",
-                "Responsável atual": "",
-                "Tipo": "ARES" if prefix in {"A", "TA", "AS"} else str(row.get("tipo_short") or ""),
-                "Atualização dtbPortal": "",
-                "Ação sugerida": "VALIDAR COM RESPONSÁVEL ATUAL",
-                "Última ação portal": "",
-                "Último histórico portal": "",
-                "Movimentos portal": 0,
-                "LPN": "",
-                "Chegada cliente": "",
-                "CTE": "",
-                "Observação portal": "",
-                "Tag no dtbPortal": str(row.get("Logger") or "").strip(),
-            }
-        )
-    return records
-
-
-def mongo_name_lookup_values(names: list[str]) -> list[str]:
-    out = set()
-    for name in names:
-        name = (name or "").strip()
-        if not name:
+def load_reversa() -> list[dict]:
+    html = REVERSA_HTML.read_text(encoding="utf-8", errors="replace")
+    rows = json.loads(re.search(r"const ALL_ROWS=(\[.*?\]);", html).group(1))
+    headers = json.loads(re.search(r"const TABLE_HEADERS=(\[.*?\]);", html).group(1))
+    idx = {str(name): i for i, name in enumerate(headers)}
+    by_key: dict[tuple[str, str], dict] = {}
+    for row in rows:
+        logger = norm_tag(cell(row, idx, "Logger"))
+        pedido = cell(row, idx, "Pedido")
+        tipo = cell(row, idx, "Tipo Datalogger")
+        if not pedido or not logger or not is_ares(logger, tipo):
             continue
-        out.add(name)
-        out.add(name + " ")
-        match = re.fullmatch(r"(AS)(\d+)", name, flags=re.I)
-        if match:
-            hyphen = match.group(1).upper() + "-" + match.group(2)
-            out.add(hyphen)
-            out.add(hyphen + " ")
-    return sorted(out)
+        entrega = parse_br(cell(row, idx, "Data de Entrega"))
+        rec = {
+            "pedido": pedido,
+            "logger": logger,
+            "logger_raw": cell(row, idx, "Logger") or logger,
+            "tipo": tipo or "ARES",
+            "lpn": cell(row, idx, "LPN"),
+            "uf": cell(row, idx, "UF Destino") or cell(row, idx, "UF"),
+            "agente": cell(row, idx, "Agente"),
+            "entrega": entrega,
+            "chegada": parse_br(cell(row, idx, "dt_chegadacliente")),
+            "romaneio": cell(row, idx, "Romaneio"),
+        }
+        prev = by_key.get((pedido, logger))
+        if prev is None or (pd.notna(entrega) and (pd.isna(prev["entrega"]) or entrega >= prev["entrega"])):
+            by_key[(pedido, logger)] = rec
+    return list(by_key.values())
 
 
-def fetch_last_sync_by_logger(loggers: list[str]) -> dict[str, pd.Timestamp]:
-    for path in [STAGE_DIR / ".env.ares_mongo", STAGE_DIR / ".env", WORKSPACE / ".env"]:
-        env = load_env(path)
-        for key, value in env.items():
-            os.environ.setdefault(key, value)
-    uri = (os.getenv("ARES_MONGO_URI") or os.getenv("ARES_MONGODB_URI") or "").strip()
-    db_name = (os.getenv("ARES_MONGO_DB") or "ares-prod").strip()
-    if not uri:
-        raise RuntimeError("ARES_MONGO_URI ausente")
-    from pymongo import MongoClient
-
-    names = sorted({norm_tag(item) for item in loggers if norm_tag(item)})
-    client = MongoClient(uri, serverSelectionTimeoutMS=25000, connectTimeoutMS=25000)
-    try:
-        client.admin.command("ping")
-        col = client[db_name]["beacon_devices"]
-        mapping: dict[str, pd.Timestamp] = {}
-        lookup = mongo_name_lookup_values(names)
-        for index in range(0, len(lookup), 2000):
-            part = lookup[index : index + 2000]
-            for doc in col.find({"name": {"$in": part}}, {"name": 1, "lastSyncDate": 1}):
-                key = norm_tag(doc.get("name"))
-                if not key:
-                    continue
-                ts = pd.to_datetime(doc.get("lastSyncDate"), errors="coerce", utc=True)
-                if pd.isna(ts):
-                    continue
-                mapping[key] = ts.tz_convert("America/Sao_Paulo").tz_localize(None)
-        return mapping
-    finally:
-        client.close()
-
-
-def refresh_mongo_and_drop_synced(records: list[dict], pagina_em: datetime) -> tuple[list[dict], int]:
-    mapping = fetch_last_sync_by_logger([rec.get("Logger") or "" for rec in records])
-    kept = []
-    dropped = 0
-    for rec in records:
-        rec = dict(rec)
-        logger = norm_tag(rec.get("Logger"))
-        sync = mapping.get(logger, pd.NaT)
-        entrega = parse_br(rec.get("Entrega"))
-        if pd.notna(sync):
-            rec["Último Sync"] = fmt_stamp(sync.to_pydatetime())
-        if pd.notna(entrega) and pd.notna(sync) and sync >= (entrega - SYNC_TOLERANCE):
-            dropped += 1
-            continue
-        if pd.notna(entrega):
-            rec["Dias sem sync"] = int((pd.Timestamp(pagina_em) - entrega).total_seconds() // 86400)
-        kept.append(rec)
-    return kept, dropped
-
-
-def enrich_uf_vtc(records: list[dict]) -> bool:
+def fetch_vtc(pedidos: list[str]) -> dict[tuple[str, str], object]:
     env = load_env(WORKSPACE / ".env.vtc_stage")
-    pedidos = sorted({str(rec.get("Pedido") or "").strip() for rec in records if rec.get("Pedido")})
     if not env.get("VTC_STAGE_HOST") or not pedidos:
-        return False
+        raise RuntimeError("VTC_STAGE ausente")
+    tag_sql = (
+        "REPLACE(REPLACE(UPPER(TRIM(COALESCE(NULLIF(TRIM(ds_tag), ''), "
+        "NULLIF(TRIM(cd_referencia), '')))), '-', ''), ' ', '')"
+    )
+    query = text(
+        f"""
+        SELECT TRIM(nr_pedido::text) AS pedido,
+               {tag_sql} AS logger,
+               MAX(NULLIF(TRIM(cd_uf), '')) AS uf,
+               MAX(NULLIF(TRIM(ds_cliente), '')) AS cliente,
+               MAX(NULLIF(TRIM(modal), '')) AS modal,
+               MAX(NULLIF(TRIM(cd_lpn::text), '')) AS lpn,
+               MAX(NULLIF(TRIM(cd_awb), '')) AS awb,
+               MAX(NULLIF(TRIM(nr_romaneio::text), '')) AS romaneio,
+               MIN(dt_coletaefetiva) AS coleta,
+               MAX(dt_entregaefetiva) AS entrega,
+               MIN(dt_chegadacliente) AS chegada,
+               MAX(dt_coletaefetivaembarque) AS coleta_embarque,
+               MAX(dt_entregaefetivaembarque) AS entrega_embarque,
+               MAX(dt_embarquecia) AS embarque_cia,
+               MAX(dt_desembarquecia) AS desembarque_cia
+        FROM vtc_stage.documentos
+        WHERE TRIM(nr_pedido::text) IN :peds
+        GROUP BY TRIM(nr_pedido::text), {tag_sql}
+        """
+    ).bindparams(bindparam("peds", expanding=True))
     url = URL.create(
         "postgresql+psycopg2",
         username=env["VTC_STAGE_USER"],
@@ -278,158 +366,62 @@ def enrich_uf_vtc(records: list[dict]) -> bool:
         port=int(env.get("VTC_STAGE_PORT") or 5432),
         database=env["VTC_STAGE_NAME"],
     )
-    query = text(
-        """
-        SELECT TRIM(nr_pedido::text) AS pedido, MAX(NULLIF(TRIM(cd_uf), '')) AS uf
-        FROM vtc_stage.documentos
-        WHERE TRIM(nr_pedido::text) IN :peds
-        GROUP BY TRIM(nr_pedido::text)
-        """
-    ).bindparams(bindparam("peds", expanding=True))
     engine = create_engine(url, pool_pre_ping=True)
-    uf_map: dict[str, str] = {}
     with engine.connect() as connection:
-        for row in connection.execute(query, {"peds": pedidos}):
-            if row[1]:
-                uf_map[str(row[0])] = str(row[1]).strip().upper()
-    if not uf_map:
-        return False
-    for rec in records:
-        rec["UF"] = rec.get("UF") or uf_map.get(str(rec.get("Pedido") or "").strip(), "")
-    return True
+        frame = pd.read_sql(query, connection, params={"peds": pedidos})
+    out: dict[tuple[str, str], object] = {}
+    for row in frame.itertuples(index=False):
+        out[(str(row.pedido or "").strip(), norm_tag(row.logger))] = row
+    return out
 
 
-def load_seed_records() -> tuple[list[dict], str]:
-    if SNAPSHOT_JSON.exists():
-        payload = json.loads(SNAPSHOT_JSON.read_text(encoding="utf-8"))
-        records = payload.get("dados") or []
-        snapshot_em = str(payload.get("snapshot_em") or "")
-        if records:
-            return records, snapshot_em
-    if SEED_HTML.exists():
-        html = SEED_HTML.read_text(encoding="utf-8")
-        records = extract_json_array(html, "const DADOS")
-        stamp = "2026-08-25T11:52:00"
-        match = re.search(r"Atualizado em ([0-9/]+ [0-9:]+)", html)
+def fetch_mongo(loggers: list[str]) -> dict[str, pd.Timestamp]:
+    for path in [STAGE_DIR / ".env.ares_mongo", STAGE_DIR / ".env", WORKSPACE / ".env"]:
+        for key, value in load_env(path).items():
+            os.environ.setdefault(key, value)
+    uri = (os.getenv("ARES_MONGO_URI") or os.getenv("ARES_MONGODB_URI") or "").strip()
+    if not uri:
+        raise RuntimeError("ARES_MONGO_URI ausente")
+    from pymongo import MongoClient
+
+    names = sorted({norm_tag(item) for item in loggers if norm_tag(item)})
+    lookup = set()
+    for name in names:
+        lookup.add(name)
+        lookup.add(name + " ")
+        match = re.fullmatch(r"(AS)(\d+)", name, flags=re.I)
         if match:
-            parsed = parse_br(match.group(1))
-            if pd.notna(parsed):
-                stamp = parsed.strftime("%Y-%m-%dT%H:%M:%S")
-        return records, stamp
-    raise FileNotFoundError("Snapshot de pendencias de sincronismo nao encontrado.")
+            hyphen = match.group(1).upper() + "-" + match.group(2)
+            lookup.add(hyphen)
+            lookup.add(hyphen + " ")
+    lookup = sorted(lookup)
+    client = MongoClient(uri, serverSelectionTimeoutMS=25000, connectTimeoutMS=25000)
+    try:
+        client.admin.command("ping")
+        col = client[os.getenv("ARES_MONGO_DB") or "ares-prod"]["beacon_devices"]
+        mapping: dict[str, pd.Timestamp] = {}
+        for index in range(0, len(lookup), 2000):
+            for doc in col.find({"name": {"$in": lookup[index : index + 2000]}}, {"name": 1, "lastSyncDate": 1}):
+                key = norm_tag(doc.get("name"))
+                ts = pd.to_datetime(doc.get("lastSyncDate"), errors="coerce", utc=True)
+                if key and pd.notna(ts):
+                    ts = ts.tz_convert("America/Sao_Paulo").tz_localize(None)
+                    prev = mapping.get(key)
+                    if prev is None or ts > prev:
+                        mapping[key] = ts
+        return mapping
+    finally:
+        client.close()
 
 
-def records_from_audit_xlsx(path: Path) -> list[dict]:
-    source = pd.read_excel(path, sheet_name="SEM_SYNC_ATUAL")
-    env = load_env(WORKSPACE / ".env.vtc_stage")
-    uf_map: dict[str, str] = {}
-    pedidos = sorted({str(p).strip() for p in source["Pedido"].dropna()})
-    if env.get("VTC_STAGE_HOST") and pedidos:
-        url = URL.create(
-            "postgresql+psycopg2",
-            username=env["VTC_STAGE_USER"],
-            password=env["VTC_STAGE_PASSWORD"],
-            host=env["VTC_STAGE_HOST"],
-            port=int(env.get("VTC_STAGE_PORT") or 5432),
-            database=env["VTC_STAGE_NAME"],
-        )
-        query = text(
-            """
-            SELECT TRIM(nr_pedido::text) AS pedido, MAX(NULLIF(TRIM(cd_uf), '')) AS uf
-            FROM vtc_stage.documentos
-            WHERE TRIM(nr_pedido::text) IN :peds
-            GROUP BY TRIM(nr_pedido::text)
-            """
-        ).bindparams(bindparam("peds", expanding=True))
-        engine = create_engine(url, pool_pre_ping=True)
-        with engine.connect() as connection:
-            for row in connection.execute(query, {"peds": pedidos}):
-                if row[1]:
-                    uf_map[str(row[0])] = str(row[1]).strip().upper()
-
-    def fmt(value: object) -> str:
-        ts = pd.to_datetime(value, errors="coerce")
-        if pd.isna(ts):
-            return ""
-        return ts.strftime("%d/%m/%y %H:%M")
-
-    records = []
-    for _, row in source.iterrows():
-        localizacao = str(row.get("Classificação GRU") or "NÃO INFORMADO")
-        situacao = str(row.get("Situação oficial dtbPortal") or "NÃO LOCALIZADO")
-        pedido = str(row.get("Pedido") or "").strip()
-        records.append(
-            {
-                "Pedido": pedido,
-                "Logger": str(row.get("Logger") or "").strip(),
-                "UF": uf_map.get(pedido, ""),
-                "Coleta": fmt(row.get("Coleta efetiva")),
-                "Entrega": fmt(row.get("Entrega efetiva")),
-                "Último Sync": fmt(row.get("Último Sync (BRT)")),
-                "Dias sem sync": int(row["Dias desde entrega"]) if pd.notna(row.get("Dias desde entrega")) else 0,
-                "Em GRU?": str(row.get("Em GRU") or "NÃO"),
-                "Localização": localizacao,
-                "Situação atual": situacao,
-                "Responsável atual": str(row.get("Responsável atual dtbPortal") or ""),
-                "Tipo": str(row.get("Tipo datalogger") or ""),
-                "Atualização dtbPortal": fmt(row.get("Atualização dtbPortal")),
-                "Ação sugerida": acao_sugerida(localizacao, situacao),
-                "Última ação portal": str(row.get("Última ação portal") or ""),
-                "Último histórico portal": fmt(row.get("Último histórico portal")),
-                "Movimentos portal": int(row["Movimentos no portal"]) if pd.notna(row.get("Movimentos no portal")) else 0,
-                "LPN": row.get("LPN") if pd.notna(row.get("LPN")) else "",
-                "Chegada cliente": fmt(row.get("Chegada ao cliente")),
-                "CTE": str(row.get("CTE") or ""),
-                "Observação portal": str(row.get("Observação última ação") or ""),
-                "Tag no dtbPortal": str(row.get("Tag no dtbPortal") or ""),
-            }
-        )
-    return records
-
-
-def overlay_reversa(records: list[dict], pagina_em: datetime) -> tuple[list[dict], bool]:
-    if not REVERSA_HTML.exists():
-        return records, False
-    html = REVERSA_HTML.read_text(encoding="utf-8", errors="replace")
-    match = re.search(r"const ALL_ROWS=(\[.*?\]);", html)
-    if not match:
-        return records, False
-    rows = json.loads(match.group(1))
-    by_key: dict[tuple[str, str], list] = {}
-    for row in rows:
-        if len(row) < 12:
-            continue
-        key = (str(row[0]).strip(), norm_tag(row[2]))
-        by_key[key] = row
-
-    kept = []
-    used = False
-    for rec in records:
-        key = (str(rec.get("Pedido") or "").strip(), norm_tag(rec.get("Logger")))
-        row = by_key.get(key)
-        if not row:
-            kept.append(rec)
-            continue
-        used = True
-        rec = dict(rec)
-        if row[13]:
-            rec["UF"] = rec.get("UF") or row[13]
-        elif row[12]:
-            rec["UF"] = rec.get("UF") or row[12]
-        if row[1]:
-            rec["LPN"] = rec.get("LPN") or row[1]
-        kept.append(rec)
-    return kept, used
-
-
-def refresh_dtbportal(records: list[dict]) -> bool:
-    load_env_file(WORKSPACE / ".env")
-    tags = sorted({norm_tag(r.get("Logger")) for r in records if r.get("Logger")})
+def fetch_dtbportal(tags: list[str]) -> dict[str, object]:
+    tags = sorted({norm_tag(item) for item in tags if norm_tag(item)})
     if not tags:
-        return False
+        return {}
+    load_env_file(WORKSPACE / ".env")
     env = load_env(WORKSPACE / ".env")
     if not env.get("AURA_POSTGRES_HOST"):
-        return False
+        raise RuntimeError("dtbPortal ausente")
     tag_norm = "REPLACE(REPLACE(UPPER(TRIM(vwt.ds_tag)), '-', ''), ' ', '')"
     query = text(
         f"""
@@ -441,10 +433,15 @@ def refresh_dtbportal(records: list[dict]) -> bool:
                vwt.ds_finalidade,
                vwt.ds_responsavel,
                vwt.ds_statusrecebimento,
-               vwt.dt_atualizacao
+               vwt.dt_atualizacao,
+               vwt.ds_cte,
+               vwt.ds_observacao
         FROM vwTabelaMovDataloggers vwt
         WHERE {tag_norm} IN :tags
-        ORDER BY {tag_norm}, vwt.dt_atualizacao DESC NULLS LAST
+        ORDER BY {tag_norm},
+                 vwt.dt_atualizacao DESC NULLS LAST,
+                 COALESCE(vwt.ds_statusrecebimento, ''),
+                 COALESCE(vwt.ds_destino, '')
         """
     ).bindparams(bindparam("tags", expanding=True))
     url = URL.create(
@@ -458,36 +455,181 @@ def refresh_dtbportal(records: list[dict]) -> bool:
     engine = create_engine(url, pool_pre_ping=True)
     with engine.connect() as connection:
         frame = pd.read_sql(query, connection, params={"tags": tags})
-    if frame.empty:
-        return False
-    pos = {norm_tag(row.logger): row for row in frame.itertuples(index=False)}
-    for rec in records:
-        row = pos.get(norm_tag(rec.get("Logger")))
-        if row is None:
-            continue
-        dest = norm_text(getattr(row, "ds_destino", ""))
-        if "ESTOQUE" in dest and "GRU" in dest:
-            rec["Localização"] = "EM GRU"
-            rec["Em GRU?"] = "SIM"
-        elif "RETORNANDO" in dest and "GRU" in dest:
-            rec["Localização"] = "RETORNANDO PARA GRU (NÃO RECEBIDO)"
-            rec["Em GRU?"] = "NÃO"
+    out: dict[str, object] = {}
+    for row in frame.itertuples(index=False):
+        key = norm_tag(row.logger)
+        if key and key not in out:
+            out[key] = row
+    if len(out) != len(frame):
+        print(f"AVISO: dtbPortal DISTINCT ON ainda tinha dup; mantida 1 linha/tag ({len(frame)} -> {len(out)})")
+    return out
+
+
+def rank_trip(entrega: pd.Timestamp, chegada: pd.Timestamp, pedido: str) -> tuple:
+    sentinela = pd.Timestamp("1678-01-01")
+    return (
+        entrega if pd.notna(entrega) else sentinela,
+        chegada if pd.notna(chegada) else sentinela,
+        str(pedido or ""),
+    )
+
+
+def build_records(pagina_em: datetime) -> tuple[list[dict], dict[str, int]]:
+    reversa = load_reversa()
+    print(f"Universo reversa ARES: {len(reversa)} | loggers unicos: {len({r['logger'] for r in reversa})}")
+    vtc = fetch_vtc(sorted({r["pedido"] for r in reversa}))
+    print(f"portal VTC: {len(vtc)} pares pedido+logger")
+    mongo = fetch_mongo([r["logger"] for r in reversa])
+    print(f"Mongo lastSyncDate: {len(mongo)} loggers")
+
+    por_logger: dict[str, dict] = {}
+    stats = Counter()
+    for base in reversa:
+        vtc_row = vtc.get((base["pedido"], base["logger"]))
+        if vtc_row is not None:
+            entrega = to_brt(vtc_row.entrega)
+            chegada = to_brt(vtc_row.chegada)
+            stats["vtc_match"] += 1
         else:
-            rec["Localização"] = rec.get("Localização") or "FORA DE GRU"
-            rec["Em GRU?"] = "NÃO"
-        rec["Responsável atual"] = str(getattr(row, "ds_responsavel", "") or rec.get("Responsável atual") or "")
-        rec["Tipo"] = rec.get("Tipo") or str(getattr(row, "ds_tipodatalogger", "") or "")
-        rec["Tag no dtbPortal"] = str(getattr(row, "tag_portal", "") or rec.get("Tag no dtbPortal") or "")
-        finalidade = str(getattr(row, "ds_finalidade", "") or "").strip()
-        status_rec = str(getattr(row, "ds_statusrecebimento", "") or "").strip()
-        rec["Situação atual"] = rec.get("Situação atual") or finalidade or status_rec
-        if not rec.get("Situação atual") and "AGENTE" in norm_text(rec.get("Responsável atual")):
-            rec["Situação atual"] = "AGENTE"
-        atual = pd.to_datetime(getattr(row, "dt_atualizacao", None), errors="coerce")
-        if pd.notna(atual):
-            rec["Atualização dtbPortal"] = atual.strftime("%d/%m/%y %H:%M")
-        rec["Ação sugerida"] = acao_sugerida(str(rec.get("Localização") or ""), str(rec.get("Situação atual") or ""))
-    return True
+            entrega = base["entrega"]
+            chegada = base["chegada"]
+            stats["vtc_sem_match"] += 1
+        if pd.isna(entrega):
+            entrega = base["entrega"]
+        atual = {
+            "base": base,
+            "vtc": vtc_row,
+            "entrega": entrega,
+            "chegada": chegada,
+            "rank": rank_trip(entrega, chegada, base["pedido"]),
+        }
+        prev = por_logger.get(base["logger"])
+        if prev is None or atual["rank"] > prev["rank"]:
+            if prev is not None:
+                stats["viagens_descartadas_logger"] += 1
+            por_logger[base["logger"]] = atual
+        else:
+            stats["viagens_descartadas_logger"] += 1
+    stats["universo_loggers"] = len(por_logger)
+    print(
+        f"Viagem vigente por logger: {len(por_logger)} | "
+        f"viagens anteriores descartadas: {stats['viagens_descartadas_logger']}"
+    )
+
+    candidatos = []
+    for logger, item in por_logger.items():
+        sync = mongo.get(logger, pd.NaT)
+        item["sync"] = sync
+        status = classify_sync(item["entrega"], sync, item["chegada"], item["base"]["tipo"])
+        stats[status] += 1
+        if pd.isna(sync):
+            stats["sem_lastsync"] += 1
+        if status != "PENDENTE":
+            continue
+        vtc_row = item["vtc"]
+        item["viagem"] = (
+            classify_viagem_vtc(
+                vtc_row.chegada,
+                vtc_row.entrega,
+                vtc_row.desembarque_cia,
+                vtc_row.embarque_cia,
+                vtc_row.coleta_embarque,
+                vtc_row.entrega_embarque,
+                vtc_row.romaneio,
+            )
+            if vtc_row is not None
+            else "SEM MATCH VTC"
+        )
+        candidatos.append(item)
+
+    portal = fetch_dtbportal([c["base"]["logger"] for c in candidatos])
+    print(
+        f"dtbPortal: {len(portal)} tags | loggers unicos: {len(por_logger)} | "
+        f"pendentes lastSyncDate: {len(candidatos)}"
+    )
+
+    records = []
+    for item in candidatos:
+        base, vtc_row = item["base"], item["vtc"]
+        entrega, chegada, sync = item["entrega"], item["chegada"], item["sync"]
+        row = portal.get(base["logger"])
+        dest = getattr(row, "ds_destino", "") if row is not None else ""
+        fin = getattr(row, "ds_finalidade", "") if row is not None else ""
+        status_rec = getattr(row, "ds_statusrecebimento", "") if row is not None else ""
+        responsavel = str(getattr(row, "ds_responsavel", "") or base["agente"] or "").strip()
+        pos = classify_posicao(dest, fin, status_rec, responsavel)
+        rec = {
+            "Pedido": base["pedido"],
+            "Logger": base["logger_raw"],
+            "Tipo": base["tipo"],
+            "LPN": (str(vtc_row.lpn).strip() if vtc_row is not None and vtc_row.lpn else "") or base["lpn"],
+            "UF": (str(vtc_row.uf).strip().upper() if vtc_row is not None and vtc_row.uf else "") or base["uf"] or "SEM UF",
+            "Cliente VTC": str(vtc_row.cliente or "").strip() if vtc_row is not None else "",
+            "Coleta": fmt_ts(vtc_row.coleta) if vtc_row is not None else "",
+            "Entrega": fmt_ts(entrega),
+            "Chegada cliente": fmt_ts(chegada),
+            "Status viagem VTC": item["viagem"],
+            "Romaneio": (str(vtc_row.romaneio or "").strip() if vtc_row is not None else "") or base["romaneio"],
+            "Modal": str(vtc_row.modal or "").strip() if vtc_row is not None else "",
+            "Embarque": (fmt_ts(vtc_row.embarque_cia) or fmt_ts(vtc_row.coleta_embarque)) if vtc_row is not None else "",
+            "Desembarque": (fmt_ts(vtc_row.desembarque_cia) or fmt_ts(vtc_row.entrega_embarque)) if vtc_row is not None else "",
+            "AWB": str(vtc_row.awb or "").strip() if vtc_row is not None else "",
+            "Último Sync": fmt_ts(sync) if pd.notna(sync) else "",
+            "Dias sem sync": int((pd.Timestamp(pagina_em) - entrega).total_seconds() // 86400) if pd.notna(entrega) else 0,
+            "Responsável atual": responsavel,
+            "Destino portal": str(dest or "").strip(),
+            "Finalidade portal": str(fin or "").strip(),
+            "Status recebimento": str(status_rec or "").strip(),
+            "Tag no dtbPortal": str(getattr(row, "tag_portal", "") or base["logger_raw"]) if row is not None else base["logger_raw"],
+            "Atualização dtbPortal": fmt_ts(getattr(row, "dt_atualizacao", None)) if row is not None else "",
+            "CTE": str(getattr(row, "ds_cte", "") or "").strip() if row is not None else "",
+            "Observação portal": str(getattr(row, "ds_observacao", "") or "").strip() if row is not None else "",
+            **pos,
+        }
+        rec["Ação sugerida"] = acao_sugerida(rec["Localização"], rec["Situação atual"])
+        records.append(rec)
+    return records, dict(stats)
+
+
+def validar(records: list[dict], mongo: dict[str, pd.Timestamp] | None = None) -> dict[str, int]:
+    erros = Counter()
+    loggers = [norm_tag(r["Logger"]) for r in records]
+    if len(loggers) != len(set(loggers)):
+        erros["dup_logger"] = len(loggers) - len(set(loggers))
+    keys = [(r["Pedido"], norm_tag(r["Logger"])) for r in records]
+    if len(keys) != len(set(keys)):
+        erros["dup_pedido_logger"] = len(keys) - len(set(keys))
+    tags_portal = [norm_tag(r.get("Tag no dtbPortal")) for r in records if norm_tag(r.get("Tag no dtbPortal"))]
+    if len(tags_portal) != len(set(tags_portal)):
+        erros["dup_tag_dtbportal"] = len(tags_portal) - len(set(tags_portal))
+    for rec in records:
+        entrega = parse_br(rec.get("Entrega"))
+        chegada = parse_br(rec.get("Chegada cliente"))
+        sync = parse_br(rec.get("Último Sync"))
+        if classify_sync(entrega, sync, chegada, rec.get("Tipo")) != "PENDENTE":
+            erros["falso_pendente_vs_datas_exibidas"] += 1
+        esperado = classify_posicao(
+            rec.get("Destino portal"),
+            rec.get("Finalidade portal"),
+            rec.get("Status recebimento"),
+            rec.get("Responsável atual"),
+        )
+        if rec.get("Em GRU?") != esperado["Em GRU?"] or rec.get("Localização") != esperado["Localização"]:
+            erros["gru_inconsistente"] += 1
+        if rec.get("Em GRU?") == "SIM" and rec.get("Status recebimento", "").upper() != "RECEBIDO":
+            erros["gru_sem_recebido"] += 1
+        dest_n = norm_text(rec.get("Destino portal"))
+        if "CAMARA" in dest_n and rec.get("Status recebimento", "").upper() == "RECEBIDO" and rec.get("Em GRU?") != "SIM":
+            erros["camara_recebido_sem_gru"] += 1
+        viagem = rec.get("Status viagem VTC")
+        if viagem == "RECEBIDO NO CLIENTE" and not rec.get("Chegada cliente"):
+            erros["recebido_sem_chegada"] += 1
+        if viagem == "ENTREGUE" and not rec.get("Entrega"):
+            erros["entregue_sem_entrega"] += 1
+        if viagem == "ENTREGUE" and rec.get("Chegada cliente"):
+            erros["entregue_com_chegada"] += 1
+    print("VALIDACAO", dict(erros) or "OK")
+    return dict(erros)
 
 
 def build_resumo(records: list[dict]) -> list[dict]:
@@ -496,14 +638,17 @@ def build_resumo(records: list[dict]) -> list[dict]:
         uf = rec.get("UF") or "SEM UF"
         item = grupos.setdefault(
             uf,
-            {"UF": uf, "Pendências": 0, "Em GRU": 0, "Fora de GRU": 0, "Retornando p/ GRU": 0, "dias": []},
+            {"UF": uf, "Pendências": 0, "Em GRU": 0, "Câmara fria": 0, "Fora de GRU": 0, "Retornando p/ GRU": 0, "dias": []},
         )
         item["Pendências"] += 1
         dias = int(rec.get("Dias sem sync") or 0)
         item["dias"].append(dias)
-        if rec.get("Em GRU?") == "SIM":
+        loc = str(rec.get("Localização") or "")
+        if "CÂMARA" in loc.upper() or "CAMARA" in norm_text(loc):
+            item["Câmara fria"] += 1
+        elif rec.get("Em GRU?") == "SIM":
             item["Em GRU"] += 1
-        elif str(rec.get("Localização") or "").startswith("RETORNANDO"):
+        elif loc.startswith("RETORNANDO"):
             item["Retornando p/ GRU"] += 1
         else:
             item["Fora de GRU"] += 1
@@ -523,11 +668,13 @@ def build_resumo(records: list[dict]) -> list[dict]:
 def write_excel(records: list[dict], resumo: list[dict], pagina_em: datetime, snapshot_em: str) -> None:
     cabecalho = pd.DataFrame(
         [
-            ("Página atualizada em", fmt_stamp(pagina_em)),
+            ("Página atualizada em", fmt_ts(pagina_em)),
             ("Snapshot em", snapshot_em),
             ("Total de pendências", len(records)),
-            ("UFs com pendência", len({r.get("UF") for r in records if r.get("UF")})),
-            ("Fontes visíveis", "dtbPortal · portal VTC"),
+            ("UFs", len({r.get("UF") for r in records if r.get("UF")})),
+            ("Regra sync", "lastSyncDate BRT >= entrega - 15 min"),
+            ("Regra GRU", "estoque+saldo+RECEBIDO ou câmara+RECEBIDO"),
+            ("Regra recebido cliente", "dt_chegadacliente no VTC"),
         ],
         columns=["Indicador", "Valor"],
     )
@@ -537,7 +684,7 @@ def write_excel(records: list[dict], resumo: list[dict], pagina_em: datetime, sn
             detalhe[col] = ""
     detalhe = detalhe[EXPORT_COLS]
     with pd.ExcelWriter(OUT_XLSX, engine="openpyxl") as writer:
-        cabecalho.to_excel(writer, sheet_name="RESUMO", index=False)
+        cabecalho.to_excel(writer, sheet_name="REGRAS", index=False)
         pd.DataFrame(resumo).to_excel(writer, sheet_name="RESUMO_UF", index=False)
         detalhe.to_excel(writer, sheet_name="PENDENCIAS", index=False)
     workbook = load_workbook(OUT_XLSX)
@@ -546,35 +693,23 @@ def write_excel(records: list[dict], resumo: list[dict], pagina_em: datetime, sn
     for sheet in workbook.worksheets:
         sheet.freeze_panes = "A2"
         sheet.auto_filter.ref = sheet.dimensions
-        sheet.sheet_view.showGridLines = False
         for cell in sheet[1]:
             cell.fill = header_fill
             cell.font = header_font
             cell.alignment = Alignment(horizontal="center", vertical="center")
         for index, cells in enumerate(sheet.columns, 1):
-            values = [str(cell.value or "") for cell in list(cells)[:400]]
-            width = min(max(max((len(value) for value in values), default=0) + 2, 10), 42)
-            sheet.column_dimensions[get_column_letter(index)].width = width
+            values = [str(c.value or "") for c in list(cells)[:400]]
+            sheet.column_dimensions[get_column_letter(index)].width = min(max(max((len(v) for v in values), default=0) + 2, 10), 42)
     workbook.save(OUT_XLSX)
 
 
 def write_html(records: list[dict], pagina_em: datetime, snapshot_em: str) -> None:
-    template = TEMPLATE.read_text(encoding="utf-8")
-    pagina_txt = fmt_stamp(pagina_em)
-    snap_txt = snapshot_em
-    if re.match(r"\d{4}-\d{2}-\d{2}", snapshot_em):
-        parsed = parse_br(snapshot_em.replace("T", " "))
-        if pd.notna(parsed):
-            snap_txt = fmt_stamp(parsed)
-    meta = {
-        "pagina_em": pagina_txt,
-        "snapshot_em": snap_txt,
-        "fontes": ["Mongo ares-prod", "dtbPortal", "portal VTC"],
-        "linhas": len(records),
-    }
+    pagina_txt = fmt_ts(pagina_em)
+    meta = {"pagina_em": pagina_txt, "snapshot_em": snapshot_em, "fontes": ["Mongo ares-prod", "dtbPortal", "portal VTC"], "linhas": len(records)}
     html = (
-        template.replace("__PAGINA_EM__", pagina_txt)
-        .replace("__SNAPSHOT_EM__", snap_txt)
+        TEMPLATE.read_text(encoding="utf-8")
+        .replace("__PAGINA_EM__", pagina_txt)
+        .replace("__SNAPSHOT_EM__", snapshot_em)
         .replace("__DADOS_JSON__", json.dumps(records, ensure_ascii=False, default=str))
         .replace("__META_JSON__", json.dumps(meta, ensure_ascii=False))
     )
@@ -584,113 +719,61 @@ def write_html(records: list[dict], pagina_em: datetime, snapshot_em: str) -> No
 def main() -> None:
     SNAPSHOT_DIR.mkdir(exist_ok=True)
     pagina_em = now_brt()
-    live_bits: list[str] = []
-    organized = latest_organized_csv()
-    if organized:
-        records = records_from_organized_csv(organized)
-        snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
-        origem = organized.name
-        live_bits.append("csv organizado")
-    else:
-        records, snapshot_em = load_seed_records()
-        origem = "snapshot local"
-        audit_files = []
-        if DESKTOP_DIR.exists():
-            audit_files = [
-                path
-                for path in DESKTOP_DIR.glob("SEM_SYNC_ATUALIZADO_*.xlsx")
-                if not path.name.startswith("~$")
-            ]
-        if audit_files:
-            latest = max(audit_files, key=lambda path: path.stat().st_mtime)
-            try:
-                records = records_from_audit_xlsx(latest)
-                snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
-                origem = latest.name
-                live_bits.append("planilha auditada")
-            except Exception as exc:
-                print(f"AVISO: nao foi possivel ler {latest.name}: {exc}")
-
-    try:
-        records, used = overlay_reversa(records, pagina_em)
-        if used:
-            live_bits.append("reversa")
-            snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
-    except Exception as exc:
-        print(f"AVISO: overlay da reversa nao aplicado: {exc}")
-
-    try:
-        records, dropped = refresh_mongo_and_drop_synced(records, pagina_em)
-        live_bits.append("mongo lastSyncDate")
-        snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
-        print(f"Mongo: {dropped} ja sincronizados removidos | {len(records)} pendentes")
-    except Exception as exc:
-        print(f"AVISO: mongo nao atualizado: {exc}")
-
-    try:
-        if enrich_uf_vtc(records):
-            live_bits.append("portal VTC")
-            snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
-    except Exception as exc:
-        print(f"AVISO: UF VTC nao atualizada: {exc}")
-
-    try:
-        if refresh_dtbportal(records):
-            live_bits.append("dtbPortal")
-            snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
-    except Exception as exc:
-        print(f"AVISO: dtbPortal nao atualizado: {exc}")
-
+    records, stats = build_records(pagina_em)
     for rec in records:
-        rec["UF"] = rec.get("UF") or "SEM UF"
-        rec["Dias sem sync"] = int(rec.get("Dias sem sync") or 0)
         for key, value in list(rec.items()):
             if value is None or (isinstance(value, float) and pd.isna(value)) or str(value).lower() == "nan":
                 rec[key] = ""
-        if rec.get("Ação sugerida"):
-            rec["Ação sugerida"] = re.sub(r"\bESL\b", "portal VTC", str(rec["Ação sugerida"]), flags=re.I)
+        rec["Dias sem sync"] = int(rec.get("Dias sem sync") or 0)
+        rec["UF"] = rec.get("UF") or "SEM UF"
 
+    erros = validar(records)
     resumo = build_resumo(records)
+    snapshot_em = pagina_em.strftime("%Y-%m-%dT%H:%M:%S")
     detalhe = pd.DataFrame(records)
     for col in EXPORT_COLS:
         if col not in detalhe.columns:
             detalhe[col] = ""
     detalhe[EXPORT_COLS].to_csv(OUT_CSV, index=False, encoding="utf-8-sig", sep=";")
-    write_excel(records, resumo, pagina_em, snapshot_em if "T" not in snapshot_em else fmt_stamp(parse_br(snapshot_em.replace("T", " "))))
-    write_html(records, pagina_em, snapshot_em)
+    write_html(records, pagina_em, fmt_ts(pagina_em))
+    try:
+        write_excel(records, resumo, pagina_em, fmt_ts(pagina_em))
+    except OSError as exc:
+        print(f"AVISO: XLSX nao gravado ({exc})")
 
-    payload = {
-        "origem": origem,
-        "snapshot_em": snapshot_em,
-        "pagina_em": pagina_em.strftime("%Y-%m-%dT%H:%M:%S"),
-        "linhas": len(records),
-        "dados": records,
-        "resumo": resumo,
-    }
-    SNAPSHOT_JSON.write_text(json.dumps(payload, ensure_ascii=False), encoding="utf-8")
-
-    status = "VALIDADO_COM_FONTES_FRESCAS" if live_bits else "SNAPSHOT_REUTILIZADO"
     manifesto = {
-        "gerado_em": pagina_em.strftime("%Y-%m-%dT%H:%M:%S"),
+        "gerado_em": snapshot_em,
         "snapshot_em": snapshot_em,
-        "status": status,
+        "status": "VALIDADO" if not erros else "VALIDADO_COM_ERROS",
         "linhas": len(records),
         "ufs": len({r.get("UF") for r in records if r.get("UF") and r.get("UF") != "SEM UF"}),
-        "fontes_visiveis": ["Mongo ares-prod", "dtbPortal", "portal VTC"],
-        "fontes_aplicadas": live_bits,
-        "origem": origem,
-        "arquivos": [
-            OUT_HTML.name,
-            OUT_CSV.name,
-            OUT_XLSX.name,
-        ],
+        "regras": {
+            "sync": "lastSyncDate BRT >= entrega VTC (fallback reversa) - 15 min",
+            "gru": "EM ESTOQUE+SALDO+RECEBIDO ou CÂMARA FRIA+RECEBIDO",
+            "recebido_cliente": "dt_chegadacliente",
+            "dedup": "1 logger = 1 lastSyncDate; viagem = entrega VTC mais recente",
+        },
+        "contagens": {
+            "localizacao": dict(Counter(r.get("Localização") for r in records)),
+            "situacao": dict(Counter(r.get("Situação atual") for r in records)),
+            "viagem_vtc": dict(Counter(r.get("Status viagem VTC") for r in records)),
+            "em_gru": sum(1 for r in records if r.get("Em GRU?") == "SIM"),
+            "loggers": len(records),
+            "pipeline": stats,
+        },
+        "erros_validacao": erros,
+        "fontes": ["reversa VTC", "vtc_stage.documentos", "mongo lastSyncDate", "dtbPortal"],
+        "arquivos": [OUT_HTML.name, OUT_CSV.name, OUT_XLSX.name],
     }
+    SNAPSHOT_JSON.write_text(json.dumps({"manifesto": manifesto, "dados": records, "resumo": resumo}, ensure_ascii=False), encoding="utf-8")
     OUT_MANIFEST.write_text(json.dumps(manifesto, ensure_ascii=False, indent=2), encoding="utf-8")
-    print(f"STATUS {status}")
+    print("posicao", manifesto["contagens"]["localizacao"])
+    print("situacao", manifesto["contagens"]["situacao"])
+    print("viagem VTC", manifesto["contagens"]["viagem_vtc"])
+    print("em GRU", manifesto["contagens"]["em_gru"])
+    print(f"STATUS {manifesto['status']}")
+    print(f"Pendencias: {len(records)} | UFs: {manifesto['ufs']}")
     print(f"HTML: {OUT_HTML}")
-    print(f"CSV: {OUT_CSV}")
-    print(f"XLSX: {OUT_XLSX}")
-    print(f"Pendencias: {len(records)} | UFs: {manifesto['ufs']} | fontes: {', '.join(live_bits) or 'snapshot'}")
 
 
 if __name__ == "__main__":

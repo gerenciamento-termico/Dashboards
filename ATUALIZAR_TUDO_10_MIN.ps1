@@ -7,6 +7,7 @@ $ErrorActionPreference = "Stop"
 if ($Mode -eq "RUN") { $Mode = "LOOP" }
 if ($Mode -eq "DRY_RUN") { $Mode = "CHECK" }
 $env:PYTHONDONTWRITEBYTECODE = "1"
+$env:PYTHONUNBUFFERED = "1"
 
 $ScriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 $PublishDir = $ScriptDir
@@ -50,6 +51,10 @@ function Import-DotEnvFile {
 
 Import-DotEnvFile (Join-Path $ScriptDir "hub_share.env")
 Import-DotEnvFile (Join-Path $ScriptDir ".env")
+# Credenciais extras do gerador fresco da Reversa (VTC_STAGE / Mongo ARES).
+Import-DotEnvFile (Join-Path $ReversaStageDir ".env.vtc_stage")
+Import-DotEnvFile (Join-Path $ReversaStageDir ".env.ares_mongo")
+Import-DotEnvFile (Join-Path $ReversaStageDir ".env")
 
 $HubSharePath = if ($env:AURA_HUB_SHARE) { $env:AURA_HUB_SHARE } else { "" }
 $HubGitUser = if ($env:AURA_HUB_USER) { $env:AURA_HUB_USER } else { "gerenciamento-termico" }
@@ -66,6 +71,7 @@ $PublishFiles = @(
     "CONTROLE_ENTREGAS_20D.csv",
     "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
     "REVERSA_DATALOGGERS.html",
+    "REVERSA_FORTEX.html",
     "GESTAO_DISPOSITIVOS.html",
     "GESTAO_DISPOSITIVOS_STAGE_DATA.js",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
@@ -90,6 +96,7 @@ $DashboardFiles = @(
     "CONTROLE_ENTREGAS_20D.csv",
     "CONTROLE_ENTREGAS_20D_SLA_PENDENTES.csv",
     "REVERSA_DATALOGGERS.html",
+    "REVERSA_FORTEX.html",
     "GESTAO_DISPOSITIVOS.html",
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "INDICADOR_VTCBOX.html",
@@ -111,6 +118,7 @@ $Urls = @(
     "$GitHubPagesBase/ESTOQUE_DATALOGGERS.html",
     "$GitHubPagesBase/CONTROLE_ENTREGAS_20D.html",
     "$GitHubPagesBase/REVERSA_DATALOGGERS.html",
+    "$GitHubPagesBase/REVERSA_FORTEX.html",
     "$GitHubPagesBase/GESTAO_DISPOSITIVOS.html",
     "$GitHubPagesBase/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "$GitHubPagesBase/INDICADOR_VTCBOX.html",
@@ -150,17 +158,32 @@ $ExtraPagesFiles = @(
 $PublishFiles += $ExtraPagesFiles
 $Urls += $ExtraPagesFiles | ForEach-Object { "$GitHubPagesBase/$_" }
 
-$PendenciasSincronismoFiles = @(
+$RetiredPublishFiles = @(
     "PENDENCIAS_SINCRONISMO.html",
     "PENDENCIAS_SINCRONISMO.csv",
     "PENDENCIAS_SINCRONISMO.xlsx",
-    "MANIFESTO_SNAPSHOT_PENDENCIAS_SINCRONISMO.json"
+    "MANIFESTO_SNAPSHOT_PENDENCIAS_SINCRONISMO.json",
+    "ocorrencias_operacionais.json"
 )
-$PublishFiles += $PendenciasSincronismoFiles
-$DashboardFiles += @("PENDENCIAS_SINCRONISMO.html", "PENDENCIAS_SINCRONISMO.csv")
-$Urls += @("$GitHubPagesBase/PENDENCIAS_SINCRONISMO.html")
-$PendenciasSeedCsv = Join-Path $PublishDir "sem_sync_ares_589_pendente.csv"
-$PendenciasSeedCsvDownloads = "C:\Users\Administrador\Downloads\sem_sync_ares_589_pendente.csv"
+
+$EntregasSincronismoFiles = @(
+    "ENTREGAS_VS_SINCRONISMO.html",
+    "ENTREGAS_VS_SINCRONISMO.csv",
+    "MANIFESTO_ENTREGAS_VS_SINCRONISMO.json"
+)
+$PublishFiles += $EntregasSincronismoFiles
+$DashboardFiles += @("ENTREGAS_VS_SINCRONISMO.html", "ENTREGAS_VS_SINCRONISMO.csv")
+$Urls += @("$GitHubPagesBase/ENTREGAS_VS_SINCRONISMO.html")
+
+$RetiradaAeroportoFiles = @(
+    "RETIRADA_AEROPORTO.html"
+)
+$PublishFiles += $RetiradaAeroportoFiles
+$DashboardFiles += $RetiradaAeroportoFiles
+$Urls += @("$GitHubPagesBase/RETIRADA_AEROPORTO.html")
+
+# Status real dos paineis para o hub (badge Ao Vivo verdadeiro)
+$PublishFiles += @("status_paineis.json")
 
 New-Item -ItemType Directory -Force -Path $LogDir | Out-Null
 $LogFile = Join-Path $LogDir ("atualizar_tudo_{0}.log" -f (Get-Date -Format "yyyyMMdd"))
@@ -219,12 +242,22 @@ function Invoke-LoggedProcess {
         throw ("Nao foi possivel iniciar {0}: {1}" -f $Name, $_.Exception.Message)
     }
 
-    if (-not $process.WaitForExit($TimeoutSec * 1000)) {
-        try {
-            Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
-        } catch {}
-        Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
-        throw ("{0} excedeu timeout de {1}s" -f $Name, $TimeoutSec)
+    $startedAt = Get-Date
+    $lastBeat = $startedAt
+    while (-not $process.WaitForExit(15000)) {
+        $elapsed = [int]((Get-Date) - $startedAt).TotalSeconds
+        if ($elapsed -ge $TimeoutSec) {
+            try {
+                Stop-Process -Id $process.Id -Force -ErrorAction SilentlyContinue
+            } catch {}
+            Remove-Item -LiteralPath $outFile, $errFile -Force -ErrorAction SilentlyContinue
+            throw ("{0} excedeu timeout de {1}s" -f $Name, $TimeoutSec)
+        }
+        if (-not $Quiet -and (((Get-Date) - $lastBeat).TotalSeconds -ge 30)) {
+            Write-Host ("      ainda executando {0}... {1}s / {2}s" -f $Name, $elapsed, $TimeoutSec) -ForegroundColor DarkYellow
+            Write-Log ("RUN ainda em andamento: {0} ({1}s / {2}s)" -f $Name, $elapsed, $TimeoutSec)
+            $lastBeat = Get-Date
+        }
     }
 
     $stdout = if (Test-Path $outFile) { Get-Content -LiteralPath $outFile -Raw -ErrorAction SilentlyContinue } else { "" }
@@ -351,11 +384,45 @@ function Invoke-OptionalProcess {
     }
 }
 
+function Write-StatusPaineis {
+    # HTMLs que sao casca estatica: a frescura vem do arquivo de dados companheiro
+    $companions = @{ "GESTAO_DISPOSITIVOS.html" = "GESTAO_DISPOSITIVOS_STAGE_DATA.js" }
+    $items = @()
+    foreach ($f in ($DashboardFiles | Where-Object { $_ -like "*.html" })) {
+        $p = Join-Path $PublishDir $f
+        if (Test-Path -LiteralPath $p) {
+            $ts = (Get-Item -LiteralPath $p).LastWriteTime
+            $comp = $companions[$f]
+            if ($comp) {
+                $cp = Join-Path $PublishDir $comp
+                if (Test-Path -LiteralPath $cp) {
+                    $cts = (Get-Item -LiteralPath $cp).LastWriteTime
+                    if ($cts -gt $ts) { $ts = $cts }
+                }
+            }
+            $items += [pscustomobject]@{
+                arquivo = $f
+                atualizado_em = $ts.ToString("yyyy-MM-ddTHH:mm:ss")
+            }
+        }
+    }
+    $payload = [pscustomobject]@{
+        gerado_em = (Get-Date).ToString("yyyy-MM-ddTHH:mm:ss")
+        intervalo_min = 10
+        paineis = $items
+    }
+    $json = $payload | ConvertTo-Json -Depth 4
+    Set-Content -LiteralPath (Join-Path $PublishDir "status_paineis.json") -Value $json -Encoding UTF8
+    Write-Log ("STATUS PAINEIS: {0} arquivos registrados em status_paineis.json" -f $items.Count)
+}
+
 function Get-MinFileSize {
     param(
         [string]$RelativePath
     )
+    if ($RelativePath -ieq "status_paineis.json") { return 64 }
     if ($RelativePath -ieq "CONTROLE_ENTREGAS_20D.csv") { return 128 }
+    if ($RelativePath -ieq "ENTREGAS_VS_SINCRONISMO.csv") { return 256 }
     if ($RelativePath -ieq "index.html") { return 200 }
     if ($RelativePath -like "*.xlsx") { return 1024 }
     if ($RelativePath -like "*.js") { return 1024 }
@@ -477,8 +544,43 @@ function Copy-PublishedFile {
         throw "Arquivo de origem nao encontrado: $Source"
     }
     $destination = Join-Path $PublishDir $DestinationName
-    Copy-Item -LiteralPath $Source -Destination $destination -Force
-    Write-Log ("COPIADO: {0} -> {1}" -f $Source, $destination)
+    $tmp = Join-Path $PublishDir ($DestinationName + ".__new__")
+    $bak = Join-Path $PublishDir ($DestinationName + ".__old__")
+    $lastErr = $null
+
+    for ($attempt = 1; $attempt -le 8; $attempt++) {
+        try {
+            if (Test-Path -LiteralPath $tmp) {
+                Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
+            }
+            Copy-Item -LiteralPath $Source -Destination $tmp -Force
+
+            if (Test-Path -LiteralPath $destination) {
+                if (Test-Path -LiteralPath $bak) {
+                    Remove-Item -LiteralPath $bak -Force -ErrorAction SilentlyContinue
+                }
+                # Rename evita falha "secao mapeada" comum em Copy-Item -Force sobre HTML aberto no browser.
+                Rename-Item -LiteralPath $destination -NewName (Split-Path -Leaf $bak) -ErrorAction Stop
+                Rename-Item -LiteralPath $tmp -NewName $DestinationName -ErrorAction Stop
+                Remove-Item -LiteralPath $bak -Force -ErrorAction SilentlyContinue
+            } else {
+                Rename-Item -LiteralPath $tmp -NewName $DestinationName -ErrorAction Stop
+            }
+
+            Write-Log ("COPIADO: {0} -> {1}" -f $Source, $destination)
+            return
+        } catch {
+            $lastErr = $_.Exception.Message
+            Write-Log ("AVISO COPIA {0} tentativa {1}/8: {2}" -f $DestinationName, $attempt, $lastErr)
+            Start-Sleep -Seconds ([Math]::Min(2 * $attempt, 12))
+        } finally {
+            if (Test-Path -LiteralPath $tmp) {
+                Remove-Item -LiteralPath $tmp -Force -ErrorAction SilentlyContinue
+            }
+        }
+    }
+
+    throw ("Falha ao copiar {0} apos retries (arquivo pode estar aberto/mapeado): {1}" -f $DestinationName, $lastErr)
 }
 
 function Invoke-NetUse {
@@ -827,32 +929,6 @@ function Sync-GitBeforeCycle {
     Write-Log "[GIT] Resultado: OK"
 }
 
-function Update-PendenciasSeedCsv {
-    $candidates = New-Object System.Collections.Generic.List[string]
-    if (Test-Path -LiteralPath $PendenciasSeedCsvDownloads) {
-        $candidates.Add($PendenciasSeedCsvDownloads)
-    }
-    $downloads = "C:\Users\Administrador\Downloads"
-    if (Test-Path -LiteralPath $downloads) {
-        Get-ChildItem -LiteralPath $downloads -Filter "sem_sync_ares*.csv" -ErrorAction SilentlyContinue | ForEach-Object { $candidates.Add($_.FullName) }
-    }
-    $desktop = "C:\Users\Administrador\Desktop\LISTA SEM SINCRONIZAÇÃO"
-    if (Test-Path -LiteralPath $desktop) {
-        Get-ChildItem -LiteralPath $desktop -Filter "sem_sync_ares*.csv" -ErrorAction SilentlyContinue | ForEach-Object { $candidates.Add($_.FullName) }
-    }
-    if ($candidates.Count -eq 0) {
-        if (Test-Path -LiteralPath $PendenciasSeedCsv) {
-            Write-Log ("PENDENCIAS SEED: reusando {0}" -f $PendenciasSeedCsv)
-            return
-        }
-        throw "CSV organizado de pendencias ausente. Coloque sem_sync_ares_589_pendente.csv em Downloads."
-    }
-    $latest = $candidates | Get-Unique | ForEach-Object { Get-Item -LiteralPath $_ } | Sort-Object LastWriteTime -Descending | Select-Object -First 1
-    Copy-Item -LiteralPath $latest.FullName -Destination $PendenciasSeedCsv -Force
-    Write-Log ("PENDENCIAS SEED: {0} -> {1}" -f $latest.FullName, $PendenciasSeedCsv)
-    Write-Status "[3b] Seed CSV organizado" $latest.Name Green
-}
-
 function Publish-Changes {
     $preStaged = @(& git -C $PublishDir diff --cached --name-only)
     if ($preStaged.Count -gt 0) {
@@ -892,7 +968,12 @@ function Publish-Changes {
         "relatorio_analitico_caixa_42l.csv"
     )
     $forcedFiles += $IndicadorCaixasGeralPublishFiles | Where-Object { $_ -like "*.xlsx" -or $_ -like "*.csv" }
-    $forcedFiles += @("PENDENCIAS_SINCRONISMO.xlsx")
+    foreach ($retired in $RetiredPublishFiles) {
+        $retiredPath = Join-Path $PublishDir $retired
+        if (Test-Path -LiteralPath $retiredPath) {
+            Invoke-LoggedProcess -FilePath "git" -Arguments @("rm", "-f", "--ignore-unmatch", "--", $retired) -WorkingDirectory $PublishDir -Name ("git rm {0}" -f $retired) -TimeoutSec 60 -Quiet
+        }
+    }
     $normalFiles = $PublishFiles | Where-Object { $forcedFiles -notcontains $_ }
     # Somente inclua no git add os arquivos que existem no disco para evitar falha quando
     # arquivos opcionais (ex: aura-hub.html) estiverem ausentes.
@@ -1012,7 +1093,7 @@ function Run-Cycle {
         $reversaOk = $true
         try {
             Write-Status "[3/9] Reversa" "GERANDO - fontes STAGE/dtbPortal/dtbTransporte/MongoARES" Yellow
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $ReversaStageDir "gerar_hibrido_aderente_original_fresco.py")) -WorkingDirectory $ReversaStageDir -Name "gerar_hibrido_aderente_original_fresco.py" -TimeoutSec 480
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $ReversaStageDir "gerar_hibrido_aderente_original_fresco.py")) -WorkingDirectory $ReversaStageDir -Name "gerar_hibrido_aderente_original_fresco.py" -TimeoutSec 1800
 
             $srcManifest = Join-Path $ReversaStageDir "MANIFESTO_SNAPSHOT_HIBRIDO_ADERENTE.json"
             $srcHtml = Join-Path $ReversaStageDir "REVERSA_DATALOGGERS_STAGE.html"
@@ -1049,15 +1130,36 @@ function Run-Cycle {
             Write-Log "AVISO: Reversa nao atualizada neste ciclo. Os demais dashboards seguem."
         }
 
-        if (-not (Invoke-Step "[3b] Pendencias de Sincronismo" {
-            Update-PendenciasSeedCsv
-            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_pendencias_sincronismo.py")) -WorkingDirectory $PublishDir -Name "gerar_html_pendencias_sincronismo.py" -TimeoutSec 360
-            Test-FreshRequiredFiles -Label "HTML PENDENCIAS SINCRONISMO" -Paths @(
-                (Join-Path $PublishDir "PENDENCIAS_SINCRONISMO.html"),
-                (Join-Path $PublishDir "PENDENCIAS_SINCRONISMO.csv")
-            ) -CycleStart $cycleStart -MinSizeBytes 1024
+        if (-not (Invoke-Step "[3c] Reversa FORTEX" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_reversa_fortex.py")) -WorkingDirectory $PublishDir -Name "gerar_html_reversa_fortex.py" -TimeoutSec 180
+            Test-FreshRequiredFiles -Label "HTML REVERSA FORTEX" -Paths @((Join-Path $PublishDir "REVERSA_FORTEX.html")) -CycleStart $cycleStart -MinSizeBytes 8000
         })) {
-            Add-StepFailure -Failures $stepFailures -Name "Pendencias de Sincronismo" -Message "falha ao gerar; HTML/CSV anteriores serao preservados se existirem"
+            Add-StepFailure -Failures $stepFailures -Name "Reversa FORTEX" -Message "falha ao gerar; REVERSA_FORTEX.html anterior sera preservado"
+        }
+
+        if (-not (Invoke-Step "[3d] Entregas x Sincronismo" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_entregas_vs_sincronismo.py")) -WorkingDirectory $PublishDir -Name "gerar_html_entregas_vs_sincronismo.py" -TimeoutSec 720
+            Test-FreshRequiredFiles -Label "HTML ENTREGAS VS SINCRONISMO" -Paths @(
+                (Join-Path $PublishDir "ENTREGAS_VS_SINCRONISMO.html")
+            ) -CycleStart $cycleStart -MinSizeBytes 1024
+            try {
+                Test-FreshRequiredFiles -Label "CSV ENTREGAS VS SINCRONISMO" -Paths @(
+                    (Join-Path $PublishDir "ENTREGAS_VS_SINCRONISMO.csv")
+                ) -CycleStart $cycleStart -MinSizeBytes 256
+            } catch {
+                Write-Log ("AVISO: CSV Entregas x Sincronismo nao atualizado ({0}); HTML do ciclo sera publicado." -f $_.Exception.Message)
+            }
+        })) {
+            Add-StepFailure -Failures $stepFailures -Name "Entregas x Sincronismo" -Message "falha ao gerar; HTML/CSV anteriores serao preservados se existirem"
+        }
+
+        if (-not (Invoke-Step "[3e] Retirada Aeroporto" {
+            Invoke-LoggedProcess -FilePath $script:PythonExe -Arguments @((Join-Path $PublishDir "gerar_html_retirada_aeroporto.py")) -WorkingDirectory $PublishDir -Name "gerar_html_retirada_aeroporto.py" -TimeoutSec 300
+            Test-FreshRequiredFiles -Label "HTML RETIRADA AEROPORTO" -Paths @(
+                (Join-Path $PublishDir "RETIRADA_AEROPORTO.html")
+            ) -CycleStart $cycleStart -MinSizeBytes 8000
+        })) {
+            Add-StepFailure -Failures $stepFailures -Name "Retirada Aeroporto" -Message "falha ao gerar; RETIRADA_AEROPORTO.html anterior sera preservado"
         }
 
         if (-not (Invoke-Step "[4/9] Gestao Dispositivos" {
@@ -1142,6 +1244,14 @@ function Run-Cycle {
 
     if ($ok) {
         try {
+            Write-StatusPaineis
+        } catch {
+            Write-Log ("AVISO: falha ao gravar status_paineis.json: " + $_.Exception.Message)
+        }
+    }
+
+    if ($ok) {
+        try {
             Publish-Changes
         } catch {
             Write-Status "[GIT] Commit e push" "ERRO" Red
@@ -1198,7 +1308,9 @@ function Run-Check {
         (Join-Path $PublishDir "gerar_snapshot_reversa_vtc_stage.py"),
         (Join-Path $PublishDir "gerar_html_reversa_vtc_stage_hibrido_aderente_original.py"),
         (Join-Path $PublishDir "gerar_html_rastreio_caixas_sem_datalogger.py"),
-        (Join-Path $PublishDir "gerar_html_pendencias_sincronismo.py"),
+        (Join-Path $PublishDir "gerar_html_entregas_vs_sincronismo.py"),
+        (Join-Path $PublishDir "gerar_html_retirada_aeroporto.py"),
+        (Join-Path $PublishDir "gerar_html_reversa_fortex.py"),
         (Join-Path $StreamlitDir "gerar_snapshot_reversa.py"),
         (Join-Path $StreamlitDir "gerar_modelo_final_reversa.py"),
         (Join-Path $DevDir "exportar_planilha_gestao_dispositivos.py"),

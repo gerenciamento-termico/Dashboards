@@ -85,7 +85,8 @@ def infer_tipo_datalogger(series: pd.Series) -> pd.Series:
     tipo.loc[logger.str.startswith(("TA", "A"))] = "ARES"
     tipo.loc[logger.str.startswith("S")] = "SYOS"
     tipo.loc[logger.str.startswith(("V", "B"))] = "SHIELD"
-    tipo.loc[logger.str.match(r"^\d", na=False)] = "SENSOR WEB"
+    tipo.loc[logger.str.match(r"^(?:0|V)7417\d+$", na=False)] = "ARES"
+    tipo.loc[logger.str.match(r"^\d", na=False) & ~logger.str.match(r"^07417\d+$", na=False)] = "SENSOR WEB"
     return tipo
 
 def resolve_tipo_datalogger(df: pd.DataFrame, logger_col: str, code_col: str = "tp_datalogger") -> pd.Series:
@@ -115,14 +116,43 @@ def build_model(base_loggers, base_agentes, recebimento, base_destinatarios) -> 
 
     if "ds_acaomovimentacao" in recebimento.columns:
         acao = recebimento["ds_acaomovimentacao"].fillna("").astype(str).str.lower()
+        is_receb = acao.str.contains("receb", na=False)
+        is_restaur = acao.str.contains("restaur", na=False)
+    else:
+        is_receb = pd.Series(True, index=recebimento.index)
+        is_restaur = pd.Series(True, index=recebimento.index)
+
+    if "ds_destino" in recebimento.columns or "ds_finalidade" in recebimento.columns:
+        destino_norm = (
+            recebimento["ds_destino"].map(normalize_text_value)
+            if "ds_destino" in recebimento.columns
+            else pd.Series("", index=recebimento.index)
+        )
+        finalidade_norm = (
+            recebimento["ds_finalidade"].map(normalize_text_value)
+            if "ds_finalidade" in recebimento.columns
+            else pd.Series("", index=recebimento.index)
+        )
+        mask_saldo = (
+            (is_receb | is_restaur)
+            & destino_norm.eq("EM ESTOQUE")
+            & finalidade_norm.isin(["SALDO ESTOQUE", "SALDO DE ESTOQUE"])
+            & ~finalidade_norm.str.contains("PENDENTE", na=False)
+        )
+        mask_manut = is_receb & (
+            destino_norm.str.contains("MANUTEN", na=False)
+            | finalidade_norm.str.contains("MANUTEN", na=False)
+        )
+        mask_estoque_gru = is_receb & (
+            (destino_norm.str.contains("ESTOQUE", na=False) & destino_norm.str.contains("GRU", na=False))
+            | (finalidade_norm.str.contains("ESTOQUE", na=False) & finalidade_norm.str.contains("GRU", na=False))
+        )
+        recebimento = recebimento[mask_saldo | mask_manut | mask_estoque_gru].copy()
+    if "ds_statusrecebimento" in recebimento.columns:
+        st = recebimento["ds_statusrecebimento"].map(normalize_text_value)
         recebimento = recebimento[
-            acao.str.contains("receb", na=False) | acao.str.contains("restaur", na=False)
-        ].copy()
-    if "ds_destino" in recebimento.columns:
-        recebimento = recebimento[recebimento["ds_destino"].map(normalize_text_value).eq("EM ESTOQUE")].copy()
-    if "ds_finalidade" in recebimento.columns:
-        recebimento = recebimento[
-            recebimento["ds_finalidade"].map(normalize_text_value).isin(["SALDO ESTOQUE", "SALDO DE ESTOQUE"])
+            ~st.str.contains("RETORNANDO", na=False)
+            & ~st.str.contains("PENDENTE", na=False)
         ].copy()
 
     base_loggers["dt_embalagem"] = pd.to_datetime(base_loggers["dt_embalagem"], errors="coerce")
@@ -1113,7 +1143,7 @@ def main():
     print(f"[reversa] Dataset unico para navegação: {len(all_rows)} registros")
 
     html = generate_html(all_rows, tipos, ufs, agentes, gerado, hist_last, snapshot_time)
-    OUTPUT_FILE.write_text(html, encoding="utf-8")
+    OUTPUT_FILE.write_text(html, encoding="utf-8-sig")
     print(f"[reversa] HTML salvo: {OUTPUT_FILE}")
 
 

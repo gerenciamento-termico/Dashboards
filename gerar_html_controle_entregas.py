@@ -29,6 +29,30 @@ TABLE_MAX_ROWS = 50
 SECTION_TABLE_ROWS = 25
 SLA_START = pd.Timestamp("2026-04-09")
 
+# Overlay fresco da Reversa (mesmo CSV que o gerador STAGE ja publica).
+# Nao altera regras de recorte/SLA: so evita depender so do modelo_final.pkl parado.
+_DEFAULT_REVERSA_STAGE_CSV = Path(
+    r"C:\Users\Administrador\Downloads\relatorios SENSORWEB"
+    r"\dataloggers_vtc_stage_operacional_filtrado_powerquery_source.csv"
+)
+OPERATIONAL_CSV_CANDIDATES = [
+    Path(os.environ["REVERSA_STAGE_CSV"]).expanduser()
+    if os.environ.get("REVERSA_STAGE_CSV")
+    else _DEFAULT_REVERSA_STAGE_CSV,
+    WORKSPACE / "snapshot_reversa_operacional" / "reversa_operacional.csv",
+]
+COLUMN_ALIASES = {
+    "Logger/Tag": "Logger",
+    "Ultimo Historico": "Ultimo_Historico",
+    "Data Entrega": "Data de Entrega",
+    "Status Retorno dtbPortal": "Status Retorno",
+    "Agente Fonte Original": "Agente",
+    "UF Destino Fonte Original": "UF Destino",
+    "Cidade Destino Fonte Original": "Cidade Destino",
+    "Destinatario Fonte Original": "Destinatario",
+    "UF VTC_STAGE": "UF",
+}
+
 DESTINO_ESTOQUE = "25d5c356-32a8-4221-84ae-8230061b9163"
 FINALIDADE_SALDO_ESTOQUE = "e8031b09-2d30-414d-af5b-16e43a41618b"
 
@@ -95,12 +119,74 @@ def refresh_return_status(df: pd.DataFrame) -> pd.DataFrame:
     return out.drop(columns=["_logger_key", "dt_historico"], errors="ignore")
 
 
+def _normalize_controle_frame(df: pd.DataFrame) -> pd.DataFrame:
+    out = df.copy()
+    rename = {src: dst for src, dst in COLUMN_ALIASES.items() if src in out.columns and dst not in out.columns}
+    if rename:
+        out = out.rename(columns=rename)
+    if "Logger" not in out.columns and "ds_tag" in out.columns:
+        out["Logger"] = out["ds_tag"]
+    if "Pedido" in out.columns:
+        out["Pedido"] = clean_text(out["Pedido"])
+    if "Logger" in out.columns:
+        out["Logger"] = clean_text(out["Logger"])
+    if "Data de Entrega" in out.columns:
+        out["Data de Entrega"] = pd.to_datetime(out["Data de Entrega"], dayfirst=True, errors="coerce")
+    if "Ultimo_Historico" in out.columns:
+        out["Ultimo_Historico"] = pd.to_datetime(out["Ultimo_Historico"], dayfirst=True, errors="coerce")
+    return out
+
+
+def _load_freshest_operational_csv() -> pd.DataFrame | None:
+    existing = [path for path in OPERATIONAL_CSV_CANDIDATES if path and path.exists() and path.is_file()]
+    if not existing:
+        return None
+    best = max(existing, key=lambda path: path.stat().st_mtime)
+    raw = pd.read_csv(best, sep=None, engine="python", dtype=str, encoding="utf-8-sig")
+    print(
+        f"[controle] Overlay operacional: {best} | "
+        f"mtime={datetime.fromtimestamp(best.stat().st_mtime).strftime('%d/%m/%Y %H:%M:%S')} | "
+        f"linhas={len(raw)}"
+    )
+    return _normalize_controle_frame(raw)
+
+
 def load_data() -> pd.DataFrame:
-    if not MODEL_FILE.exists():
-        raise FileNotFoundError(
-            f"Nao encontrei o snapshot necessario: {MODEL_FILE}"
+    frames: list[pd.DataFrame] = []
+
+    if MODEL_FILE.exists():
+        model = _normalize_controle_frame(pd.read_pickle(MODEL_FILE))
+        frames.append(model)
+        print(
+            f"[controle] Base historica: {MODEL_FILE.name} | "
+            f"mtime={datetime.fromtimestamp(MODEL_FILE.stat().st_mtime).strftime('%d/%m/%Y %H:%M:%S')} | "
+            f"linhas={len(model)}"
         )
-    df = pd.read_pickle(MODEL_FILE).copy()
+    else:
+        print(f"[controle] Aviso: {MODEL_FILE} ausente; tentando somente overlay operacional.")
+
+    fresh = _load_freshest_operational_csv()
+    if fresh is not None and not fresh.empty:
+        frames.append(fresh)
+
+    if not frames:
+        raise FileNotFoundError(
+            f"Nao encontrei fonte para o Controle de Entregas. "
+            f"Esperado {MODEL_FILE} e/ou CSV operacional fresco."
+        )
+
+    df = pd.concat(frames, ignore_index=True, sort=False)
+    if "Pedido" not in df.columns or "Logger" not in df.columns:
+        raise RuntimeError("Fonte do Controle sem colunas Pedido/Logger apos normalizacao.")
+
+    df["_entrega_sort"] = pd.to_datetime(df.get("Data de Entrega"), errors="coerce")
+    df = (
+        df.sort_values(["_entrega_sort", "Pedido", "Logger"], ascending=[False, True, True], kind="mergesort")
+        .drop_duplicates(subset=["Pedido", "Logger"], keep="first")
+        .drop(columns=["_entrega_sort"], errors="ignore")
+        .reset_index(drop=True)
+    )
+    print(f"[controle] Base consolidada (historico + overlay): {len(df)} linhas unicas Pedido+Logger")
     return refresh_return_status(df)
 
 
@@ -1072,6 +1158,10 @@ def build_page(df: pd.DataFrame) -> str:
         if col in data_json_df.columns:
             data_json_df[col] = pd.to_datetime(data_json_df[col], errors="coerce").dt.strftime("%d/%m/%Y %H:%M:%S").fillna("")
     data_json_df = data_json_df[[c for c in data_cols if c in data_json_df.columns] + ["DiaTxt"]].copy()
+    for col in data_json_df.columns:
+        if col in {"Data de Entrega", "Ultimo_Historico", "Dia"}:
+            continue
+        data_json_df[col] = data_json_df[col].fillna("").astype(str).replace({"nan": "", "None": "", "<NA>": ""})
     data_json_df = data_json_df.rename(columns={
         "Tipo Datalogger": "TipoDatalogger",
         "Status Retorno": "StatusRetorno",
@@ -1476,7 +1566,7 @@ def build_page(df: pd.DataFrame) -> str:
     {sla_section}
 
     <div class="footer">
-      Fonte: snapshot_reversa/modelo_final.pkl. O recorte considera apenas loggers com data de entrega valida e janela dos ultimos {WINDOW_DAYS} dias.
+      Fonte: modelo_final.pkl + overlay operacional fresco da Reversa STAGE. O recorte considera apenas loggers com data de entrega valida e janela dos ultimos {WINDOW_DAYS} dias.
     </div>
     <script>
       function scrollToSection(id) {{

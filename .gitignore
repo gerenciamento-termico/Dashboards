@@ -1,6 +1,10 @@
 .env
 .env.local
+.env.*
+!.env.example
 *.env
+hub_share.env
+# Senhas e conexoes ficam so nesta maquina. Nunca ir para o GitHub.
 ENV_LOCAL_SEGURO/
 *.key
 *.pem
@@ -22,3 +26,6 @@ temp_*.json
 _tmp_*.txt
 check.py
 check2.py
+
+bases_tokens_local.json
+LINKS_BASES_SINCRONISMO.csv

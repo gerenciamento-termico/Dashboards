@@ -26,6 +26,7 @@ PYTHON_SCRIPTS = [
     "HTMLACOMPANHAMENTO.py",
     "gerar_dashboard_entregas.py",
     "gerar_html_reversa.py",
+    "gerar_html_reversa_fortex.py",
     "gerar_html_rastreio_caixas_sem_datalogger.py",
     "env_utils.py",
     "validar_gestao_dispositivos_db.py",
@@ -49,6 +50,10 @@ GENERATED_HTML = {
         "min_size": 100_000,
         "markers": ["Gerado em", "const ALL_ROWS", "const DEFAULT_PERIOD"],
     },
+    "REVERSA_FORTEX.html": {
+        "min_size": 8_000,
+        "markers": ["Gerado em", "const ALL_ROWS", "Reversa FORTEX", "CAIXA 33L GELO PCM"],
+    },
     "RASTREIO_CAIXAS_SEM_DATALOGGER.html": {
         "min_size": 20_000,
         "markers": ["Atualizado em", "const SUMMARY", "const TABLE_ROWS", "const DS_TIPO_VALUES"],
@@ -67,6 +72,7 @@ STATIC_HTML = {
             "INDICADOR_VTCBOX.html",
             "GESTAO_DISPOSITIVOS.html",
             "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
+            "REVERSA_FORTEX.html",
         ],
     },
 }
@@ -76,6 +82,7 @@ HTML_SCOPE_FILES = {
     "controle": "CONTROLE_ENTREGAS_20D.html",
     "acompanhamento": "HTMLACOMPANHAMENTO.html",
     "reversa": "REVERSA_DATALOGGERS.html",
+    "reversa_fortex": "REVERSA_FORTEX.html",
     "rastreio": "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
     "gestao": "GESTAO_DISPOSITIVOS.html",
     "gerenciamento_termico": "gerenciamento_termico.html",
@@ -93,11 +100,13 @@ CODE_FILES = [
     "ATUALIZAR_TUDO_10_MIN.ps1",
     "VALIDAR_DASHBOARDS_10_MIN.bat",
     "ATUALIZAR_REVERSA.bat",
+    "ATUALIZAR_REVERSA_FORTEX.bat",
     "HTMLACOMPANHAMENTO.py",
     "gerar_dashboard_entregas.py",
     "gerar_html_estoque.py",
     "gerar_html_controle_entregas.py",
     "gerar_html_reversa.py",
+    "gerar_html_reversa_fortex.py",
     "gerar_html_rastreio_caixas_sem_datalogger.py",
     "env_utils.py",
     "validar_gestao_dispositivos_db.py",
@@ -108,12 +117,13 @@ CODE_FILES = [
 ]
 
 PUBLIC_PAGES = {
-    "gerenciamento_termico.html": "https://luan9753.github.io/banco-aura-dashboard/gerenciamento_termico.html",
-    "ESTOQUE_DATALOGGERS.html": "https://luan9753.github.io/banco-aura-dashboard/ESTOQUE_DATALOGGERS.html",
-    "CONTROLE_ENTREGAS_20D.html": "https://luan9753.github.io/banco-aura-dashboard/CONTROLE_ENTREGAS_20D.html",
-    "HTMLACOMPANHAMENTO.html": "https://luan9753.github.io/banco-aura-dashboard/HTMLACOMPANHAMENTO.html",
-    "RASTREIO_CAIXAS_SEM_DATALOGGER.html": "https://luan9753.github.io/banco-aura-dashboard/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-    "GESTAO_DISPOSITIVOS.html": "https://luan9753.github.io/banco-aura-dashboard/GESTAO_DISPOSITIVOS.html",
+    "gerenciamento_termico.html": "https://gerenciamento-termico.github.io/Dashboards/gerenciamento_termico.html",
+    "ESTOQUE_DATALOGGERS.html": "https://gerenciamento-termico.github.io/Dashboards/ESTOQUE_DATALOGGERS.html",
+    "CONTROLE_ENTREGAS_20D.html": "https://gerenciamento-termico.github.io/Dashboards/CONTROLE_ENTREGAS_20D.html",
+    "HTMLACOMPANHAMENTO.html": "https://gerenciamento-termico.github.io/Dashboards/HTMLACOMPANHAMENTO.html",
+    "RASTREIO_CAIXAS_SEM_DATALOGGER.html": "https://gerenciamento-termico.github.io/Dashboards/RASTREIO_CAIXAS_SEM_DATALOGGER.html",
+    "GESTAO_DISPOSITIVOS.html": "https://gerenciamento-termico.github.io/Dashboards/GESTAO_DISPOSITIVOS.html",
+    "REVERSA_FORTEX.html": "https://gerenciamento-termico.github.io/Dashboards/REVERSA_FORTEX.html",
 }
 
 REQUIRED_PRESENT = [
@@ -461,6 +471,42 @@ def _validate_reversa(cycle_start: float | None) -> None:
     )
 
 
+def _validate_reversa_fortex(cycle_start: float | None) -> None:
+    text = _validate_common_html("REVERSA_FORTEX.html", cycle_start)
+    rows = _extract_js_json(text, "ALL_ROWS")
+    if not isinstance(rows, list) or len(rows) <= 0:
+        raise RuntimeError("REVERSA_FORTEX.html sem ALL_ROWS real")
+    lpns: set[str] = set()
+    duplicates = 0
+    pending = 0
+    returned = 0
+    for row in rows:
+        if not isinstance(row, list) or len(row) < 11:
+            continue
+        lpn = str(row[1]).strip()
+        if not lpn:
+            raise RuntimeError("REVERSA_FORTEX.html com LPN vazio")
+        if lpn in lpns:
+            duplicates += 1
+        else:
+            lpns.add(lpn)
+        status = str(row[10]).strip()
+        if status == "Pendente de Retorno":
+            pending += 1
+        elif status == "Retornado":
+            returned += 1
+        else:
+            raise RuntimeError(f"REVERSA_FORTEX.html status invalido: {status}")
+    if duplicates:
+        raise RuntimeError(f"REVERSA_FORTEX.html com LPN duplicado: {duplicates}")
+    if returned + pending != len(rows):
+        raise RuntimeError("REVERSA_FORTEX.html cards incoerentes retornadas+pendentes")
+    _print(
+        "[html] REVERSA_FORTEX.html OK: "
+        f"caixas={len(rows)} retornadas={returned} pendentes={pending}"
+    )
+
+
 def _validate_acompanhamento_html(cycle_start: float | None) -> None:
     text = _validate_common_html("HTMLACOMPANHAMENTO.html", cycle_start)
     payload = _extract_js_json(text, "payload")
@@ -614,6 +660,7 @@ def command_validate_html(args: argparse.Namespace) -> int:
         "estoque": _validate_estoque,
         "controle": _validate_controle,
         "reversa": _validate_reversa,
+        "reversa_fortex": _validate_reversa_fortex,
         "acompanhamento": _validate_acompanhamento_html,
         "rastreio": _validate_rastreio,
         "gestao": _validate_gestao,

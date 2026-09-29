@@ -111,47 +111,81 @@ def fetch_stage_info(pedidos: list[str]) -> dict[str, dict]:
 
 
 def fetch_ctes(pedidos: list[str]) -> dict[str, list[dict]]:
-    """CT-e por pedido via dtbPortal vwstmawbs (pedido -> AWB -> nr_cte/serie/chave)."""
-    from sqlalchemy import bindparam, create_engine, text
-    from sqlalchemy.engine import URL
+    """CT-e da VTC por pedido via dtbTransporte.
 
-    env = load_env(WORKSPACE / ".env")
-    if not env.get("AURA_POSTGRES_HOST"):
-        raise RuntimeError("dtbPortal ausente (.env AURA_POSTGRES_*)")
-    url = URL.create(
-        "postgresql+psycopg2",
-        username=env["AURA_POSTGRES_USER"], password=env["AURA_POSTGRES_PASSWORD"],
-        host=env["AURA_POSTGRES_HOST"], port=int(env.get("AURA_POSTGRES_PORT") or 5432),
-        database=env["AURA_POSTGRES_NAME"],
-    )
-    query = text(
-        """
-        SELECT TRIM(nr_pedido::text) AS pedido,
-               REGEXP_REPLACE(COALESCE(cd_awb::text, ''), '\\D', '', 'g') AS awb,
-               NULLIF(TRIM(nr_cte::text), '') AS nr_cte,
-               NULLIF(TRIM(nr_serie::text), '') AS serie,
-               NULLIF(TRIM(cd_cte), '') AS chave,
-               dt_emissao
-        FROM vwstmawbs
-        WHERE TRIM(nr_pedido::text) IN :peds
-        """
-    ).bindparams(bindparam("peds", expanding=True))
+    tbdMovimento.nr_Conhecimento = numero do CT-e emitido pela VTC (nao confundir
+    com o CT-e da CIA aerea da vwstmawbs); chave de 44 digitos em
+    tbdLoteCTeMovimento.ds_ChaveCTe (CNPJ emissor 24.893.687 = VTC).
+    A serie e extraida da propria chave (posicoes 23-25).
+    """
+    cfg = _sqlserver_cfg()
+    if not cfg["host"] or not cfg["user"]:
+        raise RuntimeError("dtbTransporte ausente (.env AURA_SQLSERVER_*)")
+    import pytds
+
+    peds = sorted({str(p).strip() for p in pedidos if str(p).strip()})
+    alvo = set(peds)
+    query_mov = """
+        SELECT m.id_Movimento,
+               LTRIM(RTRIM(CAST(m.nr_Referencia AS varchar(40)))) AS ref,
+               LTRIM(RTRIM(CAST(m.nr_PedidoCliente AS varchar(40)))) AS cli,
+               LTRIM(RTRIM(COALESCE(m.nr_Conhecimento, ''))) AS cte,
+               LTRIM(RTRIM(COALESCE(m.nr_AWB, ''))) AS awb,
+               m.dt_Cadastro
+        FROM tbdMovimento m
+        WHERE m.dt_Cadastro >= DATEADD(day, -120, GETDATE())
+          AND NULLIF(LTRIM(RTRIM(m.nr_Conhecimento)), '') IS NOT NULL
+          AND (m.nr_Referencia IN ({ph}) OR m.nr_PedidoCliente IN ({ph}))
+    """
+    query_chave = """
+        SELECT id_Movimento, MAX(LTRIM(RTRIM(COALESCE(ds_ChaveCTe, '')))) AS chave
+        FROM tbdLoteCTeMovimento
+        WHERE id_Movimento IN ({ph})
+        GROUP BY id_Movimento
+    """
+    movimentos: list[dict] = []
+    with pytds.connect(
+        server=cfg["host"], port=int(cfg["port"]), database=str(cfg["database"]),
+        user=str(cfg["user"]), password=str(cfg["password"]),
+        timeout=180, login_timeout=30, validate_host=False,
+    ) as conn:
+        cur = conn.cursor()
+        for i in range(0, len(peds), 800):
+            chunk = peds[i : i + 800]
+            ph = ",".join(["%s"] * len(chunk))
+            cur.execute(query_mov.format(ph=ph), tuple(chunk) + tuple(chunk))
+            for id_mov, ref, cli, cte, awb, cad in cur.fetchall():
+                movimentos.append({
+                    "id": int(id_mov), "ref": str(ref or "").strip(),
+                    "cli": str(cli or "").strip(), "cte": str(cte or "").strip(),
+                    "awb": "".join(ch for ch in str(awb or "") if ch.isdigit()),
+                    "cad": cad,
+                })
+        chaves: dict[int, str] = {}
+        ids = sorted({m["id"] for m in movimentos})
+        for i in range(0, len(ids), 500):
+            chunk = ids[i : i + 500]
+            ph = ",".join(["%s"] * len(chunk))
+            cur.execute(query_chave.format(ph=ph), tuple(chunk))
+            for id_mov, chave in cur.fetchall():
+                chaves[int(id_mov)] = str(chave or "").strip()
+
     out: dict[str, list[dict]] = {}
-    engine = create_engine(url, pool_pre_ping=True)
-    try:
-        with engine.connect() as conn:
-            for i in range(0, len(pedidos), 500):
-                chunk = pedidos[i : i + 500]
-                for row in conn.execute(query, {"peds": chunk}):
-                    out.setdefault(str(row[0]), []).append({
-                        "awb": str(row[1] or ""),
-                        "nr_cte": str(row[2] or ""),
-                        "serie": str(row[3] or ""),
-                        "chave": str(row[4] or ""),
-                        "emissao": row[5],
-                    })
-    finally:
-        engine.dispose()
+    for m in movimentos:
+        chave = chaves.get(m["id"], "")
+        serie = chave[22:25].lstrip("0") if len(chave) == 44 else ""
+        item = {
+            "awb": m["awb"], "nr_cte": m["cte"], "serie": serie,
+            "chave": chave, "emissao": m["cad"],
+        }
+        for chave_ped in {m["ref"], m["cli"]}:
+            if chave_ped and chave_ped in alvo:
+                lst = out.setdefault(chave_ped, [])
+                if not any(
+                    x["nr_cte"] == item["nr_cte"] and x["awb"] == item["awb"]
+                    and x["chave"] == item["chave"] for x in lst
+                ):
+                    lst.append(item)
     return out
 
 
@@ -461,7 +495,7 @@ footer{margin-top:28px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 <div class="tblwrap">
 <table>
   <thead><tr>
-    <th data-s="p">Pedido</th><th data-s="cte" title="Numero/serie do CT-e (passe o mouse na celula para a chave)">CTE</th><th data-s="rom">Romaneio</th><th data-s="awb">AWB</th><th data-s="rota">Rota</th><th data-s="cia">CIA</th><th data-s="ag">Agente / Base</th>
+    <th data-s="p">Pedido</th><th data-s="cte" title="CT-e emitido pela VTC (numero/serie; passe o mouse na celula para ver a chave)">CTE VTC</th><th data-s="rom">Romaneio</th><th data-s="awb">AWB</th><th data-s="rota">Rota</th><th data-s="cia">CIA</th><th data-s="ag">Agente / Base</th>
     <th data-s="vol" title="Volumes da AWB">Vol.</th>
     <th data-s="lg" title="Dataloggers no pedido (vtc_stage)">Loggers</th>
     <th data-s="de">Desembarque</th><th data-s="re">Retirada</th><th data-s="h">Horas</th><th data-s="n">Noites</th><th data-s="st">Status</th>

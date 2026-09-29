@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-29T12:39:56",
+  "gerado_em": "2026-09-29T12:48:05",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 511,
+    "pendentes_janela": 512,
     "cobranca_gru_janela": 40,
-    "sem_embarque_efetiva": 648,
-    "com_embarque_efetiva": 7556,
+    "sem_embarque_efetiva": 647,
+    "com_embarque_efetiva": 7557,
     "loggers_sem_lastsync": 74,
-    "nao_avaliados": 648,
+    "nao_avaliados": 647,
     "pedidos_com_agente": 8333,
     "dtbtransporte": {
       "consultados": 1134,
@@ -52,7 +52,7 @@
       "VTCLOG RIO GALEAO": 14
     },
     "top10_ufs_pendencias": {
-      "MG": 78,
+      "MG": 79,
       "SP": 54,
       "GO": 49,
       "BA": 46,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 6257,
       "n_so_gru": 100,
-      "n_sem_primeiro_sync": 907,
+      "n_sem_primeiro_sync": 908,
       "media_horas": 1.74,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-29",
       "dia": "29/09",
       "dia_full": "29/09/2026",
-      "pedidos": 18,
-      "loggers": 312,
+      "pedidos": 19,
+      "loggers": 313,
       "sincronizados": 255,
-      "pendentes": 56,
-      "sem_embarque": 33,
+      "pendentes": 57,
+      "sem_embarque": 32,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 10,
-      "pct": 17.9,
+      "pedidos_pendentes": 11,
+      "pct": 18.2,
       "n_latencia": 198,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 114
+      "n_sem_primeiro_sync": 115
     }
   ],
   "erros_validacao": {},

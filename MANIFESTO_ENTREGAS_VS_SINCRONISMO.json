@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-29T13:55:05",
+  "gerado_em": "2026-09-29T14:03:13",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8410,
-    "pedidos_janela": 1143,
-    "loggers_ares_janela": 7984,
-    "loggers_ares_antes_dedup": 8281,
-    "dedup_dia_logger": 91,
+    "pares_janela": 8433,
+    "pedidos_janela": 1146,
+    "loggers_ares_janela": 8005,
+    "loggers_ares_antes_dedup": 8303,
+    "dedup_dia_logger": 92,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 466,
+    "pendentes_janela": 480,
     "cobranca_gru_janela": 46,
-    "sem_embarque_efetiva": 661,
-    "com_embarque_efetiva": 7620,
-    "loggers_sem_lastsync": 74,
-    "nao_avaliados": 661,
-    "pedidos_com_agente": 8410,
+    "sem_embarque_efetiva": 663,
+    "com_embarque_efetiva": 7640,
+    "loggers_sem_lastsync": 76,
+    "nao_avaliados": 663,
+    "pedidos_com_agente": 8433,
     "dtbtransporte": {
-      "consultados": 1143,
-      "mapeados": 1143,
-      "linhas": 1270
+      "consultados": 1146,
+      "mapeados": 1146,
+      "linhas": 1273
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 154,
@@ -48,8 +48,8 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 25,
       "VTCLOG - REC": 24,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 22,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 9,
-      "PVH - RODOTEC": 7
+      "AJU - CASSIMIRO TRANSPORTES": 15,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 9
     },
     "top10_ufs_pendencias": {
       "MG": 79,
@@ -61,12 +61,12 @@
       "MA": 25,
       "SC": 25,
       "PE": 24,
-      "RS": 13
+      "SE": 15
     },
     "latencia": {
-      "n_agente": 6385,
+      "n_agente": 6392,
       "n_so_gru": 97,
-      "n_sem_primeiro_sync": 846,
+      "n_sem_primeiro_sync": 859,
       "media_horas": 1.74,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-29",
       "dia": "29/09",
       "dia_full": "29/09/2026",
-      "pedidos": 28,
-      "loggers": 376,
-      "sincronizados": 355,
-      "pendentes": 20,
-      "sem_embarque": 46,
+      "pedidos": 29,
+      "loggers": 396,
+      "sincronizados": 361,
+      "pendentes": 34,
+      "sem_embarque": 47,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 15,
-      "pct": 5.3,
-      "n_latencia": 321,
+      "pedidos_pendentes": 16,
+      "pct": 8.6,
+      "n_latencia": 328,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 55
+      "n_sem_primeiro_sync": 68
     }
   ],
   "erros_validacao": {},

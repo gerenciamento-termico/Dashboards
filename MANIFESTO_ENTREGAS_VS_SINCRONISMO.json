@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-29T13:13:09",
+  "gerado_em": "2026-09-29T13:17:30",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 512,
+    "pendentes_janela": 474,
     "cobranca_gru_janela": 39,
     "sem_embarque_efetiva": 680,
     "com_embarque_efetiva": 7557,
@@ -41,7 +41,6 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 152,
-      "GYN - RBR EXPERIENCIA EM TRANSPORTES": 47,
       "RBR - RODOTEC": 40,
       "SSA - LUTY LOG": 36,
       "THE - AERONEIVA EXPRESS": 35,
@@ -49,25 +48,26 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 24,
       "VTCLOG - REC": 24,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 22,
-      "VTCLOG RIO GALEAO": 14
+      "VTCLOG RIO GALEAO": 14,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 9
     },
     "top10_ufs_pendencias": {
       "MG": 79,
       "SP": 54,
-      "GO": 49,
       "BA": 46,
       "AC": 40,
       "PI": 37,
       "TO": 27,
       "SC": 25,
       "MA": 24,
-      "PE": 24
+      "PE": 24,
+      "RJ": 16
     },
     "latencia": {
-      "n_agente": 6257,
+      "n_agente": 6296,
       "n_so_gru": 100,
-      "n_sem_primeiro_sync": 908,
-      "media_horas": 1.74,
+      "n_sem_primeiro_sync": 869,
+      "media_horas": 1.73,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -440,18 +440,18 @@
       "dia_full": "29/09/2026",
       "pedidos": 19,
       "loggers": 313,
-      "sincronizados": 255,
-      "pendentes": 57,
+      "sincronizados": 293,
+      "pendentes": 19,
       "sem_embarque": 65,
       "cobranca_gru": 1,
       "pedidos_pendentes": 11,
-      "pct": 18.2,
-      "n_latencia": 198,
+      "pct": 6.1,
+      "n_latencia": 237,
       "media_horas": 0.04,
-      "mediana_horas": 0.05,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 115
+      "n_sem_primeiro_sync": 76
     }
   ],
   "erros_validacao": {},

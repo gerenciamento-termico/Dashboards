@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-29T14:33:59",
+  "gerado_em": "2026-09-29T14:43:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8442,
-    "pedidos_janela": 1148,
-    "loggers_ares_janela": 8014,
-    "loggers_ares_antes_dedup": 8312,
+    "pares_janela": 8443,
+    "pedidos_janela": 1149,
+    "loggers_ares_janela": 8015,
+    "loggers_ares_antes_dedup": 8313,
     "dedup_dia_logger": 92,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 457,
-    "cobranca_gru_janela": 68,
+    "pendentes_janela": 410,
+    "cobranca_gru_janela": 116,
     "sem_embarque_efetiva": 662,
-    "com_embarque_efetiva": 7650,
+    "com_embarque_efetiva": 7651,
     "loggers_sem_lastsync": 73,
     "nao_avaliados": 662,
-    "pedidos_com_agente": 8442,
+    "pedidos_com_agente": 8443,
     "dtbtransporte": {
-      "consultados": 1148,
-      "mapeados": 1148,
-      "linhas": 1275
+      "consultados": 1149,
+      "mapeados": 1149,
+      "linhas": 1276
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 135,
+      "VTCLOG - GRU": 88,
       "THE - AERONEIVA EXPRESS": 41,
       "RBR - RODOTEC": 40,
       "SSA - LUTY LOG": 36,
@@ -52,8 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 9
     },
     "top10_ufs_pendencias": {
-      "MG": 59,
-      "SP": 56,
+      "SP": 57,
       "BA": 47,
       "PI": 43,
       "AC": 40,
@@ -61,13 +60,14 @@
       "MA": 25,
       "SC": 25,
       "PE": 24,
-      "SE": 15
+      "SE": 15,
+      "RS": 13
     },
     "latencia": {
-      "n_agente": 6420,
-      "n_so_gru": 96,
-      "n_sem_primeiro_sync": 841,
-      "media_horas": 1.8,
+      "n_agente": 6425,
+      "n_so_gru": 91,
+      "n_sem_primeiro_sync": 842,
+      "media_horas": 1.87,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -218,11 +218,11 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 19,
       "pct": 6.2,
-      "n_latencia": 387,
-      "media_horas": 2.98,
+      "n_latencia": 388,
+      "media_horas": 3.45,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 7,
+      "n_sync_so_gru": 6,
       "n_sem_primeiro_sync": 41
     },
     {
@@ -294,11 +294,11 @@
       "cobranca_gru": 2,
       "pedidos_pendentes": 7,
       "pct": 3.5,
-      "n_latencia": 311,
-      "media_horas": 0.53,
+      "n_latencia": 313,
+      "media_horas": 1.13,
       "mediana_horas": 0.05,
-      "p90_horas": 0.07,
-      "n_sync_so_gru": 5,
+      "p90_horas": 0.08,
+      "n_sync_so_gru": 3,
       "n_sem_primeiro_sync": 28
     },
     {
@@ -313,11 +313,11 @@
       "cobranca_gru": 5,
       "pedidos_pendentes": 11,
       "pct": 1.9,
-      "n_latencia": 590,
-      "media_horas": 0.24,
+      "n_latencia": 591,
+      "media_horas": 0.35,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 1,
+      "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 80
     },
     {
@@ -332,11 +332,11 @@
       "cobranca_gru": 2,
       "pedidos_pendentes": 15,
       "pct": 3.3,
-      "n_latencia": 456,
-      "media_horas": 0.25,
+      "n_latencia": 457,
+      "media_horas": 0.35,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 1,
+      "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 33
     },
     {
@@ -422,11 +422,11 @@
       "pedidos": 36,
       "loggers": 425,
       "sincronizados": 272,
-      "pendentes": 131,
+      "pendentes": 83,
       "sem_embarque": 5,
-      "cobranca_gru": 22,
-      "pedidos_pendentes": 15,
-      "pct": 30.8,
+      "cobranca_gru": 70,
+      "pedidos_pendentes": 14,
+      "pct": 19.5,
       "n_latencia": 245,
       "media_horas": 0.06,
       "mediana_horas": 0.05,
@@ -438,20 +438,20 @@
       "dia_iso": "2026-09-29",
       "dia": "29/09",
       "dia_full": "29/09/2026",
-      "pedidos": 33,
-      "loggers": 426,
+      "pedidos": 34,
+      "loggers": 427,
       "sincronizados": 378,
-      "pendentes": 47,
+      "pendentes": 48,
       "sem_embarque": 47,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 17,
-      "pct": 11.0,
+      "pedidos_pendentes": 18,
+      "pct": 11.2,
       "n_latencia": 359,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 67
+      "n_sem_primeiro_sync": 68
     }
   ],
   "erros_validacao": {},

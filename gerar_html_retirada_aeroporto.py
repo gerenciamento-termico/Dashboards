@@ -70,10 +70,10 @@ def fetch_rows() -> list[dict]:
         return [dict(zip(cols, raw)) for raw in cur.fetchall()]
 
 
-def fetch_loggers(pedidos: list[str]) -> dict[str, int]:
-    """Quantidade de dataloggers por pedido (vtc_stage.documentos).
+def fetch_stage_info(pedidos: list[str]) -> dict[str, dict]:
+    """Dataloggers e romaneios por pedido (vtc_stage.documentos).
 
-    0 = carga seca ou logger nao registrado no stage; por isso filtramos, nao excluimos.
+    loggers=0 = carga seca ou logger nao registrado no stage; por isso filtramos, nao excluimos.
     """
     from sqlalchemy import bindparam, create_engine, text
     from sqlalchemy.engine import URL
@@ -90,26 +90,72 @@ def fetch_loggers(pedidos: list[str]) -> dict[str, int]:
     query = text(
         """
         SELECT TRIM(nr_pedido::text) AS pedido,
-               COUNT(DISTINCT NULLIF(TRIM(ds_tag), '')) AS loggers
+               COUNT(DISTINCT NULLIF(TRIM(ds_tag), '')) AS loggers,
+               STRING_AGG(DISTINCT NULLIF(TRIM(nr_romaneio::text), ''), ', ') AS romaneios
         FROM vtc_stage.documentos
         WHERE TRIM(nr_pedido::text) IN :peds
         GROUP BY 1
         """
     ).bindparams(bindparam("peds", expanding=True))
-    out: dict[str, int] = {}
+    out: dict[str, dict] = {}
     engine = create_engine(url, pool_pre_ping=True)
     try:
         with engine.connect() as conn:
             for i in range(0, len(pedidos), 500):
                 chunk = pedidos[i : i + 500]
                 for row in conn.execute(query, {"peds": chunk}):
-                    out[str(row[0])] = int(row[1] or 0)
+                    out[str(row[0])] = {"lg": int(row[1] or 0), "rom": str(row[2] or "").strip()}
     finally:
         engine.dispose()
     return out
 
 
-def build_model(raw: list[dict], loggers: dict[str, int]) -> dict:
+def fetch_ctes(pedidos: list[str]) -> dict[str, list[dict]]:
+    """CT-e por pedido via dtbPortal vwstmawbs (pedido -> AWB -> nr_cte/serie/chave)."""
+    from sqlalchemy import bindparam, create_engine, text
+    from sqlalchemy.engine import URL
+
+    env = load_env(WORKSPACE / ".env")
+    if not env.get("AURA_POSTGRES_HOST"):
+        raise RuntimeError("dtbPortal ausente (.env AURA_POSTGRES_*)")
+    url = URL.create(
+        "postgresql+psycopg2",
+        username=env["AURA_POSTGRES_USER"], password=env["AURA_POSTGRES_PASSWORD"],
+        host=env["AURA_POSTGRES_HOST"], port=int(env.get("AURA_POSTGRES_PORT") or 5432),
+        database=env["AURA_POSTGRES_NAME"],
+    )
+    query = text(
+        """
+        SELECT TRIM(nr_pedido::text) AS pedido,
+               REGEXP_REPLACE(COALESCE(cd_awb::text, ''), '\\D', '', 'g') AS awb,
+               NULLIF(TRIM(nr_cte::text), '') AS nr_cte,
+               NULLIF(TRIM(nr_serie::text), '') AS serie,
+               NULLIF(TRIM(cd_cte), '') AS chave,
+               dt_emissao
+        FROM vwstmawbs
+        WHERE TRIM(nr_pedido::text) IN :peds
+        """
+    ).bindparams(bindparam("peds", expanding=True))
+    out: dict[str, list[dict]] = {}
+    engine = create_engine(url, pool_pre_ping=True)
+    try:
+        with engine.connect() as conn:
+            for i in range(0, len(pedidos), 500):
+                chunk = pedidos[i : i + 500]
+                for row in conn.execute(query, {"peds": chunk}):
+                    out.setdefault(str(row[0]), []).append({
+                        "awb": str(row[1] or ""),
+                        "nr_cte": str(row[2] or ""),
+                        "serie": str(row[3] or ""),
+                        "chave": str(row[4] or ""),
+                        "emissao": row[5],
+                    })
+    finally:
+        engine.dispose()
+    return out
+
+
+def build_model(raw: list[dict], stage: dict[str, dict], ctes: dict[str, list[dict]]) -> dict:
     agora = datetime.now()
 
     # dedup por pedido: mantem o desembarque mais recente; empate -> com retirada
@@ -132,9 +178,19 @@ def build_model(raw: list[dict], loggers: dict[str, int]) -> dict:
         horas = max(0.0, (fim - de).total_seconds() / 3600.0)
         noites = max(0, (fim.date() - de.date()).days)
         sexta = de.weekday() == 4
+        info = stage.get(p) or {}
+        awb_txt = str(r["AWB"] or "").strip()
+        awb_dig = "".join(ch for ch in awb_txt if ch.isdigit())
+        cte_lst = ctes.get(p) or []
+        cte = next((x for x in cte_lst if x["awb"] and x["awb"] == awb_dig), None)
+        if cte is None and cte_lst:
+            cte = max(cte_lst, key=lambda x: (x["emissao"] is not None, x["emissao"]))
         rows.append({
             "p": p,
-            "awb": str(r["AWB"] or "").strip(),
+            "awb": awb_txt,
+            "cte": (cte["nr_cte"] + ("/" + cte["serie"] if cte["serie"] else "")) if cte and cte["nr_cte"] else "",
+            "chv": cte["chave"] if cte else "",
+            "rom": info.get("rom", ""),
             "o": str(r["ORIGEM"] or "").strip(),
             "d": str(r["DESTINO"] or "").strip(),
             "cia": _cia_curta(str(r["CIA"] or "")),
@@ -147,7 +203,7 @@ def build_model(raw: list[dict], loggers: dict[str, int]) -> dict:
             "n": noites,
             "sx": sexta,
             "fds": bool(sexta and noites >= 1),
-            "lg": loggers.get(p, 0),
+            "lg": info.get("lg", 0),
         })
 
     # ultima sexta-feira (se hoje e sexta, considera hoje)
@@ -276,7 +332,7 @@ h1 small{display:block;font-size:.68rem;font-weight:700;color:var(--tx2);text-tr
 .btn.ghost:hover{border-color:var(--blue);color:var(--blue);opacity:1}
 
 /* filtros por coluna (fora da grade) */
-.colf{display:grid;grid-template-columns:repeat(9,1fr);gap:8px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
+.colf{display:grid;grid-template-columns:repeat(11,1fr);gap:8px;background:var(--card);border:1px solid var(--line);border-radius:15px;padding:12px 14px;margin-bottom:10px;box-shadow:var(--shadow)}
 .colf label{display:block;font-size:.57rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-bottom:3px;font-weight:700;white-space:nowrap}
 .colf input{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:8px;color:var(--tx);padding:6px 9px;font-size:.74rem;font-family:inherit}
 .colf input:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
@@ -288,7 +344,7 @@ h1 small{display:block;font-size:.68rem;font-weight:700;color:var(--tx2);text-tr
 
 /* ===== grade (maior) ===== */
 .tblwrap{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:auto;max-height:84vh;box-shadow:var(--shadow)}
-table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:1020px}
+table{width:100%;border-collapse:collapse;font-size:.84rem;min-width:1180px}
 th{position:sticky;top:0;height:42px;background:#f8fafc;color:var(--tx2);text-transform:uppercase;font-size:.65rem;letter-spacing:.5px;padding:11px 10px;text-align:left;white-space:nowrap;z-index:2;border-bottom:1px solid var(--line)}
 th[data-s]{cursor:pointer;user-select:none;transition:color .15s}
 th[data-s]:hover{color:var(--blue)}
@@ -315,7 +371,7 @@ tr.warn:hover td{background:#fef3c7}
 
 /* ===== cards mobile ===== */
 .cards{display:none}
-@media(max-width:1360px){.colf{grid-template-columns:repeat(5,1fr)}}
+@media(max-width:1360px){.colf{grid-template-columns:repeat(6,1fr)}}
 @media(max-width:960px){
   .wrap{padding:16px 12px 50px}
   .fbar{grid-template-columns:1fr 1fr}
@@ -387,6 +443,8 @@ footer{margin-top:28px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 
 <div class="colf">
   <div><label>Pedido</label><input class="cf" data-col="p" placeholder="pedido"></div>
+  <div><label>CTE</label><input class="cf" data-col="cte" placeholder="n&ordm; CT-e"></div>
+  <div><label>Romaneio</label><input class="cf" data-col="rom" placeholder="romaneio"></div>
   <div><label>AWB</label><input class="cf" data-col="awb" placeholder="AWB"></div>
   <div><label>Rota</label><input class="cf" data-col="rota" placeholder="GRU, REC..."></div>
   <div><label>CIA</label><input class="cf" data-col="cia" placeholder="cia"></div>
@@ -402,7 +460,7 @@ footer{margin-top:28px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 <div class="tblwrap">
 <table>
   <thead><tr>
-    <th data-s="p">Pedido</th><th data-s="awb">AWB</th><th data-s="rota">Rota</th><th data-s="cia">CIA</th><th data-s="ag">Agente / Base</th>
+    <th data-s="p">Pedido</th><th data-s="cte" title="Numero/serie do CT-e (passe o mouse na celula para a chave)">CTE</th><th data-s="rom">Romaneio</th><th data-s="awb">AWB</th><th data-s="rota">Rota</th><th data-s="cia">CIA</th><th data-s="ag">Agente / Base</th>
     <th data-s="vol" title="Volumes da AWB">Vol.</th>
     <th data-s="lg" title="Dataloggers no pedido (vtc_stage)">Loggers</th>
     <th data-s="de">Desembarque</th><th data-s="re">Retirada</th><th data-s="h">Horas</th><th data-s="n">Noites</th><th data-s="st">Status</th>
@@ -476,7 +534,7 @@ function apply(){
     if (so && !r.sx) return false;
     if (colf.length && !matchCols(r, colf)) return false;
     if (q){
-      const alvo = (r.p+" "+r.awb+" "+r.ag+" "+r.cia+" "+r.o+" "+r.d).toLowerCase();
+      const alvo = (r.p+" "+r.awb+" "+r.cte+" "+r.chv+" "+r.rom+" "+r.ag+" "+r.cia+" "+r.o+" "+r.d).toLowerCase();
       if (!alvo.includes(q)) return false;
     }
     return true;
@@ -513,6 +571,8 @@ function render(){
     const cls = r.st==="A" ? (r.h>=24 ? "crit" : (r.h>=12 ? "warn" : "")) : "";
     return '<tr class="'+cls+'">'
       + '<td><b>'+esc(r.p)+'</b></td>'
+      + '<td title="'+esc(r.chv||'sem chave')+'">'+(r.cte ? esc(r.cte) : '\u2014')+'</td>'
+      + '<td>'+(r.rom ? esc(r.rom) : '\u2014')+'</td>'
       + '<td>'+esc(r.awb)+'</td>'
       + '<td class="rota">'+esc(r.o)+' \u2192 '+esc(r.d)+'</td>'
       + '<td>'+esc(r.cia)+'</td>'
@@ -534,6 +594,7 @@ function render(){
       + '<div class="kv">'
       + '<span class="k">Rota</span><span class="rota">'+esc(r.o)+' \u2192 '+esc(r.d)+' \u00b7 '+esc(r.cia)+'</span>'
       + '<span class="k">AWB</span><span>'+esc(r.awb)+' \u00b7 <b>'+r.vol+'</b> vol. \u00b7 '+(r.lg>0 ? '<b>'+r.lg+'</b> logger'+(r.lg===1?'':'s') : 'carga seca')+'</span>'
+      + '<span class="k">CTE</span><span>'+(r.cte ? esc(r.cte) : '\u2014')+(r.rom ? ' \u00b7 rom. '+esc(r.rom) : '')+'</span>'
       + '<span class="k">Agente</span><span>'+esc(r.ag)+'</span>'
       + '<span class="k">Desembarque</span><span>'+fmt(r.de)+'</span>'
       + '<span class="k">Retirada</span><span>'+fmt(r.re)+'</span>'
@@ -573,8 +634,8 @@ function limpar(){
 }
 
 function baixarCsv(){
-  const cab = ["pedido","awb","volumes_awb","loggers","origem","destino","cia","agente","desembarque","retirada","horas","noites","status","sexta","fim_de_semana"];
-  const linhas = VIEW.map(r => [r.p,r.awb,r.vol,r.lg,r.o,r.d,r.cia,'"'+r.ag.replace(/"/g,'""')+'"',r.de,r.re||"",r.h,r.n,r.st==="A"?"AGUARDANDO":"RETIRADO",r.sx?"SIM":"",r.fds?"SIM":""].join(";"));
+  const cab = ["pedido","cte","chave_cte","romaneio","awb","volumes_awb","loggers","origem","destino","cia","agente","desembarque","retirada","horas","noites","status","sexta","fim_de_semana"];
+  const linhas = VIEW.map(r => [r.p,r.cte,r.chv,'"'+r.rom+'"',r.awb,r.vol,r.lg,r.o,r.d,r.cia,'"'+r.ag.replace(/"/g,'""')+'"',r.de,r.re||"",r.h,r.n,r.st==="A"?"AGUARDANDO":"RETIRADO",r.sx?"SIM":"",r.fds?"SIM":""].join(";"));
   const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -640,8 +701,9 @@ def write_html(model: dict) -> None:
 def main() -> None:
     raw = fetch_rows()
     pedidos = sorted({str(r["Pedido"]).strip() for r in raw})
-    loggers = fetch_loggers(pedidos)
-    model = build_model(raw, loggers)
+    stage = fetch_stage_info(pedidos)
+    ctes = fetch_ctes(pedidos)
+    model = build_model(raw, stage, ctes)
     write_html(model)
     k = model["kpi"]
     monitorados = sum(1 for r in model["rows"] if r["lg"] > 0)

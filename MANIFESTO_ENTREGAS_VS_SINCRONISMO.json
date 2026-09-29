@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-29T10:50:04",
+  "gerado_em": "2026-09-29T10:55:05",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 463,
+    "pendentes_janela": 462,
     "cobranca_gru_janela": 44,
     "sem_embarque_efetiva": 630,
     "com_embarque_efetiva": 7417,
@@ -36,8 +36,8 @@
     "pedidos_com_agente": 8176,
     "dtbtransporte": {
       "consultados": 1121,
-      "mapeados": 1120,
-      "linhas": 1244
+      "mapeados": 1121,
+      "linhas": 1245
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 152,
@@ -174,12 +174,12 @@
       "dia_full": "15/09/2026",
       "pedidos": 83,
       "loggers": 395,
-      "sincronizados": 380,
-      "pendentes": 15,
+      "sincronizados": 381,
+      "pendentes": 14,
       "sem_embarque": 167,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 8,
-      "pct": 3.8,
+      "pedidos_pendentes": 7,
+      "pct": 3.5,
       "n_latencia": 352,
       "media_horas": 2.0,
       "mediana_horas": 0.04,

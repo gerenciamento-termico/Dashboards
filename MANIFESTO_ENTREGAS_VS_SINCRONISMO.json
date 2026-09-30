@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-30T08:50:43",
+  "gerado_em": "2026-09-30T08:55:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 368,
+    "pendentes_janela": 367,
     "cobranca_gru_janela": 68,
     "sem_embarque_efetiva": 672,
     "com_embarque_efetiva": 7238,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 85,
       "RBR - RODOTEC": 40,
-      "SSA - LUTY LOG": 37,
+      "SSA - LUTY LOG": 36,
       "SLZ - REIS CAVALCANTE EXPRESSO": 28,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 22,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "SP": 58,
-      "BA": 47,
+      "BA": 46,
       "AC": 40,
       "MA": 28,
       "TO": 27,
@@ -64,9 +64,9 @@
       "MG": 10
     },
     "latencia": {
-      "n_agente": 6146,
+      "n_agente": 6147,
       "n_so_gru": 86,
-      "n_sem_primeiro_sync": 737,
+      "n_sem_primeiro_sync": 736,
       "media_horas": 1.41,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -371,7 +371,7 @@
       "pedidos_pendentes": 3,
       "pct": 3.9,
       "n_latencia": 118,
-      "media_horas": 0.18,
+      "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
@@ -421,18 +421,18 @@
       "dia_full": "29/09/2026",
       "pedidos": 71,
       "loggers": 570,
-      "sincronizados": 504,
-      "pendentes": 64,
+      "sincronizados": 505,
+      "pendentes": 63,
       "sem_embarque": 74,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 28,
-      "pct": 11.2,
-      "n_latencia": 482,
+      "pedidos_pendentes": 27,
+      "pct": 11.1,
+      "n_latencia": 483,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 88
+      "n_sem_primeiro_sync": 87
     },
     {
       "dia_iso": "2026-09-30",

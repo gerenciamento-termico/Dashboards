@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-30T09:29:08",
+  "gerado_em": "2026-09-30T09:36:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8039,
-    "pedidos_janela": 1079,
-    "loggers_ares_janela": 7638,
-    "loggers_ares_antes_dedup": 7912,
+    "pares_janela": 8041,
+    "pedidos_janela": 1081,
+    "loggers_ares_janela": 7640,
+    "loggers_ares_antes_dedup": 7914,
     "dedup_dia_logger": 68,
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
     "pendentes_janela": 367,
     "cobranca_gru_janela": 65,
-    "sem_embarque_efetiva": 655,
+    "sem_embarque_efetiva": 657,
     "com_embarque_efetiva": 7257,
     "loggers_sem_lastsync": 68,
-    "nao_avaliados": 655,
-    "pedidos_com_agente": 8039,
+    "nao_avaliados": 657,
+    "pedidos_com_agente": 8041,
     "dtbtransporte": {
-      "consultados": 1079,
-      "mapeados": 1079,
-      "linhas": 1205
+      "consultados": 1081,
+      "mapeados": 1081,
+      "linhas": 1207
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 85,
@@ -67,7 +67,7 @@
       "n_agente": 6171,
       "n_so_gru": 92,
       "n_sem_primeiro_sync": 725,
-      "media_horas": 1.42,
+      "media_horas": 1.41,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -371,7 +371,7 @@
       "pedidos_pendentes": 3,
       "pct": 3.9,
       "n_latencia": 120,
-      "media_horas": 0.53,
+      "media_horas": 0.22,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
@@ -409,7 +409,7 @@
       "pedidos_pendentes": 15,
       "pct": 14.2,
       "n_latencia": 334,
-      "media_horas": 0.11,
+      "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 2,
@@ -423,7 +423,7 @@
       "loggers": 589,
       "sincronizados": 524,
       "pendentes": 63,
-      "sem_embarque": 57,
+      "sem_embarque": 59,
       "cobranca_gru": 2,
       "pedidos_pendentes": 27,
       "pct": 10.7,

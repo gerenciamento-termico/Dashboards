@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-30T09:10:59",
+  "gerado_em": "2026-09-30T09:12:05",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -371,7 +371,7 @@
       "pedidos_pendentes": 3,
       "pct": 3.9,
       "n_latencia": 119,
-      "media_horas": 0.11,
+      "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,

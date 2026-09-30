@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-30T11:13:57",
+  "gerado_em": "2026-09-30T11:18:57",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 349,
+    "pendentes_janela": 346,
     "cobranca_gru_janela": 60,
     "sem_embarque_efetiva": 671,
     "com_embarque_efetiva": 7369,
@@ -45,11 +45,11 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 22,
       "THE - AERONEIVA EXPRESS": 22,
-      "RBR - RODOTEC": 22,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 21,
+      "RBR - RODOTEC": 20,
       "SLZ - REIS CAVALCANTE EXPRESSO": 18,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
-      "GYN - RBR EXPERIENCIA EM TRANSPORTES": 9
+      "VIX - SOULOG EXPRESS": 8
     },
     "top10_ufs_pendencias": {
       "SP": 57,
@@ -57,17 +57,17 @@
       "TO": 27,
       "PI": 24,
       "SC": 23,
-      "AC": 22,
       "AM": 21,
+      "AC": 20,
       "MA": 18,
       "RS": 16,
       "MG": 10
     },
     "latencia": {
-      "n_agente": 6285,
+      "n_agente": 6292,
       "n_so_gru": 102,
-      "n_sem_primeiro_sync": 710,
-      "media_horas": 1.64,
+      "n_sem_primeiro_sync": 703,
+      "media_horas": 1.55,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -326,18 +326,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 93,
       "loggers": 957,
-      "sincronizados": 907,
-      "pendentes": 46,
+      "sincronizados": 909,
+      "pendentes": 44,
       "sem_embarque": 21,
       "cobranca_gru": 4,
       "pedidos_pendentes": 27,
-      "pct": 4.8,
-      "n_latencia": 846,
-      "media_horas": 1.24,
+      "pct": 4.6,
+      "n_latencia": 849,
+      "media_horas": 0.66,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 21,
-      "n_sem_primeiro_sync": 90
+      "n_sem_primeiro_sync": 87
     },
     {
       "dia_iso": "2026-09-25",
@@ -352,7 +352,7 @@
       "pedidos_pendentes": 17,
       "pct": 3.6,
       "n_latencia": 818,
-      "media_horas": 0.27,
+      "media_horas": 0.19,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
@@ -440,18 +440,18 @@
       "dia_full": "30/09/2026",
       "pedidos": 14,
       "loggers": 105,
-      "sincronizados": 93,
-      "pendentes": 12,
+      "sincronizados": 94,
+      "pendentes": 11,
       "sem_embarque": 16,
       "cobranca_gru": 0,
       "pedidos_pendentes": 8,
-      "pct": 11.4,
-      "n_latencia": 80,
-      "media_horas": 0.05,
+      "pct": 10.5,
+      "n_latencia": 84,
+      "media_horas": 0.07,
       "mediana_horas": 0.05,
-      "p90_horas": 0.07,
+      "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 25
+      "n_sem_primeiro_sync": 21
     }
   ],
   "erros_validacao": {},

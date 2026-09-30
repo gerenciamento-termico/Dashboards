@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-09-30T10:27:50",
+  "gerado_em": "2026-09-30T10:28:35",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 206,
     "ocultos_lista": 227,
     "ocultos_ausentes": 21,
-    "pendentes_janela": 379,
+    "pendentes_janela": 368,
     "cobranca_gru_janela": 66,
     "sem_embarque_efetiva": 655,
     "com_embarque_efetiva": 7322,
@@ -46,9 +46,9 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 22,
       "THE - AERONEIVA EXPRESS": 22,
-      "AJU - CASSIMIRO TRANSPORTES": 22,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 20,
       "SLZ - REIS CAVALCANTE EXPRESSO": 18,
+      "AJU - CASSIMIRO TRANSPORTES": 11,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9
     },
     "top10_ufs_pendencias": {
@@ -58,15 +58,15 @@
       "TO": 27,
       "PI": 24,
       "SC": 23,
-      "SE": 22,
       "AM": 20,
       "MA": 18,
-      "RS": 15
+      "RS": 15,
+      "SE": 11
     },
     "latencia": {
-      "n_agente": 6223,
+      "n_agente": 6234,
       "n_so_gru": 98,
-      "n_sem_primeiro_sync": 732,
+      "n_sem_primeiro_sync": 721,
       "media_horas": 1.48,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "30/09/2026",
       "pedidos": 4,
       "loggers": 60,
-      "sincronizados": 39,
-      "pendentes": 21,
+      "sincronizados": 50,
+      "pendentes": 10,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
-      "pct": 35.0,
-      "n_latencia": 38,
+      "pct": 16.7,
+      "n_latencia": 49,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
-      "p90_horas": 0.08,
+      "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 22
+      "n_sem_primeiro_sync": 11
     }
   ],
   "erros_validacao": {},

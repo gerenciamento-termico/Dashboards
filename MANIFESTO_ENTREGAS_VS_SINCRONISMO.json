@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T16:23:23",
+  "gerado_em": "2026-10-01T16:32:24",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 798,
+    "pendentes_janela": 797,
     "cobranca_gru_janela": 51,
     "sem_embarque_efetiva": 682,
     "com_embarque_efetiva": 7770,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 210,
       "THE - AERONEIVA EXPRESS": 127,
-      "FOR - NT TRANSPORTE LTDA": 85,
+      "FOR - NT TRANSPORTE LTDA": 84,
       "SLZ - REIS CAVALCANTE EXPRESSO": 54,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 52,
       "SSA - LUTY LOG": 38,
@@ -54,7 +54,7 @@
     "top10_ufs_pendencias": {
       "SC": 152,
       "PI": 127,
-      "CE": 87,
+      "CE": 86,
       "MA": 75,
       "TO": 52,
       "BA": 50,
@@ -64,9 +64,9 @@
       "SP": 26
     },
     "latencia": {
-      "n_agente": 4317,
+      "n_agente": 4318,
       "n_so_gru": 227,
-      "n_sem_primeiro_sync": 3070,
+      "n_sem_primeiro_sync": 3069,
       "media_horas": 4.13,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "01/10/2026",
       "pedidos": 39,
       "loggers": 286,
-      "sincronizados": 52,
-      "pendentes": 234,
+      "sincronizados": 53,
+      "pendentes": 233,
       "sem_embarque": 75,
       "cobranca_gru": 0,
       "pedidos_pendentes": 29,
-      "pct": 81.8,
-      "n_latencia": 49,
+      "pct": 81.5,
+      "n_latencia": 50,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 237
+      "n_sem_primeiro_sync": 236
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T13:10:04",
+  "gerado_em": "2026-10-01T13:18:58",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 665,
-    "cobranca_gru_janela": 73,
-    "sem_embarque_efetiva": 766,
-    "com_embarque_efetiva": 7593,
+    "pendentes_janela": 749,
+    "cobranca_gru_janela": 70,
+    "sem_embarque_efetiva": 682,
+    "com_embarque_efetiva": 7677,
     "loggers_sem_lastsync": 69,
-    "nao_avaliados": 766,
+    "nao_avaliados": 682,
     "pedidos_com_agente": 8491,
     "dtbtransporte": {
       "consultados": 1082,
@@ -42,32 +42,32 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 205,
       "THE - AERONEIVA EXPRESS": 102,
+      "FOR - NT TRANSPORTE LTDA": 88,
       "SLZ - REIS CAVALCANTE EXPRESSO": 54,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 52,
       "SSA - LUTY LOG": 48,
       "VIX - SOULOG EXPRESS": 32,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 26,
       "PVH - RODOTEC": 21,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 20,
-      "RBR - RODOTEC": 15
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 20
     },
     "top10_ufs_pendencias": {
       "SC": 152,
       "PI": 103,
+      "CE": 90,
       "MA": 74,
       "BA": 60,
       "TO": 52,
       "ES": 33,
       "AM": 26,
       "SP": 21,
-      "RO": 21,
-      "RS": 16
+      "RO": 21
     },
     "latencia": {
-      "n_agente": 4173,
+      "n_agente": 4180,
       "n_so_gru": 209,
-      "n_sem_primeiro_sync": 3055,
-      "media_horas": 2.78,
+      "n_sem_primeiro_sync": 3132,
+      "media_horas": 2.98,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -123,12 +123,12 @@
       "cobranca_gru": 6,
       "pedidos_pendentes": 7,
       "pct": 1.6,
-      "n_latencia": 267,
-      "media_horas": 11.02,
+      "n_latencia": 269,
+      "media_horas": 13.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 30,
-      "n_sem_primeiro_sync": 149
+      "n_sem_primeiro_sync": 147
     },
     {
       "dia_iso": "2026-09-15",
@@ -180,12 +180,12 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 16,
       "pct": 5.5,
-      "n_latencia": 296,
-      "media_horas": 3.86,
+      "n_latencia": 297,
+      "media_horas": 4.75,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 10,
-      "n_sem_primeiro_sync": 129
+      "n_sem_primeiro_sync": 128
     },
     {
       "dia_iso": "2026-09-18",
@@ -307,18 +307,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 93,
       "loggers": 957,
-      "sincronizados": 921,
+      "sincronizados": 922,
       "pendentes": 29,
       "sem_embarque": 21,
-      "cobranca_gru": 7,
+      "cobranca_gru": 6,
       "pedidos_pendentes": 20,
       "pct": 3.0,
-      "n_latencia": 557,
-      "media_horas": 3.21,
+      "n_latencia": 558,
+      "media_horas": 3.2,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 56,
-      "n_sem_primeiro_sync": 344
+      "n_sem_primeiro_sync": 343
     },
     {
       "dia_iso": "2026-09-25",
@@ -332,12 +332,12 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 14,
       "pct": 3.4,
-      "n_latencia": 403,
+      "n_latencia": 404,
       "media_horas": 0.87,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 5,
-      "n_sem_primeiro_sync": 448
+      "n_sem_primeiro_sync": 447
     },
     {
       "dia_iso": "2026-09-26",
@@ -345,18 +345,18 @@
       "dia_full": "26/09/2026",
       "pedidos": 19,
       "loggers": 127,
-      "sincronizados": 122,
+      "sincronizados": 123,
       "pendentes": 4,
       "sem_embarque": 5,
-      "cobranca_gru": 1,
+      "cobranca_gru": 0,
       "pedidos_pendentes": 3,
       "pct": 3.1,
-      "n_latencia": 62,
-      "media_horas": 4.89,
+      "n_latencia": 63,
+      "media_horas": 5.49,
       "mediana_horas": 0.05,
-      "p90_horas": 38.13,
+      "p90_horas": 42.65,
       "n_sync_so_gru": 2,
-      "n_sem_primeiro_sync": 63
+      "n_sem_primeiro_sync": 62
     },
     {
       "dia_iso": "2026-09-27",
@@ -383,18 +383,18 @@
       "dia_full": "28/09/2026",
       "pedidos": 36,
       "loggers": 456,
-      "sincronizados": 388,
+      "sincronizados": 389,
       "pendentes": 30,
       "sem_embarque": 5,
-      "cobranca_gru": 38,
+      "cobranca_gru": 37,
       "pedidos_pendentes": 10,
       "pct": 6.6,
-      "n_latencia": 242,
+      "n_latencia": 243,
       "media_horas": 0.64,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 23,
-      "n_sem_primeiro_sync": 191
+      "n_sem_primeiro_sync": 190
     },
     {
       "dia_iso": "2026-09-29",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-01",
       "dia": "01/10",
       "dia_full": "01/10/2026",
-      "pedidos": 14,
-      "loggers": 130,
+      "pedidos": 17,
+      "loggers": 214,
       "sincronizados": 42,
-      "pendentes": 88,
-      "sem_embarque": 159,
+      "pendentes": 172,
+      "sem_embarque": 75,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 11,
-      "pct": 67.7,
+      "pedidos_pendentes": 14,
+      "pct": 80.4,
       "n_latencia": 40,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 90
+      "n_sem_primeiro_sync": 174
     }
   ],
   "erros_validacao": {},

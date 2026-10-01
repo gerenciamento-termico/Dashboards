@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T13:59:06",
+  "gerado_em": "2026-10-01T14:04:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8516,
-    "pedidos_janela": 1084,
-    "loggers_ares_janela": 8223,
-    "loggers_ares_antes_dedup": 8384,
+    "pares_janela": 8538,
+    "pedidos_janela": 1085,
+    "loggers_ares_janela": 8245,
+    "loggers_ares_antes_dedup": 8406,
     "dedup_dia_logger": 70,
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 763,
+    "pendentes_janela": 785,
     "cobranca_gru_janela": 57,
     "sem_embarque_efetiva": 682,
-    "com_embarque_efetiva": 7702,
+    "com_embarque_efetiva": 7724,
     "loggers_sem_lastsync": 69,
     "nao_avaliados": 682,
-    "pedidos_com_agente": 8516,
+    "pedidos_com_agente": 8538,
     "dtbtransporte": {
-      "consultados": 1084,
-      "mapeados": 1084,
-      "linhas": 1215
+      "consultados": 1085,
+      "mapeados": 1085,
+      "linhas": 1216
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 205,
@@ -47,9 +47,9 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 52,
       "SSA - LUTY LOG": 38,
       "VIX - SOULOG EXPRESS": 32,
+      "VTCLOG - REC": 26,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 26,
-      "PVH - RODOTEC": 21,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 20
+      "PVH - RODOTEC": 21
     },
     "top10_ufs_pendencias": {
       "SC": 152,
@@ -59,14 +59,14 @@
       "TO": 52,
       "BA": 50,
       "ES": 33,
+      "PE": 27,
       "AM": 26,
-      "SP": 21,
-      "RO": 21
+      "SP": 21
     },
     "latencia": {
       "n_agente": 4234,
       "n_so_gru": 222,
-      "n_sem_primeiro_sync": 3090,
+      "n_sem_primeiro_sync": 3112,
       "media_horas": 3.41,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-01",
       "dia": "01/10",
       "dia_full": "01/10/2026",
-      "pedidos": 19,
-      "loggers": 239,
+      "pedidos": 20,
+      "loggers": 261,
       "sincronizados": 43,
-      "pendentes": 196,
+      "pendentes": 218,
       "sem_embarque": 75,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 15,
-      "pct": 82.0,
+      "pedidos_pendentes": 16,
+      "pct": 83.5,
       "n_latencia": 41,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 198
+      "n_sem_primeiro_sync": 220
     }
   ],
   "erros_validacao": {},

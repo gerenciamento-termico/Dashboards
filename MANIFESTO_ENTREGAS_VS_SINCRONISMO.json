@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T11:26:04",
+  "gerado_em": "2026-10-01T11:31:27",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,32 +19,32 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8317,
-    "pedidos_janela": 1074,
-    "loggers_ares_janela": 8024,
-    "loggers_ares_antes_dedup": 8185,
+    "pares_janela": 8347,
+    "pedidos_janela": 1075,
+    "loggers_ares_janela": 8054,
+    "loggers_ares_antes_dedup": 8215,
     "dedup_dia_logger": 70,
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 643,
+    "pendentes_janela": 672,
     "cobranca_gru_janela": 85,
     "sem_embarque_efetiva": 660,
-    "com_embarque_efetiva": 7525,
+    "com_embarque_efetiva": 7555,
     "loggers_sem_lastsync": 75,
     "nao_avaliados": 660,
-    "pedidos_com_agente": 8317,
+    "pedidos_com_agente": 8347,
     "dtbtransporte": {
-      "consultados": 1074,
-      "mapeados": 1074,
-      "linhas": 1203
+      "consultados": 1075,
+      "mapeados": 1075,
+      "linhas": 1204
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 207,
       "THE - AERONEIVA EXPRESS": 67,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 64,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 52,
       "SSA - LUTY LOG": 48,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 34,
       "VIX - SOULOG EXPRESS": 32,
       "GYN - RBR EXPERIENCIA EM TRANSPORTES": 31,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 26,
@@ -53,9 +53,9 @@
     },
     "top10_ufs_pendencias": {
       "SC": 152,
+      "MA": 84,
       "PI": 68,
       "BA": 60,
-      "MA": 54,
       "TO": 52,
       "ES": 33,
       "GO": 32,
@@ -64,9 +64,9 @@
       "RO": 21
     },
     "latencia": {
-      "n_agente": 4075,
-      "n_so_gru": 111,
-      "n_sem_primeiro_sync": 3183,
+      "n_agente": 4077,
+      "n_so_gru": 119,
+      "n_sem_primeiro_sync": 3203,
       "media_horas": 2.37,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -279,8 +279,8 @@
       "media_horas": 0.8,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 5,
-      "n_sem_primeiro_sync": 303
+      "n_sync_so_gru": 10,
+      "n_sem_primeiro_sync": 298
     },
     {
       "dia_iso": "2026-09-23",
@@ -298,8 +298,8 @@
       "media_horas": 0.35,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 179
+      "n_sync_so_gru": 2,
+      "n_sem_primeiro_sync": 178
     },
     {
       "dia_iso": "2026-09-24",
@@ -317,8 +317,8 @@
       "media_horas": 3.1,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 22,
-      "n_sem_primeiro_sync": 383
+      "n_sync_so_gru": 24,
+      "n_sem_primeiro_sync": 381
     },
     {
       "dia_iso": "2026-09-25",
@@ -421,37 +421,37 @@
       "dia_full": "30/09/2026",
       "pedidos": 90,
       "loggers": 782,
-      "sincronizados": 462,
-      "pendentes": 317,
+      "sincronizados": 463,
+      "pendentes": 316,
       "sem_embarque": 44,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 48,
-      "pct": 40.5,
-      "n_latencia": 279,
+      "pedidos_pendentes": 47,
+      "pct": 40.4,
+      "n_latencia": 281,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 503
+      "n_sem_primeiro_sync": 501
     },
     {
       "dia_iso": "2026-10-01",
       "dia": "01/10",
       "dia_full": "01/10/2026",
-      "pedidos": 10,
-      "loggers": 63,
+      "pedidos": 11,
+      "loggers": 93,
       "sincronizados": 0,
-      "pendentes": 63,
+      "pendentes": 93,
       "sem_embarque": 53,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 10,
+      "pedidos_pendentes": 11,
       "pct": 100.0,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 63
+      "n_sem_primeiro_sync": 93
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T14:36:03",
+  "gerado_em": "2026-10-01T14:38:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 786,
-    "cobranca_gru_janela": 57,
+    "pendentes_janela": 785,
+    "cobranca_gru_janela": 58,
     "sem_embarque_efetiva": 685,
     "com_embarque_efetiva": 7726,
     "loggers_sem_lastsync": 69,
@@ -40,7 +40,7 @@
       "linhas": 1221
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 206,
+      "VTCLOG - GRU": 205,
       "THE - AERONEIVA EXPRESS": 126,
       "FOR - NT TRANSPORTE LTDA": 88,
       "SLZ - REIS CAVALCANTE EXPRESSO": 54,
@@ -61,13 +61,13 @@
       "ES": 33,
       "PE": 27,
       "AM": 26,
-      "SP": 22
+      "SP": 21
     },
     "latencia": {
-      "n_agente": 4244,
-      "n_so_gru": 222,
+      "n_agente": 4251,
+      "n_so_gru": 215,
       "n_sem_primeiro_sync": 3104,
-      "media_horas": 3.5,
+      "media_horas": 3.72,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -123,11 +123,11 @@
       "cobranca_gru": 6,
       "pedidos_pendentes": 7,
       "pct": 1.6,
-      "n_latencia": 272,
-      "media_horas": 16.11,
+      "n_latencia": 274,
+      "media_horas": 17.03,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 34,
+      "n_sync_so_gru": 32,
       "n_sem_primeiro_sync": 140
     },
     {
@@ -142,11 +142,11 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 6,
       "pct": 3.3,
-      "n_latencia": 290,
-      "media_horas": 6.49,
+      "n_latencia": 294,
+      "media_horas": 8.6,
       "mediana_horas": 0.03,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 19,
+      "n_sync_so_gru": 15,
       "n_sem_primeiro_sync": 86
     },
     {
@@ -161,11 +161,11 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 4,
       "pct": 2.3,
-      "n_latencia": 151,
-      "media_horas": 3.62,
+      "n_latencia": 152,
+      "media_horas": 3.88,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 5,
+      "n_sync_so_gru": 4,
       "n_sem_primeiro_sync": 16
     },
     {
@@ -403,11 +403,11 @@
       "pedidos": 80,
       "loggers": 650,
       "sincronizados": 586,
-      "pendentes": 62,
+      "pendentes": 61,
       "sem_embarque": 15,
-      "cobranca_gru": 2,
-      "pedidos_pendentes": 21,
-      "pct": 9.5,
+      "cobranca_gru": 3,
+      "pedidos_pendentes": 20,
+      "pct": 9.4,
       "n_latencia": 269,
       "media_horas": 1.15,
       "mediana_horas": 0.04,

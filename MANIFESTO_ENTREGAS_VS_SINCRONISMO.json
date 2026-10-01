@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T14:25:02",
+  "gerado_em": "2026-10-01T14:30:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8540,
-    "pedidos_janela": 1087,
-    "loggers_ares_janela": 8247,
-    "loggers_ares_antes_dedup": 8408,
+    "pares_janela": 8543,
+    "pedidos_janela": 1090,
+    "loggers_ares_janela": 8250,
+    "loggers_ares_antes_dedup": 8411,
     "dedup_dia_logger": 70,
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 787,
-    "cobranca_gru_janela": 56,
-    "sem_embarque_efetiva": 682,
+    "pendentes_janela": 786,
+    "cobranca_gru_janela": 57,
+    "sem_embarque_efetiva": 685,
     "com_embarque_efetiva": 7726,
     "loggers_sem_lastsync": 69,
-    "nao_avaliados": 682,
-    "pedidos_com_agente": 8540,
+    "nao_avaliados": 685,
+    "pedidos_com_agente": 8543,
     "dtbtransporte": {
-      "consultados": 1087,
-      "mapeados": 1087,
-      "linhas": 1218
+      "consultados": 1090,
+      "mapeados": 1090,
+      "linhas": 1221
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 207,
+      "VTCLOG - GRU": 206,
       "THE - AERONEIVA EXPRESS": 126,
       "FOR - NT TRANSPORTE LTDA": 88,
       "SLZ - REIS CAVALCANTE EXPRESSO": 54,
@@ -61,7 +61,7 @@
       "ES": 33,
       "PE": 27,
       "AM": 26,
-      "SP": 23
+      "SP": 22
     },
     "latencia": {
       "n_agente": 4244,
@@ -422,11 +422,11 @@
       "pedidos": 91,
       "loggers": 783,
       "sincronizados": 474,
-      "pendentes": 306,
+      "pendentes": 305,
       "sem_embarque": 44,
-      "cobranca_gru": 3,
-      "pedidos_pendentes": 46,
-      "pct": 39.1,
+      "cobranca_gru": 4,
+      "pedidos_pendentes": 45,
+      "pct": 39.0,
       "n_latencia": 299,
       "media_horas": 0.2,
       "mediana_horas": 0.04,
@@ -442,7 +442,7 @@
       "loggers": 263,
       "sincronizados": 43,
       "pendentes": 220,
-      "sem_embarque": 75,
+      "sem_embarque": 78,
       "cobranca_gru": 0,
       "pedidos_pendentes": 18,
       "pct": 83.7,

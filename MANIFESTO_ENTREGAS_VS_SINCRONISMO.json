@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T18:38:24",
+  "gerado_em": "2026-10-01T18:43:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8665,
-    "pedidos_janela": 1123,
-    "loggers_ares_janela": 8373,
-    "loggers_ares_antes_dedup": 8533,
+    "pares_janela": 8666,
+    "pedidos_janela": 1124,
+    "loggers_ares_janela": 8374,
+    "loggers_ares_antes_dedup": 8534,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 820,
+    "pendentes_janela": 821,
     "cobranca_gru_janela": 50,
     "sem_embarque_efetiva": 616,
-    "com_embarque_efetiva": 7917,
+    "com_embarque_efetiva": 7918,
     "loggers_sem_lastsync": 70,
     "nao_avaliados": 616,
-    "pedidos_com_agente": 8665,
+    "pedidos_com_agente": 8666,
     "dtbtransporte": {
-      "consultados": 1123,
-      "mapeados": 1123,
-      "linhas": 1254
+      "consultados": 1124,
+      "mapeados": 1124,
+      "linhas": 1255
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 214,
+      "VTCLOG - GRU": 215,
       "THE - AERONEIVA EXPRESS": 127,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 54,
       "VTCLOG - REC": 53,
@@ -61,12 +61,12 @@
       "TO": 54,
       "RN": 36,
       "ES": 34,
-      "SP": 27
+      "SP": 28
     },
     "latencia": {
       "n_agente": 6335,
       "n_so_gru": 253,
-      "n_sem_primeiro_sync": 1174,
+      "n_sem_primeiro_sync": 1175,
       "media_horas": 3.52,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-01",
       "dia": "01/10",
       "dia_full": "01/10/2026",
-      "pedidos": 56,
-      "loggers": 431,
+      "pedidos": 57,
+      "loggers": 432,
       "sincronizados": 161,
-      "pendentes": 267,
+      "pendentes": 268,
       "sem_embarque": 53,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 41,
-      "pct": 61.9,
+      "pedidos_pendentes": 42,
+      "pct": 62.0,
       "n_latencia": 153,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 278
+      "n_sem_primeiro_sync": 279
     }
   ],
   "erros_validacao": {},

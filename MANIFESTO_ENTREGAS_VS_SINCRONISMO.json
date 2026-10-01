@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T13:28:59",
+  "gerado_em": "2026-10-01T13:34:04",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 91,
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
-    "pendentes_janela": 749,
-    "cobranca_gru_janela": 65,
+    "pendentes_janela": 739,
+    "cobranca_gru_janela": 64,
     "sem_embarque_efetiva": 682,
     "com_embarque_efetiva": 7677,
     "loggers_sem_lastsync": 69,
@@ -45,7 +45,7 @@
       "FOR - NT TRANSPORTE LTDA": 88,
       "SLZ - REIS CAVALCANTE EXPRESSO": 54,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 52,
-      "SSA - LUTY LOG": 48,
+      "SSA - LUTY LOG": 38,
       "VIX - SOULOG EXPRESS": 32,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 26,
       "PVH - RODOTEC": 21,
@@ -56,18 +56,18 @@
       "PI": 103,
       "CE": 90,
       "MA": 74,
-      "BA": 60,
       "TO": 52,
+      "BA": 50,
       "ES": 33,
       "AM": 26,
       "SP": 21,
       "RO": 21
     },
     "latencia": {
-      "n_agente": 4193,
-      "n_so_gru": 215,
-      "n_sem_primeiro_sync": 3113,
-      "media_horas": 3.07,
+      "n_agente": 4208,
+      "n_so_gru": 222,
+      "n_sem_primeiro_sync": 3091,
+      "media_horas": 3.1,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -127,8 +127,8 @@
       "media_horas": 13.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 32,
-      "n_sem_primeiro_sync": 145
+      "n_sync_so_gru": 34,
+      "n_sem_primeiro_sync": 143
     },
     {
       "dia_iso": "2026-09-15",
@@ -256,12 +256,12 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 6,
       "pct": 2.9,
-      "n_latencia": 265,
-      "media_horas": 1.31,
+      "n_latencia": 266,
+      "media_horas": 1.4,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 7,
-      "n_sem_primeiro_sync": 72
+      "n_sem_primeiro_sync": 71
     },
     {
       "dia_iso": "2026-09-22",
@@ -279,8 +279,8 @@
       "media_horas": 1.59,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 18,
-      "n_sem_primeiro_sync": 287
+      "n_sync_so_gru": 20,
+      "n_sem_primeiro_sync": 285
     },
     {
       "dia_iso": "2026-09-23",
@@ -317,8 +317,8 @@
       "media_horas": 3.2,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 58,
-      "n_sem_primeiro_sync": 341
+      "n_sync_so_gru": 60,
+      "n_sem_primeiro_sync": 339
     },
     {
       "dia_iso": "2026-09-25",
@@ -351,12 +351,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 3,
       "pct": 3.1,
-      "n_latencia": 69,
-      "media_horas": 8.74,
+      "n_latencia": 72,
+      "media_horas": 10.15,
       "mediana_horas": 0.05,
-      "p90_horas": 43.2,
+      "p90_horas": 43.15,
       "n_sync_so_gru": 2,
-      "n_sem_primeiro_sync": 56
+      "n_sem_primeiro_sync": 53
     },
     {
       "dia_iso": "2026-09-27",
@@ -383,18 +383,18 @@
       "dia_full": "28/09/2026",
       "pedidos": 36,
       "loggers": 456,
-      "sincronizados": 393,
+      "sincronizados": 394,
       "pendentes": 30,
       "sem_embarque": 5,
-      "cobranca_gru": 33,
+      "cobranca_gru": 32,
       "pedidos_pendentes": 10,
       "pct": 6.6,
-      "n_latencia": 247,
+      "n_latencia": 248,
       "media_horas": 0.63,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 24,
-      "n_sem_primeiro_sync": 185
+      "n_sync_so_gru": 25,
+      "n_sem_primeiro_sync": 183
     },
     {
       "dia_iso": "2026-09-29",
@@ -421,18 +421,18 @@
       "dia_full": "30/09/2026",
       "pedidos": 91,
       "loggers": 783,
-      "sincronizados": 464,
-      "pendentes": 316,
+      "sincronizados": 474,
+      "pendentes": 306,
       "sem_embarque": 44,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 47,
-      "pct": 40.4,
-      "n_latencia": 289,
+      "pedidos_pendentes": 46,
+      "pct": 39.1,
+      "n_latencia": 299,
       "media_horas": 0.2,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 494
+      "n_sem_primeiro_sync": 484
     },
     {
       "dia_iso": "2026-10-01",

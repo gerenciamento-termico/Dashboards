@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T15:01:22",
+  "gerado_em": "2026-10-01T15:06:26",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -28,7 +28,7 @@
     "ocultos_lista": 227,
     "ocultos_ausentes": 136,
     "pendentes_janela": 788,
-    "cobranca_gru_janela": 55,
+    "cobranca_gru_janela": 54,
     "sem_embarque_efetiva": 684,
     "com_embarque_efetiva": 7731,
     "loggers_sem_lastsync": 69,
@@ -64,9 +64,9 @@
       "SP": 23
     },
     "latencia": {
-      "n_agente": 4262,
-      "n_so_gru": 218,
-      "n_sem_primeiro_sync": 3095,
+      "n_agente": 4263,
+      "n_so_gru": 219,
+      "n_sem_primeiro_sync": 3093,
       "media_horas": 3.79,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -203,8 +203,8 @@
       "media_horas": 3.41,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 21,
-      "n_sem_primeiro_sync": 125
+      "n_sync_so_gru": 22,
+      "n_sem_primeiro_sync": 124
     },
     {
       "dia_iso": "2026-09-19",
@@ -383,18 +383,18 @@
       "dia_full": "28/09/2026",
       "pedidos": 36,
       "loggers": 456,
-      "sincronizados": 402,
+      "sincronizados": 403,
       "pendentes": 30,
       "sem_embarque": 5,
-      "cobranca_gru": 24,
+      "cobranca_gru": 23,
       "pedidos_pendentes": 10,
       "pct": 6.6,
-      "n_latencia": 256,
+      "n_latencia": 257,
       "media_horas": 0.61,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 26,
-      "n_sem_primeiro_sync": 174
+      "n_sem_primeiro_sync": 173
     },
     {
       "dia_iso": "2026-09-29",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-01T18:43:22",
+  "gerado_em": "2026-10-06T08:46:35",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,173 +19,78 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8666,
-    "pedidos_janela": 1124,
-    "loggers_ares_janela": 8374,
-    "loggers_ares_antes_dedup": 8534,
-    "dedup_dia_logger": 69,
-    "ocultos_operacao": 91,
+    "pares_janela": 8262,
+    "pedidos_janela": 1027,
+    "loggers_ares_janela": 8053,
+    "loggers_ares_antes_dedup": 8149,
+    "dedup_dia_logger": 77,
+    "ocultos_operacao": 19,
     "ocultos_lista": 227,
-    "ocultos_ausentes": 136,
-    "pendentes_janela": 821,
-    "cobranca_gru_janela": 50,
-    "sem_embarque_efetiva": 616,
-    "com_embarque_efetiva": 7918,
-    "loggers_sem_lastsync": 70,
-    "nao_avaliados": 616,
-    "pedidos_com_agente": 8666,
+    "ocultos_ausentes": 208,
+    "pendentes_janela": 523,
+    "cobranca_gru_janela": 37,
+    "sem_embarque_efetiva": 455,
+    "com_embarque_efetiva": 7694,
+    "loggers_sem_lastsync": 36,
+    "nao_avaliados": 455,
+    "pedidos_com_agente": 8262,
     "dtbtransporte": {
-      "consultados": 1124,
-      "mapeados": 1124,
-      "linhas": 1255
+      "consultados": 1027,
+      "mapeados": 1027,
+      "linhas": 1154
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 215,
-      "THE - AERONEIVA EXPRESS": 127,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 54,
-      "VTCLOG - REC": 53,
-      "SSA - LUTY LOG": 53,
-      "FOR - NT TRANSPORTE LTDA": 53,
-      "NAT - CSM CARGO": 36,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 36,
-      "VIX - SOULOG EXPRESS": 33,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 27
+      "SSA - LUTY LOG": 86,
+      "VTCLOG - GRU": 82,
+      "THE - AERONEIVA EXPRESS": 76,
+      "FOR - NT TRANSPORTE LTDA": 54,
+      "VTCLOG - REC": 46,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 29,
+      "VIX - SOULOG EXPRESS": 22,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
+      "CGB - JR TRANSPORTES": 12,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 11
     },
     "top10_ufs_pendencias": {
-      "SC": 152,
-      "PI": 127,
-      "BA": 65,
-      "MA": 60,
+      "BA": 96,
+      "PI": 76,
+      "MA": 66,
       "CE": 55,
-      "PE": 54,
-      "TO": 54,
-      "RN": 36,
-      "ES": 34,
-      "SP": 28
+      "PE": 46,
+      "ES": 22,
+      "SC": 17,
+      "RS": 17,
+      "SP": 15,
+      "MT": 14
     },
     "latencia": {
-      "n_agente": 6335,
-      "n_so_gru": 253,
-      "n_sem_primeiro_sync": 1175,
-      "media_horas": 3.52,
+      "n_agente": 6656,
+      "n_so_gru": 104,
+      "n_sem_primeiro_sync": 842,
+      "media_horas": 0.7,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
   },
   "serie_diaria": [
     {
-      "dia_iso": "2026-09-12",
-      "dia": "12/09",
-      "dia_full": "12/09/2026",
-      "pedidos": 8,
-      "loggers": 20,
-      "sincronizados": 20,
-      "pendentes": 0,
-      "sem_embarque": 0,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 0,
-      "pct": 0.0,
-      "n_latencia": 18,
-      "media_horas": 0.04,
-      "mediana_horas": 0.05,
-      "p90_horas": 0.07,
-      "n_sync_so_gru": 2,
-      "n_sem_primeiro_sync": 0
-    },
-    {
-      "dia_iso": "2026-09-13",
-      "dia": "13/09",
-      "dia_full": "13/09/2026",
-      "pedidos": 0,
-      "loggers": 0,
-      "sincronizados": 0,
-      "pendentes": 0,
-      "sem_embarque": 0,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 0,
-      "pct": 0.0,
-      "n_latencia": 0,
-      "media_horas": null,
-      "mediana_horas": null,
-      "p90_horas": null,
-      "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 0
-    },
-    {
-      "dia_iso": "2026-09-14",
-      "dia": "14/09",
-      "dia_full": "14/09/2026",
-      "pedidos": 81,
-      "loggers": 446,
-      "sincronizados": 433,
-      "pendentes": 7,
-      "sem_embarque": 0,
-      "cobranca_gru": 6,
-      "pedidos_pendentes": 7,
-      "pct": 1.6,
-      "n_latencia": 381,
-      "media_horas": 17.19,
-      "mediana_horas": 0.04,
-      "p90_horas": 0.08,
-      "n_sync_so_gru": 36,
-      "n_sem_primeiro_sync": 29
-    },
-    {
-      "dia_iso": "2026-09-15",
-      "dia": "15/09",
-      "dia_full": "15/09/2026",
-      "pedidos": 83,
-      "loggers": 395,
-      "sincronizados": 382,
-      "pendentes": 13,
-      "sem_embarque": 167,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 6,
-      "pct": 3.3,
-      "n_latencia": 358,
-      "media_horas": 9.79,
-      "mediana_horas": 0.04,
-      "p90_horas": 0.08,
-      "n_sync_so_gru": 14,
-      "n_sem_primeiro_sync": 23
-    },
-    {
-      "dia_iso": "2026-09-16",
-      "dia": "16/09",
-      "dia_full": "16/09/2026",
-      "pedidos": 51,
-      "loggers": 172,
-      "sincronizados": 168,
-      "pendentes": 4,
-      "sem_embarque": 0,
-      "cobranca_gru": 0,
-      "pedidos_pendentes": 4,
-      "pct": 2.3,
-      "n_latencia": 158,
-      "media_horas": 4.81,
-      "mediana_horas": 0.05,
-      "p90_horas": 0.08,
-      "n_sync_so_gru": 5,
-      "n_sem_primeiro_sync": 9
-    },
-    {
       "dia_iso": "2026-09-17",
       "dia": "17/09",
       "dia_full": "17/09/2026",
       "pedidos": 121,
       "loggers": 435,
-      "sincronizados": 408,
-      "pendentes": 24,
+      "sincronizados": 421,
+      "pendentes": 12,
       "sem_embarque": 19,
-      "cobranca_gru": 3,
-      "pedidos_pendentes": 16,
-      "pct": 5.5,
-      "n_latencia": 380,
-      "media_horas": 5.58,
+      "cobranca_gru": 2,
+      "pedidos_pendentes": 11,
+      "pct": 2.8,
+      "n_latencia": 398,
+      "media_horas": 3.66,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 15,
-      "n_sem_primeiro_sync": 40
+      "n_sync_so_gru": 9,
+      "n_sem_primeiro_sync": 28
     },
     {
       "dia_iso": "2026-09-18",
@@ -193,18 +98,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 79,
       "loggers": 454,
-      "sincronizados": 434,
-      "pendentes": 20,
+      "sincronizados": 441,
+      "pendentes": 13,
       "sem_embarque": 60,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 14,
-      "pct": 4.4,
-      "n_latencia": 390,
-      "media_horas": 3.51,
-      "mediana_horas": 0.05,
+      "pedidos_pendentes": 10,
+      "pct": 2.9,
+      "n_latencia": 405,
+      "media_horas": 3.13,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 24,
-      "n_sem_primeiro_sync": 40
+      "n_sync_so_gru": 19,
+      "n_sem_primeiro_sync": 30
     },
     {
       "dia_iso": "2026-09-19",
@@ -218,11 +123,11 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 0,
       "pct": 0.0,
-      "n_latencia": 39,
+      "n_latencia": 41,
       "media_horas": 0.04,
       "mediana_horas": 0.03,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 3,
+      "n_sync_so_gru": 1,
       "n_sem_primeiro_sync": 0
     },
     {
@@ -250,18 +155,18 @@
       "dia_full": "21/09/2026",
       "pedidos": 66,
       "loggers": 344,
-      "sincronizados": 332,
-      "pendentes": 10,
+      "sincronizados": 337,
+      "pendentes": 6,
       "sem_embarque": 91,
-      "cobranca_gru": 2,
+      "cobranca_gru": 1,
       "pedidos_pendentes": 6,
-      "pct": 2.9,
-      "n_latencia": 310,
-      "media_horas": 1.47,
+      "pct": 1.7,
+      "n_latencia": 318,
+      "media_horas": 1.12,
       "mediana_horas": 0.05,
-      "p90_horas": 0.08,
-      "n_sync_so_gru": 10,
-      "n_sem_primeiro_sync": 24
+      "p90_horas": 0.07,
+      "n_sync_so_gru": 9,
+      "n_sem_primeiro_sync": 17
     },
     {
       "dia_iso": "2026-09-22",
@@ -269,18 +174,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 103,
       "loggers": 681,
-      "sincronizados": 663,
-      "pendentes": 13,
+      "sincronizados": 664,
+      "pendentes": 12,
       "sem_embarque": 102,
       "cobranca_gru": 5,
-      "pedidos_pendentes": 11,
-      "pct": 1.9,
-      "n_latencia": 577,
-      "media_horas": 2.0,
+      "pedidos_pendentes": 10,
+      "pct": 1.8,
+      "n_latencia": 604,
+      "media_horas": 0.94,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 30,
-      "n_sem_primeiro_sync": 74
+      "n_sync_so_gru": 7,
+      "n_sem_primeiro_sync": 70
     },
     {
       "dia_iso": "2026-09-23",
@@ -288,18 +193,18 @@
       "dia_full": "23/09/2026",
       "pedidos": 85,
       "loggers": 490,
-      "sincronizados": 473,
-      "pendentes": 16,
+      "sincronizados": 480,
+      "pendentes": 10,
       "sem_embarque": 43,
-      "cobranca_gru": 1,
-      "pedidos_pendentes": 15,
-      "pct": 3.3,
-      "n_latencia": 445,
-      "media_horas": 1.29,
-      "mediana_horas": 0.05,
+      "cobranca_gru": 0,
+      "pedidos_pendentes": 9,
+      "pct": 2.0,
+      "n_latencia": 464,
+      "media_horas": 0.76,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 13,
-      "n_sem_primeiro_sync": 32
+      "n_sync_so_gru": 1,
+      "n_sem_primeiro_sync": 25
     },
     {
       "dia_iso": "2026-09-24",
@@ -307,18 +212,18 @@
       "dia_full": "24/09/2026",
       "pedidos": 93,
       "loggers": 957,
-      "sincronizados": 925,
-      "pendentes": 29,
+      "sincronizados": 929,
+      "pendentes": 25,
       "sem_embarque": 21,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 20,
-      "pct": 3.0,
-      "n_latencia": 821,
-      "media_horas": 3.35,
+      "pedidos_pendentes": 18,
+      "pct": 2.6,
+      "n_latencia": 867,
+      "media_horas": 0.18,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 66,
-      "n_sem_primeiro_sync": 70
+      "n_sync_so_gru": 35,
+      "n_sem_primeiro_sync": 55
     },
     {
       "dia_iso": "2026-09-25",
@@ -326,18 +231,18 @@
       "dia_full": "25/09/2026",
       "pedidos": 81,
       "loggers": 856,
-      "sincronizados": 824,
-      "pendentes": 29,
-      "sem_embarque": 1,
-      "cobranca_gru": 3,
-      "pedidos_pendentes": 14,
-      "pct": 3.4,
-      "n_latencia": 789,
-      "media_horas": 1.7,
+      "sincronizados": 837,
+      "pendentes": 18,
+      "sem_embarque": 21,
+      "cobranca_gru": 1,
+      "pedidos_pendentes": 11,
+      "pct": 2.1,
+      "n_latencia": 806,
+      "media_horas": 0.42,
       "mediana_horas": 0.04,
-      "p90_horas": 0.08,
-      "n_sync_so_gru": 5,
-      "n_sem_primeiro_sync": 62
+      "p90_horas": 0.07,
+      "n_sync_so_gru": 4,
+      "n_sem_primeiro_sync": 46
     },
     {
       "dia_iso": "2026-09-26",
@@ -351,12 +256,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 3,
       "pct": 3.1,
-      "n_latencia": 119,
-      "media_horas": 9.74,
-      "mediana_horas": 0.05,
-      "p90_horas": 42.72,
-      "n_sync_so_gru": 2,
-      "n_sem_primeiro_sync": 6
+      "n_latencia": 121,
+      "media_horas": 0.04,
+      "mediana_horas": 0.04,
+      "p90_horas": 0.07,
+      "n_sync_so_gru": 1,
+      "n_sem_primeiro_sync": 5
     },
     {
       "dia_iso": "2026-09-27",
@@ -383,18 +288,18 @@
       "dia_full": "28/09/2026",
       "pedidos": 36,
       "loggers": 456,
-      "sincronizados": 408,
-      "pendentes": 30,
+      "sincronizados": 442,
+      "pendentes": 9,
       "sem_embarque": 5,
-      "cobranca_gru": 18,
-      "pedidos_pendentes": 10,
-      "pct": 6.6,
-      "n_latencia": 353,
-      "media_horas": 0.46,
+      "cobranca_gru": 5,
+      "pedidos_pendentes": 9,
+      "pct": 2.0,
+      "n_latencia": 403,
+      "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 28,
-      "n_sem_primeiro_sync": 75
+      "n_sync_so_gru": 17,
+      "n_sem_primeiro_sync": 36
     },
     {
       "dia_iso": "2026-09-29",
@@ -402,18 +307,18 @@
       "dia_full": "29/09/2026",
       "pedidos": 81,
       "loggers": 671,
-      "sincronizados": 607,
-      "pendentes": 61,
+      "sincronizados": 651,
+      "pendentes": 16,
       "sem_embarque": 0,
-      "cobranca_gru": 3,
-      "pedidos_pendentes": 20,
-      "pct": 9.1,
-      "n_latencia": 583,
-      "media_horas": 0.56,
-      "mediana_horas": 0.05,
+      "cobranca_gru": 4,
+      "pedidos_pendentes": 13,
+      "pct": 2.4,
+      "n_latencia": 627,
+      "media_horas": 0.08,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 88
+      "n_sem_primeiro_sync": 44
     },
     {
       "dia_iso": "2026-09-30",
@@ -421,37 +326,132 @@
       "dia_full": "30/09/2026",
       "pedidos": 93,
       "loggers": 785,
-      "sincronizados": 489,
-      "pendentes": 293,
-      "sem_embarque": 44,
-      "cobranca_gru": 3,
-      "pedidos_pendentes": 44,
-      "pct": 37.3,
-      "n_latencia": 461,
-      "media_horas": 0.15,
+      "sincronizados": 667,
+      "pendentes": 109,
+      "sem_embarque": 1,
+      "cobranca_gru": 9,
+      "pedidos_pendentes": 25,
+      "pct": 13.9,
+      "n_latencia": 636,
+      "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 324
+      "n_sync_so_gru": 1,
+      "n_sem_primeiro_sync": 148
     },
     {
       "dia_iso": "2026-10-01",
       "dia": "01/10",
       "dia_full": "01/10/2026",
-      "pedidos": 57,
-      "loggers": 432,
-      "sincronizados": 161,
-      "pendentes": 268,
-      "sem_embarque": 53,
-      "cobranca_gru": 3,
-      "pedidos_pendentes": 42,
-      "pct": 62.0,
-      "n_latencia": 153,
+      "pedidos": 79,
+      "loggers": 543,
+      "sincronizados": 362,
+      "pendentes": 179,
+      "sem_embarque": 50,
+      "cobranca_gru": 2,
+      "pedidos_pendentes": 28,
+      "pct": 33.0,
+      "n_latencia": 349,
       "media_horas": 0.04,
+      "mediana_horas": 0.04,
+      "p90_horas": 0.07,
+      "n_sync_so_gru": 0,
+      "n_sem_primeiro_sync": 194
+    },
+    {
+      "dia_iso": "2026-10-02",
+      "dia": "02/10",
+      "dia_full": "02/10/2026",
+      "pedidos": 65,
+      "loggers": 341,
+      "sincronizados": 285,
+      "pendentes": 54,
+      "sem_embarque": 3,
+      "cobranca_gru": 2,
+      "pedidos_pendentes": 24,
+      "pct": 15.8,
+      "n_latencia": 268,
+      "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 279
+      "n_sem_primeiro_sync": 73
+    },
+    {
+      "dia_iso": "2026-10-03",
+      "dia": "03/10",
+      "dia_full": "03/10/2026",
+      "pedidos": 4,
+      "loggers": 4,
+      "sincronizados": 2,
+      "pendentes": 2,
+      "sem_embarque": 0,
+      "cobranca_gru": 0,
+      "pedidos_pendentes": 2,
+      "pct": 50.0,
+      "n_latencia": 1,
+      "media_horas": 0.08,
+      "mediana_horas": 0.08,
+      "p90_horas": 0.08,
+      "n_sync_so_gru": 0,
+      "n_sem_primeiro_sync": 3
+    },
+    {
+      "dia_iso": "2026-10-04",
+      "dia": "04/10",
+      "dia_full": "04/10/2026",
+      "pedidos": 0,
+      "loggers": 0,
+      "sincronizados": 0,
+      "pendentes": 0,
+      "sem_embarque": 0,
+      "cobranca_gru": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0,
+      "n_latencia": 0,
+      "media_horas": null,
+      "mediana_horas": null,
+      "p90_horas": null,
+      "n_sync_so_gru": 0,
+      "n_sem_primeiro_sync": 0
+    },
+    {
+      "dia_iso": "2026-10-05",
+      "dia": "05/10",
+      "dia_full": "05/10/2026",
+      "pedidos": 37,
+      "loggers": 416,
+      "sincronizados": 359,
+      "pendentes": 54,
+      "sem_embarque": 30,
+      "cobranca_gru": 3,
+      "pedidos_pendentes": 14,
+      "pct": 13.0,
+      "n_latencia": 348,
+      "media_horas": 0.04,
+      "mediana_horas": 0.05,
+      "p90_horas": 0.08,
+      "n_sync_so_gru": 0,
+      "n_sem_primeiro_sync": 68
+    },
+    {
+      "dia_iso": "2026-10-06",
+      "dia": "06/10",
+      "dia_full": "06/10/2026",
+      "pedidos": 0,
+      "loggers": 0,
+      "sincronizados": 0,
+      "pendentes": 0,
+      "sem_embarque": 0,
+      "cobranca_gru": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0,
+      "n_latencia": 0,
+      "media_horas": null,
+      "mediana_horas": null,
+      "p90_horas": null,
+      "n_sync_so_gru": 0,
+      "n_sem_primeiro_sync": 0
     }
   ],
   "erros_validacao": {},
@@ -470,438 +470,6 @@
     "ENTREGAS_VS_SINCRONISMO.csv"
   ],
   "ocultos_operacao": [
-    {
-      "pedido": "566303",
-      "logger": "0741700484",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566303",
-      "logger": "A0212",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566298",
-      "logger": "A0256",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A0379",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A0861",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566892",
-      "logger": "A1069",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A2919",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A3641",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A4473",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566303",
-      "logger": "A4585",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566303",
-      "logger": "A5080",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567484",
-      "logger": "A5345",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566892",
-      "logger": "A5731",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A6449",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A6458",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567059",
-      "logger": "A6855",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A6957",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566298",
-      "logger": "A7050",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A7060",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A7087",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A7506",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A7726",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A8226",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A8311",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A8541",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566298",
-      "logger": "A8664",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566298",
-      "logger": "A8744",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A9566",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566322",
-      "logger": "A9631",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566892",
-      "logger": "TA0936",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567059",
-      "logger": "TA1124",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "566298",
-      "logger": "TA1133",
-      "dia": "2026-09-14",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A2165",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A2795",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A3106",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A3112",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A3922",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A4778",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A5156",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A5398",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A6387",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A6709",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A6867",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A7237",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A7327",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A7519",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A7785",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A7995",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8001",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8009",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8045",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8156",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8182",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8371",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8491",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8805",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A8860",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A9047",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A9126",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A9364",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A9581",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A9603",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "A9717",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA0039",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA0226",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA0251",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA0338",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA0469",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA0525",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA0607",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA1103",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
-    {
-      "pedido": "567972",
-      "logger": "TA1104",
-      "dia": "2026-09-16",
-      "motivo": "lançamento errado no aplicativo de entregas"
-    },
     {
       "pedido": "566294",
       "logger": "0741700472",

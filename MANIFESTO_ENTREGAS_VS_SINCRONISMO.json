@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T11:31:45",
+  "gerado_em": "2026-10-06T11:32:52",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 483,
+    "pendentes_janela": 482,
     "cobranca_gru_janela": 31,
     "sem_embarque_efetiva": 455,
     "com_embarque_efetiva": 7812,
@@ -57,16 +57,16 @@
       "PI": 61,
       "CE": 46,
       "PE": 35,
-      "RS": 18,
       "SC": 17,
+      "RS": 17,
       "SP": 15,
       "RR": 13,
       "ES": 13
     },
     "latencia": {
-      "n_agente": 6815,
+      "n_agente": 6817,
       "n_so_gru": 106,
-      "n_sem_primeiro_sync": 799,
+      "n_sem_primeiro_sync": 797,
       "media_horas": 0.68,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "06/10/2026",
       "pedidos": 4,
       "loggers": 73,
-      "sincronizados": 69,
-      "pendentes": 4,
+      "sincronizados": 70,
+      "pendentes": 3,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 3,
-      "pct": 5.5,
-      "n_latencia": 65,
+      "pct": 4.1,
+      "n_latencia": 67,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 8
+      "n_sem_primeiro_sync": 6
     }
   ],
   "erros_validacao": {},

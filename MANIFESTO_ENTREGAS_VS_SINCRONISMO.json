@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T12:51:08",
+  "gerado_em": "2026-10-06T12:58:33",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 556,
+    "pendentes_janela": 552,
     "cobranca_gru_janela": 30,
     "sem_embarque_efetiva": 430,
     "com_embarque_efetiva": 7917,
@@ -49,7 +49,7 @@
       "JPA - LIDER CARGAS": 29,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
-      "VIX - SOULOG EXPRESS": 13
+      "CGB - JR TRANSPORTES": 11
     },
     "top10_ufs_pendencias": {
       "BA": 96,
@@ -64,9 +64,9 @@
       "RR": 14
     },
     "latencia": {
-      "n_agente": 6846,
+      "n_agente": 6850,
       "n_so_gru": 107,
-      "n_sem_primeiro_sync": 872,
+      "n_sem_primeiro_sync": 868,
       "media_horas": 0.68,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -364,18 +364,18 @@
       "dia_full": "02/10/2026",
       "pedidos": 66,
       "loggers": 342,
-      "sincronizados": 298,
-      "pendentes": 42,
+      "sincronizados": 302,
+      "pendentes": 38,
       "sem_embarque": 3,
       "cobranca_gru": 2,
       "pedidos_pendentes": 23,
-      "pct": 12.3,
-      "n_latencia": 281,
+      "pct": 11.1,
+      "n_latencia": 285,
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 61
+      "n_sem_primeiro_sync": 57
     },
     {
       "dia_iso": "2026-10-03",

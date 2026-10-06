@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T17:32:38",
+  "gerado_em": "2026-10-06T17:38:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 457,
+    "pendentes_janela": 456,
     "cobranca_gru_janela": 50,
     "sem_embarque_efetiva": 420,
     "com_embarque_efetiva": 8120,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 64,
-      "NAT - CSM CARGO": 60,
+      "NAT - CSM CARGO": 59,
       "THE - AERONEIVA EXPRESS": 56,
       "VTCLOG - GRU": 50,
       "FOR - NT TRANSPORTE LTDA": 37,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "PA": 66,
-      "RN": 60,
+      "RN": 59,
       "PI": 56,
       "CE": 38,
       "BA": 35,
@@ -64,9 +64,9 @@
       "RO": 17
     },
     "latencia": {
-      "n_agente": 7095,
+      "n_agente": 7098,
       "n_so_gru": 111,
-      "n_sem_primeiro_sync": 822,
+      "n_sem_primeiro_sync": 819,
       "media_horas": 0.76,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "06/10/2026",
       "pedidos": 44,
       "loggers": 337,
-      "sincronizados": 198,
-      "pendentes": 137,
+      "sincronizados": 199,
+      "pendentes": 136,
       "sem_embarque": 1,
       "cobranca_gru": 2,
       "pedidos_pendentes": 25,
-      "pct": 40.7,
-      "n_latencia": 162,
+      "pct": 40.4,
+      "n_latencia": 165,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 175
+      "n_sem_primeiro_sync": 172
     }
   ],
   "erros_validacao": {},

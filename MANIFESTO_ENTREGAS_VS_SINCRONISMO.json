@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T14:00:36",
+  "gerado_em": "2026-10-06T14:01:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 451,
+    "pendentes_janela": 450,
     "cobranca_gru_janela": 37,
     "sem_embarque_efetiva": 433,
     "com_embarque_efetiva": 7921,
@@ -44,7 +44,7 @@
       "THE - AERONEIVA EXPRESS": 58,
       "VTCLOG - GRU": 56,
       "FOR - NT TRANSPORTE LTDA": 42,
-      "VTCLOG - REC": 38,
+      "VTCLOG - REC": 37,
       "SLZ - REIS CAVALCANTE EXPRESSO": 25,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
@@ -55,8 +55,8 @@
       "BA": 94,
       "PI": 58,
       "CE": 43,
-      "PE": 38,
       "MA": 38,
+      "PE": 37,
       "SP": 18,
       "SC": 17,
       "RR": 14,
@@ -64,9 +64,9 @@
       "PR": 12
     },
     "latencia": {
-      "n_agente": 6946,
+      "n_agente": 6947,
       "n_so_gru": 113,
-      "n_sem_primeiro_sync": 770,
+      "n_sem_primeiro_sync": 769,
       "media_horas": 0.67,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "05/10/2026",
       "pedidos": 42,
       "loggers": 460,
-      "sincronizados": 416,
-      "pendentes": 43,
+      "sincronizados": 417,
+      "pendentes": 42,
       "sem_embarque": 30,
       "cobranca_gru": 1,
       "pedidos_pendentes": 12,
-      "pct": 9.3,
-      "n_latencia": 397,
+      "pct": 9.1,
+      "n_latencia": 398,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 63
+      "n_sem_primeiro_sync": 62
     },
     {
       "dia_iso": "2026-10-06",

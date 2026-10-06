@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T18:33:21",
+  "gerado_em": "2026-10-06T18:37:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 405,
+    "pendentes_janela": 403,
     "cobranca_gru_janela": 51,
     "sem_embarque_efetiva": 421,
     "com_embarque_efetiva": 8147,
@@ -40,7 +40,7 @@
       "linhas": 1221
     },
     "top10_agentes_pendencias": {
-      "THE - AERONEIVA EXPRESS": 53,
+      "THE - AERONEIVA EXPRESS": 52,
       "VTCLOG - GRU": 50,
       "NAT - CSM CARGO": 45,
       "FOR - NT TRANSPORTE LTDA": 37,
@@ -52,7 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 14
     },
     "top10_ufs_pendencias": {
-      "PI": 53,
+      "PI": 52,
       "RN": 45,
       "CE": 38,
       "BA": 35,
@@ -64,9 +64,9 @@
       "RO": 17
     },
     "latencia": {
-      "n_agente": 7170,
+      "n_agente": 7172,
       "n_so_gru": 111,
-      "n_sem_primeiro_sync": 773,
+      "n_sem_primeiro_sync": 771,
       "media_horas": 0.77,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -98,18 +98,18 @@
       "dia_full": "18/09/2026",
       "pedidos": 79,
       "loggers": 454,
-      "sincronizados": 442,
-      "pendentes": 12,
+      "sincronizados": 443,
+      "pendentes": 11,
       "sem_embarque": 60,
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
-      "pct": 2.6,
-      "n_latencia": 407,
-      "media_horas": 3.78,
+      "pct": 2.4,
+      "n_latencia": 408,
+      "media_horas": 3.77,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 20,
-      "n_sem_primeiro_sync": 27
+      "n_sem_primeiro_sync": 26
     },
     {
       "dia_iso": "2026-09-19",
@@ -174,18 +174,18 @@
       "dia_full": "22/09/2026",
       "pedidos": 103,
       "loggers": 681,
-      "sincronizados": 667,
-      "pendentes": 8,
+      "sincronizados": 668,
+      "pendentes": 7,
       "sem_embarque": 102,
       "cobranca_gru": 6,
-      "pedidos_pendentes": 8,
-      "pct": 1.2,
-      "n_latencia": 623,
+      "pedidos_pendentes": 7,
+      "pct": 1.0,
+      "n_latencia": 624,
       "media_horas": 1.19,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 8,
-      "n_sem_primeiro_sync": 50
+      "n_sem_primeiro_sync": 49
     },
     {
       "dia_iso": "2026-09-23",

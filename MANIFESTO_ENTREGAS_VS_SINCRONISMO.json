@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T14:56:47",
+  "gerado_em": "2026-10-06T15:01:47",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 456,
+    "pendentes_janela": 455,
     "cobranca_gru_janela": 37,
     "sem_embarque_efetiva": 421,
     "com_embarque_efetiva": 7960,
@@ -49,7 +49,7 @@
       "PVH - RODOTEC": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
-      "JPA - LIDER CARGAS": 14
+      "JPA - LIDER CARGAS": 13
     },
     "top10_ufs_pendencias": {
       "BA": 94,
@@ -61,7 +61,7 @@
       "SC": 17,
       "RO": 17,
       "RR": 14,
-      "PB": 14
+      "RS": 13
     },
     "latencia": {
       "n_agente": 6955,
@@ -440,12 +440,12 @@
       "dia_full": "06/10/2026",
       "pedidos": 23,
       "loggers": 177,
-      "sincronizados": 151,
-      "pendentes": 26,
+      "sincronizados": 152,
+      "pendentes": 25,
       "sem_embarque": 2,
       "cobranca_gru": 0,
       "pedidos_pendentes": 8,
-      "pct": 14.7,
+      "pct": 14.1,
       "n_latencia": 125,
       "media_horas": 0.05,
       "mediana_horas": 0.05,

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T11:16:38",
+  "gerado_em": "2026-10-06T11:26:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8379,
-    "pedidos_janela": 1037,
-    "loggers_ares_janela": 8170,
-    "loggers_ares_antes_dedup": 8266,
+    "pares_janela": 8380,
+    "pedidos_janela": 1038,
+    "loggers_ares_janela": 8171,
+    "loggers_ares_antes_dedup": 8267,
     "dedup_dia_logger": 77,
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 497,
-    "cobranca_gru_janela": 33,
+    "pendentes_janela": 495,
+    "cobranca_gru_janela": 31,
     "sem_embarque_efetiva": 455,
-    "com_embarque_efetiva": 7811,
+    "com_embarque_efetiva": 7812,
     "loggers_sem_lastsync": 33,
     "nao_avaliados": 455,
-    "pedidos_com_agente": 8379,
+    "pedidos_com_agente": 8380,
     "dtbtransporte": {
-      "consultados": 1037,
-      "mapeados": 1037,
-      "linhas": 1167
+      "consultados": 1038,
+      "mapeados": 1038,
+      "linhas": 1168
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 86,
@@ -49,7 +49,7 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
       "BVB - J PIMENTEL S. CUNHA LTDA": 13,
       "VIX - SOULOG EXPRESS": 13,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 11
+      "RBR - RODOTEC": 11
     },
     "top10_ufs_pendencias": {
       "BA": 96,
@@ -57,16 +57,16 @@
       "PI": 61,
       "PE": 46,
       "CE": 46,
-      "RS": 21,
+      "RS": 19,
       "SC": 17,
       "SP": 15,
       "RR": 13,
       "ES": 13
     },
     "latencia": {
-      "n_agente": 6797,
-      "n_so_gru": 105,
-      "n_sem_primeiro_sync": 817,
+      "n_agente": 6803,
+      "n_so_gru": 106,
+      "n_sem_primeiro_sync": 811,
       "media_horas": 0.68,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -108,8 +108,8 @@
       "media_horas": 3.13,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 19,
-      "n_sem_primeiro_sync": 30
+      "n_sync_so_gru": 20,
+      "n_sem_primeiro_sync": 29
     },
     {
       "dia_iso": "2026-09-19",
@@ -288,18 +288,18 @@
       "dia_full": "28/09/2026",
       "pedidos": 36,
       "loggers": 456,
-      "sincronizados": 442,
+      "sincronizados": 444,
       "pendentes": 9,
       "sem_embarque": 5,
-      "cobranca_gru": 5,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 9,
       "pct": 2.0,
-      "n_latencia": 403,
+      "n_latencia": 405,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 17,
-      "n_sem_primeiro_sync": 36
+      "n_sem_primeiro_sync": 34
     },
     {
       "dia_iso": "2026-09-29",
@@ -421,37 +421,37 @@
       "dia_full": "05/10/2026",
       "pedidos": 41,
       "loggers": 420,
-      "sincronizados": 366,
-      "pendentes": 53,
+      "sincronizados": 367,
+      "pendentes": 52,
       "sem_embarque": 30,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 13,
-      "pct": 12.6,
-      "n_latencia": 355,
+      "pedidos_pendentes": 12,
+      "pct": 12.4,
+      "n_latencia": 356,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 65
+      "n_sem_primeiro_sync": 64
     },
     {
       "dia_iso": "2026-10-06",
       "dia": "06/10",
       "dia_full": "06/10/2026",
-      "pedidos": 3,
-      "loggers": 72,
-      "sincronizados": 66,
-      "pendentes": 6,
+      "pedidos": 4,
+      "loggers": 73,
+      "sincronizados": 68,
+      "pendentes": 5,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 3,
-      "pct": 8.3,
-      "n_latencia": 60,
+      "pct": 6.8,
+      "n_latencia": 63,
       "media_horas": 0.05,
-      "mediana_horas": 0.04,
+      "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 12
+      "n_sem_primeiro_sync": 10
     }
   ],
   "erros_validacao": {},

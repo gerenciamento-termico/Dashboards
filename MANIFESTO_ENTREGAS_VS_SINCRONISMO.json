@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T13:40:15",
+  "gerado_em": "2026-10-06T13:45:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8463,
-    "pedidos_janela": 1052,
-    "loggers_ares_janela": 8254,
-    "loggers_ares_antes_dedup": 8350,
+    "pares_janela": 8464,
+    "pedidos_janela": 1053,
+    "loggers_ares_janela": 8255,
+    "loggers_ares_antes_dedup": 8351,
     "dedup_dia_logger": 77,
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
     "pendentes_janela": 531,
     "cobranca_gru_janela": 33,
-    "sem_embarque_efetiva": 430,
+    "sem_embarque_efetiva": 431,
     "com_embarque_efetiva": 7920,
     "loggers_sem_lastsync": 33,
-    "nao_avaliados": 430,
-    "pedidos_com_agente": 8463,
+    "nao_avaliados": 431,
+    "pedidos_com_agente": 8464,
     "dtbtransporte": {
-      "consultados": 1052,
-      "mapeados": 1052,
-      "linhas": 1181
+      "consultados": 1053,
+      "mapeados": 1053,
+      "linhas": 1182
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 86,
@@ -442,7 +442,7 @@
       "loggers": 148,
       "sincronizados": 109,
       "pendentes": 39,
-      "sem_embarque": 0,
+      "sem_embarque": 1,
       "cobranca_gru": 0,
       "pedidos_pendentes": 7,
       "pct": 26.4,

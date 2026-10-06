@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T10:46:40",
+  "gerado_em": "2026-10-06T10:54:11",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8377,
-    "pedidos_janela": 1035,
-    "loggers_ares_janela": 8168,
-    "loggers_ares_antes_dedup": 8264,
+    "pares_janela": 8378,
+    "pedidos_janela": 1036,
+    "loggers_ares_janela": 8169,
+    "loggers_ares_antes_dedup": 8265,
     "dedup_dia_logger": 77,
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
     "pendentes_janela": 503,
-    "cobranca_gru_janela": 35,
+    "cobranca_gru_janela": 34,
     "sem_embarque_efetiva": 468,
-    "com_embarque_efetiva": 7796,
+    "com_embarque_efetiva": 7797,
     "loggers_sem_lastsync": 33,
     "nao_avaliados": 468,
-    "pedidos_com_agente": 8377,
+    "pedidos_com_agente": 8378,
     "dtbtransporte": {
-      "consultados": 1035,
-      "mapeados": 1035,
-      "linhas": 1165
+      "consultados": 1036,
+      "mapeados": 1036,
+      "linhas": 1166
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 86,
@@ -64,9 +64,9 @@
       "RR": 12
     },
     "latencia": {
-      "n_agente": 6774,
+      "n_agente": 6776,
       "n_so_gru": 105,
-      "n_sem_primeiro_sync": 825,
+      "n_sem_primeiro_sync": 824,
       "media_horas": 0.69,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -419,20 +419,20 @@
       "dia_iso": "2026-10-05",
       "dia": "05/10",
       "dia_full": "05/10/2026",
-      "pedidos": 39,
-      "loggers": 418,
-      "sincronizados": 363,
+      "pedidos": 40,
+      "loggers": 419,
+      "sincronizados": 365,
       "pendentes": 53,
       "sem_embarque": 30,
-      "cobranca_gru": 2,
+      "cobranca_gru": 1,
       "pedidos_pendentes": 13,
-      "pct": 12.7,
-      "n_latencia": 352,
+      "pct": 12.6,
+      "n_latencia": 354,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 66
+      "n_sem_primeiro_sync": 65
     },
     {
       "dia_iso": "2026-10-06",

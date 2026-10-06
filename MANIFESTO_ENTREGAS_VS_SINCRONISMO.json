@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T18:48:23",
+  "gerado_em": "2026-10-06T18:50:38",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8685,
-    "pedidos_janela": 1092,
-    "loggers_ares_janela": 8472,
-    "loggers_ares_antes_dedup": 8569,
+    "pares_janela": 8686,
+    "pedidos_janela": 1093,
+    "loggers_ares_janela": 8473,
+    "loggers_ares_antes_dedup": 8570,
     "dedup_dia_logger": 78,
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
     "pendentes_janela": 404,
     "cobranca_gru_janela": 51,
-    "sem_embarque_efetiva": 421,
-    "com_embarque_efetiva": 8148,
+    "sem_embarque_efetiva": 420,
+    "com_embarque_efetiva": 8150,
     "loggers_sem_lastsync": 35,
-    "nao_avaliados": 421,
-    "pedidos_com_agente": 8685,
+    "nao_avaliados": 420,
+    "pedidos_com_agente": 8686,
     "dtbtransporte": {
-      "consultados": 1092,
-      "mapeados": 1092,
-      "linhas": 1222
+      "consultados": 1093,
+      "mapeados": 1093,
+      "linhas": 1223
     },
     "top10_agentes_pendencias": {
       "THE - AERONEIVA EXPRESS": 52,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 7172,
       "n_so_gru": 111,
-      "n_sem_primeiro_sync": 772,
+      "n_sem_primeiro_sync": 774,
       "media_horas": 0.77,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-06",
       "dia": "06/10",
       "dia_full": "06/10/2026",
-      "pedidos": 57,
-      "loggers": 364,
-      "sincronizados": 272,
+      "pedidos": 59,
+      "loggers": 366,
+      "sincronizados": 274,
       "pendentes": 89,
-      "sem_embarque": 2,
+      "sem_embarque": 1,
       "cobranca_gru": 3,
       "pedidos_pendentes": 30,
-      "pct": 24.5,
+      "pct": 24.3,
       "n_latencia": 235,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 129
+      "n_sem_primeiro_sync": 131
     }
   ],
   "erros_validacao": {},

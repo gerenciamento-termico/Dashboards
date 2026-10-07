@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T21:26:06",
+  "gerado_em": "2026-10-06T21:31:05",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 399,
+    "pendentes_janela": 381,
     "cobranca_gru_janela": 38,
     "sem_embarque_efetiva": 420,
     "com_embarque_efetiva": 8151,
@@ -43,30 +43,30 @@
       "THE - AERONEIVA EXPRESS": 52,
       "VTCLOG - GRU": 50,
       "NAT - CSM CARGO": 45,
-      "FOR - NT TRANSPORTE LTDA": 34,
       "SSA - LUTY LOG": 27,
       "MAB - EXPRESSO RODRIGUES LTDA": 20,
       "VTCLOG - REC": 19,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 18,
       "PVH - RODOTEC": 17,
+      "FOR - NT TRANSPORTE LTDA": 16,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14
     },
     "top10_ufs_pendencias": {
       "PI": 52,
       "RN": 45,
       "BA": 35,
-      "CE": 35,
       "PA": 28,
       "SP": 23,
       "SC": 20,
       "PE": 19,
       "RS": 18,
-      "RO": 17
+      "RO": 17,
+      "CE": 17
     },
     "latencia": {
-      "n_agente": 7193,
+      "n_agente": 7211,
       "n_so_gru": 111,
-      "n_sem_primeiro_sync": 754,
+      "n_sem_primeiro_sync": 736,
       "media_horas": 0.77,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -345,18 +345,18 @@
       "dia_full": "01/10/2026",
       "pedidos": 79,
       "loggers": 550,
-      "sincronizados": 458,
-      "pendentes": 89,
+      "sincronizados": 476,
+      "pendentes": 71,
       "sem_embarque": 0,
       "cobranca_gru": 3,
       "pedidos_pendentes": 21,
-      "pct": 16.2,
-      "n_latencia": 441,
-      "media_horas": 0.33,
+      "pct": 12.9,
+      "n_latencia": 459,
+      "media_horas": 0.31,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 109
+      "n_sem_primeiro_sync": 91
     },
     {
       "dia_iso": "2026-10-02",

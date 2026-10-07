@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-07T15:36:40",
+  "gerado_em": "2026-10-07T15:42:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8440,
-    "pedidos_janela": 1025,
-    "loggers_ares_janela": 8256,
-    "loggers_ares_antes_dedup": 8325,
+    "pares_janela": 8441,
+    "pedidos_janela": 1026,
+    "loggers_ares_janela": 8257,
+    "loggers_ares_antes_dedup": 8326,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 311,
+    "pendentes_janela": 312,
     "cobranca_gru_janela": 24,
     "sem_embarque_efetiva": 409,
-    "com_embarque_efetiva": 7916,
-    "loggers_sem_lastsync": 30,
+    "com_embarque_efetiva": 7917,
+    "loggers_sem_lastsync": 31,
     "nao_avaliados": 409,
-    "pedidos_com_agente": 8440,
+    "pedidos_com_agente": 8441,
     "dtbtransporte": {
-      "consultados": 1025,
-      "mapeados": 1025,
-      "linhas": 1151
+      "consultados": 1026,
+      "mapeados": 1026,
+      "linhas": 1152
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 59,
+      "VTCLOG - GRU": 60,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 34,
       "SSA - LUTY LOG": 28,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 22,
@@ -56,7 +56,7 @@
       "PA": 36,
       "TO": 34,
       "SC": 24,
-      "SP": 21,
+      "SP": 22,
       "RO": 19,
       "RS": 18,
       "PI": 18,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 7104,
       "n_so_gru": 106,
-      "n_sem_primeiro_sync": 641,
+      "n_sem_primeiro_sync": 642,
       "media_horas": 0.72,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-07",
       "dia": "07/10",
       "dia_full": "07/10/2026",
-      "pedidos": 38,
-      "loggers": 144,
+      "pedidos": 39,
+      "loggers": 145,
       "sincronizados": 122,
-      "pendentes": 22,
+      "pendentes": 23,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 19,
-      "pct": 15.3,
+      "pedidos_pendentes": 20,
+      "pct": 15.9,
       "n_latencia": 103,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 41
+      "n_sem_primeiro_sync": 42
     }
   ],
   "erros_validacao": {},

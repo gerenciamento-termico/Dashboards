@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-07T08:12:55",
+  "gerado_em": "2026-10-07T08:17:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 368,
+    "pendentes_janela": 366,
     "cobranca_gru_janela": 32,
     "sem_embarque_efetiva": 371,
     "com_embarque_efetiva": 7719,
@@ -45,8 +45,8 @@
       "THE - AERONEIVA EXPRESS": 49,
       "SSA - LUTY LOG": 27,
       "MAB - EXPRESSO RODRIGUES LTDA": 20,
-      "VTCLOG - REC": 18,
       "PVH - RODOTEC": 17,
+      "VTCLOG - REC": 16,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 11
@@ -58,15 +58,15 @@
       "PA": 28,
       "SP": 23,
       "RS": 18,
-      "PE": 18,
       "RO": 17,
+      "PE": 16,
       "SC": 15,
       "RR": 14
     },
     "latencia": {
-      "n_agente": 6851,
+      "n_agente": 6861,
       "n_so_gru": 103,
-      "n_sem_primeiro_sync": 700,
+      "n_sem_primeiro_sync": 690,
       "media_horas": 0.59,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -402,18 +402,18 @@
       "dia_full": "05/10/2026",
       "pedidos": 44,
       "loggers": 500,
-      "sincronizados": 447,
-      "pendentes": 52,
+      "sincronizados": 449,
+      "pendentes": 50,
       "sem_embarque": 15,
       "cobranca_gru": 1,
       "pedidos_pendentes": 9,
-      "pct": 10.4,
-      "n_latencia": 423,
+      "pct": 10.0,
+      "n_latencia": 425,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 77
+      "n_sem_primeiro_sync": 75
     },
     {
       "dia_iso": "2026-10-06",
@@ -427,12 +427,12 @@
       "cobranca_gru": 2,
       "pedidos_pendentes": 28,
       "pct": 21.5,
-      "n_latencia": 247,
+      "n_latencia": 255,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 121
+      "n_sem_primeiro_sync": 113
     },
     {
       "dia_iso": "2026-10-07",

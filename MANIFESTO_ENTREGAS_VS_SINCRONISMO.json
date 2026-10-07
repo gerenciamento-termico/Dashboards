@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-07T17:56:14",
+  "gerado_em": "2026-10-07T18:01:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8665,
-    "pedidos_janela": 1043,
-    "loggers_ares_janela": 8481,
-    "loggers_ares_antes_dedup": 8550,
+    "pares_janela": 8666,
+    "pedidos_janela": 1044,
+    "loggers_ares_janela": 8482,
+    "loggers_ares_antes_dedup": 8551,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 372,
+    "pendentes_janela": 373,
     "cobranca_gru_janela": 24,
     "sem_embarque_efetiva": 448,
-    "com_embarque_efetiva": 8102,
+    "com_embarque_efetiva": 8103,
     "loggers_sem_lastsync": 32,
     "nao_avaliados": 448,
-    "pedidos_com_agente": 8665,
+    "pedidos_com_agente": 8666,
     "dtbtransporte": {
-      "consultados": 1043,
-      "mapeados": 1043,
-      "linhas": 1174
+      "consultados": 1044,
+      "mapeados": 1044,
+      "linhas": 1175
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 63,
@@ -49,7 +49,7 @@
       "THE - AERONEIVA EXPRESS": 18,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
       "RBR - RODOTEC": 11,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 10
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 11
     },
     "top10_ufs_pendencias": {
       "PA": 77,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 7232,
       "n_so_gru": 107,
-      "n_sem_primeiro_sync": 698,
+      "n_sem_primeiro_sync": 699,
       "media_horas": 0.7,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-07",
       "dia": "07/10",
       "dia_full": "07/10/2026",
-      "pedidos": 55,
-      "loggers": 262,
+      "pedidos": 56,
+      "loggers": 263,
       "sincronizados": 192,
-      "pendentes": 70,
+      "pendentes": 71,
       "sem_embarque": 20,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 28,
-      "pct": 26.7,
+      "pedidos_pendentes": 29,
+      "pct": 27.0,
       "n_latencia": 177,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 85
+      "n_sem_primeiro_sync": 86
     }
   ],
   "erros_validacao": {},

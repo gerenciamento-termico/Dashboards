@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-07T12:48:55",
+  "gerado_em": "2026-10-07T12:55:09",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 325,
+    "pendentes_janela": 317,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 409,
     "com_embarque_efetiva": 7866,
@@ -48,8 +48,8 @@
       "PVH - RODOTEC": 19,
       "THE - AERONEIVA EXPRESS": 18,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 14,
-      "RBR - RODOTEC": 11
+      "RBR - RODOTEC": 11,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 9
     },
     "top10_ufs_pendencias": {
       "BA": 36,
@@ -61,12 +61,12 @@
       "RS": 18,
       "PI": 18,
       "RR": 14,
-      "AM": 14
+      "MG": 12
     },
     "latencia": {
-      "n_agente": 7041,
+      "n_agente": 7049,
       "n_so_gru": 104,
-      "n_sem_primeiro_sync": 656,
+      "n_sem_primeiro_sync": 648,
       "media_horas": 0.72,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "07/10/2026",
       "pedidos": 28,
       "loggers": 94,
-      "sincronizados": 65,
-      "pendentes": 29,
+      "sincronizados": 73,
+      "pendentes": 21,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 19,
-      "pct": 30.9,
-      "n_latencia": 46,
+      "pedidos_pendentes": 18,
+      "pct": 22.3,
+      "n_latencia": 54,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 48
+      "n_sem_primeiro_sync": 40
     }
   ],
   "erros_validacao": {},

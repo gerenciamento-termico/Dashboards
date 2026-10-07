@@ -1,5 +1,4 @@
 ﻿Dia;Pedidos entregues;Loggers ARES entregues;Sincronizados;Pendentes agente;Cobranca GRU;Registro de entrega ausente;% pendência;Pedidos com pendência;N latencia agente;Media horas ate 1o sync;Mediana horas ate 1o sync;P90 horas ate 1o sync;So sincronizou em GRU;Sem 1o sync
-17/09/2026;121;435;424;9;2;19;2.1;8;399;3.65;0.05;0.08;9;27
 18/09/2026;79;454;443;11;0;60;2.4;10;408;3.77;0.04;0.08;20;26
 19/09/2026;3;42;42;0;0;0;0.0;0;41;0.04;0.03;0.07;1;0
 20/09/2026;0;0;0;0;0;0;0.0;0;0;;;;0;0
@@ -19,3 +18,4 @@
 04/10/2026;0;0;0;0;0;0;0.0;0;0;;;;0;0
 05/10/2026;43;470;437;32;1;45;6.8;9;413;0.04;0.05;0.07;0;57
 06/10/2026;60;367;276;89;2;1;24.3;30;236;0.04;0.04;0.07;0;131
+07/10/2026;0;0;0;0;0;0;0.0;0;0;;;;0;0

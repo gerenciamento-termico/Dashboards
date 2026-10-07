@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-07T11:27:28",
+  "gerado_em": "2026-10-07T11:34:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8355,
-    "pedidos_janela": 997,
-    "loggers_ares_janela": 8171,
-    "loggers_ares_antes_dedup": 8240,
+    "pares_janela": 8357,
+    "pedidos_janela": 999,
+    "loggers_ares_janela": 8173,
+    "loggers_ares_antes_dedup": 8242,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 309,
     "cobranca_gru_janela": 29,
-    "sem_embarque_efetiva": 409,
+    "sem_embarque_efetiva": 411,
     "com_embarque_efetiva": 7831,
     "loggers_sem_lastsync": 31,
-    "nao_avaliados": 409,
-    "pedidos_com_agente": 8355,
+    "nao_avaliados": 411,
+    "pedidos_com_agente": 8357,
     "dtbtransporte": {
-      "consultados": 997,
-      "mapeados": 997,
-      "linhas": 1123
+      "consultados": 999,
+      "mapeados": 999,
+      "linhas": 1125
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 58,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 7024,
-      "n_so_gru": 103,
-      "n_sem_primeiro_sync": 639,
+      "n_so_gru": 104,
+      "n_sem_primeiro_sync": 638,
       "media_horas": 0.72,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -317,8 +317,8 @@
       "media_horas": 0.05,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 4,
-      "n_sem_primeiro_sync": 64
+      "n_sync_so_gru": 5,
+      "n_sem_primeiro_sync": 63
     },
     {
       "dia_iso": "2026-10-01",
@@ -423,7 +423,7 @@
       "loggers": 402,
       "sincronizados": 321,
       "pendentes": 78,
-      "sem_embarque": 1,
+      "sem_embarque": 3,
       "cobranca_gru": 3,
       "pedidos_pendentes": 28,
       "pct": 19.4,

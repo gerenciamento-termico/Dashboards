@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-06T21:31:05",
+  "gerado_em": "2026-10-06T21:35:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 19,
     "ocultos_lista": 227,
     "ocultos_ausentes": 208,
-    "pendentes_janela": 381,
+    "pendentes_janela": 370,
     "cobranca_gru_janela": 38,
     "sem_embarque_efetiva": 420,
     "com_embarque_efetiva": 8151,
@@ -48,8 +48,8 @@
       "VTCLOG - REC": 19,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 18,
       "PVH - RODOTEC": 17,
-      "FOR - NT TRANSPORTE LTDA": 16,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 14
+      "BVB - J PIMENTEL S. CUNHA LTDA": 14,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 11
     },
     "top10_ufs_pendencias": {
       "PI": 52,
@@ -61,13 +61,13 @@
       "PE": 19,
       "RS": 18,
       "RO": 17,
-      "CE": 17
+      "RR": 14
     },
     "latencia": {
-      "n_agente": 7211,
+      "n_agente": 7222,
       "n_so_gru": 111,
-      "n_sem_primeiro_sync": 736,
-      "media_horas": 0.77,
+      "n_sem_primeiro_sync": 725,
+      "media_horas": 0.76,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -345,18 +345,18 @@
       "dia_full": "01/10/2026",
       "pedidos": 79,
       "loggers": 550,
-      "sincronizados": 476,
-      "pendentes": 71,
+      "sincronizados": 487,
+      "pendentes": 60,
       "sem_embarque": 0,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 21,
-      "pct": 12.9,
-      "n_latencia": 459,
+      "pedidos_pendentes": 20,
+      "pct": 10.9,
+      "n_latencia": 470,
       "media_horas": 0.31,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 91
+      "n_sem_primeiro_sync": 80
     },
     {
       "dia_iso": "2026-10-02",

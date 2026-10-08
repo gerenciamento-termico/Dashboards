@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T17:22:23",
+  "gerado_em": "2026-10-08T17:24:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 499,
+    "pendentes_janela": 497,
     "cobranca_gru_janela": 26,
     "sem_embarque_efetiva": 447,
     "com_embarque_efetiva": 8431,
-    "loggers_sem_lastsync": 102,
+    "loggers_sem_lastsync": 100,
     "nao_avaliados": 447,
     "pedidos_com_agente": 8988,
     "dtbtransporte": {
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 111,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 107,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 105,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
       "SSA - LUTY LOG": 27,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
@@ -52,7 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 14
     },
     "top10_ufs_pendencias": {
-      "RS": 117,
+      "RS": 115,
       "SP": 72,
       "PA": 58,
       "BA": 34,
@@ -64,9 +64,9 @@
       "AM": 15
     },
     "latencia": {
-      "n_agente": 7404,
+      "n_agente": 7405,
       "n_so_gru": 94,
-      "n_sem_primeiro_sync": 871,
+      "n_sem_primeiro_sync": 870,
       "media_horas": 0.43,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "08/10/2026",
       "pedidos": 54,
       "loggers": 713,
-      "sincronizados": 494,
-      "pendentes": 218,
+      "sincronizados": 496,
+      "pendentes": 216,
       "sem_embarque": 42,
       "cobranca_gru": 1,
       "pedidos_pendentes": 24,
-      "pct": 30.6,
-      "n_latencia": 431,
+      "pct": 30.3,
+      "n_latencia": 432,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 282
+      "n_sem_primeiro_sync": 281
     }
   ],
   "erros_validacao": {},

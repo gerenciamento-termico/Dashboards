@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T17:47:24",
+  "gerado_em": "2026-10-08T17:52:28",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,29 +19,29 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8992,
-    "pedidos_janela": 1035,
-    "loggers_ares_janela": 8816,
-    "loggers_ares_antes_dedup": 8879,
+    "pares_janela": 9000,
+    "pedidos_janela": 1036,
+    "loggers_ares_janela": 8824,
+    "loggers_ares_antes_dedup": 8887,
     "dedup_dia_logger": 63,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 490,
+    "pendentes_janela": 488,
     "cobranca_gru_janela": 27,
-    "sem_embarque_efetiva": 447,
+    "sem_embarque_efetiva": 455,
     "com_embarque_efetiva": 8432,
-    "loggers_sem_lastsync": 98,
-    "nao_avaliados": 447,
-    "pedidos_com_agente": 8989,
+    "loggers_sem_lastsync": 96,
+    "nao_avaliados": 455,
+    "pedidos_com_agente": 8997,
     "dtbtransporte": {
-      "consultados": 1035,
-      "mapeados": 1032,
-      "linhas": 1155
+      "consultados": 1036,
+      "mapeados": 1033,
+      "linhas": 1156
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 111,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 102,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 100,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
       "SSA - LUTY LOG": 27,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
@@ -52,7 +52,7 @@
       "RBR - RODOTEC": 13
     },
     "top10_ufs_pendencias": {
-      "RS": 112,
+      "RS": 110,
       "SP": 72,
       "PA": 58,
       "BA": 34,
@@ -64,9 +64,9 @@
       "RR": 14
     },
     "latencia": {
-      "n_agente": 7413,
+      "n_agente": 7415,
       "n_so_gru": 94,
-      "n_sem_primeiro_sync": 863,
+      "n_sem_primeiro_sync": 861,
       "media_horas": 0.43,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "08/10/2026",
       "pedidos": 55,
       "loggers": 714,
-      "sincronizados": 503,
-      "pendentes": 209,
-      "sem_embarque": 42,
+      "sincronizados": 505,
+      "pendentes": 207,
+      "sem_embarque": 50,
       "cobranca_gru": 2,
       "pedidos_pendentes": 23,
-      "pct": 29.3,
-      "n_latencia": 440,
+      "pct": 29.0,
+      "n_latencia": 442,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 274
+      "n_sem_primeiro_sync": 272
     }
   ],
   "erros_validacao": {},

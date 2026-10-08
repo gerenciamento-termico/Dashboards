@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T15:19:00",
+  "gerado_em": "2026-10-08T15:27:32",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8914,
-    "pedidos_janela": 1023,
-    "loggers_ares_janela": 8738,
-    "loggers_ares_antes_dedup": 8801,
+    "pares_janela": 8919,
+    "pedidos_janela": 1024,
+    "loggers_ares_janela": 8743,
+    "loggers_ares_antes_dedup": 8806,
     "dedup_dia_logger": 63,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 567,
+    "pendentes_janela": 565,
     "cobranca_gru_janela": 27,
     "sem_embarque_efetiva": 447,
-    "com_embarque_efetiva": 8354,
+    "com_embarque_efetiva": 8359,
     "loggers_sem_lastsync": 120,
     "nao_avaliados": 447,
-    "pedidos_com_agente": 8911,
+    "pedidos_com_agente": 8916,
     "dtbtransporte": {
-      "consultados": 1023,
-      "mapeados": 1020,
-      "linhas": 1143
+      "consultados": 1024,
+      "mapeados": 1021,
+      "linhas": 1144
     },
     "top10_agentes_pendencias": {
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 170,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 167,
       "VTCLOG - GRU": 111,
       "PVH - RODOTEC": 46,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
@@ -52,7 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 14
     },
     "top10_ufs_pendencias": {
-      "RS": 180,
+      "RS": 177,
       "SP": 72,
       "PA": 57,
       "RO": 46,
@@ -64,9 +64,9 @@
       "RR": 14
     },
     "latencia": {
-      "n_agente": 7266,
+      "n_agente": 7273,
       "n_so_gru": 93,
-      "n_sem_primeiro_sync": 933,
+      "n_sem_primeiro_sync": 931,
       "media_horas": 0.44,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-08",
       "dia": "08/10",
       "dia_full": "08/10/2026",
-      "pedidos": 43,
-      "loggers": 636,
-      "sincronizados": 397,
-      "pendentes": 238,
+      "pedidos": 44,
+      "loggers": 641,
+      "sincronizados": 404,
+      "pendentes": 236,
       "sem_embarque": 42,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 19,
-      "pct": 37.4,
-      "n_latencia": 342,
+      "pedidos_pendentes": 20,
+      "pct": 36.8,
+      "n_latencia": 349,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 294
+      "n_sem_primeiro_sync": 292
     }
   ],
   "erros_validacao": {},

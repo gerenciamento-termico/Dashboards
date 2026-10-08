@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T16:05:11",
+  "gerado_em": "2026-10-08T16:10:38",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 556,
+    "pendentes_janela": 553,
     "cobranca_gru_janela": 26,
-    "sem_embarque_efetiva": 449,
-    "com_embarque_efetiva": 8428,
-    "loggers_sem_lastsync": 125,
-    "nao_avaliados": 449,
+    "sem_embarque_efetiva": 447,
+    "com_embarque_efetiva": 8430,
+    "loggers_sem_lastsync": 122,
+    "nao_avaliados": 447,
     "pedidos_com_agente": 8987,
     "dtbtransporte": {
       "consultados": 1033,
@@ -40,7 +40,7 @@
       "linhas": 1153
     },
     "top10_agentes_pendencias": {
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 149,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 145,
       "VTCLOG - GRU": 111,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
       "SSA - LUTY LOG": 27,
@@ -52,7 +52,7 @@
       "THE - AERONEIVA EXPRESS": 16
     },
     "top10_ufs_pendencias": {
-      "RS": 159,
+      "RS": 155,
       "SP": 72,
       "PA": 58,
       "BA": 34,
@@ -64,9 +64,9 @@
       "TO": 17
     },
     "latencia": {
-      "n_agente": 7342,
+      "n_agente": 7347,
       "n_so_gru": 93,
-      "n_sem_primeiro_sync": 931,
+      "n_sem_primeiro_sync": 928,
       "media_horas": 0.43,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-08",
       "dia": "08/10",
       "dia_full": "08/10/2026",
-      "pedidos": 51,
-      "loggers": 710,
-      "sincronizados": 443,
-      "pendentes": 266,
-      "sem_embarque": 44,
+      "pedidos": 53,
+      "loggers": 712,
+      "sincronizados": 448,
+      "pendentes": 263,
+      "sem_embarque": 42,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 24,
-      "pct": 37.5,
-      "n_latencia": 379,
+      "pedidos_pendentes": 25,
+      "pct": 36.9,
+      "n_latencia": 384,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 331
+      "n_sem_primeiro_sync": 328
     }
   ],
   "erros_validacao": {},

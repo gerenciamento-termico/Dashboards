@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T15:06:25",
+  "gerado_em": "2026-10-08T15:12:31",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8913,
-    "pedidos_janela": 1022,
-    "loggers_ares_janela": 8737,
-    "loggers_ares_antes_dedup": 8800,
+    "pares_janela": 8914,
+    "pedidos_janela": 1023,
+    "loggers_ares_janela": 8738,
+    "loggers_ares_antes_dedup": 8801,
     "dedup_dia_logger": 63,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 569,
-    "cobranca_gru_janela": 26,
+    "cobranca_gru_janela": 27,
     "sem_embarque_efetiva": 447,
-    "com_embarque_efetiva": 8353,
+    "com_embarque_efetiva": 8354,
     "loggers_sem_lastsync": 120,
     "nao_avaliados": 447,
-    "pedidos_com_agente": 8910,
+    "pedidos_com_agente": 8911,
     "dtbtransporte": {
-      "consultados": 1022,
-      "mapeados": 1019,
-      "linhas": 1142
+      "consultados": 1023,
+      "mapeados": 1020,
+      "linhas": 1143
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 170,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 7264,
       "n_so_gru": 93,
-      "n_sem_primeiro_sync": 934,
+      "n_sem_primeiro_sync": 935,
       "media_horas": 0.44,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -324,12 +324,12 @@
       "dia_iso": "2026-10-02",
       "dia": "02/10",
       "dia_full": "02/10/2026",
-      "pedidos": 68,
-      "loggers": 360,
+      "pedidos": 69,
+      "loggers": 361,
       "sincronizados": 336,
       "pendentes": 22,
       "sem_embarque": 40,
-      "cobranca_gru": 2,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 13,
       "pct": 6.1,
       "n_latencia": 317,
@@ -337,7 +337,7 @@
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 43
+      "n_sem_primeiro_sync": 44
     },
     {
       "dia_iso": "2026-10-03",

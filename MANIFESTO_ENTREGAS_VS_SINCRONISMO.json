@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T14:13:09",
+  "gerado_em": "2026-10-08T14:22:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 554,
+    "pendentes_janela": 567,
     "cobranca_gru_janela": 26,
-    "sem_embarque_efetiva": 460,
-    "com_embarque_efetiva": 8317,
+    "sem_embarque_efetiva": 447,
+    "com_embarque_efetiva": 8330,
     "loggers_sem_lastsync": 121,
-    "nao_avaliados": 460,
+    "nao_avaliados": 447,
     "pedidos_com_agente": 8887,
     "dtbtransporte": {
       "consultados": 1016,
@@ -42,8 +42,8 @@
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 170,
       "VTCLOG - GRU": 108,
+      "PVH - RODOTEC": 46,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
-      "PVH - RODOTEC": 33,
       "SSA - LUTY LOG": 28,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 20,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 17,
@@ -55,8 +55,8 @@
       "RS": 180,
       "SP": 69,
       "PA": 57,
+      "RO": 46,
       "BA": 35,
-      "RO": 33,
       "SC": 23,
       "TO": 17,
       "MT": 17,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 7242,
-      "n_so_gru": 92,
-      "n_sem_primeiro_sync": 921,
+      "n_so_gru": 93,
+      "n_sem_primeiro_sync": 933,
       "media_horas": 0.44,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -146,8 +146,8 @@
       "media_horas": 1.18,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 12,
-      "n_sem_primeiro_sync": 40
+      "n_sync_so_gru": 13,
+      "n_sem_primeiro_sync": 39
     },
     {
       "dia_iso": "2026-09-23",
@@ -400,20 +400,20 @@
       "dia_iso": "2026-10-06",
       "dia": "06/10",
       "dia_full": "06/10/2026",
-      "pedidos": 70,
-      "loggers": 472,
+      "pedidos": 71,
+      "loggers": 485,
       "sincronizados": 395,
-      "pendentes": 75,
-      "sem_embarque": 68,
+      "pendentes": 88,
+      "sem_embarque": 55,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 26,
-      "pct": 15.9,
+      "pedidos_pendentes": 27,
+      "pct": 18.1,
       "n_latencia": 362,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 110
+      "n_sem_primeiro_sync": 123
     },
     {
       "dia_iso": "2026-10-07",

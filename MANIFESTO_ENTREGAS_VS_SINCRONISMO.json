@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T12:21:43",
+  "gerado_em": "2026-10-08T12:26:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 581,
+    "pendentes_janela": 579,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 427,
     "com_embarque_efetiva": 8307,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 170,
-      "VTCLOG - GRU": 116,
+      "VTCLOG - GRU": 114,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
       "CGB - JR TRANSPORTES": 36,
       "PVH - RODOTEC": 33,
@@ -59,14 +59,14 @@
       "BA": 35,
       "RO": 33,
       "SC": 25,
-      "MG": 19,
       "TO": 17,
+      "MG": 17,
       "PI": 16
     },
     "latencia": {
-      "n_agente": 7195,
+      "n_agente": 7200,
       "n_so_gru": 90,
-      "n_sem_primeiro_sync": 960,
+      "n_sem_primeiro_sync": 955,
       "media_horas": 0.44,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "08/10/2026",
       "pedidos": 30,
       "loggers": 603,
-      "sincronizados": 348,
-      "pendentes": 255,
+      "sincronizados": 350,
+      "pendentes": 253,
       "sem_embarque": 42,
       "cobranca_gru": 0,
       "pedidos_pendentes": 17,
-      "pct": 42.3,
-      "n_latencia": 282,
+      "pct": 42.0,
+      "n_latencia": 287,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 321
+      "n_sem_primeiro_sync": 316
     }
   ],
   "erros_validacao": {},

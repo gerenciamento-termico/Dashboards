@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T14:06:53",
+  "gerado_em": "2026-10-08T14:11:54",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8857,
-    "pedidos_janela": 1015,
-    "loggers_ares_janela": 8681,
-    "loggers_ares_antes_dedup": 8744,
+    "pares_janela": 8890,
+    "pedidos_janela": 1016,
+    "loggers_ares_janela": 8714,
+    "loggers_ares_antes_dedup": 8777,
     "dedup_dia_logger": 63,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 554,
     "cobranca_gru_janela": 26,
-    "sem_embarque_efetiva": 427,
+    "sem_embarque_efetiva": 460,
     "com_embarque_efetiva": 8317,
     "loggers_sem_lastsync": 121,
-    "nao_avaliados": 427,
-    "pedidos_com_agente": 8854,
+    "nao_avaliados": 460,
+    "pedidos_com_agente": 8887,
     "dtbtransporte": {
-      "consultados": 1015,
-      "mapeados": 1012,
-      "linhas": 1133
+      "consultados": 1016,
+      "mapeados": 1013,
+      "linhas": 1135
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 170,
@@ -64,9 +64,9 @@
       "RR": 14
     },
     "latencia": {
-      "n_agente": 7241,
+      "n_agente": 7242,
       "n_so_gru": 92,
-      "n_sem_primeiro_sync": 922,
+      "n_sem_primeiro_sync": 921,
       "media_horas": 0.44,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -404,7 +404,7 @@
       "loggers": 472,
       "sincronizados": 395,
       "pendentes": 75,
-      "sem_embarque": 35,
+      "sem_embarque": 68,
       "cobranca_gru": 2,
       "pedidos_pendentes": 26,
       "pct": 15.9,
@@ -446,12 +446,12 @@
       "cobranca_gru": 1,
       "pedidos_pendentes": 19,
       "pct": 38.5,
-      "n_latencia": 319,
+      "n_latencia": 320,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 294
+      "n_sem_primeiro_sync": 293
     }
   ],
   "erros_validacao": {},

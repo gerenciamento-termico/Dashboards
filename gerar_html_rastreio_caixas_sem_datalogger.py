@@ -153,7 +153,10 @@ def load_raw_data() -> pd.DataFrame:
       )
       AND ds_tipo IS NOT NULL
       AND TRIM(ds_tipo) <> ''
-      AND UPPER(TRIM(ds_tipo)) LIKE '%CAIXA%'
+      AND (
+            UPPER(TRIM(ds_tipo)) LIKE '%CAIXA%'
+         OR UPPER(TRIM(ds_tipo)) LIKE 'FRA%33L%'  -- FRACAO 33L (PCM)
+      )
       AND UPPER(TRIM(ds_tipo)) NOT LIKE '%PALLET%'
       AND NOT EXISTS (
           SELECT 1
@@ -193,7 +196,10 @@ def prepare_data(df: pd.DataFrame) -> pd.DataFrame:
         & out["nr_romaneio"].ne("")
         & out["cd_lpn"].ne("")
         & out["cd_referencia"].eq("")
-        & out["_tipo_norm"].str.contains("CAIXA", regex=False, na=False)
+        & (
+            out["_tipo_norm"].str.contains("CAIXA", regex=False, na=False)
+            | out["_tipo_norm"].str.contains("FRACAO", regex=False, na=False)
+        )
         & ~out["_tipo_norm"].str.contains("PALLET", regex=False, na=False)
     ].copy()
 
@@ -295,8 +301,9 @@ def validate_business_rules(df: pd.DataFrame, summary: dict) -> None:
     tipo_norm = df["ds_tipo"].map(normalize_text)
     if tipo_norm.str.contains("PALLET", regex=False, na=False).any():
         raise RuntimeError("Filtro de ds_tipo falhou: pallet entrou no indicador.")
-    if not tipo_norm.str.contains("CAIXA", regex=False, na=False).all() and not df.empty:
-        raise RuntimeError("Filtro de ds_tipo falhou: ha registro que nao representa caixa.")
+    tipo_ok = tipo_norm.str.contains("CAIXA", regex=False, na=False) | tipo_norm.str.contains("FRACAO", regex=False, na=False)
+    if not tipo_ok.all() and not df.empty:
+        raise RuntimeError("Filtro de ds_tipo falhou: ha registro que nao representa caixa/fracao PCM.")
     if int(summary["total_caixas"]) != int(len(df)):
         raise RuntimeError("Card Total de caixas sem datalogger nao bate com a tabela deduplicada por nr_romaneio + cd_lpn.")
 

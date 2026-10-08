@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T14:32:17",
+  "gerado_em": "2026-10-08T14:37:18",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -37,7 +37,7 @@
     "dtbtransporte": {
       "consultados": 1017,
       "mapeados": 1014,
-      "linhas": 1136
+      "linhas": 1137
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 170,

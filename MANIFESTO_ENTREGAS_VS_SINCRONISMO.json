@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T13:59:37",
+  "gerado_em": "2026-10-08T14:06:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 8853,
-    "pedidos_janela": 1014,
-    "loggers_ares_janela": 8677,
-    "loggers_ares_antes_dedup": 8740,
+    "pares_janela": 8857,
+    "pedidos_janela": 1015,
+    "loggers_ares_janela": 8681,
+    "loggers_ares_antes_dedup": 8744,
     "dedup_dia_logger": 63,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 551,
+    "pendentes_janela": 554,
     "cobranca_gru_janela": 26,
     "sem_embarque_efetiva": 427,
-    "com_embarque_efetiva": 8313,
+    "com_embarque_efetiva": 8317,
     "loggers_sem_lastsync": 121,
     "nao_avaliados": 427,
-    "pedidos_com_agente": 8850,
+    "pedidos_com_agente": 8854,
     "dtbtransporte": {
-      "consultados": 1014,
-      "mapeados": 1011,
-      "linhas": 1132
+      "consultados": 1015,
+      "mapeados": 1012,
+      "linhas": 1133
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 170,
@@ -64,9 +64,9 @@
       "RR": 14
     },
     "latencia": {
-      "n_agente": 7240,
+      "n_agente": 7241,
       "n_so_gru": 92,
-      "n_sem_primeiro_sync": 919,
+      "n_sem_primeiro_sync": 922,
       "media_horas": 0.44,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,37 +421,37 @@
       "dia_full": "07/10/2026",
       "pedidos": 73,
       "loggers": 321,
-      "sincronizados": 269,
-      "pendentes": 52,
+      "sincronizados": 270,
+      "pendentes": 51,
       "sem_embarque": 20,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 30,
-      "pct": 16.2,
-      "n_latencia": 248,
+      "pedidos_pendentes": 29,
+      "pct": 15.9,
+      "n_latencia": 249,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 73
+      "n_sem_primeiro_sync": 72
     },
     {
       "dia_iso": "2026-10-08",
       "dia": "08/10",
       "dia_full": "08/10/2026",
-      "pedidos": 36,
-      "loggers": 609,
+      "pedidos": 37,
+      "loggers": 613,
       "sincronizados": 376,
-      "pendentes": 232,
+      "pendentes": 236,
       "sem_embarque": 42,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 18,
-      "pct": 38.1,
+      "pedidos_pendentes": 19,
+      "pct": 38.5,
       "n_latencia": 319,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 290
+      "n_sem_primeiro_sync": 294
     }
   ],
   "erros_validacao": {},

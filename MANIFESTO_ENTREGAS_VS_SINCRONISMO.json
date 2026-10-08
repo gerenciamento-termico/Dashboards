@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T14:47:19",
+  "gerado_em": "2026-10-08T14:52:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 573,
+    "pendentes_janela": 576,
     "cobranca_gru_janela": 26,
-    "sem_embarque_efetiva": 450,
-    "com_embarque_efetiva": 8343,
+    "sem_embarque_efetiva": 447,
+    "com_embarque_efetiva": 8346,
     "loggers_sem_lastsync": 121,
-    "nao_avaliados": 450,
+    "nao_avaliados": 447,
     "pedidos_com_agente": 8903,
     "dtbtransporte": {
       "consultados": 1020,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 170,
-      "VTCLOG - GRU": 108,
+      "VTCLOG - GRU": 111,
       "PVH - RODOTEC": 46,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
       "SSA - LUTY LOG": 28,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "RS": 180,
-      "SP": 69,
+      "SP": 72,
       "PA": 57,
       "RO": 46,
       "BA": 35,
@@ -64,9 +64,9 @@
       "PI": 16
     },
     "latencia": {
-      "n_agente": 7249,
+      "n_agente": 7256,
       "n_so_gru": 93,
-      "n_sem_primeiro_sync": 939,
+      "n_sem_primeiro_sync": 935,
       "media_horas": 0.44,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-08",
       "dia": "08/10",
       "dia_full": "08/10/2026",
-      "pedidos": 40,
-      "loggers": 626,
+      "pedidos": 41,
+      "loggers": 629,
       "sincronizados": 383,
-      "pendentes": 242,
-      "sem_embarque": 45,
+      "pendentes": 245,
+      "sem_embarque": 42,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 19,
-      "pct": 38.7,
-      "n_latencia": 327,
+      "pedidos_pendentes": 20,
+      "pct": 39.0,
+      "n_latencia": 334,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 299
+      "n_sem_primeiro_sync": 295
     }
   ],
   "erros_validacao": {},

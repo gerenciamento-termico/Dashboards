@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-08T08:24:11",
+  "gerado_em": "2026-10-08T08:29:11",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 342,
+    "pendentes_janela": 341,
     "cobranca_gru_janela": 24,
     "sem_embarque_efetiva": 385,
     "com_embarque_efetiva": 7690,
@@ -40,7 +40,7 @@
       "linhas": 1093
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 60,
+      "VTCLOG - GRU": 59,
       "MAB - EXPRESSO RODRIGUES LTDA": 41,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 34,
       "PVH - RODOTEC": 33,
@@ -421,12 +421,12 @@
       "dia_full": "07/10/2026",
       "pedidos": 68,
       "loggers": 309,
-      "sincronizados": 257,
-      "pendentes": 52,
+      "sincronizados": 258,
+      "pendentes": 51,
       "sem_embarque": 20,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 30,
-      "pct": 16.8,
+      "pedidos_pendentes": 29,
+      "pct": 16.5,
       "n_latencia": 238,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

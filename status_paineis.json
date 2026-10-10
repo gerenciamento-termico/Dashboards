@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-10-10T12:14:22",
+    "gerado_em":  "2026-10-10T12:24:39",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -12,7 +12,7 @@
                     },
                     {
                         "arquivo":  "CONTROLE_ENTREGAS_20D.html",
-                        "atualizado_em":  "2026-10-10T12:07:30"
+                        "atualizado_em":  "2026-10-10T12:17:33"
                     },
                     {
                         "arquivo":  "REVERSA_DATALOGGERS.html",
@@ -28,27 +28,27 @@
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-10-10T12:11:38"
+                        "atualizado_em":  "2026-10-10T12:21:50"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",
-                        "atualizado_em":  "2026-10-10T12:11:55"
+                        "atualizado_em":  "2026-10-10T12:22:06"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXA_VELHA_130L.html",
-                        "atualizado_em":  "2026-10-10T12:12:19"
+                        "atualizado_em":  "2026-10-10T12:22:38"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXA_33L.html",
-                        "atualizado_em":  "2026-10-10T12:12:35"
+                        "atualizado_em":  "2026-10-10T12:22:54"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXA_42L.html",
-                        "atualizado_em":  "2026-10-10T12:12:44"
+                        "atualizado_em":  "2026-10-10T12:23:06"
                     },
                     {
                         "arquivo":  "INDICADOR_CAIXAS_GERAL.html",
-                        "atualizado_em":  "2026-10-10T12:13:07"
+                        "atualizado_em":  "2026-10-10T12:23:30"
                     },
                     {
                         "arquivo":  "ENTREGAS_VS_SINCRONISMO.html",

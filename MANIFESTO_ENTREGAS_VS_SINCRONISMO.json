@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-13T14:09:19",
+  "gerado_em": "2026-10-13T14:14:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 7765,
-    "pedidos_janela": 1002,
-    "loggers_ares_janela": 7626,
-    "loggers_ares_antes_dedup": 7668,
+    "pares_janela": 7768,
+    "pedidos_janela": 1005,
+    "loggers_ares_janela": 7629,
+    "loggers_ares_antes_dedup": 7671,
     "dedup_dia_logger": 42,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 481,
     "cobranca_gru_janela": 25,
-    "sem_embarque_efetiva": 147,
-    "com_embarque_efetiva": 7521,
+    "sem_embarque_efetiva": 148,
+    "com_embarque_efetiva": 7523,
     "loggers_sem_lastsync": 59,
-    "nao_avaliados": 147,
-    "pedidos_com_agente": 7765,
+    "nao_avaliados": 148,
+    "pedidos_com_agente": 7768,
     "dtbtransporte": {
-      "consultados": 1002,
-      "mapeados": 1002,
-      "linhas": 1108
+      "consultados": 1005,
+      "mapeados": 1005,
+      "linhas": 1111
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 79,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 6613,
       "n_so_gru": 73,
-      "n_sem_primeiro_sync": 794,
+      "n_sem_primeiro_sync": 796,
       "media_horas": 0.39,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -362,9 +362,9 @@
       "dia_iso": "2026-10-09",
       "dia": "09/10",
       "dia_full": "09/10/2026",
-      "pedidos": 139,
-      "loggers": 481,
-      "sincronizados": 361,
+      "pedidos": 140,
+      "loggers": 482,
+      "sincronizados": 362,
       "pendentes": 118,
       "sem_embarque": 27,
       "cobranca_gru": 2,
@@ -375,7 +375,7 @@
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 140
+      "n_sem_primeiro_sync": 141
     },
     {
       "dia_iso": "2026-10-10",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-13",
       "dia": "13/10",
       "dia_full": "13/10/2026",
-      "pedidos": 44,
-      "loggers": 55,
-      "sincronizados": 30,
+      "pedidos": 45,
+      "loggers": 56,
+      "sincronizados": 31,
       "pendentes": 25,
-      "sem_embarque": 5,
+      "sem_embarque": 6,
       "cobranca_gru": 0,
       "pedidos_pendentes": 24,
-      "pct": 45.5,
+      "pct": 44.6,
       "n_latencia": 22,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 33
+      "n_sem_primeiro_sync": 34
     }
   ],
   "erros_validacao": {},

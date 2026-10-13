@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-13T16:06:03",
+  "gerado_em": "2026-10-13T16:07:54",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 471,
+    "pendentes_janela": 470,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 148,
     "com_embarque_efetiva": 7559,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 82,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 79,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 78,
       "MAB - EXPRESSO RODRIGUES LTDA": 61,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 28,
       "SSA - LUTY LOG": 27,
@@ -52,7 +52,7 @@
       "THE - AERONEIVA EXPRESS": 17
     },
     "top10_ufs_pendencias": {
-      "RS": 88,
+      "RS": 87,
       "PA": 87,
       "SP": 56,
       "BA": 34,
@@ -64,9 +64,9 @@
       "MG": 15
     },
     "latencia": {
-      "n_agente": 6657,
+      "n_agente": 6658,
       "n_so_gru": 73,
-      "n_sem_primeiro_sync": 788,
+      "n_sem_primeiro_sync": 787,
       "media_horas": 0.39,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "13/10/2026",
       "pedidos": 62,
       "loggers": 86,
-      "sincronizados": 57,
-      "pendentes": 29,
+      "sincronizados": 58,
+      "pendentes": 28,
       "sem_embarque": 7,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 28,
-      "pct": 33.7,
-      "n_latencia": 48,
+      "pedidos_pendentes": 27,
+      "pct": 32.6,
+      "n_latencia": 49,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 38
+      "n_sem_primeiro_sync": 37
     }
   ],
   "erros_validacao": {},

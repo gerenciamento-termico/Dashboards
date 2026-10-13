@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Evolu&ccedil;&atilde;o do Sincronismo &mdash; 3 meses de cobran&ccedil;a ativa | VTC LOG</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
+<style>
+:root{--bg:#eef2f8;--card:#fff;--line:#e3e8f0;--tx:#101828;--tx2:#667085;--blue:#2563eb;--green:#16a34a;--red:#dc2626;--orange:#d97706;--purple:#7c3aed}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--tx);padding:26px 18px 60px}
+.wrap{max-width:1240px;margin:0 auto}
+h1{font-size:1.4rem;font-weight:900;text-transform:uppercase;letter-spacing:.3px}
+h1 span{color:var(--blue)}
+.sub{color:var(--tx2);font-size:.82rem;margin:6px 0 20px;max-width:900px;line-height:1.6}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 1px 3px rgba(16,24,40,.07)}
+.card .v{font-size:1.7rem;font-weight:900}
+.card .lbl{font-size:.68rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-top:4px;line-height:1.4}
+.card.g .v{color:var(--green)} .card.b .v{color:var(--blue)} .card.o .v{color:var(--orange)} .card.p .v{color:var(--purple)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;margin-bottom:16px;box-shadow:0 1px 3px rgba(16,24,40,.07)}
+.panel h2{font-size:.95rem;font-weight:800;margin-bottom:4px}
+.panel p{font-size:.76rem;color:var(--tx2);margin-bottom:12px;line-height:1.5}
+.conclusao{background:#eefcf2;border:1px solid #bbf7d0;border-left:5px solid var(--green);border-radius:12px;padding:16px 18px;font-size:.86rem;line-height:1.7;margin-bottom:16px}
+.alerta{background:#fef6e7;border:1px solid #fde68a;border-left:5px solid var(--orange);border-radius:12px;padding:14px 18px;font-size:.8rem;line-height:1.6}
+footer{text-align:center;color:var(--tx2);font-size:.68rem;margin-top:24px;line-height:1.6}
+canvas{max-height:380px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>Evolu&ccedil;&atilde;o do <span>Sincronismo</span> &mdash; 3 meses de cobran&ccedil;a ativa</h1>
+<div class="sub">Per&iacute;odo: 13/07/2026 a 13/10/2026 &middot; <b>28,897 pares pedido+logger ARES entregues</b> &middot;
+M&eacute;trica: % de loggers com 1&ordm; sincronismo em at&eacute; 24h/48h ap&oacute;s a entrega (mesma r&eacute;gua do indicador Entregas &times; Sincronismo:
+T0 = chegada ao cliente/embarque, 1&ordm; registro no ARES ap&oacute;s T0). Gerado em 13/10/2026 &mdash; an&aacute;lise independente, nenhum indicador foi alterado.</div>
+
+<div class="cards">
+  <div class="card b"><div class="v">87.9%</div><div class="lbl">Julho &middot; sync &le; 24h (7,124 pares)</div></div>
+  <div class="card o"><div class="v">85.3%</div><div class="lbl">Agosto &middot; sync &le; 24h (6,943 pares)</div></div>
+  <div class="card g"><div class="v">89.4%</div><div class="lbl">Setembro &middot; sync &le; 24h (11,241 pares)</div></div>
+  <div class="card g"><div class="v">+4.1 p.p.</div><div class="lbl">Melhoria setembro vs agosto</div></div>
+  <div class="card p"><div class="v">92.0%</div><div class="lbl">Pico semanal &middot; semana de 21/09</div></div>
+</div>
+
+<div class="conclusao">
+<b>&#10003; A cobran&ccedil;a est&aacute; surtindo efeito.</b> Ap&oacute;s o in&iacute;cio da cobran&ccedil;a ativa por base
+(treinamento, indicador p&uacute;blico e p&aacute;ginas individuais por base &mdash; meados de setembro), o sincronismo em at&eacute; 24h subiu de
+<b>85.3% (agosto)</b> para <b>89.4% (setembro)</b>, com pico de <b>92.0% na semana de 21/09</b> &mdash;
+as duas melhores semanas de toda a s&eacute;rie s&atilde;o exatamente as duas primeiras semanas de cobran&ccedil;a plena (21/09 e 28/09).
+O volume de setembro foi o maior do trimestre (11,241 pares), ou seja, a melhoria veio mesmo com mais carga.
+</div>
+
+<div class="panel">
+  <h2>Sincronismo em at&eacute; 24h e 48h ap&oacute;s a entrega &mdash; semana a semana</h2>
+  <p>Barras: volume de pares entregues na semana. A &uacute;ltima semana (tracejada) &eacute; parcial: entregas recentes ainda t&ecirc;m janela aberta para sincronizar, o percentual sobe naturalmente nos pr&oacute;ximos dias.</p>
+  <canvas id="g1"></canvas>
+</div>
+
+<div class="panel">
+  <h2>Loggers que nunca sincronizaram ap&oacute;s a entrega &mdash; o efeito da s&eacute;rie V nova</h2>
+  <p>% de pares sem nenhum sincronismo at&eacute; hoje, separado entre a s&eacute;rie nova V7417 (entrou em opera&ccedil;&atilde;o em setembro) e as demais s&eacute;ries (A / TA / 0741).</p>
+  <canvas id="g2"></canvas>
+</div>
+
+<div class="alerta">
+<b>&#9888; Ponto de aten&ccedil;&atilde;o:</b> enquanto a velocidade de sincronismo melhorou, a cauda de loggers que <b>nunca sincronizaram</b> ap&oacute;s a entrega
+cresceu de 2.0% (jul) para 5.3% (set) &mdash; distribu&iacute;da entre todas as s&eacute;ries (em setembro: 5.6% nas s&eacute;ries A/TA/0741 e 2.3% na s&eacute;rie nova V7417,
+que estreou bem no agregado, com casos pontuais de ativa&ccedil;&atilde;o de f&aacute;brica j&aacute; mapeados). Outubro (15.6%) &eacute; janela aberta &mdash; entregas recentes ainda v&atilde;o sincronizar, n&atilde;o &eacute; comparável.
+Essa cauda de "mudos" (descarregados/apagados sem verifica&ccedil;&atilde;o antes da entrega) &eacute; a pr&oacute;xima fronteira da cobran&ccedil;a.
+</div>
+
+<footer>VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; An&aacute;lise de efetividade da cobran&ccedil;a de sincronismo &middot; Fontes: vtc_stage.documentos, dtbPortal (tipos), Mongo ares-prod beacon_devices_logs (1&ordm; sync p&oacute;s-entrega)</footer>
+</div>
+
+<script>
+const SEM = ["13/07", "20/07", "27/07", "03/08", "10/08", "17/08", "24/08", "31/08", "07/09", "14/09", "21/09", "28/09", "05/10"];
+const P24 = [87.8, 88.3, 87.6, 83.1, 82.9, 85.9, 87.4, 85.2, 87.5, 88.3, 92.0, 90.9, 82.5];
+const P48 = [89.0, 89.4, 88.6, 83.4, 83.2, 86.8, 88.2, 85.4, 87.7, 88.7, 92.1, 91.2, 82.6];
+const VOL = [2820, 2454, 1861, 1406, 1306, 1417, 2629, 1976, 1970, 2083, 3459, 2868, 2648];
+const PARC = [false, false, false, false, false, false, false, false, false, false, false, false, true];
+const MESES = ["2026-07", "2026-08", "2026-09", "2026-10"];
+const NUNCA_V = [0.0, 0.0, 2.3, 14.4];
+const NUNCA_O = [2.0, 3.6, 5.6, 16.0];
+
+new Chart(document.getElementById('g1'), {
+  data: {
+    labels: SEM,
+    datasets: [
+      { type: 'line', label: '% sync <= 24h', data: P24, borderColor: '#16a34a', backgroundColor: '#16a34a',
+         borderWidth: 3, tension: .3, yAxisID: 'y', pointRadius: 4,
+         segment: { borderDash: ctx => PARC[ctx.p1DataIndex] ? [6, 6] : undefined } },
+      { type: 'line', label: '% sync <= 48h', data: P48, borderColor: '#2563eb', backgroundColor: '#2563eb',
+         borderWidth: 2, tension: .3, yAxisID: 'y', pointRadius: 3,
+         segment: { borderDash: ctx => PARC[ctx.p1DataIndex] ? [6, 6] : undefined } },
+      { type: 'bar', label: 'Pares entregues', data: VOL, backgroundColor: 'rgba(124,58,237,.18)', yAxisID: 'y2' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'bottom' },
+      tooltip: { callbacks: { footer: items => PARC[items[0].dataIndex] ? 'Semana parcial (janela aberta)' : '' } },
+      annotation: undefined
+    },
+    scales: {
+      y: { min: 70, max: 100, ticks: { callback: v => v + '%' } },
+      y2: { position: 'right', grid: { display: false }, beginAtZero: true }
+    }
+  }
+});
+
+new Chart(document.getElementById('g2'), {
+  type: 'bar',
+  data: {
+    labels: MESES,
+    datasets: [
+      { label: '% nunca sincronizou - serie V7417 (nova)', data: NUNCA_V, backgroundColor: '#dc2626' },
+      { label: '% nunca sincronizou - series A/TA/0741', data: NUNCA_O, backgroundColor: '#2563eb' }
+    ]
+  },
+  options: { responsive: true, plugins: { legend: { position: 'bottom' } },
+    scales: { y: { beginAtZero: true, ticks: { callback: v => v + '%' } } } }
+});
+</script>
+</body>
+</html>

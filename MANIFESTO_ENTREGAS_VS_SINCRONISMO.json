@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-14T15:27:14",
+  "gerado_em": "2026-10-14T15:32:14",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 436,
+    "pendentes_janela": 435,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 130,
     "com_embarque_efetiva": 6810,
@@ -49,7 +49,7 @@
       "RBR - RODOTEC": 21,
       "THE - AERONEIVA EXPRESS": 16,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 13
+      "CGB - JR TRANSPORTES": 13
     },
     "top10_ufs_pendencias": {
       "RS": 83,
@@ -64,9 +64,9 @@
       "MG": 14
     },
     "latencia": {
-      "n_agente": 6003,
-      "n_so_gru": 40,
-      "n_sem_primeiro_sync": 730,
+      "n_agente": 6004,
+      "n_so_gru": 41,
+      "n_sem_primeiro_sync": 728,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -89,8 +89,8 @@
       "media_horas": 0.83,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 7,
-      "n_sem_primeiro_sync": 34
+      "n_sync_so_gru": 8,
+      "n_sem_primeiro_sync": 33
     },
     {
       "dia_iso": "2026-09-26",
@@ -421,18 +421,18 @@
       "dia_full": "13/10/2026",
       "pedidos": 103,
       "loggers": 210,
-      "sincronizados": 180,
-      "pendentes": 30,
+      "sincronizados": 181,
+      "pendentes": 29,
       "sem_embarque": 5,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 29,
-      "pct": 14.3,
-      "n_latencia": 170,
-      "media_horas": 0.04,
+      "pedidos_pendentes": 28,
+      "pct": 13.8,
+      "n_latencia": 171,
+      "media_horas": 0.21,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 40
+      "n_sem_primeiro_sync": 39
     },
     {
       "dia_iso": "2026-10-14",

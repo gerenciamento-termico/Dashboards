@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-14T14:44:34",
+  "gerado_em": "2026-10-14T14:47:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 437,
+    "pendentes_janela": 435,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 131,
     "com_embarque_efetiva": 6802,
@@ -48,8 +48,8 @@
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 24,
       "RBR - RODOTEC": 21,
       "THE - AERONEIVA EXPRESS": 16,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 15,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 14
+      "BVB - J PIMENTEL S. CUNHA LTDA": 14,
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 13
     },
     "top10_ufs_pendencias": {
       "RS": 82,
@@ -61,12 +61,12 @@
       "AC": 21,
       "PI": 16,
       "PR": 16,
-      "AM": 15
+      "MG": 14
     },
     "latencia": {
-      "n_agente": 5995,
+      "n_agente": 5997,
       "n_so_gru": 40,
-      "n_sem_primeiro_sync": 730,
+      "n_sem_primeiro_sync": 728,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "13/10/2026",
       "pedidos": 103,
       "loggers": 210,
-      "sincronizados": 178,
-      "pendentes": 32,
+      "sincronizados": 180,
+      "pendentes": 30,
       "sem_embarque": 5,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 31,
-      "pct": 15.2,
-      "n_latencia": 168,
+      "pedidos_pendentes": 29,
+      "pct": 14.3,
+      "n_latencia": 170,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 42
+      "n_sem_primeiro_sync": 40
     },
     {
       "dia_iso": "2026-10-14",

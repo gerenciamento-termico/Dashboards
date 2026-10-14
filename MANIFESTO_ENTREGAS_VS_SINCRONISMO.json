@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-14T16:08:04",
+  "gerado_em": "2026-10-14T16:13:44",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -29,10 +29,10 @@
     "ocultos_ausentes": 227,
     "pendentes_janela": 433,
     "cobranca_gru_janela": 25,
-    "sem_embarque_efetiva": 133,
-    "com_embarque_efetiva": 6811,
+    "sem_embarque_efetiva": 131,
+    "com_embarque_efetiva": 6813,
     "loggers_sem_lastsync": 61,
-    "nao_avaliados": 133,
+    "nao_avaliados": 131,
     "pedidos_com_agente": 7090,
     "dtbtransporte": {
       "consultados": 1020,
@@ -40,8 +40,8 @@
       "linhas": 1118
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 79,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 78,
+      "VTCLOG - GRU": 80,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 77,
       "MAB - EXPRESSO RODRIGUES LTDA": 58,
       "SSA - LUTY LOG": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
@@ -52,9 +52,9 @@
       "CGB - JR TRANSPORTES": 13
     },
     "top10_ufs_pendencias": {
-      "RS": 83,
+      "RS": 82,
+      "SP": 60,
       "PA": 60,
-      "SP": 59,
       "BA": 33,
       "SC": 27,
       "TO": 25,
@@ -64,7 +64,7 @@
       "MG": 14
     },
     "latencia": {
-      "n_agente": 6006,
+      "n_agente": 6008,
       "n_so_gru": 41,
       "n_sem_primeiro_sync": 727,
       "media_horas": 0.25,
@@ -438,15 +438,15 @@
       "dia_iso": "2026-10-14",
       "dia": "14/10",
       "dia_full": "14/10/2026",
-      "pedidos": 36,
-      "loggers": 85,
-      "sincronizados": 54,
+      "pedidos": 38,
+      "loggers": 87,
+      "sincronizados": 56,
       "pendentes": 31,
-      "sem_embarque": 9,
+      "sem_embarque": 7,
       "cobranca_gru": 0,
       "pedidos_pendentes": 20,
-      "pct": 36.5,
-      "n_latencia": 50,
+      "pct": 35.6,
+      "n_latencia": 52,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,

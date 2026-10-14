@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-14T10:57:07",
+  "gerado_em": "2026-10-14T11:02:08",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6958,
-    "pedidos_janela": 992,
-    "loggers_ares_janela": 6845,
-    "loggers_ares_antes_dedup": 6882,
+    "pares_janela": 6959,
+    "pedidos_janela": 993,
+    "loggers_ares_janela": 6846,
+    "loggers_ares_antes_dedup": 6883,
     "dedup_dia_logger": 37,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
@@ -30,14 +30,14 @@
     "pendentes_janela": 427,
     "cobranca_gru_janela": 29,
     "sem_embarque_efetiva": 124,
-    "com_embarque_efetiva": 6758,
+    "com_embarque_efetiva": 6759,
     "loggers_sem_lastsync": 59,
     "nao_avaliados": 124,
-    "pedidos_com_agente": 6958,
+    "pedidos_com_agente": 6959,
     "dtbtransporte": {
-      "consultados": 992,
-      "mapeados": 992,
-      "linhas": 1087
+      "consultados": 993,
+      "mapeados": 993,
+      "linhas": 1088
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 76,
@@ -64,7 +64,7 @@
       "AM": 15
     },
     "latencia": {
-      "n_agente": 5956,
+      "n_agente": 5957,
       "n_so_gru": 40,
       "n_sem_primeiro_sync": 725,
       "media_horas": 0.25,
@@ -438,17 +438,17 @@
       "dia_iso": "2026-10-14",
       "dia": "14/10",
       "dia_full": "14/10/2026",
-      "pedidos": 13,
-      "loggers": 34,
-      "sincronizados": 25,
+      "pedidos": 14,
+      "loggers": 35,
+      "sincronizados": 26,
       "pendentes": 9,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 8,
-      "pct": 26.5,
-      "n_latencia": 14,
+      "pct": 25.7,
+      "n_latencia": 15,
       "media_horas": 0.04,
-      "mediana_horas": 0.04,
+      "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 20

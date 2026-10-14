@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-14T10:49:25",
+  "gerado_em": "2026-10-14T10:57:07",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6957,
-    "pedidos_janela": 991,
-    "loggers_ares_janela": 6844,
-    "loggers_ares_antes_dedup": 6881,
+    "pares_janela": 6958,
+    "pedidos_janela": 992,
+    "loggers_ares_janela": 6845,
+    "loggers_ares_antes_dedup": 6882,
     "dedup_dia_logger": 37,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 427,
     "cobranca_gru_janela": 29,
-    "sem_embarque_efetiva": 130,
-    "com_embarque_efetiva": 6751,
+    "sem_embarque_efetiva": 124,
+    "com_embarque_efetiva": 6758,
     "loggers_sem_lastsync": 59,
-    "nao_avaliados": 130,
-    "pedidos_com_agente": 6957,
+    "nao_avaliados": 124,
+    "pedidos_com_agente": 6958,
     "dtbtransporte": {
-      "consultados": 991,
-      "mapeados": 991,
-      "linhas": 1086
+      "consultados": 992,
+      "mapeados": 992,
+      "linhas": 1087
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 76,
@@ -52,7 +52,7 @@
       "BVB - J PIMENTEL S. CUNHA LTDA": 13
     },
     "top10_ufs_pendencias": {
-      "RS": 82,
+      "RS": 81,
       "PA": 66,
       "SP": 54,
       "BA": 33,
@@ -60,12 +60,12 @@
       "TO": 25,
       "AC": 21,
       "PI": 16,
-      "AM": 15,
-      "PR": 14
+      "MG": 15,
+      "AM": 15
     },
     "latencia": {
-      "n_agente": 5950,
-      "n_so_gru": 39,
+      "n_agente": 5956,
+      "n_so_gru": 40,
       "n_sem_primeiro_sync": 725,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
@@ -174,12 +174,12 @@
       "dia_full": "30/09/2026",
       "pedidos": 94,
       "loggers": 791,
-      "sincronizados": 758,
-      "pendentes": 32,
+      "sincronizados": 759,
+      "pendentes": 31,
       "sem_embarque": 1,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 18,
-      "pct": 4.0,
+      "pedidos_pendentes": 17,
+      "pct": 3.9,
       "n_latencia": 725,
       "media_horas": 0.2,
       "mediana_horas": 0.04,
@@ -203,8 +203,8 @@
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 63
+      "n_sync_so_gru": 1,
+      "n_sem_primeiro_sync": 62
     },
     {
       "dia_iso": "2026-10-02",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-14",
       "dia": "14/10",
       "dia_full": "14/10/2026",
-      "pedidos": 11,
-      "loggers": 27,
-      "sincronizados": 19,
-      "pendentes": 8,
-      "sem_embarque": 6,
+      "pedidos": 13,
+      "loggers": 34,
+      "sincronizados": 25,
+      "pendentes": 9,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 7,
-      "pct": 29.6,
-      "n_latencia": 8,
-      "media_horas": 0.05,
-      "mediana_horas": 0.06,
+      "pedidos_pendentes": 8,
+      "pct": 26.5,
+      "n_latencia": 14,
+      "media_horas": 0.04,
+      "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 19
+      "n_sem_primeiro_sync": 20
     }
   ],
   "erros_validacao": {},

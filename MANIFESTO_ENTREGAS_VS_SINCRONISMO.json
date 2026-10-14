@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-14T11:50:15",
+  "gerado_em": "2026-10-14T11:52:04",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 428,
+    "pendentes_janela": 429,
     "cobranca_gru_janela": 27,
-    "sem_embarque_efetiva": 125,
-    "com_embarque_efetiva": 6763,
+    "sem_embarque_efetiva": 124,
+    "com_embarque_efetiva": 6764,
     "loggers_sem_lastsync": 59,
-    "nao_avaliados": 125,
+    "nao_avaliados": 124,
     "pedidos_com_agente": 6964,
     "dtbtransporte": {
       "consultados": 997,
@@ -40,8 +40,8 @@
       "linhas": 1092
     },
     "top10_agentes_pendencias": {
+      "VTCLOG - GRU": 76,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 76,
-      "VTCLOG - GRU": 75,
       "MAB - EXPRESSO RODRIGUES LTDA": 58,
       "SSA - LUTY LOG": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
@@ -54,7 +54,7 @@
     "top10_ufs_pendencias": {
       "RS": 81,
       "PA": 66,
-      "SP": 55,
+      "SP": 56,
       "BA": 33,
       "SC": 27,
       "TO": 25,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 5969,
       "n_so_gru": 40,
-      "n_sem_primeiro_sync": 717,
+      "n_sem_primeiro_sync": 718,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-14",
       "dia": "14/10",
       "dia_full": "14/10/2026",
-      "pedidos": 17,
-      "loggers": 39,
+      "pedidos": 18,
+      "loggers": 40,
       "sincronizados": 29,
-      "pendentes": 10,
-      "sem_embarque": 1,
+      "pendentes": 11,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 9,
-      "pct": 25.6,
+      "pedidos_pendentes": 10,
+      "pct": 27.5,
       "n_latencia": 25,
       "media_horas": 0.05,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 14
+      "n_sem_primeiro_sync": 15
     }
   ],
   "erros_validacao": {},

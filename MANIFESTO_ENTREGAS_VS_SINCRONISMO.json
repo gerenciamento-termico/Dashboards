@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-14T10:06:58",
+  "gerado_em": "2026-10-14T10:11:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,29 +19,29 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6901,
-    "pedidos_janela": 984,
-    "loggers_ares_janela": 6820,
-    "loggers_ares_antes_dedup": 6857,
+    "pares_janela": 6926,
+    "pedidos_janela": 985,
+    "loggers_ares_janela": 6832,
+    "loggers_ares_antes_dedup": 6869,
     "dedup_dia_logger": 37,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 423,
+    "pendentes_janela": 424,
     "cobranca_gru_janela": 29,
     "sem_embarque_efetiva": 124,
-    "com_embarque_efetiva": 6733,
+    "com_embarque_efetiva": 6745,
     "loggers_sem_lastsync": 59,
     "nao_avaliados": 124,
-    "pedidos_com_agente": 6901,
+    "pedidos_com_agente": 6926,
     "dtbtransporte": {
-      "consultados": 984,
-      "mapeados": 984,
-      "linhas": 1079
+      "consultados": 985,
+      "mapeados": 985,
+      "linhas": 1080
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 76,
-      "VTCLOG - GRU": 74,
+      "VTCLOG - GRU": 75,
       "MAB - EXPRESSO RODRIGUES LTDA": 58,
       "SSA - LUTY LOG": 27,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 25,
@@ -64,9 +64,9 @@
       "PR": 14
     },
     "latencia": {
-      "n_agente": 5940,
+      "n_agente": 5941,
       "n_so_gru": 37,
-      "n_sem_primeiro_sync": 719,
+      "n_sem_primeiro_sync": 730,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-14",
       "dia": "14/10",
       "dia_full": "14/10/2026",
-      "pedidos": 6,
-      "loggers": 10,
-      "sincronizados": 7,
-      "pendentes": 3,
+      "pedidos": 7,
+      "loggers": 22,
+      "sincronizados": 18,
+      "pendentes": 4,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 3,
-      "pct": 30.0,
-      "n_latencia": 1,
-      "media_horas": 0.06,
-      "mediana_horas": 0.06,
+      "pedidos_pendentes": 4,
+      "pct": 18.2,
+      "n_latencia": 2,
+      "media_horas": 0.05,
+      "mediana_horas": 0.05,
       "p90_horas": 0.06,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 9
+      "n_sem_primeiro_sync": 20
     }
   ],
   "erros_validacao": {},

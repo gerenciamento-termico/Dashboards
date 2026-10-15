@@ -241,6 +241,22 @@ tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
 .mo-danger{background:none;border-color:#fecaca;color:#dc2626}
 .mo-danger:hover{background:#fef2f2;border-color:#dc2626}
 
+/* ---- login ---- */
+.lg-ov{display:none;position:fixed;inset:0;background:var(--bg);z-index:950;align-items:center;justify-content:center;padding:18px}
+body.bloqueada .lg-ov{display:flex}
+body.bloqueada .topbar, body.bloqueada .wrap{filter:blur(7px);pointer-events:none;user-select:none}
+.lg-card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow2);width:100%;max-width:380px;padding:30px 28px 26px}
+.lg-brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.lg-tit{font-size:1.05rem;font-weight:700;letter-spacing:-.2px;margin-bottom:4px}
+.lg-sub{font-size:.76rem;color:var(--tx2);line-height:1.55;margin-bottom:16px}
+.lg-err{font-size:.73rem;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:9px;padding:9px 12px;margin-top:12px;display:none}
+.lg-err.on{display:block}
+.lg-foot{font-size:.65rem;color:var(--tx3);text-align:center;margin-top:16px;line-height:1.5}
+.tb-user{display:flex;align-items:center;gap:9px}
+.tb-user .pill b{font-weight:600}
+.btn-sair{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;color:var(--tx2);padding:6px 13px;font-size:.71rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .12s}
+.btn-sair:hover{border-color:#fecaca;color:#dc2626;background:#fef2f2}
+
 .cards{display:none}
 @media(max-width:1200px){.fbar{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:860px){
@@ -263,7 +279,7 @@ tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
 footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-height:1.7}
 </style>
 </head>
-<body>
+<body class="bloqueada">
 <div class="topbar">
   <div class="tb-in">
     <div class="brand">
@@ -274,6 +290,10 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
       <span class="pill"><span class="livedot"></span> Ao vivo &middot; recalculado a cada 30s</span>
       <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>__GERADO__</b> &middot; ciclo 5 min</span>
       <span class="pill"><i class="fa-solid fa-database"></i> Fonte __FONTE_EM__</span>
+    </div>
+    <div class="tb-user">
+      <span class="pill"><i class="fa-solid fa-circle-user"></i> <b id="quem-nome"></b></span>
+      <button class="btn-sair" onclick="sair()" title="Encerrar sess&atilde;o"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
     </div>
   </div>
 </div>
@@ -323,6 +343,24 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 </footer>
 </div>
 
+<div class="lg-ov" id="lg-ov">
+  <div class="lg-card">
+    <div class="lg-brand">
+      <div class="hicon"><i class="fa-solid fa-stopwatch"></i></div>
+      <h1 style="font-size:.98rem">Sincronismo 48h<small>VTC LOG &middot; Gerenciamento T&eacute;rmico</small></h1>
+    </div>
+    <div class="lg-tit">Acesso restrito</div>
+    <div class="lg-sub">Entre com seu usu&aacute;rio para visualizar as pend&ecirc;ncias e registrar cobran&ccedil;as e observa&ccedil;&otilde;es em nome da sua conta.</div>
+    <label class="mo-lbl" for="lg-user">Usu&aacute;rio</label>
+    <input id="lg-user" class="mo-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false">
+    <label class="mo-lbl" for="lg-pass">Senha</label>
+    <input id="lg-pass" type="password" class="mo-inp" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password">
+    <div class="lg-err" id="lg-err"></div>
+    <button class="mo-btn mo-primary" id="lg-btn" onclick="fazerLogin()" style="width:100%;margin-top:16px;padding:12px"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
+    <div class="lg-foot">Quadro compartilhado do Gerenciamento T&eacute;rmico &middot; toda marca&ccedil;&atilde;o fica registrada com o nome de quem fez</div>
+  </div>
+</div>
+
 <div class="mo-ov" id="mo-ov">
   <div class="mo-card" role="dialog" aria-modal="true" aria-labelledby="mo-tit">
     <div class="mo-head">
@@ -334,13 +372,11 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
       <button class="mo-x" onclick="fecharModal(null)" title="Fechar"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="mo-body">
-      <label class="mo-lbl" for="mo-nome">Seu nome <small>&middot; aparece para todos no quadro</small></label>
-      <input id="mo-nome" class="mo-inp" maxlength="40" placeholder="Ex.: Caio" autocomplete="off">
       <div id="mo-obs-wrap">
         <label class="mo-lbl" for="mo-obs">Motivo / observa&ccedil;&atilde;o <small>&middot; por que n&atilde;o sincronizou, onde est&aacute; o logger...</small></label>
         <div class="mo-chips" id="mo-chips"></div>
         <textarea id="mo-obs" class="mo-inp mo-ta" maxlength="200" placeholder="Descreva o motivo ou toque numa sugest&atilde;o acima"></textarea>
-        <div class="mo-cnt"><span id="mo-cnt">0</span>/200</div>
+        <div class="mo-cnt"><span id="mo-cnt">0</span>/200 &middot; registrado como <b id="mo-quem"></b></div>
       </div>
     </div>
     <div class="mo-foot">
@@ -369,6 +405,74 @@ const NOMES = {1:["NO PRAZO","b1","ok","#16a34a"], 2:["ATEN\u00c7\u00c3O","b2","
 const FB = "https://gt-sincronismo-default-rtdb.firebaseio.com/sync48";
 let FLAGS = {};
 let FB_OK = false;
+
+/* ===== login (usuarios cadastrados no Firebase, senha nunca trafega nem fica salva: hash SHA-256) ===== */
+const SKEY = "sync48_sessao";
+let SESSION = null;
+
+async function sha256(txt){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(txt));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function lgErr(msg){
+  const el = document.getElementById("lg-err");
+  if (msg){ el.textContent = msg; el.classList.add("on"); } else el.classList.remove("on");
+}
+function aplicarSessao(){
+  document.body.classList.remove("bloqueada");
+  document.getElementById("quem-nome").textContent = SESSION.nome;
+  try { localStorage.setItem("sync48_operador", SESSION.nome); } catch(e){}
+}
+function bloquear(){
+  SESSION = null;
+  try { localStorage.removeItem(SKEY); } catch(e){}
+  document.body.classList.add("bloqueada");
+  document.getElementById("lg-pass").value = "";
+  lgErr("");
+  setTimeout(() => document.getElementById("lg-user").focus(), 150);
+}
+function sair(){ bloquear(); }
+async function fazerLogin(){
+  const u = document.getElementById("lg-user").value.trim().toLowerCase();
+  const p = document.getElementById("lg-pass").value;
+  if (!u || !p){ lgErr("Preencha usu\u00e1rio e senha."); return; }
+  const btn = document.getElementById("lg-btn");
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Verificando...';
+  try {
+    const chaveU = u.replace(/[.#$\[\]\/]/g, "_"); // Firebase nao aceita "." em chaves
+    const resp = await fetch(FB + "/_usuarios/" + encodeURIComponent(chaveU) + ".json", { cache: "no-store" });
+    if (!resp.ok) throw new Error(resp.status);
+    const reg = await resp.json();
+    const h = await sha256(u + ":" + p);
+    if (!reg || !reg.h || reg.h !== h){
+      lgErr("Usu\u00e1rio ou senha incorretos.");
+    } else {
+      SESSION = { u: u, nome: reg.nome || u, t: Date.now() };
+      try { localStorage.setItem(SKEY, JSON.stringify(SESSION)); } catch(e){}
+      lgErr("");
+      aplicarSessao();
+    }
+  } catch(e){
+    lgErr("Sem conex\u00e3o com o servidor de acesso. Tente novamente.");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Entrar';
+  }
+}
+async function validarSessaoSalva(){
+  try { SESSION = JSON.parse(localStorage.getItem(SKEY) || "null"); } catch(e){ SESSION = null; }
+  if (!SESSION || !SESSION.u || !SESSION.nome){ bloquear(); return; }
+  aplicarSessao();
+  try { // confirma que o usuario ainda existe no banco; se foi removido, encerra a sessao
+    const chaveU = SESSION.u.replace(/[.#$\[\]\/]/g, "_");
+    const resp = await fetch(FB + "/_usuarios/" + encodeURIComponent(chaveU) + ".json", { cache: "no-store" });
+    if (resp.ok && (await resp.json()) === null) bloquear();
+  } catch(e){ /* offline: mantem a sessao local */ }
+}
+["lg-user","lg-pass"].forEach(id => document.getElementById(id).addEventListener("keydown", e => {
+  if (e.key === "Enter"){ e.preventDefault(); fazerLogin(); }
+}));
 function chave(r){ return (r.p + "|" + r.l + "|" + r.ent).replace(/[.#$\[\]\/]/g, "_"); }
 function normalizar(v){
   if (!v) return null;
@@ -383,6 +487,7 @@ async function buscarFlags(){
     const bruto = (await resp.json()) || {};
     FLAGS = {};
     for (const k of Object.keys(bruto)){
+      if (k.charAt(0) === "_") continue; // nos reservados (ex.: _usuarios)
       const v = normalizar(bruto[k]);
       if (v) FLAGS[k] = v;
     }
@@ -413,26 +518,19 @@ const MOTIVOS = ["Solicitado sinc", "Enviado para GRU", "Logger descarregado", "
 let MO_RESOLVE = null;
 
 function abrirModal(opts){
-  // opts: { titulo, sub, comObs, textoObs, podeRemover }
+  // opts: { titulo, sub, textoObs, podeRemover }
   return new Promise(resolve => {
     MO_RESOLVE = resolve;
     document.getElementById("mo-tit").textContent = opts.titulo;
     document.getElementById("mo-sub").innerHTML = opts.sub || "";
-    document.getElementById("mo-ico").innerHTML = opts.comObs ? '<i class="fa-solid fa-pen-to-square"></i>' : '<i class="fa-solid fa-user-check"></i>';
-    const nome = document.getElementById("mo-nome");
-    nome.value = localStorage.getItem("sync48_operador") || "";
-    const wrap = document.getElementById("mo-obs-wrap");
-    wrap.style.display = opts.comObs ? "" : "none";
-    if (opts.comObs){
-      document.getElementById("mo-obs").value = opts.textoObs || "";
-      atualizaCnt();
-      document.getElementById("mo-chips").innerHTML = MOTIVOS.map(m =>
-        '<button type="button" class="mo-chip" onclick="usarChip(this)">'+m+'</button>').join("");
-    }
+    document.getElementById("mo-obs").value = opts.textoObs || "";
+    atualizaCnt();
+    document.getElementById("mo-quem").textContent = SESSION ? SESSION.nome : "";
+    document.getElementById("mo-chips").innerHTML = MOTIVOS.map(m =>
+      '<button type="button" class="mo-chip" onclick="usarChip(this)">'+m+'</button>').join("");
     document.getElementById("mo-remover").style.display = opts.podeRemover ? "" : "none";
-    validaModal();
     document.getElementById("mo-ov").classList.add("aberto");
-    setTimeout(() => { (nome.value ? (opts.comObs ? document.getElementById("mo-obs") : nome) : nome).focus(); }, 180);
+    setTimeout(() => document.getElementById("mo-obs").focus(), 180);
   });
 }
 function fecharModal(resultado){
@@ -441,11 +539,8 @@ function fecharModal(resultado){
   if (r) r(resultado);
 }
 function modalSalvar(){
-  const nome = document.getElementById("mo-nome").value.trim().slice(0, 40);
-  if (!nome) return;
-  localStorage.setItem("sync48_operador", nome);
-  const comObs = document.getElementById("mo-obs-wrap").style.display !== "none";
-  fecharModal({ nome: nome, texto: comObs ? document.getElementById("mo-obs").value.trim().slice(0, 200) : null });
+  if (!SESSION){ fecharModal(null); bloquear(); return; }
+  fecharModal({ nome: SESSION.nome, texto: document.getElementById("mo-obs").value.trim().slice(0, 200) });
 }
 function usarChip(el){
   const ta = document.getElementById("mo-obs");
@@ -455,17 +550,6 @@ function usarChip(el){
 function atualizaCnt(){
   document.getElementById("mo-cnt").textContent = document.getElementById("mo-obs").value.length;
 }
-function validaModal(){
-  document.getElementById("mo-salvar").disabled = !document.getElementById("mo-nome").value.trim();
-}
-document.getElementById("mo-nome").addEventListener("input", validaModal);
-document.getElementById("mo-nome").addEventListener("keydown", e => {
-  if (e.key === "Enter"){
-    e.preventDefault();
-    if (document.getElementById("mo-obs-wrap").style.display === "none") modalSalvar();
-    else document.getElementById("mo-obs").focus();
-  }
-});
 document.getElementById("mo-obs").addEventListener("input", atualizaCnt);
 document.getElementById("mo-obs").addEventListener("keydown", e => {
   if (e.key === "Enter" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); modalSalvar(); }
@@ -478,10 +562,8 @@ function subPendencia(k){
   return r ? "Pedido <b>"+esc(r.p)+"</b> \u00b7 logger <b>"+esc(r.l)+"</b> \u00b7 "+esc(r.ag) : "";
 }
 async function obterNome(k){
-  const salvo = (localStorage.getItem("sync48_operador") || "").trim();
-  if (salvo) return salvo;
-  const res = await abrirModal({ titulo: "Identifique-se", sub: subPendencia(k), comObs: false, podeRemover: false });
-  return res ? res.nome : null;
+  if (!SESSION){ bloquear(); return null; } // exige login: nunca marca cobrado sem nome
+  return SESSION.nome;
 }
 async function patchFlag(k, campos){
   const url = FB + "/" + encodeURIComponent(k) + ".json";
@@ -514,6 +596,7 @@ async function toggleCobrado(k){
   }
 }
 async function editarObs(k){
+  if (!SESSION){ bloquear(); return; }
   const atual = FLAGS[k] || {};
   const res = await abrirModal({
     titulo: atual.obs ? "Editar observa\u00e7\u00e3o" : "Nova observa\u00e7\u00e3o",
@@ -700,6 +783,7 @@ document.querySelectorAll(".kpi").forEach(k => k.addEventListener("click", () =>
   apply();
 }));
 (async () => {
+  await validarSessaoSalva();
   await buscarFlags();
   await limpezaFlags();
   apply();

@@ -514,7 +514,7 @@ async function limpezaFlags(){
 /* ---- modal profissional (substitui window.prompt) ---- */
 const MOTIVOS = ["Solicitado sinc", "Enviado para GRU", "Logger descarregado", "Agente sem bateria",
                  "Em retorno para base", "Pedido devolvido", "Rodovi\u00e1rio paletizado", "Sem logger",
-                 "Aguardando retirada", "Confirmar elitech"];
+                 "Aguardando retirada", "Nota retida", "Realizado ressalva"];
 let MO_RESOLVE = null;
 
 function abrirModal(opts){

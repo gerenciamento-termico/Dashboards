@@ -250,7 +250,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 
 <div class="fcard">
 <div class="fbar">
-  <div class="search"><label>Busca (pedido / logger / romaneio / base / obs)</label><i class="fa-solid fa-magnifying-glass"></i><input id="f-busca" type="text" placeholder="Ex.: 572344, A8841, RODOTEC..."></div>
+  <div class="search"><label>Busca (pedido / logger / romaneio / base / ocorr&ecirc;ncia)</label><i class="fa-solid fa-magnifying-glass"></i><input id="f-busca" type="text" placeholder="Ex.: 572344, A8841, RODOTEC..."></div>
   <div><label>Base / Agente</label><select id="f-base"><option value="">Todas</option><option value="BVB - J PIMENTEL S. CUNHA LTDA">BVB - J PIMENTEL S. CUNHA LTDA</option><option value="CGR - LH TRANSPORTES">CGR - LH TRANSPORTES</option><option value="FLN - TGEX TRANSPORTES E LOCACAO DE VEIC">FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</option><option value="FOR - NT TRANSPORTE LTDA">FOR - NT TRANSPORTE LTDA</option><option value="GYN - RBR EXPERIENCIA EM TRANSPORTES">GYN - RBR EXPERIENCIA EM TRANSPORTES</option><option value="IMP - AAS LUCENA SERVIÇOS EDE ENTREGA RAPIDA">IMP - AAS LUCENA SERVIÇOS EDE ENTREGA RAPIDA</option><option value="JDO - TRANSVALBER">JDO - TRANSVALBER</option><option value="LDB - ND CARGAS LTDA">LDB - ND CARGAS LTDA</option><option value="MAB - EXPRESSO RODRIGUES LTDA">MAB - EXPRESSO RODRIGUES LTDA</option><option value="MCZ - MCZ EXPRESS SERVICE LTDA">MCZ - MCZ EXPRESS SERVICE LTDA</option><option value="POA - GMB TRANSPORTES E LOGISTICA ME">POA - GMB TRANSPORTES E LOGISTICA ME</option><option value="RBR - RODOTEC">RBR - RODOTEC</option><option value="SSA - LUTY LOG">SSA - LUTY LOG</option><option value="TBT - PAIVA TRANSPORTES">TBT - PAIVA TRANSPORTES</option><option value="THE - AERONEIVA EXPRESS">THE - AERONEIVA EXPRESS</option><option value="UDI - ENTREGAS URGENTES LTDA">UDI - ENTREGAS URGENTES LTDA</option><option value="VTCLOG - BSB">VTCLOG - BSB</option><option value="VTCLOG - GRU">VTCLOG - GRU</option><option value="XAP - DMK">XAP - DMK</option></select></div>
   <div><label>UF</label><select id="f-uf"><option value="">Todas</option><option value="AC">AC</option><option value="AL">AL</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="PA">PA</option><option value="PI">PI</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SP">SP</option></select></div>
   <div><label>N&iacute;vel</label><select id="f-nivel"><option value="">Todos</option><option value="1">No prazo (0-12h)</option><option value="2">Aten&ccedil;&atilde;o (12-24h)</option><option value="3">Alerta (24-36h)</option><option value="4">Cr&iacute;tico (36-48h)</option><option value="5">Estourado (&gt;48h)</option></select></div>
@@ -276,7 +276,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <footer>
   VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; Sincronismo 48h &middot; derivado do indicador Entregas &times; Sincronismo (mesmas regras; nada foi alterado nele)<br>
   N&iacute;veis pela idade da entrega: 0&ndash;12h no prazo &middot; 12&ndash;24h aten&ccedil;&atilde;o &middot; 24&ndash;36h alerta &middot; <b style="color:var(--n4)">36&ndash;48h cr&iacute;tico</b> &middot; <b style="color:var(--n5)">&gt;48h estourado</b> &middot; Sincronizou? Sai sozinho na pr&oacute;xima atualiza&ccedil;&atilde;o (5 min)<br>
-  Sinaliza&ccedil;&atilde;o "cobrado" em quadro compartilhado: a marca&ccedil;&atilde;o aparece para todos, com nome e hor&aacute;rio de quem cobrou; some sozinha quando a pend&ecirc;ncia sincroniza
+  Sinaliza&ccedil;&atilde;o "cobrado" e ocorr&ecirc;ncias em quadro compartilhado: aparecem para todos, com nome e hor&aacute;rio de quem registrou; s&oacute; o autor altera a pr&oacute;pria ocorr&ecirc;ncia; somem sozinhas quando a pend&ecirc;ncia sincroniza
 </footer>
 </div>
 
@@ -668,7 +668,12 @@ document.getElementById("mo-obs").addEventListener("keydown", e => {
   if (e.key === "Enter" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); modalSalvar(); }
 });
 document.getElementById("mo-ov").addEventListener("mousedown", e => { if (e.target === e.currentTarget) fecharModal(null); });
-document.addEventListener("keydown", e => { if (e.key === "Escape" && MO_RESOLVE) fecharModal(null); });
+document.addEventListener("keydown", e => {
+  if (e.key === "Escape"){
+    if (MO_RESOLVE) fecharModal(null);
+    else fecharPainel();
+  }
+});
 
 function subPendencia(k){
   const r = R.find(x => chave(x) === k);

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T08:44:34",
+  "gerado_em": "2026-10-15T08:51:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 415,
+    "pendentes_janela": 413,
     "cobranca_gru_janela": 45,
     "sem_embarque_efetiva": 82,
     "com_embarque_efetiva": 6037,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 77,
-      "VTCLOG - GRU": 72,
+      "VTCLOG - GRU": 70,
       "MAB - EXPRESSO RODRIGUES LTDA": 58,
       "SSA - LUTY LOG": 26,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 24,
@@ -64,9 +64,9 @@
       "PI": 13
     },
     "latencia": {
-      "n_agente": 5263,
+      "n_agente": 5265,
       "n_so_gru": 32,
-      "n_sem_primeiro_sync": 708,
+      "n_sem_primeiro_sync": 706,
       "media_horas": 0.18,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -402,18 +402,18 @@
       "dia_full": "13/10/2026",
       "pedidos": 103,
       "loggers": 210,
-      "sincronizados": 182,
-      "pendentes": 26,
+      "sincronizados": 183,
+      "pendentes": 25,
       "sem_embarque": 5,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 25,
-      "pct": 12.4,
-      "n_latencia": 172,
+      "pedidos_pendentes": 24,
+      "pct": 11.9,
+      "n_latencia": 173,
       "media_horas": 0.21,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 38
+      "n_sem_primeiro_sync": 37
     },
     {
       "dia_iso": "2026-10-14",
@@ -421,18 +421,18 @@
       "dia_full": "14/10/2026",
       "pedidos": 49,
       "loggers": 150,
-      "sincronizados": 105,
-      "pendentes": 35,
+      "sincronizados": 106,
+      "pendentes": 34,
       "sem_embarque": 7,
       "cobranca_gru": 10,
-      "pedidos_pendentes": 17,
-      "pct": 23.3,
-      "n_latencia": 101,
+      "pedidos_pendentes": 16,
+      "pct": 22.7,
+      "n_latencia": 102,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 49
+      "n_sem_primeiro_sync": 48
     },
     {
       "dia_iso": "2026-10-15",

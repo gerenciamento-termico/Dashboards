@@ -77,6 +77,14 @@ tr.lv5 td{background:var(--n5bg)} tr.lv5:hover td{background:#fbd5d5}
 .pbar{width:120px;height:7px;background:#eef1f6;border-radius:99px;overflow:hidden}
 .pbar>div{height:100%;border-radius:99px}
 
+/* marcacao "ja cobrado" (localStorage - sem backend) */
+tr.flagged td{opacity:.55}
+tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
+.b-cob{background:#dbeafe;color:#1d4ed8;cursor:pointer;border:1px solid #bfdbfe}
+.b-cob:hover{background:#bfdbfe}
+.btn-flag{background:#fff;border:1px dashed #cbd5e1;border-radius:7px;color:var(--tx2);font-size:.62rem;font-weight:800;padding:3px 9px;cursor:pointer;font-family:inherit;letter-spacing:.3px}
+.btn-flag:hover{border-color:var(--blue);color:var(--blue)}
+
 .cards{display:none}
 @media(max-width:1200px){.fbar{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:860px){
@@ -109,7 +117,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
       pode passar de <b>48 horas</b>. Derivado do indicador Entregas &times; Sincronismo (mesmas regras), janela de 96h.</div>
     </div>
   </div>
-  <div class="upd"><i class="fa-solid fa-rotate"></i>Atualizado em <b>15/10/2026 16:51</b> &middot; a cada 5 min &middot; fonte 15/10/2026 16:51</div>
+  <div class="upd"><i class="fa-solid fa-rotate"></i>Atualizado em <b>15/10/2026 16:55</b> &middot; a cada 5 min &middot; fonte 15/10/2026 16:51</div>
 </header>
 
 <div class="kpis" id="kpis">
@@ -127,17 +135,18 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <div><label>UF</label><select id="f-uf"><option value="">Todas</option><option value="AL">AL</option><option value="AM">AM</option><option value="BA">BA</option><option value="CE">CE</option><option value="DF">DF</option><option value="ES">ES</option><option value="GO">GO</option><option value="MA">MA</option><option value="MG">MG</option><option value="MS">MS</option><option value="PA">PA</option><option value="PR">PR</option><option value="RJ">RJ</option><option value="RR">RR</option><option value="RS">RS</option><option value="SC">SC</option><option value="SP">SP</option><option value="TO">TO</option></select></div>
   <div><label>N&iacute;vel</label><select id="f-nivel"><option value="">Todos</option><option value="1">No prazo (0-12h)</option><option value="2">Aten&ccedil;&atilde;o (12-24h)</option><option value="3">Alerta (24-36h)</option><option value="4">Cr&iacute;tico (36-48h)</option><option value="5">Estourado (&gt;48h)</option></select></div>
   <div><label>Cobran&ccedil;a</label><select id="f-cob"><option value="">Todas</option><option value="AGENTE">Agente / Base</option><option value="GRU">GRU</option></select></div>
-  <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
+  <div><label>Sinaliza&ccedil;&atilde;o</label><select id="f-flag"><option value="">Todas</option><option value="N">N&atilde;o cobradas</option><option value="S">J&aacute; cobradas</option></select></div>
+  <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn ghost" onclick="compartilharFlags()" title="Copia um codigo com suas marcacoes para colar no WhatsApp; quem receber usa Importar"><i class="fa-solid fa-share-nodes"></i></button><button class="btn ghost" onclick="importarFlags()" title="Cole um codigo de marcacoes recebido"><i class="fa-solid fa-download"></i></button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
 </div>
 </div>
 
-<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--blue)"><i class="fa-solid fa-clock"></i> contagem regressiva recalculada ao vivo (a cada 30s) &middot; pend&ecirc;ncias com mais de 96h: <b>302</b> (ver indicador principal)</span></div>
+<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--blue)"><i class="fa-solid fa-clock"></i> contagem regressiva recalculada ao vivo (a cada 30s) &middot; pend&ecirc;ncias com mais de 96h: <b>301</b> (ver indicador principal)</span></div>
 
 <div class="tblwrap">
 <table>
   <thead><tr>
     <th>N&iacute;vel</th><th>Pedido</th><th>Logger</th><th>Romaneio</th><th>UF</th><th>Base / Agente</th>
-    <th>Entrega</th><th>Horas desde entrega</th><th>Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th>&Uacute;ltimo sync</th><th>Cobran&ccedil;a</th>
+    <th>Entrega</th><th>Horas desde entrega</th><th>Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th>&Uacute;ltimo sync</th><th>Cobran&ccedil;a</th><th title="Marcacao local deste navegador; use Compartilhar/Importar para sincronizar com colegas">Sinaliza&ccedil;&atilde;o</th>
   </tr></thead>
   <tbody id="tb"></tbody>
 </table>
@@ -163,6 +172,62 @@ function calc(r){
 }
 const NOMES = {1:["NO PRAZO","b1","ok","#16a34a"], 2:["ATEN\u00c7\u00c3O","b2","at","#ca8a04"], 3:["ALERTA","b3","al","#ea580c"], 4:["CR\u00cdTICO","b4","cr","#dc2626"], 5:["ESTOUROU","b5","es","#7f1d1d"]};
 
+/* ===== sinalizacao "ja cobrado" (localStorage; GitHub Pages nao tem backend) ===== */
+const FKEY = "sync48_cobrados";
+function chave(r){ return r.p + "|" + r.l + "|" + r.ent; }
+function lerFlags(){ try { return JSON.parse(localStorage.getItem(FKEY) || "{}"); } catch(e){ return {}; } }
+function salvarFlags(f){ try { localStorage.setItem(FKEY, JSON.stringify(f)); } catch(e){} }
+(function limpezaFlags(){
+  const f = lerFlags(); const atuais = new Set(R.map(chave)); let mudou = false;
+  for (const k of Object.keys(f)){
+    if (!atuais.has(k) || (Date.now() - (f[k].t || 0)) > 7*86400000){ delete f[k]; mudou = true; }
+  }
+  if (mudou) salvarFlags(f);
+})();
+function nomeOperador(){
+  let n = localStorage.getItem("sync48_operador") || "";
+  if (!n){
+    n = (window.prompt("Seu nome (aparece na marca\u00e7\u00e3o de cobrado):") || "").trim();
+    if (n) localStorage.setItem("sync48_operador", n);
+  }
+  return n || "GT";
+}
+function toggleCobrado(k){
+  const f = lerFlags();
+  if (f[k]) delete f[k];
+  else f[k] = { q: nomeOperador(), t: Date.now() };
+  salvarFlags(f);
+  apply();
+}
+function idadeFlag(t){
+  const h = (Date.now() - t) / 36e5;
+  if (h < 1) return Math.round(h * 60) + "min";
+  if (h < 48) return h.toFixed(0) + "h";
+  return Math.round(h / 24) + "d";
+}
+function compartilharFlags(){
+  const f = lerFlags();
+  const codigo = "SYNC48FLAGS:" + btoa(unescape(encodeURIComponent(JSON.stringify(f))));
+  navigator.clipboard.writeText(codigo).then(
+    () => alert("C\u00f3digo com " + Object.keys(f).length + " marca\u00e7\u00e3o(\u00f5es) copiado! Cole no WhatsApp para o colega importar."),
+    () => window.prompt("Copie o c\u00f3digo abaixo:", codigo)
+  );
+}
+function importarFlags(){
+  const codigo = (window.prompt("Cole o c\u00f3digo de marca\u00e7\u00f5es (SYNC48FLAGS:...):") || "").trim();
+  if (!codigo.startsWith("SYNC48FLAGS:")) { if (codigo) alert("C\u00f3digo inv\u00e1lido."); return; }
+  try {
+    const recebidas = JSON.parse(decodeURIComponent(escape(atob(codigo.slice(12)))));
+    const f = lerFlags();
+    let novas = 0;
+    for (const k of Object.keys(recebidas)){
+      if (!f[k]) { f[k] = recebidas[k]; novas++; }
+    }
+    salvarFlags(f);
+    alert(novas + " marca\u00e7\u00e3o(\u00f5es) importada(s)."); apply();
+  } catch(e){ alert("N\u00e3o foi poss\u00edvel ler o c\u00f3digo."); }
+}
+
 function fmtResta(resta){
   if (resta >= 0){
     const hh = Math.floor(resta), mm = Math.round((resta - hh) * 60);
@@ -179,11 +244,15 @@ function apply(){
   const uf = document.getElementById("f-uf").value;
   const nv = document.getElementById("f-nivel").value;
   const cb = document.getElementById("f-cob").value;
-  VIEW = R.map(r => ({...r, ...calc(r)})).filter(r => {
+  const fl = document.getElementById("f-flag").value;
+  const flags = lerFlags();
+  VIEW = R.map(r => ({...r, ...calc(r), flag: flags[chave(r)] || null})).filter(r => {
     if (ba && r.ag !== ba) return false;
     if (uf && r.uf !== uf) return false;
     if (nv && String(r.nivel) !== nv) return false;
     if (cb && r.cob !== cb) return false;
+    if (fl === "N" && r.flag) return false;
+    if (fl === "S" && !r.flag) return false;
     if (q){
       const alvo = (r.p+" "+r.l+" "+r.ro+" "+r.ag+" "+r.cli+" "+r.uf).toLowerCase();
       if (!alvo.includes(q)) return false;
@@ -201,12 +270,17 @@ function render(){
   }
   document.getElementById("cnt").innerHTML = "<b>" + VIEW.length + "</b> pend\u00eancia(s) no recorte \u00b7 <b>" +
     VIEW.filter(r => r.nivel === 4).length + "</b> cr\u00edticas (36\u201348h) \u00b7 <b>" +
-    VIEW.filter(r => r.nivel === 5).length + "</b> estouradas";
+    VIEW.filter(r => r.nivel === 5).length + "</b> estouradas \u00b7 <b>" +
+    VIEW.filter(r => r.flag).length + "</b> j\u00e1 cobradas (marca\u00e7\u00e3o local)";
 
   document.getElementById("tb").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls, cor] = NOMES[r.nivel];
     const pct = Math.max(2, Math.min(100, (r.h / 48) * 100));
-    return '<tr class="lv'+r.nivel+'">'
+    const k = chave(r).replace(/"/g, "&quot;");
+    const celCob = r.flag
+      ? '<td class="cobcell"><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')" title="Clique para desfazer">\u2713 COBRADO \u00b7 '+esc(r.flag.q)+' \u00b7 h\u00e1 '+idadeFlag(r.flag.t)+'</span></td>'
+      : '<td class="cobcell"><button class="btn-flag" onclick="toggleCobrado(\''+k+'\')">marcar cobrado</button></td>';
+    return '<tr class="lv'+r.nivel+(r.flag ? ' flagged' : '')+'">'
       + '<td><span class="badge '+bcls+'">'+nome+'</span></td>'
       + '<td><b>'+esc(r.p)+'</b></td>'
       + '<td>'+esc(r.l)+'</td>'
@@ -219,11 +293,16 @@ function render(){
       + '<td><div class="pbar"><div style="width:'+pct+'%;background:'+cor+'"></div></div></td>'
       + '<td>'+esc(r.s || "\u2014")+'</td>'
       + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
+      + celCob
       + '</tr>';
-  }).join("") || '<tr><td colspan="12" style="text-align:center;padding:26px;color:var(--tx2)">Nenhuma pend\u00eancia neste recorte. &#127881;</td></tr>';
+  }).join("") || '<tr><td colspan="13" style="text-align:center;padding:26px;color:var(--tx2)">Nenhuma pend\u00eancia neste recorte. &#127881;</td></tr>';
 
   document.getElementById("cards").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls] = NOMES[r.nivel];
+    const k = chave(r).replace(/"/g, "&quot;");
+    const linhaCob = r.flag
+      ? '<span class="k">Sinaliza\u00e7\u00e3o</span><span><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')">\u2713 COBRADO \u00b7 '+esc(r.flag.q)+' \u00b7 h\u00e1 '+idadeFlag(r.flag.t)+'</span></span>'
+      : '<span class="k">Sinaliza\u00e7\u00e3o</span><span><button class="btn-flag" onclick="toggleCobrado(\''+k+'\')">marcar cobrado</button></span>';
     return '<div class="card lv'+r.nivel+'">'
       + '<div class="topo"><span class="ped">'+esc(r.p)+'</span><span class="badge '+bcls+'">'+nome+'</span></div>'
       + '<div class="kv">'
@@ -232,18 +311,20 @@ function render(){
       + '<span class="k">Entrega</span><span>'+fmtEnt(r.ent)+' ('+r.h.toFixed(1)+'h atr\u00e1s)</span>'
       + '<span class="k">Rel\u00f3gio</span><span class="resta '+rcls+'">'+fmtResta(r.resta)+'</span>'
       + '<span class="k">Cobran\u00e7a</span><span>'+r.cob+'</span>'
+      + linhaCob
       + '</div></div>';
   }).join("");
 }
 
 function limpar(){
-  ["f-busca","f-base","f-uf","f-nivel","f-cob"].forEach(id => { document.getElementById(id).value = ""; });
+  ["f-busca","f-base","f-uf","f-nivel","f-cob","f-flag"].forEach(id => { document.getElementById(id).value = ""; });
   apply();
 }
 
 function baixarCsv(){
-  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca"];
-  const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, r.cob].join(";"));
+  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca","ja_cobrado","cobrado_por","cobrado_em"];
+  const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, r.cob,
+    r.flag ? "SIM" : "", r.flag ? '"'+String(r.flag.q).replace(/"/g,'""')+'"' : "", r.flag ? new Date(r.flag.t).toLocaleString("pt-BR") : ""].join(";"));
   const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);
@@ -252,7 +333,7 @@ function baixarCsv(){
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 3000);
 }
 
-["f-busca","f-base","f-uf","f-nivel","f-cob"].forEach(id => {
+["f-busca","f-base","f-uf","f-nivel","f-cob","f-flag"].forEach(id => {
   const el = document.getElementById(id);
   el.addEventListener(el.tagName === "INPUT" ? "input" : "change", apply);
 });

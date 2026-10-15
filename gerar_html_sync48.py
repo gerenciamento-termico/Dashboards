@@ -54,9 +54,11 @@ def main() -> None:
         if ent is None:
             continue
         idade_h = (agora - ent).total_seconds() / 3600.0
-        if idade_h > JANELA_H:
+        velho = 1 if idade_h > JANELA_H else 0
+        if velho:
             antigos += 1
-            continue
+        # antigos (>96h) entram no seed com vel=1: ficam fora da aba Geral,
+        # mas aparecem na aba Rodoviario quando tiverem ocorrencia rodoviaria
         saida.append({
             "p": str(r.get("p") or ""),
             "ro": str(r.get("ro") or ""),
@@ -67,6 +69,7 @@ def main() -> None:
             "ent": ent.strftime("%Y-%m-%dT%H:%M"),
             "cob": "GRU" if r.get("st") == "G" else "AGENTE",
             "s": str(r.get("s") or ""),
+            "vel": velho,
         })
 
     modelo = {
@@ -147,7 +150,7 @@ h1 small{display:block;font-size:.66rem;font-weight:500;color:var(--tx2);text-tr
 
 /* ---- filtros ---- */
 .fcard{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin-bottom:12px;box-shadow:var(--shadow)}
-.fbar{display:grid;grid-template-columns:1.4fr 1.1fr .55fr .95fr .85fr .95fr auto;gap:10px;align-items:end}
+.fbar{display:grid;grid-template-columns:1.3fr 1fr .5fr .95fr .9fr .8fr .9fr auto;gap:10px;align-items:end}
 .fbar label{display:block;font-size:.6rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;font-weight:600}
 .fbar input,.fbar select{width:100%;background:#fff;border:1px solid var(--line);border-radius:8px;color:var(--tx);padding:8px 10px;font-size:.8rem;font-family:inherit;max-width:100%;transition:border-color .12s, box-shadow .12s}
 .fbar select{text-overflow:ellipsis}
@@ -162,6 +165,14 @@ h1 small{display:block;font-size:.66rem;font-weight:500;color:var(--tx2);text-tr
 
 .cnt{font-size:.74rem;color:var(--tx2);margin:0 2px 10px}
 .cnt b{color:var(--tx);font-weight:600}
+
+/* ---- abas da grade (Geral / Rodoviario) ---- */
+.gtabs{display:inline-flex;gap:4px;background:var(--card);border:1px solid var(--line);border-radius:11px;padding:4px;margin-bottom:12px;box-shadow:var(--shadow)}
+.gtab{font:inherit;font-size:.76rem;font-weight:600;color:var(--tx2);background:none;border:none;border-radius:8px;padding:8px 16px;cursor:pointer;display:inline-flex;align-items:center;gap:8px;transition:all .13s}
+.gtab:hover{color:var(--tx)}
+.gtab.ativo{background:var(--ink);color:#fff}
+.gt-n{font-size:.64rem;font-weight:700;background:var(--line2);color:var(--tx2);border-radius:999px;padding:2px 8px;font-variant-numeric:tabular-nums}
+.gtab.ativo .gt-n{background:rgba(255,255,255,.18);color:#fff}
 
 /* ---- grade ---- */
 .tblwrap{background:var(--card);border:1px solid var(--line);border-radius:12px;overflow:auto;max-height:78vh;box-shadow:var(--shadow)}
@@ -340,11 +351,17 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
   <div class="search"><label>Busca (pedido / logger / romaneio / base / ocorr&ecirc;ncia)</label><i class="fa-solid fa-magnifying-glass"></i><input id="f-busca" type="text" placeholder="Ex.: 572344, A8841, RODOTEC..."></div>
   <div><label>Base / Agente</label><select id="f-base"><option value="">Todas</option>__BASES__</select></div>
   <div><label>UF</label><select id="f-uf"><option value="">Todas</option>__UFS__</select></div>
+  <div><label>Regi&atilde;o</label><select id="f-reg"><option value="">Todas</option><option value="COSE">Centro-Oeste e Sudeste</option><option value="NOSU">Norte e Sul</option><option value="NE">Nordeste</option></select></div>
   <div><label>N&iacute;vel</label><select id="f-nivel"><option value="">Todos</option><option value="1">No prazo (0-12h)</option><option value="2">Aten&ccedil;&atilde;o (12-24h)</option><option value="3">Alerta (24-36h)</option><option value="4">Cr&iacute;tico (36-48h)</option><option value="5">Estourado (&gt;48h)</option></select></div>
   <div><label>Cobran&ccedil;a</label><select id="f-cob"><option value="">Todas</option><option value="AGENTE">Agente / Base</option><option value="GRU">GRU</option></select></div>
   <div><label>Sinaliza&ccedil;&atilde;o</label><select id="f-flag"><option value="">Todas</option><option value="N">N&atilde;o cobradas</option><option value="S">J&aacute; cobradas</option><option value="O">Com ocorr&ecirc;ncia</option><option value="X">Sem ocorr&ecirc;ncia</option></select></div>
   <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
 </div>
+</div>
+
+<div class="gtabs">
+  <button class="gtab ativo" data-tab="geral" onclick="setTab('geral')"><i class="fa-solid fa-plane-up"></i> Geral <span class="gt-n" id="gt-geral">0</span></button>
+  <button class="gtab" data-tab="rod" onclick="setTab('rod')" title="Pendencias com ocorrencia de rodoviario paletizado (sem logger / sem dados), em qualquer idade"><i class="fa-solid fa-truck"></i> Rodovi&aacute;rio <span class="gt-n" id="gt-rod">0</span></button>
 </div>
 
 <div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--blue)"><i class="fa-solid fa-clock"></i> contagem regressiva recalculada ao vivo (a cada 30s) &middot; pend&ecirc;ncias com mais de 96h: <b>__ANTIGOS__</b> (ver indicador principal)</span></div>
@@ -475,6 +492,13 @@ function calc(r){
   return { h: h, nivel: nivel, resta: 48 - h };
 }
 const NOMES = {1:["NO PRAZO","b1","ok","#16a34a"], 2:["ATEN\u00c7\u00c3O","b2","at","#ca8a04"], 3:["ALERTA","b3","al","#ea580c"], 4:["CR\u00cdTICO","b4","cr","#dc2626"], 5:["ESTOUROU","b5","es","#7f1d1d"]};
+
+/* regioes do Brasil (agrupamentos de cobranca) */
+const REGIOES = {
+  COSE: ["GO","MT","MS","DF","SP","RJ","MG","ES"],                 // Centro-Oeste e Sudeste
+  NOSU: ["AC","AP","AM","PA","RO","RR","TO","PR","RS","SC"],       // Norte e Sul
+  NE:   ["AL","BA","CE","MA","PB","PE","PI","RN","SE"]             // Nordeste
+};
 
 /* ===== sinalizacao "ja cobrado" COMPARTILHADA (Firebase Realtime DB) ===== */
 const FB = "https://gt-sincronismo-default-rtdb.firebaseio.com/sync48";
@@ -857,6 +881,13 @@ function fmtResta(resta){
 }
 
 let VIEW = [];
+let TAB = "geral";
+function ehRod(fobs){ return !!(fobs && /rodovi/i.test(fobs.x)); }
+function setTab(t){
+  TAB = t;
+  document.querySelectorAll(".gtab").forEach(b => b.classList.toggle("ativo", b.dataset.tab === t));
+  apply();
+}
 let SORT = { k: "resta", d: 1 };
 const CMP = {
   nivel: (a,b) => a.h - b.h,
@@ -875,15 +906,20 @@ function apply(){
   const q = document.getElementById("f-busca").value.trim().toLowerCase();
   const ba = document.getElementById("f-base").value;
   const uf = document.getElementById("f-uf").value;
+  const rg = document.getElementById("f-reg").value;
   const nv = document.getElementById("f-nivel").value;
   const cb = document.getElementById("f-cob").value;
   const fl = document.getElementById("f-flag").value;
-  VIEW = R.map(r => {
+  const TODAS = R.map(r => {
     const f = FLAGS[chave(r)] || {};
-    return {...r, ...calc(r), fcob: f.cob || null, fobs: f.obs || null};
-  }).filter(r => {
+    return {...r, ...calc(r), fcob: f.cob || null, fobs: f.obs || null, rod: ehRod(f.obs)};
+  });
+  document.getElementById("gt-geral").textContent = TODAS.filter(r => !r.vel && !r.rod).length;
+  document.getElementById("gt-rod").textContent = TODAS.filter(r => r.rod).length;
+  VIEW = TODAS.filter(r => TAB === "rod" ? r.rod : (!r.vel && !r.rod)).filter(r => {
     if (ba && r.ag !== ba) return false;
     if (uf && r.uf !== uf) return false;
+    if (rg && REGIOES[rg].indexOf(r.uf) === -1) return false;
     if (nv && String(r.nivel) !== nv) return false;
     if (cb && r.cob !== cb) return false;
     if (fl === "N" && r.fcob) return false;
@@ -902,7 +938,8 @@ function apply(){
 }
 
 function render(){
-  const todos = R.map(r => calc(r));
+  // KPIs: corrida das 48h da aba Geral (sem antigos e sem rodoviario, que nao tem logger a sincronizar)
+  const todos = R.filter(r => !r.vel && !ehRod((FLAGS[chave(r)] || {}).obs)).map(r => calc(r));
   for (let n = 1; n <= 5; n++){
     document.getElementById("k"+n).textContent = todos.filter(x => x.nivel === n).length;
   }
@@ -963,7 +1000,7 @@ function render(){
 }
 
 function limpar(){
-  ["f-busca","f-base","f-uf","f-nivel","f-cob","f-flag"].forEach(id => { document.getElementById(id).value = ""; });
+  ["f-busca","f-base","f-uf","f-reg","f-nivel","f-cob","f-flag"].forEach(id => { document.getElementById(id).value = ""; });
   apply();
 }
 
@@ -980,7 +1017,7 @@ function baixarCsv(){
   setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 3000);
 }
 
-["f-busca","f-base","f-uf","f-nivel","f-cob","f-flag"].forEach(id => {
+["f-busca","f-base","f-uf","f-reg","f-nivel","f-cob","f-flag"].forEach(id => {
   const el = document.getElementById(id);
   el.addEventListener(el.tagName === "INPUT" ? "input" : "change", apply);
 });

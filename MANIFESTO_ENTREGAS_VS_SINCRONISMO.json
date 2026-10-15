@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T14:04:40",
+  "gerado_em": "2026-10-15T14:09:42",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 345,
-    "cobranca_gru_janela": 30,
+    "pendentes_janela": 343,
+    "cobranca_gru_janela": 32,
     "sem_embarque_efetiva": 82,
     "com_embarque_efetiva": 6127,
     "loggers_sem_lastsync": 30,
@@ -47,8 +47,8 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
       "RBR - RODOTEC": 19,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 16,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 14,
       "THE - AERONEIVA EXPRESS": 13,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 12,
       "LDB - ND CARGAS LTDA": 10
     },
     "top10_ufs_pendencias": {
@@ -59,9 +59,9 @@
       "SC": 26,
       "RS": 21,
       "AC": 19,
-      "RR": 14,
       "PI": 13,
-      "PR": 12
+      "PR": 12,
+      "RR": 12
     },
     "latencia": {
       "n_agente": 5426,
@@ -270,11 +270,11 @@
       "pedidos": 72,
       "loggers": 506,
       "sincronizados": 457,
-      "pendentes": 47,
+      "pendentes": 45,
       "sem_embarque": 1,
-      "cobranca_gru": 2,
+      "cobranca_gru": 4,
       "pedidos_pendentes": 18,
-      "pct": 9.3,
+      "pct": 8.9,
       "n_latencia": 420,
       "media_horas": 0.12,
       "mediana_horas": 0.04,

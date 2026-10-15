@@ -1,0 +1,382 @@
+# -*- coding: utf-8 -*-
+"""
+SINCRONISMO 48H - entregues sem sincronismo, corrida contra o relogio.
+
+NAO consulta banco e NAO altera o indicador existente: le o ENTREGAS_VS_SINCRONISMO.html
+recem-gerado pelo mesmo ciclo de 5 minutos e deriva a visao focada em 48 horas.
+
+Regra: pendencias (st='P' cobranca agente, st='G' cobranca GRU) com entrega nas
+ultimas 96h. Niveis de criticidade pela idade da entrega:
+  N1 0-12h No prazo | N2 12-24h Atencao | N3 24-36h Alerta | N4 36-48h CRITICO | N5 >48h ESTOURADO
+O nivel e recalculado AO VIVO no navegador (countdown por linha).
+
+Publica SINCRONISMO_48H.html (rotina ATUALIZAR_ENTREGAS_VS_SINCRONISMO_5_MIN).
+"""
+from __future__ import annotations
+
+import json
+import re
+from datetime import datetime
+from pathlib import Path
+
+WORKSPACE = Path(__file__).resolve().parent
+FONTE = WORKSPACE / "ENTREGAS_VS_SINCRONISMO.html"
+OUT_HTML = WORKSPACE / "SINCRONISMO_48H.html"
+JANELA_H = 96  # foco 0-48h + estourados ate 96h
+
+
+def parse_dt(txt: str) -> datetime | None:
+    txt = (txt or "").strip()
+    if not txt:
+        return None
+    try:
+        return datetime.strptime(txt, "%d/%m/%Y %H:%M")
+    except ValueError:
+        return None
+
+
+def main() -> None:
+    if not FONTE.exists():
+        raise RuntimeError(f"fonte ausente: {FONTE.name}")
+    html = FONTE.read_text(encoding="utf-8")
+    m = re.search(r"const ROWS\s*=\s*(\[.*?\]);", html, re.DOTALL)
+    if not m:
+        raise RuntimeError("seed ROWS nao encontrado na fonte")
+    rows = json.loads(m.group(1).replace("NaN", "null"))
+    fonte_em = datetime.fromtimestamp(FONTE.stat().st_mtime)
+    agora = datetime.now()
+
+    pend = [r for r in rows if r.get("st") in ("P", "G")]
+    saida = []
+    antigos = 0
+    for r in pend:
+        ent = parse_dt(r.get("e")) or parse_dt(r.get("emb"))
+        if ent is None:
+            continue
+        idade_h = (agora - ent).total_seconds() / 3600.0
+        if idade_h > JANELA_H:
+            antigos += 1
+            continue
+        saida.append({
+            "p": str(r.get("p") or ""),
+            "ro": str(r.get("ro") or ""),
+            "l": str(r.get("l") or ""),
+            "uf": str(r.get("uf") or ""),
+            "ag": str(r.get("ag") or ""),
+            "cli": str(r.get("cli") or ""),
+            "ent": ent.strftime("%Y-%m-%dT%H:%M"),
+            "cob": "GRU" if r.get("st") == "G" else "AGENTE",
+            "s": str(r.get("s") or ""),
+        })
+
+    modelo = {
+        "gerado_em": agora.strftime("%d/%m/%Y %H:%M"),
+        "fonte_em": fonte_em.strftime("%d/%m/%Y %H:%M"),
+        "rows": saida,
+        "antigos": antigos,
+        "total_pendencias": len(pend),
+        "ufs": sorted({r["uf"] for r in saida if r["uf"]}),
+        "bases": sorted({r["ag"] for r in saida if r["ag"]}),
+    }
+    write_html(modelo)
+    print(
+        f"OK SINCRONISMO_48H.html | pendencias_fonte={len(pend)} | na_janela_96h={len(saida)} | "
+        f"antigos(>96h)={antigos} | fonte_gerada_em={modelo['fonte_em']}"
+    )
+
+
+HTML_TEMPLATE = r"""<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="refresh" content="300">
+<title>Sincronismo 48h &mdash; VTC LOG</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+:root{
+  --bg:#eef2f8; --card:#ffffff; --line:#e3e8f0; --tx:#101828; --tx2:#667085;
+  --blue:#2563eb; --blue2:#1d4ed8;
+  --n1:#16a34a; --n1bg:#eefcf2; --n2:#ca8a04; --n2bg:#fefce8;
+  --n3:#ea580c; --n3bg:#fff7ed; --n4:#dc2626; --n4bg:#fef1f1; --n5:#7f1d1d; --n5bg:#fde8e8;
+  --shadow:0 1px 2px rgba(16,24,40,.06), 0 6px 18px rgba(16,24,40,.05);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',system-ui,sans-serif;background:linear-gradient(180deg,#e9eef7 0%,var(--bg) 240px);color:var(--tx);min-height:100vh}
+.wrap{max-width:1860px;margin:0 auto;padding:26px 20px 60px}
+.top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;margin-bottom:18px}
+.tleft{display:flex;gap:15px;align-items:center}
+.hicon{width:52px;height:52px;min-width:52px;border-radius:15px;background:linear-gradient(135deg,#dc2626,#ea580c);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.3rem;box-shadow:0 6px 16px rgba(220,38,38,.3)}
+h1{font-size:1.42rem;font-weight:800;letter-spacing:-.3px}
+h1 small{display:block;font-size:.68rem;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:1.2px;margin-top:2px}
+.sub{color:var(--tx2);font-size:.79rem;margin-top:6px;max-width:860px;line-height:1.55}
+.upd{font-size:.73rem;color:var(--tx2);background:var(--card);border:1px solid var(--line);border-radius:11px;padding:9px 15px;white-space:nowrap;box-shadow:var(--shadow)}
+.upd i{color:var(--blue);margin-right:6px}
+.upd b{color:var(--tx)}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(196px,1fr));gap:14px;margin-bottom:16px}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:16px;display:flex;gap:13px;align-items:center;box-shadow:var(--shadow);cursor:pointer;transition:transform .15s}
+.kpi:hover{transform:translateY(-2px)}
+.kpi.ativo{outline:2px solid var(--blue)}
+.kpi .ic{width:48px;height:48px;min-width:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.kpi .v{font-size:1.6rem;font-weight:900;line-height:1.05}
+.kpi .lbl{font-size:.63rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.4px;margin-top:3px;line-height:1.35;font-weight:700}
+.kpi.k1 .ic{background:var(--n1bg);color:var(--n1)} .kpi.k1 .v{color:var(--n1)}
+.kpi.k2 .ic{background:var(--n2bg);color:var(--n2)} .kpi.k2 .v{color:var(--n2)}
+.kpi.k3 .ic{background:var(--n3bg);color:var(--n3)} .kpi.k3 .v{color:var(--n3)}
+.kpi.k4 .ic{background:var(--n4bg);color:var(--n4)} .kpi.k4 .v{color:var(--n4)}
+.kpi.k5 .ic{background:var(--n5bg);color:var(--n5)} .kpi.k5 .v{color:var(--n5)}
+.kpi.k4.pulse{animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{box-shadow:var(--shadow)}50%{box-shadow:0 0 0 4px rgba(220,38,38,.15)}}
+
+.fcard{background:var(--card);border:1px solid var(--line);border-radius:15px;padding:14px 16px;margin-bottom:12px;box-shadow:var(--shadow)}
+.fbar{display:grid;grid-template-columns:1.3fr 1fr .7fr .9fr .9fr auto;gap:10px;align-items:end}
+.fbar label{display:block;font-size:.61rem;color:var(--tx2);text-transform:uppercase;letter-spacing:.5px;margin-bottom:5px;font-weight:700}
+.fbar input,.fbar select{width:100%;background:#f8fafc;border:1px solid var(--line);border-radius:9px;color:var(--tx);padding:8px 11px;font-size:.82rem;font-family:inherit;max-width:100%}
+.fbar select{text-overflow:ellipsis}
+.fbar input:focus,.fbar select:focus{outline:none;border-color:var(--blue);background:#fff;box-shadow:0 0 0 3px rgba(37,99,235,.1)}
+.btn{display:inline-flex;align-items:center;gap:7px;background:linear-gradient(135deg,var(--blue),var(--blue2));border:1px solid var(--blue2);border-radius:9px;color:#fff;padding:8px 15px;font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;box-shadow:0 4px 12px rgba(37,99,235,.25)}
+.btn:hover{opacity:.9}
+.btn.ghost{background:#fff;color:var(--tx);border-color:var(--line);box-shadow:var(--shadow)}
+.btn.ghost:hover{border-color:var(--blue);color:var(--blue)}
+
+.cnt{font-size:.75rem;color:var(--tx2);margin:0 2px 10px}
+.cnt b{color:var(--tx)}
+
+.tblwrap{background:var(--card);border:1px solid var(--line);border-radius:15px;overflow:auto;max-height:80vh;box-shadow:var(--shadow)}
+table{width:100%;border-collapse:collapse;font-size:.8rem;min-width:1100px}
+th{position:sticky;top:0;height:40px;background:#f8fafc;color:var(--tx2);text-transform:uppercase;font-size:.62rem;letter-spacing:.4px;padding:9px 8px;text-align:left;white-space:nowrap;z-index:2;border-bottom:1px solid var(--line)}
+td{padding:9px 8px;border-top:1px solid var(--line);white-space:nowrap;vertical-align:middle}
+tbody tr:nth-child(even) td{background:#fafbfd}
+tbody tr:hover td{background:#eff6ff}
+tr.lv4 td{background:var(--n4bg)} tr.lv4:hover td{background:#fee2e2}
+tr.lv5 td{background:var(--n5bg)} tr.lv5:hover td{background:#fbd5d5}
+.badge{display:inline-block;font-size:.62rem;font-weight:800;border-radius:7px;padding:3px 9px;letter-spacing:.4px}
+.b1{background:var(--n1bg);color:var(--n1)} .b2{background:var(--n2bg);color:#a16207}
+.b3{background:var(--n3bg);color:var(--n3)} .b4{background:#fee2e2;color:var(--n4)}
+.b5{background:#7f1d1d;color:#fff}
+.b-gru{background:#e0f2fe;color:#0369a1}
+.b-ag{background:#ede9fe;color:#6d28d9}
+.agc{max-width:280px;overflow:hidden;text-overflow:ellipsis}
+.resta{font-weight:900}
+.resta.ok{color:var(--n1)} .resta.at{color:var(--n2)} .resta.al{color:var(--n3)} .resta.cr{color:var(--n4)} .resta.es{color:var(--n5)}
+.pbar{width:120px;height:7px;background:#eef1f6;border-radius:99px;overflow:hidden}
+.pbar>div{height:100%;border-radius:99px}
+
+.cards{display:none}
+@media(max-width:1200px){.fbar{grid-template-columns:1fr 1fr 1fr}}
+@media(max-width:860px){
+  .wrap{padding:16px 10px 50px}
+  h1{font-size:1.1rem} .sub{display:none}
+  .tblwrap{display:none}
+  .fbar{grid-template-columns:1fr 1fr}
+  .cards{display:grid;grid-template-columns:1fr;gap:10px}
+  .card{position:relative;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow);overflow:hidden}
+  .card::before{content:"";position:absolute;top:0;left:0;bottom:0;width:4px;background:var(--n1)}
+  .card.lv2::before{background:var(--n2)} .card.lv3::before{background:var(--n3)}
+  .card.lv4::before{background:var(--n4)} .card.lv5::before{background:var(--n5)}
+  .card .topo{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;gap:8px;flex-wrap:wrap}
+  .card .ped{font-weight:900;font-size:1.02rem}
+  .card .kv{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:.78rem}
+  .card .kv .k{color:var(--tx2);font-size:.65rem;text-transform:uppercase;letter-spacing:.4px;padding-top:2px;font-weight:700}
+}
+footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-height:1.7}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div class="tleft">
+    <div class="hicon"><i class="fa-solid fa-stopwatch"></i></div>
+    <div>
+      <h1>Sincronismo 48h<small>VTC LOG &middot; Gerenciamento T&eacute;rmico &middot; corrida contra o rel&oacute;gio</small></h1>
+      <div class="sub">Pedidos <b>entregues e ainda sem sincronismo</b>, com contagem regressiva ao vivo: nenhuma pend&ecirc;ncia
+      pode passar de <b>48 horas</b>. Derivado do indicador Entregas &times; Sincronismo (mesmas regras), janela de 96h.</div>
+    </div>
+  </div>
+  <div class="upd"><i class="fa-solid fa-rotate"></i>Atualizado em <b>__GERADO__</b> &middot; a cada 5 min &middot; fonte __FONTE_EM__</div>
+</header>
+
+<div class="kpis" id="kpis">
+  <div class="kpi k1" data-n="1"><div class="ic"><i class="fa-solid fa-circle-check"></i></div><div><div class="v" id="k1">0</div><div class="lbl">No prazo &middot; 0&ndash;12h</div></div></div>
+  <div class="kpi k2" data-n="2"><div class="ic"><i class="fa-solid fa-hourglass-half"></i></div><div><div class="v" id="k2">0</div><div class="lbl">Aten&ccedil;&atilde;o &middot; 12&ndash;24h</div></div></div>
+  <div class="kpi k3" data-n="3"><div class="ic"><i class="fa-solid fa-triangle-exclamation"></i></div><div><div class="v" id="k3">0</div><div class="lbl">Alerta &middot; 24&ndash;36h</div></div></div>
+  <div class="kpi k4 pulse" data-n="4"><div class="ic"><i class="fa-solid fa-fire"></i></div><div><div class="v" id="k4">0</div><div class="lbl">CR&Iacute;TICO &middot; 36&ndash;48h &middot; prestes a estourar</div></div></div>
+  <div class="kpi k5" data-n="5"><div class="ic"><i class="fa-solid fa-skull-crossbones"></i></div><div><div class="v" id="k5">0</div><div class="lbl">Estourou as 48h (at&eacute; 96h)</div></div></div>
+</div>
+
+<div class="fcard">
+<div class="fbar">
+  <div><label>Busca (pedido / logger / romaneio / base)</label><input id="f-busca" type="text" placeholder="Ex.: 572344, A8841, RODOTEC..."></div>
+  <div><label>Base / Agente</label><select id="f-base"><option value="">Todas</option>__BASES__</select></div>
+  <div><label>UF</label><select id="f-uf"><option value="">Todas</option>__UFS__</select></div>
+  <div><label>N&iacute;vel</label><select id="f-nivel"><option value="">Todos</option><option value="1">No prazo (0-12h)</option><option value="2">Aten&ccedil;&atilde;o (12-24h)</option><option value="3">Alerta (24-36h)</option><option value="4">Cr&iacute;tico (36-48h)</option><option value="5">Estourado (&gt;48h)</option></select></div>
+  <div><label>Cobran&ccedil;a</label><select id="f-cob"><option value="">Todas</option><option value="AGENTE">Agente / Base</option><option value="GRU">GRU</option></select></div>
+  <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
+</div>
+</div>
+
+<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--blue)"><i class="fa-solid fa-clock"></i> contagem regressiva recalculada ao vivo (a cada 30s) &middot; pend&ecirc;ncias com mais de 96h: <b>__ANTIGOS__</b> (ver indicador principal)</span></div>
+
+<div class="tblwrap">
+<table>
+  <thead><tr>
+    <th>N&iacute;vel</th><th>Pedido</th><th>Logger</th><th>Romaneio</th><th>UF</th><th>Base / Agente</th>
+    <th>Entrega</th><th>Horas desde entrega</th><th>Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th>&Uacute;ltimo sync</th><th>Cobran&ccedil;a</th>
+  </tr></thead>
+  <tbody id="tb"></tbody>
+</table>
+</div>
+<div class="cards" id="cards"></div>
+
+<footer>
+  VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; Sincronismo 48h &middot; derivado do indicador Entregas &times; Sincronismo (mesmas regras; nada foi alterado nele)<br>
+  N&iacute;veis pela idade da entrega: 0&ndash;12h no prazo &middot; 12&ndash;24h aten&ccedil;&atilde;o &middot; 24&ndash;36h alerta &middot; <b style="color:var(--n4)">36&ndash;48h cr&iacute;tico</b> &middot; <b style="color:var(--n5)">&gt;48h estourado</b> &middot; Sincronizou? Sai sozinho na pr&oacute;xima atualiza&ccedil;&atilde;o (5 min)
+</footer>
+</div>
+
+<script>
+const R = __ROWS__;
+
+const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmtEnt = s => { const d = new Date(s); return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); };
+
+function calc(r){
+  const h = (Date.now() - new Date(r.ent).getTime()) / 36e5;
+  const nivel = h < 12 ? 1 : h < 24 ? 2 : h < 36 ? 3 : h <= 48 ? 4 : 5;
+  return { h: h, nivel: nivel, resta: 48 - h };
+}
+const NOMES = {1:["NO PRAZO","b1","ok","#16a34a"], 2:["ATEN\u00c7\u00c3O","b2","at","#ca8a04"], 3:["ALERTA","b3","al","#ea580c"], 4:["CR\u00cdTICO","b4","cr","#dc2626"], 5:["ESTOUROU","b5","es","#7f1d1d"]};
+
+function fmtResta(resta){
+  if (resta >= 0){
+    const hh = Math.floor(resta), mm = Math.round((resta - hh) * 60);
+    return "faltam " + hh + "h" + String(mm).padStart(2,"0");
+  }
+  const v = -resta, hh = Math.floor(v), mm = Math.round((v - hh) * 60);
+  return "estourou h\u00e1 " + hh + "h" + String(mm).padStart(2,"0");
+}
+
+let VIEW = [];
+function apply(){
+  const q = document.getElementById("f-busca").value.trim().toLowerCase();
+  const ba = document.getElementById("f-base").value;
+  const uf = document.getElementById("f-uf").value;
+  const nv = document.getElementById("f-nivel").value;
+  const cb = document.getElementById("f-cob").value;
+  VIEW = R.map(r => ({...r, ...calc(r)})).filter(r => {
+    if (ba && r.ag !== ba) return false;
+    if (uf && r.uf !== uf) return false;
+    if (nv && String(r.nivel) !== nv) return false;
+    if (cb && r.cob !== cb) return false;
+    if (q){
+      const alvo = (r.p+" "+r.l+" "+r.ro+" "+r.ag+" "+r.cli+" "+r.uf).toLowerCase();
+      if (!alvo.includes(q)) return false;
+    }
+    return true;
+  });
+  VIEW.sort((a,b) => a.resta - b.resta); // mais urgente primeiro (estourados no topo)
+  render();
+}
+
+function render(){
+  const todos = R.map(r => calc(r));
+  for (let n = 1; n <= 5; n++){
+    document.getElementById("k"+n).textContent = todos.filter(x => x.nivel === n).length;
+  }
+  document.getElementById("cnt").innerHTML = "<b>" + VIEW.length + "</b> pend\u00eancia(s) no recorte \u00b7 <b>" +
+    VIEW.filter(r => r.nivel === 4).length + "</b> cr\u00edticas (36\u201348h) \u00b7 <b>" +
+    VIEW.filter(r => r.nivel === 5).length + "</b> estouradas";
+
+  document.getElementById("tb").innerHTML = VIEW.map(r => {
+    const [nome, bcls, rcls, cor] = NOMES[r.nivel];
+    const pct = Math.max(2, Math.min(100, (r.h / 48) * 100));
+    return '<tr class="lv'+r.nivel+'">'
+      + '<td><span class="badge '+bcls+'">'+nome+'</span></td>'
+      + '<td><b>'+esc(r.p)+'</b></td>'
+      + '<td>'+esc(r.l)+'</td>'
+      + '<td>'+esc(r.ro)+'</td>'
+      + '<td>'+esc(r.uf)+'</td>'
+      + '<td class="agc" title="'+esc(r.ag)+'">'+esc(r.ag)+'</td>'
+      + '<td>'+fmtEnt(r.ent)+'</td>'
+      + '<td><b>'+r.h.toFixed(1)+'h</b></td>'
+      + '<td class="resta '+rcls+'">'+fmtResta(r.resta)+'</td>'
+      + '<td><div class="pbar"><div style="width:'+pct+'%;background:'+cor+'"></div></div></td>'
+      + '<td>'+esc(r.s || "\u2014")+'</td>'
+      + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
+      + '</tr>';
+  }).join("") || '<tr><td colspan="12" style="text-align:center;padding:26px;color:var(--tx2)">Nenhuma pend\u00eancia neste recorte. &#127881;</td></tr>';
+
+  document.getElementById("cards").innerHTML = VIEW.map(r => {
+    const [nome, bcls, rcls] = NOMES[r.nivel];
+    return '<div class="card lv'+r.nivel+'">'
+      + '<div class="topo"><span class="ped">'+esc(r.p)+'</span><span class="badge '+bcls+'">'+nome+'</span></div>'
+      + '<div class="kv">'
+      + '<span class="k">Logger</span><span><b>'+esc(r.l)+'</b> \u00b7 rom. '+esc(r.ro)+' \u00b7 '+esc(r.uf)+'</span>'
+      + '<span class="k">Base</span><span>'+esc(r.ag)+'</span>'
+      + '<span class="k">Entrega</span><span>'+fmtEnt(r.ent)+' ('+r.h.toFixed(1)+'h atr\u00e1s)</span>'
+      + '<span class="k">Rel\u00f3gio</span><span class="resta '+rcls+'">'+fmtResta(r.resta)+'</span>'
+      + '<span class="k">Cobran\u00e7a</span><span>'+r.cob+'</span>'
+      + '</div></div>';
+  }).join("");
+}
+
+function limpar(){
+  ["f-busca","f-base","f-uf","f-nivel","f-cob"].forEach(id => { document.getElementById(id).value = ""; });
+  apply();
+}
+
+function baixarCsv(){
+  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca"];
+  const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, r.cob].join(";"));
+  const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "sincronismo_48h.csv";
+  document.body.appendChild(a); a.click();
+  setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 3000);
+}
+
+["f-busca","f-base","f-uf","f-nivel","f-cob"].forEach(id => {
+  const el = document.getElementById(id);
+  el.addEventListener(el.tagName === "INPUT" ? "input" : "change", apply);
+});
+document.querySelectorAll(".kpi").forEach(k => k.addEventListener("click", () => {
+  const sel = document.getElementById("f-nivel");
+  sel.value = sel.value === k.dataset.n ? "" : k.dataset.n;
+  document.querySelectorAll(".kpi").forEach(x => x.classList.remove("ativo"));
+  if (sel.value) k.classList.add("ativo");
+  apply();
+}));
+apply();
+setInterval(apply, 30000); // countdown ao vivo
+</script>
+</body>
+</html>
+"""
+
+
+def write_html(modelo: dict) -> None:
+    import html as _html
+
+    bases = "".join(
+        f'<option value="{_html.escape(b, quote=True)}">{_html.escape(b)}</option>'
+        for b in modelo["bases"]
+    )
+    ufs = "".join(f'<option value="{u}">{u}</option>' for u in modelo["ufs"])
+    out = (
+        HTML_TEMPLATE
+        .replace("__GERADO__", modelo["gerado_em"])
+        .replace("__FONTE_EM__", modelo["fonte_em"])
+        .replace("__ANTIGOS__", str(modelo["antigos"]))
+        .replace("__BASES__", bases)
+        .replace("__UFS__", ufs)
+        .replace("__ROWS__", json.dumps(modelo["rows"], ensure_ascii=False, separators=(",", ":")))
+    )
+    OUT_HTML.write_text(out, encoding="utf-8")
+
+
+if __name__ == "__main__":
+    main()

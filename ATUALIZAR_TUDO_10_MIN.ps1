@@ -169,11 +169,12 @@ $RetiredPublishFiles = @(
 $EntregasSincronismoFiles = @(
     "ENTREGAS_VS_SINCRONISMO.html",
     "ENTREGAS_VS_SINCRONISMO.csv",
-    "MANIFESTO_ENTREGAS_VS_SINCRONISMO.json"
+    "MANIFESTO_ENTREGAS_VS_SINCRONISMO.json",
+    "SINCRONISMO_48H.html"
 )
 $PublishFiles += $EntregasSincronismoFiles
-$DashboardFiles += @("ENTREGAS_VS_SINCRONISMO.html", "ENTREGAS_VS_SINCRONISMO.csv")
-$Urls += @("$GitHubPagesBase/ENTREGAS_VS_SINCRONISMO.html")
+$DashboardFiles += @("ENTREGAS_VS_SINCRONISMO.html", "ENTREGAS_VS_SINCRONISMO.csv", "SINCRONISMO_48H.html")
+$Urls += @("$GitHubPagesBase/ENTREGAS_VS_SINCRONISMO.html", "$GitHubPagesBase/SINCRONISMO_48H.html")
 
 $RetiradaAeroportoFiles = @(
     "RETIRADA_AEROPORTO.html"

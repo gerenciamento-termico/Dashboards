@@ -117,7 +117,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
       pode passar de <b>48 horas</b>. Derivado do indicador Entregas &times; Sincronismo (mesmas regras), janela de 96h.</div>
     </div>
   </div>
-  <div class="upd"><i class="fa-solid fa-rotate"></i>Atualizado em <b>15/10/2026 17:12</b> &middot; a cada 5 min &middot; fonte 15/10/2026 17:12</div>
+  <div class="upd"><i class="fa-solid fa-rotate"></i>Atualizado em <b>15/10/2026 17:15</b> &middot; a cada 5 min &middot; fonte 15/10/2026 17:12</div>
 </header>
 
 <div class="kpis" id="kpis">
@@ -136,7 +136,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <div><label>N&iacute;vel</label><select id="f-nivel"><option value="">Todos</option><option value="1">No prazo (0-12h)</option><option value="2">Aten&ccedil;&atilde;o (12-24h)</option><option value="3">Alerta (24-36h)</option><option value="4">Cr&iacute;tico (36-48h)</option><option value="5">Estourado (&gt;48h)</option></select></div>
   <div><label>Cobran&ccedil;a</label><select id="f-cob"><option value="">Todas</option><option value="AGENTE">Agente / Base</option><option value="GRU">GRU</option></select></div>
   <div><label>Sinaliza&ccedil;&atilde;o</label><select id="f-flag"><option value="">Todas</option><option value="N">N&atilde;o cobradas</option><option value="S">J&aacute; cobradas</option></select></div>
-  <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn ghost" onclick="compartilharFlags()" title="Copia um codigo com suas marcacoes para colar no WhatsApp; quem receber usa Importar"><i class="fa-solid fa-share-nodes"></i></button><button class="btn ghost" onclick="importarFlags()" title="Cole um codigo de marcacoes recebido"><i class="fa-solid fa-download"></i></button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
+  <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
 </div>
 </div>
 
@@ -146,7 +146,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 <table>
   <thead><tr>
     <th>N&iacute;vel</th><th>Pedido</th><th>Logger</th><th>Romaneio</th><th>UF</th><th>Base / Agente</th>
-    <th>Entrega</th><th>Horas desde entrega</th><th>Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th>&Uacute;ltimo sync</th><th>Cobran&ccedil;a</th><th title="Marcacao local deste navegador; use Compartilhar/Importar para sincronizar com colegas">Sinaliza&ccedil;&atilde;o</th>
+    <th>Entrega</th><th>Horas desde entrega</th><th>Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th>&Uacute;ltimo sync</th><th>Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th>
   </tr></thead>
   <tbody id="tb"></tbody>
 </table>
@@ -155,7 +155,8 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 
 <footer>
   VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; Sincronismo 48h &middot; derivado do indicador Entregas &times; Sincronismo (mesmas regras; nada foi alterado nele)<br>
-  N&iacute;veis pela idade da entrega: 0&ndash;12h no prazo &middot; 12&ndash;24h aten&ccedil;&atilde;o &middot; 24&ndash;36h alerta &middot; <b style="color:var(--n4)">36&ndash;48h cr&iacute;tico</b> &middot; <b style="color:var(--n5)">&gt;48h estourado</b> &middot; Sincronizou? Sai sozinho na pr&oacute;xima atualiza&ccedil;&atilde;o (5 min)
+  N&iacute;veis pela idade da entrega: 0&ndash;12h no prazo &middot; 12&ndash;24h aten&ccedil;&atilde;o &middot; 24&ndash;36h alerta &middot; <b style="color:var(--n4)">36&ndash;48h cr&iacute;tico</b> &middot; <b style="color:var(--n5)">&gt;48h estourado</b> &middot; Sincronizou? Sai sozinho na pr&oacute;xima atualiza&ccedil;&atilde;o (5 min)<br>
+  Sinaliza&ccedil;&atilde;o "cobrado" em quadro compartilhado: a marca&ccedil;&atilde;o aparece para todos, com nome e hor&aacute;rio de quem cobrou; some sozinha quando a pend&ecirc;ncia sincroniza
 </footer>
 </div>
 
@@ -172,60 +173,68 @@ function calc(r){
 }
 const NOMES = {1:["NO PRAZO","b1","ok","#16a34a"], 2:["ATEN\u00c7\u00c3O","b2","at","#ca8a04"], 3:["ALERTA","b3","al","#ea580c"], 4:["CR\u00cdTICO","b4","cr","#dc2626"], 5:["ESTOUROU","b5","es","#7f1d1d"]};
 
-/* ===== sinalizacao "ja cobrado" (localStorage; GitHub Pages nao tem backend) ===== */
-const FKEY = "sync48_cobrados";
-function chave(r){ return r.p + "|" + r.l + "|" + r.ent; }
-function lerFlags(){ try { return JSON.parse(localStorage.getItem(FKEY) || "{}"); } catch(e){ return {}; } }
-function salvarFlags(f){ try { localStorage.setItem(FKEY, JSON.stringify(f)); } catch(e){} }
-(function limpezaFlags(){
-  const f = lerFlags(); const atuais = new Set(R.map(chave)); let mudou = false;
-  for (const k of Object.keys(f)){
-    if (!atuais.has(k) || (Date.now() - (f[k].t || 0)) > 7*86400000){ delete f[k]; mudou = true; }
+/* ===== sinalizacao "ja cobrado" COMPARTILHADA (Firebase Realtime DB) ===== */
+const FB = "https://gt-sincronismo-default-rtdb.firebaseio.com/sync48";
+let FLAGS = {};
+let FB_OK = false;
+function chave(r){ return (r.p + "|" + r.l + "|" + r.ent).replace(/[.#$\[\]\/]/g, "_"); }
+async function buscarFlags(){
+  try {
+    const resp = await fetch(FB + ".json", { cache: "no-store" });
+    if (!resp.ok) throw new Error(resp.status);
+    FLAGS = (await resp.json()) || {};
+    FB_OK = true;
+    try { localStorage.setItem("sync48_espelho", JSON.stringify(FLAGS)); } catch(e){}
+  } catch(e){
+    FB_OK = false;
+    try { FLAGS = JSON.parse(localStorage.getItem("sync48_espelho") || "{}"); } catch(x){ FLAGS = {}; }
   }
-  if (mudou) salvarFlags(f);
-})();
+}
+async function limpezaFlags(){
+  if (!FB_OK) return;
+  const atuais = new Set(R.map(chave));
+  for (const k of Object.keys(FLAGS)){
+    if (!atuais.has(k) || (Date.now() - (FLAGS[k].t || 0)) > 7*86400000){
+      delete FLAGS[k];
+      fetch(FB + "/" + encodeURIComponent(k) + ".json", { method: "DELETE" }).catch(() => {});
+    }
+  }
+}
 function nomeOperador(){
   let n = localStorage.getItem("sync48_operador") || "";
   if (!n){
-    n = (window.prompt("Seu nome (aparece na marca\u00e7\u00e3o de cobrado):") || "").trim();
+    n = (window.prompt("Seu nome (aparece na marca\u00e7\u00e3o de cobrado para todos):") || "").trim();
     if (n) localStorage.setItem("sync48_operador", n);
   }
   return n || "GT";
 }
-function toggleCobrado(k){
-  const f = lerFlags();
-  if (f[k]) delete f[k];
-  else f[k] = { q: nomeOperador(), t: Date.now() };
-  salvarFlags(f);
-  apply();
+async function toggleCobrado(k){
+  const url = FB + "/" + encodeURIComponent(k) + ".json";
+  try {
+    if (FLAGS[k]){
+      delete FLAGS[k];
+      apply();
+      const resp = await fetch(url, { method: "DELETE" });
+      if (!resp.ok) throw new Error(resp.status);
+    } else {
+      const valor = { q: nomeOperador(), t: Date.now() };
+      FLAGS[k] = valor;
+      apply();
+      const resp = await fetch(url, { method: "PUT", body: JSON.stringify(valor) });
+      if (!resp.ok) throw new Error(resp.status);
+    }
+    try { localStorage.setItem("sync48_espelho", JSON.stringify(FLAGS)); } catch(e){}
+  } catch(e){
+    alert("Sem conex\u00e3o com o quadro compartilhado agora; tente novamente.");
+    await buscarFlags();
+    apply();
+  }
 }
 function idadeFlag(t){
   const h = (Date.now() - t) / 36e5;
   if (h < 1) return Math.round(h * 60) + "min";
   if (h < 48) return h.toFixed(0) + "h";
   return Math.round(h / 24) + "d";
-}
-function compartilharFlags(){
-  const f = lerFlags();
-  const codigo = "SYNC48FLAGS:" + btoa(unescape(encodeURIComponent(JSON.stringify(f))));
-  navigator.clipboard.writeText(codigo).then(
-    () => alert("C\u00f3digo com " + Object.keys(f).length + " marca\u00e7\u00e3o(\u00f5es) copiado! Cole no WhatsApp para o colega importar."),
-    () => window.prompt("Copie o c\u00f3digo abaixo:", codigo)
-  );
-}
-function importarFlags(){
-  const codigo = (window.prompt("Cole o c\u00f3digo de marca\u00e7\u00f5es (SYNC48FLAGS:...):") || "").trim();
-  if (!codigo.startsWith("SYNC48FLAGS:")) { if (codigo) alert("C\u00f3digo inv\u00e1lido."); return; }
-  try {
-    const recebidas = JSON.parse(decodeURIComponent(escape(atob(codigo.slice(12)))));
-    const f = lerFlags();
-    let novas = 0;
-    for (const k of Object.keys(recebidas)){
-      if (!f[k]) { f[k] = recebidas[k]; novas++; }
-    }
-    salvarFlags(f);
-    alert(novas + " marca\u00e7\u00e3o(\u00f5es) importada(s)."); apply();
-  } catch(e){ alert("N\u00e3o foi poss\u00edvel ler o c\u00f3digo."); }
 }
 
 function fmtResta(resta){
@@ -245,8 +254,7 @@ function apply(){
   const nv = document.getElementById("f-nivel").value;
   const cb = document.getElementById("f-cob").value;
   const fl = document.getElementById("f-flag").value;
-  const flags = lerFlags();
-  VIEW = R.map(r => ({...r, ...calc(r), flag: flags[chave(r)] || null})).filter(r => {
+  VIEW = R.map(r => ({...r, ...calc(r), flag: FLAGS[chave(r)] || null})).filter(r => {
     if (ba && r.ag !== ba) return false;
     if (uf && r.uf !== uf) return false;
     if (nv && String(r.nivel) !== nv) return false;
@@ -271,7 +279,7 @@ function render(){
   document.getElementById("cnt").innerHTML = "<b>" + VIEW.length + "</b> pend\u00eancia(s) no recorte \u00b7 <b>" +
     VIEW.filter(r => r.nivel === 4).length + "</b> cr\u00edticas (36\u201348h) \u00b7 <b>" +
     VIEW.filter(r => r.nivel === 5).length + "</b> estouradas \u00b7 <b>" +
-    VIEW.filter(r => r.flag).length + "</b> j\u00e1 cobradas (marca\u00e7\u00e3o local)";
+    VIEW.filter(r => r.flag).length + "</b> j\u00e1 cobradas" + (FB_OK ? " <i class=\"fa-solid fa-cloud\" title=\"quadro compartilhado online\" style=\"color:#16a34a\"></i>" : " <i class=\"fa-solid fa-cloud-arrow-down\" title=\"offline - mostrando ultima copia local\" style=\"color:#d97706\"></i>");
 
   document.getElementById("tb").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls, cor] = NOMES[r.nivel];
@@ -344,8 +352,12 @@ document.querySelectorAll(".kpi").forEach(k => k.addEventListener("click", () =>
   if (sel.value) k.classList.add("ativo");
   apply();
 }));
-apply();
-setInterval(apply, 30000); // countdown ao vivo
+(async () => {
+  await buscarFlags();
+  await limpezaFlags();
+  apply();
+})();
+setInterval(async () => { await buscarFlags(); apply(); }, 30000); // countdown + quadro compartilhado ao vivo
 </script>
 </body>
 </html>

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T13:34:38",
+  "gerado_em": "2026-10-15T13:39:00",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 353,
+    "pendentes_janela": 351,
     "cobranca_gru_janela": 29,
     "sem_embarque_efetiva": 82,
     "com_embarque_efetiva": 6125,
@@ -45,8 +45,8 @@
       "SSA - LUTY LOG": 27,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 26,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 23,
-      "RBR - RODOTEC": 21,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 22,
+      "RBR - RODOTEC": 20,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
       "THE - AERONEIVA EXPRESS": 13,
       "LDB - ND CARGAS LTDA": 10
@@ -55,18 +55,18 @@
       "PA": 62,
       "SP": 54,
       "BA": 33,
-      "RS": 28,
       "TO": 27,
+      "RS": 27,
       "SC": 26,
-      "AC": 21,
+      "AC": 20,
       "RR": 14,
       "PI": 13,
       "PR": 12
     },
     "latencia": {
-      "n_agente": 5418,
+      "n_agente": 5420,
       "n_so_gru": 37,
-      "n_sem_primeiro_sync": 636,
+      "n_sem_primeiro_sync": 634,
       "media_horas": 0.18,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -307,18 +307,18 @@
       "dia_full": "08/10/2026",
       "pedidos": 75,
       "loggers": 795,
-      "sincronizados": 758,
-      "pendentes": 33,
+      "sincronizados": 760,
+      "pendentes": 31,
       "sem_embarque": 0,
       "cobranca_gru": 4,
       "pedidos_pendentes": 11,
-      "pct": 4.2,
-      "n_latencia": 725,
+      "pct": 3.9,
+      "n_latencia": 727,
       "media_horas": 0.11,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 69
+      "n_sem_primeiro_sync": 67
     },
     {
       "dia_iso": "2026-10-09",

@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "15/10/2026 20:19:56",
+  "geradoEm": "15/10/2026 20:38:55",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -31,7 +31,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "SENSOR VTC": {
       "totalEstoque": null,
       "loggersTransito": 330,
-      "loggersEntregues": 5167,
+      "loggersEntregues": 5166,
       "loggersRetornados": 1469,
       "registrosEntregas": 124165,
       "registrosEstoque": 0,
@@ -70,7 +70,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     "ALL": {
       "totalEstoque": null,
       "loggersTransito": 330,
-      "loggersEntregues": 5167,
+      "loggersEntregues": 5166,
       "loggersRetornados": 1469,
       "registrosEntregas": 131102,
       "registrosEstoque": 0,
@@ -118,7 +118,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           5455
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES": {
       "aptoUso": 303,
@@ -154,7 +154,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4091
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES COM SONDA": {
       "aptoUso": 0,
@@ -280,7 +280,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4762
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|SENSOR VTC": {
       "aptoUso": 303,
@@ -316,7 +316,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4666
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|SHIELD": {
       "aptoUso": 305,
@@ -352,7 +352,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4208
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|SYOS": {
       "aptoUso": 303,
@@ -388,7 +388,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4092
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES COM SONDA|SENSOR VTC": {
       "aptoUso": 0,
@@ -584,7 +584,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           5337
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|ARES COM SONDA|SHIELD": {
       "aptoUso": 305,
@@ -620,7 +620,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4879
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|ARES COM SONDA|SYOS": {
       "aptoUso": 303,
@@ -656,7 +656,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4763
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|SENSOR VTC|SHIELD": {
       "aptoUso": 305,
@@ -692,7 +692,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4783
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|SENSOR VTC|SYOS": {
       "aptoUso": 303,
@@ -728,7 +728,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4667
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|SHIELD|SYOS": {
       "aptoUso": 305,
@@ -764,7 +764,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4209
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES COM SONDA|SENSOR VTC|SHIELD": {
       "aptoUso": 2,
@@ -922,7 +922,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           5454
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|ARES COM SONDA|SENSOR VTC|SYOS": {
       "aptoUso": 303,
@@ -958,7 +958,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           5338
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|ARES COM SONDA|SHIELD|SYOS": {
       "aptoUso": 305,
@@ -994,7 +994,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4880
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES|SENSOR VTC|SHIELD|SYOS": {
       "aptoUso": 305,
@@ -1030,7 +1030,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           4784
         ]
       },
-      "ultimaAtualizacao": "15/10/2026 18:10"
+      "ultimaAtualizacao": "15/10/2026 20:16"
     },
     "ARES COM SONDA|SENSOR VTC|SHIELD|SYOS": {
       "aptoUso": 2,

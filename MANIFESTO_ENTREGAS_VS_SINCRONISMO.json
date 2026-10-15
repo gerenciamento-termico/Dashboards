@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T12:00:56",
+  "gerado_em": "2026-10-15T12:08:39",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 393,
+    "pendentes_janela": 391,
     "cobranca_gru_janela": 29,
     "sem_embarque_efetiva": 83,
     "com_embarque_efetiva": 6105,
-    "loggers_sem_lastsync": 51,
+    "loggers_sem_lastsync": 50,
     "nao_avaliados": 83,
     "pedidos_com_agente": 6332,
     "dtbtransporte": {
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 72,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 63,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 61,
       "MAB - EXPRESSO RODRIGUES LTDA": 58,
       "SSA - LUTY LOG": 27,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 26,
@@ -52,7 +52,7 @@
       "LDB - ND CARGAS LTDA": 10
     },
     "top10_ufs_pendencias": {
-      "RS": 68,
+      "RS": 66,
       "PA": 62,
       "SP": 53,
       "BA": 33,
@@ -64,9 +64,9 @@
       "PR": 12
     },
     "latencia": {
-      "n_agente": 5357,
+      "n_agente": 5359,
       "n_so_gru": 37,
-      "n_sem_primeiro_sync": 677,
+      "n_sem_primeiro_sync": 675,
       "media_horas": 0.18,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -307,18 +307,18 @@
       "dia_full": "08/10/2026",
       "pedidos": 75,
       "loggers": 795,
-      "sincronizados": 718,
-      "pendentes": 73,
+      "sincronizados": 720,
+      "pendentes": 71,
       "sem_embarque": 0,
       "cobranca_gru": 4,
       "pedidos_pendentes": 11,
-      "pct": 9.2,
-      "n_latencia": 685,
-      "media_horas": 0.12,
+      "pct": 8.9,
+      "n_latencia": 687,
+      "media_horas": 0.11,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 109
+      "n_sem_primeiro_sync": 107
     },
     {
       "dia_iso": "2026-10-09",

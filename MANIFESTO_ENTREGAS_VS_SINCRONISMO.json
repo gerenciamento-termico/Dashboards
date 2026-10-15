@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T15:29:58",
+  "gerado_em": "2026-10-15T15:34:20",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6369,
-    "pedidos_janela": 994,
-    "loggers_ares_janela": 6191,
-    "loggers_ares_antes_dedup": 6225,
+    "pares_janela": 6370,
+    "pedidos_janela": 995,
+    "loggers_ares_janela": 6192,
+    "loggers_ares_antes_dedup": 6226,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
@@ -30,14 +30,14 @@
     "pendentes_janela": 342,
     "cobranca_gru_janela": 31,
     "sem_embarque_efetiva": 82,
-    "com_embarque_efetiva": 6143,
+    "com_embarque_efetiva": 6144,
     "loggers_sem_lastsync": 32,
     "nao_avaliados": 82,
-    "pedidos_com_agente": 6369,
+    "pedidos_com_agente": 6370,
     "dtbtransporte": {
-      "consultados": 994,
-      "mapeados": 994,
-      "linhas": 1064
+      "consultados": 995,
+      "mapeados": 995,
+      "linhas": 1065
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 77,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 5446,
       "n_so_gru": 35,
-      "n_sem_primeiro_sync": 628,
+      "n_sem_primeiro_sync": 629,
       "media_horas": 0.2,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-15",
       "dia": "15/10",
       "dia_full": "15/10/2026",
-      "pedidos": 31,
-      "loggers": 92,
-      "sincronizados": 76,
+      "pedidos": 32,
+      "loggers": 93,
+      "sincronizados": 77,
       "pendentes": 16,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 9,
-      "pct": 17.4,
+      "pct": 17.2,
       "n_latencia": 74,
       "media_horas": 0.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 18
+      "n_sem_primeiro_sync": 19
     }
   ],
   "erros_validacao": {},

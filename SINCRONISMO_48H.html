@@ -154,6 +154,22 @@ tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
 .mo-danger{background:none;border-color:#fecaca;color:#dc2626}
 .mo-danger:hover{background:#fef2f2;border-color:#dc2626}
 
+/* ---- login ---- */
+.lg-ov{display:none;position:fixed;inset:0;background:var(--bg);z-index:950;align-items:center;justify-content:center;padding:18px}
+body.bloqueada .lg-ov{display:flex}
+body.bloqueada .topbar, body.bloqueada .wrap{filter:blur(7px);pointer-events:none;user-select:none}
+.lg-card{background:#fff;border:1px solid var(--line);border-radius:18px;box-shadow:var(--shadow2);width:100%;max-width:380px;padding:30px 28px 26px}
+.lg-brand{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.lg-tit{font-size:1.05rem;font-weight:700;letter-spacing:-.2px;margin-bottom:4px}
+.lg-sub{font-size:.76rem;color:var(--tx2);line-height:1.55;margin-bottom:16px}
+.lg-err{font-size:.73rem;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:9px;padding:9px 12px;margin-top:12px;display:none}
+.lg-err.on{display:block}
+.lg-foot{font-size:.65rem;color:var(--tx3);text-align:center;margin-top:16px;line-height:1.5}
+.tb-user{display:flex;align-items:center;gap:9px}
+.tb-user .pill b{font-weight:600}
+.btn-sair{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;color:var(--tx2);padding:6px 13px;font-size:.71rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .12s}
+.btn-sair:hover{border-color:#fecaca;color:#dc2626;background:#fef2f2}
+
 .cards{display:none}
 @media(max-width:1200px){.fbar{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:860px){
@@ -176,7 +192,7 @@ tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
 footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-height:1.7}
 </style>
 </head>
-<body>
+<body class="bloqueada">
 <div class="topbar">
   <div class="tb-in">
     <div class="brand">
@@ -185,8 +201,12 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
     </div>
     <div class="tb-meta">
       <span class="pill"><span class="livedot"></span> Ao vivo &middot; recalculado a cada 30s</span>
-      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>15/10/2026 17:52</b> &middot; ciclo 5 min</span>
-      <span class="pill"><i class="fa-solid fa-database"></i> Fonte 15/10/2026 17:52</span>
+      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>15/10/2026 17:58</b> &middot; ciclo 5 min</span>
+      <span class="pill"><i class="fa-solid fa-database"></i> Fonte 15/10/2026 17:58</span>
+    </div>
+    <div class="tb-user">
+      <span class="pill"><i class="fa-solid fa-circle-user"></i> <b id="quem-nome"></b></span>
+      <button class="btn-sair" onclick="sair()" title="Encerrar sess&atilde;o"><i class="fa-solid fa-right-from-bracket"></i> Sair</button>
     </div>
   </div>
 </div>
@@ -216,7 +236,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 </div>
 </div>
 
-<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--blue)"><i class="fa-solid fa-clock"></i> contagem regressiva recalculada ao vivo (a cada 30s) &middot; pend&ecirc;ncias com mais de 96h: <b>281</b> (ver indicador principal)</span></div>
+<div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--blue)"><i class="fa-solid fa-clock"></i> contagem regressiva recalculada ao vivo (a cada 30s) &middot; pend&ecirc;ncias com mais de 96h: <b>274</b> (ver indicador principal)</span></div>
 
 <div class="tblwrap">
 <table>
@@ -236,6 +256,24 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 </footer>
 </div>
 
+<div class="lg-ov" id="lg-ov">
+  <div class="lg-card">
+    <div class="lg-brand">
+      <div class="hicon"><i class="fa-solid fa-stopwatch"></i></div>
+      <h1 style="font-size:.98rem">Sincronismo 48h<small>VTC LOG &middot; Gerenciamento T&eacute;rmico</small></h1>
+    </div>
+    <div class="lg-tit">Acesso restrito</div>
+    <div class="lg-sub">Entre com seu usu&aacute;rio para visualizar as pend&ecirc;ncias e registrar cobran&ccedil;as e observa&ccedil;&otilde;es em nome da sua conta.</div>
+    <label class="mo-lbl" for="lg-user">Usu&aacute;rio</label>
+    <input id="lg-user" class="mo-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false">
+    <label class="mo-lbl" for="lg-pass">Senha</label>
+    <input id="lg-pass" type="password" class="mo-inp" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password">
+    <div class="lg-err" id="lg-err"></div>
+    <button class="mo-btn mo-primary" id="lg-btn" onclick="fazerLogin()" style="width:100%;margin-top:16px;padding:12px"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
+    <div class="lg-foot">Quadro compartilhado do Gerenciamento T&eacute;rmico &middot; toda marca&ccedil;&atilde;o fica registrada com o nome de quem fez</div>
+  </div>
+</div>
+
 <div class="mo-ov" id="mo-ov">
   <div class="mo-card" role="dialog" aria-modal="true" aria-labelledby="mo-tit">
     <div class="mo-head">
@@ -247,13 +285,11 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
       <button class="mo-x" onclick="fecharModal(null)" title="Fechar"><i class="fa-solid fa-xmark"></i></button>
     </div>
     <div class="mo-body">
-      <label class="mo-lbl" for="mo-nome">Seu nome <small>&middot; aparece para todos no quadro</small></label>
-      <input id="mo-nome" class="mo-inp" maxlength="40" placeholder="Ex.: Caio" autocomplete="off">
       <div id="mo-obs-wrap">
         <label class="mo-lbl" for="mo-obs">Motivo / observa&ccedil;&atilde;o <small>&middot; por que n&atilde;o sincronizou, onde est&aacute; o logger...</small></label>
         <div class="mo-chips" id="mo-chips"></div>
         <textarea id="mo-obs" class="mo-inp mo-ta" maxlength="200" placeholder="Descreva o motivo ou toque numa sugest&atilde;o acima"></textarea>
-        <div class="mo-cnt"><span id="mo-cnt">0</span>/200</div>
+        <div class="mo-cnt"><span id="mo-cnt">0</span>/200 &middot; registrado como <b id="mo-quem"></b></div>
       </div>
     </div>
     <div class="mo-foot">
@@ -266,7 +302,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 </div>
 
 <script>
-const R = [{"p":"571699","ro":"9232","l":"A1477","uf":"ES","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T08:48","cob":"AGENTE","s":"25/09/2026 16:56"},{"p":"571982","ro":"9248","l":"A2672","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:02","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571949","ro":"9247","l":"A3148","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:19","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571959","ro":"9245","l":"A5261","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:49","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571760","ro":"9245","l":"A5563","uf":"BA","ag":"SSA - LUTY LOG","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T18:23","cob":"AGENTE","s":"13/10/2026 08:57"},{"p":"571940","ro":"9245","l":"A5991","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:46","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571413","ro":"9202","l":"A6396","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:10","cob":"AGENTE","s":"06/10/2026 20:59"},{"p":"571957","ro":"9247","l":"A6602","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:07","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571970","ro":"9246","l":"A7032","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:55","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571969","ro":"9246","l":"A7353","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:15","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571888","ro":"9248","l":"A7474","uf":"CE","ag":"JDO - TRANSVALBER","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:51","cob":"AGENTE","s":"06/10/2026 20:59"},{"p":"571971","ro":"9247","l":"A7882","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:58","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571946","ro":"9247","l":"A7968","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:04","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"570781","ro":"9167","l":"A8738","uf":"AL","ag":"MCZ - MCZ EXPRESS SERVICE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:00","cob":"AGENTE","s":"05/10/2026 12:26"},{"p":"571271","ro":"9256","l":"A9668","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T10:23","cob":"AGENTE","s":"13/05/2026 16:29"},{"p":"571945","ro":"9247","l":"TA1004","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:17","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571708","ro":"9242","l":"TA1132","uf":"MA","ag":"IMP - AAS LUCENA SERVIÇOS EDE ENTREGA RAPIDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:00","cob":"AGENTE","s":"07/10/2026 12:10"},{"p":"571950","ro":"9247","l":"V741701454","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:12","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571635","ro":"9247","l":"V741701860","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:41","cob":"AGENTE","s":"06/10/2026 22:01"},{"p":"571160","ro":"9160","l":"V741702450","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T10:00","cob":"AGENTE","s":"07/10/2026 09:02"},{"p":"571207","ro":"9193","l":"V741702500","uf":"MG","ag":"UDI - ENTREGAS URGENTES LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:20","cob":"AGENTE","s":"13/10/2026 10:26"},{"p":"571944","ro":"9247","l":"V741702879","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:09","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571867","ro":"9245","l":"V741703016","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:41","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571867","ro":"9245","l":"V741703102","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:41","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571425","ro":"9247","l":"V741703142","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:40","cob":"AGENTE","s":""},{"p":"571442","ro":"9245","l":"V741703170","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:42","cob":"AGENTE","s":""},{"p":"569242","ro":"9239","l":"V741703276","uf":"AL","ag":"MCZ - MCZ EXPRESS SERVICE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:20","cob":"AGENTE","s":""},{"p":"569170","ro":"9054","l":"0741700152","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 11:56"},{"p":"569170","ro":"9054","l":"0741700556","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"AGENTE","s":"10/10/2026 12:01"},{"p":"571713","ro":"9296","l":"A0329","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T19:51","cob":"AGENTE","s":"07/10/2026 14:01"},{"p":"571194","ro":"9217","l":"A4694","uf":"MG","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T10:42","cob":"AGENTE","s":"07/10/2026 18:08"},{"p":"567376","ro":"9255","l":"A4867","uf":"RJ","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:35","cob":"GRU","s":"08/08/2026 11:44"},{"p":"569170","ro":"9054","l":"A5193","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 12:24"},{"p":"571468","ro":"9296","l":"A5245","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T19:55","cob":"AGENTE","s":"07/10/2026 10:14"},{"p":"569170","ro":"9054","l":"A6255","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"AGENTE","s":"10/10/2026 12:03"},{"p":"571492","ro":"9248","l":"A6334","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:02","cob":"AGENTE","s":"14/10/2026 12:33"},{"p":"571644","ro":"9248","l":"A7250","uf":"CE","ag":"FOR - NT TRANSPORTE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T09:32","cob":"AGENTE","s":"13/10/2026 13:35"},{"p":"571263","ro":"9264","l":"A7314","uf":"DF","ag":"VTCLOG - BSB","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T10:25","cob":"AGENTE","s":"14/10/2026 09:54"},{"p":"571469","ro":"9247","l":"A8215","uf":"RS","ag":"POA - GMB TRANSPORTES E LOGISTICA ME","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T15:56","cob":"AGENTE","s":"14/10/2026 09:07"},{"p":"571597","ro":"9247","l":"A8272","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:03","cob":"AGENTE","s":"14/10/2026 12:30"},{"p":"569170","ro":"9054","l":"A8579","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"13/10/2026 17:06"},{"p":"571703","ro":"9250","l":"A8783","uf":"RS","ag":"POA - GMB TRANSPORTES E LOGISTICA ME","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:36","cob":"AGENTE","s":"13/10/2026 12:24"},{"p":"569170","ro":"9054","l":"A8907","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 10:30"},{"p":"571719","ro":"9242","l":"TA0708","uf":"CE","ag":"FOR - NT TRANSPORTE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T09:32","cob":"AGENTE","s":"13/10/2026 13:34"},{"p":"569170","ro":"9054","l":"V741701430","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 09:07"},{"p":"569170","ro":"9054","l":"V741701519","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"AGENTE","s":"10/10/2026 10:45"},{"p":"570844","ro":"9240","l":"V741702438","uf":"AM","ag":"TBT - PAIVA TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T15:20","cob":"GRU","s":""},{"p":"571884","ro":"9248","l":"V741702593","uf":"MS","ag":"CGR - LH TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:20","cob":"AGENTE","s":"13/10/2026 18:31"},{"p":"571508","ro":"9297","l":"V741702783","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T13:47","cob":"AGENTE","s":""},{"p":"571333","ro":"9242","l":"V741703079","uf":"RR","ag":"BVB - J PIMENTEL S. CUNHA LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T12:33","cob":"AGENTE","s":"14/10/2026 11:02"},{"p":"571263","ro":"9264","l":"V741703413","uf":"DF","ag":"VTCLOG - BSB","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T10:25","cob":"AGENTE","s":"14/10/2026 09:54"},{"p":"571639","ro":"9206","l":"0741700191","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T14:45","cob":"AGENTE","s":"15/10/2026 07:23"},{"p":"571696","ro":"9290","l":"0741700886","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T13:51","cob":"AGENTE","s":"07/10/2026 10:14"},{"p":"572018","ro":"9296","l":"A1998","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:22","cob":"AGENTE","s":"06/10/2026 21:11"},{"p":"571955","ro":"9245","l":"A2642","uf":"PA","ag":"MAB - EXPRESSO RODRIGUES LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T15:36","cob":"AGENTE","s":"06/10/2026 20:54"},{"p":"571698","ro":"9242","l":"A2900","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:26","cob":"AGENTE","s":"15/10/2026 10:52"},{"p":"571698","ro":"9242","l":"A2927","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:26","cob":"AGENTE","s":"15/10/2026 09:18"},{"p":"567505","ro":"9254","l":"A3066","uf":"RS","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:07","cob":"AGENTE","s":"29/09/2026 14:20"},{"p":"571698","ro":"9242","l":"A4642","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:26","cob":"AGENTE","s":"15/10/2026 10:52"},{"p":"572007","ro":"9247","l":"A5749","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:24","cob":"AGENTE","s":"15/10/2026 12:19"},{"p":"570084","ro":"9286","l":"A6564","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"09/10/2026 11:51"},{"p":"572506","ro":"9321","l":"A6678","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:12","cob":"AGENTE","s":"07/10/2026 12:09"},{"p":"571587","ro":"9296","l":"A6732","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T14:30","cob":"AGENTE","s":"07/10/2026 09:42"},{"p":"572259","ro":"9319","l":"A9563","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:18","cob":"AGENTE","s":"09/10/2026 09:20"},{"p":"571346","ro":"9241","l":"TA0426","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:27","cob":"AGENTE","s":"15/10/2026 11:52"},{"p":"570084","ro":"9286","l":"TA0440","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"07/10/2026 09:36"},{"p":"571637","ro":"9296","l":"TA1208","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T11:43","cob":"AGENTE","s":"07/10/2026 16:44"},{"p":"570084","ro":"9286","l":"V741701903","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"09/10/2026 12:24"},{"p":"570084","ro":"9286","l":"V741701919","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"09/10/2026 10:29"},{"p":"572260","ro":"9319","l":"V741702735","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:19","cob":"AGENTE","s":""},{"p":"572352","ro":"9301","l":"V741703013","uf":"PI","ag":"THE - AERONEIVA EXPRESS","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T16:09","cob":"AGENTE","s":"15/10/2026 12:31"},{"p":"572253","ro":"9320","l":"V741703117","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T15:10","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703260","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""},{"p":"572275","ro":"9320","l":"V741703336","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T15:07","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703349","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703529","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""},{"p":"572259","ro":"9319","l":"V741703560","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:18","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703564","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""}];
+const R = [{"p":"571699","ro":"9232","l":"A1477","uf":"ES","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T08:48","cob":"AGENTE","s":"25/09/2026 16:56"},{"p":"571982","ro":"9248","l":"A2672","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:02","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571949","ro":"9247","l":"A3148","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:19","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571959","ro":"9245","l":"A5261","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:49","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571760","ro":"9245","l":"A5563","uf":"BA","ag":"SSA - LUTY LOG","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T18:23","cob":"AGENTE","s":"13/10/2026 08:57"},{"p":"571940","ro":"9245","l":"A5991","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:46","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571413","ro":"9202","l":"A6396","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:10","cob":"AGENTE","s":"06/10/2026 20:59"},{"p":"571957","ro":"9247","l":"A6602","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:07","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571970","ro":"9246","l":"A7032","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:55","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571969","ro":"9246","l":"A7353","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:15","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571888","ro":"9248","l":"A7474","uf":"CE","ag":"JDO - TRANSVALBER","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:51","cob":"AGENTE","s":"06/10/2026 20:59"},{"p":"571971","ro":"9247","l":"A7882","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:58","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571946","ro":"9247","l":"A7968","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:04","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"570781","ro":"9167","l":"A8738","uf":"AL","ag":"MCZ - MCZ EXPRESS SERVICE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:00","cob":"AGENTE","s":"05/10/2026 12:26"},{"p":"571271","ro":"9256","l":"A9668","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T10:23","cob":"AGENTE","s":"13/05/2026 16:29"},{"p":"571945","ro":"9247","l":"TA1004","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:17","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571708","ro":"9242","l":"TA1132","uf":"MA","ag":"IMP - AAS LUCENA SERVIÇOS EDE ENTREGA RAPIDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:00","cob":"AGENTE","s":"07/10/2026 12:10"},{"p":"571950","ro":"9247","l":"V741701454","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:12","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571635","ro":"9247","l":"V741701860","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:41","cob":"AGENTE","s":"06/10/2026 22:01"},{"p":"571160","ro":"9160","l":"V741702450","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T10:00","cob":"AGENTE","s":"07/10/2026 09:02"},{"p":"571207","ro":"9193","l":"V741702500","uf":"MG","ag":"UDI - ENTREGAS URGENTES LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:20","cob":"AGENTE","s":"13/10/2026 10:26"},{"p":"571944","ro":"9247","l":"V741702879","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T12:09","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571867","ro":"9245","l":"V741703016","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:41","cob":"AGENTE","s":"13/10/2026 11:16"},{"p":"571867","ro":"9245","l":"V741703102","uf":"SC","ag":"FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T11:41","cob":"AGENTE","s":"13/10/2026 11:17"},{"p":"571425","ro":"9247","l":"V741703142","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:40","cob":"AGENTE","s":""},{"p":"571442","ro":"9245","l":"V741703170","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T17:42","cob":"AGENTE","s":""},{"p":"569242","ro":"9239","l":"V741703276","uf":"AL","ag":"MCZ - MCZ EXPRESS SERVICE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-13T15:20","cob":"AGENTE","s":""},{"p":"569170","ro":"9054","l":"0741700152","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 11:56"},{"p":"569170","ro":"9054","l":"0741700556","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"AGENTE","s":"10/10/2026 12:01"},{"p":"571713","ro":"9296","l":"A0329","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T19:51","cob":"AGENTE","s":"07/10/2026 14:01"},{"p":"571194","ro":"9217","l":"A4694","uf":"MG","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T10:42","cob":"AGENTE","s":"07/10/2026 18:08"},{"p":"567376","ro":"9255","l":"A4867","uf":"RJ","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:35","cob":"GRU","s":"08/08/2026 11:44"},{"p":"569170","ro":"9054","l":"A5193","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 12:24"},{"p":"571468","ro":"9296","l":"A5245","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T19:55","cob":"AGENTE","s":"07/10/2026 10:14"},{"p":"569170","ro":"9054","l":"A6255","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"AGENTE","s":"10/10/2026 12:03"},{"p":"571492","ro":"9248","l":"A6334","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:02","cob":"AGENTE","s":"14/10/2026 12:33"},{"p":"571644","ro":"9248","l":"A7250","uf":"CE","ag":"FOR - NT TRANSPORTE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T09:32","cob":"AGENTE","s":"13/10/2026 13:35"},{"p":"571263","ro":"9264","l":"A7314","uf":"DF","ag":"VTCLOG - BSB","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T10:25","cob":"AGENTE","s":"14/10/2026 09:54"},{"p":"571469","ro":"9247","l":"A8215","uf":"RS","ag":"POA - GMB TRANSPORTES E LOGISTICA ME","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T15:56","cob":"AGENTE","s":"14/10/2026 09:07"},{"p":"571597","ro":"9247","l":"A8272","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:03","cob":"AGENTE","s":"14/10/2026 12:30"},{"p":"569170","ro":"9054","l":"A8579","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"13/10/2026 17:06"},{"p":"571703","ro":"9250","l":"A8783","uf":"RS","ag":"POA - GMB TRANSPORTES E LOGISTICA ME","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:36","cob":"AGENTE","s":"13/10/2026 12:24"},{"p":"569170","ro":"9054","l":"A8907","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 10:30"},{"p":"571719","ro":"9242","l":"TA0708","uf":"CE","ag":"FOR - NT TRANSPORTE LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T09:32","cob":"AGENTE","s":"13/10/2026 13:34"},{"p":"569170","ro":"9054","l":"V741701430","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"GRU","s":"10/10/2026 09:07"},{"p":"569170","ro":"9054","l":"V741701519","uf":"PA","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T17:40","cob":"AGENTE","s":"10/10/2026 10:45"},{"p":"570844","ro":"9240","l":"V741702438","uf":"AM","ag":"TBT - PAIVA TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T15:20","cob":"GRU","s":""},{"p":"571884","ro":"9248","l":"V741702593","uf":"MS","ag":"CGR - LH TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T14:20","cob":"AGENTE","s":"13/10/2026 18:31"},{"p":"571508","ro":"9297","l":"V741702783","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T13:47","cob":"AGENTE","s":""},{"p":"571333","ro":"9242","l":"V741703079","uf":"RR","ag":"BVB - J PIMENTEL S. CUNHA LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T12:33","cob":"AGENTE","s":"14/10/2026 11:02"},{"p":"571263","ro":"9264","l":"V741703413","uf":"DF","ag":"VTCLOG - BSB","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-14T10:25","cob":"AGENTE","s":"14/10/2026 09:54"},{"p":"571639","ro":"9206","l":"0741700191","uf":"PR","ag":"LDB - ND CARGAS LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T14:45","cob":"AGENTE","s":"15/10/2026 07:23"},{"p":"571696","ro":"9290","l":"0741700886","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T13:51","cob":"AGENTE","s":"07/10/2026 10:14"},{"p":"572018","ro":"9296","l":"A1998","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:22","cob":"AGENTE","s":"06/10/2026 21:11"},{"p":"571955","ro":"9245","l":"A2642","uf":"PA","ag":"MAB - EXPRESSO RODRIGUES LTDA","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T15:36","cob":"AGENTE","s":"06/10/2026 20:54"},{"p":"571698","ro":"9242","l":"A2900","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:26","cob":"AGENTE","s":"15/10/2026 10:52"},{"p":"571698","ro":"9242","l":"A2927","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:26","cob":"AGENTE","s":"15/10/2026 09:18"},{"p":"567385","ro":"9254","l":"A3066","uf":"RS","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:43","cob":"AGENTE","s":"29/09/2026 14:20"},{"p":"571698","ro":"9242","l":"A4642","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:26","cob":"AGENTE","s":"15/10/2026 10:52"},{"p":"572007","ro":"9247","l":"A5749","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:24","cob":"AGENTE","s":"15/10/2026 12:19"},{"p":"570084","ro":"9286","l":"A6564","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"09/10/2026 11:51"},{"p":"572506","ro":"9321","l":"A6678","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:12","cob":"AGENTE","s":"07/10/2026 12:09"},{"p":"571587","ro":"9296","l":"A6732","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T14:30","cob":"AGENTE","s":"07/10/2026 09:42"},{"p":"572259","ro":"9319","l":"A9563","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:18","cob":"AGENTE","s":"09/10/2026 09:20"},{"p":"571346","ro":"9241","l":"TA0426","uf":"AC","ag":"RBR - RODOTEC","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:27","cob":"AGENTE","s":"15/10/2026 11:52"},{"p":"570084","ro":"9286","l":"TA0440","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"07/10/2026 09:36"},{"p":"571637","ro":"9296","l":"TA1208","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T11:43","cob":"AGENTE","s":"07/10/2026 16:44"},{"p":"570084","ro":"9286","l":"V741701903","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"09/10/2026 12:24"},{"p":"570084","ro":"9286","l":"V741701919","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":"09/10/2026 10:29"},{"p":"572260","ro":"9319","l":"V741702735","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:19","cob":"AGENTE","s":""},{"p":"572352","ro":"9301","l":"V741703013","uf":"PI","ag":"THE - AERONEIVA EXPRESS","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T16:09","cob":"AGENTE","s":"15/10/2026 12:31"},{"p":"572253","ro":"9320","l":"V741703117","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T15:10","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703260","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""},{"p":"572275","ro":"9320","l":"V741703336","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T15:07","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703349","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703529","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""},{"p":"572259","ro":"9319","l":"V741703560","uf":"SP","ag":"VTCLOG - GRU","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T17:18","cob":"AGENTE","s":""},{"p":"570084","ro":"9286","l":"V741703564","uf":"GO","ag":"GYN - RBR EXPERIENCIA EM TRANSPORTES","cli":"MINISTÉRIO DA SAUDE","ent":"2026-10-15T10:59","cob":"AGENTE","s":""}];
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtEnt = s => { const d = new Date(s); return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); };
@@ -282,6 +318,74 @@ const NOMES = {1:["NO PRAZO","b1","ok","#16a34a"], 2:["ATEN\u00c7\u00c3O","b2","
 const FB = "https://gt-sincronismo-default-rtdb.firebaseio.com/sync48";
 let FLAGS = {};
 let FB_OK = false;
+
+/* ===== login (usuarios cadastrados no Firebase, senha nunca trafega nem fica salva: hash SHA-256) ===== */
+const SKEY = "sync48_sessao";
+let SESSION = null;
+
+async function sha256(txt){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(txt));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function lgErr(msg){
+  const el = document.getElementById("lg-err");
+  if (msg){ el.textContent = msg; el.classList.add("on"); } else el.classList.remove("on");
+}
+function aplicarSessao(){
+  document.body.classList.remove("bloqueada");
+  document.getElementById("quem-nome").textContent = SESSION.nome;
+  try { localStorage.setItem("sync48_operador", SESSION.nome); } catch(e){}
+}
+function bloquear(){
+  SESSION = null;
+  try { localStorage.removeItem(SKEY); } catch(e){}
+  document.body.classList.add("bloqueada");
+  document.getElementById("lg-pass").value = "";
+  lgErr("");
+  setTimeout(() => document.getElementById("lg-user").focus(), 150);
+}
+function sair(){ bloquear(); }
+async function fazerLogin(){
+  const u = document.getElementById("lg-user").value.trim().toLowerCase();
+  const p = document.getElementById("lg-pass").value;
+  if (!u || !p){ lgErr("Preencha usu\u00e1rio e senha."); return; }
+  const btn = document.getElementById("lg-btn");
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Verificando...';
+  try {
+    const chaveU = u.replace(/[.#$\[\]\/]/g, "_"); // Firebase nao aceita "." em chaves
+    const resp = await fetch(FB + "/_usuarios/" + encodeURIComponent(chaveU) + ".json", { cache: "no-store" });
+    if (!resp.ok) throw new Error(resp.status);
+    const reg = await resp.json();
+    const h = await sha256(u + ":" + p);
+    if (!reg || !reg.h || reg.h !== h){
+      lgErr("Usu\u00e1rio ou senha incorretos.");
+    } else {
+      SESSION = { u: u, nome: reg.nome || u, t: Date.now() };
+      try { localStorage.setItem(SKEY, JSON.stringify(SESSION)); } catch(e){}
+      lgErr("");
+      aplicarSessao();
+    }
+  } catch(e){
+    lgErr("Sem conex\u00e3o com o servidor de acesso. Tente novamente.");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fa-solid fa-right-to-bracket"></i> Entrar';
+  }
+}
+async function validarSessaoSalva(){
+  try { SESSION = JSON.parse(localStorage.getItem(SKEY) || "null"); } catch(e){ SESSION = null; }
+  if (!SESSION || !SESSION.u || !SESSION.nome){ bloquear(); return; }
+  aplicarSessao();
+  try { // confirma que o usuario ainda existe no banco; se foi removido, encerra a sessao
+    const chaveU = SESSION.u.replace(/[.#$\[\]\/]/g, "_");
+    const resp = await fetch(FB + "/_usuarios/" + encodeURIComponent(chaveU) + ".json", { cache: "no-store" });
+    if (resp.ok && (await resp.json()) === null) bloquear();
+  } catch(e){ /* offline: mantem a sessao local */ }
+}
+["lg-user","lg-pass"].forEach(id => document.getElementById(id).addEventListener("keydown", e => {
+  if (e.key === "Enter"){ e.preventDefault(); fazerLogin(); }
+}));
 function chave(r){ return (r.p + "|" + r.l + "|" + r.ent).replace(/[.#$\[\]\/]/g, "_"); }
 function normalizar(v){
   if (!v) return null;
@@ -296,6 +400,7 @@ async function buscarFlags(){
     const bruto = (await resp.json()) || {};
     FLAGS = {};
     for (const k of Object.keys(bruto)){
+      if (k.charAt(0) === "_") continue; // nos reservados (ex.: _usuarios)
       const v = normalizar(bruto[k]);
       if (v) FLAGS[k] = v;
     }
@@ -326,26 +431,19 @@ const MOTIVOS = ["Solicitado sinc", "Enviado para GRU", "Logger descarregado", "
 let MO_RESOLVE = null;
 
 function abrirModal(opts){
-  // opts: { titulo, sub, comObs, textoObs, podeRemover }
+  // opts: { titulo, sub, textoObs, podeRemover }
   return new Promise(resolve => {
     MO_RESOLVE = resolve;
     document.getElementById("mo-tit").textContent = opts.titulo;
     document.getElementById("mo-sub").innerHTML = opts.sub || "";
-    document.getElementById("mo-ico").innerHTML = opts.comObs ? '<i class="fa-solid fa-pen-to-square"></i>' : '<i class="fa-solid fa-user-check"></i>';
-    const nome = document.getElementById("mo-nome");
-    nome.value = localStorage.getItem("sync48_operador") || "";
-    const wrap = document.getElementById("mo-obs-wrap");
-    wrap.style.display = opts.comObs ? "" : "none";
-    if (opts.comObs){
-      document.getElementById("mo-obs").value = opts.textoObs || "";
-      atualizaCnt();
-      document.getElementById("mo-chips").innerHTML = MOTIVOS.map(m =>
-        '<button type="button" class="mo-chip" onclick="usarChip(this)">'+m+'</button>').join("");
-    }
+    document.getElementById("mo-obs").value = opts.textoObs || "";
+    atualizaCnt();
+    document.getElementById("mo-quem").textContent = SESSION ? SESSION.nome : "";
+    document.getElementById("mo-chips").innerHTML = MOTIVOS.map(m =>
+      '<button type="button" class="mo-chip" onclick="usarChip(this)">'+m+'</button>').join("");
     document.getElementById("mo-remover").style.display = opts.podeRemover ? "" : "none";
-    validaModal();
     document.getElementById("mo-ov").classList.add("aberto");
-    setTimeout(() => { (nome.value ? (opts.comObs ? document.getElementById("mo-obs") : nome) : nome).focus(); }, 180);
+    setTimeout(() => document.getElementById("mo-obs").focus(), 180);
   });
 }
 function fecharModal(resultado){
@@ -354,11 +452,8 @@ function fecharModal(resultado){
   if (r) r(resultado);
 }
 function modalSalvar(){
-  const nome = document.getElementById("mo-nome").value.trim().slice(0, 40);
-  if (!nome) return;
-  localStorage.setItem("sync48_operador", nome);
-  const comObs = document.getElementById("mo-obs-wrap").style.display !== "none";
-  fecharModal({ nome: nome, texto: comObs ? document.getElementById("mo-obs").value.trim().slice(0, 200) : null });
+  if (!SESSION){ fecharModal(null); bloquear(); return; }
+  fecharModal({ nome: SESSION.nome, texto: document.getElementById("mo-obs").value.trim().slice(0, 200) });
 }
 function usarChip(el){
   const ta = document.getElementById("mo-obs");
@@ -368,17 +463,6 @@ function usarChip(el){
 function atualizaCnt(){
   document.getElementById("mo-cnt").textContent = document.getElementById("mo-obs").value.length;
 }
-function validaModal(){
-  document.getElementById("mo-salvar").disabled = !document.getElementById("mo-nome").value.trim();
-}
-document.getElementById("mo-nome").addEventListener("input", validaModal);
-document.getElementById("mo-nome").addEventListener("keydown", e => {
-  if (e.key === "Enter"){
-    e.preventDefault();
-    if (document.getElementById("mo-obs-wrap").style.display === "none") modalSalvar();
-    else document.getElementById("mo-obs").focus();
-  }
-});
 document.getElementById("mo-obs").addEventListener("input", atualizaCnt);
 document.getElementById("mo-obs").addEventListener("keydown", e => {
   if (e.key === "Enter" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); modalSalvar(); }
@@ -391,10 +475,8 @@ function subPendencia(k){
   return r ? "Pedido <b>"+esc(r.p)+"</b> \u00b7 logger <b>"+esc(r.l)+"</b> \u00b7 "+esc(r.ag) : "";
 }
 async function obterNome(k){
-  const salvo = (localStorage.getItem("sync48_operador") || "").trim();
-  if (salvo) return salvo;
-  const res = await abrirModal({ titulo: "Identifique-se", sub: subPendencia(k), comObs: false, podeRemover: false });
-  return res ? res.nome : null;
+  if (!SESSION){ bloquear(); return null; } // exige login: nunca marca cobrado sem nome
+  return SESSION.nome;
 }
 async function patchFlag(k, campos){
   const url = FB + "/" + encodeURIComponent(k) + ".json";
@@ -427,6 +509,7 @@ async function toggleCobrado(k){
   }
 }
 async function editarObs(k){
+  if (!SESSION){ bloquear(); return; }
   const atual = FLAGS[k] || {};
   const res = await abrirModal({
     titulo: atual.obs ? "Editar observa\u00e7\u00e3o" : "Nova observa\u00e7\u00e3o",
@@ -613,6 +696,7 @@ document.querySelectorAll(".kpi").forEach(k => k.addEventListener("click", () =>
   apply();
 }));
 (async () => {
+  await validarSessaoSalva();
   await buscarFlags();
   await limpezaFlags();
   apply();

@@ -104,7 +104,8 @@ def main():
         nome, login = RESP[resp_nome]
         k = chave(p, str(r.get("l") or ""), ent.strftime("%Y-%m-%dT%H:%M"))
         url = f"{FB}/{urllib.parse.quote(k, safe='')}.json"
-        st = patch(url, {"obs": {"x": texto, "q": nome, "u": login, "t": agora_ms}})
+        st = patch(url, {"obs": {"x": texto, "q": nome, "u": login, "t": agora_ms,
+                                 "uf": str(r.get("uf") or ""), "ag": str(r.get("ag") or "")}})
         if st == 200:
             gravadas += 1
             pedidos_ok.add(p)

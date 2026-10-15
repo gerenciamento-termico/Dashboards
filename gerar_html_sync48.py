@@ -362,11 +362,22 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <div class="gtabs">
   <button class="gtab ativo" data-tab="geral" onclick="setTab('geral')"><i class="fa-solid fa-plane-up"></i> Geral <span class="gt-n" id="gt-geral">0</span></button>
   <button class="gtab" data-tab="rod" onclick="setTab('rod')" title="Pendencias com ocorrencia de rodoviario paletizado (sem logger / sem dados), em qualquer idade"><i class="fa-solid fa-truck"></i> Rodovi&aacute;rio <span class="gt-n" id="gt-rod">0</span></button>
+  <button class="gtab" data-tab="oco" onclick="setTab('oco')" title="Historico de todas as ocorrencias registradas, inclusive de pendencias ja sincronizadas (retencao de 30 dias)"><i class="fa-solid fa-clipboard-list"></i> Ocorr&ecirc;ncias <span class="gt-n" id="gt-oco">0</span></button>
 </div>
 
 <div class="cnt"><span id="cnt"></span> &nbsp;&middot;&nbsp; <span style="color:var(--blue)"><i class="fa-solid fa-clock"></i> contagem regressiva recalculada ao vivo (a cada 30s) &middot; pend&ecirc;ncias com mais de 96h: <b>__ANTIGOS__</b> (ver indicador principal)</span></div>
 
-<div class="tblwrap">
+<div class="tblwrap" id="ocoWrap" style="display:none">
+<table style="min-width:1100px">
+  <thead><tr>
+    <th>Situa&ccedil;&atilde;o</th><th>Pedido</th><th>Logger</th><th>Entrega</th><th>UF</th><th>Base / Agente</th>
+    <th>Ocorr&ecirc;ncia</th><th>Registrada por</th><th>Quando</th><th></th>
+  </tr></thead>
+  <tbody id="tb-oco"></tbody>
+</table>
+</div>
+
+<div class="tblwrap" id="gridWrap">
 <table>
   <thead><tr>
     <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p">Pedido</th><th class="sv" data-k="l">Logger</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
@@ -677,20 +688,20 @@ function renderMinhasOco(){
   for (const k of Object.keys(FLAGS)){
     const f = FLAGS[k];
     if (!f.obs || !donaDaOco(f.obs)) continue;
-    const r = R.find(x => chave(x) === k);
-    minhas.push({ k: k, r: r, obs: f.obs });
+    minhas.push({ k: k, i: infoChave(k), obs: f.obs });
   }
   minhas.sort((a,b) => b.obs.t - a.obs.t);
   alvo.innerHTML = minhas.map(m => {
-    const ctx = m.r ? "Pedido <b>" + esc(m.r.p) + "</b> \u00b7 logger " + esc(m.r.l) + " \u00b7 " + esc(m.r.ag) : "(pend\u00eancia j\u00e1 resolvida)";
+    const ctx = "Pedido <b>" + esc(m.i.p) + "</b> \u00b7 logger " + esc(m.i.l) + (m.i.ag ? " \u00b7 " + esc(m.i.ag) : "")
+      + (m.i.atual ? "" : ' \u00b7 <span style="color:var(--n1);font-weight:700">sincronizado</span>');
     const k = m.k.replace(/"/g, "&quot;");
     return '<div class="up-item">'
       + '<div class="t">' + ctx + '</div>'
       + '<div class="x">' + esc(m.obs.x) + '</div>'
       + '<div class="m">registrada h\u00e1 ' + idadeFlag(m.obs.t) + '</div>'
-      + (m.r ? '<div class="acao"><button class="up-mini" onclick="fecharPainel();editarObs(\'' + k + '\')"><i class="fa-solid fa-pen"></i> Editar</button></div>' : '')
+      + '<div class="acao"><button class="up-mini" onclick="fecharPainel();editarObs(\'' + k + '\')"><i class="fa-solid fa-pen"></i> Editar</button></div>'
       + '</div>';
-  }).join("") || '<div class="up-vazio">Voc\u00ea ainda n\u00e3o registrou ocorr\u00eancias nas pend\u00eancias atuais.</div>';
+  }).join("") || '<div class="up-vazio">Voc\u00ea ainda n\u00e3o registrou ocorr\u00eancias.</div>';
 }
 document.getElementById("up-ov").addEventListener("mousedown", e => { if (e.target === e.currentTarget) fecharPainel(); });
 function chave(r){ return (r.p + "|" + r.l + "|" + r.ent).replace(/[.#$\[\]\/]/g, "_"); }
@@ -725,11 +736,30 @@ async function limpezaFlags(){
   if (!FB_OK) return;
   const atuais = new Set(R.map(chave));
   for (const k of Object.keys(FLAGS)){
-    if (!atuais.has(k) || (Date.now() - tsFlag(FLAGS[k])) > 7*86400000){
+    const f = FLAGS[k];
+    if (f.obs){
+      // ocorrencia e historico: sobrevive ao sincronismo; expira em 30 dias
+      if ((Date.now() - (f.obs.t || 0)) > 30*86400000){
+        delete FLAGS[k];
+        fetch(FB + "/" + encodeURIComponent(k) + ".json", { method: "DELETE" }).catch(() => {});
+      } else if (!atuais.has(k) && f.cob){
+        // pendencia resolvida: limpa so o "cobrado", preserva a ocorrencia
+        delete f.cob;
+        fetch(FB + "/" + encodeURIComponent(k) + ".json", { method: "PATCH", body: JSON.stringify({ cob: null }) }).catch(() => {});
+      }
+    } else if (!atuais.has(k) || (Date.now() - tsFlag(f)) > 7*86400000){
       delete FLAGS[k];
       fetch(FB + "/" + encodeURIComponent(k) + ".json", { method: "DELETE" }).catch(() => {});
     }
   }
+}
+function infoChave(k){
+  const r = R.find(x => chave(x) === k);
+  if (r) return { p: r.p, l: r.l, uf: r.uf, ag: r.ag, ent: r.ent, atual: r };
+  const f = FLAGS[k] || {};
+  const partes = k.split("|");
+  return { p: partes[0] || "?", l: partes[1] || "?", ent: partes[2] || "",
+           uf: (f.obs && f.obs.uf) || "", ag: (f.obs && f.obs.ag) || "", atual: null };
 }
 /* ---- modal profissional (substitui window.prompt) ---- */
 const MOTIVOS = ["Solicitado sinc", "Enviado para GRU", "Logger descarregado", "Agente sem bateria",
@@ -787,8 +817,9 @@ document.addEventListener("keydown", e => {
 });
 
 function subPendencia(k){
-  const r = R.find(x => chave(x) === k);
-  return r ? "Pedido <b>"+esc(r.p)+"</b> \u00b7 logger <b>"+esc(r.l)+"</b> \u00b7 "+esc(r.ag) : "";
+  const i = infoChave(k);
+  return "Pedido <b>"+esc(i.p)+"</b> \u00b7 logger <b>"+esc(i.l)+"</b>" + (i.ag ? " \u00b7 "+esc(i.ag) : "") +
+         (i.atual ? "" : " \u00b7 <b style=\"color:var(--n1)\">j\u00e1 sincronizado</b>");
 }
 async function obterNome(k){
   if (!SESSION){ bloquear(); return null; } // exige login: nunca marca cobrado sem nome
@@ -848,7 +879,9 @@ async function editarObs(k){
   try {
     const limpo = res.remover ? "" : (res.texto || "");
     if (limpo){
-      atual.obs = { x: limpo, q: res.nome, u: SESSION.u, t: Date.now() };
+      const info = infoChave(k); // guarda uf/base junto: o contexto sobrevive quando a pendencia sincroniza
+      atual.obs = { x: limpo, q: res.nome, u: SESSION.u, t: Date.now(),
+                    uf: info.uf || "", ag: info.ag || "" };
       FLAGS[k] = atual;
       apply();
       await patchFlag(k, { obs: atual.obs });
@@ -886,6 +919,9 @@ function ehRod(fobs){ return !!(fobs && /rodovi/i.test(fobs.x)); }
 function setTab(t){
   TAB = t;
   document.querySelectorAll(".gtab").forEach(b => b.classList.toggle("ativo", b.dataset.tab === t));
+  document.getElementById("gridWrap").style.display = (t === "oco") ? "none" : "";
+  document.getElementById("ocoWrap").style.display = (t === "oco") ? "" : "none";
+  document.getElementById("cards").style.display = (t === "oco") ? "none" : "";
   apply();
 }
 let SORT = { k: "resta", d: 1 };
@@ -916,6 +952,7 @@ function apply(){
   });
   document.getElementById("gt-geral").textContent = TODAS.filter(r => !r.vel && !r.rod).length;
   document.getElementById("gt-rod").textContent = TODAS.filter(r => r.rod).length;
+  document.getElementById("gt-oco").textContent = Object.keys(FLAGS).filter(k => FLAGS[k].obs).length;
   VIEW = TODAS.filter(r => TAB === "rod" ? r.rod : (!r.vel && !r.rod)).filter(r => {
     if (ba && r.ag !== ba) return false;
     if (uf && r.uf !== uf) return false;
@@ -935,6 +972,48 @@ function apply(){
   const cmp = CMP[SORT.k] || CMP.resta;
   VIEW.sort((a,b) => cmp(a,b) * SORT.d || a.resta - b.resta); // desempate: mais urgente primeiro
   render();
+  if (TAB === "oco") renderOco();
+}
+
+function renderOco(){
+  const q = document.getElementById("f-busca").value.trim().toLowerCase();
+  const ba = document.getElementById("f-base").value;
+  const uf = document.getElementById("f-uf").value;
+  const rg = document.getElementById("f-reg").value;
+  const itens = [];
+  for (const k of Object.keys(FLAGS)){
+    const f = FLAGS[k];
+    if (!f.obs) continue;
+    const i = infoChave(k);
+    if (ba && i.ag !== ba) continue;
+    if (uf && i.uf !== uf) continue;
+    if (rg && REGIOES[rg].indexOf(i.uf) === -1) continue;
+    if (q){
+      const alvo = (i.p + " " + i.l + " " + i.ag + " " + i.uf + " " + f.obs.x + " " + f.obs.q).toLowerCase();
+      if (!alvo.includes(q)) continue;
+    }
+    itens.push({ k: k, i: i, obs: f.obs });
+  }
+  itens.sort((a,b) => b.obs.t - a.obs.t);
+  document.getElementById("cnt").innerHTML = "<b>" + itens.length + "</b> ocorr\u00eancia(s) no recorte \u00b7 <b>" +
+    itens.filter(m => !m.i.atual).length + "</b> de pend\u00eancias j\u00e1 sincronizadas \u00b7 hist\u00f3rico mantido por 30 dias" +
+    (FB_OK ? " <i class=\"fa-solid fa-cloud\" style=\"color:#16a34a\"></i>" : " <i class=\"fa-solid fa-cloud-arrow-down\" style=\"color:#d97706\"></i>");
+  document.getElementById("tb-oco").innerHTML = itens.map(m => {
+    const k = m.k.replace(/"/g, "&quot;");
+    const dona = donaDaOco(m.obs);
+    return '<tr>'
+      + '<td>' + (m.i.atual ? '<span class="badge ' + NOMES[calc(m.i.atual).nivel][1] + '">' + NOMES[calc(m.i.atual).nivel][0] + '</span>' : '<span class="badge b1">SINCRONIZADO</span>') + '</td>'
+      + '<td><b>' + esc(m.i.p) + '</b></td>'
+      + '<td>' + esc(m.i.l) + '</td>'
+      + '<td>' + (m.i.ent ? fmtEnt(m.i.ent) : "\u2014") + '</td>'
+      + '<td>' + esc(m.i.uf || "\u2014") + '</td>'
+      + '<td class="agc" title="' + esc(m.i.ag) + '">' + esc(m.i.ag || "\u2014") + '</td>'
+      + '<td class="obscell" onclick="editarObs(\'' + k + '\')" title="' + esc(m.obs.x) + '"><span class="obs-txt" style="max-width:340px">' + esc(m.obs.x) + '</span></td>'
+      + '<td>' + esc(m.obs.q) + (dona ? '' : ' <i class="fa-solid fa-lock oco-lock"></i>') + '</td>'
+      + '<td>h\u00e1 ' + idadeFlag(m.obs.t) + '</td>'
+      + '<td>' + (dona ? '<button class="btn-flag" onclick="editarObs(\'' + k + '\')">editar</button>' : '') + '</td>'
+      + '</tr>';
+  }).join("") || '<tr><td colspan="10" style="text-align:center;padding:30px;color:var(--tx2)">Nenhuma ocorr\u00eancia registrada neste recorte.</td></tr>';
 }
 
 function render(){

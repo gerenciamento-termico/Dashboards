@@ -175,6 +175,37 @@ tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
 .obs-txt{display:block;white-space:normal;line-height:1.3;font-size:.74rem;color:var(--tx);max-width:240px}
 .obs-meta{display:block;font-size:.62rem;color:var(--tx2);margin-top:2px}
 
+/* ---- modal ---- */
+.mo-ov{position:fixed;inset:0;background:rgba(16,24,40,.45);backdrop-filter:blur(4px);z-index:900;display:flex;align-items:center;justify-content:center;padding:18px;opacity:0;pointer-events:none;transition:opacity .18s ease}
+.mo-ov.aberto{opacity:1;pointer-events:auto}
+.mo-card{background:var(--card);border-radius:18px;width:100%;max-width:480px;box-shadow:0 24px 70px rgba(16,24,40,.28);transform:translateY(14px) scale(.98);transition:transform .22s cubic-bezier(.2,.9,.3,1.2);overflow:hidden}
+.mo-ov.aberto .mo-card{transform:translateY(0) scale(1)}
+.mo-head{display:flex;align-items:center;gap:13px;padding:18px 20px 14px;border-bottom:1px solid var(--line)}
+.mo-ico{width:42px;height:42px;border-radius:12px;background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1rem;flex:none;box-shadow:0 6px 16px rgba(37,99,235,.35)}
+.mo-tit{font-weight:800;font-size:.95rem;color:var(--tx)}
+.mo-sub{font-size:.72rem;color:var(--tx2);margin-top:2px}
+.mo-x{margin-left:auto;background:none;border:none;color:var(--tx2);font-size:1rem;cursor:pointer;width:32px;height:32px;border-radius:9px;flex:none}
+.mo-x:hover{background:var(--bg);color:var(--tx)}
+.mo-body{padding:16px 20px 6px}
+.mo-lbl{display:block;font-size:.66rem;font-weight:800;color:var(--tx2);text-transform:uppercase;letter-spacing:.6px;margin:10px 0 6px}
+.mo-lbl small{text-transform:none;letter-spacing:0;font-weight:600;opacity:.8}
+.mo-inp{width:100%;box-sizing:border-box;border:1.5px solid var(--line);border-radius:11px;padding:11px 13px;font:inherit;font-size:.86rem;color:var(--tx);background:var(--bg);outline:none;transition:border-color .15s, box-shadow .15s}
+.mo-inp:focus{border-color:var(--blue);box-shadow:0 0 0 3px rgba(37,99,235,.14);background:#fff}
+.mo-ta{resize:vertical;min-height:76px;line-height:1.45}
+.mo-cnt{text-align:right;font-size:.64rem;color:var(--tx2);margin-top:4px}
+.mo-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.mo-chip{border:1px solid var(--line);background:var(--bg);color:var(--tx2);font-size:.68rem;font-weight:700;padding:5px 10px;border-radius:999px;cursor:pointer;transition:all .12s}
+.mo-chip:hover{border-color:var(--blue);color:var(--blue);background:#eff6ff}
+.mo-foot{display:flex;align-items:center;gap:9px;padding:14px 20px 18px}
+.mo-btn{font:inherit;font-size:.8rem;font-weight:700;padding:10px 18px;border-radius:11px;cursor:pointer;border:1.5px solid transparent;transition:all .13s}
+.mo-primary{background:linear-gradient(135deg,#2563eb,#1d4ed8);color:#fff;box-shadow:0 5px 14px rgba(37,99,235,.3)}
+.mo-primary:hover{filter:brightness(1.08)}
+.mo-primary:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.mo-ghost{background:none;border-color:var(--line);color:var(--tx2)}
+.mo-ghost:hover{border-color:var(--tx2);color:var(--tx)}
+.mo-danger{background:none;border-color:#fecaca;color:#dc2626}
+.mo-danger:hover{background:#fef2f2;border-color:#dc2626}
+
 .cards{display:none}
 @media(max-width:1200px){.fbar{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:860px){
@@ -250,6 +281,35 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 </footer>
 </div>
 
+<div class="mo-ov" id="mo-ov">
+  <div class="mo-card" role="dialog" aria-modal="true" aria-labelledby="mo-tit">
+    <div class="mo-head">
+      <span class="mo-ico" id="mo-ico"><i class="fa-solid fa-pen-to-square"></i></span>
+      <div>
+        <div class="mo-tit" id="mo-tit">Observa&ccedil;&atilde;o</div>
+        <div class="mo-sub" id="mo-sub"></div>
+      </div>
+      <button class="mo-x" onclick="fecharModal(null)" title="Fechar"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="mo-body">
+      <label class="mo-lbl" for="mo-nome">Seu nome <small>&middot; aparece para todos no quadro</small></label>
+      <input id="mo-nome" class="mo-inp" maxlength="40" placeholder="Ex.: Caio" autocomplete="off">
+      <div id="mo-obs-wrap">
+        <label class="mo-lbl" for="mo-obs">Motivo / observa&ccedil;&atilde;o <small>&middot; por que n&atilde;o sincronizou, onde est&aacute; o logger...</small></label>
+        <div class="mo-chips" id="mo-chips"></div>
+        <textarea id="mo-obs" class="mo-inp mo-ta" maxlength="200" placeholder="Descreva o motivo ou toque numa sugest&atilde;o acima"></textarea>
+        <div class="mo-cnt"><span id="mo-cnt">0</span>/200</div>
+      </div>
+    </div>
+    <div class="mo-foot">
+      <button class="mo-btn mo-danger" id="mo-remover" onclick="fecharModal({remover:true})"><i class="fa-solid fa-trash-can"></i> Remover</button>
+      <span style="flex:1"></span>
+      <button class="mo-btn mo-ghost" onclick="fecharModal(null)">Cancelar</button>
+      <button class="mo-btn mo-primary" id="mo-salvar" onclick="modalSalvar()"><i class="fa-solid fa-check"></i> Salvar</button>
+    </div>
+  </div>
+</div>
+
 <script>
 const R = __ROWS__;
 
@@ -304,13 +364,82 @@ async function limpezaFlags(){
     }
   }
 }
-function nomeOperador(){
-  let n = localStorage.getItem("sync48_operador") || "";
-  if (!n){
-    n = (window.prompt("Seu nome (aparece na marca\u00e7\u00e3o de cobrado para todos):") || "").trim();
-    if (n) localStorage.setItem("sync48_operador", n);
+/* ---- modal profissional (substitui window.prompt) ---- */
+const MOTIVOS = ["Solicitado sinc", "Enviado para GRU", "Logger descarregado", "Agente sem bateria",
+                 "Em retorno para base", "Pedido devolvido", "Rodovi\u00e1rio paletizado", "Sem logger",
+                 "Aguardando retirada", "Confirmar elitech"];
+let MO_RESOLVE = null;
+
+function abrirModal(opts){
+  // opts: { titulo, sub, comObs, textoObs, podeRemover }
+  return new Promise(resolve => {
+    MO_RESOLVE = resolve;
+    document.getElementById("mo-tit").textContent = opts.titulo;
+    document.getElementById("mo-sub").innerHTML = opts.sub || "";
+    document.getElementById("mo-ico").innerHTML = opts.comObs ? '<i class="fa-solid fa-pen-to-square"></i>' : '<i class="fa-solid fa-user-check"></i>';
+    const nome = document.getElementById("mo-nome");
+    nome.value = localStorage.getItem("sync48_operador") || "";
+    const wrap = document.getElementById("mo-obs-wrap");
+    wrap.style.display = opts.comObs ? "" : "none";
+    if (opts.comObs){
+      document.getElementById("mo-obs").value = opts.textoObs || "";
+      atualizaCnt();
+      document.getElementById("mo-chips").innerHTML = MOTIVOS.map(m =>
+        '<button type="button" class="mo-chip" onclick="usarChip(this)">'+m+'</button>').join("");
+    }
+    document.getElementById("mo-remover").style.display = opts.podeRemover ? "" : "none";
+    validaModal();
+    document.getElementById("mo-ov").classList.add("aberto");
+    setTimeout(() => { (nome.value ? (opts.comObs ? document.getElementById("mo-obs") : nome) : nome).focus(); }, 180);
+  });
+}
+function fecharModal(resultado){
+  document.getElementById("mo-ov").classList.remove("aberto");
+  const r = MO_RESOLVE; MO_RESOLVE = null;
+  if (r) r(resultado);
+}
+function modalSalvar(){
+  const nome = document.getElementById("mo-nome").value.trim().slice(0, 40);
+  if (!nome) return;
+  localStorage.setItem("sync48_operador", nome);
+  const comObs = document.getElementById("mo-obs-wrap").style.display !== "none";
+  fecharModal({ nome: nome, texto: comObs ? document.getElementById("mo-obs").value.trim().slice(0, 200) : null });
+}
+function usarChip(el){
+  const ta = document.getElementById("mo-obs");
+  ta.value = ta.value.trim() ? ta.value.trim() + " - " + el.textContent.toLowerCase() : el.textContent;
+  atualizaCnt(); ta.focus();
+}
+function atualizaCnt(){
+  document.getElementById("mo-cnt").textContent = document.getElementById("mo-obs").value.length;
+}
+function validaModal(){
+  document.getElementById("mo-salvar").disabled = !document.getElementById("mo-nome").value.trim();
+}
+document.getElementById("mo-nome").addEventListener("input", validaModal);
+document.getElementById("mo-nome").addEventListener("keydown", e => {
+  if (e.key === "Enter"){
+    e.preventDefault();
+    if (document.getElementById("mo-obs-wrap").style.display === "none") modalSalvar();
+    else document.getElementById("mo-obs").focus();
   }
-  return n || "GT";
+});
+document.getElementById("mo-obs").addEventListener("input", atualizaCnt);
+document.getElementById("mo-obs").addEventListener("keydown", e => {
+  if (e.key === "Enter" && (e.ctrlKey || e.metaKey)){ e.preventDefault(); modalSalvar(); }
+});
+document.getElementById("mo-ov").addEventListener("mousedown", e => { if (e.target === e.currentTarget) fecharModal(null); });
+document.addEventListener("keydown", e => { if (e.key === "Escape" && MO_RESOLVE) fecharModal(null); });
+
+function subPendencia(k){
+  const r = R.find(x => chave(x) === k);
+  return r ? "Pedido <b>"+esc(r.p)+"</b> \u00b7 logger <b>"+esc(r.l)+"</b> \u00b7 "+esc(r.ag) : "";
+}
+async function obterNome(k){
+  const salvo = (localStorage.getItem("sync48_operador") || "").trim();
+  if (salvo) return salvo;
+  const res = await abrirModal({ titulo: "Identifique-se", sub: subPendencia(k), comObs: false, podeRemover: false });
+  return res ? res.nome : null;
 }
 async function patchFlag(k, campos){
   const url = FB + "/" + encodeURIComponent(k) + ".json";
@@ -318,15 +447,20 @@ async function patchFlag(k, campos){
   if (!resp.ok) throw new Error(resp.status);
 }
 async function toggleCobrado(k){
+  const atual = FLAGS[k] || {};
+  let nome = null;
+  if (!atual.cob){
+    nome = await obterNome(k);
+    if (!nome) return; // cancelou o modal
+  }
   try {
-    const atual = FLAGS[k] || {};
     if (atual.cob){
       delete atual.cob;
       if (!atual.obs) delete FLAGS[k]; else FLAGS[k] = atual;
       apply();
       await patchFlag(k, { cob: null });
     } else {
-      atual.cob = { q: nomeOperador(), t: Date.now() };
+      atual.cob = { q: nome, t: Date.now() };
       FLAGS[k] = atual;
       apply();
       await patchFlag(k, { cob: atual.cob });
@@ -339,13 +473,18 @@ async function toggleCobrado(k){
 }
 async function editarObs(k){
   const atual = FLAGS[k] || {};
-  const texto = window.prompt("Observa\u00e7\u00e3o / motivo (ex.: logger descarregado, enviado para GRU, solicitado sinc...):",
-                              atual.obs ? atual.obs.x : "");
-  if (texto === null) return; // cancelou
+  const res = await abrirModal({
+    titulo: atual.obs ? "Editar observa\u00e7\u00e3o" : "Nova observa\u00e7\u00e3o",
+    sub: subPendencia(k),
+    comObs: true,
+    textoObs: atual.obs ? atual.obs.x : "",
+    podeRemover: !!atual.obs
+  });
+  if (!res) return; // cancelou
   try {
-    const limpo = texto.trim().slice(0, 200);
+    const limpo = res.remover ? "" : (res.texto || "");
     if (limpo){
-      atual.obs = { x: limpo, q: nomeOperador(), t: Date.now() };
+      atual.obs = { x: limpo, q: res.nome, t: Date.now() };
       FLAGS[k] = atual;
       apply();
       await patchFlag(k, { obs: atual.obs });

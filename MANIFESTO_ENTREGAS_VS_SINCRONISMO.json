@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T09:06:57",
+  "gerado_em": "2026-10-15T09:11:57",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6263,
-    "pedidos_janela": 953,
-    "loggers_ares_janela": 6085,
-    "loggers_ares_antes_dedup": 6119,
+    "pares_janela": 6264,
+    "pedidos_janela": 954,
+    "loggers_ares_janela": 6086,
+    "loggers_ares_antes_dedup": 6120,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 407,
     "cobranca_gru_janela": 42,
-    "sem_embarque_efetiva": 82,
+    "sem_embarque_efetiva": 83,
     "com_embarque_efetiva": 6037,
     "loggers_sem_lastsync": 54,
-    "nao_avaliados": 82,
-    "pedidos_com_agente": 6263,
+    "nao_avaliados": 83,
+    "pedidos_com_agente": 6264,
     "dtbtransporte": {
-      "consultados": 953,
-      "mapeados": 953,
-      "linhas": 1022
+      "consultados": 954,
+      "mapeados": 954,
+      "linhas": 1023
     },
     "top10_agentes_pendencias": {
       "POA - GMB TRANSPORTES E LOGISTICA ME": 77,
@@ -404,7 +404,7 @@
       "loggers": 210,
       "sincronizados": 184,
       "pendentes": 25,
-      "sem_embarque": 5,
+      "sem_embarque": 6,
       "cobranca_gru": 1,
       "pedidos_pendentes": 24,
       "pct": 11.9,

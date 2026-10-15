@@ -171,6 +171,9 @@ tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
 .b-cob:hover{background:#bfdbfe}
 .btn-flag{background:#fff;border:1px dashed #cbd5e1;border-radius:7px;color:var(--tx2);font-size:.62rem;font-weight:800;padding:3px 9px;cursor:pointer;font-family:inherit;letter-spacing:.3px}
 .btn-flag:hover{border-color:var(--blue);color:var(--blue)}
+.obscell{cursor:pointer;max-width:240px}
+.obs-txt{display:block;white-space:normal;line-height:1.3;font-size:.74rem;color:var(--tx);max-width:240px}
+.obs-meta{display:block;font-size:.62rem;color:var(--tx2);margin-top:2px}
 
 .cards{display:none}
 @media(max-width:1200px){.fbar{grid-template-columns:1fr 1fr 1fr}}
@@ -222,7 +225,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
   <div><label>UF</label><select id="f-uf"><option value="">Todas</option>__UFS__</select></div>
   <div><label>N&iacute;vel</label><select id="f-nivel"><option value="">Todos</option><option value="1">No prazo (0-12h)</option><option value="2">Aten&ccedil;&atilde;o (12-24h)</option><option value="3">Alerta (24-36h)</option><option value="4">Cr&iacute;tico (36-48h)</option><option value="5">Estourado (&gt;48h)</option></select></div>
   <div><label>Cobran&ccedil;a</label><select id="f-cob"><option value="">Todas</option><option value="AGENTE">Agente / Base</option><option value="GRU">GRU</option></select></div>
-  <div><label>Sinaliza&ccedil;&atilde;o</label><select id="f-flag"><option value="">Todas</option><option value="N">N&atilde;o cobradas</option><option value="S">J&aacute; cobradas</option></select></div>
+  <div><label>Sinaliza&ccedil;&atilde;o</label><select id="f-flag"><option value="">Todas</option><option value="N">N&atilde;o cobradas</option><option value="S">J&aacute; cobradas</option><option value="O">Com observa&ccedil;&atilde;o</option><option value="X">Sem observa&ccedil;&atilde;o</option></select></div>
   <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
 </div>
 </div>
@@ -233,7 +236,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
 <table>
   <thead><tr>
     <th>N&iacute;vel</th><th>Pedido</th><th>Logger</th><th>Romaneio</th><th>UF</th><th>Base / Agente</th>
-    <th>Entrega</th><th>Horas desde entrega</th><th>Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th>&Uacute;ltimo sync</th><th>Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th>
+    <th>Entrega</th><th>Horas desde entrega</th><th>Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th>&Uacute;ltimo sync</th><th>Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th><th title="Motivo/observacao compartilhada: por que nao sincronizou, onde esta o logger, etc. Clique para editar">Observa&ccedil;&atilde;o / motivo</th>
   </tr></thead>
   <tbody id="tb"></tbody>
 </table>
@@ -265,11 +268,22 @@ const FB = "https://gt-sincronismo-default-rtdb.firebaseio.com/sync48";
 let FLAGS = {};
 let FB_OK = false;
 function chave(r){ return (r.p + "|" + r.l + "|" + r.ent).replace(/[.#$\[\]\/]/g, "_"); }
+function normalizar(v){
+  if (!v) return null;
+  if (v.cob || v.obs) return v;
+  if (v.q) return { cob: { q: v.q, t: v.t } }; // formato antigo
+  return v;
+}
 async function buscarFlags(){
   try {
     const resp = await fetch(FB + ".json", { cache: "no-store" });
     if (!resp.ok) throw new Error(resp.status);
-    FLAGS = (await resp.json()) || {};
+    const bruto = (await resp.json()) || {};
+    FLAGS = {};
+    for (const k of Object.keys(bruto)){
+      const v = normalizar(bruto[k]);
+      if (v) FLAGS[k] = v;
+    }
     FB_OK = true;
     try { localStorage.setItem("sync48_espelho", JSON.stringify(FLAGS)); } catch(e){}
   } catch(e){
@@ -277,11 +291,14 @@ async function buscarFlags(){
     try { FLAGS = JSON.parse(localStorage.getItem("sync48_espelho") || "{}"); } catch(x){ FLAGS = {}; }
   }
 }
+function tsFlag(v){
+  return Math.max((v && v.cob && v.cob.t) || 0, (v && v.obs && v.obs.t) || 0);
+}
 async function limpezaFlags(){
   if (!FB_OK) return;
   const atuais = new Set(R.map(chave));
   for (const k of Object.keys(FLAGS)){
-    if (!atuais.has(k) || (Date.now() - (FLAGS[k].t || 0)) > 7*86400000){
+    if (!atuais.has(k) || (Date.now() - tsFlag(FLAGS[k])) > 7*86400000){
       delete FLAGS[k];
       fetch(FB + "/" + encodeURIComponent(k) + ".json", { method: "DELETE" }).catch(() => {});
     }
@@ -295,26 +312,53 @@ function nomeOperador(){
   }
   return n || "GT";
 }
-async function toggleCobrado(k){
+async function patchFlag(k, campos){
   const url = FB + "/" + encodeURIComponent(k) + ".json";
+  const resp = await fetch(url, { method: "PATCH", body: JSON.stringify(campos) });
+  if (!resp.ok) throw new Error(resp.status);
+}
+async function toggleCobrado(k){
   try {
-    if (FLAGS[k]){
-      delete FLAGS[k];
+    const atual = FLAGS[k] || {};
+    if (atual.cob){
+      delete atual.cob;
+      if (!atual.obs) delete FLAGS[k]; else FLAGS[k] = atual;
       apply();
-      const resp = await fetch(url, { method: "DELETE" });
-      if (!resp.ok) throw new Error(resp.status);
+      await patchFlag(k, { cob: null });
     } else {
-      const valor = { q: nomeOperador(), t: Date.now() };
-      FLAGS[k] = valor;
+      atual.cob = { q: nomeOperador(), t: Date.now() };
+      FLAGS[k] = atual;
       apply();
-      const resp = await fetch(url, { method: "PUT", body: JSON.stringify(valor) });
-      if (!resp.ok) throw new Error(resp.status);
+      await patchFlag(k, { cob: atual.cob });
     }
     try { localStorage.setItem("sync48_espelho", JSON.stringify(FLAGS)); } catch(e){}
   } catch(e){
     alert("Sem conex\u00e3o com o quadro compartilhado agora; tente novamente.");
-    await buscarFlags();
-    apply();
+    await buscarFlags(); apply();
+  }
+}
+async function editarObs(k){
+  const atual = FLAGS[k] || {};
+  const texto = window.prompt("Observa\u00e7\u00e3o / motivo (ex.: logger descarregado, enviado para GRU, solicitado sinc...):",
+                              atual.obs ? atual.obs.x : "");
+  if (texto === null) return; // cancelou
+  try {
+    const limpo = texto.trim().slice(0, 200);
+    if (limpo){
+      atual.obs = { x: limpo, q: nomeOperador(), t: Date.now() };
+      FLAGS[k] = atual;
+      apply();
+      await patchFlag(k, { obs: atual.obs });
+    } else {
+      delete atual.obs;
+      if (!atual.cob) delete FLAGS[k]; else FLAGS[k] = atual;
+      apply();
+      await patchFlag(k, { obs: null });
+    }
+    try { localStorage.setItem("sync48_espelho", JSON.stringify(FLAGS)); } catch(e){}
+  } catch(e){
+    alert("Sem conex\u00e3o com o quadro compartilhado agora; tente novamente.");
+    await buscarFlags(); apply();
   }
 }
 function idadeFlag(t){
@@ -341,15 +385,20 @@ function apply(){
   const nv = document.getElementById("f-nivel").value;
   const cb = document.getElementById("f-cob").value;
   const fl = document.getElementById("f-flag").value;
-  VIEW = R.map(r => ({...r, ...calc(r), flag: FLAGS[chave(r)] || null})).filter(r => {
+  VIEW = R.map(r => {
+    const f = FLAGS[chave(r)] || {};
+    return {...r, ...calc(r), fcob: f.cob || null, fobs: f.obs || null};
+  }).filter(r => {
     if (ba && r.ag !== ba) return false;
     if (uf && r.uf !== uf) return false;
     if (nv && String(r.nivel) !== nv) return false;
     if (cb && r.cob !== cb) return false;
-    if (fl === "N" && r.flag) return false;
-    if (fl === "S" && !r.flag) return false;
+    if (fl === "N" && r.fcob) return false;
+    if (fl === "S" && !r.fcob) return false;
+    if (fl === "O" && !r.fobs) return false;
+    if (fl === "X" && r.fobs) return false;
     if (q){
-      const alvo = (r.p+" "+r.l+" "+r.ro+" "+r.ag+" "+r.cli+" "+r.uf).toLowerCase();
+      const alvo = (r.p+" "+r.l+" "+r.ro+" "+r.ag+" "+r.cli+" "+r.uf+" "+(r.fobs ? r.fobs.x : "")).toLowerCase();
       if (!alvo.includes(q)) return false;
     }
     return true;
@@ -366,16 +415,20 @@ function render(){
   document.getElementById("cnt").innerHTML = "<b>" + VIEW.length + "</b> pend\u00eancia(s) no recorte \u00b7 <b>" +
     VIEW.filter(r => r.nivel === 4).length + "</b> cr\u00edticas (36\u201348h) \u00b7 <b>" +
     VIEW.filter(r => r.nivel === 5).length + "</b> estouradas \u00b7 <b>" +
-    VIEW.filter(r => r.flag).length + "</b> j\u00e1 cobradas" + (FB_OK ? " <i class=\"fa-solid fa-cloud\" title=\"quadro compartilhado online\" style=\"color:#16a34a\"></i>" : " <i class=\"fa-solid fa-cloud-arrow-down\" title=\"offline - mostrando ultima copia local\" style=\"color:#d97706\"></i>");
+    VIEW.filter(r => r.fcob).length + "</b> j\u00e1 cobradas \u00b7 <b>" +
+    VIEW.filter(r => r.fobs).length + "</b> com observa\u00e7\u00e3o" + (FB_OK ? " <i class=\"fa-solid fa-cloud\" title=\"quadro compartilhado online\" style=\"color:#16a34a\"></i>" : " <i class=\"fa-solid fa-cloud-arrow-down\" title=\"offline - mostrando ultima copia local\" style=\"color:#d97706\"></i>");
 
   document.getElementById("tb").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls, cor] = NOMES[r.nivel];
     const pct = Math.max(2, Math.min(100, (r.h / 48) * 100));
     const k = chave(r).replace(/"/g, "&quot;");
-    const celCob = r.flag
-      ? '<td class="cobcell"><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')" title="Clique para desfazer">\u2713 COBRADO \u00b7 '+esc(r.flag.q)+' \u00b7 h\u00e1 '+idadeFlag(r.flag.t)+'</span></td>'
+    const celCob = r.fcob
+      ? '<td class="cobcell"><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')" title="Clique para desfazer">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+'</span></td>'
       : '<td class="cobcell"><button class="btn-flag" onclick="toggleCobrado(\''+k+'\')">marcar cobrado</button></td>';
-    return '<tr class="lv'+r.nivel+(r.flag ? ' flagged' : '')+'">'
+    const celObs = r.fobs
+      ? '<td class="cobcell obscell" onclick="editarObs(\''+k+'\')" title="'+esc(r.fobs.x)+' \u2014 '+esc(r.fobs.q)+', h\u00e1 '+idadeFlag(r.fobs.t)+' (clique para editar)"><span class="obs-txt">'+esc(r.fobs.x)+'</span><span class="obs-meta">'+esc(r.fobs.q)+' \u00b7 '+idadeFlag(r.fobs.t)+'</span></td>'
+      : '<td class="cobcell"><button class="btn-flag" onclick="editarObs(\''+k+'\')">+ obs</button></td>';
+    return '<tr class="lv'+r.nivel+(r.fcob ? ' flagged' : '')+'">'
       + '<td><span class="badge '+bcls+'">'+nome+'</span></td>'
       + '<td><b>'+esc(r.p)+'</b></td>'
       + '<td>'+esc(r.l)+'</td>'
@@ -388,16 +441,19 @@ function render(){
       + '<td><div class="pbar"><div style="width:'+pct+'%;background:'+cor+'"></div></div></td>'
       + '<td>'+esc(r.s || "\u2014")+'</td>'
       + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
-      + celCob
+      + celCob + celObs
       + '</tr>';
-  }).join("") || '<tr><td colspan="13" style="text-align:center;padding:26px;color:var(--tx2)">Nenhuma pend\u00eancia neste recorte. &#127881;</td></tr>';
+  }).join("") || '<tr><td colspan="14" style="text-align:center;padding:26px;color:var(--tx2)">Nenhuma pend\u00eancia neste recorte. &#127881;</td></tr>';
 
   document.getElementById("cards").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls] = NOMES[r.nivel];
     const k = chave(r).replace(/"/g, "&quot;");
-    const linhaCob = r.flag
-      ? '<span class="k">Sinaliza\u00e7\u00e3o</span><span><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')">\u2713 COBRADO \u00b7 '+esc(r.flag.q)+' \u00b7 h\u00e1 '+idadeFlag(r.flag.t)+'</span></span>'
-      : '<span class="k">Sinaliza\u00e7\u00e3o</span><span><button class="btn-flag" onclick="toggleCobrado(\''+k+'\')">marcar cobrado</button></span>';
+    const linhaCob = (r.fcob
+      ? '<span class="k">Sinaliza\u00e7\u00e3o</span><span><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+'</span></span>'
+      : '<span class="k">Sinaliza\u00e7\u00e3o</span><span><button class="btn-flag" onclick="toggleCobrado(\''+k+'\')">marcar cobrado</button></span>')
+      + (r.fobs
+      ? '<span class="k">Observa\u00e7\u00e3o</span><span onclick="editarObs(\''+k+'\')" style="cursor:pointer">'+esc(r.fobs.x)+' <small style="color:var(--tx2)">('+esc(r.fobs.q)+' \u00b7 '+idadeFlag(r.fobs.t)+')</small></span>'
+      : '<span class="k">Observa\u00e7\u00e3o</span><span><button class="btn-flag" onclick="editarObs(\''+k+'\')">+ obs</button></span>');
     return '<div class="card lv'+r.nivel+'">'
       + '<div class="topo"><span class="ped">'+esc(r.p)+'</span><span class="badge '+bcls+'">'+nome+'</span></div>'
       + '<div class="kv">'
@@ -417,9 +473,10 @@ function limpar(){
 }
 
 function baixarCsv(){
-  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca","ja_cobrado","cobrado_por","cobrado_em"];
+  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca","ja_cobrado","cobrado_por","cobrado_em","observacao","obs_por","obs_em"];
   const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, r.cob,
-    r.flag ? "SIM" : "", r.flag ? '"'+String(r.flag.q).replace(/"/g,'""')+'"' : "", r.flag ? new Date(r.flag.t).toLocaleString("pt-BR") : ""].join(";"));
+    r.fcob ? "SIM" : "", r.fcob ? '"'+String(r.fcob.q).replace(/"/g,'""')+'"' : "", r.fcob ? new Date(r.fcob.t).toLocaleString("pt-BR") : "",
+    r.fobs ? '"'+String(r.fobs.x).replace(/"/g,'""')+'"' : "", r.fobs ? '"'+String(r.fobs.q).replace(/"/g,'""')+'"' : "", r.fobs ? new Date(r.fobs.t).toLocaleString("pt-BR") : ""].join(";"));
   const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});
   const a = document.createElement("a");
   a.href = URL.createObjectURL(blob);

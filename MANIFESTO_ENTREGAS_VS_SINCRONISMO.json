@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-15T18:44:19",
+  "gerado_em": "2026-10-15T18:49:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 322,
+    "pendentes_janela": 321,
     "cobranca_gru_janela": 29,
     "sem_embarque_efetiva": 91,
     "com_embarque_efetiva": 6197,
@@ -49,7 +49,7 @@
       "THE - AERONEIVA EXPRESS": 14,
       "LDB - ND CARGAS LTDA": 11,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 8
+      "GYN - RBR EXPERIENCIA EM TRANSPORTES": 8
     },
     "top10_ufs_pendencias": {
       "SP": 63,
@@ -64,9 +64,9 @@
       "MG": 10
     },
     "latencia": {
-      "n_agente": 5520,
+      "n_agente": 5521,
       "n_so_gru": 36,
-      "n_sem_primeiro_sync": 605,
+      "n_sem_primeiro_sync": 604,
       "media_horas": 0.2,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -326,18 +326,18 @@
       "dia_full": "09/10/2026",
       "pedidos": 145,
       "loggers": 487,
-      "sincronizados": 401,
-      "pendentes": 82,
+      "sincronizados": 402,
+      "pendentes": 81,
       "sem_embarque": 26,
       "cobranca_gru": 4,
       "pedidos_pendentes": 19,
-      "pct": 16.8,
-      "n_latencia": 388,
+      "pct": 16.6,
+      "n_latencia": 389,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 98
+      "n_sem_primeiro_sync": 97
     },
     {
       "dia_iso": "2026-10-10",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-16T15:31:45",
+  "gerado_em": "2026-10-16T15:38:54",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 230,
+    "pendentes_janela": 228,
     "cobranca_gru_janela": 32,
     "sem_embarque_efetiva": 113,
     "com_embarque_efetiva": 6207,
-    "loggers_sem_lastsync": 20,
+    "loggers_sem_lastsync": 18,
     "nao_avaliados": 113,
     "pedidos_com_agente": 6474,
     "dtbtransporte": {
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 37,
-      "THE - AERONEIVA EXPRESS": 36,
+      "THE - AERONEIVA EXPRESS": 35,
       "SSA - LUTY LOG": 26,
       "RBR - RODOTEC": 24,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
@@ -52,21 +52,21 @@
       "MAB - EXPRESSO RODRIGUES LTDA": 6
     },
     "top10_ufs_pendencias": {
-      "PI": 36,
+      "PI": 35,
       "BA": 31,
       "AC": 24,
       "SP": 20,
       "SC": 17,
-      "RS": 13,
       "AM": 12,
+      "RS": 12,
       "PR": 11,
       "PA": 10,
       "MG": 9
     },
     "latencia": {
-      "n_agente": 5608,
+      "n_agente": 5610,
       "n_so_gru": 36,
-      "n_sem_primeiro_sync": 525,
+      "n_sem_primeiro_sync": 523,
       "media_horas": 0.22,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "15/10/2026",
       "pedidos": 67,
       "loggers": 157,
-      "sincronizados": 137,
-      "pendentes": 19,
+      "sincronizados": 138,
+      "pendentes": 18,
       "sem_embarque": 0,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 16,
-      "pct": 12.1,
-      "n_latencia": 136,
+      "pedidos_pendentes": 15,
+      "pct": 11.5,
+      "n_latencia": 137,
       "media_horas": 0.06,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 21
+      "n_sem_primeiro_sync": 20
     },
     {
       "dia_iso": "2026-10-16",
@@ -440,18 +440,18 @@
       "dia_full": "16/10/2026",
       "pedidos": 61,
       "loggers": 100,
-      "sincronizados": 49,
-      "pendentes": 49,
+      "sincronizados": 50,
+      "pendentes": 48,
       "sem_embarque": 36,
       "cobranca_gru": 2,
       "pedidos_pendentes": 20,
-      "pct": 49.0,
-      "n_latencia": 43,
+      "pct": 48.0,
+      "n_latencia": 44,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 57
+      "n_sem_primeiro_sync": 56
     }
   ],
   "erros_validacao": {},

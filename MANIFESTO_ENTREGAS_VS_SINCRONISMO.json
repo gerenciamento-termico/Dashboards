@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-16T14:48:22",
+  "gerado_em": "2026-10-16T14:53:30",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6461,
-    "pedidos_janela": 1072,
-    "loggers_ares_janela": 6270,
-    "loggers_ares_antes_dedup": 6308,
+    "pares_janela": 6462,
+    "pedidos_janela": 1073,
+    "loggers_ares_janela": 6271,
+    "loggers_ares_antes_dedup": 6309,
     "dedup_dia_logger": 38,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
@@ -30,14 +30,14 @@
     "pendentes_janela": 232,
     "cobranca_gru_janela": 32,
     "sem_embarque_efetiva": 113,
-    "com_embarque_efetiva": 6195,
+    "com_embarque_efetiva": 6196,
     "loggers_sem_lastsync": 23,
     "nao_avaliados": 113,
-    "pedidos_com_agente": 6461,
+    "pedidos_com_agente": 6462,
     "dtbtransporte": {
-      "consultados": 1072,
-      "mapeados": 1072,
-      "linhas": 1145
+      "consultados": 1073,
+      "mapeados": 1073,
+      "linhas": 1146
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 37,
@@ -61,10 +61,10 @@
       "AM": 12,
       "PR": 10,
       "PA": 10,
-      "MG": 10
+      "MG": 9
     },
     "latencia": {
-      "n_agente": 5594,
+      "n_agente": 5595,
       "n_so_gru": 36,
       "n_sem_primeiro_sync": 527,
       "media_horas": 0.22,
@@ -438,15 +438,15 @@
       "dia_iso": "2026-10-16",
       "dia": "16/10",
       "dia_full": "16/10/2026",
-      "pedidos": 57,
-      "loggers": 88,
-      "sincronizados": 35,
+      "pedidos": 58,
+      "loggers": 89,
+      "sincronizados": 36,
       "pendentes": 51,
       "sem_embarque": 36,
       "cobranca_gru": 2,
       "pedidos_pendentes": 22,
-      "pct": 58.0,
-      "n_latencia": 29,
+      "pct": 57.3,
+      "n_latencia": 30,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,

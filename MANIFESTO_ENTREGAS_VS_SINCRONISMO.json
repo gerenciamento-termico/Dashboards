@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-16T15:17:44",
+  "gerado_em": "2026-10-16T15:23:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -438,7 +438,7 @@
       "dia_iso": "2026-10-16",
       "dia": "16/10",
       "dia_full": "16/10/2026",
-      "pedidos": 60,
+      "pedidos": 61,
       "loggers": 100,
       "sincronizados": 49,
       "pendentes": 49,

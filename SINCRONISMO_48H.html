@@ -113,6 +113,8 @@ tr.lv5 td:first-child{box-shadow:inset 3px 0 0 var(--n5)}
 .b5{color:#fff;background:var(--n5);border-color:var(--n5)}
 .b-gru{color:#0369a1;border-color:#dbeafe;background:#f0f9ff}
 .b-ag{color:#6d28d9;border-color:#e9e2fd;background:#f8f6ff}
+.b-rod{color:#92400e;border-color:#fde8c8;background:#fffbeb}
+.b-mm{color:#334155;border-color:var(--line);background:#f8fafc}
 .agc{max-width:280px;overflow:hidden;text-overflow:ellipsis}
 .resta{font-weight:700}
 .resta.ok{color:var(--tx)} .resta.at{color:var(--tx)} .resta.al{color:var(--n3)} .resta.cr{color:var(--n4)} .resta.es{color:var(--n5)}
@@ -233,7 +235,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
     </div>
     <div class="tb-meta">
       <span class="pill"><span class="livedot"></span> Ao vivo &middot; recalculado a cada 30s</span>
-      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>16/10/2026 08:51</b> &middot; ciclo 5 min</span>
+      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>16/10/2026 08:53</b> &middot; ciclo 5 min</span>
       <span class="pill"><i class="fa-solid fa-database"></i> Fonte 16/10/2026 08:51</span>
     </div>
     <div class="tb-user">
@@ -271,7 +273,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 
 <div class="gtabs">
   <button class="gtab ativo" data-tab="geral" onclick="setTab('geral')"><i class="fa-solid fa-plane-up"></i> Geral <span class="gt-n" id="gt-geral">0</span></button>
-  <button class="gtab" data-tab="rod" onclick="setTab('rod')" title="Pendencias com ocorrencia de rodoviario paletizado (sem logger / sem dados), em qualquer idade"><i class="fa-solid fa-truck"></i> Rodovi&aacute;rio <span class="gt-n" id="gt-rod">0</span></button>
+  <button class="gtab" data-tab="rod" onclick="setTab('rod')" title="Pendencias com modal Rodoviario na fonte ou com ocorrencia de rodoviario paletizado, em qualquer idade"><i class="fa-solid fa-truck"></i> Rodovi&aacute;rio <span class="gt-n" id="gt-rod">0</span></button>
   <button class="gtab" data-tab="oco" onclick="setTab('oco')" title="Historico de todas as ocorrencias registradas, inclusive de pendencias ja sincronizadas (retencao de 30 dias)"><i class="fa-solid fa-clipboard-list"></i> Ocorr&ecirc;ncias <span class="gt-n" id="gt-oco">0</span></button>
 </div>
 
@@ -280,7 +282,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <div class="tblwrap" id="ocoWrap" style="display:none">
 <table style="min-width:1100px">
   <thead><tr>
-    <th>Situa&ccedil;&atilde;o</th><th>Pedido</th><th>Logger</th><th>Entrega</th><th>UF</th><th>Base / Agente</th>
+    <th>Situa&ccedil;&atilde;o</th><th>Pedido</th><th>Logger</th><th>Modal</th><th>Entrega</th><th>UF</th><th>Base / Agente</th>
     <th>Ocorr&ecirc;ncia</th><th>Registrada por</th><th>Quando</th><th></th>
   </tr></thead>
   <tbody id="tb-oco"></tbody>
@@ -291,6 +293,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <table>
   <thead><tr>
     <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p">Pedido</th><th class="sv" data-k="l">Logger</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
+    <th class="sv" data-k="mo" title="Modal do pedido na fonte: Rodoviario ou MultiModal">Modal</th>
     <th class="sv" data-k="ent">Entrega</th><th class="sv" data-k="h">Horas desde entrega</th><th class="sv asc" data-k="resta">Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th class="sv" data-k="s">&Uacute;ltimo sync</th><th class="sv" data-k="cob">Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th><th title="Ocorrencia compartilhada: por que nao sincronizou, onde esta o logger, etc. So quem registrou pode alterar">Ocorr&ecirc;ncia</th>
   </tr></thead>
   <tbody id="tb"></tbody>
@@ -665,11 +668,12 @@ async function limpezaFlags(){
 }
 function infoChave(k){
   const r = R.find(x => chave(x) === k);
-  if (r) return { p: r.p, l: r.l, uf: r.uf, ag: r.ag, ent: r.ent, atual: r };
+  if (r) return { p: r.p, l: r.l, uf: r.uf, ag: r.ag, ent: r.ent, mo: r.mo, atual: r };
   const f = FLAGS[k] || {};
   const partes = k.split("|");
   return { p: partes[0] || "?", l: partes[1] || "?", ent: partes[2] || "",
-           uf: (f.obs && f.obs.uf) || "", ag: (f.obs && f.obs.ag) || "", atual: null };
+           uf: (f.obs && f.obs.uf) || "", ag: (f.obs && f.obs.ag) || "",
+           mo: (f.obs && f.obs.mo) || "", atual: null };
 }
 /* ---- modal profissional (substitui window.prompt) ---- */
 const MOTIVOS = ["Solicitado sinc", "Enviado para GRU", "Logger descarregado", "Agente sem bateria",
@@ -789,9 +793,9 @@ async function editarObs(k){
   try {
     const limpo = res.remover ? "" : (res.texto || "");
     if (limpo){
-      const info = infoChave(k); // guarda uf/base junto: o contexto sobrevive quando a pendencia sincroniza
+      const info = infoChave(k); // guarda uf/base/modal junto: o contexto sobrevive quando a pendencia sincroniza
       atual.obs = { x: limpo, q: res.nome, u: SESSION.u, t: Date.now(),
-                    uf: info.uf || "", ag: info.ag || "" };
+                    uf: info.uf || "", ag: info.ag || "", mo: info.mo || "" };
       FLAGS[k] = atual;
       apply();
       await patchFlag(k, { obs: atual.obs });
@@ -826,6 +830,12 @@ function fmtResta(resta){
 let VIEW = [];
 let TAB = "geral";
 function ehRod(fobs){ return !!(fobs && /rodovi/i.test(fobs.x)); }
+function modalBadge(mo){
+  return mo === "R"
+    ? '<span class="badge b-rod"><i class="fa-solid fa-truck" style="font-size:.58rem"></i> Rodovi\u00e1rio</span>'
+    : '<span class="badge b-mm"><i class="fa-solid fa-plane" style="font-size:.58rem"></i> MultiModal</span>';
+}
+function modalNome(mo){ return mo === "R" ? "Rodovi\u00e1rio" : "MultiModal"; }
 function setTab(t){
   TAB = t;
   document.querySelectorAll(".gtab").forEach(b => b.classList.toggle("ativo", b.dataset.tab === t));
@@ -847,6 +857,7 @@ const CMP = {
   ag: (a,b) => String(a.ag).localeCompare(String(b.ag)),
   s:  (a,b) => String(a.s).localeCompare(String(b.s)),
   cob:(a,b) => String(a.cob).localeCompare(String(b.cob)),
+  mo: (a,b) => String(a.mo).localeCompare(String(b.mo)),
 };
 function apply(){
   const q = document.getElementById("f-busca").value.trim().toLowerCase();
@@ -858,7 +869,7 @@ function apply(){
   const fl = document.getElementById("f-flag").value;
   const TODAS = R.map(r => {
     const f = FLAGS[chave(r)] || {};
-    return {...r, ...calc(r), fcob: f.cob || null, fobs: f.obs || null, rod: ehRod(f.obs)};
+    return {...r, ...calc(r), fcob: f.cob || null, fobs: f.obs || null, rod: r.mo === "R" || ehRod(f.obs)};
   });
   document.getElementById("gt-geral").textContent = TODAS.filter(r => !r.vel && !r.rod).length;
   document.getElementById("gt-rod").textContent = TODAS.filter(r => r.rod).length;
@@ -915,6 +926,7 @@ function renderOco(){
       + '<td>' + (m.i.atual ? '<span class="badge ' + NOMES[calc(m.i.atual).nivel][1] + '">' + NOMES[calc(m.i.atual).nivel][0] + '</span>' : '<span class="badge b1">SINCRONIZADO</span>') + '</td>'
       + '<td><b>' + esc(m.i.p) + '</b></td>'
       + '<td>' + esc(m.i.l) + '</td>'
+      + '<td>' + (m.i.mo ? modalBadge(m.i.mo) : "\u2014") + '</td>'
       + '<td>' + (m.i.ent ? fmtEnt(m.i.ent) : "\u2014") + '</td>'
       + '<td>' + esc(m.i.uf || "\u2014") + '</td>'
       + '<td class="agc" title="' + esc(m.i.ag) + '">' + esc(m.i.ag || "\u2014") + '</td>'
@@ -923,12 +935,12 @@ function renderOco(){
       + '<td>h\u00e1 ' + idadeFlag(m.obs.t) + '</td>'
       + '<td>' + (dona ? '<button class="btn-flag" onclick="editarObs(\'' + k + '\')">editar</button>' : '') + '</td>'
       + '</tr>';
-  }).join("") || '<tr><td colspan="10" style="text-align:center;padding:30px;color:var(--tx2)">Nenhuma ocorr\u00eancia registrada neste recorte.</td></tr>';
+  }).join("") || '<tr><td colspan="11" style="text-align:center;padding:30px;color:var(--tx2)">Nenhuma ocorr\u00eancia registrada neste recorte.</td></tr>';
 }
 
 function render(){
   // KPIs: corrida das 48h da aba Geral (sem antigos e sem rodoviario, que nao tem logger a sincronizar)
-  const todos = R.filter(r => !r.vel && !ehRod((FLAGS[chave(r)] || {}).obs)).map(r => calc(r));
+  const todos = R.filter(r => !r.vel && r.mo !== "R" && !ehRod((FLAGS[chave(r)] || {}).obs)).map(r => calc(r));
   for (let n = 1; n <= 5; n++){
     document.getElementById("k"+n).textContent = todos.filter(x => x.nivel === n).length;
   }
@@ -956,6 +968,7 @@ function render(){
       + '<td>'+esc(r.ro)+'</td>'
       + '<td>'+esc(r.uf)+'</td>'
       + '<td class="agc" title="'+esc(r.ag)+'">'+esc(r.ag)+'</td>'
+      + '<td>'+modalBadge(r.mo)+'</td>'
       + '<td>'+fmtEnt(r.ent)+'</td>'
       + '<td><b>'+r.h.toFixed(1)+'h</b></td>'
       + '<td class="resta '+rcls+'">'+fmtResta(r.resta)+'</td>'
@@ -964,7 +977,7 @@ function render(){
       + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
       + celCob + celObs
       + '</tr>';
-  }).join("") || '<tr><td colspan="14" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
+  }).join("") || '<tr><td colspan="15" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
 
   document.getElementById("cards").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls] = NOMES[r.nivel];
@@ -980,6 +993,7 @@ function render(){
       + '<div class="kv">'
       + '<span class="k">Logger</span><span><b>'+esc(r.l)+'</b> \u00b7 rom. '+esc(r.ro)+' \u00b7 '+esc(r.uf)+'</span>'
       + '<span class="k">Base</span><span>'+esc(r.ag)+'</span>'
+      + '<span class="k">Modal</span><span>'+modalNome(r.mo)+'</span>'
       + '<span class="k">Entrega</span><span>'+fmtEnt(r.ent)+' ('+r.h.toFixed(1)+'h atr\u00e1s)</span>'
       + '<span class="k">Rel\u00f3gio</span><span class="resta '+rcls+'">'+fmtResta(r.resta)+'</span>'
       + '<span class="k">Cobran\u00e7a</span><span>'+r.cob+'</span>'
@@ -994,8 +1008,8 @@ function limpar(){
 }
 
 function baixarCsv(){
-  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca","ja_cobrado","cobrado_por","cobrado_em","ocorrencia","ocorrencia_por","ocorrencia_em"];
-  const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, r.cob,
+  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","modal","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca","ja_cobrado","cobrado_por","cobrado_em","ocorrencia","ocorrencia_por","ocorrencia_em"];
+  const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', modalNome(r.mo), '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, r.cob,
     r.fcob ? "SIM" : "", r.fcob ? '"'+String(r.fcob.q).replace(/"/g,'""')+'"' : "", r.fcob ? new Date(r.fcob.t).toLocaleString("pt-BR") : "",
     r.fobs ? '"'+String(r.fobs.x).replace(/"/g,'""')+'"' : "", r.fobs ? '"'+String(r.fobs.q).replace(/"/g,'""')+'"' : "", r.fobs ? new Date(r.fobs.t).toLocaleString("pt-BR") : ""].join(";"));
   const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});

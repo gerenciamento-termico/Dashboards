@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-16T14:53:30",
+  "gerado_em": "2026-10-16T14:58:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 232,
+    "pendentes_janela": 231,
     "cobranca_gru_janela": 32,
     "sem_embarque_efetiva": 113,
     "com_embarque_efetiva": 6196,
@@ -46,7 +46,7 @@
       "RBR - RODOTEC": 24,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 12,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 8,
       "LDB - ND CARGAS LTDA": 8,
       "PVH - RODOTEC": 7,
       "MAB - EXPRESSO RODRIGUES LTDA": 6
@@ -57,16 +57,16 @@
       "AC": 24,
       "SP": 20,
       "SC": 17,
-      "RS": 14,
+      "RS": 13,
       "AM": 12,
       "PR": 10,
       "PA": 10,
       "MG": 9
     },
     "latencia": {
-      "n_agente": 5595,
+      "n_agente": 5596,
       "n_so_gru": 36,
-      "n_sem_primeiro_sync": 527,
+      "n_sem_primeiro_sync": 526,
       "media_horas": 0.22,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "16/10/2026",
       "pedidos": 58,
       "loggers": 89,
-      "sincronizados": 36,
-      "pendentes": 51,
+      "sincronizados": 37,
+      "pendentes": 50,
       "sem_embarque": 36,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 22,
-      "pct": 57.3,
-      "n_latencia": 30,
+      "pedidos_pendentes": 21,
+      "pct": 56.2,
+      "n_latencia": 31,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 59
+      "n_sem_primeiro_sync": 58
     }
   ],
   "erros_validacao": {},

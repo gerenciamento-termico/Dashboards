@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-16T17:19:15",
+  "gerado_em": "2026-10-16T17:25:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 209,
+    "pendentes_janela": 210,
     "cobranca_gru_janela": 31,
-    "sem_embarque_efetiva": 114,
-    "com_embarque_efetiva": 6223,
+    "sem_embarque_efetiva": 113,
+    "com_embarque_efetiva": 6224,
     "loggers_sem_lastsync": 19,
-    "nao_avaliados": 114,
+    "nao_avaliados": 113,
     "pedidos_com_agente": 6491,
     "dtbtransporte": {
       "consultados": 1091,
@@ -46,7 +46,7 @@
       "THE - AERONEIVA EXPRESS": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
-      "LDB - ND CARGAS LTDA": 8,
+      "LDB - ND CARGAS LTDA": 9,
       "PVH - RODOTEC": 7,
       "MAB - EXPRESSO RODRIGUES LTDA": 6,
       "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 6
@@ -58,15 +58,15 @@
       "PI": 17,
       "SC": 17,
       "RS": 13,
+      "PR": 11,
       "PA": 11,
-      "PR": 10,
       "MG": 9,
       "TO": 7
     },
     "latencia": {
       "n_agente": 5643,
       "n_so_gru": 39,
-      "n_sem_primeiro_sync": 503,
+      "n_sem_primeiro_sync": 504,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-16",
       "dia": "16/10",
       "dia_full": "16/10/2026",
-      "pedidos": 75,
-      "loggers": 116,
+      "pedidos": 76,
+      "loggers": 117,
       "sincronizados": 86,
-      "pendentes": 28,
-      "sem_embarque": 37,
+      "pendentes": 29,
+      "sem_embarque": 36,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 25,
-      "pct": 24.1,
+      "pedidos_pendentes": 26,
+      "pct": 24.8,
       "n_latencia": 76,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 40
+      "n_sem_primeiro_sync": 41
     }
   ],
   "erros_validacao": {},

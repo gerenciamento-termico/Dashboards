@@ -235,7 +235,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
     </div>
     <div class="tb-meta">
       <span class="pill"><span class="livedot"></span> Ao vivo &middot; recalculado a cada 30s</span>
-      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>16/10/2026 08:56</b> &middot; ciclo 5 min</span>
+      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>16/10/2026 08:59</b> &middot; ciclo 5 min</span>
       <span class="pill"><i class="fa-solid fa-database"></i> Fonte 16/10/2026 08:56</span>
     </div>
     <div class="tb-user">
@@ -304,7 +304,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <footer>
   VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; Sincronismo 48h &middot; derivado do indicador Entregas &times; Sincronismo (mesmas regras; nada foi alterado nele)<br>
   N&iacute;veis pela idade da entrega: 0&ndash;12h no prazo &middot; 12&ndash;24h aten&ccedil;&atilde;o &middot; 24&ndash;36h alerta &middot; <b style="color:var(--n4)">36&ndash;48h cr&iacute;tico</b> &middot; <b style="color:var(--n5)">&gt;48h estourado</b> &middot; Sincronizou? Sai sozinho na pr&oacute;xima atualiza&ccedil;&atilde;o (5 min)<br>
-  Sinaliza&ccedil;&atilde;o "cobrado" e ocorr&ecirc;ncias em quadro compartilhado: aparecem para todos, com nome e hor&aacute;rio de quem registrou; s&oacute; o autor altera a pr&oacute;pria ocorr&ecirc;ncia; somem sozinhas quando a pend&ecirc;ncia sincroniza
+  Sinaliza&ccedil;&atilde;o "cobrado" e ocorr&ecirc;ncias em quadro compartilhado: aparecem para todos, com nome e hor&aacute;rio de quem registrou; s&oacute; o autor pode desfazer a pr&oacute;pria sinaliza&ccedil;&atilde;o ou alterar a pr&oacute;pria ocorr&ecirc;ncia; a sinaliza&ccedil;&atilde;o sai sozinha quando a pend&ecirc;ncia sincroniza e a ocorr&ecirc;ncia fica no hist&oacute;rico por 30 dias
 </footer>
 </div>
 
@@ -750,6 +750,8 @@ async function toggleCobrado(k){
   if (!atual.cob){
     nome = await obterNome(k);
     if (!nome) return; // cancelou o modal
+  } else if (!donaDaOco(atual.cob)){
+    return; // sinalizacao de outro usuario: so quem marcou pode desfazer
   }
   try {
     if (atual.cob){
@@ -758,7 +760,7 @@ async function toggleCobrado(k){
       apply();
       await patchFlag(k, { cob: null });
     } else {
-      atual.cob = { q: nome, t: Date.now() };
+      atual.cob = { q: nome, t: Date.now(), u: SESSION.u };
       FLAGS[k] = atual;
       apply();
       await patchFlag(k, { cob: atual.cob });
@@ -954,8 +956,11 @@ function render(){
     const [nome, bcls, rcls, cor] = NOMES[r.nivel];
     const pct = Math.max(2, Math.min(100, (r.h / 48) * 100));
     const k = chave(r).replace(/"/g, "&quot;");
+    const meuCob = r.fcob ? donaDaOco(r.fcob) : true;
     const celCob = r.fcob
-      ? '<td class="cobcell"><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')" title="Clique para desfazer">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+'</span></td>'
+      ? (meuCob
+        ? '<td class="cobcell"><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')" title="Clique para desfazer (s\u00f3 voc\u00ea pode)">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+'</span></td>'
+        : '<td class="cobcell"><span class="badge b-cob" style="cursor:default" title="S\u00f3 '+esc(r.fcob.q)+' pode desfazer esta sinaliza\u00e7\u00e3o">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+' <i class="fa-solid fa-lock oco-lock"></i></span></td>')
       : '<td class="cobcell"><button class="btn-flag" onclick="toggleCobrado(\''+k+'\')">marcar cobrado</button></td>';
     const minhaObs = r.fobs ? donaDaOco(r.fobs) : true;
     const celObs = r.fobs
@@ -983,7 +988,9 @@ function render(){
     const [nome, bcls, rcls] = NOMES[r.nivel];
     const k = chave(r).replace(/"/g, "&quot;");
     const linhaCob = (r.fcob
-      ? '<span class="k">Sinaliza\u00e7\u00e3o</span><span><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+'</span></span>'
+      ? (donaDaOco(r.fcob)
+        ? '<span class="k">Sinaliza\u00e7\u00e3o</span><span><span class="badge b-cob" onclick="toggleCobrado(\''+k+'\')">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+'</span></span>'
+        : '<span class="k">Sinaliza\u00e7\u00e3o</span><span><span class="badge b-cob" style="cursor:default">\u2713 COBRADO \u00b7 '+esc(r.fcob.q)+' \u00b7 h\u00e1 '+idadeFlag(r.fcob.t)+' <i class="fa-solid fa-lock oco-lock"></i></span></span>')
       : '<span class="k">Sinaliza\u00e7\u00e3o</span><span><button class="btn-flag" onclick="toggleCobrado(\''+k+'\')">marcar cobrado</button></span>')
       + (r.fobs
       ? '<span class="k">Ocorr\u00eancia</span><span onclick="editarObs(\''+k+'\')" style="cursor:pointer">'+esc(r.fobs.x)+' <small style="color:var(--tx2)">('+esc(r.fobs.q)+' \u00b7 '+idadeFlag(r.fobs.t)+')</small></span>'

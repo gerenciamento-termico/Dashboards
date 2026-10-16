@@ -74,10 +74,24 @@ def main() -> None:
             "mo": "R" if str(r.get("mo") or "").upper().startswith("RODOVI") else "M",
         })
 
+    # mapa pedido -> todos os dataloggers vinculados na fonte (qualquer status),
+    # usado no hover card do pedido: [logger, status, ultimo_sync]
+    pedidos_na_pagina = {r["p"] for r in saida}
+    logs: dict[str, list] = {}
+    for r in rows:
+        p = str(r.get("p") or "")
+        l = str(r.get("l") or "")
+        if not p or not l or p not in pedidos_na_pagina:
+            continue
+        lst = logs.setdefault(p, [])
+        if not any(x[0] == l for x in lst):
+            lst.append([l, str(r.get("st") or ""), str(r.get("s") or "")])
+
     modelo = {
         "gerado_em": agora.strftime("%d/%m/%Y %H:%M"),
         "fonte_em": fonte_em.strftime("%d/%m/%Y %H:%M"),
         "rows": saida,
+        "logs": logs,
         "antigos": antigos,
         "total_pendencias": len(pend),
         "ufs": sorted({r["uf"] for r in saida if r["uf"]}),
@@ -220,6 +234,21 @@ tr.flagged td:first-child, tr.flagged td.cobcell{opacity:1}
 .b-cob:hover{background:#dbeafe}
 .btn-flag{background:#fff;border:1px dashed #cbd5e1;border-radius:7px;color:var(--tx2);font-size:.62rem;font-weight:600;padding:4px 10px;cursor:pointer;font-family:inherit;letter-spacing:.3px;transition:all .12s}
 .btn-flag:hover{border-color:var(--ink);border-style:solid;color:var(--ink)}
+/* ---- hover card do pedido (ares pendente + outros dataloggers) ---- */
+.pedcell{cursor:help}
+.pedcell b{border-bottom:1px dashed #c3cbd8;padding-bottom:1px}
+#hovercard{position:fixed;display:none;z-index:600;background:#fff;border:1px solid var(--line);border-radius:13px;box-shadow:0 14px 40px rgba(15,23,42,.18);padding:13px 15px;min-width:270px;max-width:340px;pointer-events:none;font-size:.76rem}
+#hovercard .hc-t{font-weight:700;font-size:.8rem;margin-bottom:9px;color:var(--tx)}
+#hovercard .hc-t small{color:var(--tx3);font-weight:500}
+#hovercard .hc-ares{border:1px solid #fecaca;background:#fef7f7;border-radius:9px;padding:8px 10px;margin-bottom:8px}
+#hovercard .hc-ares .l1{font-weight:700;color:var(--n4);font-size:.78rem;display:flex;align-items:center;gap:6px}
+#hovercard .hc-ares .l2{color:var(--tx2);font-size:.68rem;margin-top:3px;line-height:1.5}
+#hovercard .hc-sec{font-size:.6rem;font-weight:700;color:var(--tx3);text-transform:uppercase;letter-spacing:.5px;margin:9px 0 5px}
+#hovercard .hc-it{display:flex;align-items:center;gap:7px;padding:3px 0;color:var(--tx)}
+#hovercard .hc-it .pt{width:7px;height:7px;border-radius:50%;flex:none}
+#hovercard .hc-it small{color:var(--tx3);margin-left:auto;padding-left:10px;white-space:nowrap}
+#hovercard .hc-nada{color:var(--tx3);font-size:.7rem;padding:2px 0}
+
 .obscell{cursor:pointer;max-width:240px}
 .obscell:hover .obs-txt{color:var(--blue)}
 .obs-txt{display:block;white-space:normal;line-height:1.35;font-size:.73rem;color:var(--tx);max-width:240px;font-weight:500}
@@ -384,7 +413,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <div class="tblwrap" id="gridWrap">
 <table>
   <thead><tr>
-    <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p">Pedido</th><th class="sv" data-k="l">Logger</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
+    <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p" title="Passe o mouse sobre o pedido para ver o Ares pendente e os demais dataloggers vinculados">Pedido</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
     <th class="sv" data-k="mo" title="Modal do pedido na fonte: Rodoviario ou MultiModal">Modal</th>
     <th class="sv" data-k="ent">Entrega</th><th class="sv" data-k="h">Horas desde entrega</th><th class="sv asc" data-k="resta">Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th class="sv" data-k="s">&Uacute;ltimo sync</th><th class="sv" data-k="cob">Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th><th title="Ocorrencia compartilhada: por que nao sincronizou, onde esta o logger, etc. So quem registrou pode alterar">Ocorr&ecirc;ncia</th>
   </tr></thead>
@@ -399,6 +428,8 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
   Sinaliza&ccedil;&atilde;o "cobrado" e ocorr&ecirc;ncias em quadro compartilhado: aparecem para todos, com nome e hor&aacute;rio de quem registrou; s&oacute; o autor pode desfazer a pr&oacute;pria sinaliza&ccedil;&atilde;o ou alterar a pr&oacute;pria ocorr&ecirc;ncia; a sinaliza&ccedil;&atilde;o sai sozinha quando a pend&ecirc;ncia sincroniza e a ocorr&ecirc;ncia fica no hist&oacute;rico por 30 dias
 </footer>
 </div>
+
+<div id="hovercard"></div>
 
 <div class="lg-ov" id="lg-ov">
   <div class="lg-card">
@@ -498,6 +529,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 
 <script>
 const R = __ROWS__;
+const LOGS = __LOGS__; // pedido -> [[logger, status, ultimo_sync], ...]
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtEnt = s => { const d = new Date(s); return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); };
@@ -930,6 +962,39 @@ function modalBadge(mo){
     : '<span class="badge b-mm"><i class="fa-solid fa-plane" style="font-size:.58rem"></i> MultiModal</span>';
 }
 function modalNome(mo){ return mo === "R" ? "Rodovi\u00e1rio" : "MultiModal"; }
+
+/* ---- hover card: ares pendente + outros dataloggers do pedido ---- */
+const ST_LOG = { S: ["Sincronizado", "#16a34a"], P: ["Pendente", "#dc2626"], G: ["Pendente (GRU)", "#dc2626"], E: ["Erro operacional", "#9aa3b2"] };
+function mostrarCard(ev, p, l, s, h){
+  const el = document.getElementById("hovercard");
+  const todos = LOGS[p] || [];
+  const outros = todos.filter(x => x[0] !== l);
+  let html = '<div class="hc-t">Pedido ' + esc(p) + ' <small>\u00b7 ' + todos.length + ' datalogger(s) vinculado(s)</small></div>'
+    + '<div class="hc-ares"><div class="l1"><i class="fa-solid fa-tower-broadcast"></i> ' + esc(l) + ' \u2014 ARES PENDENTE</div>'
+    + '<div class="l2">Sem sincronismo h\u00e1 <b>' + h + '</b> desde a entrega<br>\u00daltimo sync: ' + esc(s || "nunca registrado") + '</div></div>';
+  if (outros.length){
+    html += '<div class="hc-sec">Outros dataloggers do pedido</div>' + outros.map(x => {
+      const st = ST_LOG[x[1]] || ["?", "#9aa3b2"];
+      return '<div class="hc-it"><span class="pt" style="background:' + st[1] + '"></span><b>' + esc(x[0]) + '</b> ' + st[0] + '<small>' + esc(x[2] || "") + '</small></div>';
+    }).join("");
+  } else {
+    html += '<div class="hc-nada">Sem outros dataloggers vinculados a este pedido.</div>';
+  }
+  el.innerHTML = html;
+  el.style.display = "block";
+  moverCard(ev);
+}
+function moverCard(ev){
+  const el = document.getElementById("hovercard");
+  if (el.style.display !== "block") return;
+  const w = el.offsetWidth, hh = el.offsetHeight;
+  let x = ev.clientX + 16, y = ev.clientY + 14;
+  if (x + w > window.innerWidth - 10) x = ev.clientX - w - 16;
+  if (y + hh > window.innerHeight - 10) y = ev.clientY - hh - 14;
+  el.style.left = Math.max(8, x) + "px";
+  el.style.top = Math.max(8, y) + "px";
+}
+function esconderCard(){ document.getElementById("hovercard").style.display = "none"; }
 function setTab(t){
   TAB = t;
   document.querySelectorAll(".gtab").forEach(b => b.classList.toggle("ativo", b.dataset.tab === t));
@@ -1058,10 +1123,10 @@ function render(){
     const celObs = r.fobs
       ? '<td class="cobcell obscell" onclick="editarObs(\''+k+'\')" title="'+esc(r.fobs.x)+' \u2014 '+esc(r.fobs.q)+', h\u00e1 '+idadeFlag(r.fobs.t)+(minhaObs ? ' (clique para editar)' : ' (s\u00f3 quem registrou pode alterar)')+'"><span class="obs-txt">'+esc(r.fobs.x)+'</span><span class="obs-meta">'+esc(r.fobs.q)+' \u00b7 '+idadeFlag(r.fobs.t)+(minhaObs ? '' : ' <i class="fa-solid fa-lock oco-lock"></i>')+'</span></td>'
       : '<td class="cobcell"><button class="btn-flag" onclick="editarObs(\''+k+'\')">+ ocorr\u00eancia</button></td>';
+    const hArg = r.h.toFixed(1) + 'h';
     return '<tr class="lv'+r.nivel+(r.fcob ? ' flagged' : '')+'">'
       + '<td><span class="badge '+bcls+'">'+nome+'</span></td>'
-      + '<td><b>'+esc(r.p)+'</b></td>'
-      + '<td>'+esc(r.l)+'</td>'
+      + '<td class="pedcell" onmouseenter="mostrarCard(event,\''+esc(r.p)+'\',\''+esc(r.l)+'\',\''+esc(r.s)+'\',\''+hArg+'\')" onmousemove="moverCard(event)" onmouseleave="esconderCard()"><b>'+esc(r.p)+'</b></td>'
       + '<td>'+esc(r.ro)+'</td>'
       + '<td>'+esc(r.uf)+'</td>'
       + '<td class="agc" title="'+esc(r.ag)+'">'+esc(r.ag)+'</td>'
@@ -1074,7 +1139,7 @@ function render(){
       + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
       + celCob + celObs
       + '</tr>';
-  }).join("") || '<tr><td colspan="15" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
+  }).join("") || '<tr><td colspan="14" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
 
   document.getElementById("cards").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls] = NOMES[r.nivel];
@@ -1166,6 +1231,7 @@ def write_html(modelo: dict) -> None:
         .replace("__BASES__", bases)
         .replace("__UFS__", ufs)
         .replace("__ROWS__", json.dumps(modelo["rows"], ensure_ascii=False, separators=(",", ":")))
+        .replace("__LOGS__", json.dumps(modelo["logs"], ensure_ascii=False, separators=(",", ":")))
     )
     OUT_HTML.write_text(out, encoding="utf-8")
 

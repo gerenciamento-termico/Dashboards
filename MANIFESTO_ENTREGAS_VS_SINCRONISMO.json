@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-16T17:10:58",
+  "gerado_em": "2026-10-16T17:15:58",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 217,
+    "pendentes_janela": 209,
     "cobranca_gru_janela": 31,
     "sem_embarque_efetiva": 114,
     "com_embarque_efetiva": 6223,
@@ -45,11 +45,11 @@
       "RBR - RODOTEC": 24,
       "THE - AERONEIVA EXPRESS": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 15,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 12,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
       "LDB - ND CARGAS LTDA": 8,
       "PVH - RODOTEC": 7,
-      "MAB - EXPRESSO RODRIGUES LTDA": 6
+      "MAB - EXPRESSO RODRIGUES LTDA": 6,
+      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 6
     },
     "top10_ufs_pendencias": {
       "BA": 32,
@@ -58,15 +58,15 @@
       "PI": 17,
       "SC": 17,
       "RS": 13,
-      "AM": 12,
       "PA": 11,
       "PR": 10,
-      "MG": 9
+      "MG": 9,
+      "TO": 7
     },
     "latencia": {
-      "n_agente": 5635,
+      "n_agente": 5643,
       "n_so_gru": 39,
-      "n_sem_primeiro_sync": 511,
+      "n_sem_primeiro_sync": 503,
       "media_horas": 0.25,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -440,18 +440,18 @@
       "dia_full": "16/10/2026",
       "pedidos": 75,
       "loggers": 116,
-      "sincronizados": 78,
-      "pendentes": 36,
+      "sincronizados": 86,
+      "pendentes": 28,
       "sem_embarque": 37,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 26,
-      "pct": 31.0,
-      "n_latencia": 68,
+      "pedidos_pendentes": 25,
+      "pct": 24.1,
+      "n_latencia": 76,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 48
+      "n_sem_primeiro_sync": 40
     }
   ],
   "erros_validacao": {},

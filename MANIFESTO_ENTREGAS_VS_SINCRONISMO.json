@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-16T13:48:15",
+  "gerado_em": "2026-10-16T13:53:14",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,32 +19,32 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6445,
-    "pedidos_janela": 1060,
-    "loggers_ares_janela": 6254,
-    "loggers_ares_antes_dedup": 6292,
+    "pares_janela": 6447,
+    "pedidos_janela": 1062,
+    "loggers_ares_janela": 6256,
+    "loggers_ares_antes_dedup": 6294,
     "dedup_dia_logger": 38,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 240,
+    "pendentes_janela": 242,
     "cobranca_gru_janela": 38,
     "sem_embarque_efetiva": 113,
-    "com_embarque_efetiva": 6179,
+    "com_embarque_efetiva": 6181,
     "loggers_sem_lastsync": 23,
     "nao_avaliados": 113,
-    "pedidos_com_agente": 6445,
+    "pedidos_com_agente": 6447,
     "dtbtransporte": {
-      "consultados": 1060,
-      "mapeados": 1060,
-      "linhas": 1133
+      "consultados": 1062,
+      "mapeados": 1062,
+      "linhas": 1135
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 36,
       "THE - AERONEIVA EXPRESS": 36,
       "SSA - LUTY LOG": 26,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 26,
       "RBR - RODOTEC": 24,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 24,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 12,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
       "LDB - ND CARGAS LTDA": 8,
@@ -54,7 +54,7 @@
     "top10_ufs_pendencias": {
       "PI": 36,
       "BA": 31,
-      "SC": 26,
+      "SC": 28,
       "AC": 24,
       "SP": 19,
       "RS": 14,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 5563,
       "n_so_gru": 35,
-      "n_sem_primeiro_sync": 543,
+      "n_sem_primeiro_sync": 545,
       "media_horas": 0.22,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-16",
       "dia": "16/10",
       "dia_full": "16/10/2026",
-      "pedidos": 45,
-      "loggers": 72,
+      "pedidos": 47,
+      "loggers": 74,
       "sincronizados": 24,
-      "pendentes": 46,
+      "pendentes": 48,
       "sem_embarque": 36,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 17,
-      "pct": 63.9,
+      "pedidos_pendentes": 19,
+      "pct": 64.9,
       "n_latencia": 17,
       "media_horas": 0.04,
       "mediana_horas": 0.05,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 55
+      "n_sem_primeiro_sync": 57
     }
   ],
   "erros_validacao": {},

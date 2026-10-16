@@ -480,7 +480,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
         <div class="up-lista" id="up-oco-lista"></div>
       </div>
       <div class="up-pane" id="up-usuarios" hidden>
-        <div class="up-sec">Usu&aacute;rios cadastrados <small style="text-transform:none;letter-spacing:0">&middot; todos s&atilde;o administradores</small></div>
+        <div class="up-sec">Usu&aacute;rios cadastrados <small style="text-transform:none;letter-spacing:0">&middot; cada usu&aacute;rio altera somente a pr&oacute;pria senha</small></div>
         <div class="up-lista" id="up-user-lista"></div>
         <div class="up-sec" style="margin-top:18px">Cadastrar novo usu&aacute;rio</div>
         <label class="mo-lbl" for="up-nu-login">Login <small>&middot; padr&atilde;o nome.sobrenome, min&uacute;sculas</small></label>
@@ -670,31 +670,15 @@ async function carregarUsuarios(){
     alvo.innerHTML = Object.keys(todos).sort().map(key => {
       const reg = todos[key];
       const login = reg.login || key.replace(/_/g, ".");
+      const souEu = login === SESSION.u;
       return '<div class="up-item" id="upu-' + key + '">'
-        + '<div class="t">' + esc(reg.nome || login) + (login === SESSION.u ? ' <small style="color:var(--tx3)">(voc\u00ea)</small>' : '') + '</div>'
-        + '<div class="m">' + esc(login) + ' \u00b7 administrador</div>'
-        + '<div class="acao"><button class="up-mini" onclick="formRedefinir(\'' + key + '\',\'' + esc(login) + '\')"><i class="fa-solid fa-key"></i> Redefinir senha</button></div>'
+        + '<div class="t">' + esc(reg.nome || login) + (souEu ? ' <small style="color:var(--tx3)">(voc\u00ea)</small>' : '') + '</div>'
+        + '<div class="m">' + esc(login) + (souEu
+          ? ' \u00b7 altere sua senha na aba "Minha conta"'
+          : ' \u00b7 <i class="fa-solid fa-lock" style="font-size:.58rem"></i> somente o pr\u00f3prio usu\u00e1rio altera a senha') + '</div>'
         + '</div>';
     }).join("") || '<div class="up-vazio">Nenhum usu\u00e1rio cadastrado.</div>';
   } catch(e){ alvo.innerHTML = '<div class="up-vazio">Sem conex\u00e3o com o servidor.</div>'; }
-}
-function formRedefinir(key, login){
-  const acao = document.querySelector("#upu-" + key + " .acao");
-  acao.innerHTML = '<input type="password" class="mo-inp" id="rs-' + key + '" placeholder="nova senha (m\u00edn. 6)" style="flex:1;min-width:150px;padding:7px 10px;font-size:.74rem">'
-    + '<button class="up-mini" onclick="redefinirSenha(\'' + key + '\',\'' + esc(login) + '\')"><i class="fa-solid fa-check"></i> Salvar</button>'
-    + '<button class="up-mini" onclick="carregarUsuarios()">Cancelar</button>';
-  document.getElementById("rs-" + key).focus();
-}
-async function redefinirSenha(key, login){
-  const nova = document.getElementById("rs-" + key).value;
-  if (nova.length < 6){ upMsg("user", "A senha precisa de pelo menos 6 caracteres."); return; }
-  try {
-    const resp = await fetch(FB + "/_usuarios/" + key + ".json", { method: "PATCH",
-      body: JSON.stringify({ h: await sha256(login + ":" + nova) }) });
-    if (!resp.ok) throw new Error(resp.status);
-    upMsg("user", "Senha de " + login + " redefinida.", true);
-    carregarUsuarios();
-  } catch(e){ upMsg("user", "Sem conex\u00e3o com o servidor. Tente novamente."); }
 }
 async function cadastrarUsuario(){
   const login = document.getElementById("up-nu-login").value.trim().toLowerCase();

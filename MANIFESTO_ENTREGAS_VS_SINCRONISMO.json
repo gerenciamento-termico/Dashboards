@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-19T10:52:59",
+  "gerado_em": "2026-10-19T11:04:48",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5417,
-    "pedidos_janela": 995,
-    "loggers_ares_janela": 5231,
-    "loggers_ares_antes_dedup": 5264,
+    "pares_janela": 5419,
+    "pedidos_janela": 997,
+    "loggers_ares_janela": 5233,
+    "loggers_ares_antes_dedup": 5266,
     "dedup_dia_logger": 33,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 180,
     "cobranca_gru_janela": 39,
-    "sem_embarque_efetiva": 88,
+    "sem_embarque_efetiva": 90,
     "com_embarque_efetiva": 5176,
     "loggers_sem_lastsync": 14,
-    "nao_avaliados": 88,
-    "pedidos_com_agente": 5417,
+    "nao_avaliados": 90,
+    "pedidos_com_agente": 5419,
     "dtbtransporte": {
-      "consultados": 995,
-      "mapeados": 995,
-      "linhas": 1052
+      "consultados": 997,
+      "mapeados": 997,
+      "linhas": 1054
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 26,
@@ -64,9 +64,9 @@
       "SP": 5
     },
     "latencia": {
-      "n_agente": 4683,
+      "n_agente": 4684,
       "n_so_gru": 21,
-      "n_sem_primeiro_sync": 439,
+      "n_sem_primeiro_sync": 438,
       "media_horas": 0.23,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -385,16 +385,16 @@
       "loggers": 197,
       "sincronizados": 159,
       "pendentes": 34,
-      "sem_embarque": 16,
+      "sem_embarque": 18,
       "cobranca_gru": 4,
       "pedidos_pendentes": 19,
       "pct": 17.3,
-      "n_latencia": 149,
+      "n_latencia": 150,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 48
+      "n_sem_primeiro_sync": 47
     },
     {
       "dia_iso": "2026-10-17",

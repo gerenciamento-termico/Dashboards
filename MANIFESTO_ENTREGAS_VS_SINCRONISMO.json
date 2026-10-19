@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-19T15:47:24",
+  "gerado_em": "2026-10-19T15:52:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 169,
+    "pendentes_janela": 170,
     "cobranca_gru_janela": 32,
-    "sem_embarque_efetiva": 89,
-    "com_embarque_efetiva": 5192,
+    "sem_embarque_efetiva": 88,
+    "com_embarque_efetiva": 5193,
     "loggers_sem_lastsync": 16,
-    "nao_avaliados": 89,
+    "nao_avaliados": 88,
     "pedidos_com_agente": 5434,
     "dtbtransporte": {
       "consultados": 1011,
@@ -45,8 +45,8 @@
       "RBR - RODOTEC": 19,
       "THE - AERONEIVA EXPRESS": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
+      "MOC - LOG SERVIÇOS": 9,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 8,
-      "MOC - LOG SERVIÇOS": 8,
       "PVH - RODOTEC": 7,
       "IOS - MASPEX CARGO": 5,
       "LDB - ND CARGAS LTDA": 5
@@ -56,9 +56,9 @@
       "AC": 19,
       "PI": 16,
       "SC": 15,
+      "MG": 11,
       "RS": 11,
       "SP": 11,
-      "MG": 10,
       "PA": 9,
       "RO": 7,
       "PR": 5
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4712,
       "n_so_gru": 22,
-      "n_sem_primeiro_sync": 425,
+      "n_sem_primeiro_sync": 426,
       "media_horas": 0.23,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -381,20 +381,20 @@
       "dia_iso": "2026-10-16",
       "dia": "16/10",
       "dia_full": "16/10/2026",
-      "pedidos": 93,
-      "loggers": 201,
+      "pedidos": 94,
+      "loggers": 202,
       "sincronizados": 181,
-      "pendentes": 17,
-      "sem_embarque": 17,
+      "pendentes": 18,
+      "sem_embarque": 16,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 15,
-      "pct": 8.5,
+      "pedidos_pendentes": 16,
+      "pct": 8.9,
       "n_latencia": 172,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 29
+      "n_sem_primeiro_sync": 30
     },
     {
       "dia_iso": "2026-10-17",

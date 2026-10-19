@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-19T08:58:29",
+  "gerado_em": "2026-10-19T09:07:37",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 178,
-    "cobranca_gru_janela": 38,
+    "pendentes_janela": 177,
+    "cobranca_gru_janela": 36,
     "sem_embarque_efetiva": 108,
     "com_embarque_efetiva": 5139,
     "loggers_sem_lastsync": 14,
@@ -46,7 +46,7 @@
       "THE - AERONEIVA EXPRESS": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 11,
-      "LDB - ND CARGAS LTDA": 9,
+      "LDB - ND CARGAS LTDA": 8,
       "PVH - RODOTEC": 7,
       "MOC - LOG SERVIÇOS": 6,
       "IOS - MASPEX CARGO": 5
@@ -57,16 +57,16 @@
       "PI": 16,
       "SC": 15,
       "RS": 15,
-      "PR": 10,
+      "PR": 9,
       "PA": 9,
       "MG": 8,
       "RO": 7,
       "DF": 5
     },
     "latencia": {
-      "n_agente": 4646,
+      "n_agente": 4649,
       "n_so_gru": 21,
-      "n_sem_primeiro_sync": 439,
+      "n_sem_primeiro_sync": 436,
       "media_horas": 0.18,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -383,18 +383,18 @@
       "dia_full": "16/10/2026",
       "pedidos": 85,
       "loggers": 161,
-      "sincronizados": 133,
-      "pendentes": 22,
+      "sincronizados": 136,
+      "pendentes": 21,
       "sem_embarque": 36,
-      "cobranca_gru": 6,
-      "pedidos_pendentes": 20,
-      "pct": 13.7,
-      "n_latencia": 121,
+      "cobranca_gru": 4,
+      "pedidos_pendentes": 19,
+      "pct": 13.0,
+      "n_latencia": 124,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 40
+      "n_sem_primeiro_sync": 37
     },
     {
       "dia_iso": "2026-10-17",

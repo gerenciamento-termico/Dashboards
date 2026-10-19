@@ -604,6 +604,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <div class="gtabs">
   <button class="gtab ativo" data-tab="geral" onclick="setTab('geral')"><i class="fa-solid fa-plane-up"></i> Geral <span class="gt-n" id="gt-geral">0</span></button>
   <button class="gtab" data-tab="rod" onclick="setTab('rod')" title="Pendencias com modal Rodoviario na fonte ou com ocorrencia de rodoviario paletizado, em qualquer idade"><i class="fa-solid fa-truck"></i> Rodovi&aacute;rio <span class="gt-n" id="gt-rod">0</span></button>
+  <button class="gtab" data-tab="todos" onclick="setTab('todos')" title="MultiModal e Rodoviario juntos"><i class="fa-solid fa-layer-group"></i> Todos <span class="gt-n" id="gt-todos">0</span></button>
   <button class="gtab" data-tab="oco" onclick="setTab('oco')" title="Historico de todas as ocorrencias registradas, inclusive de pendencias ja sincronizadas (retencao de 30 dias)"><i class="fa-solid fa-clipboard-list"></i> Ocorr&ecirc;ncias <span class="gt-n" id="gt-oco">0</span></button>
 </div>
 
@@ -1239,8 +1240,9 @@ function apply(){
   });
   document.getElementById("gt-geral").textContent = TODAS.filter(r => !r.vel && !r.rod).length;
   document.getElementById("gt-rod").textContent = TODAS.filter(r => r.rod).length;
+  document.getElementById("gt-todos").textContent = TODAS.filter(r => !r.vel || r.rod).length;
   document.getElementById("gt-oco").textContent = Object.keys(FLAGS).filter(k => FLAGS[k].obs).length;
-  VIEW = TODAS.filter(r => TAB === "rod" ? r.rod : (!r.vel && !r.rod)).filter(r => {
+  VIEW = TODAS.filter(r => TAB === "rod" ? r.rod : TAB === "todos" ? (!r.vel || r.rod) : (!r.vel && !r.rod)).filter(r => {
     if (ba && r.ag !== ba) return false;
     if (uf && r.uf !== uf) return false;
     if (rg && REGIOES[rg].indexOf(r.uf) === -1) return false;

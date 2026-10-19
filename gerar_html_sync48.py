@@ -571,7 +571,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <div class="tblwrap" id="gridWrap">
 <table>
   <thead><tr>
-    <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p" title="Passe o mouse sobre o pedido para ver o Ares pendente e os demais dispositivos vinculados (Syos, Shield, Elitech...)">Pedido</th><th class="sv" data-k="l">Logger</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
+    <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p" title="Passe o mouse sobre o pedido para ver o logger Ares pendente, quem fez o ultimo sync e os demais dispositivos vinculados">Pedido</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
     <th class="sv" data-k="mo" title="Modal do pedido na fonte: Rodoviario ou MultiModal">Modal</th>
     <th class="sv" data-k="ent">Entrega</th><th class="sv" data-k="h">Horas desde entrega</th><th class="sv asc" data-k="resta">Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th class="sv" data-k="s">&Uacute;ltimo sync</th><th class="sv" data-k="cob">Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th><th title="Ocorrencia compartilhada: por que nao sincronizou, onde esta o logger, etc. So quem registrou pode alterar">Ocorr&ecirc;ncia</th>
   </tr></thead>
@@ -1282,7 +1282,6 @@ function render(){
     return '<tr class="lv'+r.nivel+(r.fcob ? ' flagged' : '')+'">'
       + '<td><span class="badge '+bcls+'">'+nome+'</span></td>'
       + '<td class="pedcell" onmouseenter="mostrarCard(event,\''+esc(r.p)+'\',\''+esc(r.l)+'\',\''+esc(r.s)+'\',\''+hArg+'\',\''+esc(r.su || "")+'\')" onmousemove="moverCard(event)" onmouseleave="esconderCard()"><b>'+esc(r.p)+'</b></td>'
-      + '<td>'+esc(r.l)+'</td>'
       + '<td>'+esc(r.ro)+'</td>'
       + '<td>'+esc(r.uf)+'</td>'
       + '<td class="agc" title="'+esc(r.ag)+'">'+esc(r.ag)+'</td>'
@@ -1291,11 +1290,11 @@ function render(){
       + '<td><b>'+r.h.toFixed(1)+'h</b></td>'
       + '<td class="resta '+rcls+'">'+fmtResta(r.resta)+'</td>'
       + '<td><div class="pbar"><div style="width:'+pct+'%;background:'+cor+'"></div></div></td>'
-      + '<td>'+esc(r.s || "\u2014")+(r.su ? '<span class="obs-meta" title="quem fez o \u00faltimo sync (app Ares)">'+esc(r.su)+'</span>' : '')+'</td>'
+      + '<td>'+esc(r.s || "\u2014")+'</td>'
       + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
       + celCob + celObs
       + '</tr>';
-  }).join("") || '<tr><td colspan="15" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
+  }).join("") || '<tr><td colspan="14" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
 
   document.getElementById("cards").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls] = NOMES[r.nivel];

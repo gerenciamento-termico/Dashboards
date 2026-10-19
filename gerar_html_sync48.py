@@ -96,6 +96,69 @@ def parse_dt(txt: str) -> datetime | None:
         return None
 
 
+def fetch_sync_users(tags: list[str]) -> dict[str, str]:
+    """Nome de quem fez o ultimo sync por logger: user.name do documento mais
+    recente em ares-prod.beacon_devices_logs (mesma informacao do portal).
+
+    Retorna {tag: nome}. Lanca excecao em falha (tratada no main).
+    """
+    import os
+    from concurrent.futures import ThreadPoolExecutor
+
+    from pymongo import MongoClient
+
+    from gerar_html_entregas_vs_sincronismo import (
+        STAGE_DIR,
+        _mongo_lookup_names,
+        load_env,
+        norm_tag,
+    )
+
+    if not tags:
+        return {}
+    for path in [STAGE_DIR / ".env.ares_mongo", STAGE_DIR / ".env", WORKSPACE / ".env"]:
+        for key, value in load_env(path).items():
+            os.environ.setdefault(key, value)
+    uri = (os.getenv("ARES_MONGO_URI") or os.getenv("ARES_MONGODB_URI") or "").strip()
+    if not uri:
+        raise RuntimeError("ARES_MONGO_URI ausente")
+
+    lookup = _mongo_lookup_names(sorted({norm_tag(t) for t in tags if norm_tag(t)}))
+    client = MongoClient(uri, serverSelectionTimeoutMS=20000, connectTimeoutMS=20000)
+    try:
+        db = client[os.getenv("ARES_MONGO_DB") or "ares-prod"]
+        tag_mac: dict[str, str] = {}
+        for i in range(0, len(lookup), 2000):
+            for doc in db["beacon_devices"].find(
+                {"name": {"$in": lookup[i : i + 2000]}}, {"name": 1, "mac": 1}
+            ):
+                tag = norm_tag(doc.get("name"))
+                mac = str(doc.get("mac") or "").strip()
+                if tag and mac:
+                    tag_mac[tag] = mac
+
+        logs = db["beacon_devices_logs"]
+
+        def _ultimo_usuario(item: tuple[str, str]) -> tuple[str, str]:
+            tag, mac = item
+            doc = logs.find_one(
+                {"mac": mac}, {"user.name": 1}, sort=[("createdAt", -1)]
+            )
+            nome = ""
+            if doc and isinstance(doc.get("user"), dict):
+                nome = str(doc["user"].get("name") or "").strip()
+            return tag, nome
+
+        out: dict[str, str] = {}
+        with ThreadPoolExecutor(max_workers=12) as pool:
+            for tag, nome in pool.map(_ultimo_usuario, tag_mac.items()):
+                if nome:
+                    out[tag] = nome
+        return out
+    finally:
+        client.close()
+
+
 def main() -> None:
     if not FONTE.exists():
         raise RuntimeError(f"fonte ausente: {FONTE.name}")
@@ -164,6 +227,22 @@ def main() -> None:
         )
     except Exception as exc:  # noqa: BLE001
         print(f"[aviso] dispositivos vtc_stage indisponiveis ({type(exc).__name__}: {exc}); card mostrara so os Ares")
+
+    # quem fez o ultimo sync (user.name do ultimo beacon_devices_logs por logger);
+    # fail-safe: sem Mongo, a pagina sai sem o nome
+    try:
+        sync_users = fetch_sync_users([r["l"] for r in saida if r["l"]])
+        atribuidos = 0
+        for r in saida:
+            nome = sync_users.get(r["l"].upper().replace("-", "").replace(" ", ""), "")
+            r["su"] = nome
+            if nome:
+                atribuidos += 1
+        print(f"[sync-user] nome do ultimo sync em {atribuidos}/{len(saida)} linhas")
+    except Exception as exc:  # noqa: BLE001
+        for r in saida:
+            r.setdefault("su", "")
+        print(f"[aviso] usuario do sync indisponivel ({type(exc).__name__}: {exc})")
 
     modelo = {
         "gerado_em": agora.strftime("%d/%m/%Y %H:%M"),
@@ -1030,13 +1109,14 @@ function modalNome(mo){ return mo === "R" ? "Rodovi\u00e1rio" : "MultiModal"; }
 /* ---- hover card: ares pendente + outros dataloggers do pedido ---- */
 const ST_LOG = { S: ["Sincronizado", "#16a34a"], P: ["Pendente", "#dc2626"], G: ["Pendente (GRU)", "#dc2626"], E: ["Erro operacional", "#9aa3b2"] };
 const COR_DEV = { "ARES": "#dc2626", "ARES COM SONDA": "#dc2626", "SYOS": "#0369a1", "SHIELD": "#6d28d9", "ELITECH": "#d97706", "SENSOR WEB": "#16a34a" };
-function mostrarCard(ev, p, l, s, h){
+function mostrarCard(ev, p, l, s, h, su){
   const el = document.getElementById("hovercard");
   const todos = LOGS[p] || [];
   const outros = todos.filter(x => x[0] !== l);
   let html = '<div class="hc-t">Pedido ' + esc(p) + ' <small>\u00b7 ' + todos.length + ' datalogger(s) vinculado(s)</small></div>'
     + '<div class="hc-ares"><div class="l1"><i class="fa-solid fa-tower-broadcast"></i> ' + esc(l) + ' \u2014 ARES PENDENTE</div>'
-    + '<div class="l2">Sem sincronismo h\u00e1 <b>' + h + '</b> desde a entrega<br>\u00daltimo sync: ' + esc(s || "nunca registrado") + '</div></div>';
+    + '<div class="l2">Sem sincronismo h\u00e1 <b>' + h + '</b> desde a entrega<br>\u00daltimo sync: ' + esc(s || "nunca registrado")
+    + (su ? '<br>\u00daltimo sync feito por: <b>' + esc(su) + '</b>' : '') + '</div></div>';
   if (outros.length){
     html += '<div class="hc-sec">Outros Ares do pedido</div>' + outros.map(x => {
       const st = ST_LOG[x[1]] || ["?", "#9aa3b2"];
@@ -1201,7 +1281,7 @@ function render(){
     const hArg = r.h.toFixed(1) + 'h';
     return '<tr class="lv'+r.nivel+(r.fcob ? ' flagged' : '')+'">'
       + '<td><span class="badge '+bcls+'">'+nome+'</span></td>'
-      + '<td class="pedcell" onmouseenter="mostrarCard(event,\''+esc(r.p)+'\',\''+esc(r.l)+'\',\''+esc(r.s)+'\',\''+hArg+'\')" onmousemove="moverCard(event)" onmouseleave="esconderCard()"><b>'+esc(r.p)+'</b></td>'
+      + '<td class="pedcell" onmouseenter="mostrarCard(event,\''+esc(r.p)+'\',\''+esc(r.l)+'\',\''+esc(r.s)+'\',\''+hArg+'\',\''+esc(r.su || "")+'\')" onmousemove="moverCard(event)" onmouseleave="esconderCard()"><b>'+esc(r.p)+'</b></td>'
       + '<td>'+esc(r.l)+'</td>'
       + '<td>'+esc(r.ro)+'</td>'
       + '<td>'+esc(r.uf)+'</td>'
@@ -1211,7 +1291,7 @@ function render(){
       + '<td><b>'+r.h.toFixed(1)+'h</b></td>'
       + '<td class="resta '+rcls+'">'+fmtResta(r.resta)+'</td>'
       + '<td><div class="pbar"><div style="width:'+pct+'%;background:'+cor+'"></div></div></td>'
-      + '<td>'+esc(r.s || "\u2014")+'</td>'
+      + '<td>'+esc(r.s || "\u2014")+(r.su ? '<span class="obs-meta" title="quem fez o \u00faltimo sync (app Ares)">'+esc(r.su)+'</span>' : '')+'</td>'
       + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
       + celCob + celObs
       + '</tr>';
@@ -1248,8 +1328,8 @@ function limpar(){
 }
 
 function baixarCsv(){
-  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","modal","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","cobranca","ja_cobrado","cobrado_por","cobrado_em","ocorrencia","ocorrencia_por","ocorrencia_em"];
-  const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', modalNome(r.mo), '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, r.cob,
+  const cab = ["nivel","pedido","logger","romaneio","uf","base_agente","modal","cliente","entrega","horas_desde_entrega","resta_para_48h","ultimo_sync","sync_por","cobranca","ja_cobrado","cobrado_por","cobrado_em","ocorrencia","ocorrencia_por","ocorrencia_em"];
+  const linhas = VIEW.map(r => [NOMES[r.nivel][0], r.p, r.l, r.ro, r.uf, '"'+r.ag.replace(/"/g,'""')+'"', modalNome(r.mo), '"'+r.cli.replace(/"/g,'""')+'"', r.ent, r.h.toFixed(1), r.resta.toFixed(1), r.s, '"'+String(r.su || "").replace(/"/g,'""')+'"', r.cob,
     r.fcob ? "SIM" : "", r.fcob ? '"'+String(r.fcob.q).replace(/"/g,'""')+'"' : "", r.fcob ? new Date(r.fcob.t).toLocaleString("pt-BR") : "",
     r.fobs ? '"'+String(r.fobs.x).replace(/"/g,'""')+'"' : "", r.fobs ? '"'+String(r.fobs.q).replace(/"/g,'""')+'"' : "", r.fobs ? new Date(r.fobs.t).toLocaleString("pt-BR") : ""].join(";"));
   const blob = new Blob(["\ufeff"+cab.join(";")+"\n"+linhas.join("\n")], {type:"text/csv;charset=utf-8"});

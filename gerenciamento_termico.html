@@ -468,6 +468,35 @@ body{
   to{opacity:1;transform:translateY(0)}
 }
 
+/* ===== LOGIN GATE (mesmos usuarios do Sincronismo 48h) ===== */
+body.bloqueada .header, body.bloqueada main, body.bloqueada .footer{filter:blur(16px);pointer-events:none;user-select:none}
+.lg-ov{position:fixed;inset:0;z-index:50;display:none;align-items:center;justify-content:center;padding:1.5rem}
+body.bloqueada .lg-ov{display:flex}
+.lg-card{position:relative;width:100%;max-width:430px;background:rgba(15,23,42,0.72);border:1px solid rgba(14,165,233,0.25);border-radius:24px;padding:2.6rem 2.4rem 2.2rem;backdrop-filter:blur(22px);box-shadow:0 30px 80px rgba(0,0,0,0.6), 0 0 120px rgba(14,165,233,0.12);animation:fadeInDown 0.7s ease}
+.lg-card::before{content:"";position:absolute;inset:-1px;border-radius:24px;padding:1px;background:linear-gradient(135deg, rgba(14,165,233,0.55), transparent 38%, transparent 62%, rgba(11,245,202,0.4));-webkit-mask:linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.lg-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(14,165,233,0.08);border:1px solid rgba(14,165,233,0.2);color:var(--aura-light);padding:0.4rem 1rem;border-radius:999px;font-size:0.68rem;font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:1.4rem}
+.lg-badge i{font-size:0.5rem;color:var(--success);animation:pulse 2s ease-in-out infinite}
+.lg-card h2{font-size:1.75rem;font-weight:800;letter-spacing:-0.02em;margin-bottom:0.4rem;color:var(--text)}
+.lg-card h2 span{background:linear-gradient(90deg,var(--aura-light),#0bf5ca);-webkit-background-clip:text;background-clip:text;color:transparent}
+.lg-sub{color:var(--muted);font-size:0.82rem;line-height:1.6;margin-bottom:1.2rem}
+.lg-lbl{display:block;font-size:0.65rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.08em;margin:1rem 0 0.45rem}
+.lg-inp-wrap{position:relative}
+.lg-inp-wrap > i{position:absolute;left:1rem;top:50%;transform:translateY(-50%);color:var(--muted);font-size:0.8rem;pointer-events:none}
+.lg-inp{width:100%;background:rgba(7,10,18,0.6);border:1px solid var(--border);border-radius:12px;color:var(--text);padding:0.85rem 1rem 0.85rem 2.6rem;font:inherit;font-size:0.9rem;outline:none;transition:border-color .2s, box-shadow .2s}
+.lg-inp:focus{border-color:var(--aura);box-shadow:0 0 0 3px rgba(14,165,233,0.15), 0 0 24px rgba(14,165,233,0.12)}
+.lg-err{display:none;font-size:0.76rem;color:#fca5a5;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:0.6rem 0.9rem;margin-top:1rem}
+.lg-err.on{display:block}
+.lg-btn{width:100%;margin-top:1.4rem;background:linear-gradient(135deg,var(--aura),#0284c7);border:none;border-radius:12px;color:#fff;font:inherit;font-size:0.92rem;font-weight:700;padding:0.95rem;cursor:pointer;box-shadow:0 10px 30px rgba(14,165,233,0.35);transition:transform .15s, box-shadow .2s}
+.lg-btn:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(14,165,233,0.45)}
+.lg-btn:disabled{opacity:.6;cursor:wait;transform:none}
+.lg-foot{text-align:center;color:var(--muted);font-size:0.68rem;margin-top:1.4rem;line-height:1.6}
+.tb-user{position:fixed;top:1.2rem;right:1.4rem;z-index:40;display:flex;gap:0.5rem;align-items:center;animation:fadeInDown .8s ease}
+.tb-user .quem{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(15,23,42,0.6);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:0.76rem;font-weight:600;padding:0.5rem 1rem;backdrop-filter:blur(12px)}
+.tb-user .quem i{color:var(--aura-light)}
+.tb-user .sair{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(15,23,42,0.6);border:1px solid var(--border);border-radius:999px;color:var(--muted);font:inherit;font-size:0.74rem;font-weight:600;padding:0.5rem 0.95rem;cursor:pointer;backdrop-filter:blur(12px);transition:all .2s}
+.tb-user .sair:hover{border-color:rgba(239,68,68,0.5);color:#fca5a5}
+body.bloqueada .tb-user{display:none}
+
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
   .header h1{font-size:2.2rem}
@@ -483,7 +512,29 @@ body{
 }
 </style>
 </head>
-<body>
+<body class="bloqueada">
+
+<!-- Usuario logado -->
+<div class="tb-user">
+  <span class="quem"><i class="fas fa-circle-user"></i> <b id="quem-nome"></b></span>
+  <button class="sair" onclick="sairHub()" title="Encerrar sessão"><i class="fas fa-right-from-bracket"></i> Sair</button>
+</div>
+
+<!-- Login Gate -->
+<div class="lg-ov" id="lg-ov">
+  <div class="lg-card">
+    <div class="lg-badge"><i class="fas fa-circle"></i> Acesso Restrito</div>
+    <h2>Gerenciamento <span>Térmico</span></h2>
+    <div class="lg-sub">Central de indicadores da VTC LOG. Entre com seu usuário para acessar os dashboards.</div>
+    <label class="lg-lbl" for="lg-user">Usuário</label>
+    <div class="lg-inp-wrap"><i class="fas fa-user"></i><input id="lg-user" class="lg-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false"></div>
+    <label class="lg-lbl" for="lg-pass">Senha</label>
+    <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="lg-pass" type="password" class="lg-inp" placeholder="••••••••" autocomplete="current-password"></div>
+    <div class="lg-err" id="lg-err"></div>
+    <button class="lg-btn" id="lg-btn" onclick="fazerLoginHub()"><i class="fas fa-right-to-bracket" style="margin-right:0.5rem"></i>Entrar</button>
+    <div class="lg-foot">Mesmo usuário e senha dos indicadores · a sessão vale para todos os painéis</div>
+  </div>
+</div>
 
 <!-- Background Effects -->
 <div class="bg-mesh"></div>
@@ -828,6 +879,101 @@ body{
 </footer>
 
 <script>
+/* ===== LOGIN (mesmos usuarios e sessao do Sincronismo 48h: login unico no dominio) ===== */
+const FB_HUB = "https://gt-sincronismo-default-rtdb.firebaseio.com/sync48";
+const SKEY_HUB = "sync48_sessao";
+let SES_HUB = null;
+let PULSO_HUB = null;
+
+async function sha256Hub(txt){
+  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(txt));
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, "0")).join("");
+}
+function hubErr(msg){
+  const el = document.getElementById("lg-err");
+  if (msg){ el.textContent = msg; el.classList.add("on"); } else el.classList.remove("on");
+}
+function chaveUsuarioHub(login){ return login.replace(/[.#$\[\]\/]/g, "_"); }
+async function pulsoPresencaHub(){
+  if (!SES_HUB) return;
+  try {
+    await fetch(FB_HUB + "/_presenca/" + chaveUsuarioHub(SES_HUB.u) + ".json",
+      { method: "PUT", body: JSON.stringify({ q: SES_HUB.nome, t: Date.now() }) });
+  } catch(e){}
+}
+async function auditHub(acao){
+  if (!SES_HUB) return;
+  const k = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  try {
+    await fetch(FB_HUB + "/_audit/" + k + ".json",
+      { method: "PUT", body: JSON.stringify({ t: Date.now(), u: SES_HUB.u, q: SES_HUB.nome, a: acao, x: "hub" }) });
+  } catch(e){}
+}
+function aplicarSessaoHub(){
+  document.body.classList.remove("bloqueada");
+  document.getElementById("quem-nome").textContent = SES_HUB.nome;
+  pulsoPresencaHub();
+  if (PULSO_HUB) clearInterval(PULSO_HUB);
+  PULSO_HUB = setInterval(pulsoPresencaHub, 120000);
+}
+function bloquearHub(){
+  SES_HUB = null;
+  try { localStorage.removeItem(SKEY_HUB); } catch(e){}
+  document.body.classList.add("bloqueada");
+  document.getElementById("lg-pass").value = "";
+  hubErr("");
+  setTimeout(() => document.getElementById("lg-user").focus(), 200);
+}
+function sairHub(){
+  if (SES_HUB){
+    auditHub("saiu do sistema");
+    fetch(FB_HUB + "/_presenca/" + chaveUsuarioHub(SES_HUB.u) + ".json", { method: "DELETE" }).catch(() => {});
+    if (PULSO_HUB) clearInterval(PULSO_HUB);
+  }
+  bloquearHub();
+}
+async function fazerLoginHub(){
+  const u = document.getElementById("lg-user").value.trim().toLowerCase();
+  const p = document.getElementById("lg-pass").value;
+  if (!u || !p){ hubErr("Preencha usuário e senha."); return; }
+  const btn = document.getElementById("lg-btn");
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-circle-notch fa-spin" style="margin-right:0.5rem"></i>Verificando...';
+  try {
+    const resp = await fetch(FB_HUB + "/_usuarios/" + encodeURIComponent(chaveUsuarioHub(u)) + ".json", { cache: "no-store" });
+    if (!resp.ok) throw new Error(resp.status);
+    const reg = await resp.json();
+    const h = await sha256Hub(u + ":" + p);
+    if (!reg || !reg.h || reg.h !== h){
+      hubErr("Usuário ou senha incorretos.");
+    } else {
+      SES_HUB = { u: u, nome: reg.nome || u, t: Date.now() };
+      try { localStorage.setItem(SKEY_HUB, JSON.stringify(SES_HUB)); } catch(e){}
+      hubErr("");
+      aplicarSessaoHub();
+      auditHub("entrou no sistema");
+    }
+  } catch(e){
+    hubErr("Sem conexão com o servidor de acesso. Tente novamente.");
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-right-to-bracket" style="margin-right:0.5rem"></i>Entrar';
+  }
+}
+async function validarSessaoHub(){
+  try { SES_HUB = JSON.parse(localStorage.getItem(SKEY_HUB) || "null"); } catch(e){ SES_HUB = null; }
+  if (!SES_HUB || !SES_HUB.u || !SES_HUB.nome){ bloquearHub(); return; }
+  aplicarSessaoHub();
+  try { // sessao cai se o usuario foi removido do cadastro
+    const resp = await fetch(FB_HUB + "/_usuarios/" + encodeURIComponent(chaveUsuarioHub(SES_HUB.u)) + ".json", { cache: "no-store" });
+    if (resp.ok && (await resp.json()) === null) bloquearHub();
+  } catch(e){ /* offline: mantem a sessao local */ }
+}
+["lg-user","lg-pass"].forEach(id => document.getElementById(id).addEventListener("keydown", e => {
+  if (e.key === "Enter"){ e.preventDefault(); fazerLoginHub(); }
+}));
+validarSessaoHub();
+
 // Mouse glow effect on cards
 document.querySelectorAll('.card').forEach(card => {
   card.addEventListener('mousemove', e => {

@@ -512,6 +512,27 @@ body.bloqueada .topbar, body.bloqueada .wrap{filter:blur(7px);pointer-events:non
 .btn-sair:hover{border-color:#fecaca;color:#dc2626;background:#fef2f2}
 
 .cards{display:none}
+
+/* ---- modo compacto: a grade inteira cabe em monitores menores ---- */
+@media(max-width:1680px){
+  #gridWrap table{min-width:0;font-size:.73rem}
+  #gridWrap th, #gridWrap td{padding:7px 6px}
+  #gridWrap .pbar{width:64px}
+  #gridWrap .agc{max-width:150px}
+  #gridWrap .obs-txt{max-width:170px}
+  #gridWrap .badge{font-size:.6rem;padding:3px 6px;gap:4px}
+  .mtx{display:none} /* modal vira so o icone (texto completo no title e no CSV) */
+  /* "Horas desde entrega" e redundante com "Resta p/ 48h" (48h - resta) */
+  #gridWrap th:nth-child(8), #gridWrap td:nth-child(8){display:none}
+}
+@media(max-width:1440px){
+  /* barra de progresso (a urgencia ja esta em "Resta p/ 48h") e romaneio saem */
+  #gridWrap th:nth-child(10), #gridWrap td:nth-child(10){display:none}
+  #gridWrap th:nth-child(3), #gridWrap td:nth-child(3){display:none}
+  #gridWrap .obs-txt{max-width:140px}
+  #gridWrap .agc{max-width:120px}
+  #gridWrap .btn-flag{padding:3px 7px;font-size:.58rem}
+}
 @media(max-width:1200px){.fbar{grid-template-columns:1fr 1fr 1fr}}
 @media(max-width:860px){
   .wrap{padding:14px 10px 50px}
@@ -1132,8 +1153,8 @@ let TAB = "geral";
 function ehRod(fobs){ return !!(fobs && /rodovi/i.test(fobs.x)); }
 function modalBadge(mo){
   return mo === "R"
-    ? '<span class="badge b-rod"><i class="fa-solid fa-truck" style="font-size:.58rem"></i> Rodovi\u00e1rio</span>'
-    : '<span class="badge b-mm"><i class="fa-solid fa-plane" style="font-size:.58rem"></i> MultiModal</span>';
+    ? '<span class="badge b-rod" title="Rodovi\u00e1rio"><i class="fa-solid fa-truck" style="font-size:.58rem"></i><span class="mtx"> Rodovi\u00e1rio</span></span>'
+    : '<span class="badge b-mm" title="MultiModal"><i class="fa-solid fa-plane" style="font-size:.58rem"></i><span class="mtx"> MultiModal</span></span>';
 }
 function modalNome(mo){ return mo === "R" ? "Rodovi\u00e1rio" : "MultiModal"; }
 

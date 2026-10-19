@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-19T08:07:42",
+  "gerado_em": "2026-10-19T08:12:43",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5396,
-    "pedidos_janela": 987,
-    "loggers_ares_janela": 5211,
-    "loggers_ares_antes_dedup": 5244,
+    "pares_janela": 5397,
+    "pedidos_janela": 988,
+    "loggers_ares_janela": 5212,
+    "loggers_ares_antes_dedup": 5245,
     "dedup_dia_logger": 33,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 192,
+    "pendentes_janela": 191,
     "cobranca_gru_janela": 42,
-    "sem_embarque_efetiva": 108,
+    "sem_embarque_efetiva": 109,
     "com_embarque_efetiva": 5136,
     "loggers_sem_lastsync": 17,
-    "nao_avaliados": 108,
-    "pedidos_com_agente": 5396,
+    "nao_avaliados": 109,
+    "pedidos_com_agente": 5397,
     "dtbtransporte": {
-      "consultados": 987,
-      "mapeados": 987,
-      "linhas": 1044
+      "consultados": 988,
+      "mapeados": 988,
+      "linhas": 1045
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 26,
@@ -64,9 +64,9 @@
       "RO": 7
     },
     "latencia": {
-      "n_agente": 4624,
+      "n_agente": 4625,
       "n_so_gru": 21,
-      "n_sem_primeiro_sync": 458,
+      "n_sem_primeiro_sync": 457,
       "media_horas": 0.18,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -383,18 +383,18 @@
       "dia_full": "16/10/2026",
       "pedidos": 82,
       "loggers": 158,
-      "sincronizados": 116,
-      "pendentes": 36,
-      "sem_embarque": 36,
+      "sincronizados": 117,
+      "pendentes": 35,
+      "sem_embarque": 37,
       "cobranca_gru": 6,
-      "pedidos_pendentes": 23,
-      "pct": 22.8,
-      "n_latencia": 104,
+      "pedidos_pendentes": 22,
+      "pct": 22.2,
+      "n_latencia": 105,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 54
+      "n_sem_primeiro_sync": 53
     },
     {
       "dia_iso": "2026-10-17",

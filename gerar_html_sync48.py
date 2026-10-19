@@ -3,7 +3,7 @@
 SINCRONISMO 48H - entregues sem sincronismo, corrida contra o relogio.
 
 NAO consulta banco e NAO altera o indicador existente: le o ENTREGAS_VS_SINCRONISMO.html
-recem-gerado pelo mesmo ciclo de 5 minutos e deriva a visao focada em 48 horas.
+recem-gerado pelo mesmo ciclo de 10 minutos e deriva a visao focada em 48 horas.
 
 Regra: pendencias (st='P' cobranca agente, st='G' cobranca GRU) com entrega nas
 ultimas 96h. Niveis de criticidade pela idade da entrega:
@@ -267,7 +267,7 @@ HTML_TEMPLATE = r"""<!DOCTYPE html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta http-equiv="refresh" content="300">
+<meta http-equiv="refresh" content="600">
 <meta name="theme-color" content="#0f172a">
 <meta name="description" content="Pendencias de sincronismo com contagem regressiva de 48h - VTC LOG Gerenciamento Termico">
 <title>Sincronismo 48h &mdash; VTC LOG</title>
@@ -514,7 +514,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
     </div>
     <div class="tb-meta">
       <span class="pill"><span class="livedot"></span> Ao vivo &middot; recalculado a cada 30s</span>
-      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>__GERADO__</b> &middot; ciclo 5 min</span>
+      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>__GERADO__</b> &middot; ciclo 10 min</span>
       <span class="pill"><i class="fa-solid fa-database"></i> Fonte __FONTE_EM__</span>
     </div>
     <div class="tb-user">
@@ -582,7 +582,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 
 <footer>
   VTC LOG &middot; Gerenciamento T&eacute;rmico &mdash; Sincronismo 48h &middot; derivado do indicador Entregas &times; Sincronismo (mesmas regras; nada foi alterado nele)<br>
-  N&iacute;veis pela idade da entrega: 0&ndash;12h no prazo &middot; 12&ndash;24h aten&ccedil;&atilde;o &middot; 24&ndash;36h alerta &middot; <b style="color:var(--n4)">36&ndash;48h cr&iacute;tico</b> &middot; <b style="color:var(--n5)">&gt;48h estourado</b> &middot; Sincronizou? Sai sozinho na pr&oacute;xima atualiza&ccedil;&atilde;o (5 min)<br>
+  N&iacute;veis pela idade da entrega: 0&ndash;12h no prazo &middot; 12&ndash;24h aten&ccedil;&atilde;o &middot; 24&ndash;36h alerta &middot; <b style="color:var(--n4)">36&ndash;48h cr&iacute;tico</b> &middot; <b style="color:var(--n5)">&gt;48h estourado</b> &middot; Sincronizou? Sai sozinho na pr&oacute;xima atualiza&ccedil;&atilde;o (10 min)<br>
   Sinaliza&ccedil;&atilde;o "cobrado" e ocorr&ecirc;ncias em quadro compartilhado: aparecem para todos, com nome e hor&aacute;rio de quem registrou; s&oacute; o autor pode desfazer a pr&oacute;pria sinaliza&ccedil;&atilde;o ou alterar a pr&oacute;pria ocorr&ecirc;ncia; a sinaliza&ccedil;&atilde;o sai sozinha quando a pend&ecirc;ncia sincroniza e a ocorr&ecirc;ncia fica no hist&oacute;rico por 30 dias
 </footer>
 </div>

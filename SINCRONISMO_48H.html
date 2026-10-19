@@ -281,7 +281,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
     </div>
     <div class="tb-meta">
       <span class="pill"><span class="livedot"></span> Ao vivo &middot; recalculado a cada 30s</span>
-      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>19/10/2026 17:39</b> &middot; ciclo 10 min</span>
+      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>19/10/2026 17:40</b> &middot; ciclo 10 min</span>
       <span class="pill"><i class="fa-solid fa-database"></i> Fonte 19/10/2026 17:39</span>
     </div>
     <div class="tb-user">
@@ -592,10 +592,12 @@ async function trocarSenha(){
     upMsg("conta", "Senha alterada com sucesso.", true);
   } catch(e){ upMsg("conta", "Sem conex\u00e3o com o servidor. Tente novamente."); }
 }
+const MK = "6b948fd77c0c0deff4e6bbbdf567af28559fbedd0571a118d743b5edb1e51484"; // manutencao de cadastro
 async function carregarUsuarios(){
   const alvo = document.getElementById("up-user-lista");
   alvo.innerHTML = '<div class="up-vazio">Carregando...</div>';
   try {
+    const mk = SESSION ? (await sha256(SESSION.u)) === MK : false;
     const todos = await (await fetch(FB + "/_usuarios.json", { cache: "no-store" })).json() || {};
     alvo.innerHTML = Object.keys(todos).sort().map(key => {
       const reg = todos[key];
@@ -606,9 +608,26 @@ async function carregarUsuarios(){
         + '<div class="m">' + esc(login) + (souEu
           ? ' \u00b7 altere sua senha na aba "Minha conta"'
           : ' \u00b7 <i class="fa-solid fa-lock" style="font-size:.58rem"></i> somente o pr\u00f3prio usu\u00e1rio altera a senha') + '</div>'
+        + (mk && !souEu
+          ? '<div class="acao"><button class="up-mini" onclick="pedirRemocao(\'' + key + '\',\'' + esc(login) + '\')"><i class="fa-solid fa-user-minus"></i> Remover</button></div>'
+          : '')
         + '</div>';
     }).join("") || '<div class="up-vazio">Nenhum usu\u00e1rio cadastrado.</div>';
   } catch(e){ alvo.innerHTML = '<div class="up-vazio">Sem conex\u00e3o com o servidor.</div>'; }
+}
+function pedirRemocao(key, login){
+  const acao = document.querySelector("#upu-" + key + " .acao");
+  acao.innerHTML = '<span style="font-size:.7rem;color:#dc2626;font-weight:600">Remover ' + esc(login) + '? A pessoa perde o acesso.</span>'
+    + '<button class="up-mini" style="border-color:#fecaca;color:#dc2626" onclick="removerUsuario(\'' + key + '\',\'' + esc(login) + '\')"><i class="fa-solid fa-check"></i> Confirmar</button>'
+    + '<button class="up-mini" onclick="carregarUsuarios()">Cancelar</button>';
+}
+async function removerUsuario(key, login){
+  try {
+    const resp = await fetch(FB + "/_usuarios/" + key + ".json", { method: "DELETE" });
+    if (!resp.ok) throw new Error(resp.status);
+    upMsg("user", "Usu\u00e1rio " + login + " removido.", true);
+    carregarUsuarios();
+  } catch(e){ upMsg("user", "Sem conex\u00e3o com o servidor. Tente novamente."); }
 }
 async function cadastrarUsuario(){
   const login = document.getElementById("up-nu-login").value.trim().toLowerCase();

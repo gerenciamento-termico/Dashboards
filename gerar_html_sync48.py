@@ -20,6 +20,67 @@ from datetime import datetime
 from pathlib import Path
 
 WORKSPACE = Path(__file__).resolve().parent
+
+
+def fetch_dispositivos(pedidos: list[str]) -> dict[str, list]:
+    """Todas as tags vinculadas aos pedidos no vtc_stage.documentos, classificadas
+    pelo cadastro oficial do dtbPortal (ds_tipodatalogger); padrao da tag e fallback.
+
+    Retorna {pedido: [[tag, tipo], ...]}. Lanca excecao em falha (tratada no main).
+    """
+    from sqlalchemy import bindparam, create_engine, text
+    from sqlalchemy.engine import URL
+
+    from gerar_html_entregas_vs_sincronismo import (
+        fetch_tipos_cadastro,
+        infer_tipo,
+        load_env,
+        norm_tag,
+    )
+
+    if not pedidos:
+        return {}
+    env = load_env(WORKSPACE / ".env.vtc_stage")
+    if not env.get("VTC_STAGE_HOST"):
+        raise RuntimeError("VTC_STAGE ausente (.env.vtc_stage)")
+    url = URL.create(
+        "postgresql+psycopg2",
+        username=env["VTC_STAGE_USER"],
+        password=env["VTC_STAGE_PASSWORD"],
+        host=env["VTC_STAGE_HOST"],
+        port=int(env.get("VTC_STAGE_PORT") or 5432),
+        database=env["VTC_STAGE_NAME"],
+    )
+    engine = create_engine(url, pool_pre_ping=True, connect_args={"connect_timeout": 15})
+    query = text(
+        """
+        SELECT TRIM(nr_pedido::text) AS pedido,
+               REPLACE(REPLACE(UPPER(TRIM(ds_tag)), '-', ''), ' ', '') AS tag
+        FROM vtc_stage.documentos
+        WHERE TRIM(nr_pedido::text) IN :peds
+          AND NULLIF(TRIM(ds_tag), '') IS NOT NULL
+        GROUP BY 1, 2
+        """
+    ).bindparams(bindparam("peds", expanding=True))
+    pares: list[tuple[str, str]] = []
+    with engine.connect() as connection:
+        for i in range(0, len(pedidos), 500):
+            chunk = pedidos[i : i + 500]
+            for rec in connection.execute(query, {"peds": chunk}):
+                tag = norm_tag(rec.tag)
+                if tag:
+                    pares.append((str(rec.pedido), tag))
+    engine.dispose()
+
+    # tipo oficial no cadastro dtbPortal; fallback: padrao da tag
+    tipos = fetch_tipos_cadastro([t for _, t in pares])
+    out: dict[str, list] = {}
+    for pedido, tag in pares:
+        tipo = tipos.get(tag) or infer_tipo(tag)
+        lst = out.setdefault(pedido, [])
+        if not any(x[0] == tag for x in lst):
+            lst.append([tag, tipo])
+    return out
 FONTE = WORKSPACE / "ENTREGAS_VS_SINCRONISMO.html"
 OUT_HTML = WORKSPACE / "SINCRONISMO_48H.html"
 JANELA_H = 96  # foco 0-48h + estourados ate 96h
@@ -87,11 +148,29 @@ def main() -> None:
         if not any(x[0] == l for x in lst):
             lst.append([l, str(r.get("st") or ""), str(r.get("s") or "")])
 
+    # outros dispositivos (Syos/Shield/Elitech...) via vtc_stage + cadastro dtbPortal;
+    # fail-safe: se o banco nao responder, o card mostra so os Ares da fonte
+    dispositivos: dict[str, list] = {}
+    try:
+        dispositivos = fetch_dispositivos(sorted(pedidos_na_pagina))
+        com_stage = sum(1 for p in pedidos_na_pagina if dispositivos.get(p))
+        bate = sum(
+            1 for r in saida
+            if r["l"] and any(x[0] == r["l"].upper() for x in dispositivos.get(r["p"], []))
+        )
+        print(
+            f"[dispositivos] stage cobre {com_stage}/{len(pedidos_na_pagina)} pedidos | "
+            f"logger da pagina presente no stage em {bate}/{len(saida)} linhas"
+        )
+    except Exception as exc:  # noqa: BLE001
+        print(f"[aviso] dispositivos vtc_stage indisponiveis ({type(exc).__name__}: {exc}); card mostrara so os Ares")
+
     modelo = {
         "gerado_em": agora.strftime("%d/%m/%Y %H:%M"),
         "fonte_em": fonte_em.strftime("%d/%m/%Y %H:%M"),
         "rows": saida,
         "logs": logs,
+        "devs": dispositivos,
         "antigos": antigos,
         "total_pendencias": len(pend),
         "ufs": sorted({r["uf"] for r in saida if r["uf"]}),
@@ -413,7 +492,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 <div class="tblwrap" id="gridWrap">
 <table>
   <thead><tr>
-    <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p" title="Passe o mouse sobre o pedido para ver o Ares pendente e os demais dataloggers vinculados">Pedido</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
+    <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p" title="Passe o mouse sobre o pedido para ver o Ares pendente e os demais dispositivos vinculados (Syos, Shield, Elitech...)">Pedido</th><th class="sv" data-k="l">Logger</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
     <th class="sv" data-k="mo" title="Modal do pedido na fonte: Rodoviario ou MultiModal">Modal</th>
     <th class="sv" data-k="ent">Entrega</th><th class="sv" data-k="h">Horas desde entrega</th><th class="sv asc" data-k="resta">Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th class="sv" data-k="s">&Uacute;ltimo sync</th><th class="sv" data-k="cob">Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th><th title="Ocorrencia compartilhada: por que nao sincronizou, onde esta o logger, etc. So quem registrou pode alterar">Ocorr&ecirc;ncia</th>
   </tr></thead>
@@ -529,7 +608,8 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 
 <script>
 const R = __ROWS__;
-const LOGS = __LOGS__; // pedido -> [[logger, status, ultimo_sync], ...]
+const LOGS = __LOGS__; // pedido -> [[logger, status, ultimo_sync], ...] (Ares da fonte)
+const DEVS = __DEVS__; // pedido -> [[tag, tipo], ...] (vtc_stage + cadastro dtbPortal)
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtEnt = s => { const d = new Date(s); return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); };
@@ -949,6 +1029,7 @@ function modalNome(mo){ return mo === "R" ? "Rodovi\u00e1rio" : "MultiModal"; }
 
 /* ---- hover card: ares pendente + outros dataloggers do pedido ---- */
 const ST_LOG = { S: ["Sincronizado", "#16a34a"], P: ["Pendente", "#dc2626"], G: ["Pendente (GRU)", "#dc2626"], E: ["Erro operacional", "#9aa3b2"] };
+const COR_DEV = { "ARES": "#dc2626", "ARES COM SONDA": "#dc2626", "SYOS": "#0369a1", "SHIELD": "#6d28d9", "ELITECH": "#d97706", "SENSOR WEB": "#16a34a" };
 function mostrarCard(ev, p, l, s, h){
   const el = document.getElementById("hovercard");
   const todos = LOGS[p] || [];
@@ -957,12 +1038,22 @@ function mostrarCard(ev, p, l, s, h){
     + '<div class="hc-ares"><div class="l1"><i class="fa-solid fa-tower-broadcast"></i> ' + esc(l) + ' \u2014 ARES PENDENTE</div>'
     + '<div class="l2">Sem sincronismo h\u00e1 <b>' + h + '</b> desde a entrega<br>\u00daltimo sync: ' + esc(s || "nunca registrado") + '</div></div>';
   if (outros.length){
-    html += '<div class="hc-sec">Outros dataloggers do pedido</div>' + outros.map(x => {
+    html += '<div class="hc-sec">Outros Ares do pedido</div>' + outros.map(x => {
       const st = ST_LOG[x[1]] || ["?", "#9aa3b2"];
       return '<div class="hc-it"><span class="pt" style="background:' + st[1] + '"></span><b>' + esc(x[0]) + '</b> ' + st[0] + '<small>' + esc(x[2] || "") + '</small></div>';
     }).join("");
-  } else {
-    html += '<div class="hc-nada">Sem outros dataloggers vinculados a este pedido.</div>';
+  }
+  // outros dispositivos (Syos, Shield, Elitech...) do vtc_stage, classificados pelo cadastro dtbPortal
+  const jaListados = new Set([l.toUpperCase()].concat(todos.map(x => String(x[0]).toUpperCase())));
+  const devs = (DEVS[p] || []).filter(x => !jaListados.has(String(x[0]).toUpperCase()));
+  if (devs.length){
+    html += '<div class="hc-sec">Outros dispositivos do pedido <small style="font-weight:500;text-transform:none">(vtc_stage)</small></div>' + devs.map(x => {
+      const cor = COR_DEV[x[1]] || "#9aa3b2";
+      return '<div class="hc-it"><span class="pt" style="background:' + cor + '"></span><b>' + esc(x[0]) + '</b><small>' + esc(x[1]) + '</small></div>';
+    }).join("");
+  }
+  if (!outros.length && !devs.length){
+    html += '<div class="hc-nada">Sem outros dispositivos vinculados a este pedido.</div>';
   }
   el.innerHTML = html;
   el.style.display = "block";
@@ -1111,6 +1202,7 @@ function render(){
     return '<tr class="lv'+r.nivel+(r.fcob ? ' flagged' : '')+'">'
       + '<td><span class="badge '+bcls+'">'+nome+'</span></td>'
       + '<td class="pedcell" onmouseenter="mostrarCard(event,\''+esc(r.p)+'\',\''+esc(r.l)+'\',\''+esc(r.s)+'\',\''+hArg+'\')" onmousemove="moverCard(event)" onmouseleave="esconderCard()"><b>'+esc(r.p)+'</b></td>'
+      + '<td>'+esc(r.l)+'</td>'
       + '<td>'+esc(r.ro)+'</td>'
       + '<td>'+esc(r.uf)+'</td>'
       + '<td class="agc" title="'+esc(r.ag)+'">'+esc(r.ag)+'</td>'
@@ -1123,7 +1215,7 @@ function render(){
       + '<td><span class="badge '+(r.cob === "GRU" ? "b-gru" : "b-ag")+'">'+r.cob+'</span></td>'
       + celCob + celObs
       + '</tr>';
-  }).join("") || '<tr><td colspan="14" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
+  }).join("") || '<tr><td colspan="15" style="text-align:center;padding:30px;color:var(--tx2)"><i class="fa-solid fa-circle-check" style="color:var(--n1);margin-right:7px"></i>Nenhuma pend\u00eancia neste recorte.</td></tr>';
 
   document.getElementById("cards").innerHTML = VIEW.map(r => {
     const [nome, bcls, rcls] = NOMES[r.nivel];
@@ -1216,6 +1308,7 @@ def write_html(modelo: dict) -> None:
         .replace("__UFS__", ufs)
         .replace("__ROWS__", json.dumps(modelo["rows"], ensure_ascii=False, separators=(",", ":")))
         .replace("__LOGS__", json.dumps(modelo["logs"], ensure_ascii=False, separators=(",", ":")))
+        .replace("__DEVS__", json.dumps(modelo["devs"], ensure_ascii=False, separators=(",", ":")))
     )
     OUT_HTML.write_text(out, encoding="utf-8")
 

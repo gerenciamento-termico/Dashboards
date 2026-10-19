@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-19T16:11:27",
+  "gerado_em": "2026-10-19T16:17:26",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -37,7 +37,7 @@
     "dtbtransporte": {
       "consultados": 1012,
       "mapeados": 1012,
-      "linhas": 1069
+      "linhas": 1070
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 27,

@@ -198,6 +198,23 @@ def main() -> None:
             "mo": "R" if str(r.get("mo") or "").upper().startswith("RODOVI") else "M",
         })
 
+    # base compacta de VERIFICACAO (fora da grade): sincronizados e erros operacionais
+    # da janela da fonte, para a busca confirmar "ja sincronizou?" sem poluir a grade
+    verificacao = []
+    for r in rows:
+        if r.get("st") not in ("S", "E"):
+            continue
+        ent = parse_dt(r.get("e")) or parse_dt(r.get("emb"))
+        verificacao.append([
+            str(r.get("p") or ""),
+            str(r.get("l") or ""),
+            str(r.get("s") or ""),
+            ent.strftime("%d/%m %H:%M") if ent else "",
+            str(r.get("uf") or ""),
+            str(r.get("ag") or "")[:38],
+            str(r.get("st") or ""),
+        ])
+
     # mapa pedido -> todos os dataloggers vinculados na fonte (qualquer status),
     # usado no hover card do pedido: [logger, status, ultimo_sync]
     pedidos_na_pagina = {r["p"] for r in saida}
@@ -250,6 +267,7 @@ def main() -> None:
         "rows": saida,
         "logs": logs,
         "devs": dispositivos,
+        "ver": verificacao,
         "antigos": antigos,
         "total_pendencias": len(pend),
         "ufs": sorted({r["uf"] for r in saida if r["uf"]}),
@@ -480,6 +498,16 @@ body.bloqueada .topbar, body.bloqueada .wrap{filter:blur(7px);pointer-events:non
 .up-sec{font-size:.65rem;font-weight:700;color:var(--tx2);text-transform:uppercase;letter-spacing:.6px;margin:16px 0 4px}
 .up-vazio{font-size:.75rem;color:var(--tx2);padding:14px 4px}
 .oco-lock{color:var(--tx3);font-size:.6rem;margin-left:5px}
+
+/* ---- painel de verificacao (busca em sincronizados, fora da grade) ---- */
+#verbox{background:#f0fdf4;border:1px solid #bbf7d0;border-radius:12px;padding:12px 16px;margin-bottom:12px}
+#verbox .vb-t{font-size:.7rem;font-weight:700;color:#15803d;text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+#verbox .vb-t i{margin-right:6px}
+#verbox .vb-it{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:5px 0;font-size:.78rem;color:var(--tx);border-top:1px dashed #d1e9d9}
+#verbox .vb-it:first-of-type{border-top:none}
+#verbox .vb-it small{color:var(--tx2)}
+#verbox.vazio{background:#fffbeb;border-color:#fde8c8}
+#verbox.vazio .vb-t{color:#92400e}
 .btn-sair{display:inline-flex;align-items:center;gap:6px;background:#fff;border:1px solid var(--line);border-radius:999px;color:var(--tx2);padding:6px 13px;font-size:.71rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .12s}
 .btn-sair:hover{border-color:#fecaca;color:#dc2626;background:#fef2f2}
 
@@ -549,6 +577,8 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
   <div style="display:flex;gap:8px"><button class="btn ghost" onclick="limpar()"><i class="fa-solid fa-eraser"></i> Limpar</button><button class="btn" onclick="baixarCsv()"><i class="fa-solid fa-file-csv"></i> CSV</button></div>
 </div>
 </div>
+
+<div id="verbox" style="display:none"></div>
 
 <div class="gtabs">
   <button class="gtab ativo" data-tab="geral" onclick="setTab('geral')"><i class="fa-solid fa-plane-up"></i> Geral <span class="gt-n" id="gt-geral">0</span></button>
@@ -689,6 +719,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
 const R = __ROWS__;
 const LOGS = __LOGS__; // pedido -> [[logger, status, ultimo_sync], ...] (Ares da fonte)
 const DEVS = __DEVS__; // pedido -> [[tag, tipo], ...] (vtc_stage + cadastro dtbPortal)
+const VER = __VER__;   // verificacao fora da grade: [pedido, logger, sync, entrega, uf, base, st] com st S/E
 
 const esc = t => String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const fmtEnt = s => { const d = new Date(s); return String(d.getDate()).padStart(2,"0")+"/"+String(d.getMonth()+1).padStart(2,"0")+" "+String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); };
@@ -1208,6 +1239,35 @@ function apply(){
   VIEW.sort((a,b) => cmp(a,b) * SORT.d || a.resta - b.resta); // desempate: mais urgente primeiro
   render();
   if (TAB === "oco") renderOco();
+  renderVerificacao(q);
+}
+
+/* busca tambem verifica quem JA sincronizou (fora da grade), para tirar duvidas */
+function renderVerificacao(q){
+  const box = document.getElementById("verbox");
+  if (!q || q.length < 4){ box.style.display = "none"; return; }
+  const hits = VER.filter(v => v[0].toLowerCase().includes(q) || v[1].toLowerCase().includes(q)).slice(0, 12);
+  if (hits.length){
+    box.className = "";
+    box.innerHTML = '<div class="vb-t"><i class="fa-solid fa-circle-check"></i>Verifica\u00e7\u00e3o: j\u00e1 resolvidos que casam com a busca (fora da grade)</div>'
+      + hits.map(v => {
+        const st = v[6] === "E"
+          ? '<span class="badge" style="color:#9aa3b2">ERRO OPERACIONAL</span>'
+          : '<span class="badge b1">SINCRONIZADO</span>';
+        return '<div class="vb-it">' + st
+          + '<b>' + esc(v[0]) + '</b><span>logger ' + esc(v[1]) + '</span>'
+          + (v[2] ? '<span>sync <b>' + esc(v[2]) + '</b></span>' : '')
+          + (v[3] ? '<small>entrega ' + esc(v[3]) + '</small>' : '')
+          + '<small>' + esc(v[4]) + (v[5] ? ' \u00b7 ' + esc(v[5]) : '') + '</small></div>';
+      }).join("");
+    box.style.display = "";
+  } else if (!VIEW.length){
+    box.className = "vazio";
+    box.innerHTML = '<div class="vb-t"><i class="fa-solid fa-magnifying-glass"></i>N\u00e3o encontrado nem nas pend\u00eancias nem nos sincronizados da janela do indicador</div>';
+    box.style.display = "";
+  } else {
+    box.style.display = "none";
+  }
 }
 
 function renderOco(){
@@ -1388,6 +1448,7 @@ def write_html(modelo: dict) -> None:
         .replace("__ROWS__", json.dumps(modelo["rows"], ensure_ascii=False, separators=(",", ":")))
         .replace("__LOGS__", json.dumps(modelo["logs"], ensure_ascii=False, separators=(",", ":")))
         .replace("__DEVS__", json.dumps(modelo["devs"], ensure_ascii=False, separators=(",", ":")))
+        .replace("__VER__", json.dumps(modelo["ver"], ensure_ascii=False, separators=(",", ":")))
     )
     OUT_HTML.write_text(out, encoding="utf-8")
 

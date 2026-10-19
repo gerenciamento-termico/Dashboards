@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-19T11:27:34",
+  "gerado_em": "2026-10-19T11:37:04",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 168,
+    "pendentes_janela": 164,
     "cobranca_gru_janela": 39,
     "sem_embarque_efetiva": 88,
     "com_embarque_efetiva": 5178,
@@ -45,8 +45,8 @@
       "RBR - RODOTEC": 19,
       "THE - AERONEIVA EXPRESS": 17,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
-      "PVH - RODOTEC": 11,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
+      "PVH - RODOTEC": 8,
       "MOC - LOG SERVIÇOS": 6,
       "IOS - MASPEX CARGO": 5,
       "LDB - ND CARGAS LTDA": 5
@@ -57,16 +57,16 @@
       "PI": 16,
       "SC": 15,
       "RS": 13,
-      "RO": 11,
-      "PA": 9,
+      "RO": 8,
       "MG": 8,
+      "PA": 8,
       "PR": 5,
       "SP": 5
     },
     "latencia": {
-      "n_agente": 4698,
+      "n_agente": 4701,
       "n_so_gru": 21,
-      "n_sem_primeiro_sync": 426,
+      "n_sem_primeiro_sync": 423,
       "media_horas": 0.23,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -383,18 +383,18 @@
       "dia_full": "16/10/2026",
       "pedidos": 91,
       "loggers": 199,
-      "sincronizados": 172,
-      "pendentes": 23,
+      "sincronizados": 176,
+      "pendentes": 19,
       "sem_embarque": 16,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 19,
-      "pct": 11.6,
-      "n_latencia": 163,
+      "pedidos_pendentes": 17,
+      "pct": 9.5,
+      "n_latencia": 166,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 36
+      "n_sem_primeiro_sync": 33
     },
     {
       "dia_iso": "2026-10-17",

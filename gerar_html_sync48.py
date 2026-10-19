@@ -624,7 +624,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
   <thead><tr>
     <th class="sv" data-k="nivel">N&iacute;vel</th><th class="sv" data-k="p" title="Passe o mouse sobre o pedido para ver o logger Ares pendente, quem fez o ultimo sync e os demais dispositivos vinculados">Pedido</th><th class="sv" data-k="ro">Romaneio</th><th class="sv" data-k="uf">UF</th><th class="sv" data-k="ag">Base / Agente</th>
     <th class="sv" data-k="mo" title="Modal do pedido na fonte: Rodoviario ou MultiModal">Modal</th>
-    <th class="sv" data-k="ent">Entrega</th><th class="sv" data-k="h">Horas desde entrega</th><th class="sv asc" data-k="resta">Resta p/ 48h</th><th>Progresso 0&rarr;48h</th><th class="sv" data-k="s">&Uacute;ltimo sync</th><th class="sv" data-k="cob">Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th><th title="Ocorrencia compartilhada: por que nao sincronizou, onde esta o logger, etc. So quem registrou pode alterar">Ocorr&ecirc;ncia</th>
+    <th class="sv" data-k="ent">Entrega</th><th class="sv" data-k="h" title="Horas desde a entrega">Desde a entrega</th><th class="sv asc" data-k="resta">Resta p/ 48h</th><th title="Progresso de 0 a 48h">Progresso</th><th class="sv" data-k="s">&Uacute;ltimo sync</th><th class="sv" data-k="cob">Cobran&ccedil;a</th><th title="Quadro compartilhado: a marcacao aparece para todos que abrirem a pagina">Sinaliza&ccedil;&atilde;o</th><th title="Ocorrencia compartilhada: por que nao sincronizou, onde esta o logger, etc. So quem registrou pode alterar">Ocorr&ecirc;ncia</th>
   </tr></thead>
   <tbody id="tb"></tbody>
 </table>

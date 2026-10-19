@@ -673,6 +673,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
       <button class="up-tab ativo" data-t="conta" onclick="upTab('conta')"><i class="fa-solid fa-key"></i> Minha conta</button>
       <button class="up-tab" data-t="oco" onclick="upTab('oco')"><i class="fa-solid fa-clipboard-list"></i> Minhas ocorr&ecirc;ncias</button>
       <button class="up-tab" data-t="usuarios" onclick="upTab('usuarios')"><i class="fa-solid fa-users-gear"></i> Usu&aacute;rios</button>
+      <button class="up-tab" data-t="aud" id="up-tab-aud" style="display:none" onclick="upTab('aud')"><i class="fa-solid fa-shield-halved"></i> Auditoria</button>
     </div>
     <div class="mo-body">
       <div class="up-pane" id="up-conta">
@@ -701,6 +702,12 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
         <input id="up-nu-senha" type="password" class="mo-inp" autocomplete="new-password">
         <div class="up-msg" id="up-msg-user"></div>
         <button class="mo-btn mo-primary" onclick="cadastrarUsuario()" style="margin-top:14px"><i class="fa-solid fa-user-plus"></i> Cadastrar</button>
+      </div>
+      <div class="up-pane" id="up-aud" hidden>
+        <div class="up-sec">Conectados agora <small style="text-transform:none;letter-spacing:0">&middot; presen&ccedil;a dos &uacute;ltimos 5 minutos</small></div>
+        <div class="up-lista" id="aud-conectados" style="max-height:150px"></div>
+        <div class="up-sec" style="margin-top:14px">&Uacute;ltimas altera&ccedil;&otilde;es <small style="text-transform:none;letter-spacing:0">&middot; retidas por 7 dias</small></div>
+        <div class="up-lista" id="aud-lista" style="max-height:280px"></div>
       </div>
     </div>
     <div class="mo-foot" style="padding-top:4px">
@@ -781,6 +788,7 @@ function aplicarSessao(){
   document.body.classList.remove("bloqueada");
   document.getElementById("quem-nome").textContent = SESSION.nome;
   try { localStorage.setItem("sync48_operador", SESSION.nome); } catch(e){}
+  iniciarPresenca();
 }
 function bloquear(){
   SESSION = null;
@@ -790,7 +798,14 @@ function bloquear(){
   lgErr("");
   setTimeout(() => document.getElementById("lg-user").focus(), 150);
 }
-function sair(){ bloquear(); }
+function sair(){
+  if (SESSION){
+    registrarAudit("saiu do sistema", "");
+    fetch(FB + "/_presenca/" + chaveUsuario(SESSION.u) + ".json", { method: "DELETE" }).catch(() => {});
+    if (PRES_TIMER) clearInterval(PRES_TIMER);
+  }
+  bloquear();
+}
 async function fazerLogin(){
   const u = document.getElementById("lg-user").value.trim().toLowerCase();
   const p = document.getElementById("lg-pass").value;
@@ -811,6 +826,7 @@ async function fazerLogin(){
       try { localStorage.setItem(SKEY, JSON.stringify(SESSION)); } catch(e){}
       lgErr("");
       aplicarSessao();
+      registrarAudit("entrou no sistema", "");
     }
   } catch(e){
     lgErr("Sem conex\u00e3o com o servidor de acesso. Tente novamente.");
@@ -833,6 +849,57 @@ async function validarSessaoSalva(){
   if (e.key === "Enter"){ e.preventDefault(); fazerLogin(); }
 }));
 
+/* ===== presenca e trilha de alteracoes (gravadas por toda sessao; leitura restrita) ===== */
+let PRES_TIMER = null;
+async function pulsoPresenca(){
+  if (!SESSION) return;
+  try {
+    await fetch(FB + "/_presenca/" + chaveUsuario(SESSION.u) + ".json",
+      { method: "PUT", body: JSON.stringify({ q: SESSION.nome, t: Date.now() }) });
+  } catch(e){}
+}
+function iniciarPresenca(){
+  pulsoPresenca();
+  if (PRES_TIMER) clearInterval(PRES_TIMER);
+  PRES_TIMER = setInterval(pulsoPresenca, 120000);
+}
+async function registrarAudit(acao, detalhe){
+  if (!SESSION) return;
+  const k = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  try {
+    await fetch(FB + "/_audit/" + k + ".json",
+      { method: "PUT", body: JSON.stringify({ t: Date.now(), u: SESSION.u, q: SESSION.nome, a: acao, x: String(detalhe || "").slice(0, 90) }) });
+  } catch(e){}
+}
+async function renderAuditoria(){
+  const con = document.getElementById("aud-conectados");
+  const lst = document.getElementById("aud-lista");
+  con.innerHTML = '<div class="up-vazio">Carregando...</div>';
+  lst.innerHTML = '<div class="up-vazio">Carregando...</div>';
+  try {
+    const agora = Date.now();
+    const pres = await (await fetch(FB + "/_presenca.json", { cache: "no-store" })).json() || {};
+    const online = Object.values(pres).filter(p => p && agora - (p.t || 0) < 5*60000).sort((a,b) => b.t - a.t);
+    con.innerHTML = online.map(p =>
+      '<div class="up-item"><div class="t"><span class="livedot" style="display:inline-block;margin-right:7px"></span>' + esc(p.q) + '</div>'
+      + '<div class="m">ativo h\u00e1 ' + Math.max(0, Math.round((agora - p.t)/60000)) + ' min</div></div>'
+    ).join("") || '<div class="up-vazio">Ningu\u00e9m conectado agora.</div>';
+
+    const aud = await (await fetch(FB + "/_audit.json", { cache: "no-store" })).json() || {};
+    const evts = Object.entries(aud).map(([k, v]) => ({ k: k, ...v })).sort((a,b) => b.t - a.t);
+    evts.filter(e => agora - e.t > 7*86400000).forEach(e =>
+      fetch(FB + "/_audit/" + e.k + ".json", { method: "DELETE" }).catch(() => {}));
+    lst.innerHTML = evts.filter(e => agora - e.t <= 7*86400000).slice(0, 60).map(e =>
+      '<div class="up-item"><div class="t">' + esc(e.q) + ' <small style="font-weight:500;color:var(--tx2)">' + esc(e.a) + '</small></div>'
+      + (e.x ? '<div class="x">' + esc(e.x) + '</div>' : '')
+      + '<div class="m">' + new Date(e.t).toLocaleString("pt-BR") + '</div></div>'
+    ).join("") || '<div class="up-vazio">Sem registros nos \u00faltimos 7 dias.</div>';
+  } catch(e){
+    con.innerHTML = '<div class="up-vazio">Sem conex\u00e3o com o servidor.</div>';
+    lst.innerHTML = "";
+  }
+}
+
 /* ===== area do usuario (senha, ocorrencias, administracao) ===== */
 function chaveUsuario(login){ return login.replace(/[.#$\[\]\/]/g, "_"); }
 function abrirPainelUsuario(){
@@ -840,15 +907,18 @@ function abrirPainelUsuario(){
   document.getElementById("up-sub").textContent = SESSION.nome + " \u00b7 " + SESSION.u;
   ["up-s0","up-s1","up-s2","up-nu-login","up-nu-nome","up-nu-senha"].forEach(i => document.getElementById(i).value = "");
   upMsg("conta", ""); upMsg("user", "");
+  document.getElementById("up-tab-aud").style.display = "none";
+  sha256(SESSION.u).then(h => { if (h === MK) document.getElementById("up-tab-aud").style.display = ""; });
   upTab("conta");
   document.getElementById("up-ov").classList.add("aberto");
 }
 function fecharPainel(){ document.getElementById("up-ov").classList.remove("aberto"); }
 function upTab(t){
   document.querySelectorAll(".up-tab").forEach(b => b.classList.toggle("ativo", b.dataset.t === t));
-  ["conta","oco","usuarios"].forEach(x => { document.getElementById("up-" + x).hidden = (x !== t); });
+  ["conta","oco","usuarios","aud"].forEach(x => { document.getElementById("up-" + x).hidden = (x !== t); });
   if (t === "oco") renderMinhasOco();
   if (t === "usuarios") carregarUsuarios();
+  if (t === "aud") renderAuditoria();
 }
 function upMsg(qual, msg, ok){
   const el = document.getElementById("up-msg-" + qual);
@@ -872,6 +942,7 @@ async function trocarSenha(){
     if (!resp.ok) throw new Error(resp.status);
     ["up-s0","up-s1","up-s2"].forEach(i => document.getElementById(i).value = "");
     upMsg("conta", "Senha alterada com sucesso.", true);
+    registrarAudit("alterou a pr\u00f3pria senha", "");
   } catch(e){ upMsg("conta", "Sem conex\u00e3o com o servidor. Tente novamente."); }
 }
 const MK = "6b948fd77c0c0deff4e6bbbdf567af28559fbedd0571a118d743b5edb1e51484"; // manutencao de cadastro
@@ -908,6 +979,7 @@ async function removerUsuario(key, login){
     const resp = await fetch(FB + "/_usuarios/" + key + ".json", { method: "DELETE" });
     if (!resp.ok) throw new Error(resp.status);
     upMsg("user", "Usu\u00e1rio " + login + " removido.", true);
+    registrarAudit("removeu usu\u00e1rio", login);
     carregarUsuarios();
   } catch(e){ upMsg("user", "Sem conex\u00e3o com o servidor. Tente novamente."); }
 }
@@ -927,6 +999,7 @@ async function cadastrarUsuario(){
     if (!resp.ok) throw new Error(resp.status);
     ["up-nu-login","up-nu-nome","up-nu-senha"].forEach(i => document.getElementById(i).value = "");
     upMsg("user", "Usu\u00e1rio " + login + " cadastrado.", true);
+    registrarAudit("cadastrou usu\u00e1rio", login);
     carregarUsuarios();
   } catch(e){ upMsg("user", "Sem conex\u00e3o com o servidor. Tente novamente."); }
 }
@@ -1098,11 +1171,13 @@ async function toggleCobrado(k){
       if (!atual.obs) delete FLAGS[k]; else FLAGS[k] = atual;
       apply();
       await patchFlag(k, { cob: null });
+      registrarAudit("desfez cobrado", "pedido " + infoChave(k).p);
     } else {
       atual.cob = { q: nome, t: Date.now(), u: SESSION.u };
       FLAGS[k] = atual;
       apply();
       await patchFlag(k, { cob: atual.cob });
+      registrarAudit("marcou cobrado", "pedido " + infoChave(k).p);
     }
     try { localStorage.setItem("sync48_espelho", JSON.stringify(FLAGS)); } catch(e){}
   } catch(e){
@@ -1133,6 +1208,7 @@ async function editarObs(k){
   if (!res) return; // cancelou
   try {
     const limpo = res.remover ? "" : (res.texto || "");
+    const tinhaAntes = !!atual.obs;
     if (limpo){
       const info = infoChave(k); // guarda uf/base/modal junto: o contexto sobrevive quando a pendencia sincroniza
       atual.obs = { x: limpo, q: res.nome, u: SESSION.u, t: Date.now(),
@@ -1140,11 +1216,13 @@ async function editarObs(k){
       FLAGS[k] = atual;
       apply();
       await patchFlag(k, { obs: atual.obs });
+      registrarAudit(tinhaAntes ? "editou ocorr\u00eancia" : "registrou ocorr\u00eancia", "pedido " + info.p + ": " + limpo.slice(0, 50));
     } else {
       delete atual.obs;
       if (!atual.cob) delete FLAGS[k]; else FLAGS[k] = atual;
       apply();
       await patchFlag(k, { obs: null });
+      registrarAudit("removeu ocorr\u00eancia", "pedido " + infoChave(k).p);
     }
     try { localStorage.setItem("sync48_espelho", JSON.stringify(FLAGS)); } catch(e){}
   } catch(e){

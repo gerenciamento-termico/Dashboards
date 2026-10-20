@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T13:38:49",
+  "gerado_em": "2026-10-20T13:54:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5071,
-    "pedidos_janela": 975,
-    "loggers_ares_janela": 4888,
-    "loggers_ares_antes_dedup": 4922,
+    "pares_janela": 5074,
+    "pedidos_janela": 978,
+    "loggers_ares_janela": 4891,
+    "loggers_ares_antes_dedup": 4925,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 233,
+    "pendentes_janela": 235,
     "cobranca_gru_janela": 26,
     "sem_embarque_efetiva": 186,
-    "com_embarque_efetiva": 4736,
+    "com_embarque_efetiva": 4739,
     "loggers_sem_lastsync": 43,
     "nao_avaliados": 186,
-    "pedidos_com_agente": 5071,
+    "pedidos_com_agente": 5074,
     "dtbtransporte": {
-      "consultados": 975,
-      "mapeados": 975,
-      "linhas": 1030
+      "consultados": 978,
+      "mapeados": 978,
+      "linhas": 1033
     },
     "top10_agentes_pendencias": {
       "VTCLOG - REC": 63,
@@ -54,8 +54,8 @@
     "top10_ufs_pendencias": {
       "PB": 84,
       "BA": 32,
+      "MG": 14,
       "SC": 13,
-      "MG": 13,
       "SP": 13,
       "PI": 12,
       "PA": 11,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4203,
       "n_so_gru": 20,
-      "n_sem_primeiro_sync": 479,
+      "n_sem_primeiro_sync": 482,
       "media_horas": 0.33,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-20",
       "dia": "20/10",
       "dia_full": "20/10/2026",
-      "pedidos": 38,
-      "loggers": 193,
-      "sincronizados": 160,
-      "pendentes": 33,
+      "pedidos": 41,
+      "loggers": 196,
+      "sincronizados": 161,
+      "pendentes": 35,
       "sem_embarque": 121,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 12,
-      "pct": 17.1,
+      "pedidos_pendentes": 14,
+      "pct": 17.9,
       "n_latencia": 132,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 61
+      "n_sem_primeiro_sync": 64
     }
   ],
   "erros_validacao": {},

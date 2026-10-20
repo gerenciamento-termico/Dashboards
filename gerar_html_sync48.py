@@ -951,9 +951,13 @@ async function carregarUsuarios(){
   alvo.innerHTML = '<div class="up-vazio">Carregando...</div>';
   try {
     const mk = SESSION ? (await sha256(SESSION.u)) === MK : false;
-    const todos = await (await fetch(FB + "/_usuarios.json", { cache: "no-store" })).json() || {};
-    alvo.innerHTML = Object.keys(todos).sort().map(key => {
-      const reg = todos[key];
+    const [todos, sols] = await Promise.all([
+      fetch(FB + "/_usuarios.json", { cache: "no-store" }).then(r => r.json()),
+      fetch(FB + "/_solicitacoes.json", { cache: "no-store" }).then(r => r.json()),
+    ]);
+    const us = todos || {}, so = sols || {};
+    let html = Object.keys(us).sort().map(key => {
+      const reg = us[key];
       const login = reg.login || key.replace(/_/g, ".");
       const souEu = login === SESSION.u;
       return '<div class="up-item" id="upu-' + key + '">'
@@ -966,6 +970,21 @@ async function carregarUsuarios(){
           : '')
         + '</div>';
     }).join("") || '<div class="up-vazio">Nenhum usu\u00e1rio cadastrado.</div>';
+    const pend = Object.keys(so).sort((a,b) => (so[a].t||0) - (so[b].t||0));
+    if (pend.length){
+      html += '<div class="up-sec" style="margin-top:12px">Aguardando aprova\u00e7\u00e3o</div>' + pend.map(key => {
+        const s = so[key];
+        return '<div class="up-item">'
+          + '<div class="t">' + esc(s.nome || s.login) + '</div>'
+          + '<div class="m">' + esc(s.login || "") + ' \u00b7 solicitado por ' + esc(s.porQ || "?") + (s.t ? ' \u00b7 ' + new Date(s.t).toLocaleString("pt-BR") : '') + '</div>'
+          + (mk
+            ? '<div class="acao"><button class="up-mini" onclick="aprovarUsuario(\'' + key + '\')"><i class="fa-solid fa-check"></i> Aprovar</button>'
+              + '<button class="up-mini" onclick="recusarUsuario(\'' + key + '\')"><i class="fa-solid fa-xmark"></i> Recusar</button></div>'
+            : '<div class="m"><i class="fa-solid fa-hourglass-half"></i> aguardando aprova\u00e7\u00e3o</div>')
+          + '</div>';
+      }).join("");
+    }
+    alvo.innerHTML = html;
   } catch(e){ alvo.innerHTML = '<div class="up-vazio">Sem conex\u00e3o com o servidor.</div>'; }
 }
 function pedirRemocao(key, login){
@@ -994,12 +1013,45 @@ async function cadastrarUsuario(){
     const key = chaveUsuario(login);
     const existe = await (await fetch(FB + "/_usuarios/" + key + ".json", { cache: "no-store" })).json();
     if (existe){ upMsg("user", "J\u00e1 existe usu\u00e1rio com esse login."); return; }
-    const resp = await fetch(FB + "/_usuarios/" + key + ".json", { method: "PUT",
-      body: JSON.stringify({ nome: nome, login: login, h: await sha256(login + ":" + senha) }) });
-    if (!resp.ok) throw new Error(resp.status);
+    const pendente = await (await fetch(FB + "/_solicitacoes/" + key + ".json", { cache: "no-store" })).json();
+    if (pendente){ upMsg("user", "Esse login j\u00e1 est\u00e1 aguardando aprova\u00e7\u00e3o."); return; }
+    const h = await sha256(login + ":" + senha);
+    const ehMk = (await sha256(SESSION.u)) === MK;
+    if (ehMk){
+      const resp = await fetch(FB + "/_usuarios/" + key + ".json", { method: "PUT",
+        body: JSON.stringify({ nome: nome, login: login, h: h }) });
+      if (!resp.ok) throw new Error(resp.status);
+      upMsg("user", "Usu\u00e1rio " + login + " cadastrado com acesso imediato.", true);
+      registrarAudit("cadastrou usu\u00e1rio", login);
+    } else {
+      const resp = await fetch(FB + "/_solicitacoes/" + key + ".json", { method: "PUT",
+        body: JSON.stringify({ nome: nome, login: login, h: h, t: Date.now(), porU: SESSION.u, porQ: SESSION.nome }) });
+      if (!resp.ok) throw new Error(resp.status);
+      upMsg("user", "Solicita\u00e7\u00e3o enviada. O acesso \u00e9 liberado ap\u00f3s aprova\u00e7\u00e3o.", true);
+      registrarAudit("solicitou usu\u00e1rio", login);
+    }
     ["up-nu-login","up-nu-nome","up-nu-senha"].forEach(i => document.getElementById(i).value = "");
-    upMsg("user", "Usu\u00e1rio " + login + " cadastrado.", true);
-    registrarAudit("cadastrou usu\u00e1rio", login);
+    carregarUsuarios();
+  } catch(e){ upMsg("user", "Sem conex\u00e3o com o servidor. Tente novamente."); }
+}
+async function aprovarUsuario(key){
+  try {
+    const s = await (await fetch(FB + "/_solicitacoes/" + key + ".json", { cache: "no-store" })).json();
+    if (!s){ carregarUsuarios(); return; }
+    await fetch(FB + "/_usuarios/" + key + ".json", { method: "PUT",
+      body: JSON.stringify({ nome: s.nome, login: s.login, h: s.h }) });
+    await fetch(FB + "/_solicitacoes/" + key + ".json", { method: "DELETE" });
+    registrarAudit("aprovou usu\u00e1rio", s.login);
+    upMsg("user", "Acesso de " + s.login + " aprovado.", true);
+    carregarUsuarios();
+  } catch(e){ upMsg("user", "Sem conex\u00e3o com o servidor. Tente novamente."); }
+}
+async function recusarUsuario(key){
+  try {
+    const s = await (await fetch(FB + "/_solicitacoes/" + key + ".json", { cache: "no-store" })).json();
+    await fetch(FB + "/_solicitacoes/" + key + ".json", { method: "DELETE" });
+    registrarAudit("recusou usu\u00e1rio", s ? s.login : key);
+    upMsg("user", "Solicita\u00e7\u00e3o recusada.", true);
     carregarUsuarios();
   } catch(e){ upMsg("user", "Sem conex\u00e3o com o servidor. Tente novamente."); }
 }

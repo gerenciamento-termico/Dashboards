@@ -491,11 +491,41 @@ body.bloqueada .lg-ov{display:flex}
 .lg-btn:disabled{opacity:.6;cursor:wait;transform:none}
 .lg-foot{text-align:center;color:var(--muted);font-size:0.68rem;margin-top:1.4rem;line-height:1.6}
 .tb-user{position:fixed;top:1.2rem;right:1.4rem;z-index:40;display:flex;gap:0.5rem;align-items:center;animation:fadeInDown .8s ease}
-.tb-user .quem{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(15,23,42,0.6);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:0.76rem;font-weight:600;padding:0.5rem 1rem;backdrop-filter:blur(12px)}
+.tb-user .quem{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(15,23,42,0.6);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:0.76rem;font-weight:600;padding:0.5rem 1rem;backdrop-filter:blur(12px);cursor:pointer;transition:border-color .2s, box-shadow .2s}
+.tb-user .quem:hover{border-color:rgba(14,165,233,0.5);box-shadow:0 0 18px rgba(14,165,233,0.15)}
 .tb-user .quem i{color:var(--aura-light)}
 .tb-user .sair{display:inline-flex;align-items:center;gap:0.4rem;background:rgba(15,23,42,0.6);border:1px solid var(--border);border-radius:999px;color:var(--muted);font:inherit;font-size:0.74rem;font-weight:600;padding:0.5rem 0.95rem;cursor:pointer;backdrop-filter:blur(12px);transition:all .2s}
 .tb-user .sair:hover{border-color:rgba(239,68,68,0.5);color:#fca5a5}
 body.bloqueada .tb-user{display:none}
+
+/* ===== AREA DO USUARIO (hub) ===== */
+.up-ov{position:fixed;inset:0;z-index:60;display:none;align-items:center;justify-content:center;padding:1.5rem;background:rgba(7,10,18,0.55);backdrop-filter:blur(8px)}
+.up-ov.aberto{display:flex}
+.up-card{position:relative;width:100%;max-width:580px;max-height:86vh;overflow:auto;background:rgba(15,23,42,0.88);border:1px solid rgba(14,165,233,0.25);border-radius:22px;padding:1.8rem 1.8rem 1.6rem;backdrop-filter:blur(22px);box-shadow:0 30px 80px rgba(0,0,0,0.6), 0 0 100px rgba(14,165,233,0.1);animation:fadeInDown .5s ease}
+.up-head{display:flex;align-items:center;gap:0.85rem;margin-bottom:0.6rem}
+.up-head .ic{width:44px;height:44px;border-radius:13px;background:linear-gradient(135deg,var(--aura),#0284c7);display:flex;align-items:center;justify-content:center;color:#fff;box-shadow:0 8px 24px rgba(14,165,233,0.35)}
+.up-head h3{font-size:1.12rem;font-weight:800;color:var(--text)}
+.up-head small{display:block;color:var(--muted);font-size:0.72rem;font-weight:500;margin-top:2px}
+.up-x{margin-left:auto;background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;width:34px;height:34px;border-radius:10px;transition:all .15s}
+.up-x:hover{background:rgba(255,255,255,0.06);color:var(--text)}
+.up-sec{display:flex;align-items:center;justify-content:space-between;gap:0.6rem;font-size:0.66rem;font-weight:700;color:var(--aura-light);text-transform:uppercase;letter-spacing:0.08em;margin:1.2rem 0 0.6rem}
+.up-sec small{text-transform:none;letter-spacing:0;color:var(--muted);font-weight:500}
+.up-item{display:flex;align-items:center;gap:0.7rem;background:rgba(7,10,18,0.5);border:1px solid var(--border);border-radius:12px;padding:0.68rem 0.9rem;margin-bottom:0.45rem;font-size:0.82rem;color:var(--text);flex-wrap:wrap}
+.up-item b{font-weight:700}
+.up-item small{color:var(--muted);font-size:0.7rem}
+.up-item .fim{margin-left:auto;display:flex;gap:0.4rem;align-items:center}
+.dot-on{width:8px;height:8px;border-radius:50%;background:var(--success);box-shadow:0 0 10px var(--success);animation:pulse 2s infinite;flex:none}
+.dot-off{width:8px;height:8px;border-radius:50%;background:#475569;flex:none}
+.up-mini{font:inherit;font-size:0.7rem;font-weight:700;border:1px solid var(--border);background:rgba(7,10,18,0.5);color:var(--muted);border-radius:9px;padding:0.42rem 0.8rem;cursor:pointer;transition:all .15s}
+.up-mini:hover{border-color:var(--aura);color:var(--aura-light)}
+.up-mini.ok:hover{border-color:var(--success);color:#6ee7b7}
+.up-mini.no:hover{border-color:#ef4444;color:#fca5a5}
+.up-msg{display:none;font-size:0.74rem;border-radius:10px;padding:0.6rem 0.9rem;margin-top:0.9rem}
+.up-msg.ok{display:block;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.3);color:#6ee7b7}
+.up-msg.erro{display:block;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);color:#fca5a5}
+.up-vazio{color:var(--muted);font-size:0.76rem;padding:0.3rem 0.1rem}
+.up-form{display:none;margin-top:0.4rem}
+.up-form.aberto{display:block}
 
 /* ===== RESPONSIVE ===== */
 @media(max-width:768px){
@@ -516,8 +546,36 @@ body.bloqueada .tb-user{display:none}
 
 <!-- Usuario logado -->
 <div class="tb-user">
-  <span class="quem"><i class="fas fa-circle-user"></i> <b id="quem-nome"></b></span>
+  <span class="quem" onclick="abrirAreaHub()" title="Área do usuário"><i class="fas fa-circle-user"></i> <b id="quem-nome"></b> <i class="fas fa-chevron-down" style="font-size:0.55rem"></i></span>
   <button class="sair" onclick="sairHub()" title="Encerrar sessão"><i class="fas fa-right-from-bracket"></i> Sair</button>
+</div>
+
+<!-- Area do usuario -->
+<div class="up-ov" id="up-ov">
+  <div class="up-card">
+    <div class="up-head">
+      <div class="ic"><i class="fas fa-users"></i></div>
+      <div><h3>Área do usuário</h3><small id="up-sub"></small></div>
+      <button class="up-x" onclick="fecharAreaHub()" title="Fechar"><i class="fas fa-xmark"></i></button>
+    </div>
+    <div class="up-sec">Com acesso <small id="up-n-acesso"></small></div>
+    <div id="up-lista-acesso"><div class="up-vazio">Carregando...</div></div>
+    <div class="up-sec">Aguardando aprovação <small id="up-n-pend"></small></div>
+    <div id="up-lista-pend"><div class="up-vazio">Carregando...</div></div>
+    <div class="up-sec">Criar usuário
+      <button class="up-mini" onclick="document.getElementById('up-form').classList.toggle('aberto')"><i class="fas fa-user-plus"></i> Novo usuário</button>
+    </div>
+    <div class="up-form" id="up-form">
+      <label class="lg-lbl" for="nu-login">Login · padrão nome.sobrenome, minúsculas</label>
+      <div class="lg-inp-wrap"><i class="fas fa-user"></i><input id="nu-login" class="lg-inp" placeholder="nome.sobrenome" autocapitalize="none" spellcheck="false"></div>
+      <label class="lg-lbl" for="nu-nome">Nome de exibição</label>
+      <div class="lg-inp-wrap"><i class="fas fa-id-card"></i><input id="nu-nome" class="lg-inp" placeholder="Ex.: Maria Silva"></div>
+      <label class="lg-lbl" for="nu-senha">Senha inicial · mínimo 6 caracteres</label>
+      <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="nu-senha" type="password" class="lg-inp" autocomplete="new-password"></div>
+      <button class="lg-btn" style="margin-top:1.1rem;padding:0.8rem" onclick="enviarNovoUsuario()"><i class="fas fa-paper-plane" style="margin-right:0.5rem"></i>Enviar</button>
+    </div>
+    <div class="up-msg" id="up-msg"></div>
+  </div>
 </div>
 
 <!-- Login Gate -->
@@ -901,14 +959,129 @@ async function pulsoPresencaHub(){
       { method: "PUT", body: JSON.stringify({ q: SES_HUB.nome, t: Date.now() }) });
   } catch(e){}
 }
-async function auditHub(acao){
+async function auditHub(acao, detalhe){
   if (!SES_HUB) return;
   const k = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   try {
     await fetch(FB_HUB + "/_audit/" + k + ".json",
-      { method: "PUT", body: JSON.stringify({ t: Date.now(), u: SES_HUB.u, q: SES_HUB.nome, a: acao, x: "hub" }) });
+      { method: "PUT", body: JSON.stringify({ t: Date.now(), u: SES_HUB.u, q: SES_HUB.nome, a: acao, x: String(detalhe || "hub").slice(0, 90) }) });
   } catch(e){}
 }
+
+/* ===== AREA DO USUARIO: acessos, aprovacao de novos usuarios ===== */
+const MK_HUB = "6b948fd77c0c0deff4e6bbbdf567af28559fbedd0571a118d743b5edb1e51484"; // manutencao de cadastro
+function escHub(t){ return String(t).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+function upMsgHub(msg, ok){
+  const el = document.getElementById("up-msg");
+  el.textContent = msg || "";
+  el.className = "up-msg" + (msg ? (ok ? " ok" : " erro") : "");
+}
+function abrirAreaHub(){
+  if (!SES_HUB) return;
+  document.getElementById("up-sub").textContent = SES_HUB.nome + " · " + SES_HUB.u;
+  upMsgHub("");
+  document.getElementById("up-form").classList.remove("aberto");
+  document.getElementById("up-ov").classList.add("aberto");
+  renderAreaHub();
+}
+function fecharAreaHub(){ document.getElementById("up-ov").classList.remove("aberto"); }
+document.addEventListener("keydown", e => { if (e.key === "Escape") fecharAreaHub(); });
+async function renderAreaHub(){
+  const la = document.getElementById("up-lista-acesso");
+  const lp = document.getElementById("up-lista-pend");
+  try {
+    const ehMk = (await sha256Hub(SES_HUB.u)) === MK_HUB;
+    const agora = Date.now();
+    const [usuarios, pres, sols] = await Promise.all([
+      fetch(FB_HUB + "/_usuarios.json", { cache: "no-store" }).then(r => r.json()),
+      fetch(FB_HUB + "/_presenca.json", { cache: "no-store" }).then(r => r.json()),
+      fetch(FB_HUB + "/_solicitacoes.json", { cache: "no-store" }).then(r => r.json()),
+    ]);
+    const us = usuarios || {}, pr = pres || {}, so = sols || {};
+    const chavesU = Object.keys(us).sort();
+    document.getElementById("up-n-acesso").textContent = "· " + chavesU.length + " usuário(s)";
+    la.innerHTML = chavesU.map(key => {
+      const reg = us[key];
+      const login = reg.login || key.replace(/_/g, ".");
+      const online = pr[key] && (agora - (pr[key].t || 0)) < 5*60000;
+      return '<div class="up-item"><span class="' + (online ? "dot-on" : "dot-off") + '"></span>'
+        + '<b>' + escHub(reg.nome || login) + '</b><small>' + escHub(login) + '</small>'
+        + '<span class="fim"><small>' + (online ? "online agora" : "offline") + '</small></span></div>';
+    }).join("") || '<div class="up-vazio">Nenhum usuário cadastrado.</div>';
+
+    const chavesS = Object.keys(so).sort((a,b) => (so[a].t||0) - (so[b].t||0));
+    document.getElementById("up-n-pend").textContent = chavesS.length ? "· " + chavesS.length + " solicitação(ões)" : "";
+    lp.innerHTML = chavesS.map(key => {
+      const s = so[key];
+      const quando = s.t ? new Date(s.t).toLocaleString("pt-BR") : "";
+      const acoes = ehMk
+        ? '<span class="fim"><button class="up-mini ok" onclick="aprovarUsuario(\'' + key + '\')"><i class="fas fa-check"></i> Aprovar</button>'
+          + '<button class="up-mini no" onclick="recusarUsuario(\'' + key + '\')"><i class="fas fa-xmark"></i> Recusar</button></span>'
+        : '<span class="fim"><small><i class="fas fa-hourglass-half"></i> aguardando aprovação</small></span>';
+      return '<div class="up-item"><span class="dot-off"></span><b>' + escHub(s.nome || s.login) + '</b>'
+        + '<small>' + escHub(s.login || "") + ' · solicitado por ' + escHub(s.porQ || "?") + (quando ? ' · ' + quando : '') + '</small>'
+        + acoes + '</div>';
+    }).join("") || '<div class="up-vazio">Nenhuma solicitação pendente.</div>';
+  } catch(e){
+    la.innerHTML = '<div class="up-vazio">Sem conexão com o servidor.</div>';
+    lp.innerHTML = "";
+  }
+}
+async function enviarNovoUsuario(){
+  const login = document.getElementById("nu-login").value.trim().toLowerCase();
+  const nome = document.getElementById("nu-nome").value.trim();
+  const senha = document.getElementById("nu-senha").value;
+  if (!/^[a-z0-9]+([._-][a-z0-9]+)*$/.test(login)){ upMsgHub("Login inválido. Use minúsculas no padrão nome.sobrenome."); return; }
+  if (!nome){ upMsgHub("Informe o nome de exibição."); return; }
+  if (senha.length < 6){ upMsgHub("A senha inicial precisa de pelo menos 6 caracteres."); return; }
+  try {
+    const key = chaveUsuarioHub(login);
+    const [jaUsuario, jaSolicitado] = await Promise.all([
+      fetch(FB_HUB + "/_usuarios/" + key + ".json", { cache: "no-store" }).then(r => r.json()),
+      fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { cache: "no-store" }).then(r => r.json()),
+    ]);
+    if (jaUsuario){ upMsgHub("Esse login já tem acesso."); return; }
+    if (jaSolicitado){ upMsgHub("Esse login já está aguardando aprovação."); return; }
+    const h = await sha256Hub(login + ":" + senha);
+    const ehMk = (await sha256Hub(SES_HUB.u)) === MK_HUB;
+    if (ehMk){
+      await fetch(FB_HUB + "/_usuarios/" + key + ".json", { method: "PUT",
+        body: JSON.stringify({ nome: nome, login: login, h: h }) });
+      auditHub("cadastrou usuário", login);
+      upMsgHub("Usuário " + login + " criado com acesso imediato.", true);
+    } else {
+      await fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { method: "PUT",
+        body: JSON.stringify({ nome: nome, login: login, h: h, t: Date.now(), porU: SES_HUB.u, porQ: SES_HUB.nome }) });
+      auditHub("solicitou usuário", login);
+      upMsgHub("Solicitação enviada. O acesso é liberado após aprovação.", true);
+    }
+    ["nu-login","nu-nome","nu-senha"].forEach(i => document.getElementById(i).value = "");
+    document.getElementById("up-form").classList.remove("aberto");
+    renderAreaHub();
+  } catch(e){ upMsgHub("Sem conexão com o servidor. Tente novamente."); }
+}
+async function aprovarUsuario(key){
+  try {
+    const s = await (await fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { cache: "no-store" })).json();
+    if (!s){ renderAreaHub(); return; }
+    await fetch(FB_HUB + "/_usuarios/" + key + ".json", { method: "PUT",
+      body: JSON.stringify({ nome: s.nome, login: s.login, h: s.h }) });
+    await fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { method: "DELETE" });
+    auditHub("aprovou usuário", s.login);
+    upMsgHub("Acesso de " + s.login + " aprovado.", true);
+    renderAreaHub();
+  } catch(e){ upMsgHub("Sem conexão com o servidor. Tente novamente."); }
+}
+async function recusarUsuario(key){
+  try {
+    const s = await (await fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { cache: "no-store" })).json();
+    await fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { method: "DELETE" });
+    auditHub("recusou usuário", s ? s.login : key);
+    upMsgHub("Solicitação recusada.", true);
+    renderAreaHub();
+  } catch(e){ upMsgHub("Sem conexão com o servidor. Tente novamente."); }
+}
+document.getElementById("up-ov").addEventListener("mousedown", e => { if (e.target === e.currentTarget) fecharAreaHub(); });
 function aplicarSessaoHub(){
   document.body.classList.remove("bloqueada");
   document.getElementById("quem-nome").textContent = SES_HUB.nome;

@@ -489,105 +489,6 @@ def fetch_entregas_dia() -> list[dict]:
     return rows
 
 
-def fetch_entregas_semana() -> list[dict]:
-    """Pedidos previstos e/ou entregues na semana atual (seg-dom, BRT), por dia.
-
-    Mesma fonte da visao do dia (vtc_stage.documentos, a base que alimenta o portal):
-    dt_previstaentrega para o previsto e dt_entregaefetiva(embarque) para a entrega.
-    Status por dia: E = entregue no dia, F = previsto para o dia sem entrega lancada,
-    O = previsto para o dia mas entregue em outra data.
-    """
-    env = load_env(WORKSPACE / ".env.vtc_stage")
-    if not env.get("VTC_STAGE_HOST"):
-        raise RuntimeError("VTC_STAGE ausente (.env.vtc_stage)")
-    agora = pd.Timestamp(now_brt())
-    segunda = (agora - pd.Timedelta(days=int(agora.weekday()))).normalize()
-    dias_semana = [segunda + pd.Timedelta(days=i) for i in range(7)]
-    # margem de 1 dia nas bordas: timestamps do banco sao UTC e o recorte e em BRT
-    ini = (segunda - pd.Timedelta(days=1)).date()
-    fim = (segunda + pd.Timedelta(days=7)).date()
-    query = text(
-        """
-        SELECT TRIM(nr_pedido::text) AS pedido,
-               MAX(NULLIF(TRIM(cd_uf), '')) AS uf,
-               MAX(NULLIF(TRIM(ds_cliente), '')) AS cliente,
-               MAX(NULLIF(TRIM(modal), '')) AS modal,
-               MIN(dt_previstaentrega) AS prevista,
-               MAX(COALESCE(dt_entregaefetivaembarque, dt_entregaefetiva)) AS entrega,
-               COUNT(DISTINCT NULLIF(TRIM(ds_tag), '')) AS loggers
-        FROM vtc_stage.documentos
-        WHERE NULLIF(TRIM(nr_pedido::text), '') IS NOT NULL
-          AND (dt_previstaentrega::date BETWEEN :ini AND :fim
-               OR COALESCE(dt_entregaefetivaembarque, dt_entregaefetiva)::date BETWEEN :ini AND :fim)
-        GROUP BY 1
-        """
-    )
-    url = URL.create(
-        "postgresql+psycopg2",
-        username=env["VTC_STAGE_USER"],
-        password=env["VTC_STAGE_PASSWORD"],
-        host=env["VTC_STAGE_HOST"],
-        port=int(env.get("VTC_STAGE_PORT") or 5432),
-        database=env["VTC_STAGE_NAME"],
-    )
-    engine = create_engine(url, pool_pre_ping=True)
-    registros = []
-    with engine.connect() as connection:
-        for rec in connection.execute(query, {"ini": ini, "fim": fim}):
-            prev = to_brt(rec.prevista) if rec.prevista is not None else None
-            ent = to_brt(rec.entrega) if rec.entrega is not None else None
-            registros.append(
-                {
-                    "p": str(rec.pedido),
-                    "uf": rec.uf or "",
-                    "cli": rec.cliente or "",
-                    "mo": rec.modal or "",
-                    "prev_ts": prev if (prev is not None and pd.notna(prev)) else None,
-                    "ent_ts": ent if (ent is not None and pd.notna(ent)) else None,
-                    "lg": int(rec.loggers or 0),
-                }
-            )
-    engine.dispose()
-
-    rotulos = ["Seg", "Ter", "Qua", "Qui", "Sex", "S\u00e1b", "Dom"]
-    saida: list[dict] = []
-    for i, dia in enumerate(dias_semana):
-        dia_d = dia.date()
-        rows = []
-        for reg in registros:
-            prev_no_dia = reg["prev_ts"] is not None and reg["prev_ts"].date() == dia_d
-            ent_no_dia = reg["ent_ts"] is not None and reg["ent_ts"].date() == dia_d
-            if not prev_no_dia and not ent_no_dia:
-                continue
-            if ent_no_dia:
-                st = "E"
-            elif prev_no_dia and reg["ent_ts"] is None:
-                st = "F"
-            else:
-                st = "O"
-            rows.append(
-                {
-                    "p": reg["p"],
-                    "uf": reg["uf"],
-                    "cli": reg["cli"],
-                    "mo": reg["mo"],
-                    "prev": f"{reg['prev_ts']:%d/%m %H:%M}" if reg["prev_ts"] is not None else "",
-                    "ent": f"{reg['ent_ts']:%d/%m %H:%M}" if reg["ent_ts"] is not None else "",
-                    "lg": reg["lg"],
-                    "ph": 1 if prev_no_dia else 0,
-                    "st": st,
-                }
-            )
-        saida.append(
-            {
-                "iso": dia.strftime("%Y-%m-%d"),
-                "rot": f"{rotulos[i]} {dia:%d/%m}",
-                "rows": rows,
-            }
-        )
-    return saida
-
-
 def fetch_tipos_cadastro(tags: list[str]) -> dict[str, str]:
     """Tipo oficial do datalogger no cadastro do dtbPortal (ds_tipodatalogger).
 
@@ -739,13 +640,6 @@ def build() -> dict:
     except Exception as exc:
         print(f"AVISO: entregas do dia indisponivel ({exc})")
         dia_hoje_rows = []
-
-    try:
-        semana_rows = fetch_entregas_semana()
-        print("Entregas da semana: " + ", ".join(f"{d['rot']}={len(d['rows'])}" for d in semana_rows))
-    except Exception as exc:
-        print(f"AVISO: entregas da semana indisponivel ({exc})")
-        semana_rows = []
 
     frame["pedido"] = frame["pedido"].astype(str).str.strip()
     frame["logger"] = frame["logger"].map(norm_tag)
@@ -1022,7 +916,6 @@ def build() -> dict:
         "ares_rows": ares_rows,
         "ocultos_rows": ocultos_rows,
         "dia_hoje": dia_hoje_rows,
-        "semana": semana_rows,
         "erros": dict(erros),
         "stats": {
             "pares_janela": int(len(frame)),
@@ -1145,12 +1038,6 @@ tr.hoje td{background:rgba(61,139,253,.16);font-weight:700}
 .tab-btn.active{background:var(--panel);border-color:var(--line-strong);color:#eaf2fb}
 .tab-page{display:none}
 .tab-page.on{display:block}
-.mini-tabs{display:flex;gap:7px;flex-wrap:wrap;margin:2px 0 14px}
-.mini-tab{font-family:inherit;font-size:.74rem;font-weight:700;padding:6px 14px;border-radius:999px;border:1px solid rgba(77,155,255,.35);background:rgba(61,139,253,.08);color:#a9c1da;cursor:pointer;transition:all .15s}
-.mini-tab:hover{color:#eaf3ff;border-color:rgba(77,155,255,.6)}
-.mini-tab.active{background:rgba(61,139,253,.3);color:#fff;border-color:rgba(77,155,255,.85)}
-.mini-tab .mn{opacity:.8;font-weight:600;margin-left:5px;font-size:.66rem}
-.mini-tab.ehoje::after{content:"hoje";margin-left:7px;font-size:.56rem;color:#6ee7a0;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
 .legenda{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 16px;margin-bottom:14px}
 .legenda p{color:var(--soft);font-size:.74rem;line-height:1.45;margin:0 0 8px}
 .legenda-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
@@ -1181,7 +1068,7 @@ footer{color:var(--soft);font-size:.72rem;margin-top:20px;text-align:center}
 </div>
 <div class="tabs" id="tabs">
   <button type="button" class="tab-btn active" data-tab="cobranca" onclick="showTab('cobranca')">Cobrança</button>
-  <button type="button" class="tab-btn" data-tab="hoje" id="tab-btn-hoje" onclick="showTab('hoje')">Entregas da semana</button>
+  <button type="button" class="tab-btn" data-tab="hoje" id="tab-btn-hoje" onclick="showTab('hoje')">Entregas do dia</button>
   <button type="button" class="tab-btn" data-tab="tempo" onclick="showTab('tempo')">Tempo até o 1º sync</button>
   <button type="button" class="tab-btn" data-tab="erros" id="tab-btn-erros" onclick="showTab('erros')">Erros operacionais</button>
   <button type="button" class="tab-btn" data-tab="individual" id="tab-btn-individual" onclick="showTab('individual')">Cobrança individual</button>
@@ -1194,16 +1081,15 @@ footer{color:var(--soft);font-size:.72rem;margin-top:20px;text-align:center}
 </tr></thead><tbody id="tb-bases"></tbody></table></div></div>
 </div>
 <div id="tab-hoje" class="tab-page">
-<div class="mini-tabs" id="mini-dias"></div>
 <div class="kpis" id="kpis-hoje"></div>
-<div class="legenda"><p>Visão da semana (independe de sincronismo e dos filtros do topo): escolha o dia nas mini-abas. Para cada dia: pedidos com <b>previsão de entrega</b> (dt_previstaentrega) e pedidos <b>entregues no dia</b> (data de entrega lançada). "Faltam entregar" = previstos para o dia ainda sem registro de entrega — em dias futuros é a programação; em dias passados, o que ficou para trás.</p></div>
+<div class="legenda"><p>Visão do dia (independe de sincronismo e dos filtros do topo): pedidos com <b>previsão de entrega para hoje</b> (dt_previstaentrega) e pedidos <b>entregues hoje</b> (data de entrega lançada). "Faltam entregar" = previstos para hoje ainda sem registro de entrega.</p></div>
 <div class="grid2">
-  <div class="panel"><h2 id="hj-falta-tit">Faltam entregar <small id="hj-falta-count"></small></h2>
+  <div class="panel"><h2>Faltam entregar hoje <small id="hj-falta-count"></small></h2>
   <div class="tbl-scroll"><table><thead><tr><th>#</th><th>Pedido</th><th>UF</th><th>Cliente</th><th>Modal</th><th>Previsto p/</th><th class="num">Loggers</th></tr></thead><tbody id="tb-hj-falta"></tbody></table></div></div>
-  <div class="panel"><h2 id="hj-ent-tit">Entregues no dia <small id="hj-ent-count"></small></h2>
+  <div class="panel"><h2>Entregues hoje <small id="hj-ent-count"></small></h2>
   <div class="tbl-scroll"><table><thead><tr><th>#</th><th>Pedido</th><th>UF</th><th>Cliente</th><th>Modal</th><th>Previsto p/</th><th>Entregue em</th><th class="num">Loggers</th></tr></thead><tbody id="tb-hj-ent"></tbody></table></div></div>
 </div>
-<div class="panel detail-panel"><h2>Previstos para o dia entregues em outra data <small id="hj-outra-count"></small></h2>
+<div class="panel detail-panel"><h2>Previstos para hoje entregues em outra data <small id="hj-outra-count"></small></h2>
 <div class="tbl-scroll"><table><thead><tr><th>#</th><th>Pedido</th><th>UF</th><th>Cliente</th><th>Modal</th><th>Previsto p/</th><th>Entregue em</th><th class="num">Loggers</th></tr></thead><tbody id="tb-hj-outra"></tbody></table></div></div>
 </div>
 <div id="tab-cobranca" class="tab-page on">
@@ -1326,8 +1212,7 @@ footer{color:var(--soft);font-size:.72rem;margin-top:20px;text-align:center}
 </div>
 <footer>Gerado em __PAGINA_EM__ &middot; VTC LOG - BI Qualidade &middot; Analítico Entregas x Sincronismo</footer>
 <script>
-const PEDIDOS=__PEDIDOS__;const ROWS=__ROWS__;const OCULTOS=__OCULTOS__;const HOJE=__HOJE__;const DIAS=__DIAS__;const DIAHOJE=__DIAHOJE__;const SEMANA=__SEMANA__;const BASESLINKS=__BASESLINKS__;
-let DIASEL=(SEMANA&&SEMANA.some(d=>d.iso===HOJE))?HOJE:((SEMANA&&SEMANA.length)?SEMANA[0].iso:HOJE);
+const PEDIDOS=__PEDIDOS__;const ROWS=__ROWS__;const OCULTOS=__OCULTOS__;const HOJE=__HOJE__;const DIAS=__DIAS__;const DIAHOJE=__DIAHOJE__;const BASESLINKS=__BASESLINKS__;
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function fmtInt(n){return Number(n||0).toLocaleString('pt-BR')}
 function fmtPct(v){return Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:1,maximumFractionDigits:1})+'%'}
@@ -1556,44 +1441,26 @@ function renderTop(campo,rows,tbId){
  const max=arr.length?arr[0].pend:1;
  document.getElementById(tbId).innerHTML=arr.map((x,i)=>'<tr><td>'+(i+1)+'</td><td>'+esc(x.k)+'</td><td class="num">'+fmtInt(x.ent)+'</td><td class="num"><span class="pill-pend">'+fmtInt(x.pend)+'</span></td><td class="num">'+fmtPct(x.pct)+'</td><td class="bar-cell"><div class="bar" style="width:'+Math.round(x.pend/max*100)+'%"></div><span class="bar-txt">&nbsp;</span></td></tr>').join('')||'<tr><td colspan="6" style="color:#a9c1da">Sem pendências para os filtros</td></tr>';
 }
-function diaSemSel(){ return (SEMANA||[]).find(d=>d.iso===DIASEL)||null; }
-function setDiaSem(iso){ DIASEL=iso; paintHoje(); }
-function paintMiniDias(){
- const box=document.getElementById('mini-dias');
- if(!box)return;
- if(!SEMANA||!SEMANA.length){ box.style.display='none'; return; }
- box.innerHTML=SEMANA.map((d,i)=>{
-  if(i>=5&&!d.rows.length&&d.iso!==DIASEL)return ''; // sab/dom so quando ha movimento
-  const prev=d.rows.filter(r=>r.ph===1).length;
-  const ent=d.rows.filter(r=>r.st==='E').length;
-  return '<button type="button" class="mini-tab'+(d.iso===DIASEL?' active':'')+(d.iso===HOJE?' ehoje':'')+'" onclick="setDiaSem(\\''+d.iso+'\\')">'+esc(d.rot)+'<span class="mn">'+fmtInt(prev)+' prev · '+fmtInt(ent)+' ent</span></button>';
- }).join('');
-}
 function paintHoje(){
- paintMiniDias();
- const sel=diaSemSel();
- const base=sel?sel.rows:DIAHOJE;
- const rotDia=sel?sel.rot:'hoje';
- const eHoje=(!sel)||sel.iso===HOJE;
- const prev=base.filter(r=>r.ph===1);
- const ent=base.filter(r=>r.st==='E');
- const falta=base.filter(r=>r.st==='F');
- const outra=base.filter(r=>r.st==='O');
+ const prev=DIAHOJE.filter(r=>r.ph===1);
+ const ent=DIAHOJE.filter(r=>r.st==='E');
+ const falta=DIAHOJE.filter(r=>r.st==='F');
+ const outra=DIAHOJE.filter(r=>r.st==='O');
  const pct=prev.length?((prev.length-falta.length)/prev.length*100):0;
  const k=document.getElementById('kpis-hoje');
  if(k)k.innerHTML=
-  '<div class="kpi"><div class="lbl">Previstas &middot; '+esc(rotDia)+'</div><div class="val">'+fmtInt(prev.length)+'</div><div class="sub">pedidos com previsão de entrega no dia</div></div>'
- +'<div class="kpi ok"><div class="lbl">Entregues no dia</div><div class="val">'+fmtInt(ent.length)+'</div><div class="sub">independente de sincronismo</div></div>'
- +'<div class="kpi warn"><div class="lbl">Faltam entregar</div><div class="val">'+fmtInt(falta.length)+'</div><div class="sub">'+(eHoje?'previstas para hoje, sem entrega lançada':'previstas para o dia, sem entrega lançada')+'</div></div>'
- +'<div class="kpi"><div class="lbl">% concluído</div><div class="val">'+fmtPct(pct)+'</div><div class="sub">das previstas do dia (conta entrega em qualquer data)</div></div>';
+  '<div class="kpi"><div class="lbl">Previstas para hoje</div><div class="val">'+fmtInt(prev.length)+'</div><div class="sub">pedidos com previsão de entrega hoje</div></div>'
+ +'<div class="kpi ok"><div class="lbl">Entregues hoje</div><div class="val">'+fmtInt(ent.length)+'</div><div class="sub">independente de sincronismo</div></div>'
+ +'<div class="kpi warn"><div class="lbl">Faltam entregar</div><div class="val">'+fmtInt(falta.length)+'</div><div class="sub">previstas para hoje, sem entrega lançada</div></div>'
+ +'<div class="kpi"><div class="lbl">% concluído</div><div class="val">'+fmtPct(pct)+'</div><div class="sub">das previstas p/ hoje (conta entrega em qualquer data)</div></div>';
  const fc=document.getElementById('hj-falta-count');if(fc)fc.textContent='('+fmtInt(falta.length)+')';
  const ec=document.getElementById('hj-ent-count');if(ec)ec.textContent='('+fmtInt(ent.length)+')';
  const oc=document.getElementById('hj-outra-count');if(oc)oc.textContent='('+fmtInt(outra.length)+')';
  const linha=(r,i,comEnt)=>'<tr><td>'+(i+1)+'</td><td>'+esc(r.p)+'</td><td>'+esc(r.uf)+'</td><td title="'+esc(r.cli)+'">'+esc(r.cli)+'</td><td>'+esc(r.mo)+'</td><td>'+(r.prev?esc(r.prev):'—')+'</td>'+(comEnt?'<td>'+(r.ent?esc(r.ent):'—')+'</td>':'')+'<td class="num">'+fmtInt(r.lg)+'</td></tr>';
  const tf=document.getElementById('tb-hj-falta');
- if(tf)tf.innerHTML=falta.slice().sort((a,b)=>(a.prev||'99').localeCompare(b.prev||'99')||a.uf.localeCompare(b.uf)).map((r,i)=>linha(r,i,false)).join('')||'<tr><td colspan="7" style="color:#a9c1da">Nenhum pedido previsto para este dia pendente de entrega</td></tr>';
+ if(tf)tf.innerHTML=falta.slice().sort((a,b)=>(a.prev||'99').localeCompare(b.prev||'99')||a.uf.localeCompare(b.uf)).map((r,i)=>linha(r,i,false)).join('')||'<tr><td colspan="7" style="color:#a9c1da">Nenhum pedido previsto para hoje pendente de entrega</td></tr>';
  const te=document.getElementById('tb-hj-ent');
- if(te)te.innerHTML=ent.slice().sort((a,b)=>(b.ent||'').localeCompare(a.ent||'')).map((r,i)=>linha(r,i,true)).join('')||'<tr><td colspan="8" style="color:#a9c1da">Nenhuma entrega lançada neste dia</td></tr>';
+ if(te)te.innerHTML=ent.slice().sort((a,b)=>(b.ent||'').localeCompare(a.ent||'')).map((r,i)=>linha(r,i,true)).join('')||'<tr><td colspan="8" style="color:#a9c1da">Nenhuma entrega lançada hoje até agora</td></tr>';
  const to=document.getElementById('tb-hj-outra');
  if(to)to.innerHTML=outra.slice().sort((a,b)=>a.uf.localeCompare(b.uf)||String(a.p).localeCompare(String(b.p))).map((r,i)=>linha(r,i,true)).join('')||'<tr><td colspan="8" style="color:#a9c1da">Nenhum</td></tr>';
 }
@@ -1902,7 +1769,6 @@ def write_outputs(model: dict) -> None:
         .replace("__HOJE__", json.dumps(model["hoje_iso"]))
         .replace("__DIAS__", json.dumps(dias_iso))
         .replace("__DIAHOJE__", json.dumps(model.get("dia_hoje") or [], ensure_ascii=False))
-        .replace("__SEMANA__", json.dumps(model.get("semana") or [], ensure_ascii=False))
         .replace("__BASESLINKS__", json.dumps(bases_links, ensure_ascii=False))
     )
     OUT_HTML.write_text(html, encoding="utf-8")

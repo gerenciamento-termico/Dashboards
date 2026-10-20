@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T12:47:39",
+  "gerado_em": "2026-10-20T12:54:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5070,
-    "pedidos_janela": 974,
-    "loggers_ares_janela": 4887,
-    "loggers_ares_antes_dedup": 4921,
+    "pares_janela": 5071,
+    "pedidos_janela": 975,
+    "loggers_ares_janela": 4888,
+    "loggers_ares_antes_dedup": 4922,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 231,
     "cobranca_gru_janela": 30,
-    "sem_embarque_efetiva": 187,
-    "com_embarque_efetiva": 4734,
+    "sem_embarque_efetiva": 186,
+    "com_embarque_efetiva": 4736,
     "loggers_sem_lastsync": 42,
-    "nao_avaliados": 187,
-    "pedidos_com_agente": 5070,
+    "nao_avaliados": 186,
+    "pedidos_com_agente": 5071,
     "dtbtransporte": {
-      "consultados": 974,
-      "mapeados": 974,
-      "linhas": 1029
+      "consultados": 975,
+      "mapeados": 975,
+      "linhas": 1030
     },
     "top10_agentes_pendencias": {
       "VTCLOG - REC": 63,
@@ -64,7 +64,7 @@
       "PR": 5
     },
     "latencia": {
-      "n_agente": 4200,
+      "n_agente": 4201,
       "n_so_gru": 20,
       "n_sem_primeiro_sync": 481,
       "media_horas": 0.33,
@@ -438,15 +438,15 @@
       "dia_iso": "2026-10-20",
       "dia": "20/10",
       "dia_full": "20/10/2026",
-      "pedidos": 36,
-      "loggers": 192,
-      "sincronizados": 159,
+      "pedidos": 38,
+      "loggers": 193,
+      "sincronizados": 160,
       "pendentes": 33,
       "sem_embarque": 121,
       "cobranca_gru": 0,
       "pedidos_pendentes": 12,
-      "pct": 17.2,
-      "n_latencia": 131,
+      "pct": 17.1,
+      "n_latencia": 132,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,

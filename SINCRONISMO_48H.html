@@ -763,10 +763,8 @@ async function carregarUsuarios(){
         return '<div class="up-item">'
           + '<div class="t">' + esc(s.nome || s.login) + '</div>'
           + '<div class="m">' + esc(s.login || "") + ' \u00b7 solicitado por ' + esc(s.porQ || "?") + (s.t ? ' \u00b7 ' + new Date(s.t).toLocaleString("pt-BR") : '') + '</div>'
-          + (mk
-            ? '<div class="acao"><button class="up-mini" onclick="aprovarUsuario(\'' + key + '\')"><i class="fa-solid fa-check"></i> Aprovar</button>'
-              + '<button class="up-mini" onclick="recusarUsuario(\'' + key + '\')"><i class="fa-solid fa-xmark"></i> Recusar</button></div>'
-            : '<div class="m"><i class="fa-solid fa-hourglass-half"></i> aguardando aprova\u00e7\u00e3o</div>')
+          + '<div class="acao"><button class="up-mini" onclick="aprovarUsuario(\'' + key + '\')"><i class="fa-solid fa-check"></i> Aprovar</button>'
+          + '<button class="up-mini" onclick="recusarUsuario(\'' + key + '\')"><i class="fa-solid fa-xmark"></i> Recusar</button></div>'
           + '</div>';
       }).join("");
     }

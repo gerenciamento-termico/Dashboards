@@ -1013,9 +1013,10 @@ async function renderAreaHub(){
   try {
     const ehMk = (await sha256Hub(SES_HUB.u)) === MK_HUB;
     const agora = Date.now();
+    // presenca (quem esta online) e leitura restrita; a lista de acessos e a aprovacao sao de todos
     const [usuarios, pres, sols] = await Promise.all([
       fetch(FB_HUB + "/_usuarios.json", { cache: "no-store" }).then(r => r.json()),
-      fetch(FB_HUB + "/_presenca.json", { cache: "no-store" }).then(r => r.json()),
+      ehMk ? fetch(FB_HUB + "/_presenca.json", { cache: "no-store" }).then(r => r.json()) : Promise.resolve(null),
       fetch(FB_HUB + "/_solicitacoes.json", { cache: "no-store" }).then(r => r.json()),
     ]);
     const us = usuarios || {}, pr = pres || {}, so = sols || {};
@@ -1024,6 +1025,10 @@ async function renderAreaHub(){
     la.innerHTML = chavesU.map(key => {
       const reg = us[key];
       const login = reg.login || key.replace(/_/g, ".");
+      if (!ehMk){
+        return '<div class="up-item"><span class="dot-off"></span>'
+          + '<b>' + escHub(reg.nome || login) + '</b><small>' + escHub(login) + '</small></div>';
+      }
       const online = pr[key] && (agora - (pr[key].t || 0)) < 5*60000;
       return '<div class="up-item"><span class="' + (online ? "dot-on" : "dot-off") + '"></span>'
         + '<b>' + escHub(reg.nome || login) + '</b><small>' + escHub(login) + '</small>'
@@ -1035,10 +1040,8 @@ async function renderAreaHub(){
     lp.innerHTML = chavesS.map(key => {
       const s = so[key];
       const quando = s.t ? new Date(s.t).toLocaleString("pt-BR") : "";
-      const acoes = ehMk
-        ? '<span class="fim"><button class="up-mini ok" onclick="aprovarUsuario(\'' + key + '\')"><i class="fas fa-check"></i> Aprovar</button>'
-          + '<button class="up-mini no" onclick="recusarUsuario(\'' + key + '\')"><i class="fas fa-xmark"></i> Recusar</button></span>'
-        : '<span class="fim"><small><i class="fas fa-hourglass-half"></i> aguardando aprovação</small></span>';
+      const acoes = '<span class="fim"><button class="up-mini ok" onclick="aprovarUsuario(\'' + key + '\')"><i class="fas fa-check"></i> Aprovar</button>'
+          + '<button class="up-mini no" onclick="recusarUsuario(\'' + key + '\')"><i class="fas fa-xmark"></i> Recusar</button></span>';
       return '<div class="up-item"><span class="dot-off"></span><b>' + escHub(s.nome || s.login) + '</b>'
         + '<small>' + escHub(s.login || "") + ' · solicitado por ' + escHub(s.porQ || "?") + (quando ? ' · ' + quando : '') + '</small>'
         + acoes + '</div>';

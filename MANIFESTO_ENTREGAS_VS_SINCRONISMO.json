@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T12:24:49",
+  "gerado_em": "2026-10-20T12:34:17",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5043,
-    "pedidos_janela": 966,
-    "loggers_ares_janela": 4866,
-    "loggers_ares_antes_dedup": 4894,
-    "dedup_dia_logger": 28,
+    "pares_janela": 5048,
+    "pedidos_janela": 971,
+    "loggers_ares_janela": 4867,
+    "loggers_ares_antes_dedup": 4899,
+    "dedup_dia_logger": 32,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 228,
     "cobranca_gru_janela": 33,
-    "sem_embarque_efetiva": 186,
+    "sem_embarque_efetiva": 191,
     "com_embarque_efetiva": 4708,
     "loggers_sem_lastsync": 42,
-    "nao_avaliados": 186,
-    "pedidos_com_agente": 5043,
+    "nao_avaliados": 191,
+    "pedidos_com_agente": 5048,
     "dtbtransporte": {
-      "consultados": 966,
-      "mapeados": 966,
-      "linhas": 1021
+      "consultados": 971,
+      "mapeados": 971,
+      "linhas": 1026
     },
     "top10_agentes_pendencias": {
       "VTCLOG - REC": 63,
@@ -64,10 +64,10 @@
       "PR": 5
     },
     "latencia": {
-      "n_agente": 4166,
+      "n_agente": 4167,
       "n_so_gru": 20,
-      "n_sem_primeiro_sync": 494,
-      "media_horas": 0.26,
+      "n_sem_primeiro_sync": 493,
+      "media_horas": 0.33,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -218,12 +218,12 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 6,
       "pct": 1.0,
-      "n_latencia": 747,
-      "media_horas": 0.11,
+      "n_latencia": 748,
+      "media_horas": 0.49,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 45
+      "n_sem_primeiro_sync": 44
     },
     {
       "dia_iso": "2026-10-09",
@@ -442,7 +442,7 @@
       "loggers": 171,
       "sincronizados": 141,
       "pendentes": 30,
-      "sem_embarque": 121,
+      "sem_embarque": 122,
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
       "pct": 17.5,

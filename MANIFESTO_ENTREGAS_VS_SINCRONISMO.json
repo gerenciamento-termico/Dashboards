@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T16:34:59",
+  "gerado_em": "2026-10-20T16:45:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5153,
-    "pedidos_janela": 1005,
-    "loggers_ares_janela": 4969,
-    "loggers_ares_antes_dedup": 5004,
+    "pares_janela": 5183,
+    "pedidos_janela": 1006,
+    "loggers_ares_janela": 4999,
+    "loggers_ares_antes_dedup": 5034,
     "dedup_dia_logger": 35,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
@@ -30,14 +30,14 @@
     "pendentes_janela": 270,
     "cobranca_gru_janela": 31,
     "sem_embarque_efetiva": 166,
-    "com_embarque_efetiva": 4838,
+    "com_embarque_efetiva": 4868,
     "loggers_sem_lastsync": 44,
     "nao_avaliados": 166,
-    "pedidos_com_agente": 5153,
+    "pedidos_com_agente": 5183,
     "dtbtransporte": {
-      "consultados": 1005,
-      "mapeados": 1005,
-      "linhas": 1060
+      "consultados": 1006,
+      "mapeados": 1006,
+      "linhas": 1061
     },
     "top10_agentes_pendencias": {
       "VTCLOG - REC": 77,
@@ -64,10 +64,10 @@
       "PR": 7
     },
     "latencia": {
-      "n_agente": 4248,
+      "n_agente": 4278,
       "n_so_gru": 21,
       "n_sem_primeiro_sync": 534,
-      "media_horas": 0.33,
+      "media_horas": 0.32,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
@@ -438,15 +438,15 @@
       "dia_iso": "2026-10-20",
       "dia": "20/10",
       "dia_full": "20/10/2026",
-      "pedidos": 68,
-      "loggers": 294,
-      "sincronizados": 217,
+      "pedidos": 69,
+      "loggers": 324,
+      "sincronizados": 247,
       "pendentes": 77,
       "sem_embarque": 101,
       "cobranca_gru": 0,
       "pedidos_pendentes": 24,
-      "pct": 26.2,
-      "n_latencia": 174,
+      "pct": 23.8,
+      "n_latencia": 204,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,

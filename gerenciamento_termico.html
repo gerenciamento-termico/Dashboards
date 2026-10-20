@@ -489,7 +489,12 @@ body.bloqueada .lg-ov{display:flex}
 .lg-btn{width:100%;margin-top:1.4rem;background:linear-gradient(135deg,var(--aura),#0284c7);border:none;border-radius:12px;color:#fff;font:inherit;font-size:0.92rem;font-weight:700;padding:0.95rem;cursor:pointer;box-shadow:0 10px 30px rgba(14,165,233,0.35);transition:transform .15s, box-shadow .2s}
 .lg-btn:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(14,165,233,0.45)}
 .lg-btn:disabled{opacity:.6;cursor:wait;transform:none}
-.lg-foot{text-align:center;color:var(--muted);font-size:0.68rem;margin-top:1.4rem;line-height:1.6}
+.lg-foot{text-align:center;color:var(--muted);font-size:0.68rem;margin-top:1.4rem;line-height:1.8}
+.lg-link{color:var(--aura-light);cursor:pointer;transition:opacity .15s}
+.lg-link:hover{opacity:0.8}
+.lg-link b{font-weight:700}
+.lg-okmsg{display:none;font-size:0.76rem;color:#6ee7b7;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.3);border-radius:10px;padding:0.6rem 0.9rem;margin-top:1rem}
+.lg-okmsg.on{display:block}
 .tb-user{position:fixed;top:1.2rem;right:1.4rem;z-index:40;display:flex;gap:0.5rem;align-items:center;animation:fadeInDown .8s ease}
 .tb-user .quem{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(15,23,42,0.6);border:1px solid var(--border);border-radius:999px;color:var(--text);font-size:0.76rem;font-weight:600;padding:0.5rem 1rem;backdrop-filter:blur(12px);cursor:pointer;transition:border-color .2s, box-shadow .2s}
 .tb-user .quem:hover{border-color:rgba(14,165,233,0.5);box-shadow:0 0 18px rgba(14,165,233,0.15)}
@@ -583,14 +588,30 @@ body.bloqueada .tb-user{display:none}
   <div class="lg-card">
     <div class="lg-badge"><i class="fas fa-circle"></i> Acesso Restrito</div>
     <h2>Gerenciamento <span>Térmico</span></h2>
-    <div class="lg-sub">Central de indicadores da VTC LOG. Entre com seu usuário para acessar os dashboards.</div>
-    <label class="lg-lbl" for="lg-user">Usuário</label>
-    <div class="lg-inp-wrap"><i class="fas fa-user"></i><input id="lg-user" class="lg-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false"></div>
-    <label class="lg-lbl" for="lg-pass">Senha</label>
-    <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="lg-pass" type="password" class="lg-inp" placeholder="••••••••" autocomplete="current-password"></div>
-    <div class="lg-err" id="lg-err"></div>
-    <button class="lg-btn" id="lg-btn" onclick="fazerLoginHub()"><i class="fas fa-right-to-bracket" style="margin-right:0.5rem"></i>Entrar</button>
-    <div class="lg-foot">Mesmo usuário e senha dos indicadores · a sessão vale para todos os painéis</div>
+    <div id="lg-modo-login">
+      <div class="lg-sub">Central de indicadores da VTC LOG. Entre com seu usuário para acessar os dashboards.</div>
+      <label class="lg-lbl" for="lg-user">Usuário</label>
+      <div class="lg-inp-wrap"><i class="fas fa-user"></i><input id="lg-user" class="lg-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false"></div>
+      <label class="lg-lbl" for="lg-pass">Senha</label>
+      <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="lg-pass" type="password" class="lg-inp" placeholder="••••••••" autocomplete="current-password"></div>
+      <div class="lg-err" id="lg-err"></div>
+      <button class="lg-btn" id="lg-btn" onclick="fazerLoginHub()"><i class="fas fa-right-to-bracket" style="margin-right:0.5rem"></i>Entrar</button>
+      <div class="lg-foot">Mesmo usuário e senha dos indicadores · a sessão vale para todos os painéis<br>
+        <a class="lg-link" onclick="modoLoginHub('sol')">Primeiro acesso? <b>Solicitar cadastro</b></a></div>
+    </div>
+    <div id="lg-modo-sol" style="display:none">
+      <div class="lg-sub">Solicite seu cadastro: o acesso é liberado após aprovação da equipe.</div>
+      <label class="lg-lbl" for="sol-nome">Nome completo</label>
+      <div class="lg-inp-wrap"><i class="fas fa-id-card"></i><input id="sol-nome" class="lg-inp" placeholder="Ex.: Maria Silva"></div>
+      <label class="lg-lbl" for="sol-login">Login desejado · nome.sobrenome</label>
+      <div class="lg-inp-wrap"><i class="fas fa-user"></i><input id="sol-login" class="lg-inp" placeholder="nome.sobrenome" autocapitalize="none" spellcheck="false"></div>
+      <label class="lg-lbl" for="sol-senha">Senha · mínimo 6 caracteres</label>
+      <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="sol-senha" type="password" class="lg-inp" autocomplete="new-password"></div>
+      <div class="lg-err" id="sol-err"></div>
+      <div class="lg-okmsg" id="sol-ok"></div>
+      <button class="lg-btn" id="sol-btn" onclick="solicitarAcessoHub()"><i class="fas fa-paper-plane" style="margin-right:0.5rem"></i>Enviar solicitação</button>
+      <div class="lg-foot"><a class="lg-link" onclick="modoLoginHub('login')"><b>Já tem acesso? Entrar</b></a></div>
+    </div>
   </div>
 </div>
 
@@ -1145,6 +1166,54 @@ async function validarSessaoHub(){
 ["lg-user","lg-pass"].forEach(id => document.getElementById(id).addEventListener("keydown", e => {
   if (e.key === "Enter"){ e.preventDefault(); fazerLoginHub(); }
 }));
+
+/* ===== solicitar cadastro (sem login): acesso liberado apos aprovacao ===== */
+function modoLoginHub(m){
+  document.getElementById("lg-modo-login").style.display = (m === "login") ? "" : "none";
+  document.getElementById("lg-modo-sol").style.display = (m === "sol") ? "" : "none";
+  hubErr("");
+  document.getElementById("sol-err").classList.remove("on");
+  document.getElementById("sol-ok").classList.remove("on");
+}
+function solErr(msg){
+  const el = document.getElementById("sol-err");
+  if (msg){ el.textContent = msg; el.classList.add("on"); } else el.classList.remove("on");
+  document.getElementById("sol-ok").classList.remove("on");
+}
+async function solicitarAcessoHub(){
+  const nome = document.getElementById("sol-nome").value.trim();
+  const login = document.getElementById("sol-login").value.trim().toLowerCase();
+  const senha = document.getElementById("sol-senha").value;
+  if (!nome){ solErr("Informe seu nome completo."); return; }
+  if (!/^[a-z0-9]+([._-][a-z0-9]+)*$/.test(login)){ solErr("Login inválido. Use minúsculas no padrão nome.sobrenome."); return; }
+  if (senha.length < 6){ solErr("A senha precisa de pelo menos 6 caracteres."); return; }
+  const btn = document.getElementById("sol-btn");
+  btn.disabled = true;
+  try {
+    const key = chaveUsuarioHub(login);
+    const [jaUsuario, jaSolicitado] = await Promise.all([
+      fetch(FB_HUB + "/_usuarios/" + key + ".json", { cache: "no-store" }).then(r => r.json()),
+      fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { cache: "no-store" }).then(r => r.json()),
+    ]);
+    if (jaUsuario){ solErr("Esse login já tem acesso. Use a tela de entrada."); return; }
+    if (jaSolicitado){ solErr("Esse login já está aguardando aprovação."); return; }
+    const h = await sha256Hub(login + ":" + senha);
+    await fetch(FB_HUB + "/_solicitacoes/" + key + ".json", { method: "PUT",
+      body: JSON.stringify({ nome: nome, login: login, h: h, t: Date.now(), porU: login, porQ: nome + " (auto-cadastro)" }) });
+    const ak = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    fetch(FB_HUB + "/_audit/" + ak + ".json", { method: "PUT",
+      body: JSON.stringify({ t: Date.now(), u: login, q: nome, a: "solicitou acesso (tela de login)", x: login }) }).catch(() => {});
+    solErr("");
+    const ok = document.getElementById("sol-ok");
+    ok.textContent = "Solicitação enviada! Seu acesso será liberado assim que for aprovado.";
+    ok.classList.add("on");
+    ["sol-nome","sol-login","sol-senha"].forEach(i => document.getElementById(i).value = "");
+  } catch(e){
+    solErr("Sem conexão com o servidor. Tente novamente.");
+  } finally {
+    btn.disabled = false;
+  }
+}
 validarSessaoHub();
 
 // Mouse glow effect on cards

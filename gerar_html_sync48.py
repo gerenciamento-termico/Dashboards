@@ -471,7 +471,11 @@ body.bloqueada .topbar, body.bloqueada .wrap{filter:blur(7px);pointer-events:non
 .lg-sub{font-size:.76rem;color:var(--tx2);line-height:1.55;margin-bottom:16px}
 .lg-err{font-size:.73rem;color:#dc2626;background:#fef2f2;border:1px solid #fecaca;border-radius:9px;padding:9px 12px;margin-top:12px;display:none}
 .lg-err.on{display:block}
-.lg-foot{font-size:.65rem;color:var(--tx3);text-align:center;margin-top:16px;line-height:1.5}
+.lg-foot{font-size:.65rem;color:var(--tx3);text-align:center;margin-top:16px;line-height:1.8}
+.lg-link{color:var(--blue);cursor:pointer}
+.lg-link:hover{opacity:.8}
+.lg-okmsg{display:none;font-size:.73rem;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:9px 12px;margin-top:12px}
+.lg-okmsg.on{display:block}
 .tb-user{display:flex;align-items:center;gap:9px}
 .tb-user .pill b{font-weight:600}
 .pill-user{cursor:pointer;transition:border-color .12s, box-shadow .12s}
@@ -648,14 +652,30 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
       <h1 style="font-size:.98rem">Sincronismo 48h<small>VTC LOG &middot; Gerenciamento T&eacute;rmico</small></h1>
     </div>
     <div class="lg-tit">Acesso restrito</div>
-    <div class="lg-sub">Entre com seu usu&aacute;rio para visualizar as pend&ecirc;ncias e registrar cobran&ccedil;as e observa&ccedil;&otilde;es em nome da sua conta.</div>
-    <label class="mo-lbl" for="lg-user">Usu&aacute;rio</label>
-    <input id="lg-user" class="mo-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false">
-    <label class="mo-lbl" for="lg-pass">Senha</label>
-    <input id="lg-pass" type="password" class="mo-inp" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password">
-    <div class="lg-err" id="lg-err"></div>
-    <button class="mo-btn mo-primary" id="lg-btn" onclick="fazerLogin()" style="width:100%;margin-top:16px;padding:12px"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
-    <div class="lg-foot">Quadro compartilhado do Gerenciamento T&eacute;rmico &middot; toda marca&ccedil;&atilde;o fica registrada com o nome de quem fez</div>
+    <div id="lg-modo-login">
+      <div class="lg-sub">Entre com seu usu&aacute;rio para visualizar as pend&ecirc;ncias e registrar cobran&ccedil;as e observa&ccedil;&otilde;es em nome da sua conta.</div>
+      <label class="mo-lbl" for="lg-user">Usu&aacute;rio</label>
+      <input id="lg-user" class="mo-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false">
+      <label class="mo-lbl" for="lg-pass">Senha</label>
+      <input id="lg-pass" type="password" class="mo-inp" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password">
+      <div class="lg-err" id="lg-err"></div>
+      <button class="mo-btn mo-primary" id="lg-btn" onclick="fazerLogin()" style="width:100%;margin-top:16px;padding:12px"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
+      <div class="lg-foot">Quadro compartilhado do Gerenciamento T&eacute;rmico &middot; toda marca&ccedil;&atilde;o fica registrada com o nome de quem fez<br>
+        <a class="lg-link" onclick="modoLogin48('sol')">Primeiro acesso? <b>Solicitar cadastro</b></a></div>
+    </div>
+    <div id="lg-modo-sol" style="display:none">
+      <div class="lg-sub">Solicite seu cadastro: o acesso &eacute; liberado ap&oacute;s aprova&ccedil;&atilde;o da equipe.</div>
+      <label class="mo-lbl" for="sol-nome">Nome completo</label>
+      <input id="sol-nome" class="mo-inp" placeholder="Ex.: Maria Silva">
+      <label class="mo-lbl" for="sol-login">Login desejado <small>&middot; nome.sobrenome</small></label>
+      <input id="sol-login" class="mo-inp" placeholder="nome.sobrenome" autocapitalize="none" spellcheck="false">
+      <label class="mo-lbl" for="sol-senha">Senha <small>&middot; m&iacute;nimo 6 caracteres</small></label>
+      <input id="sol-senha" type="password" class="mo-inp" autocomplete="new-password">
+      <div class="lg-err" id="sol-err"></div>
+      <div class="lg-okmsg" id="sol-ok"></div>
+      <button class="mo-btn mo-primary" id="sol-btn" onclick="solicitarAcesso48()" style="width:100%;margin-top:16px;padding:12px"><i class="fa-solid fa-paper-plane"></i> Enviar solicita&ccedil;&atilde;o</button>
+      <div class="lg-foot"><a class="lg-link" onclick="modoLogin48('login')"><b>J&aacute; tem acesso? Entrar</b></a></div>
+    </div>
   </div>
 </div>
 
@@ -848,6 +868,54 @@ async function validarSessaoSalva(){
 ["lg-user","lg-pass"].forEach(id => document.getElementById(id).addEventListener("keydown", e => {
   if (e.key === "Enter"){ e.preventDefault(); fazerLogin(); }
 }));
+
+/* ===== solicitar cadastro (sem login): acesso liberado apos aprovacao ===== */
+function modoLogin48(m){
+  document.getElementById("lg-modo-login").style.display = (m === "login") ? "" : "none";
+  document.getElementById("lg-modo-sol").style.display = (m === "sol") ? "" : "none";
+  lgErr("");
+  document.getElementById("sol-err").classList.remove("on");
+  document.getElementById("sol-ok").classList.remove("on");
+}
+function solErr(msg){
+  const el = document.getElementById("sol-err");
+  if (msg){ el.textContent = msg; el.classList.add("on"); } else el.classList.remove("on");
+  document.getElementById("sol-ok").classList.remove("on");
+}
+async function solicitarAcesso48(){
+  const nome = document.getElementById("sol-nome").value.trim();
+  const login = document.getElementById("sol-login").value.trim().toLowerCase();
+  const senha = document.getElementById("sol-senha").value;
+  if (!nome){ solErr("Informe seu nome completo."); return; }
+  if (!/^[a-z0-9]+([._-][a-z0-9]+)*$/.test(login)){ solErr("Login inv\u00e1lido. Use min\u00fasculas no padr\u00e3o nome.sobrenome."); return; }
+  if (senha.length < 6){ solErr("A senha precisa de pelo menos 6 caracteres."); return; }
+  const btn = document.getElementById("sol-btn");
+  btn.disabled = true;
+  try {
+    const key = chaveUsuario(login);
+    const [jaUsuario, jaSolicitado] = await Promise.all([
+      fetch(FB + "/_usuarios/" + key + ".json", { cache: "no-store" }).then(r => r.json()),
+      fetch(FB + "/_solicitacoes/" + key + ".json", { cache: "no-store" }).then(r => r.json()),
+    ]);
+    if (jaUsuario){ solErr("Esse login j\u00e1 tem acesso. Use a tela de entrada."); return; }
+    if (jaSolicitado){ solErr("Esse login j\u00e1 est\u00e1 aguardando aprova\u00e7\u00e3o."); return; }
+    const h = await sha256(login + ":" + senha);
+    await fetch(FB + "/_solicitacoes/" + key + ".json", { method: "PUT",
+      body: JSON.stringify({ nome: nome, login: login, h: h, t: Date.now(), porU: login, porQ: nome + " (auto-cadastro)" }) });
+    const ak = Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+    fetch(FB + "/_audit/" + ak + ".json", { method: "PUT",
+      body: JSON.stringify({ t: Date.now(), u: login, q: nome, a: "solicitou acesso (tela de login)", x: login }) }).catch(() => {});
+    solErr("");
+    const ok = document.getElementById("sol-ok");
+    ok.textContent = "Solicita\u00e7\u00e3o enviada! Seu acesso ser\u00e1 liberado assim que for aprovado.";
+    ok.classList.add("on");
+    ["sol-nome","sol-login","sol-senha"].forEach(i => document.getElementById(i).value = "");
+  } catch(e){
+    solErr("Sem conex\u00e3o com o servidor. Tente novamente.");
+  } finally {
+    btn.disabled = false;
+  }
+}
 
 /* ===== presenca e trilha de alteracoes (gravadas por toda sessao; leitura restrita) ===== */
 let PRES_TIMER = null;

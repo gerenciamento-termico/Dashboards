@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T16:14:58",
+  "gerado_em": "2026-10-20T16:17:06",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 265,
+    "pendentes_janela": 264,
     "cobranca_gru_janela": 31,
     "sem_embarque_efetiva": 167,
     "com_embarque_efetiva": 4831,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "VTCLOG - REC": 77,
       "THE - AERONEIVA EXPRESS": 33,
-      "VTCLOG - GRU": 31,
+      "VTCLOG - GRU": 30,
       "SSA - LUTY LOG": 26,
       "JPA - LIDER CARGAS": 20,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
@@ -59,14 +59,14 @@
       "SC": 13,
       "MG": 12,
       "RS": 12,
-      "PA": 9,
       "AC": 9,
+      "PA": 8,
       "PR": 5
     },
     "latencia": {
-      "n_agente": 4245,
+      "n_agente": 4246,
       "n_so_gru": 21,
-      "n_sem_primeiro_sync": 530,
+      "n_sem_primeiro_sync": 529,
       "media_horas": 0.33,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "19/10/2026",
       "pedidos": 28,
       "loggers": 144,
-      "sincronizados": 73,
-      "pendentes": 71,
+      "sincronizados": 74,
+      "pendentes": 70,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 9,
-      "pct": 49.3,
-      "n_latencia": 66,
+      "pedidos_pendentes": 8,
+      "pct": 48.6,
+      "n_latencia": 67,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 78
+      "n_sem_primeiro_sync": 77
     },
     {
       "dia_iso": "2026-10-20",

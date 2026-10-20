@@ -819,7 +819,7 @@ function verSenha(id, btn){
   const aberto = inp.type === "text";
   inp.type = aberto ? "password" : "text";
   btn.innerHTML = '<i class="fa-solid fa-eye' + (aberto ? '' : '-slash') + '"></i>';
-  btn.title = aberto ? "Mostrar senha" : "Ocultar senha";
+  btn.title = (aberto ? "Mostrar" : "Ocultar") + " senha";
 }
 function aplicarSessao(){
   document.body.classList.remove("bloqueada");

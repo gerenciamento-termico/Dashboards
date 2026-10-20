@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T17:21:21",
+  "gerado_em": "2026-10-20T17:35:01",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 246,
-    "cobranca_gru_janela": 31,
+    "pendentes_janela": 245,
+    "cobranca_gru_janela": 29,
     "sem_embarque_efetiva": 196,
     "com_embarque_efetiva": 4934,
     "loggers_sem_lastsync": 61,
@@ -61,12 +61,12 @@
       "MG": 13,
       "RS": 12,
       "AC": 9,
-      "PR": 7
+      "AM": 6
     },
     "latencia": {
-      "n_agente": 4361,
+      "n_agente": 4372,
       "n_so_gru": 21,
-      "n_sem_primeiro_sync": 517,
+      "n_sem_primeiro_sync": 506,
       "media_horas": 0.32,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -193,18 +193,18 @@
       "dia_full": "07/10/2026",
       "pedidos": 75,
       "loggers": 359,
-      "sincronizados": 349,
+      "sincronizados": 350,
       "pendentes": 9,
       "sem_embarque": 0,
-      "cobranca_gru": 1,
+      "cobranca_gru": 0,
       "pedidos_pendentes": 8,
       "pct": 2.5,
-      "n_latencia": 332,
-      "media_horas": 0.8,
+      "n_latencia": 333,
+      "media_horas": 0.79,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 27
+      "n_sem_primeiro_sync": 26
     },
     {
       "dia_iso": "2026-10-08",
@@ -231,18 +231,18 @@
       "dia_full": "09/10/2026",
       "pedidos": 145,
       "loggers": 487,
-      "sincronizados": 464,
+      "sincronizados": 465,
       "pendentes": 17,
       "sem_embarque": 26,
-      "cobranca_gru": 6,
+      "cobranca_gru": 5,
       "pedidos_pendentes": 13,
       "pct": 3.5,
-      "n_latencia": 451,
+      "n_latencia": 452,
       "media_horas": 0.59,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 35
+      "n_sem_primeiro_sync": 34
     },
     {
       "dia_iso": "2026-10-10",
@@ -256,12 +256,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
       "pct": 6.2,
-      "n_latencia": 13,
-      "media_horas": 4.9,
-      "mediana_horas": 0.05,
+      "n_latencia": 14,
+      "media_horas": 4.55,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 3
+      "n_sem_primeiro_sync": 2
     },
     {
       "dia_iso": "2026-10-11",
@@ -313,12 +313,12 @@
       "cobranca_gru": 0,
       "pedidos_pendentes": 9,
       "pct": 4.1,
-      "n_latencia": 196,
+      "n_latencia": 200,
       "media_horas": 0.19,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 21
+      "n_sem_primeiro_sync": 17
     },
     {
       "dia_iso": "2026-10-14",
@@ -332,12 +332,12 @@
       "cobranca_gru": 5,
       "pedidos_pendentes": 1,
       "pct": 2.2,
-      "n_latencia": 166,
+      "n_latencia": 167,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 1,
-      "n_sem_primeiro_sync": 17
+      "n_sem_primeiro_sync": 16
     },
     {
       "dia_iso": "2026-10-15",
@@ -370,12 +370,12 @@
       "cobranca_gru": 3,
       "pedidos_pendentes": 15,
       "pct": 7.4,
-      "n_latencia": 176,
+      "n_latencia": 178,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 28
+      "n_sem_primeiro_sync": 26
     },
     {
       "dia_iso": "2026-10-17",
@@ -440,18 +440,18 @@
       "dia_full": "20/10/2026",
       "pedidos": 79,
       "loggers": 390,
-      "sincronizados": 275,
-      "pendentes": 115,
+      "sincronizados": 276,
+      "pendentes": 114,
       "sem_embarque": 131,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 26,
-      "pct": 29.5,
-      "n_latencia": 225,
+      "pedidos_pendentes": 25,
+      "pct": 29.2,
+      "n_latencia": 226,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 165
+      "n_sem_primeiro_sync": 164
     }
   ],
   "erros_validacao": {},

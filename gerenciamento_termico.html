@@ -486,6 +486,12 @@ body.bloqueada .lg-ov{display:flex}
 .lg-inp:focus{border-color:var(--aura);box-shadow:0 0 0 3px rgba(14,165,233,0.15), 0 0 24px rgba(14,165,233,0.12)}
 .lg-err{display:none;font-size:0.76rem;color:#fca5a5;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.25);border-radius:10px;padding:0.6rem 0.9rem;margin-top:1rem}
 .lg-err.on{display:block}
+.lg-mark{width:58px;height:58px;border-radius:17px;background:linear-gradient(135deg,var(--aura),#0284c7);display:flex;align-items:center;justify-content:center;color:#fff;font-size:1.45rem;margin-bottom:1.3rem;box-shadow:0 12px 34px rgba(14,165,233,0.4)}
+.lg-inp-wrap .eye{position:absolute;right:0.7rem;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--muted);cursor:pointer;font-size:0.85rem;padding:6px;transition:color .15s}
+.lg-inp-wrap .eye:hover{color:var(--aura-light)}
+.lg-inp.com-eye{padding-right:2.6rem}
+@keyframes lgshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.lg-card.erro{animation:lgshake .4s ease}
 .lg-btn{width:100%;margin-top:1.4rem;background:linear-gradient(135deg,var(--aura),#0284c7);border:none;border-radius:12px;color:#fff;font:inherit;font-size:0.92rem;font-weight:700;padding:0.95rem;cursor:pointer;box-shadow:0 10px 30px rgba(14,165,233,0.35);transition:transform .15s, box-shadow .2s}
 .lg-btn:hover{transform:translateY(-1px);box-shadow:0 14px 40px rgba(14,165,233,0.45)}
 .lg-btn:disabled{opacity:.6;cursor:wait;transform:none}
@@ -586,6 +592,7 @@ body.bloqueada .tb-user{display:none}
 <!-- Login Gate -->
 <div class="lg-ov" id="lg-ov">
   <div class="lg-card">
+    <div class="lg-mark"><i class="fas fa-chart-line"></i></div>
     <div class="lg-badge"><i class="fas fa-circle"></i> Acesso Restrito</div>
     <h2>Gerenciamento Térmico</h2>
     <div id="lg-modo-login">
@@ -593,7 +600,7 @@ body.bloqueada .tb-user{display:none}
       <label class="lg-lbl" for="lg-user">Usuário</label>
       <div class="lg-inp-wrap"><i class="fas fa-user"></i><input id="lg-user" class="lg-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false"></div>
       <label class="lg-lbl" for="lg-pass">Senha</label>
-      <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="lg-pass" type="password" class="lg-inp" placeholder="••••••••" autocomplete="current-password"></div>
+      <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="lg-pass" type="password" class="lg-inp com-eye" placeholder="••••••••" autocomplete="current-password"><button type="button" class="eye" onclick="verSenha('lg-pass',this)" title="Mostrar senha"><i class="fas fa-eye"></i></button></div>
       <div class="lg-err" id="lg-err"></div>
       <button class="lg-btn" id="lg-btn" onclick="fazerLoginHub()"><i class="fas fa-right-to-bracket" style="margin-right:0.5rem"></i>Entrar</button>
       <div class="lg-foot">Mesmo usuário e senha dos indicadores · a sessão vale para todos os painéis<br>
@@ -606,7 +613,7 @@ body.bloqueada .tb-user{display:none}
       <label class="lg-lbl" for="sol-login">Login desejado · nome.sobrenome</label>
       <div class="lg-inp-wrap"><i class="fas fa-user"></i><input id="sol-login" class="lg-inp" placeholder="nome.sobrenome" autocapitalize="none" spellcheck="false"></div>
       <label class="lg-lbl" for="sol-senha">Senha · mínimo 6 caracteres</label>
-      <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="sol-senha" type="password" class="lg-inp" autocomplete="new-password"></div>
+      <div class="lg-inp-wrap"><i class="fas fa-lock"></i><input id="sol-senha" type="password" class="lg-inp com-eye" autocomplete="new-password"><button type="button" class="eye" onclick="verSenha('sol-senha',this)" title="Mostrar senha"><i class="fas fa-eye"></i></button></div>
       <div class="lg-err" id="sol-err"></div>
       <div class="lg-okmsg" id="sol-ok"></div>
       <button class="lg-btn" id="sol-btn" onclick="solicitarAcessoHub()"><i class="fas fa-paper-plane" style="margin-right:0.5rem"></i>Enviar solicitação</button>
@@ -970,7 +977,18 @@ async function sha256Hub(txt){
 }
 function hubErr(msg){
   const el = document.getElementById("lg-err");
-  if (msg){ el.textContent = msg; el.classList.add("on"); } else el.classList.remove("on");
+  if (msg){
+    el.textContent = msg; el.classList.add("on");
+    const card = document.querySelector(".lg-card");
+    if (card){ card.classList.remove("erro"); void card.offsetWidth; card.classList.add("erro"); }
+  } else el.classList.remove("on");
+}
+function verSenha(id, btn){
+  const inp = document.getElementById(id);
+  const aberto = inp.type === "text";
+  inp.type = aberto ? "password" : "text";
+  btn.innerHTML = '<i class="fas fa-eye' + (aberto ? '' : '-slash') + '"></i>';
+  btn.title = aberto ? "Mostrar senha" : "Ocultar senha";
 }
 function chaveUsuarioHub(login){ return login.replace(/[.#$\[\]\/]/g, "_"); }
 async function pulsoPresencaHub(){
@@ -1118,8 +1136,12 @@ function bloquearHub(){
   try { localStorage.removeItem(SKEY_HUB); } catch(e){}
   document.body.classList.add("bloqueada");
   document.getElementById("lg-pass").value = "";
+  try { document.getElementById("lg-user").value = localStorage.getItem("gt_ultimo_login") || ""; } catch(e){}
   hubErr("");
-  setTimeout(() => document.getElementById("lg-user").focus(), 200);
+  setTimeout(() => {
+    const u = document.getElementById("lg-user");
+    (u.value ? document.getElementById("lg-pass") : u).focus();
+  }, 200);
 }
 function sairHub(){
   if (SES_HUB){
@@ -1145,7 +1167,10 @@ async function fazerLoginHub(){
       hubErr("Usuário ou senha incorretos.");
     } else {
       SES_HUB = { u: u, nome: reg.nome || u, t: Date.now() };
-      try { localStorage.setItem(SKEY_HUB, JSON.stringify(SES_HUB)); } catch(e){}
+      try {
+        localStorage.setItem(SKEY_HUB, JSON.stringify(SES_HUB));
+        localStorage.setItem("gt_ultimo_login", u);
+      } catch(e){}
       hubErr("");
       aplicarSessaoHub();
       auditHub("entrou no sistema");

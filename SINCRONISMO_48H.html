@@ -194,6 +194,12 @@ body.bloqueada .topbar, body.bloqueada .wrap{filter:blur(7px);pointer-events:non
 .lg-link:hover{opacity:.8}
 .lg-okmsg{display:none;font-size:.73rem;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:9px;padding:9px 12px;margin-top:12px}
 .lg-okmsg.on{display:block}
+.senha-wrap{position:relative}
+.senha-wrap .eye{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;color:var(--tx3);cursor:pointer;font-size:.82rem;padding:6px;transition:color .15s}
+.senha-wrap .eye:hover{color:var(--blue)}
+.senha-wrap input{padding-right:38px}
+@keyframes lgshake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+.lg-card.erro{animation:lgshake .4s ease}
 .tb-user{display:flex;align-items:center;gap:9px}
 .tb-user .pill b{font-weight:600}
 .pill-user{cursor:pointer;transition:border-color .12s, box-shadow .12s}
@@ -285,7 +291,7 @@ footer{margin-top:26px;text-align:center;color:var(--tx2);font-size:.7rem;line-h
     </div>
     <div class="tb-meta">
       <span class="pill"><span class="livedot"></span> Ao vivo &middot; recalculado a cada 30s</span>
-      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>20/10/2026 16:39</b> &middot; ciclo 10 min</span>
+      <span class="pill"><i class="fa-regular fa-clock"></i> Atualizado <b>20/10/2026 16:46</b> &middot; ciclo 10 min</span>
       <span class="pill"><i class="fa-solid fa-database"></i> Fonte 20/10/2026 16:39</span>
     </div>
     <div class="tb-user">
@@ -375,7 +381,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
       <label class="mo-lbl" for="lg-user">Usu&aacute;rio</label>
       <input id="lg-user" class="mo-inp" placeholder="nome.sobrenome" autocomplete="username" autocapitalize="none" spellcheck="false">
       <label class="mo-lbl" for="lg-pass">Senha</label>
-      <input id="lg-pass" type="password" class="mo-inp" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password">
+      <div class="senha-wrap"><input id="lg-pass" type="password" class="mo-inp" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" autocomplete="current-password"><button type="button" class="eye" onclick="verSenha('lg-pass',this)" title="Mostrar senha"><i class="fa-solid fa-eye"></i></button></div>
       <div class="lg-err" id="lg-err"></div>
       <button class="mo-btn mo-primary" id="lg-btn" onclick="fazerLogin()" style="width:100%;margin-top:16px;padding:12px"><i class="fa-solid fa-right-to-bracket"></i> Entrar</button>
       <div class="lg-foot">Quadro compartilhado do Gerenciamento T&eacute;rmico &middot; toda marca&ccedil;&atilde;o fica registrada com o nome de quem fez<br>
@@ -388,7 +394,7 @@ Clique no cabe&ccedil;alho de qualquer coluna para ordenar a grade.</div>
       <label class="mo-lbl" for="sol-login">Login desejado <small>&middot; nome.sobrenome</small></label>
       <input id="sol-login" class="mo-inp" placeholder="nome.sobrenome" autocapitalize="none" spellcheck="false">
       <label class="mo-lbl" for="sol-senha">Senha <small>&middot; m&iacute;nimo 6 caracteres</small></label>
-      <input id="sol-senha" type="password" class="mo-inp" autocomplete="new-password">
+      <div class="senha-wrap"><input id="sol-senha" type="password" class="mo-inp" autocomplete="new-password"><button type="button" class="eye" onclick="verSenha('sol-senha',this)" title="Mostrar senha"><i class="fa-solid fa-eye"></i></button></div>
       <div class="lg-err" id="sol-err"></div>
       <div class="lg-okmsg" id="sol-ok"></div>
       <button class="mo-btn mo-primary" id="sol-btn" onclick="solicitarAcesso48()" style="width:100%;margin-top:16px;padding:12px"><i class="fa-solid fa-paper-plane"></i> Enviar solicita&ccedil;&atilde;o</button>
@@ -520,7 +526,18 @@ async function sha256(txt){
 }
 function lgErr(msg){
   const el = document.getElementById("lg-err");
-  if (msg){ el.textContent = msg; el.classList.add("on"); } else el.classList.remove("on");
+  if (msg){
+    el.textContent = msg; el.classList.add("on");
+    const card = document.querySelector(".lg-card");
+    if (card){ card.classList.remove("erro"); void card.offsetWidth; card.classList.add("erro"); }
+  } else el.classList.remove("on");
+}
+function verSenha(id, btn){
+  const inp = document.getElementById(id);
+  const aberto = inp.type === "text";
+  inp.type = aberto ? "password" : "text";
+  btn.innerHTML = '<i class="fa-solid fa-eye' + (aberto ? '' : '-slash') + '"></i>';
+  btn.title = aberto ? "Mostrar senha" : "Ocultar senha";
 }
 function aplicarSessao(){
   document.body.classList.remove("bloqueada");
@@ -533,8 +550,12 @@ function bloquear(){
   try { localStorage.removeItem(SKEY); } catch(e){}
   document.body.classList.add("bloqueada");
   document.getElementById("lg-pass").value = "";
+  try { document.getElementById("lg-user").value = localStorage.getItem("gt_ultimo_login") || ""; } catch(e){}
   lgErr("");
-  setTimeout(() => document.getElementById("lg-user").focus(), 150);
+  setTimeout(() => {
+    const u = document.getElementById("lg-user");
+    (u.value ? document.getElementById("lg-pass") : u).focus();
+  }, 150);
 }
 function sair(){
   if (SESSION){
@@ -561,7 +582,10 @@ async function fazerLogin(){
       lgErr("Usu\u00e1rio ou senha incorretos.");
     } else {
       SESSION = { u: u, nome: reg.nome || u, t: Date.now() };
-      try { localStorage.setItem(SKEY, JSON.stringify(SESSION)); } catch(e){}
+      try {
+        localStorage.setItem(SKEY, JSON.stringify(SESSION));
+        localStorage.setItem("gt_ultimo_login", u);
+      } catch(e){}
       lgErr("");
       aplicarSessao();
       registrarAudit("entrou no sistema", "");

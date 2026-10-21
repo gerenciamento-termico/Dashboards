@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-21T14:24:21",
+  "gerado_em": "2026-10-21T14:34:22",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 181,
+    "pendentes_janela": 155,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 135,
     "com_embarque_efetiva": 4760,
@@ -41,7 +41,6 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 36,
-      "PMW - MK BILLIG TRANSPORTES E LOGISTICA EIRELLI": 29,
       "THE - AERONEIVA EXPRESS": 23,
       "BEL - MH FROTA TRANSPORTE": 15,
       "RBR - RODOTEC": 9,
@@ -49,10 +48,10 @@
       "MOC - LOG SERVIÇOS": 8,
       "VIX - SOULOG EXPRESS": 6,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 6,
-      "LDB - ND CARGAS LTDA": 5
+      "LDB - ND CARGAS LTDA": 5,
+      "UDI - ENTREGAS URGENTES LTDA": 4
     },
     "top10_ufs_pendencias": {
-      "TO": 30,
       "PA": 25,
       "PI": 23,
       "SP": 20,
@@ -61,12 +60,13 @@
       "AC": 9,
       "SC": 8,
       "BA": 8,
-      "ES": 7
+      "ES": 7,
+      "PR": 6
     },
     "latencia": {
-      "n_agente": 4291,
+      "n_agente": 4317,
       "n_so_gru": 26,
-      "n_sem_primeiro_sync": 401,
+      "n_sem_primeiro_sync": 375,
       "media_horas": 0.39,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "20/10/2026",
       "pedidos": 94,
       "loggers": 536,
-      "sincronizados": 479,
-      "pendentes": 57,
+      "sincronizados": 505,
+      "pendentes": 31,
       "sem_embarque": 70,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 19,
-      "pct": 10.6,
-      "n_latencia": 444,
+      "pedidos_pendentes": 18,
+      "pct": 5.8,
+      "n_latencia": 470,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 92
+      "n_sem_primeiro_sync": 66
     },
     {
       "dia_iso": "2026-10-21",

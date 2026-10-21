@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-21T07:35:45",
+  "gerado_em": "2026-10-21T07:45:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 204,
-    "cobranca_gru_janela": 25,
+    "pendentes_janela": 205,
+    "cobranca_gru_janela": 24,
     "sem_embarque_efetiva": 196,
     "com_embarque_efetiva": 4508,
     "loggers_sem_lastsync": 55,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 37,
-      "VTCLOG - GRU": 34,
+      "VTCLOG - GRU": 35,
       "THE - AERONEIVA EXPRESS": 30,
       "JPA - LIDER CARGAS": 20,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
@@ -52,7 +52,7 @@
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 5
     },
     "top10_ufs_pendencias": {
-      "PA": 46,
+      "PA": 47,
       "PI": 30,
       "PB": 21,
       "SP": 20,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 3998,
-      "n_so_gru": 19,
-      "n_sem_primeiro_sync": 454,
+      "n_so_gru": 20,
+      "n_sem_primeiro_sync": 453,
       "media_horas": 0.34,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -203,8 +203,8 @@
       "media_horas": 0.49,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
-      "n_sync_so_gru": 4,
-      "n_sem_primeiro_sync": 43
+      "n_sync_so_gru": 5,
+      "n_sem_primeiro_sync": 42
     },
     {
       "dia_iso": "2026-10-09",
@@ -308,11 +308,11 @@
       "pedidos": 58,
       "loggers": 184,
       "sincronizados": 175,
-      "pendentes": 5,
+      "pendentes": 6,
       "sem_embarque": 1,
-      "cobranca_gru": 4,
+      "cobranca_gru": 3,
       "pedidos_pendentes": 1,
-      "pct": 2.7,
+      "pct": 3.3,
       "n_latencia": 167,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

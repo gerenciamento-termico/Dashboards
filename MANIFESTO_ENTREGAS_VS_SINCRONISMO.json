@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-21T05:15:37",
+  "gerado_em": "2026-10-21T05:25:37",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,8 +27,8 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 217,
-    "cobranca_gru_janela": 26,
+    "pendentes_janela": 218,
+    "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 196,
     "com_embarque_efetiva": 4508,
     "loggers_sem_lastsync": 62,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 37,
-      "VTCLOG - GRU": 33,
+      "VTCLOG - GRU": 34,
       "THE - AERONEIVA EXPRESS": 30,
       "JPA - LIDER CARGAS": 20,
       "VTCLOG - REC": 15,
@@ -52,7 +52,7 @@
       "LDB - ND CARGAS LTDA": 5
     },
     "top10_ufs_pendencias": {
-      "PA": 45,
+      "PA": 46,
       "PB": 35,
       "PI": 30,
       "SP": 20,
@@ -308,11 +308,11 @@
       "pedidos": 58,
       "loggers": 184,
       "sincronizados": 175,
-      "pendentes": 4,
+      "pendentes": 5,
       "sem_embarque": 1,
-      "cobranca_gru": 5,
+      "cobranca_gru": 4,
       "pedidos_pendentes": 1,
-      "pct": 2.2,
+      "pct": 2.7,
       "n_latencia": 167,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

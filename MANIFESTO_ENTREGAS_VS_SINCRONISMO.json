@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-21T15:09:20",
+  "gerado_em": "2026-10-21T15:14:28",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 153,
+    "pendentes_janela": 151,
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 135,
     "com_embarque_efetiva": 4764,
@@ -49,13 +49,13 @@
       "VIX - SOULOG EXPRESS": 6,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 6,
       "LDB - ND CARGAS LTDA": 5,
-      "UDI - ENTREGAS URGENTES LTDA": 4
+      "VDC - MASPEX CARGO": 4
     },
     "top10_ufs_pendencias": {
       "PA": 25,
       "PI": 23,
       "SP": 20,
-      "MG": 15,
+      "MG": 13,
       "RS": 9,
       "BA": 9,
       "AC": 9,
@@ -64,9 +64,9 @@
       "PR": 6
     },
     "latencia": {
-      "n_agente": 4321,
+      "n_agente": 4323,
       "n_so_gru": 26,
-      "n_sem_primeiro_sync": 375,
+      "n_sem_primeiro_sync": 373,
       "media_horas": 0.39,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -421,18 +421,18 @@
       "dia_full": "20/10/2026",
       "pedidos": 94,
       "loggers": 536,
-      "sincronizados": 505,
-      "pendentes": 31,
+      "sincronizados": 507,
+      "pendentes": 29,
       "sem_embarque": 70,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 18,
-      "pct": 5.8,
-      "n_latencia": 470,
+      "pedidos_pendentes": 16,
+      "pct": 5.4,
+      "n_latencia": 472,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 66
+      "n_sem_primeiro_sync": 64
     },
     {
       "dia_iso": "2026-10-21",

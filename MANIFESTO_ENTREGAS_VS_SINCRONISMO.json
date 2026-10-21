@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-21T09:44:45",
+  "gerado_em": "2026-10-21T09:54:40",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -29,10 +29,10 @@
     "ocultos_ausentes": 227,
     "pendentes_janela": 166,
     "cobranca_gru_janela": 28,
-    "sem_embarque_efetiva": 196,
-    "com_embarque_efetiva": 4533,
+    "sem_embarque_efetiva": 165,
+    "com_embarque_efetiva": 4564,
     "loggers_sem_lastsync": 50,
-    "nao_avaliados": 196,
+    "nao_avaliados": 165,
     "pedidos_com_agente": 4870,
     "dtbtransporte": {
       "consultados": 953,
@@ -64,9 +64,9 @@
       "TO": 4
     },
     "latencia": {
-      "n_agente": 4064,
+      "n_agente": 4077,
       "n_so_gru": 21,
-      "n_sem_primeiro_sync": 411,
+      "n_sem_primeiro_sync": 429,
       "media_horas": 0.35,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -161,12 +161,12 @@
       "cobranca_gru": 2,
       "pedidos_pendentes": 11,
       "pct": 3.2,
-      "n_latencia": 451,
+      "n_latencia": 452,
       "media_horas": 0.11,
       "mediana_horas": 0.04,
       "p90_horas": 0.07,
       "n_sync_so_gru": 3,
-      "n_sem_primeiro_sync": 52
+      "n_sem_primeiro_sync": 51
     },
     {
       "dia_iso": "2026-10-07",
@@ -423,7 +423,7 @@
       "loggers": 507,
       "sincronizados": 435,
       "pendentes": 69,
-      "sem_embarque": 131,
+      "sem_embarque": 100,
       "cobranca_gru": 3,
       "pedidos_pendentes": 19,
       "pct": 13.6,
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-21",
       "dia": "21/10",
       "dia_full": "21/10/2026",
-      "pedidos": 2,
-      "loggers": 24,
-      "sincronizados": 23,
+      "pedidos": 3,
+      "loggers": 55,
+      "sincronizados": 54,
       "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 1,
-      "pct": 4.2,
-      "n_latencia": 23,
-      "media_horas": 0.04,
-      "mediana_horas": 0.04,
+      "pct": 1.8,
+      "n_latencia": 35,
+      "media_horas": 0.03,
+      "mediana_horas": 0.02,
       "p90_horas": 0.06,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 1
+      "n_sem_primeiro_sync": 20
     }
   ],
   "erros_validacao": {},

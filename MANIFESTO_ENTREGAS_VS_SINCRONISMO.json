@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-20T23:55:21",
+  "gerado_em": "2026-10-21T00:00:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,79 +19,60 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5397,
-    "pedidos_janela": 1026,
-    "loggers_ares_janela": 5211,
-    "loggers_ares_antes_dedup": 5248,
+    "pares_janela": 4845,
+    "pedidos_janela": 950,
+    "loggers_ares_janela": 4667,
+    "loggers_ares_antes_dedup": 4704,
     "dedup_dia_logger": 37,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 249,
-    "cobranca_gru_janela": 30,
+    "pendentes_janela": 217,
+    "cobranca_gru_janela": 26,
     "sem_embarque_efetiva": 196,
-    "com_embarque_efetiva": 5052,
-    "loggers_sem_lastsync": 63,
+    "com_embarque_efetiva": 4508,
+    "loggers_sem_lastsync": 62,
     "nao_avaliados": 196,
-    "pedidos_com_agente": 5397,
+    "pedidos_com_agente": 4845,
     "dtbtransporte": {
-      "consultados": 1026,
-      "mapeados": 1026,
-      "linhas": 1084
+      "consultados": 950,
+      "mapeados": 950,
+      "linhas": 995
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 37,
-      "THE - AERONEIVA EXPRESS": 33,
       "VTCLOG - GRU": 33,
-      "SSA - LUTY LOG": 26,
+      "THE - AERONEIVA EXPRESS": 30,
       "JPA - LIDER CARGAS": 20,
       "VTCLOG - REC": 15,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 9,
       "RBR - RODOTEC": 9,
-      "MOC - LOG SERVIÇOS": 8
+      "MOC - LOG SERVIÇOS": 8,
+      "LDB - ND CARGAS LTDA": 5
     },
     "top10_ufs_pendencias": {
       "PA": 45,
       "PB": 35,
-      "PI": 32,
-      "BA": 32,
+      "PI": 30,
       "SP": 20,
       "MG": 14,
       "SC": 13,
       "RS": 12,
       "AC": 9,
-      "AM": 6
+      "BA": 7,
+      "PR": 6
     },
     "latencia": {
-      "n_agente": 4474,
-      "n_so_gru": 21,
-      "n_sem_primeiro_sync": 520,
-      "media_horas": 0.31,
+      "n_agente": 3984,
+      "n_so_gru": 19,
+      "n_sem_primeiro_sync": 468,
+      "media_horas": 0.34,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
     }
   },
   "serie_diaria": [
-    {
-      "dia_iso": "2026-10-01",
-      "dia": "01/10",
-      "dia_full": "01/10/2026",
-      "pedidos": 78,
-      "loggers": 544,
-      "sincronizados": 508,
-      "pendentes": 32,
-      "sem_embarque": 0,
-      "cobranca_gru": 4,
-      "pedidos_pendentes": 7,
-      "pct": 5.9,
-      "n_latencia": 490,
-      "media_horas": 0.04,
-      "mediana_horas": 0.04,
-      "p90_horas": 0.07,
-      "n_sync_so_gru": 2,
-      "n_sem_primeiro_sync": 52
-    },
     {
       "dia_iso": "2026-10-02",
       "dia": "02/10",
@@ -452,6 +433,25 @@
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
       "n_sem_primeiro_sync": 178
+    },
+    {
+      "dia_iso": "2026-10-21",
+      "dia": "21/10",
+      "dia_full": "21/10/2026",
+      "pedidos": 0,
+      "loggers": 0,
+      "sincronizados": 0,
+      "pendentes": 0,
+      "sem_embarque": 0,
+      "cobranca_gru": 0,
+      "pedidos_pendentes": 0,
+      "pct": 0.0,
+      "n_latencia": 0,
+      "media_horas": null,
+      "mediana_horas": null,
+      "p90_horas": null,
+      "n_sync_so_gru": 0,
+      "n_sem_primeiro_sync": 0
     }
   ],
   "erros_validacao": {},

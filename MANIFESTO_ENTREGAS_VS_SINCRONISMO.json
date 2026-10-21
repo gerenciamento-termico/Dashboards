@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-21T07:28:29",
+  "gerado_em": "2026-10-21T07:35:45",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -31,13 +31,13 @@
     "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 196,
     "com_embarque_efetiva": 4508,
-    "loggers_sem_lastsync": 59,
+    "loggers_sem_lastsync": 55,
     "nao_avaliados": 196,
     "pedidos_com_agente": 4845,
     "dtbtransporte": {
       "consultados": 950,
       "mapeados": 950,
-      "linhas": 995
+      "linhas": 996
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 37,

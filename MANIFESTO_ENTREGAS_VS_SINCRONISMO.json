@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T08:15:48",
+  "gerado_em": "2026-10-22T08:27:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,11 +27,11 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 151,
+    "pendentes_janela": 150,
     "cobranca_gru_janela": 29,
     "sem_embarque_efetiva": 179,
     "com_embarque_efetiva": 4634,
-    "loggers_sem_lastsync": 52,
+    "loggers_sem_lastsync": 51,
     "nao_avaliados": 179,
     "pedidos_com_agente": 5013,
     "dtbtransporte": {
@@ -41,8 +41,8 @@
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 27,
-      "BEL - MH FROTA TRANSPORTE": 24,
       "THE - AERONEIVA EXPRESS": 23,
+      "BEL - MH FROTA TRANSPORTE": 23,
       "RBR - RODOTEC": 9,
       "MOC - LOG SERVIÇOS": 8,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 8,
@@ -52,7 +52,7 @@
       "MAB - EXPRESSO RODRIGUES LTDA": 3
     },
     "top10_ufs_pendencias": {
-      "PA": 36,
+      "PA": 35,
       "PI": 23,
       "MG": 14,
       "SP": 11,
@@ -402,12 +402,12 @@
       "dia_full": "20/10/2026",
       "pedidos": 96,
       "loggers": 558,
-      "sincronizados": 531,
-      "pendentes": 25,
+      "sincronizados": 532,
+      "pendentes": 24,
       "sem_embarque": 69,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 12,
-      "pct": 4.5,
+      "pedidos_pendentes": 11,
+      "pct": 4.3,
       "n_latencia": 492,
       "media_horas": 0.04,
       "mediana_horas": 0.04,

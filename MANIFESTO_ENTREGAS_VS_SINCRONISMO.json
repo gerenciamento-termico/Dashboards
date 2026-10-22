@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T15:06:38",
+  "gerado_em": "2026-10-22T15:17:43",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,29 +19,29 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5432,
-    "pedidos_janela": 995,
-    "loggers_ares_janela": 5191,
-    "loggers_ares_antes_dedup": 5232,
+    "pares_janela": 5433,
+    "pedidos_janela": 996,
+    "loggers_ares_janela": 5192,
+    "loggers_ares_antes_dedup": 5233,
     "dedup_dia_logger": 41,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 200,
+    "pendentes_janela": 203,
     "cobranca_gru_janela": 17,
-    "sem_embarque_efetiva": 264,
-    "com_embarque_efetiva": 4968,
+    "sem_embarque_efetiva": 262,
+    "com_embarque_efetiva": 4971,
     "loggers_sem_lastsync": 36,
-    "nao_avaliados": 264,
-    "pedidos_com_agente": 5432,
+    "nao_avaliados": 262,
+    "pedidos_com_agente": 5433,
     "dtbtransporte": {
-      "consultados": 995,
-      "mapeados": 995,
-      "linhas": 1045
+      "consultados": 996,
+      "mapeados": 996,
+      "linhas": 1046
     },
     "top10_agentes_pendencias": {
       "FOR - NT TRANSPORTE LTDA": 30,
-      "VTCLOG - GRU": 25,
+      "VTCLOG - GRU": 27,
       "NAT - CSM CARGO": 19,
       "BVB - J PIMENTEL S. CUNHA LTDA": 16,
       "BEL - MH FROTA TRANSPORTE": 14,
@@ -57,8 +57,8 @@
       "RN": 19,
       "MG": 16,
       "RR": 16,
+      "SP": 15,
       "PI": 13,
-      "SP": 13,
       "GO": 12,
       "SC": 9,
       "AC": 9
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4486,
       "n_so_gru": 27,
-      "n_sem_primeiro_sync": 414,
+      "n_sem_primeiro_sync": 417,
       "media_horas": 0.37,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-22",
       "dia": "22/10",
       "dia_full": "22/10/2026",
-      "pedidos": 36,
-      "loggers": 309,
+      "pedidos": 39,
+      "loggers": 312,
       "sincronizados": 240,
-      "pendentes": 68,
-      "sem_embarque": 103,
+      "pendentes": 71,
+      "sem_embarque": 101,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 13,
-      "pct": 22.0,
+      "pedidos_pendentes": 16,
+      "pct": 22.8,
       "n_latencia": 232,
       "media_horas": 0.08,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 77
+      "n_sem_primeiro_sync": 80
     }
   ],
   "erros_validacao": {},

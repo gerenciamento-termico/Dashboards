@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T18:23:42",
+  "gerado_em": "2026-10-22T18:27:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 236,
+    "pendentes_janela": 235,
     "cobranca_gru_janela": 18,
     "sem_embarque_efetiva": 182,
     "com_embarque_efetiva": 5213,
@@ -40,7 +40,7 @@
       "linhas": 1067
     },
     "top10_agentes_pendencias": {
-      "FOR - NT TRANSPORTE LTDA": 41,
+      "FOR - NT TRANSPORTE LTDA": 40,
       "VTCLOG - GRU": 33,
       "JPA - LIDER CARGAS": 24,
       "BVB - J PIMENTEL S. CUNHA LTDA": 16,
@@ -52,7 +52,7 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 8
     },
     "top10_ufs_pendencias": {
-      "CE": 42,
+      "CE": 41,
       "PB": 24,
       "PA": 23,
       "SP": 19,
@@ -65,8 +65,8 @@
     },
     "latencia": {
       "n_agente": 4688,
-      "n_so_gru": 28,
-      "n_sem_primeiro_sync": 456,
+      "n_so_gru": 29,
+      "n_sem_primeiro_sync": 455,
       "media_horas": 0.36,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -127,8 +127,8 @@
       "media_horas": 0.39,
       "mediana_horas": 0.05,
       "p90_horas": 0.08,
-      "n_sync_so_gru": 7,
-      "n_sem_primeiro_sync": 17
+      "n_sync_so_gru": 8,
+      "n_sem_primeiro_sync": 16
     },
     {
       "dia_iso": "2026-10-06",
@@ -440,12 +440,12 @@
       "dia_full": "22/10/2026",
       "pedidos": 59,
       "loggers": 526,
-      "sincronizados": 410,
-      "pendentes": 114,
+      "sincronizados": 411,
+      "pendentes": 113,
       "sem_embarque": 48,
       "cobranca_gru": 2,
       "pedidos_pendentes": 25,
-      "pct": 21.7,
+      "pct": 21.5,
       "n_latencia": 397,
       "media_horas": 0.07,
       "mediana_horas": 0.04,

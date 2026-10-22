@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "22/10/2026 10:24:56",
+  "geradoEm": "22/10/2026 10:45:38",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -30,7 +30,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 1407,
+      "loggersTransito": 1406,
       "loggersEntregues": 4589,
       "loggersRetornados": 1930,
       "registrosEntregas": 127937,
@@ -69,7 +69,7 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 1407,
+      "loggersTransito": 1406,
       "loggersEntregues": 4589,
       "loggersRetornados": 1930,
       "registrosEntregas": 134874,
@@ -110,12 +110,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           338,
           368,
           391,
-          449,
+          448,
           509,
-          790,
-          1218,
-          3929,
-          6544
+          792,
+          1217,
+          3922,
+          6551
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -146,12 +146,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           317,
           334,
           368,
-          449,
+          448,
           508,
-          629,
-          853,
-          3629,
-          3867
+          631,
+          852,
+          3636,
+          3860
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -268,12 +268,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           325,
           334,
           368,
-          449,
+          448,
           508,
-          790,
-          882,
-          3904,
-          4293
+          792,
+          881,
+          3897,
+          4300
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -304,12 +304,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           317,
           334,
           368,
-          449,
+          448,
           508,
-          629,
-          1000,
-          3871,
-          4185
+          631,
+          999,
+          3864,
+          4192
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -340,12 +340,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           317,
           338,
           368,
-          449,
+          448,
           509,
-          629,
-          905,
-          3746,
-          3869
+          631,
+          904,
+          3753,
+          3862
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -376,12 +376,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           334,
           368,
           383,
-          449,
+          448,
           508,
-          629,
-          990,
-          3886,
-          5207
+          631,
+          989,
+          3879,
+          5214
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -560,12 +560,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           325,
           334,
           368,
-          449,
+          448,
           508,
-          790,
-          1029,
-          3908,
-          4849
+          792,
+          1028,
+          3901,
+          4856
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -596,12 +596,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           325,
           338,
           368,
-          449,
+          448,
           509,
-          790,
-          934,
-          3906,
-          4410
+          792,
+          933,
+          3899,
+          4417
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -632,12 +632,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           334,
           368,
           391,
-          449,
+          448,
           508,
-          790,
-          1019,
-          3923,
-          5871
+          792,
+          1018,
+          3916,
+          5878
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -668,12 +668,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           317,
           338,
           368,
-          449,
+          448,
           509,
-          629,
-          1052,
-          3873,
-          4302
+          631,
+          1051,
+          3866,
+          4309
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -704,12 +704,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           334,
           368,
           383,
-          449,
+          448,
           508,
-          629,
-          1137,
-          3890,
-          5763
+          631,
+          1136,
+          3883,
+          5770
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -740,12 +740,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           338,
           368,
           383,
-          449,
+          448,
           509,
-          629,
-          1042,
-          3888,
-          5324
+          631,
+          1041,
+          3881,
+          5331
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -886,12 +886,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           325,
           338,
           368,
-          449,
+          448,
           509,
-          790,
-          1081,
-          3910,
-          4966
+          792,
+          1080,
+          3903,
+          4973
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -922,12 +922,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           334,
           368,
           391,
-          449,
+          448,
           508,
-          790,
-          1166,
-          3927,
-          6427
+          792,
+          1165,
+          3920,
+          6434
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -958,12 +958,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           338,
           368,
           391,
-          449,
+          448,
           509,
-          790,
-          1071,
-          3925,
-          5988
+          792,
+          1070,
+          3918,
+          5995
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"
@@ -994,12 +994,12 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
           338,
           368,
           383,
-          449,
+          448,
           509,
-          629,
-          1189,
-          3892,
-          5880
+          631,
+          1188,
+          3885,
+          5887
         ]
       },
       "ultimaAtualizacao": "22/10/2026 10:42"

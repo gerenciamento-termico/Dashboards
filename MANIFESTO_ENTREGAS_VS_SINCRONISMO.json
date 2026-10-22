@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T17:23:55",
+  "gerado_em": "2026-10-22T17:37:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5606,
-    "pedidos_janela": 1013,
-    "loggers_ares_janela": 5351,
-    "loggers_ares_antes_dedup": 5392,
+    "pares_janela": 5607,
+    "pedidos_janela": 1014,
+    "loggers_ares_janela": 5352,
+    "loggers_ares_antes_dedup": 5393,
     "dedup_dia_logger": 41,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 235,
+    "pendentes_janela": 236,
     "cobranca_gru_janela": 18,
     "sem_embarque_efetiva": 182,
-    "com_embarque_efetiva": 5210,
+    "com_embarque_efetiva": 5211,
     "loggers_sem_lastsync": 38,
     "nao_avaliados": 182,
-    "pedidos_com_agente": 5606,
+    "pedidos_com_agente": 5607,
     "dtbtransporte": {
-      "consultados": 1013,
-      "mapeados": 1012,
-      "linhas": 1064
+      "consultados": 1014,
+      "mapeados": 1013,
+      "linhas": 1065
     },
     "top10_agentes_pendencias": {
       "FOR - NT TRANSPORTE LTDA": 41,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 4685,
       "n_so_gru": 28,
-      "n_sem_primeiro_sync": 456,
+      "n_sem_primeiro_sync": 457,
       "media_horas": 0.36,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-22",
       "dia": "22/10",
       "dia_full": "22/10/2026",
-      "pedidos": 56,
-      "loggers": 523,
+      "pedidos": 57,
+      "loggers": 524,
       "sincronizados": 408,
-      "pendentes": 113,
+      "pendentes": 114,
       "sem_embarque": 48,
       "cobranca_gru": 2,
-      "pedidos_pendentes": 24,
-      "pct": 21.6,
+      "pedidos_pendentes": 25,
+      "pct": 21.8,
       "n_latencia": 394,
       "media_horas": 0.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 129
+      "n_sem_primeiro_sync": 130
     }
   ],
   "erros_validacao": {},

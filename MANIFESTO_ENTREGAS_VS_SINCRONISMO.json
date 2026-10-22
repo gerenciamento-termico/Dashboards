@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T17:08:00",
+  "gerado_em": "2026-10-22T17:17:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,29 +19,29 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5605,
-    "pedidos_janela": 1012,
-    "loggers_ares_janela": 5350,
-    "loggers_ares_antes_dedup": 5391,
+    "pares_janela": 5606,
+    "pedidos_janela": 1013,
+    "loggers_ares_janela": 5351,
+    "loggers_ares_antes_dedup": 5392,
     "dedup_dia_logger": 41,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 224,
+    "pendentes_janela": 235,
     "cobranca_gru_janela": 18,
-    "sem_embarque_efetiva": 234,
-    "com_embarque_efetiva": 5157,
+    "sem_embarque_efetiva": 183,
+    "com_embarque_efetiva": 5209,
     "loggers_sem_lastsync": 38,
-    "nao_avaliados": 234,
-    "pedidos_com_agente": 5605,
+    "nao_avaliados": 183,
+    "pedidos_com_agente": 5606,
     "dtbtransporte": {
-      "consultados": 1012,
-      "mapeados": 1011,
-      "linhas": 1063
+      "consultados": 1013,
+      "mapeados": 1012,
+      "linhas": 1064
     },
     "top10_agentes_pendencias": {
+      "FOR - NT TRANSPORTE LTDA": 41,
       "VTCLOG - GRU": 32,
-      "FOR - NT TRANSPORTE LTDA": 30,
       "JPA - LIDER CARGAS": 24,
       "BVB - J PIMENTEL S. CUNHA LTDA": 16,
       "BEL - MH FROTA TRANSPORTE": 14,
@@ -52,7 +52,7 @@
       "RBR - RODOTEC": 9
     },
     "top10_ufs_pendencias": {
-      "CE": 31,
+      "CE": 42,
       "PB": 24,
       "PA": 23,
       "MG": 18,
@@ -64,9 +64,9 @@
       "AC": 9
     },
     "latencia": {
-      "n_agente": 4643,
+      "n_agente": 4684,
       "n_so_gru": 28,
-      "n_sem_primeiro_sync": 445,
+      "n_sem_primeiro_sync": 456,
       "media_horas": 0.36,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -439,19 +439,19 @@
       "dia": "22/10",
       "dia_full": "22/10/2026",
       "pedidos": 55,
-      "loggers": 470,
-      "sincronizados": 366,
-      "pendentes": 102,
-      "sem_embarque": 100,
+      "loggers": 522,
+      "sincronizados": 407,
+      "pendentes": 113,
+      "sem_embarque": 49,
       "cobranca_gru": 2,
       "pedidos_pendentes": 24,
-      "pct": 21.7,
-      "n_latencia": 352,
-      "media_horas": 0.07,
+      "pct": 21.6,
+      "n_latencia": 393,
+      "media_horas": 0.06,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 118
+      "n_sem_primeiro_sync": 129
     }
   ],
   "erros_validacao": {},

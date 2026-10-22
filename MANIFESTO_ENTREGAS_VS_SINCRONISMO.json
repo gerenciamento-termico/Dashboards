@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T12:48:09",
+  "gerado_em": "2026-10-22T12:57:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5412,
-    "pedidos_janela": 982,
-    "loggers_ares_janela": 5171,
-    "loggers_ares_antes_dedup": 5212,
+    "pares_janela": 5415,
+    "pedidos_janela": 983,
+    "loggers_ares_janela": 5174,
+    "loggers_ares_antes_dedup": 5215,
     "dedup_dia_logger": 41,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 187,
+    "pendentes_janela": 189,
     "cobranca_gru_janela": 19,
     "sem_embarque_efetiva": 280,
-    "com_embarque_efetiva": 4932,
+    "com_embarque_efetiva": 4935,
     "loggers_sem_lastsync": 67,
     "nao_avaliados": 280,
-    "pedidos_com_agente": 5412,
+    "pedidos_com_agente": 5415,
     "dtbtransporte": {
-      "consultados": 982,
-      "mapeados": 982,
-      "linhas": 1032
+      "consultados": 983,
+      "mapeados": 983,
+      "linhas": 1033
     },
     "top10_agentes_pendencias": {
       "FOR - NT TRANSPORTE LTDA": 30,
@@ -64,9 +64,9 @@
       "BA": 8
     },
     "latencia": {
-      "n_agente": 4458,
+      "n_agente": 4459,
       "n_so_gru": 25,
-      "n_sem_primeiro_sync": 408,
+      "n_sem_primeiro_sync": 410,
       "media_horas": 0.37,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-22",
       "dia": "22/10",
       "dia_full": "22/10/2026",
-      "pedidos": 26,
-      "loggers": 292,
-      "sincronizados": 226,
-      "pendentes": 65,
+      "pedidos": 27,
+      "loggers": 295,
+      "sincronizados": 227,
+      "pendentes": 67,
       "sem_embarque": 100,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 9,
-      "pct": 22.3,
-      "n_latencia": 216,
+      "pedidos_pendentes": 10,
+      "pct": 22.7,
+      "n_latencia": 217,
       "media_horas": 0.04,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 76
+      "n_sem_primeiro_sync": 78
     }
   ],
   "erros_validacao": {},

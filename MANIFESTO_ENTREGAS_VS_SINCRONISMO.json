@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T11:27:30",
+  "gerado_em": "2026-10-22T11:37:34",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5223,
-    "pedidos_janela": 972,
-    "loggers_ares_janela": 4983,
-    "loggers_ares_antes_dedup": 5023,
+    "pares_janela": 5252,
+    "pedidos_janela": 973,
+    "loggers_ares_janela": 5012,
+    "loggers_ares_antes_dedup": 5052,
     "dedup_dia_logger": 40,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 195,
+    "pendentes_janela": 196,
     "cobranca_gru_janela": 21,
     "sem_embarque_efetiva": 223,
-    "com_embarque_efetiva": 4800,
+    "com_embarque_efetiva": 4829,
     "loggers_sem_lastsync": 65,
     "nao_avaliados": 223,
-    "pedidos_com_agente": 5223,
+    "pedidos_com_agente": 5252,
     "dtbtransporte": {
-      "consultados": 972,
-      "mapeados": 972,
-      "linhas": 1019
+      "consultados": 973,
+      "mapeados": 973,
+      "linhas": 1020
     },
     "top10_agentes_pendencias": {
       "GYN - RBR EXPERIENCIA EM TRANSPORTES": 42,
@@ -64,9 +64,9 @@
       "RS": 6
     },
     "latencia": {
-      "n_agente": 4288,
+      "n_agente": 4316,
       "n_so_gru": 25,
-      "n_sem_primeiro_sync": 447,
+      "n_sem_primeiro_sync": 448,
       "media_horas": 0.38,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -438,20 +438,20 @@
       "dia_iso": "2026-10-22",
       "dia": "22/10",
       "dia_full": "22/10/2026",
-      "pedidos": 17,
-      "loggers": 162,
-      "sincronizados": 100,
-      "pendentes": 61,
+      "pedidos": 18,
+      "loggers": 191,
+      "sincronizados": 128,
+      "pendentes": 62,
       "sem_embarque": 43,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 6,
-      "pct": 37.7,
-      "n_latencia": 65,
+      "pedidos_pendentes": 7,
+      "pct": 32.5,
+      "n_latencia": 93,
       "media_horas": 0.04,
-      "mediana_horas": 0.05,
+      "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 97
+      "n_sem_primeiro_sync": 98
     }
   ],
   "erros_validacao": {},

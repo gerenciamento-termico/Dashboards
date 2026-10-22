@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T15:58:08",
+  "gerado_em": "2026-10-22T16:07:14",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5521,
-    "pedidos_janela": 1002,
-    "loggers_ares_janela": 5280,
-    "loggers_ares_antes_dedup": 5321,
+    "pares_janela": 5522,
+    "pedidos_janela": 1003,
+    "loggers_ares_janela": 5281,
+    "loggers_ares_antes_dedup": 5322,
     "dedup_dia_logger": 41,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 217,
     "cobranca_gru_janela": 17,
-    "sem_embarque_efetiva": 235,
+    "sem_embarque_efetiva": 236,
     "com_embarque_efetiva": 5086,
     "loggers_sem_lastsync": 37,
-    "nao_avaliados": 235,
-    "pedidos_com_agente": 5521,
+    "nao_avaliados": 236,
+    "pedidos_com_agente": 5522,
     "dtbtransporte": {
-      "consultados": 1002,
-      "mapeados": 1002,
-      "linhas": 1053
+      "consultados": 1003,
+      "mapeados": 1003,
+      "linhas": 1055
     },
     "top10_agentes_pendencias": {
       "FOR - NT TRANSPORTE LTDA": 30,
@@ -442,7 +442,7 @@
       "loggers": 401,
       "sincronizados": 303,
       "pendentes": 97,
-      "sem_embarque": 101,
+      "sem_embarque": 102,
       "cobranca_gru": 1,
       "pedidos_pendentes": 19,
       "pct": 24.2,

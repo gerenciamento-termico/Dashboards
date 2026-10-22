@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-10-22T14:27:38",
+  "gerado_em": "2026-10-22T14:35:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5426,
-    "pedidos_janela": 989,
-    "loggers_ares_janela": 5185,
-    "loggers_ares_antes_dedup": 5226,
+    "pares_janela": 5427,
+    "pedidos_janela": 990,
+    "loggers_ares_janela": 5186,
+    "loggers_ares_antes_dedup": 5227,
     "dedup_dia_logger": 41,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 199,
-    "cobranca_gru_janela": 18,
-    "sem_embarque_efetiva": 262,
+    "cobranca_gru_janela": 17,
+    "sem_embarque_efetiva": 263,
     "com_embarque_efetiva": 4964,
     "loggers_sem_lastsync": 36,
-    "nao_avaliados": 262,
-    "pedidos_com_agente": 5426,
+    "nao_avaliados": 263,
+    "pedidos_com_agente": 5427,
     "dtbtransporte": {
-      "consultados": 989,
-      "mapeados": 989,
-      "linhas": 1039
+      "consultados": 990,
+      "mapeados": 990,
+      "linhas": 1040
     },
     "top10_agentes_pendencias": {
       "FOR - NT TRANSPORTE LTDA": 30,
@@ -64,9 +64,9 @@
       "SC": 8
     },
     "latencia": {
-      "n_agente": 4483,
+      "n_agente": 4484,
       "n_so_gru": 27,
-      "n_sem_primeiro_sync": 413,
+      "n_sem_primeiro_sync": 412,
       "media_horas": 0.37,
       "mediana_horas": 0.04,
       "p90_horas": 0.08
@@ -400,12 +400,12 @@
       "dia_iso": "2026-10-20",
       "dia": "20/10",
       "dia_full": "20/10/2026",
-      "pedidos": 97,
-      "loggers": 559,
+      "pedidos": 96,
+      "loggers": 558,
       "sincronizados": 550,
       "pendentes": 8,
-      "sem_embarque": 50,
-      "cobranca_gru": 1,
+      "sem_embarque": 51,
+      "cobranca_gru": 0,
       "pedidos_pendentes": 6,
       "pct": 1.4,
       "n_latencia": 517,
@@ -413,7 +413,7 @@
       "mediana_horas": 0.04,
       "p90_horas": 0.08,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 42
+      "n_sem_primeiro_sync": 41
     },
     {
       "dia_iso": "2026-10-21",
@@ -438,15 +438,15 @@
       "dia_iso": "2026-10-22",
       "dia": "22/10",
       "dia_full": "22/10/2026",
-      "pedidos": 32,
-      "loggers": 305,
-      "sincronizados": 237,
+      "pedidos": 33,
+      "loggers": 306,
+      "sincronizados": 238,
       "pendentes": 67,
       "sem_embarque": 101,
       "cobranca_gru": 1,
       "pedidos_pendentes": 12,
-      "pct": 22.0,
-      "n_latencia": 230,
+      "pct": 21.9,
+      "n_latencia": 231,
       "media_horas": 0.08,
       "mediana_horas": 0.04,
       "p90_horas": 0.08,

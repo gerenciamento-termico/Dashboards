@@ -518,6 +518,7 @@ let FB_OK = false;
 
 /* ===== login (usuarios cadastrados no Firebase, senha nunca trafega nem fica salva: hash SHA-256) ===== */
 const SKEY = "sync48_sessao";
+const SESSAO_MAX_MS = 10 * 60 * 60 * 1000; // acesso encerra sozinho apos 10 horas
 let SESSION = null;
 
 async function sha256(txt){
@@ -547,7 +548,7 @@ function aplicarSessao(){
 }
 function bloquear(){
   SESSION = null;
-  try { localStorage.removeItem(SKEY); } catch(e){}
+  try { sessionStorage.removeItem(SKEY); } catch(e){}
   document.body.classList.add("bloqueada");
   document.getElementById("lg-pass").value = "";
   try { document.getElementById("lg-user").value = localStorage.getItem("gt_ultimo_login") || ""; } catch(e){}
@@ -583,7 +584,7 @@ async function fazerLogin(){
     } else {
       SESSION = { u: u, nome: reg.nome || u, t: Date.now() };
       try {
-        localStorage.setItem(SKEY, JSON.stringify(SESSION));
+        sessionStorage.setItem(SKEY, JSON.stringify(SESSION));
         localStorage.setItem("gt_ultimo_login", u);
       } catch(e){}
       lgErr("");
@@ -598,8 +599,9 @@ async function fazerLogin(){
   }
 }
 async function validarSessaoSalva(){
-  try { SESSION = JSON.parse(localStorage.getItem(SKEY) || "null"); } catch(e){ SESSION = null; }
-  if (!SESSION || !SESSION.u || !SESSION.nome){ bloquear(); return; }
+  try { SESSION = JSON.parse(sessionStorage.getItem(SKEY) || "null"); } catch(e){ SESSION = null; }
+  if (!SESSION || !SESSION.u || !SESSION.nome || !SESSION.t ||
+      (Date.now() - SESSION.t) > SESSAO_MAX_MS){ bloquear(); return; }
   aplicarSessao();
   try { // confirma que o usuario ainda existe no banco; se foi removido, encerra a sessao
     const chaveU = SESSION.u.replace(/[.#$\[\]\/]/g, "_");
@@ -607,6 +609,13 @@ async function validarSessaoSalva(){
     if (resp.ok && (await resp.json()) === null) bloquear();
   } catch(e){ /* offline: mantem a sessao local */ }
 }
+// encerra sozinho apos 10 horas, mesmo com a pagina aberta
+setInterval(() => {
+  if (SESSION && SESSION.t && (Date.now() - SESSION.t) > SESSAO_MAX_MS){
+    registrarAudit("sessao expirada automaticamente (10 h)", "");
+    sair();
+  }
+}, 60000);
 ["lg-user","lg-pass"].forEach(id => document.getElementById(id).addEventListener("keydown", e => {
   if (e.key === "Enter"){ e.preventDefault(); fazerLogin(); }
 }));

@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-10-26T17:37:31",
+    "gerado_em":  "2026-10-26T17:47:27",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -24,11 +24,11 @@
                     },
                     {
                         "arquivo":  "GESTAO_DISPOSITIVOS.html",
-                        "atualizado_em":  "2026-10-26T17:37:11"
+                        "atualizado_em":  "2026-10-26T17:46:59"
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-10-26T17:37:29"
+                        "atualizado_em":  "2026-10-26T17:47:26"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",
@@ -60,7 +60,7 @@
                     },
                     {
                         "arquivo":  "RETIRADA_AEROPORTO.html",
-                        "atualizado_em":  "2026-10-26T17:36:52"
+                        "atualizado_em":  "2026-10-26T17:46:44"
                     }
                 ]
 }

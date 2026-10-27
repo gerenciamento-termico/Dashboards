@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-10-27T12:19:27",
+    "gerado_em":  "2026-10-27T12:27:39",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -8,11 +8,11 @@
                     },
                     {
                         "arquivo":  "ESTOQUE_DATALOGGERS.html",
-                        "atualizado_em":  "2026-10-27T12:11:58"
+                        "atualizado_em":  "2026-10-27T12:22:03"
                     },
                     {
                         "arquivo":  "CONTROLE_ENTREGAS_20D.html",
-                        "atualizado_em":  "2026-10-27T12:12:16"
+                        "atualizado_em":  "2026-10-27T12:22:18"
                     },
                     {
                         "arquivo":  "REVERSA_DATALOGGERS.html",
@@ -20,15 +20,15 @@
                     },
                     {
                         "arquivo":  "REVERSA_FORTEX.html",
-                        "atualizado_em":  "2026-10-27T12:12:48"
+                        "atualizado_em":  "2026-10-27T12:22:41"
                     },
                     {
                         "arquivo":  "GESTAO_DISPOSITIVOS.html",
-                        "atualizado_em":  "2026-10-27T12:19:08"
+                        "atualizado_em":  "2026-10-27T12:27:15"
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-10-27T12:19:26"
+                        "atualizado_em":  "2026-10-27T12:27:38"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",
@@ -60,7 +60,7 @@
                     },
                     {
                         "arquivo":  "RETIRADA_AEROPORTO.html",
-                        "atualizado_em":  "2026-10-27T12:18:46"
+                        "atualizado_em":  "2026-10-27T12:26:54"
                     }
                 ]
 }

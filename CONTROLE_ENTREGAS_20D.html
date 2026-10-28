@@ -313,7 +313,7 @@
       <div class="pill-row">
         <div class="pill"><strong>Janela:</strong> ultimos 20 dias</div>
         <div class="pill"><strong>Ultima entrega:</strong> --</div>
-        <div class="pill"><strong>Gerado em:</strong> 27/10/2026 19:16:04</div>
+        <div class="pill"><strong>Gerado em:</strong> 28/10/2026 10:15:04</div>
       </div>
       <div style="display:flex; justify-content:flex-end; margin-top: 12px;">
         <a class="btn" href="CONTROLE_ENTREGAS_20D.csv" download>Baixar CSV completo</a>
@@ -394,15 +394,15 @@
       </div>
       <div class="kpis">
         <div class="kpi"><div class="label">Entregas no SLA</div><div class="value">24.346</div><div class="foot">Entregas consideradas desde 09/04</div></div>
-        <div class="kpi"><div class="label">Retornados</div><div class="value">24.024</div><div class="foot">Com retorno pareado</div></div>
-        <div class="kpi"><div class="label">Pendentes</div><div class="value">322</div><div class="foot">Sem retorno ainda</div></div>
-        <div class="kpi"><div class="label">SLA medio</div><div class="value">11d 7h 40m</div><div class="foot">Media entre entrega e retorno</div></div>
+        <div class="kpi"><div class="label">Retornados</div><div class="value">0</div><div class="foot">Com retorno pareado</div></div>
+        <div class="kpi"><div class="label">Pendentes</div><div class="value">24.346</div><div class="foot">Sem retorno ainda</div></div>
+        <div class="kpi"><div class="label">SLA medio</div><div class="value">--</div><div class="foot">Media entre entrega e retorno</div></div>
       </div>
       <div class="kpis" style="margin-top:12px;">
-        <div class="kpi"><div class="label">% retorno em 48h</div><div class="value">11,7%</div><div class="foot">2.799 de 24.024 retornos</div></div>
-        <div class="kpi"><div class="label">% retorno em 7 dias</div><div class="value">46,8%</div><div class="foot">11.233 de 24.024 retornos</div></div>
-        <div class="kpi"><div class="label">% retorno em 14 dias</div><div class="value">76,1%</div><div class="foot">18.282 de 24.024 retornos</div></div>
-        <div class="kpi"><div class="label">% retorno em 20 dias</div><div class="value">86,8%</div><div class="foot">20.858 de 24.024 retornos</div></div>
+        <div class="kpi"><div class="label">% retorno em 48h</div><div class="value">0,0%</div><div class="foot">0 de 0 retornos</div></div>
+        <div class="kpi"><div class="label">% retorno em 7 dias</div><div class="value">0,0%</div><div class="foot">0 de 0 retornos</div></div>
+        <div class="kpi"><div class="label">% retorno em 14 dias</div><div class="value">0,0%</div><div class="foot">0 de 0 retornos</div></div>
+        <div class="kpi"><div class="label">% retorno em 20 dias</div><div class="value">0,0%</div><div class="foot">0 de 0 retornos</div></div>
       </div>
       <div class="two-col">
         <div class="section" style="margin-top:16px;">
@@ -412,7 +412,7 @@
               <p class="section-note">Somente pendentes com mais de 10 dias</p>
             </div>
           </div>
-          <div style="height:320px; width:100%;">                            <div id="sla-bucket-chart" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("sla-bucket-chart")) {                    Plotly.newPlot(                        "sla-bucket-chart",                        [{"hovertemplate":"Faixa=%{x}\u003cbr\u003ePendentes=%{text}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#6f9eff","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"text":{"dtype":"f8","bdata":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgdEA="},"textposition":"outside","x":["11-14 dias","15-20 dias","21-30 dias","31+ dias"],"xaxis":"x","y":{"dtype":"i2","bdata":"AAAAAAAAQgE="},"yaxis":"y","type":"bar","cliponaxis":false}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#f2f5fa"},"error_y":{"color":"#f2f5fa"},"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"baxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"line":{"color":"#283442"}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"marker":{"line":{"color":"#283442"}},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#506784"},"line":{"color":"rgb(17,17,17)"}},"header":{"fill":{"color":"#2a3f5f"},"line":{"color":"rgb(17,17,17)"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#f2f5fa","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#f2f5fa"},"geo":{"bgcolor":"rgb(17,17,17)","lakecolor":"rgb(17,17,17)","landcolor":"rgb(17,17,17)","showlakes":true,"showland":true,"subunitcolor":"#506784"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"rgb(17,17,17)","plot_bgcolor":"rgb(17,17,17)","polar":{"angularaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","radialaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"yaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"zaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"}},"shapedefaults":{"line":{"color":"#f2f5fa"}},"sliderdefaults":{"bgcolor":"#C8D4E3","bordercolor":"rgb(17,17,17)","borderwidth":1,"tickwidth":0},"ternary":{"aaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"baxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","caxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"title":{"x":0.05},"updatemenudefaults":{"bgcolor":"#506784","borderwidth":0},"xaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Faixa"},"gridcolor":"#25304a","tickangle":-15},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Pendentes"},"gridcolor":"#25304a"},"legend":{"tracegroupgap":0},"title":{"text":"Faixas de atraso","font":{"size":15},"x":0.02},"barmode":"relative","margin":{"l":18,"r":18,"t":48,"b":36},"font":{"color":"#e5eefc"},"paper_bgcolor":"#0b1020","plot_bgcolor":"#0b1020","height":320,"bargap":0.25},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+          <div style="height:320px; width:100%;">                            <div id="sla-bucket-chart" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("sla-bucket-chart")) {                    Plotly.newPlot(                        "sla-bucket-chart",                        [{"hovertemplate":"Faixa=%{x}\u003cbr\u003ePendentes=%{text}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#6f9eff","pattern":{"shape":""}},"name":"","orientation":"v","showlegend":false,"text":{"dtype":"f8","bdata":"AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIDG10A="},"textposition":"outside","x":["11-14 dias","15-20 dias","21-30 dias","31+ dias"],"xaxis":"x","y":{"dtype":"i2","bdata":"AAAAAAAAGl8="},"yaxis":"y","type":"bar","cliponaxis":false}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#f2f5fa"},"error_y":{"color":"#f2f5fa"},"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"baxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"line":{"color":"#283442"}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"marker":{"line":{"color":"#283442"}},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#506784"},"line":{"color":"rgb(17,17,17)"}},"header":{"fill":{"color":"#2a3f5f"},"line":{"color":"rgb(17,17,17)"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#f2f5fa","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#f2f5fa"},"geo":{"bgcolor":"rgb(17,17,17)","lakecolor":"rgb(17,17,17)","landcolor":"rgb(17,17,17)","showlakes":true,"showland":true,"subunitcolor":"#506784"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"rgb(17,17,17)","plot_bgcolor":"rgb(17,17,17)","polar":{"angularaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","radialaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"yaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"zaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"}},"shapedefaults":{"line":{"color":"#f2f5fa"}},"sliderdefaults":{"bgcolor":"#C8D4E3","bordercolor":"rgb(17,17,17)","borderwidth":1,"tickwidth":0},"ternary":{"aaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"baxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","caxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"title":{"x":0.05},"updatemenudefaults":{"bgcolor":"#506784","borderwidth":0},"xaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Faixa"},"gridcolor":"#25304a","tickangle":-15},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Pendentes"},"gridcolor":"#25304a"},"legend":{"tracegroupgap":0},"title":{"text":"Faixas de atraso","font":{"size":15},"x":0.02},"barmode":"relative","margin":{"l":18,"r":18,"t":48,"b":36},"font":{"color":"#e5eefc"},"paper_bgcolor":"#0b1020","plot_bgcolor":"#0b1020","height":320,"bargap":0.25},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
         </div>
         <div class="section" style="margin-top:16px;">
           <div class="section-head">
@@ -421,7 +421,7 @@
               <p class="section-note">Top 10 por quantidade de pendencias acima de 10 dias</p>
             </div>
           </div>
-          <div style="height:320px; width:100%;">                            <div id="sla-rank-chart" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("sla-rank-chart")) {                    Plotly.newPlot(                        "sla-rank-chart",                        [{"hovertemplate":"Pendentes=%{x}\u003cbr\u003eAgente=%{y}\u003cbr\u003ePendentesTxt=%{text}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#2f6fd6","pattern":{"shape":""}},"name":"","orientation":"h","showlegend":false,"text":["10","10","14","15","20","21","27","34","34","63"],"textposition":"inside","x":{"dtype":"i1","bdata":"CgoODxQVGyIiPw=="},"xaxis":"x","y":["VTCLOG CNF - CONTAGEM","VTCLOG RIO GALEAO","SSA - LUTY LOG","NAT - CSM CARGO","FOR - NT TRANSPORTE LTDA","SLZ - REIS CAVALCANTE EXPRESSO","VTCLOG - GRU","FLN - TGEX TRANSPORTES E LOCACAO DE VEIC","POA - GMB TRANSPORTES E LOGISTICA ME","THE - TRANSPRESS"],"yaxis":"y","type":"bar","cliponaxis":false}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#f2f5fa"},"error_y":{"color":"#f2f5fa"},"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"baxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"line":{"color":"#283442"}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"marker":{"line":{"color":"#283442"}},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#506784"},"line":{"color":"rgb(17,17,17)"}},"header":{"fill":{"color":"#2a3f5f"},"line":{"color":"rgb(17,17,17)"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#f2f5fa","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#f2f5fa"},"geo":{"bgcolor":"rgb(17,17,17)","lakecolor":"rgb(17,17,17)","landcolor":"rgb(17,17,17)","showlakes":true,"showland":true,"subunitcolor":"#506784"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"rgb(17,17,17)","plot_bgcolor":"rgb(17,17,17)","polar":{"angularaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","radialaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"yaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"zaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"}},"shapedefaults":{"line":{"color":"#f2f5fa"}},"sliderdefaults":{"bgcolor":"#C8D4E3","bordercolor":"rgb(17,17,17)","borderwidth":1,"tickwidth":0},"ternary":{"aaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"baxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","caxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"title":{"x":0.05},"updatemenudefaults":{"bgcolor":"#506784","borderwidth":0},"xaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Pendencias"},"gridcolor":"#25304a"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Agente"},"gridcolor":"#25304a","autorange":"reversed"},"legend":{"tracegroupgap":0},"title":{"text":"Agentes com mais pendencias acima de 10 dias","font":{"size":15},"x":0.02},"barmode":"relative","margin":{"l":18,"r":18,"t":48,"b":36},"font":{"color":"#e5eefc"},"paper_bgcolor":"#0b1020","plot_bgcolor":"#0b1020","height":320},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
+          <div style="height:320px; width:100%;">                            <div id="sla-rank-chart" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("sla-rank-chart")) {                    Plotly.newPlot(                        "sla-rank-chart",                        [{"hovertemplate":"Pendentes=%{x}\u003cbr\u003eAgente=%{y}\u003cbr\u003ePendentesTxt=%{text}\u003cextra\u003e\u003c\u002fextra\u003e","legendgroup":"","marker":{"color":"#2f6fd6","pattern":{"shape":""}},"name":"","orientation":"h","showlegend":false,"text":["801","832","887","997","1.158","1.376","1.810","1.965","2.038","3.881"],"textposition":"inside","x":{"dtype":"i2","bdata":"IQNAA3cD5QOGBGAFEgetB\u002fYHKQ8="},"xaxis":"x","y":["CGR - LH TRANSPORTES","VTCLOG RIO GALEAO","MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL","AJU - CASSIMIRO TRANSPORTES","SLZ - REIS CAVALCANTE EXPRESSO","GYN - RBR EXPERIENCIA EM TRANSPORTES","VTCLOG - REC","FOR - NT TRANSPORTE LTDA","SSA - LUTY LOG","VTCLOG - GRU"],"yaxis":"y","type":"bar","cliponaxis":false}],                        {"template":{"data":{"barpolar":[{"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"bar":[{"error_x":{"color":"#f2f5fa"},"error_y":{"color":"#f2f5fa"},"marker":{"line":{"color":"rgb(17,17,17)","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"carpet":[{"aaxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"baxis":{"endlinecolor":"#A2B1C6","gridcolor":"#506784","linecolor":"#506784","minorgridcolor":"#506784","startlinecolor":"#A2B1C6"},"type":"carpet"}],"choropleth":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"choropleth"}],"contourcarpet":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"contourcarpet"}],"contour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"contour"}],"heatmap":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"heatmap"}],"histogram2dcontour":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2dcontour"}],"histogram2d":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"histogram2d"}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"mesh3d":[{"colorbar":{"outlinewidth":0,"ticks":""},"type":"mesh3d"}],"parcoords":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"parcoords"}],"pie":[{"automargin":true,"type":"pie"}],"scatter3d":[{"line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatter3d"}],"scattercarpet":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattercarpet"}],"scattergeo":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattergeo"}],"scattergl":[{"marker":{"line":{"color":"#283442"}},"type":"scattergl"}],"scattermap":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scattermap"}],"scatterpolargl":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolargl"}],"scatterpolar":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterpolar"}],"scatter":[{"marker":{"line":{"color":"#283442"}},"type":"scatter"}],"scatterternary":[{"marker":{"colorbar":{"outlinewidth":0,"ticks":""}},"type":"scatterternary"}],"surface":[{"colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"type":"surface"}],"table":[{"cells":{"fill":{"color":"#506784"},"line":{"color":"rgb(17,17,17)"}},"header":{"fill":{"color":"#2a3f5f"},"line":{"color":"rgb(17,17,17)"}},"type":"table"}]},"layout":{"annotationdefaults":{"arrowcolor":"#f2f5fa","arrowhead":0,"arrowwidth":1},"autotypenumbers":"strict","coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]],"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]},"colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#f2f5fa"},"geo":{"bgcolor":"rgb(17,17,17)","lakecolor":"rgb(17,17,17)","landcolor":"rgb(17,17,17)","showlakes":true,"showland":true,"subunitcolor":"#506784"},"hoverlabel":{"align":"left"},"hovermode":"closest","paper_bgcolor":"rgb(17,17,17)","plot_bgcolor":"rgb(17,17,17)","polar":{"angularaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","radialaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"scene":{"xaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"yaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"},"zaxis":{"backgroundcolor":"rgb(17,17,17)","gridcolor":"#506784","gridwidth":2,"linecolor":"#506784","showbackground":true,"ticks":"","zerolinecolor":"#C8D4E3"}},"shapedefaults":{"line":{"color":"#f2f5fa"}},"sliderdefaults":{"bgcolor":"#C8D4E3","bordercolor":"rgb(17,17,17)","borderwidth":1,"tickwidth":0},"ternary":{"aaxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"baxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""},"bgcolor":"rgb(17,17,17)","caxis":{"gridcolor":"#506784","linecolor":"#506784","ticks":""}},"title":{"x":0.05},"updatemenudefaults":{"bgcolor":"#506784","borderwidth":0},"xaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2},"yaxis":{"automargin":true,"gridcolor":"#283442","linecolor":"#506784","ticks":"","title":{"standoff":15},"zerolinecolor":"#283442","zerolinewidth":2}}},"xaxis":{"anchor":"y","domain":[0.0,1.0],"title":{"text":"Pendencias"},"gridcolor":"#25304a"},"yaxis":{"anchor":"x","domain":[0.0,1.0],"title":{"text":"Agente"},"gridcolor":"#25304a","autorange":"reversed"},"legend":{"tracegroupgap":0},"title":{"text":"Agentes com mais pendencias acima de 10 dias","font":{"size":15},"x":0.02},"barmode":"relative","margin":{"l":18,"r":18,"t":48,"b":36},"font":{"color":"#e5eefc"},"paper_bgcolor":"#0b1020","plot_bgcolor":"#0b1020","height":320},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div>
         </div>
       </div>
       <div class="section" style="margin-top:16px;">
@@ -432,8 +432,8 @@
           </div>
         </div>
         <div class="meta-strip" style="margin-bottom:12px;">
-          <div><strong>Media de retorno:</strong> 11d 7h 40m</div>
-          <div><strong>Pendentes &gt; 10 dias:</strong> 322</div>
+          <div><strong>Media de retorno:</strong> --</div>
+          <div><strong>Pendentes &gt; 10 dias:</strong> 24.346</div>
           <div><strong>Base SLA:</strong> desde 09/04/2026</div>
         </div>
         <table class="dataframe data-table">
@@ -451,503 +451,503 @@
   </thead>
   <tbody>
     <tr>
-      <td>552996</td>
-      <td>S0476</td>
-      <td>VTCLOG - GRU</td>
-      <td></td>
-      <td>MG</td>
-      <td>06/05/2026 10:50:00</td>
-      <td>174,4</td>
-      <td>Pendente</td>
-    </tr>
-    <tr>
-      <td>551149</td>
-      <td>S1955</td>
-      <td>BEL - SSS EXPRESSO</td>
-      <td></td>
-      <td>PA</td>
-      <td>07/05/2026 14:00:00</td>
-      <td>173,2</td>
-      <td>Pendente</td>
-    </tr>
-    <tr>
-      <td>553333</td>
-      <td>S0252</td>
+      <td>552444</td>
+      <td>869170034871393</td>
       <td>VTCLOG - GRU</td>
       <td></td>
       <td>SP</td>
-      <td>08/05/2026 12:23:00</td>
-      <td>172,3</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>553111</td>
-      <td>S0207</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034871997</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>08/05/2026 17:00:00</td>
-      <td>172,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>552950</td>
-      <td>AS-0118</td>
-      <td>FOR - NT TRANSPORTE LTDA</td>
+      <td>552444</td>
+      <td>869170034873043</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>CE</td>
-      <td>08/05/2026 17:42:00</td>
-      <td>172,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>20260536</td>
-      <td>A3592</td>
-      <td>VTCLOG RIO GALEAO</td>
+      <td>552444</td>
+      <td>869170034873423</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RJ</td>
-      <td>09/05/2026 11:20:00</td>
-      <td>171,3</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>552965</td>
-      <td>S-012</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034874488</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>12/05/2026 10:00:00</td>
-      <td>168,4</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>553440</td>
-      <td>S0305</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034874587</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>12/05/2026 15:40:00</td>
-      <td>168,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>552844</td>
-      <td>S1657</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034874629</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>12/05/2026 15:52:20</td>
-      <td>168,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>553222</td>
-      <td>S0926</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034875972</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>12/05/2026 16:13:00</td>
-      <td>168,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>553680</td>
-      <td>A6420</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034876186</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>13/05/2026 17:00:00</td>
-      <td>167,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>553579</td>
-      <td>S0479</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552584</td>
+      <td>869170034876277</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>13/05/2026 17:00:00</td>
-      <td>167,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>553315</td>
-      <td>S1462</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034876343</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>13/05/2026 17:00:00</td>
-      <td>167,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554046</td>
-      <td>A9282</td>
-      <td>VTCLOG RIO GALEAO</td>
+      <td>552444</td>
+      <td>869170034876632</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RJ</td>
-      <td>15/05/2026 15:31:00</td>
-      <td>165,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554260</td>
-      <td>S0281</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034877036</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>19/05/2026 15:26:24</td>
-      <td>161,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554260</td>
-      <td>S0787</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034877333</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>19/05/2026 15:26:24</td>
-      <td>161,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554260</td>
-      <td>S0936</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034877747</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>19/05/2026 15:26:24</td>
-      <td>161,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554260</td>
-      <td>S1124</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034877978</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>19/05/2026 15:26:24</td>
-      <td>161,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554260</td>
-      <td>S1540</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034878356</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>19/05/2026 15:26:24</td>
-      <td>161,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554260</td>
-      <td>S1579</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034878570</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>19/05/2026 15:26:24</td>
-      <td>161,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554260</td>
-      <td>S1658</td>
-      <td>VTCLOG CNF - CONTAGEM</td>
+      <td>552444</td>
+      <td>869170034879024</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MG</td>
-      <td>19/05/2026 15:26:24</td>
-      <td>161,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554609</td>
-      <td>A7184</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034879149</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>19/05/2026 17:00:00</td>
-      <td>161,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554595</td>
-      <td>S0236</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034879222</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>19/05/2026 17:00:00</td>
-      <td>161,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554605</td>
-      <td>S0299</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034879347</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>19/05/2026 17:00:00</td>
-      <td>161,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554092</td>
-      <td>S0301</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034879412</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>19/05/2026 17:00:00</td>
-      <td>161,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554598</td>
-      <td>S0572</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034879727</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>19/05/2026 17:00:00</td>
-      <td>161,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>554607</td>
-      <td>S0692</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034879768</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>19/05/2026 17:00:00</td>
-      <td>161,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>553768</td>
-      <td>A2005</td>
-      <td>SSA - LUTY LOG</td>
+      <td>552444</td>
+      <td>869170034880634</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>BA</td>
-      <td>19/05/2026 17:05:00</td>
-      <td>161,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555565</td>
-      <td>S1107</td>
-      <td>CGB - JR TRANSPORTES</td>
+      <td>552444</td>
+      <td>869170034880808</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MT</td>
-      <td>27/05/2026 15:30:00</td>
-      <td>153,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555616</td>
-      <td>A7874</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034880816</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>29/05/2026 11:42:00</td>
-      <td>151,3</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555726</td>
-      <td>A5281</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034881632</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>29/05/2026 18:01:00</td>
-      <td>151,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555995</td>
-      <td>A8076</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034882390</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>01/06/2026 15:35:00</td>
-      <td>148,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555976</td>
-      <td>A5709</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034883513</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>01/06/2026 16:00:00</td>
-      <td>148,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555976</td>
-      <td>A7186</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034884313</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>01/06/2026 16:00:00</td>
-      <td>148,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555868</td>
-      <td>A3471</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034884818</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>01/06/2026 17:00:00</td>
-      <td>148,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555868</td>
-      <td>A4963</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552584</td>
+      <td>869170034885559</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>01/06/2026 17:00:00</td>
-      <td>148,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555725</td>
-      <td>A7045</td>
-      <td>CGB - JR TRANSPORTES</td>
+      <td>552444</td>
+      <td>869170034886110</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MT</td>
-      <td>02/06/2026 06:41:00</td>
-      <td>147,5</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555882</td>
-      <td>A8874</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034886268</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>02/06/2026 15:30:00</td>
-      <td>147,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555989</td>
-      <td>A5835</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034886862</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>02/06/2026 15:31:00</td>
-      <td>147,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555981</td>
-      <td>TA0645</td>
-      <td>FLN - TGEX TRANSPORTES E LOCACAO DE VEIC</td>
+      <td>552444</td>
+      <td>869170034887365</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SC</td>
-      <td>03/06/2026 10:30:00</td>
-      <td>146,4</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555891</td>
-      <td>A1692</td>
-      <td>AJU - CASSIMIRO TRANSPORTES</td>
+      <td>552444</td>
+      <td>869170034888330</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>SE</td>
-      <td>03/06/2026 16:00:00</td>
-      <td>146,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555355</td>
-      <td>TA0671</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170034889494</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>03/06/2026 19:00:00</td>
-      <td>146,0</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>555300</td>
-      <td>TA0492</td>
-      <td>POA - GMB TRANSPORTES E LOGISTICA ME</td>
+      <td>552444</td>
+      <td>869170035491340</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>RS</td>
-      <td>04/06/2026 17:50:00</td>
-      <td>145,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>556173</td>
-      <td>A4423</td>
-      <td>JPA - MJ TRANSPORTES</td>
+      <td>552444</td>
+      <td>869170035491696</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>PB</td>
-      <td>08/06/2026 14:00:00</td>
-      <td>141,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>556173</td>
-      <td>A5580</td>
-      <td>JPA - MJ TRANSPORTES</td>
+      <td>552444</td>
+      <td>869170035500538</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>PB</td>
-      <td>08/06/2026 14:00:00</td>
-      <td>141,2</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>556417</td>
-      <td>A8861</td>
-      <td>FOR - NT TRANSPORTE LTDA</td>
+      <td>552444</td>
+      <td>869170035501759</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>CE</td>
-      <td>08/06/2026 16:05:00</td>
-      <td>141,1</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>556262</td>
-      <td>A7749</td>
-      <td>CGR - LH TRANSPORTES</td>
+      <td>552444</td>
+      <td>869170035502146</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MS</td>
-      <td>09/06/2026 10:47:00</td>
-      <td>140,4</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>556151</td>
-      <td>TA1068</td>
-      <td>JPA - MJ TRANSPORTES</td>
+      <td>552444</td>
+      <td>869170035502401</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>PB</td>
-      <td>10/06/2026 11:25:00</td>
-      <td>139,3</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>556144</td>
-      <td>A0622</td>
-      <td>SLZ - REIS CAVALCANTE EXPRESSO</td>
+      <td>552444</td>
+      <td>869170035510420</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MA</td>
-      <td>10/06/2026 11:30:00</td>
-      <td>139,3</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
     <tr>
-      <td>556144</td>
-      <td>A3774</td>
-      <td>SLZ - REIS CAVALCANTE EXPRESSO</td>
+      <td>552584</td>
+      <td>869170035512400</td>
+      <td>VTCLOG - GRU</td>
       <td></td>
-      <td>MA</td>
-      <td>10/06/2026 11:30:00</td>
-      <td>139,3</td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
+      <td>Pendente</td>
+    </tr>
+    <tr>
+      <td>552444</td>
+      <td>869170035513606</td>
+      <td>VTCLOG - GRU</td>
+      <td></td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
+      <td>Pendente</td>
+    </tr>
+    <tr>
+      <td>552444</td>
+      <td>869170035514349</td>
+      <td>VTCLOG - GRU</td>
+      <td></td>
+      <td>SP</td>
+      <td>30/04/2026 10:46:00</td>
+      <td>181,0</td>
       <td>Pendente</td>
     </tr>
   </tbody>
@@ -971,7 +971,7 @@
       }
 
       const RAW_DATA = [];
-      const DAY_LABELS = ["07/10", "08/10", "09/10", "10/10", "11/10", "12/10", "13/10", "14/10", "15/10", "16/10", "17/10", "18/10", "19/10", "20/10", "21/10", "22/10", "23/10", "24/10", "25/10", "26/10", "27/10"];
+      const DAY_LABELS = ["08/10", "09/10", "10/10", "11/10", "12/10", "13/10", "14/10", "15/10", "16/10", "17/10", "18/10", "19/10", "20/10", "21/10", "22/10", "23/10", "24/10", "25/10", "26/10", "27/10", "28/10"];
       const TABLE_COLUMNS = [
         { key: "Pedido", label: "Pedido" },
         { key: "Logger", label: "Logger" },

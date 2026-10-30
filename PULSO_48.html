@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pulso 48</title>
+<style>
+  :root {
+    --ink: #1d1a16; --muted: #6d675f; --line: #e4ddd4; --head: #243044;
+    --red: #8d1f1c; --blue: #1e4d8c;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; }
+  body { margin: 0; color: var(--ink); background: #ece7df; font-family: "Segoe UI", Calibri, Arial, sans-serif; font-size: 13px; }
+  .page { height: 100%; display: flex; flex-direction: column; min-height: 0; padding: 14px 16px 12px; gap: 10px; }
+  .top { display: flex; justify-content: space-between; gap: 16px; align-items: flex-end; }
+  .kicker { margin: 0 0 2px; color: var(--red); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; }
+  h1 { margin: 0; font-size: 22px; letter-spacing: -0.02em; font-weight: 650; }
+  .sub { margin: 4px 0 0; color: var(--muted); font-size: 13px; max-width: 78ch; }
+  .nums { display: flex; gap: 8px; flex-shrink: 0; }
+  .num { background: #fff; border: 1px solid var(--line); min-width: 108px; padding: 6px 10px 7px; }
+  .num b { display: block; font-size: 20px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .num span { color: var(--muted); font-size: 11px; }
+  .num.alerta b { color: var(--red); }
+  .num.just b { color: var(--blue); }
+  .bar { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
+  .grupo-filtro { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  input[type="search"], select {
+    border: 1px solid #d5cdc2; background: #fff; height: 32px; padding: 6px 8px; font: inherit; color: inherit;
+  }
+  input[type="search"] { flex: 1 1 280px; width: auto; min-width: 220px; }
+  select { max-width: 340px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .chip, .copiar, .carregar {
+    border: 1px solid #d5cdc2; background: #fff; color: var(--ink);
+    padding: 6px 10px; font: inherit; font-size: 12.5px; cursor: pointer;
+  }
+  .chip.ativo, .carregar { background: var(--head); color: #fff; border-color: var(--head); }
+  .copiar { background: var(--head); color: #fff; border-color: var(--head); }
+  .copiar.ok, .carregar.ok { background: #1d5a42; border-color: #1d5a42; }
+  .rotulo { color: var(--muted); font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; }
+  .conta { margin-left: auto; color: var(--muted); font-size: 12.5px; white-space: nowrap; }
+  .aviso { margin: 0; color: var(--red); font-size: 13px; }
+  .sheet { flex: 1; min-height: 0; overflow: auto; background: #fff; border: 1px solid #d3cbc0; }
+  table { border-collapse: separate; border-spacing: 0; min-width: 100%; }
+  th, td {
+    padding: 5px 8px; border-bottom: 1px solid var(--line); border-right: 1px solid #f0ebe4;
+    text-align: left; vertical-align: top; font-variant-numeric: tabular-nums; white-space: nowrap;
+  }
+  th {
+    position: sticky; top: 0; z-index: 2; background: var(--head); color: #fff;
+    font-size: 11px; font-weight: 650; letter-spacing: 0.04em; text-transform: uppercase; cursor: pointer; user-select: none;
+  }
+  th .seta { opacity: 0.35; font-style: normal; margin-left: 4px; }
+  th.ativo .seta { opacity: 1; }
+  td.idx, th.idx { position: sticky; left: 0; width: 42px; min-width: 42px; text-align: right; color: var(--muted); }
+  td.sit, th.sit { position: sticky; left: 42px; min-width: 148px; box-shadow: 1px 0 0 #d3cbc0; }
+  th.idx, th.sit { z-index: 4; background: var(--head); color: #fff; }
+  td.idx, td.sit { background: #fff; z-index: 1; }
+  tr.com td, tr.com td.idx, tr.com td.sit { background: #e7f0fa; }
+  tr.vencido td.sit, tr.com.vencido td.sit { color: var(--red); font-weight: 700; }
+  tr.hoje td.sit { color: #8a5a10; font-weight: 700; }
+  tr:hover td { background: #efe4d4; }
+  td.mono { font-family: Consolas, "Courier New", monospace; font-size: 12.5px; }
+  td.uf { text-align: center; font-weight: 650; }
+  td.vazio { color: #b0a89e; }
+  td.ag { font-weight: 650; }
+  td.just { white-space: normal; min-width: 280px; max-width: 460px; }
+  .vazio-tabela { padding: 28px; color: var(--muted); }
+  .bar[hidden], #tabela[hidden], #pedido[hidden] { display: none !important; }
+  .pedido { min-height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 40px 36px; max-width: 62ch; }
+  .pedido h2 { margin: 0; font-size: 22px; letter-spacing: -0.02em; font-weight: 650; }
+  .pedido p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  .pedido .carregar { align-self: flex-start; margin-top: 8px; padding: 10px 14px; font-size: 14px; }
+  @media print {
+    body { background: #fff; height: auto; }
+    .page { height: auto; display: block; padding: 0; }
+    .bar, .nums, .aviso, .pedido { display: none; }
+    .sheet { overflow: visible; border: 0; }
+    th, td.idx, td.sit, th.idx, th.sit { position: static; box-shadow: none; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="top">
+    <div>
+      <p class="kicker" id="kicker">Pulso 48</p>
+      <h1 id="titulo">Pulso 48</h1>
+      <p class="sub" id="sub">Para ver a grade, envie a planilha de 48 horas (CSV do prazo D+2).</p>
+    </div>
+    <div class="nums">
+      <div class="num"><b id="n-total">—</b><span>Na região</span></div>
+      <div class="num just"><b id="n-just">—</b><span>Com justificativa</span></div>
+      <div class="num"><b id="n-sem">—</b><span>Sem justificativa</span></div>
+    </div>
+  </div>
+  <div class="bar" hidden>
+    <button type="button" class="carregar" id="uploadBtn">Trocar planilha de 48h</button>
+    <input id="q" type="search" placeholder="Filtrar agente, pedido, logger, UF ou motivo" aria-label="Filtrar a grade">
+    <div class="grupo-filtro">
+      <span class="rotulo">Agente</span>
+      <select id="agente" aria-label="Filtrar por agente"></select>
+    </div>
+    <div class="grupo-filtro">
+      <span class="rotulo">Região</span>
+      <div class="chips" id="chips-reg">
+        <button type="button" class="chip ativo" data-r="seco">Centro-Oeste e Sudeste</button>
+        <button type="button" class="chip" data-r="nosu">Norte e Sul</button>
+        <button type="button" class="chip" data-r="ne">Nordeste</button>
+        <button type="button" class="chip" data-r="todas">Todas</button>
+      </div>
+    </div>
+    <div class="grupo-filtro">
+      <span class="rotulo">Justificativa</span>
+      <div class="chips" id="chips-just">
+        <button type="button" class="chip ativo" data-f="tudo">Todos</button>
+        <button type="button" class="chip" data-f="sim">Com justificativa</button>
+        <button type="button" class="chip" data-f="nao">Sem justificativa</button>
+      </div>
+    </div>
+    <button type="button" class="copiar" id="copiar">Copiar WhatsApp</button>
+    <button type="button" class="copiar" id="exportar">Exportar CSV</button>
+    <span class="conta" id="conta"></span>
+  </div>
+  <p class="aviso" id="aviso" hidden></p>
+  <input id="arquivo" type="file" accept=".csv,text/csv" hidden>
+  <div class="sheet">
+    <div class="pedido" id="pedido">
+      <p class="kicker">Pulso 48</p>
+      <h2>Envie a planilha para trazer os dados</h2>
+      <p>A grade só abre com a planilha de 48h, o CSV do prazo D+2. Cada vez que abrir esta página, envie o arquivo de novo. Outro tipo de planilha não entra.</p>
+      <button type="button" class="carregar" id="uploadCentro">Enviar planilha de 48h</button>
+    </div>
+    <div id="tabela" hidden>
+    <table>
+      <thead>
+        <tr>
+          <th class="idx" data-k="idx">#<i class="seta"></i></th>
+          <th class="sit" data-k="vence">Vence em<i class="seta"></i></th>
+          <th data-k="prazo">Prazo<i class="seta"></i></th>
+          <th data-k="regiao">Região<i class="seta"></i></th>
+          <th data-k="uf">UF<i class="seta"></i></th>
+          <th data-k="agente">Agente<i class="seta"></i></th>
+          <th data-k="pedido">Pedido<i class="seta"></i></th>
+          <th data-k="logger">Logger<i class="seta"></i></th>
+          <th data-k="caixa">Caixa<i class="seta"></i></th>
+          <th data-k="entrega">Entrega<i class="seta"></i></th>
+          <th data-k="ult">Último sync<i class="seta"></i></th>
+          <th data-k="motivo">Motivo<i class="seta"></i></th>
+          <th data-k="quem">Registrado por<i class="seta"></i></th>
+        </tr>
+      </thead>
+      <tbody id="corpo"></tbody>
+    </table>
+    <p class="vazio-tabela" id="vazio" hidden>Nenhum item nessa região.</p>
+    </div>
+  </div>
+</div>
+<script>
+const SE = new Set(["SP","RJ","MG","ES"]);
+const CO = new Set(["DF","GO","MT","MS"]);
+const NO = new Set(["AC","AP","AM","PA","RO","RR","TO"]);
+const SU = new Set(["PR","SC","RS"]);
+const NE = new Set(["AL","BA","CE","MA","PB","PE","PI","RN","SE"]);
+const GRUPOS = {
+  seco: { titulo: "Sudeste e Centro-Oeste", arquivo: "prazo_d2_sudeste_centro_oeste.csv" },
+  nosu: { titulo: "Norte e Sul", arquivo: "prazo_d2_norte_sul.csv" },
+  ne: { titulo: "Nordeste", arquivo: "prazo_d2_nordeste.csv" },
+  todas: { titulo: "Todas as regiões", arquivo: "prazo_d2.csv" }
+};
+const INICIAL = [];
+let base = INICIAL;
+let nomeArquivo = "";
+const corpo = document.getElementById("corpo");
+const estado = { filtro: "tudo", regiao: "seco", agente: "", q: "", col: "", dir: 1 };
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+}
+function diasDe(v) {
+  const m = /(\d+)/.exec(v || "");
+  return String(v || "").startsWith("Vencido") && m ? Number(m[1]) : 0;
+}
+function bucketDe(v) {
+  if (String(v || "").startsWith("Vencido")) return "vencido";
+  if (v === "Hoje") return "hoje";
+  if (v === "Amanhã") return "amanha";
+  return "depois";
+}
+function venceEm(v) {
+  if (String(v || "").startsWith("Vencido")) {
+    const n = diasDe(v);
+    return n === 1 ? "Vencido há 1 dia" : "Vencido há " + n + " dias";
+  }
+  return { "Hoje": "Vence hoje", "Amanhã": "Vence amanhã", "Em 2 dias": "Vence em 2 dias" }[v] || v || "";
+}
+function regiaoDe(uf) {
+  if (SE.has(uf)) return "Sudeste";
+  if (CO.has(uf)) return "Centro-Oeste";
+  if (NO.has(uf)) return "Norte";
+  if (SU.has(uf)) return "Sul";
+  if (NE.has(uf)) return "Nordeste";
+  return "Outra";
+}
+function noGrupo(uf, g) {
+  if (g === "seco") return SE.has(uf) || CO.has(uf);
+  if (g === "nosu") return NO.has(uf) || SU.has(uf);
+  if (g === "ne") return NE.has(uf);
+  return true;
+}
+function junta(partes) {
+  if (partes.length <= 1) return partes[0] || "";
+  return partes.slice(0, -1).join(", ") + " e " + partes[partes.length - 1];
+}
+function curto(s) {
+  const m = String(s || "").match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2}))?/);
+  if (!m) return s || "";
+  const hm = m[4] ? " " + m[4] + ":" + m[5] : "";
+  if (m[1] !== "2026") return m[3] + "/" + m[2] + "/" + m[1] + hm;
+  return m[3] + "/" + m[2] + hm;
+}
+function chaveDt(s) {
+  const m = String(s || "").match(/^(\d{4})-(\d{2})-(\d{2})(?:[ T](\d{2}):(\d{2}))?/);
+  return m ? m[1] + m[2] + m[3] + (m[4] || "00") + (m[5] || "00") : "";
+}
+function chavePrazo(p) {
+  const m = String(p || "").match(/^(\d{2})\/(\d{2})/);
+  return m ? m[2] + m[1] : "";
+}
+function ordenarDados(lista) {
+  return lista.slice().sort((a, b) => {
+    const ra = { vencido: 0, hoje: 1, amanha: 2, depois: 3 }[bucketDe(a.vence)];
+    const rb = { vencido: 0, hoje: 1, amanha: 2, depois: 3 }[bucketDe(b.vence)];
+    if (ra !== rb) return ra - rb;
+    const da = diasDe(a.vence), db = diasDe(b.vence);
+    if (da !== db) return db - da;
+    const ja = a.observacao ? 0 : 1, jb = b.observacao ? 0 : 1;
+    if (ja !== jb) return ja - jb;
+    return (a.agente + a.pedido + a.logger).localeCompare(b.agente + b.pedido + b.logger);
+  });
+}
+function linhas() { return [...corpo.querySelectorAll("tr")]; }
+function pintar() {
+  const semDados = base.length === 0;
+  document.querySelector(".bar").hidden = semDados;
+  document.getElementById("pedido").hidden = !semDados;
+  document.getElementById("tabela").hidden = semDados;
+  if (semDados) {
+    document.getElementById("kicker").textContent = "Pulso 48";
+    document.getElementById("titulo").textContent = "Pulso 48";
+    document.title = "Pulso 48";
+    document.getElementById("sub").textContent = "Para ver a grade, envie a planilha de 48 horas (CSV do prazo D+2).";
+    document.getElementById("n-total").textContent = "—";
+    document.getElementById("n-just").textContent = "—";
+    document.getElementById("n-sem").textContent = "—";
+    corpo.innerHTML = "";
+    document.getElementById("conta").textContent = "";
+    return;
+  }
+  const lista = ordenarDados(base.filter(r => noGrupo(r.uf, estado.regiao)));
+  const just = lista.filter(r => r.observacao).length;
+  const grupo = GRUPOS[estado.regiao] || GRUPOS.todas;
+  document.getElementById("n-total").textContent = lista.length;
+  document.getElementById("n-just").textContent = just;
+  document.getElementById("n-sem").textContent = lista.length - just;
+  document.getElementById("titulo").textContent = grupo.titulo;
+  document.title = "Pulso 48 · " + grupo.titulo;
+  document.querySelectorAll("#chips-reg .chip").forEach(c => {
+    const n = base.filter(r => noGrupo(r.uf, c.dataset.r)).length;
+    const nome = (GRUPOS[c.dataset.r] || {}).titulo || c.dataset.r;
+    c.textContent = nome + " · " + n;
+    c.classList.toggle("ativo", c.dataset.r === estado.regiao);
+  });
+  document.querySelector("#chips-just [data-f='tudo']").textContent = "Todos · " + lista.length;
+  document.querySelector("#chips-just [data-f='sim']").textContent = "Com justificativa · " + just;
+  document.querySelector("#chips-just [data-f='nao']").textContent = "Sem justificativa · " + (lista.length - just);
+  document.querySelectorAll("#chips-just .chip").forEach(c => c.classList.toggle("ativo", c.dataset.f === estado.filtro));
+  const partes = ["Sudeste", "Centro-Oeste", "Norte", "Sul", "Nordeste", "Outra"].map(nome => {
+    const n = lista.filter(r => regiaoDe(r.uf) === nome).length;
+    return n ? n + " no " + nome : "";
+  }).filter(Boolean);
+  document.getElementById("sub").textContent =
+    "Linhas em azul já têm justificativa, com o motivo ao lado. Arquivo: " +
+    nomeArquivo + (partes.length ? " · " + junta(partes) + "." : ".");
+  const dataArq = String(nomeArquivo).match(/(20\d{2})-(\d{2})-(\d{2})/);
+  document.getElementById("kicker").textContent = dataArq
+    ? "Pulso 48 · " + dataArq[3] + "/" + dataArq[2] + "/" + dataArq[1]
+    : "Pulso 48";
+  corpo.innerHTML = lista.map(r => {
+    const motivo = r.observacao || "";
+    const quem = [r.observacao_por, r.observacao_em].filter(Boolean).join(" ");
+    const reg = regiaoDe(r.uf);
+    const busca = [r.agente, r.pedido, r.logger, r.uf, reg, venceEm(r.vence), motivo, quem].join(" ").toLowerCase();
+    const cls = (motivo ? "com" : "sem") + " " + bucketDe(r.vence);
+    const cel = (txt, extra) => {
+      const vazio = !txt;
+      return '<td class="' + [extra, vazio ? "vazio" : ""].filter(Boolean).join(" ") + '">' + (vazio ? "—" : esc(txt)) + "</td>";
+    };
+    return '<tr class="' + cls + '" data-bucket="' + bucketDe(r.vence) + '" data-just="' + (motivo ? "sim" : "nao") +
+      '" data-dias="' + diasDe(r.vence) + '" data-vence="' + esc(venceEm(r.vence)) + '" data-prazo="' + chavePrazo(r.prazo) +
+      '" data-regiao="' + esc(reg) + '" data-uf="' + esc(r.uf) + '" data-agente="' + esc(r.agente) +
+      '" data-pedido="' + esc(r.pedido) + '" data-logger="' + esc(r.logger) + '" data-caixa="' + esc(r.caixa) +
+      '" data-entrega="' + chaveDt(r.entrega) + '" data-ult="' + chaveDt(r.ultimo_sync) +
+      '" data-motivo="' + esc(motivo) + '" data-quem="' + esc(quem) + '" data-q="' + esc(busca) + '">' +
+      '<td class="idx"></td><td class="sit">' + esc(venceEm(r.vence)) + "</td>" +
+      cel(r.prazo) + cel(reg) + cel(r.uf, "uf") + cel(r.agente, "ag") + cel(r.pedido, "mono") + cel(r.logger, "mono") +
+      cel(r.caixa) + cel(curto(r.entrega)) + cel(curto(r.ultimo_sync) || "Nunca") + cel(motivo, "just") + cel(quem) +
+      "</tr>";
+  }).join("");
+  document.getElementById("vazio").hidden = lista.length > 0;
+  preencherAgentes(lista);
+  aplica();
+}
+function preencherAgentes(lista) {
+  const nomes = [...new Set(lista.map(r => r.agente).filter(Boolean))].sort((a, b) => a.localeCompare(b, "pt"));
+  if (estado.agente && !nomes.includes(estado.agente)) estado.agente = "";
+  const sel = document.getElementById("agente");
+  sel.innerHTML = '<option value="">Todos os agentes</option>' + nomes.map(n =>
+    '<option value="' + esc(n) + '">' + esc(n) + "</option>"
+  ).join("");
+  sel.value = estado.agente;
+}
+function aplica() {
+  const termos = estado.q.toLowerCase().split(/\s+/).filter(Boolean);
+  let n = 0;
+  linhas().forEach(tr => {
+    const okF = estado.filtro === "tudo" || tr.dataset.just === estado.filtro;
+    const okA = !estado.agente || tr.dataset.agente === estado.agente;
+    const okQ = termos.every(t => (tr.dataset.q || "").includes(t));
+    tr.hidden = !(okF && okA && okQ);
+    if (!tr.hidden) n += 1;
+  });
+  let i = 1;
+  linhas().forEach(tr => { if (!tr.hidden) tr.querySelector(".idx").textContent = i++; });
+  document.getElementById("conta").textContent = n + (n === 1 ? " linha" : " linhas");
+}
+function valor(tr, k) {
+  if (k === "vence") {
+    const rank = { vencido: 0, hoje: 1, amanha: 2, depois: 3 }[tr.dataset.bucket] || 9;
+    return String(rank * 1000 - Number(tr.dataset.dias || 0)).padStart(6, "0");
+  }
+  return (tr.dataset[k] || "").toLowerCase();
+}
+function ordenar(k) {
+  if (estado.col === k) estado.dir *= -1;
+  else { estado.col = k; estado.dir = 1; }
+  const rows = linhas();
+  rows.sort((a, b) => {
+    const va = valor(a, k), vb = valor(b, k);
+    if (va < vb) return -1 * estado.dir;
+    if (va > vb) return 1 * estado.dir;
+    return 0;
+  });
+  rows.forEach(tr => corpo.appendChild(tr));
+  document.querySelectorAll("th").forEach(th => {
+    th.classList.toggle("ativo", th.dataset.k === k);
+    th.querySelector(".seta").textContent = th.dataset.k === k ? (estado.dir > 0 ? "↑" : "↓") : "";
+  });
+  aplica();
+}
+function detectarSep(texto) {
+  const linha = texto.replace(/^\uFEFF/, "").split(/\r?\n/, 1)[0] || "";
+  const pv = (linha.match(/;/g) || []).length;
+  const vg = (linha.match(/,/g) || []).length;
+  return pv >= vg ? ";" : ",";
+}
+function parseCsv(texto) {
+  const sep = detectarSep(texto);
+  texto = texto.replace(/^\uFEFF/, "");
+  const rows = [];
+  let row = [], cur = "", q = false;
+  for (let i = 0; i < texto.length; i++) {
+    const c = texto[i];
+    if (q) {
+      if (c === '"') {
+        if (texto[i + 1] === '"') { cur += '"'; i++; }
+        else q = false;
+      } else cur += c;
+    } else if (c === '"') q = true;
+    else if (c === sep) { row.push(cur); cur = ""; }
+    else if (c === "\n") { row.push(cur); rows.push(row); row = []; cur = ""; }
+    else if (c !== "\r") cur += c;
+  }
+  if (cur.length || row.length) { row.push(cur); rows.push(row); }
+  const header = (rows.shift() || []).map(h => h.trim().toLowerCase());
+  return rows.filter(r => r.some(c => String(c).trim())).map(r => {
+    const o = {};
+    header.forEach((h, i) => { o[h] = r[i] == null ? "" : String(r[i]).trim(); });
+    return o;
+  });
+}
+function normalizar(rows) {
+  const precisa = ["vence", "prazo", "agente", "pedido", "logger", "uf", "ultimo_sync", "observacao"];
+  if (!rows.length || precisa.some(k => !(k in rows[0]))) {
+    throw new Error("Envie a planilha de 48 horas, o CSV do prazo D+2. Este arquivo não é essa planilha.");
+  }
+  return rows.map(r => ({
+    vence: r.vence || "",
+    prazo: r.prazo || "",
+    agente: r.agente || "",
+    pedido: r.pedido || "",
+    logger: r.logger || "",
+    uf: (r.uf || "").toUpperCase(),
+    caixa: r.caixa || "",
+    entrega: r.entrega || "",
+    ultimo_sync: r.ultimo_sync || "",
+    observacao: (r.observacao || "").replace(/\s+/g, " ").trim(),
+    observacao_por: r.observacao_por || "",
+    observacao_em: r.observacao_em || ""
+  }));
+}
+function abrirArquivo() { document.getElementById("arquivo").click(); }
+document.getElementById("uploadBtn").addEventListener("click", abrirArquivo);
+document.getElementById("uploadCentro").addEventListener("click", abrirArquivo);
+document.getElementById("arquivo").addEventListener("change", e => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = "";
+  if (!file) return;
+  const aviso = document.getElementById("aviso");
+  const leitor = new FileReader();
+  leitor.onload = () => {
+    try {
+      const utf = new TextDecoder("utf-8").decode(leitor.result);
+      let rows = parseCsv(utf);
+      if (!rows.length || !("vence" in rows[0])) rows = parseCsv(new TextDecoder("windows-1252").decode(leitor.result));
+      base = normalizar(rows);
+      nomeArquivo = file.name;
+      estado.filtro = "tudo";
+      estado.agente = "";
+      estado.q = "";
+      document.getElementById("q").value = "";
+      document.querySelectorAll("#chips-just .chip").forEach(c => c.classList.toggle("ativo", c.dataset.f === "tudo"));
+      aviso.hidden = true;
+      pintar();
+      const btn = document.getElementById("uploadBtn");
+      btn.textContent = "Planilha de 48h carregada";
+      btn.classList.add("ok");
+      setTimeout(() => { btn.textContent = "Trocar planilha de 48h"; btn.classList.remove("ok"); }, 1600);
+    } catch (err) {
+      aviso.hidden = false;
+      aviso.textContent = err.message || "Não foi possível ler a planilha.";
+    }
+  };
+  leitor.readAsArrayBuffer(file);
+});
+document.getElementById("chips-reg").addEventListener("click", e => {
+  const b = e.target.closest("[data-r]");
+  if (!b) return;
+  estado.regiao = b.dataset.r;
+  pintar();
+});
+document.getElementById("chips-just").addEventListener("click", e => {
+  const b = e.target.closest("[data-f]");
+  if (!b) return;
+  estado.filtro = b.dataset.f;
+  document.querySelectorAll("#chips-just .chip").forEach(c => c.classList.toggle("ativo", c === b));
+  aplica();
+});
+document.getElementById("agente").addEventListener("change", e => { estado.agente = e.target.value; aplica(); });
+document.getElementById("q").addEventListener("input", e => { estado.q = e.target.value.trim(); aplica(); });
+document.querySelector("thead").addEventListener("click", e => {
+  const th = e.target.closest("th");
+  if (!th || th.dataset.k === "idx") return;
+  if (estado.col === th.dataset.k) estado.dir *= -1;
+  else { estado.col = th.dataset.k; estado.dir = 1; }
+  const rows = linhas();
+  const k = th.dataset.k;
+  rows.sort((a, b) => {
+    const va = valor(a, k), vb = valor(b, k);
+    if (va < vb) return -1 * estado.dir;
+    if (va > vb) return 1 * estado.dir;
+    return 0;
+  });
+  rows.forEach(tr => corpo.appendChild(tr));
+  document.querySelectorAll("th").forEach(th2 => {
+    th2.classList.toggle("ativo", th2.dataset.k === k);
+    th2.querySelector(".seta").textContent = th2.dataset.k === k ? (estado.dir > 0 ? "↑" : "↓") : "";
+  });
+  aplica();
+});
+document.getElementById("copiar").addEventListener("click", () => {
+  const termos = estado.q.toLowerCase().split(/\s+/).filter(Boolean);
+  const alvos = linhas().filter(tr => {
+    const okA = !estado.agente || tr.dataset.agente === estado.agente;
+    const okQ = termos.every(t => (tr.dataset.q || "").includes(t));
+    return tr.dataset.just === "nao" && okA && okQ;
+  });
+  const btn = document.getElementById("copiar");
+  const voltar = "Copiar WhatsApp";
+  if (!alvos.length) {
+    btn.textContent = "Nada sem justificativa";
+    setTimeout(() => { btn.textContent = voltar; }, 1400);
+    return;
+  }
+  const grupos = new Map();
+  alvos.forEach(tr => {
+    const agente = tr.dataset.agente || "Sem agente";
+    if (!grupos.has(agente)) grupos.set(agente, []);
+    grupos.get(agente).push("• " + tr.dataset.pedido + " · " + tr.dataset.logger);
+  });
+  const blocos = [...grupos.entries()].map(([agente, itens]) => "*" + agente + "*\n" + itens.join("\n"));
+  const texto = "Favor sincronizar:\n\n" + blocos.join("\n\n");
+  const pronto = () => { btn.textContent = "Copiado"; btn.classList.add("ok"); setTimeout(() => { btn.textContent = voltar; btn.classList.remove("ok"); }, 1400); };
+  const fallback = () => {
+    const ta = document.createElement("textarea");
+    ta.value = texto; ta.style.position = "fixed"; ta.style.left = "-9999px";
+    document.body.appendChild(ta); ta.select();
+    try { if (document.execCommand("copy")) pronto(); } catch (err) {}
+    ta.remove();
+  };
+  if (navigator.clipboard && window.isSecureContext) navigator.clipboard.writeText(texto).then(pronto).catch(fallback);
+  else fallback();
+});
+function csvCampo(v) {
+  const s = String(v ?? "");
+  return /[;"\r\n]/.test(s) ? '"' + s.replace(/"/g, '""') + '"' : s;
+}
+document.getElementById("exportar").addEventListener("click", () => {
+  const vis = linhas().filter(tr => !tr.hidden);
+  const texto = ["agente;pedido;logger;vence_em;motivo"].concat(vis.map(tr =>
+    [tr.dataset.agente, tr.dataset.pedido, tr.dataset.logger, tr.dataset.vence, tr.dataset.motivo].map(csvCampo).join(";")
+  )).join("\r\n");
+  const blob = new Blob(["\uFEFF" + texto], { type: "text/csv;charset=utf-8" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = (GRUPOS[estado.regiao] || GRUPOS.todas).arquivo;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1500);
+  const btn = document.getElementById("exportar");
+  btn.textContent = "CSV baixado"; btn.classList.add("ok");
+  setTimeout(() => { btn.textContent = "Exportar CSV"; btn.classList.remove("ok"); }, 1400);
+});
+pintar();
+</script>
+</body>
+</html>

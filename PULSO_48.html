@@ -499,17 +499,6 @@ document.getElementById("copiar").addEventListener("click", () => {
     if (h < 18) return "Boa tarde";
     return "Boa noite";
   })();
-  function prazoDe(vence) {
-    if (vence === "Vence hoje") return { frase: "para hoje", label: "Hoje" };
-    if (vence === "Vence amanhã") return { frase: "para amanhã", label: "Amanhã" };
-    if (vence === "Vence em 2 dias") return { frase: "para daqui a 2 dias", label: "Em 2 dias" };
-    const m = /Vencido há (\d+)/.exec(vence || "");
-    if (m) {
-      const dias = m[1] === "1" ? "1 dia" : m[1] + " dias";
-      return { frase: "já vencido há " + dias, label: "Vencido há " + dias };
-    }
-    return { frase: "em aberto", label: vence || "—" };
-  }
   const porAgente = new Map();
   alvos.forEach(tr => {
     const agente = tr.dataset.agente || "Sem agente";
@@ -520,28 +509,20 @@ document.getElementById("copiar").addEventListener("click", () => {
     const pedidos = [];
     rows.forEach(tr => {
       const pedido = tr.dataset.pedido || "";
-      const vence = tr.dataset.vence || "";
       const logger = tr.dataset.logger || "";
-      let item = pedidos.find(p => p.pedido === pedido && p.vence === vence);
+      let item = pedidos.find(p => p.pedido === pedido);
       if (!item) {
-        item = { pedido, vence, loggers: [] };
+        item = { pedido, loggers: [] };
         pedidos.push(item);
       }
       if (logger && !item.loggers.includes(logger)) item.loggers.push(logger);
     });
-    const prazos = [...new Set(pedidos.map(p => p.vence))];
-    const unico = prazos.length === 1 ? prazoDe(prazos[0]) : null;
     const alvo = pedidos.length === 1 ? "do seguinte pedido" : "dos seguintes pedidos";
-    const abertura = unico
-      ? "Estamos com pendência de sincronismo com prazo de vencimento " + unico.frase + "."
-      : "Estamos com pendência de sincronismo com prazos de vencimento diferentes.";
-    let textoAg = saudacao + "!\n\n" + abertura + " Precisamos priorizar a sincronização " + alvo + ":\n\nAgente: " + agente + "\n";
+    let textoAg = saudacao + "!\n\nEstamos com pendência de sincronismo. Precisamos da sincronização urgente " + alvo + ":\n\nAgente: " + agente + "\n";
     pedidos.forEach(p => {
       textoAg += "\nPedido: " + p.pedido + "\n";
       p.loggers.forEach(lg => { textoAg += "Datalogger: " + lg + "\n"; });
-      if (!unico) textoAg += "Vencimento: " + prazoDe(p.vence).label + "\n";
     });
-    if (unico) textoAg += "\nVencimento: " + unico.label + "\n";
     textoAg += "\nPor favor, confirmem assim que o procedimento for realizado.";
     return textoAg;
   });

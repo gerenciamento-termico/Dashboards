@@ -68,10 +68,24 @@
   td.just { white-space: normal; min-width: 280px; max-width: 460px; }
   .vazio-tabela { padding: 28px; color: var(--muted); }
   .bar[hidden], #tabela[hidden], #pedido[hidden] { display: none !important; }
-  .pedido { min-height: 100%; display: flex; flex-direction: column; justify-content: center; gap: 8px; padding: 40px 36px; max-width: 62ch; }
-  .pedido h2 { margin: 0; font-size: 22px; letter-spacing: -0.02em; font-weight: 650; }
-  .pedido p { margin: 0; color: var(--muted); font-size: 14px; line-height: 1.5; }
-  .pedido .carregar { align-self: flex-start; margin-top: 8px; padding: 10px 14px; font-size: 14px; }
+  .pedido { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 28px; }
+  .zona {
+    width: min(520px, 100%);
+    border: 1.5px dotted #b7aea3;
+    border-radius: 18px;
+    background: #f7f3ed;
+    padding: 48px 36px 42px;
+    text-align: center;
+    cursor: pointer;
+  }
+  .zona:hover, .zona:focus-visible, body.arrastando .zona {
+    border-color: var(--head);
+    background: #fff;
+    outline: none;
+  }
+  .zona h2 { margin: 8px 0 0; font-size: 22px; letter-spacing: -0.02em; font-weight: 650; }
+  .zona p { margin: 10px auto 0; max-width: 42ch; color: var(--muted); font-size: 14px; line-height: 1.5; }
+  .zona .acao { margin-top: 18px; color: var(--head); font-size: 13px; font-weight: 650; }
   @media print {
     body { background: #fff; height: auto; }
     .page { height: auto; display: block; padding: 0; }
@@ -127,10 +141,12 @@
   <input id="arquivo" type="file" accept=".csv,text/csv" hidden>
   <div class="sheet">
     <div class="pedido" id="pedido">
-      <p class="kicker">Pulso 48</p>
-      <h2>Envie a planilha para trazer os dados</h2>
-      <p>A grade só abre com a planilha de 48h, o CSV do prazo D+2. Cada vez que abrir esta página, envie o arquivo de novo. Outro tipo de planilha não entra.</p>
-      <button type="button" class="carregar" id="uploadCentro">Enviar planilha de 48h</button>
+      <div class="zona" id="zona" role="button" tabindex="0">
+        <p class="kicker">Pulso 48</p>
+        <h2>Arraste a planilha de 48h</h2>
+        <p>Solte aqui o CSV do prazo D+2. Se preferir, clique para escolher o arquivo.</p>
+        <div class="acao">Solte ou clique para anexar</div>
+      </div>
     </div>
     <div id="tabela" hidden>
     <table>
@@ -411,11 +427,7 @@ function normalizar(rows) {
   }));
 }
 function abrirArquivo() { document.getElementById("arquivo").click(); }
-document.getElementById("uploadBtn").addEventListener("click", abrirArquivo);
-document.getElementById("uploadCentro").addEventListener("click", abrirArquivo);
-document.getElementById("arquivo").addEventListener("change", e => {
-  const file = e.target.files && e.target.files[0];
-  e.target.value = "";
+function lerPlanilha(file) {
   if (!file) return;
   const aviso = document.getElementById("aviso");
   const leitor = new FileReader();
@@ -443,6 +455,42 @@ document.getElementById("arquivo").addEventListener("change", e => {
     }
   };
   leitor.readAsArrayBuffer(file);
+}
+document.getElementById("uploadBtn").addEventListener("click", abrirArquivo);
+const zona = document.getElementById("zona");
+zona.addEventListener("click", abrirArquivo);
+zona.addEventListener("keydown", e => {
+  if (e.key === "Enter" || e.key === " ") { e.preventDefault(); abrirArquivo(); }
+});
+document.getElementById("arquivo").addEventListener("change", e => {
+  const file = e.target.files && e.target.files[0];
+  e.target.value = "";
+  if (file) lerPlanilha(file);
+});
+let arrastando = 0;
+function temArquivo(e) {
+  return e.dataTransfer && [...e.dataTransfer.types].includes("Files");
+}
+document.addEventListener("dragenter", e => {
+  if (!temArquivo(e)) return;
+  e.preventDefault();
+  arrastando += 1;
+  document.body.classList.add("arrastando");
+});
+document.addEventListener("dragover", e => {
+  if (!temArquivo(e)) return;
+  e.preventDefault();
+});
+document.addEventListener("dragleave", () => {
+  arrastando = Math.max(0, arrastando - 1);
+  if (!arrastando) document.body.classList.remove("arrastando");
+});
+document.addEventListener("drop", e => {
+  if (!temArquivo(e)) return;
+  e.preventDefault();
+  arrastando = 0;
+  document.body.classList.remove("arrastando");
+  lerPlanilha(e.dataTransfer.files && e.dataTransfer.files[0]);
 });
 document.getElementById("chips-reg").addEventListener("click", e => {
   const b = e.target.closest("[data-r]");

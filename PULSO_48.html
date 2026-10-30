@@ -493,17 +493,11 @@ document.getElementById("copiar").addEventListener("click", () => {
     setTimeout(() => { btn.textContent = voltar; }, 1400);
     return;
   }
-  const cab = ["agente", "pedido", "logger", "vence_em"];
-  const linhasTab = alvos.map(tr => [
-    tr.dataset.agente || "",
-    tr.dataset.pedido || "",
-    tr.dataset.logger || "",
-    tr.dataset.vence || ""
-  ]);
-  const larguras = cab.map((h, i) => Math.max(h.length, ...linhasTab.map(l => l[i].length)));
-  const montar = vals => vals.map((v, i) => i === vals.length - 1 ? v : v + " ".repeat(Math.max(0, larguras[i] - v.length))).join("  ");
-  const tabela = [montar(cab), ...linhasTab.map(montar)].join("\n");
-  const texto = "Precisamos sincronizar:\n\n```\n" + tabela + "\n```";
+  const linhasTxt = alvos.map(tr =>
+    (tr.dataset.agente || "Sem agente") + "  Ped:  " + (tr.dataset.pedido || "") +
+    "  Datalogger: " + (tr.dataset.logger || "") + "   " + (tr.dataset.vence || "")
+  );
+  const texto = "Precisamos sincronizar:\n\n" + linhasTxt.join("\n");
   const pronto = () => { btn.textContent = "Copiado"; btn.classList.add("ok"); setTimeout(() => { btn.textContent = voltar; btn.classList.remove("ok"); }, 1400); };
   const fallback = () => {
     const ta = document.createElement("textarea");

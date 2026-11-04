@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-04T11:59:25",
+  "gerado_em": "2026-11-04T12:10:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6104,
-    "pedidos_janela": 787,
-    "loggers_ares_janela": 5928,
-    "loggers_ares_antes_dedup": 5991,
+    "pares_janela": 6123,
+    "pedidos_janela": 788,
+    "loggers_ares_janela": 5947,
+    "loggers_ares_antes_dedup": 6010,
     "dedup_dia_logger": 63,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 91,
     "cobranca_gru_janela": 13,
-    "sem_embarque_efetiva": 156,
-    "com_embarque_efetiva": 5835,
+    "sem_embarque_efetiva": 157,
+    "com_embarque_efetiva": 5853,
     "loggers_sem_lastsync": 7,
-    "nao_avaliados": 156,
-    "pedidos_com_agente": 6104,
+    "nao_avaliados": 157,
+    "pedidos_com_agente": 6123,
     "dtbtransporte": {
-      "consultados": 787,
-      "mapeados": 787,
-      "linhas": 837
+      "consultados": 788,
+      "mapeados": 788,
+      "linhas": 838
     },
     "top10_agentes_pendencias": {
       "SLZ - REIS CAVALCANTE EXPRESSO": 21,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5772,
+      "n_sem_primeiro_sync": 5790,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -286,11 +286,11 @@
       "dia_iso": "2026-10-27",
       "dia": "27/10",
       "dia_full": "27/10/2026",
-      "pedidos": 86,
-      "loggers": 745,
-      "sincronizados": 740,
+      "pedidos": 85,
+      "loggers": 744,
+      "sincronizados": 739,
       "pendentes": 3,
-      "sem_embarque": 30,
+      "sem_embarque": 31,
       "cobranca_gru": 2,
       "pedidos_pendentes": 3,
       "pct": 0.4,
@@ -299,7 +299,7 @@
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 745
+      "n_sem_primeiro_sync": 744
     },
     {
       "dia_iso": "2026-10-28",
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-04",
       "dia": "04/11",
       "dia_full": "04/11/2026",
-      "pedidos": 7,
-      "loggers": 7,
-      "sincronizados": 4,
+      "pedidos": 8,
+      "loggers": 26,
+      "sincronizados": 23,
       "pendentes": 3,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
-      "pct": 42.9,
+      "pct": 11.5,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 7
+      "n_sem_primeiro_sync": 26
     }
   ],
   "erros_validacao": {},

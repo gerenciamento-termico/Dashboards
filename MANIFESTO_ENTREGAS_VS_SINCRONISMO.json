@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-04T12:20:21",
+  "gerado_em": "2026-11-04T12:46:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6123,
-    "pedidos_janela": 788,
-    "loggers_ares_janela": 5947,
-    "loggers_ares_antes_dedup": 6010,
-    "dedup_dia_logger": 63,
+    "pares_janela": 6133,
+    "pedidos_janela": 794,
+    "loggers_ares_janela": 5954,
+    "loggers_ares_antes_dedup": 6020,
+    "dedup_dia_logger": 66,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 91,
-    "cobranca_gru_janela": 13,
+    "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 157,
-    "com_embarque_efetiva": 5853,
+    "com_embarque_efetiva": 5863,
     "loggers_sem_lastsync": 7,
     "nao_avaliados": 157,
-    "pedidos_com_agente": 6123,
+    "pedidos_com_agente": 6133,
     "dtbtransporte": {
-      "consultados": 788,
-      "mapeados": 788,
-      "linhas": 838
+      "consultados": 794,
+      "mapeados": 794,
+      "linhas": 844
     },
     "top10_agentes_pendencias": {
       "SLZ - REIS CAVALCANTE EXPRESSO": 21,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5790,
+      "n_sem_primeiro_sync": 5797,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-04",
       "dia": "04/11",
       "dia_full": "04/11/2026",
-      "pedidos": 8,
-      "loggers": 26,
-      "sincronizados": 23,
+      "pedidos": 14,
+      "loggers": 33,
+      "sincronizados": 29,
       "pendentes": 3,
       "sem_embarque": 0,
-      "cobranca_gru": 0,
+      "cobranca_gru": 1,
       "pedidos_pendentes": 2,
-      "pct": 11.5,
+      "pct": 9.1,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 26
+      "n_sem_primeiro_sync": 33
     }
   ],
   "erros_validacao": {},

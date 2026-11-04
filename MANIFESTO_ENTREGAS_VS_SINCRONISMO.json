@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-04T10:43:12",
+  "gerado_em": "2026-11-04T10:56:13",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -14,7 +14,7 @@
     "chave_logger": "1 logger por dia (pedido+logger ja e unico na origem; varios produtos/pedidos na mesma caixa nao repetem o aparelho)",
     "romaneio": "nr_romaneio e trava de saida: sem romaneio o pedido nao saiu. Com romaneio ainda precisa de embarque para cobrar; romaneio sozinho nao prova entrega",
     "latencia_t0": "T0 = dt_chegadacliente so se for anterior a dt_entregaefetivaembarque; senao embarque (BRT). Cobre lancamento atrasado. So quem saiu. Patio fora",
-    "latencia_primeiro_sync": "fora desta rotina; a API do portal entrega lastSyncDate e nao o 1o log apos a entrega",
+    "latencia_primeiro_sync": "menor createdAt em ares-prod.beacon_devices_logs >= T0 (BRT). Sem tolerancia de 15 min (essa vale so na classificacao pendente). Nao usa lastSyncDate",
     "latencia_media": "media/mediana/P90 so de quem teve 1o sync no agente (antes de estoque/restauracao depois deste embarque). Pendente e so-GRU ficam fora da media",
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
@@ -457,7 +457,7 @@
   "erros_validacao": {},
   "fontes": [
     "vtc_stage.documentos",
-    "API portal Ares lastSyncDate",
+    "mongo ares-prod lastSyncDate",
     "API portal Ares (sem beacon_devices_logs)",
     "dtbTransporte tbdMovimento (agente)",
     "dtbPortal vwTabelaMovDataloggers (Em GRU agora)",

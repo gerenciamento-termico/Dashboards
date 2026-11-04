@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-04T16:49:46",
+  "gerado_em": "2026-11-04T16:59:44",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6235,
-    "pedidos_janela": 812,
-    "loggers_ares_janela": 6055,
-    "loggers_ares_antes_dedup": 6122,
+    "pares_janela": 6236,
+    "pedidos_janela": 813,
+    "loggers_ares_janela": 6056,
+    "loggers_ares_antes_dedup": 6123,
     "dedup_dia_logger": 67,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 115,
+    "pendentes_janela": 116,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 177,
-    "com_embarque_efetiva": 5945,
+    "com_embarque_efetiva": 5946,
     "loggers_sem_lastsync": 7,
     "nao_avaliados": 177,
-    "pedidos_com_agente": 6235,
+    "pedidos_com_agente": 6236,
     "dtbtransporte": {
-      "consultados": 812,
-      "mapeados": 812,
-      "linhas": 862
+      "consultados": 813,
+      "mapeados": 813,
+      "linhas": 863
     },
     "top10_agentes_pendencias": {
-      "AJU - CASSIMIRO TRANSPORTES": 31,
+      "AJU - CASSIMIRO TRANSPORTES": 32,
       "VTCLOG - GRU": 16,
       "MCP - A A CARVALHO ROCHA ME": 14,
       "BVB - J PIMENTEL S. CUNHA LTDA": 12,
@@ -52,7 +52,7 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 2
     },
     "top10_ufs_pendencias": {
-      "SE": 31,
+      "SE": 32,
       "AP": 14,
       "RR": 12,
       "BA": 8,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5878,
+      "n_sem_primeiro_sync": 5879,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-04",
       "dia": "04/11",
       "dia_full": "04/11/2026",
-      "pedidos": 24,
-      "loggers": 84,
+      "pedidos": 25,
+      "loggers": 85,
       "sincronizados": 31,
-      "pendentes": 52,
+      "pendentes": 53,
       "sem_embarque": 20,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 10,
-      "pct": 61.9,
+      "pedidos_pendentes": 11,
+      "pct": 62.4,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 84
+      "n_sem_primeiro_sync": 85
     }
   ],
   "erros_validacao": {},

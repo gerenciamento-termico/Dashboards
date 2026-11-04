@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-04T11:49:27",
+  "gerado_em": "2026-11-04T11:59:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6102,
-    "pedidos_janela": 785,
-    "loggers_ares_janela": 5927,
-    "loggers_ares_antes_dedup": 5989,
-    "dedup_dia_logger": 62,
+    "pares_janela": 6104,
+    "pedidos_janela": 787,
+    "loggers_ares_janela": 5928,
+    "loggers_ares_antes_dedup": 5991,
+    "dedup_dia_logger": 63,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 91,
     "cobranca_gru_janela": 13,
     "sem_embarque_efetiva": 156,
-    "com_embarque_efetiva": 5833,
+    "com_embarque_efetiva": 5835,
     "loggers_sem_lastsync": 7,
     "nao_avaliados": 156,
-    "pedidos_com_agente": 6102,
+    "pedidos_com_agente": 6104,
     "dtbtransporte": {
-      "consultados": 785,
-      "mapeados": 785,
-      "linhas": 835
+      "consultados": 787,
+      "mapeados": 787,
+      "linhas": 837
     },
     "top10_agentes_pendencias": {
       "SLZ - REIS CAVALCANTE EXPRESSO": 21,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5771,
+      "n_sem_primeiro_sync": 5772,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-04",
       "dia": "04/11",
       "dia_full": "04/11/2026",
-      "pedidos": 5,
-      "loggers": 6,
-      "sincronizados": 3,
+      "pedidos": 7,
+      "loggers": 7,
+      "sincronizados": 4,
       "pendentes": 3,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
-      "pct": 50.0,
+      "pct": 42.9,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 6
+      "n_sem_primeiro_sync": 7
     }
   ],
   "erros_validacao": {},

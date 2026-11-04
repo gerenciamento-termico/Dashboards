@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-04T14:38:09",
+  "gerado_em": "2026-11-04T14:48:15",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6135,
-    "pedidos_janela": 796,
-    "loggers_ares_janela": 5955,
-    "loggers_ares_antes_dedup": 6022,
+    "pares_janela": 6137,
+    "pedidos_janela": 798,
+    "loggers_ares_janela": 5957,
+    "loggers_ares_antes_dedup": 6024,
     "dedup_dia_logger": 67,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 90,
     "cobranca_gru_janela": 14,
-    "sem_embarque_efetiva": 157,
+    "sem_embarque_efetiva": 159,
     "com_embarque_efetiva": 5865,
     "loggers_sem_lastsync": 7,
-    "nao_avaliados": 157,
-    "pedidos_com_agente": 6135,
+    "nao_avaliados": 159,
+    "pedidos_com_agente": 6137,
     "dtbtransporte": {
-      "consultados": 796,
-      "mapeados": 796,
-      "linhas": 846
+      "consultados": 798,
+      "mapeados": 798,
+      "linhas": 848
     },
     "top10_agentes_pendencias": {
       "SLZ - REIS CAVALCANTE EXPRESSO": 21,
@@ -423,7 +423,7 @@
       "loggers": 492,
       "sincronizados": 463,
       "pendentes": 28,
-      "sem_embarque": 57,
+      "sem_embarque": 59,
       "cobranca_gru": 1,
       "pedidos_pendentes": 10,
       "pct": 5.7,

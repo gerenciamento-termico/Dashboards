@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-04T16:39:40",
+  "gerado_em": "2026-11-04T16:49:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6234,
-    "pedidos_janela": 811,
-    "loggers_ares_janela": 6054,
-    "loggers_ares_antes_dedup": 6121,
+    "pares_janela": 6235,
+    "pedidos_janela": 812,
+    "loggers_ares_janela": 6055,
+    "loggers_ares_antes_dedup": 6122,
     "dedup_dia_logger": 67,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
@@ -30,14 +30,14 @@
     "pendentes_janela": 115,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 177,
-    "com_embarque_efetiva": 5944,
+    "com_embarque_efetiva": 5945,
     "loggers_sem_lastsync": 7,
     "nao_avaliados": 177,
-    "pedidos_com_agente": 6234,
+    "pedidos_com_agente": 6235,
     "dtbtransporte": {
-      "consultados": 811,
-      "mapeados": 811,
-      "linhas": 861
+      "consultados": 812,
+      "mapeados": 812,
+      "linhas": 862
     },
     "top10_agentes_pendencias": {
       "AJU - CASSIMIRO TRANSPORTES": 31,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5877,
+      "n_sem_primeiro_sync": 5878,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-04",
       "dia": "04/11",
       "dia_full": "04/11/2026",
-      "pedidos": 23,
-      "loggers": 83,
-      "sincronizados": 30,
+      "pedidos": 24,
+      "loggers": 84,
+      "sincronizados": 31,
       "pendentes": 52,
       "sem_embarque": 20,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 9,
-      "pct": 62.7,
+      "pedidos_pendentes": 10,
+      "pct": 61.9,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 83
+      "n_sem_primeiro_sync": 84
     }
   ],
   "erros_validacao": {},

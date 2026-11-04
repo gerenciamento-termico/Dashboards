@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-11-04T10:17:37",
+    "gerado_em":  "2026-11-04T10:39:05",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -12,7 +12,7 @@
                     },
                     {
                         "arquivo":  "CONTROLE_ENTREGAS_20D.html",
-                        "atualizado_em":  "2026-11-04T10:13:03"
+                        "atualizado_em":  "2026-11-04T10:29:25"
                     },
                     {
                         "arquivo":  "REVERSA_DATALOGGERS.html",
@@ -20,15 +20,15 @@
                     },
                     {
                         "arquivo":  "REVERSA_FORTEX.html",
-                        "atualizado_em":  "2026-11-04T10:13:32"
+                        "atualizado_em":  "2026-11-04T10:31:14"
                     },
                     {
                         "arquivo":  "GESTAO_DISPOSITIVOS.html",
-                        "atualizado_em":  "2026-11-04T10:17:15"
+                        "atualizado_em":  "2026-11-04T10:38:37"
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-11-04T10:17:36"
+                        "atualizado_em":  "2026-11-04T10:39:03"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",
@@ -52,7 +52,7 @@
                     },
                     {
                         "arquivo":  "ENTREGAS_VS_SINCRONISMO.html",
-                        "atualizado_em":  "2026-10-22T20:59:03"
+                        "atualizado_em":  "2026-11-04T10:36:40"
                     },
                     {
                         "arquivo":  "SINCRONISMO_48H.html",
@@ -60,7 +60,7 @@
                     },
                     {
                         "arquivo":  "RETIRADA_AEROPORTO.html",
-                        "atualizado_em":  "2026-11-04T10:16:58"
+                        "atualizado_em":  "2026-11-04T10:38:19"
                     }
                 ]
 }

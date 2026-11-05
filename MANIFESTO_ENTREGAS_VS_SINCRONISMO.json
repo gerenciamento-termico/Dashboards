@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-05T16:16:24",
+  "gerado_em": "2026-11-05T16:25:57",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 82,
+    "pendentes_janela": 84,
     "cobranca_gru_janela": 13,
-    "sem_embarque_efetiva": 382,
-    "com_embarque_efetiva": 6055,
+    "sem_embarque_efetiva": 379,
+    "com_embarque_efetiva": 6058,
     "loggers_sem_lastsync": 6,
-    "nao_avaliados": 382,
+    "nao_avaliados": 379,
     "pedidos_com_agente": 6549,
     "dtbtransporte": {
       "consultados": 776,
@@ -46,10 +46,10 @@
       "CGB - JR TRANSPORTES": 7,
       "THE - AERONEIVA EXPRESS": 4,
       "IOS - MASPEX CARGO": 4,
+      "JPA - LIDER CARGAS": 4,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 3,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 3,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 3
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 3
     },
     "top10_ufs_pendencias": {
       "PA": 19,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5986,
+      "n_sem_primeiro_sync": 5989,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -419,30 +419,30 @@
       "dia_iso": "2026-11-04",
       "dia": "04/11",
       "dia_full": "04/11/2026",
-      "pedidos": 40,
-      "loggers": 184,
+      "pedidos": 41,
+      "loggers": 186,
       "sincronizados": 162,
-      "pendentes": 21,
-      "sem_embarque": 102,
+      "pendentes": 23,
+      "sem_embarque": 100,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 7,
-      "pct": 11.4,
+      "pedidos_pendentes": 8,
+      "pct": 12.4,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 184
+      "n_sem_primeiro_sync": 186
     },
     {
       "dia_iso": "2026-11-05",
       "dia": "05/11",
       "dia_full": "05/11/2026",
-      "pedidos": 43,
-      "loggers": 210,
-      "sincronizados": 202,
+      "pedidos": 44,
+      "loggers": 211,
+      "sincronizados": 203,
       "pendentes": 8,
-      "sem_embarque": 140,
+      "sem_embarque": 139,
       "cobranca_gru": 0,
       "pedidos_pendentes": 8,
       "pct": 3.8,
@@ -451,7 +451,7 @@
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 210
+      "n_sem_primeiro_sync": 211
     }
   ],
   "erros_validacao": {},

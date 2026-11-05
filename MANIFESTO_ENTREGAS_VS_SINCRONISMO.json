@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-05T17:46:29",
+  "gerado_em": "2026-11-05T17:56:29",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 88,
+    "pendentes_janela": 89,
     "cobranca_gru_janela": 13,
-    "sem_embarque_efetiva": 348,
-    "com_embarque_efetiva": 6118,
+    "sem_embarque_efetiva": 342,
+    "com_embarque_efetiva": 6124,
     "loggers_sem_lastsync": 6,
-    "nao_avaliados": 348,
+    "nao_avaliados": 342,
     "pedidos_com_agente": 6578,
     "dtbtransporte": {
       "consultados": 788,
@@ -40,7 +40,7 @@
       "linhas": 842
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 22,
+      "VTCLOG - GRU": 23,
       "BEL - MH FROTA TRANSPORTE": 14,
       "BVB - J PIMENTEL S. CUNHA LTDA": 12,
       "CGB - JR TRANSPORTES": 7,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "PA": 19,
-      "SP": 12,
+      "SP": 13,
       "RR": 12,
       "MT": 7,
       "MG": 7,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6049,
+      "n_sem_primeiro_sync": 6055,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-05",
       "dia": "05/11",
       "dia_full": "05/11/2026",
-      "pedidos": 53,
-      "loggers": 271,
-      "sincronizados": 259,
-      "pendentes": 12,
-      "sem_embarque": 108,
+      "pedidos": 56,
+      "loggers": 277,
+      "sincronizados": 264,
+      "pendentes": 13,
+      "sem_embarque": 102,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 12,
-      "pct": 4.4,
+      "pedidos_pendentes": 13,
+      "pct": 4.7,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 271
+      "n_sem_primeiro_sync": 277
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-05T16:25:57",
+  "gerado_em": "2026-11-05T16:36:50",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6549,
-    "pedidos_janela": 776,
-    "loggers_ares_janela": 6368,
-    "loggers_ares_antes_dedup": 6437,
+    "pares_janela": 6550,
+    "pedidos_janela": 777,
+    "loggers_ares_janela": 6369,
+    "loggers_ares_antes_dedup": 6438,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 84,
+    "pendentes_janela": 83,
     "cobranca_gru_janela": 13,
-    "sem_embarque_efetiva": 379,
+    "sem_embarque_efetiva": 380,
     "com_embarque_efetiva": 6058,
     "loggers_sem_lastsync": 6,
-    "nao_avaliados": 379,
-    "pedidos_com_agente": 6549,
+    "nao_avaliados": 380,
+    "pedidos_com_agente": 6550,
     "dtbtransporte": {
-      "consultados": 776,
-      "mapeados": 776,
-      "linhas": 830
+      "consultados": 777,
+      "mapeados": 777,
+      "linhas": 831
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 19,
@@ -46,10 +46,10 @@
       "CGB - JR TRANSPORTES": 7,
       "THE - AERONEIVA EXPRESS": 4,
       "IOS - MASPEX CARGO": 4,
-      "JPA - LIDER CARGAS": 4,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 3,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 3
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 3,
+      "JPA - LIDER CARGAS": 3
     },
     "top10_ufs_pendencias": {
       "PA": 19,
@@ -440,12 +440,12 @@
       "dia_full": "05/11/2026",
       "pedidos": 44,
       "loggers": 211,
-      "sincronizados": 203,
-      "pendentes": 8,
-      "sem_embarque": 139,
+      "sincronizados": 204,
+      "pendentes": 7,
+      "sem_embarque": 140,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 8,
-      "pct": 3.8,
+      "pedidos_pendentes": 7,
+      "pct": 3.3,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

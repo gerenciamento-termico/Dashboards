@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-05T11:16:06",
+  "gerado_em": "2026-11-05T11:26:08",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 81,
+    "pendentes_janela": 92,
     "cobranca_gru_janela": 14,
-    "sem_embarque_efetiva": 251,
-    "com_embarque_efetiva": 5849,
+    "sem_embarque_efetiva": 240,
+    "com_embarque_efetiva": 5860,
     "loggers_sem_lastsync": 6,
-    "nao_avaliados": 251,
+    "nao_avaliados": 240,
     "pedidos_com_agente": 6211,
     "dtbtransporte": {
       "consultados": 739,
@@ -43,19 +43,19 @@
       "VTCLOG - GRU": 17,
       "BEL - MH FROTA TRANSPORTE": 14,
       "BVB - J PIMENTEL S. CUNHA LTDA": 12,
+      "VTCLOG CNF - CONTAGEM": 11,
       "CGB - JR TRANSPORTES": 6,
       "THE - AERONEIVA EXPRESS": 4,
       "IOS - MASPEX CARGO": 4,
       "AJU - CASSIMIRO TRANSPORTES": 4,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 3,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 2
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 3
     },
     "top10_ufs_pendencias": {
       "PA": 19,
+      "MG": 18,
       "RR": 12,
       "SP": 7,
-      "MG": 7,
       "MT": 6,
       "BA": 5,
       "PI": 4,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5782,
+      "n_sem_primeiro_sync": 5793,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-05",
       "dia": "05/11",
       "dia_full": "05/11/2026",
-      "pedidos": 7,
-      "loggers": 6,
+      "pedidos": 8,
+      "loggers": 17,
       "sincronizados": 3,
-      "pendentes": 3,
-      "sem_embarque": 11,
+      "pendentes": 14,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 3,
-      "pct": 50.0,
+      "pedidos_pendentes": 4,
+      "pct": 82.4,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 6
+      "n_sem_primeiro_sync": 17
     }
   ],
   "erros_validacao": {},

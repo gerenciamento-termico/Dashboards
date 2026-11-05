@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-05T14:41:11",
+  "gerado_em": "2026-11-05T16:06:38",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6528,
-    "pedidos_janela": 762,
-    "loggers_ares_janela": 6347,
-    "loggers_ares_antes_dedup": 6416,
+    "pares_janela": 6546,
+    "pedidos_janela": 774,
+    "loggers_ares_janela": 6365,
+    "loggers_ares_antes_dedup": 6434,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 80,
+    "pendentes_janela": 82,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 379,
-    "com_embarque_efetiva": 6037,
+    "com_embarque_efetiva": 6055,
     "loggers_sem_lastsync": 6,
     "nao_avaliados": 379,
-    "pedidos_com_agente": 6528,
+    "pedidos_com_agente": 6546,
     "dtbtransporte": {
-      "consultados": 762,
-      "mapeados": 762,
-      "linhas": 816
+      "consultados": 774,
+      "mapeados": 774,
+      "linhas": 828
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 19,
@@ -49,7 +49,7 @@
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 3,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 3,
-      "SLZ - REIS CAVALCANTE EXPRESSO": 2
+      "SLZ - REIS CAVALCANTE EXPRESSO": 3
     },
     "top10_ufs_pendencias": {
       "PA": 19,
@@ -60,13 +60,13 @@
       "BA": 5,
       "SC": 4,
       "PI": 4,
-      "RS": 4,
-      "MA": 3
+      "MA": 4,
+      "RS": 4
     },
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5968,
+      "n_sem_primeiro_sync": 5986,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-05",
       "dia": "05/11",
       "dia_full": "05/11/2026",
-      "pedidos": 31,
-      "loggers": 192,
-      "sincronizados": 185,
-      "pendentes": 6,
+      "pedidos": 43,
+      "loggers": 210,
+      "sincronizados": 201,
+      "pendentes": 8,
       "sem_embarque": 139,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 6,
-      "pct": 3.1,
+      "pedidos_pendentes": 8,
+      "pct": 3.8,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 192
+      "n_sem_primeiro_sync": 210
     }
   ],
   "erros_validacao": {},

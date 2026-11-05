@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-05T14:05:43",
+  "gerado_em": "2026-11-05T14:32:46",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6302,
-    "pedidos_janela": 759,
-    "loggers_ares_janela": 6121,
-    "loggers_ares_antes_dedup": 6190,
+    "pares_janela": 6476,
+    "pedidos_janela": 761,
+    "loggers_ares_janela": 6295,
+    "loggers_ares_antes_dedup": 6364,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 79,
     "cobranca_gru_janela": 13,
-    "sem_embarque_efetiva": 240,
-    "com_embarque_efetiva": 5950,
+    "sem_embarque_efetiva": 349,
+    "com_embarque_efetiva": 6015,
     "loggers_sem_lastsync": 6,
-    "nao_avaliados": 240,
-    "pedidos_com_agente": 6302,
+    "nao_avaliados": 349,
+    "pedidos_com_agente": 6476,
     "dtbtransporte": {
-      "consultados": 759,
-      "mapeados": 759,
-      "linhas": 809
+      "consultados": 761,
+      "mapeados": 761,
+      "linhas": 814
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 19,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5881,
+      "n_sem_primeiro_sync": 5946,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-05",
       "dia": "05/11",
       "dia_full": "05/11/2026",
-      "pedidos": 28,
-      "loggers": 105,
-      "sincronizados": 100,
+      "pedidos": 30,
+      "loggers": 170,
+      "sincronizados": 165,
       "pendentes": 5,
-      "sem_embarque": 0,
+      "sem_embarque": 109,
       "cobranca_gru": 0,
       "pedidos_pendentes": 5,
-      "pct": 4.8,
+      "pct": 2.9,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 105
+      "n_sem_primeiro_sync": 170
     }
   ],
   "erros_validacao": {},

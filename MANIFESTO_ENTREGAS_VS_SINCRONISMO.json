@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-06T09:32:49",
+  "gerado_em": "2026-11-06T09:43:02",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -29,10 +29,10 @@
     "ocultos_ausentes": 227,
     "pendentes_janela": 107,
     "cobranca_gru_janela": 17,
-    "sem_embarque_efetiva": 363,
-    "com_embarque_efetiva": 6220,
+    "sem_embarque_efetiva": 362,
+    "com_embarque_efetiva": 6221,
     "loggers_sem_lastsync": 6,
-    "nao_avaliados": 363,
+    "nao_avaliados": 362,
     "pedidos_com_agente": 6695,
     "dtbtransporte": {
       "consultados": 793,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6151,
+      "n_sem_primeiro_sync": 6152,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,11 +438,11 @@
       "dia_iso": "2026-11-06",
       "dia": "06/11",
       "dia_full": "06/11/2026",
-      "pedidos": 0,
-      "loggers": 0,
-      "sincronizados": 0,
+      "pedidos": 1,
+      "loggers": 1,
+      "sincronizados": 1,
       "pendentes": 0,
-      "sem_embarque": 1,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 0,
       "pct": 0.0,
@@ -451,7 +451,7 @@
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 0
+      "n_sem_primeiro_sync": 1
     }
   ],
   "erros_validacao": {},

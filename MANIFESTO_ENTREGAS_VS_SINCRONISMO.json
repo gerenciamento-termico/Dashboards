@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-06T13:29:43",
+  "gerado_em": "2026-11-06T13:41:36",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,54 +19,54 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6971,
-    "pedidos_janela": 826,
-    "loggers_ares_janela": 6789,
-    "loggers_ares_antes_dedup": 6858,
+    "pares_janela": 6991,
+    "pedidos_janela": 827,
+    "loggers_ares_janela": 6809,
+    "loggers_ares_antes_dedup": 6878,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 204,
+    "pendentes_janela": 221,
     "cobranca_gru_janela": 17,
     "sem_embarque_efetiva": 411,
-    "com_embarque_efetiva": 6447,
+    "com_embarque_efetiva": 6467,
     "loggers_sem_lastsync": 6,
     "nao_avaliados": 411,
-    "pedidos_com_agente": 6971,
+    "pedidos_com_agente": 6991,
     "dtbtransporte": {
-      "consultados": 826,
-      "mapeados": 826,
-      "linhas": 882
+      "consultados": 827,
+      "mapeados": 827,
+      "linhas": 883
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 80,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
+      "MCZ - MCZ EXPRESS SERVICE LTDA": 20,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 17,
       "BEL - MH FROTA TRANSPORTE": 16,
       "BVB - J PIMENTEL S. CUNHA LTDA": 12,
       "CGB - JR TRANSPORTES": 7,
       "IOS - MASPEX CARGO": 4,
       "THE - AERONEIVA EXPRESS": 3,
-      "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 3
+      "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3
     },
     "top10_ufs_pendencias": {
       "SP": 70,
       "AM": 41,
       "PA": 21,
+      "AL": 20,
       "SC": 18,
       "RR": 12,
       "MT": 7,
       "MG": 7,
       "BA": 6,
-      "MA": 4,
-      "PI": 3
+      "MA": 4
     },
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6378,
+      "n_sem_primeiro_sync": 6398,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-06",
       "dia": "06/11",
       "dia_full": "06/11/2026",
-      "pedidos": 31,
-      "loggers": 223,
-      "sincronizados": 104,
-      "pendentes": 119,
+      "pedidos": 32,
+      "loggers": 243,
+      "sincronizados": 107,
+      "pendentes": 136,
       "sem_embarque": 79,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 7,
-      "pct": 53.4,
+      "pedidos_pendentes": 5,
+      "pct": 56.0,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 223
+      "n_sem_primeiro_sync": 243
     }
   ],
   "erros_validacao": {},

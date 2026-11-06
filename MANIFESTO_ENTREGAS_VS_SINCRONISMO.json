@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-06T16:28:32",
+  "gerado_em": "2026-11-06T16:41:16",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,43 +19,43 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 7149,
-    "pedidos_janela": 855,
-    "loggers_ares_janela": 6967,
-    "loggers_ares_antes_dedup": 7036,
+    "pares_janela": 7153,
+    "pedidos_janela": 859,
+    "loggers_ares_janela": 6971,
+    "loggers_ares_antes_dedup": 7040,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 263,
+    "pendentes_janela": 260,
     "cobranca_gru_janela": 17,
     "sem_embarque_efetiva": 391,
-    "com_embarque_efetiva": 6645,
+    "com_embarque_efetiva": 6649,
     "loggers_sem_lastsync": 6,
     "nao_avaliados": 391,
-    "pedidos_com_agente": 7149,
+    "pedidos_com_agente": 7153,
     "dtbtransporte": {
-      "consultados": 855,
-      "mapeados": 855,
-      "linhas": 911
+      "consultados": 859,
+      "mapeados": 859,
+      "linhas": 915
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 81,
       "THE - AERONEIVA EXPRESS": 41,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 41,
-      "SSA - LUTY LOG": 23,
+      "SSA - LUTY LOG": 21,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 17,
       "BEL - MH FROTA TRANSPORTE": 16,
       "BVB - J PIMENTEL S. CUNHA LTDA": 12,
       "CGB - JR TRANSPORTES": 7,
       "IOS - MASPEX CARGO": 4,
-      "AJU - CASSIMIRO TRANSPORTES": 4
+      "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3
     },
     "top10_ufs_pendencias": {
       "SP": 71,
       "PI": 41,
       "AM": 41,
-      "BA": 29,
+      "BA": 27,
       "PA": 21,
       "SC": 18,
       "RR": 12,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6576,
+      "n_sem_primeiro_sync": 6580,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-06",
       "dia": "06/11",
       "dia_full": "06/11/2026",
-      "pedidos": 61,
-      "loggers": 421,
-      "sincronizados": 241,
-      "pendentes": 180,
+      "pedidos": 65,
+      "loggers": 425,
+      "sincronizados": 248,
+      "pendentes": 177,
       "sem_embarque": 79,
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
-      "pct": 42.8,
+      "pct": 41.6,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 421
+      "n_sem_primeiro_sync": 425
     }
   ],
   "erros_validacao": {},

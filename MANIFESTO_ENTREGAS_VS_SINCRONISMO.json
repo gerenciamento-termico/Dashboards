@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-06T10:02:43",
+  "gerado_em": "2026-11-06T10:12:43",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6697,
-    "pedidos_janela": 795,
-    "loggers_ares_janela": 6516,
-    "loggers_ares_antes_dedup": 6585,
+    "pares_janela": 6707,
+    "pedidos_janela": 802,
+    "loggers_ares_janela": 6526,
+    "loggers_ares_antes_dedup": 6595,
     "dedup_dia_logger": 69,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 106,
+    "pendentes_janela": 107,
     "cobranca_gru_janela": 17,
     "sem_embarque_efetiva": 363,
-    "com_embarque_efetiva": 6222,
+    "com_embarque_efetiva": 6232,
     "loggers_sem_lastsync": 6,
     "nao_avaliados": 363,
-    "pedidos_com_agente": 6697,
+    "pedidos_com_agente": 6707,
     "dtbtransporte": {
-      "consultados": 795,
-      "mapeados": 795,
-      "linhas": 851
+      "consultados": 802,
+      "mapeados": 802,
+      "linhas": 858
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 37,
@@ -57,7 +57,7 @@
       "SP": 12,
       "MT": 7,
       "MG": 7,
-      "BA": 5,
+      "BA": 6,
       "PI": 4,
       "MA": 4,
       "SC": 3,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6153,
+      "n_sem_primeiro_sync": 6163,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -419,28 +419,28 @@
       "dia_iso": "2026-11-05",
       "dia": "05/11",
       "dia_full": "05/11/2026",
-      "pedidos": 64,
-      "loggers": 376,
+      "pedidos": 65,
+      "loggers": 377,
       "sincronizados": 341,
-      "pendentes": 32,
+      "pendentes": 33,
       "sem_embarque": 123,
       "cobranca_gru": 3,
-      "pedidos_pendentes": 12,
-      "pct": 8.5,
+      "pedidos_pendentes": 13,
+      "pct": 8.8,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 376
+      "n_sem_primeiro_sync": 377
     },
     {
       "dia_iso": "2026-11-06",
       "dia": "06/11",
       "dia_full": "06/11/2026",
-      "pedidos": 2,
-      "loggers": 2,
-      "sincronizados": 2,
+      "pedidos": 8,
+      "loggers": 11,
+      "sincronizados": 11,
       "pendentes": 0,
       "sem_embarque": 0,
       "cobranca_gru": 0,
@@ -451,7 +451,7 @@
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 2
+      "n_sem_primeiro_sync": 11
     }
   ],
   "erros_validacao": {},

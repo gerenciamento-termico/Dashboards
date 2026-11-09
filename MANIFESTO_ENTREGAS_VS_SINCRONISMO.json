@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-09T08:27:26",
+  "gerado_em": "2026-11-09T08:37:33",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6708,
-    "pedidos_janela": 760,
-    "loggers_ares_janela": 6544,
-    "loggers_ares_antes_dedup": 6601,
+    "pares_janela": 6709,
+    "pedidos_janela": 761,
+    "loggers_ares_janela": 6545,
+    "loggers_ares_antes_dedup": 6602,
     "dedup_dia_logger": 57,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 141,
+    "pendentes_janela": 142,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 554,
-    "com_embarque_efetiva": 6047,
+    "com_embarque_efetiva": 6048,
     "loggers_sem_lastsync": 5,
     "nao_avaliados": 554,
-    "pedidos_com_agente": 6708,
+    "pedidos_com_agente": 6709,
     "dtbtransporte": {
-      "consultados": 760,
-      "mapeados": 760,
-      "linhas": 821
+      "consultados": 761,
+      "mapeados": 761,
+      "linhas": 822
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 74,
+      "VTCLOG - GRU": 75,
       "BEL - MH FROTA TRANSPORTE": 18,
       "BVB - J PIMENTEL S. CUNHA LTDA": 12,
       "CGB - JR TRANSPORTES": 7,
@@ -52,7 +52,7 @@
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 2
     },
     "top10_ufs_pendencias": {
-      "SP": 63,
+      "SP": 64,
       "PA": 22,
       "RR": 12,
       "SC": 7,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5990,
+      "n_sem_primeiro_sync": 5991,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-09",
       "dia": "09/11",
       "dia_full": "09/11/2026",
-      "pedidos": 0,
-      "loggers": 0,
+      "pedidos": 1,
+      "loggers": 1,
       "sincronizados": 0,
-      "pendentes": 0,
+      "pendentes": 1,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 0,
-      "pct": 0.0,
+      "pedidos_pendentes": 1,
+      "pct": 100.0,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 0
+      "n_sem_primeiro_sync": 1
     }
   ],
   "erros_validacao": {},

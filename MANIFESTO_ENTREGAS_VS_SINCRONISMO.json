@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-09T11:55:12",
+  "gerado_em": "2026-11-09T12:05:33",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 181,
+    "pendentes_janela": 161,
     "cobranca_gru_janela": 15,
     "sem_embarque_efetiva": 476,
     "com_embarque_efetiva": 6191,
@@ -42,26 +42,26 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 65,
       "BEL - MH FROTA TRANSPORTE": 33,
-      "AJU - CASSIMIRO TRANSPORTES": 20,
       "BVB - J PIMENTEL S. CUNHA LTDA": 12,
       "RBR - RODOTEC": 11,
       "CGB - JR TRANSPORTES": 7,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 5,
       "IOS - MASPEX CARGO": 4,
       "STM - TRANSPORTADORA OESTE CARGAS LTDA": 3,
-      "POA - GMB TRANSPORTES E LOGISTICA ME": 3
+      "POA - GMB TRANSPORTES E LOGISTICA ME": 3,
+      "SLZ - REIS CAVALCANTE EXPRESSO": 3
     },
     "top10_ufs_pendencias": {
       "SP": 54,
       "PA": 38,
-      "SE": 20,
       "RR": 12,
       "AC": 11,
       "SC": 7,
       "MT": 7,
       "MG": 7,
       "BA": 6,
-      "MA": 4
+      "MA": 4,
+      "RS": 3
     },
     "latencia": {
       "n_agente": 0,
@@ -440,12 +440,12 @@
       "dia_full": "09/11/2026",
       "pedidos": 12,
       "loggers": 151,
-      "sincronizados": 88,
-      "pendentes": 63,
+      "sincronizados": 108,
+      "pendentes": 43,
       "sem_embarque": 7,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 4,
-      "pct": 41.7,
+      "pedidos_pendentes": 3,
+      "pct": 28.5,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

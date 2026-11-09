@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-11-09T15:26:01",
+    "gerado_em":  "2026-11-09T15:36:09",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -12,7 +12,7 @@
                     },
                     {
                         "arquivo":  "CONTROLE_ENTREGAS_20D.html",
-                        "atualizado_em":  "2026-11-09T15:22:43"
+                        "atualizado_em":  "2026-11-09T15:32:48"
                     },
                     {
                         "arquivo":  "REVERSA_DATALOGGERS.html",
@@ -28,7 +28,7 @@
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-11-09T15:26:00"
+                        "atualizado_em":  "2026-11-09T15:36:08"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-09T09:17:55",
+  "gerado_em": "2026-11-09T09:44:30",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6740,
-    "pedidos_janela": 765,
-    "loggers_ares_janela": 6576,
-    "loggers_ares_antes_dedup": 6633,
+    "pares_janela": 6741,
+    "pedidos_janela": 766,
+    "loggers_ares_janela": 6577,
+    "loggers_ares_antes_dedup": 6634,
     "dedup_dia_logger": 57,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
@@ -30,14 +30,14 @@
     "pendentes_janela": 154,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 554,
-    "com_embarque_efetiva": 6079,
+    "com_embarque_efetiva": 6080,
     "loggers_sem_lastsync": 5,
     "nao_avaliados": 554,
-    "pedidos_com_agente": 6740,
+    "pedidos_com_agente": 6741,
     "dtbtransporte": {
-      "consultados": 765,
-      "mapeados": 765,
-      "linhas": 826
+      "consultados": 766,
+      "mapeados": 766,
+      "linhas": 827
     },
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 75,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6022,
+      "n_sem_primeiro_sync": 6023,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -400,20 +400,20 @@
       "dia_iso": "2026-11-07",
       "dia": "07/11",
       "dia_full": "07/11/2026",
-      "pedidos": 5,
-      "loggers": 5,
-      "sincronizados": 3,
+      "pedidos": 6,
+      "loggers": 6,
+      "sincronizados": 4,
       "pendentes": 2,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
-      "pct": 40.0,
+      "pct": 33.3,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 5
+      "n_sem_primeiro_sync": 6
     },
     {
       "dia_iso": "2026-11-08",

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-10T10:27:03",
+  "gerado_em": "2026-11-10T10:37:53",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6246,
-    "pedidos_janela": 748,
-    "loggers_ares_janela": 6161,
-    "loggers_ares_antes_dedup": 6211,
+    "pares_janela": 6262,
+    "pedidos_janela": 749,
+    "loggers_ares_janela": 6177,
+    "loggers_ares_antes_dedup": 6227,
     "dedup_dia_logger": 50,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 144,
     "cobranca_gru_janela": 14,
-    "sem_embarque_efetiva": 327,
-    "com_embarque_efetiva": 5884,
+    "sem_embarque_efetiva": 300,
+    "com_embarque_efetiva": 5927,
     "loggers_sem_lastsync": 4,
-    "nao_avaliados": 327,
-    "pedidos_com_agente": 6246,
+    "nao_avaliados": 300,
+    "pedidos_com_agente": 6262,
     "dtbtransporte": {
-      "consultados": 748,
-      "mapeados": 748,
-      "linhas": 807
+      "consultados": 749,
+      "mapeados": 749,
+      "linhas": 808
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 49,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5834,
+      "n_sem_primeiro_sync": 5877,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -366,7 +366,7 @@
       "loggers": 531,
       "sincronizados": 496,
       "pendentes": 35,
-      "sem_embarque": 115,
+      "sem_embarque": 88,
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
       "pct": 6.6,
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-10",
       "dia": "10/11",
       "dia_full": "10/11/2026",
-      "pedidos": 7,
-      "loggers": 28,
-      "sincronizados": 5,
+      "pedidos": 9,
+      "loggers": 71,
+      "sincronizados": 48,
       "pendentes": 23,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 2,
-      "pct": 82.1,
+      "pct": 32.4,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 28
+      "n_sem_primeiro_sync": 71
     }
   ],
   "erros_validacao": {},

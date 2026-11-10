@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-10T10:37:53",
+  "gerado_em": "2026-11-10T10:48:06",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6262,
-    "pedidos_janela": 749,
-    "loggers_ares_janela": 6177,
-    "loggers_ares_antes_dedup": 6227,
+    "pares_janela": 6306,
+    "pedidos_janela": 752,
+    "loggers_ares_janela": 6221,
+    "loggers_ares_antes_dedup": 6271,
     "dedup_dia_logger": 50,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 144,
+    "pendentes_janela": 146,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 300,
-    "com_embarque_efetiva": 5927,
+    "com_embarque_efetiva": 5971,
     "loggers_sem_lastsync": 4,
     "nao_avaliados": 300,
-    "pedidos_com_agente": 6262,
+    "pedidos_com_agente": 6306,
     "dtbtransporte": {
-      "consultados": 749,
-      "mapeados": 749,
-      "linhas": 808
+      "consultados": 752,
+      "mapeados": 752,
+      "linhas": 811
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 49,
@@ -49,7 +49,7 @@
       "POA - GMB TRANSPORTES E LOGISTICA ME": 3,
       "IOS - MASPEX CARGO": 3,
       "SLZ - REIS CAVALCANTE EXPRESSO": 3,
-      "STM - TRANSPORTADORA OESTE CARGAS LTDA": 2
+      "JPA - LIDER CARGAS": 2
     },
     "top10_ufs_pendencias": {
       "PA": 53,
@@ -59,14 +59,14 @@
       "SC": 9,
       "MG": 7,
       "MT": 6,
-      "BA": 4,
+      "BA": 5,
       "RS": 3,
       "MA": 3
     },
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5877,
+      "n_sem_primeiro_sync": 5921,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-10",
       "dia": "10/11",
       "dia_full": "10/11/2026",
-      "pedidos": 9,
-      "loggers": 71,
-      "sincronizados": 48,
-      "pendentes": 23,
+      "pedidos": 12,
+      "loggers": 115,
+      "sincronizados": 90,
+      "pendentes": 25,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 2,
-      "pct": 32.4,
+      "pedidos_pendentes": 4,
+      "pct": 21.7,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 71
+      "n_sem_primeiro_sync": 115
     }
   ],
   "erros_validacao": {},

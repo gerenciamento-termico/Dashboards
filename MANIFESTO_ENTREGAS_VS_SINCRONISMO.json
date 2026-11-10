@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-10T12:55:36",
+  "gerado_em": "2026-11-10T13:07:41",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,10 +19,10 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6409,
-    "pedidos_janela": 766,
-    "loggers_ares_janela": 6324,
-    "loggers_ares_antes_dedup": 6374,
+    "pares_janela": 6413,
+    "pedidos_janela": 768,
+    "loggers_ares_janela": 6328,
+    "loggers_ares_antes_dedup": 6378,
     "dedup_dia_logger": 50,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
@@ -30,14 +30,14 @@
     "pendentes_janela": 151,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 318,
-    "com_embarque_efetiva": 6056,
+    "com_embarque_efetiva": 6060,
     "loggers_sem_lastsync": 4,
     "nao_avaliados": 318,
-    "pedidos_com_agente": 6409,
+    "pedidos_com_agente": 6413,
     "dtbtransporte": {
-      "consultados": 766,
-      "mapeados": 766,
-      "linhas": 827
+      "consultados": 768,
+      "mapeados": 768,
+      "linhas": 829
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 49,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6006,
+      "n_sem_primeiro_sync": 6010,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-10",
       "dia": "10/11",
       "dia_full": "10/11/2026",
-      "pedidos": 22,
-      "loggers": 156,
-      "sincronizados": 125,
+      "pedidos": 24,
+      "loggers": 160,
+      "sincronizados": 129,
       "pendentes": 31,
       "sem_embarque": 38,
       "cobranca_gru": 0,
       "pedidos_pendentes": 10,
-      "pct": 19.9,
+      "pct": 19.4,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 156
+      "n_sem_primeiro_sync": 160
     }
   ],
   "erros_validacao": {},

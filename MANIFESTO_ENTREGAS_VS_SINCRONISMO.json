@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-10T09:07:00",
+  "gerado_em": "2026-11-10T09:17:04",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 138,
+    "pendentes_janela": 125,
     "cobranca_gru_janela": 14,
-    "sem_embarque_efetiva": 350,
-    "com_embarque_efetiva": 5853,
+    "sem_embarque_efetiva": 349,
+    "com_embarque_efetiva": 5854,
     "loggers_sem_lastsync": 4,
-    "nao_avaliados": 350,
+    "nao_avaliados": 349,
     "pedidos_com_agente": 6238,
     "dtbtransporte": {
       "consultados": 740,
@@ -41,7 +41,7 @@
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 49,
-      "VTCLOG - GRU": 34,
+      "VTCLOG - GRU": 21,
       "BVB - J PIMENTEL S. CUNHA LTDA": 11,
       "RBR - RODOTEC": 11,
       "CGB - JR TRANSPORTES": 6,
@@ -53,9 +53,9 @@
     },
     "top10_ufs_pendencias": {
       "PA": 53,
-      "SP": 23,
       "RR": 11,
       "AC": 11,
+      "SP": 10,
       "MG": 8,
       "SC": 8,
       "MT": 6,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5803,
+      "n_sem_primeiro_sync": 5804,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -419,20 +419,20 @@
       "dia_iso": "2026-11-09",
       "dia": "09/11",
       "dia_full": "09/11/2026",
-      "pedidos": 42,
-      "loggers": 294,
-      "sincronizados": 249,
-      "pendentes": 45,
-      "sem_embarque": 9,
+      "pedidos": 43,
+      "loggers": 295,
+      "sincronizados": 263,
+      "pendentes": 32,
+      "sem_embarque": 8,
       "cobranca_gru": 0,
       "pedidos_pendentes": 8,
-      "pct": 15.3,
+      "pct": 10.8,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 294
+      "n_sem_primeiro_sync": 295
     },
     {
       "dia_iso": "2026-11-10",

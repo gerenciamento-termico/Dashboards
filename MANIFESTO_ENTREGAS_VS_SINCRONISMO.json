@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-10T12:46:03",
+  "gerado_em": "2026-11-10T12:55:36",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,29 +19,29 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6408,
-    "pedidos_janela": 765,
-    "loggers_ares_janela": 6323,
-    "loggers_ares_antes_dedup": 6373,
+    "pares_janela": 6409,
+    "pedidos_janela": 766,
+    "loggers_ares_janela": 6324,
+    "loggers_ares_antes_dedup": 6374,
     "dedup_dia_logger": 50,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 150,
+    "pendentes_janela": 151,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 318,
-    "com_embarque_efetiva": 6055,
+    "com_embarque_efetiva": 6056,
     "loggers_sem_lastsync": 4,
     "nao_avaliados": 318,
-    "pedidos_com_agente": 6408,
+    "pedidos_com_agente": 6409,
     "dtbtransporte": {
-      "consultados": 765,
-      "mapeados": 765,
-      "linhas": 826
+      "consultados": 766,
+      "mapeados": 766,
+      "linhas": 827
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 49,
-      "VTCLOG - GRU": 42,
+      "VTCLOG - GRU": 43,
       "BVB - J PIMENTEL S. CUNHA LTDA": 14,
       "RBR - RODOTEC": 11,
       "CGB - JR TRANSPORTES": 6,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "PA": 53,
-      "SP": 32,
+      "SP": 33,
       "RR": 14,
       "AC": 11,
       "MG": 7,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 6005,
+      "n_sem_primeiro_sync": 6006,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-10",
       "dia": "10/11",
       "dia_full": "10/11/2026",
-      "pedidos": 21,
-      "loggers": 155,
+      "pedidos": 22,
+      "loggers": 156,
       "sincronizados": 125,
-      "pendentes": 30,
+      "pendentes": 31,
       "sem_embarque": 38,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 9,
-      "pct": 19.4,
+      "pedidos_pendentes": 10,
+      "pct": 19.9,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 155
+      "n_sem_primeiro_sync": 156
     }
   ],
   "erros_validacao": {},

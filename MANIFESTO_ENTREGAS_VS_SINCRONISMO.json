@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-10T08:30:59",
+  "gerado_em": "2026-11-10T08:57:00",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 164,
+    "pendentes_janela": 159,
     "cobranca_gru_janela": 14,
     "sem_embarque_efetiva": 349,
     "com_embarque_efetiva": 5853,
@@ -40,7 +40,7 @@
       "linhas": 798
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 60,
+      "VTCLOG - GRU": 55,
       "BEL - MH FROTA TRANSPORTE": 49,
       "BVB - J PIMENTEL S. CUNHA LTDA": 11,
       "RBR - RODOTEC": 11,
@@ -53,7 +53,7 @@
     },
     "top10_ufs_pendencias": {
       "PA": 53,
-      "SP": 49,
+      "SP": 44,
       "RR": 11,
       "AC": 11,
       "MG": 8,
@@ -421,12 +421,12 @@
       "dia_full": "09/11/2026",
       "pedidos": 42,
       "loggers": 294,
-      "sincronizados": 223,
-      "pendentes": 71,
+      "sincronizados": 228,
+      "pendentes": 66,
       "sem_embarque": 8,
       "cobranca_gru": 0,
       "pedidos_pendentes": 8,
-      "pct": 24.1,
+      "pct": 22.4,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

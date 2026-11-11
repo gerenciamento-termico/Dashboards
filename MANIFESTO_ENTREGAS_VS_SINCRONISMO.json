@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-11T10:24:51",
+  "gerado_em": "2026-11-11T10:34:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 6117,
-    "pedidos_janela": 749,
-    "loggers_ares_janela": 6035,
-    "loggers_ares_antes_dedup": 6083,
-    "dedup_dia_logger": 48,
+    "pares_janela": 6125,
+    "pedidos_janela": 751,
+    "loggers_ares_janela": 6042,
+    "loggers_ares_antes_dedup": 6091,
+    "dedup_dia_logger": 49,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 146,
+    "pendentes_janela": 147,
     "cobranca_gru_janela": 12,
     "sem_embarque_efetiva": 300,
-    "com_embarque_efetiva": 5783,
+    "com_embarque_efetiva": 5791,
     "loggers_sem_lastsync": 4,
     "nao_avaliados": 300,
-    "pedidos_com_agente": 6117,
+    "pedidos_com_agente": 6125,
     "dtbtransporte": {
-      "consultados": 749,
-      "mapeados": 749,
-      "linhas": 810
+      "consultados": 751,
+      "mapeados": 751,
+      "linhas": 812
     },
     "top10_agentes_pendencias": {
-      "VTCLOG - GRU": 46,
+      "VTCLOG - GRU": 47,
       "BEL - MH FROTA TRANSPORTE": 39,
       "BVB - J PIMENTEL S. CUNHA LTDA": 11,
       "RBR - RODOTEC": 11,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5736,
+      "n_sem_primeiro_sync": 5743,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-11",
       "dia": "11/11",
       "dia_full": "11/11/2026",
-      "pedidos": 5,
-      "loggers": 17,
-      "sincronizados": 16,
-      "pendentes": 1,
+      "pedidos": 7,
+      "loggers": 24,
+      "sincronizados": 22,
+      "pendentes": 2,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 1,
-      "pct": 5.9,
+      "pedidos_pendentes": 2,
+      "pct": 8.3,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 17
+      "n_sem_primeiro_sync": 24
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-11T08:50:02",
+  "gerado_em": "2026-11-11T09:03:16",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 150,
+    "pendentes_janela": 146,
     "cobranca_gru_janela": 12,
-    "sem_embarque_efetiva": 311,
-    "com_embarque_efetiva": 5755,
+    "sem_embarque_efetiva": 300,
+    "com_embarque_efetiva": 5766,
     "loggers_sem_lastsync": 4,
-    "nao_avaliados": 311,
+    "nao_avaliados": 300,
     "pedidos_com_agente": 6100,
     "dtbtransporte": {
       "consultados": 744,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "VTCLOG - GRU": 46,
       "BEL - MH FROTA TRANSPORTE": 39,
-      "BVB - J PIMENTEL S. CUNHA LTDA": 14,
+      "BVB - J PIMENTEL S. CUNHA LTDA": 11,
       "RBR - RODOTEC": 11,
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 10,
       "CGB - JR TRANSPORTES": 5,
@@ -54,7 +54,7 @@
     "top10_ufs_pendencias": {
       "PA": 43,
       "SP": 35,
-      "RR": 14,
+      "RR": 11,
       "AC": 11,
       "PR": 10,
       "MG": 9,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5708,
+      "n_sem_primeiro_sync": 5719,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -419,20 +419,20 @@
       "dia_iso": "2026-11-10",
       "dia": "10/11",
       "dia_full": "10/11/2026",
-      "pedidos": 58,
-      "loggers": 385,
-      "sincronizados": 334,
-      "pendentes": 51,
-      "sem_embarque": 49,
+      "pedidos": 59,
+      "loggers": 396,
+      "sincronizados": 349,
+      "pendentes": 47,
+      "sem_embarque": 38,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 20,
-      "pct": 13.2,
+      "pedidos_pendentes": 16,
+      "pct": 11.9,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 385
+      "n_sem_primeiro_sync": 396
     },
     {
       "dia_iso": "2026-11-11",

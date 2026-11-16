@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-16T13:13:15",
+  "gerado_em": "2026-11-16T13:22:26",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,23 +19,23 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5996,
-    "pedidos_janela": 791,
-    "loggers_ares_janela": 5642,
-    "loggers_ares_antes_dedup": 5677,
+    "pares_janela": 5997,
+    "pedidos_janela": 792,
+    "loggers_ares_janela": 5643,
+    "loggers_ares_antes_dedup": 5678,
     "dedup_dia_logger": 35,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 138,
-    "cobranca_gru_janela": 24,
+    "cobranca_gru_janela": 25,
     "sem_embarque_efetiva": 176,
-    "com_embarque_efetiva": 5501,
+    "com_embarque_efetiva": 5502,
     "loggers_sem_lastsync": 4,
     "nao_avaliados": 176,
     "pedidos_com_agente": 5988,
     "dtbtransporte": {
-      "consultados": 791,
+      "consultados": 792,
       "mapeados": 785,
       "linhas": 842
     },
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5466,
+      "n_sem_primeiro_sync": 5467,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-16",
       "dia": "16/11",
       "dia_full": "16/11/2026",
-      "pedidos": 15,
-      "loggers": 27,
+      "pedidos": 16,
+      "loggers": 28,
       "sincronizados": 18,
       "pendentes": 2,
       "sem_embarque": 0,
-      "cobranca_gru": 7,
+      "cobranca_gru": 8,
       "pedidos_pendentes": 2,
-      "pct": 7.4,
+      "pct": 7.1,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 27
+      "n_sem_primeiro_sync": 28
     }
   ],
   "erros_validacao": {},

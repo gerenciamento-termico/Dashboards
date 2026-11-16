@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-16T12:42:00",
+  "gerado_em": "2026-11-16T13:01:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 142,
+    "pendentes_janela": 138,
     "cobranca_gru_janela": 24,
     "sem_embarque_efetiva": 176,
     "com_embarque_efetiva": 5501,
@@ -46,10 +46,10 @@
       "MCP - A A CARVALHO ROCHA ME": 14,
       "RBR - RODOTEC": 11,
       "VTCLOG CNF - CONTAGEM": 6,
-      "GYN - RBR EXPERIENCIA EM TRANSPORTES": 5,
       "CGB - JR TRANSPORTES": 4,
       "POA - GMB TRANSPORTES E LOGISTICA ME": 4,
-      "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 4
+      "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 4,
+      "MOC - LOG SERVIÇOS": 3
     },
     "top10_ufs_pendencias": {
       "PA": 38,
@@ -60,8 +60,8 @@
       "AC": 11,
       "SC": 5,
       "PR": 5,
-      "GO": 5,
-      "BA": 4
+      "BA": 4,
+      "MT": 4
     },
     "latencia": {
       "n_agente": 0,
@@ -440,12 +440,12 @@
       "dia_full": "16/11/2026",
       "pedidos": 15,
       "loggers": 27,
-      "sincronizados": 14,
-      "pendentes": 6,
+      "sincronizados": 18,
+      "pendentes": 2,
       "sem_embarque": 0,
       "cobranca_gru": 7,
-      "pedidos_pendentes": 3,
-      "pct": 22.2,
+      "pedidos_pendentes": 2,
+      "pct": 7.4,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

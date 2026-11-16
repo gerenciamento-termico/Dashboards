@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-16T09:12:42",
+  "gerado_em": "2026-11-16T09:21:36",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5922,
-    "pedidos_janela": 771,
-    "loggers_ares_janela": 5604,
-    "loggers_ares_antes_dedup": 5638,
+    "pares_janela": 5932,
+    "pedidos_janela": 774,
+    "loggers_ares_janela": 5614,
+    "loggers_ares_antes_dedup": 5648,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 156,
     "cobranca_gru_janela": 18,
-    "sem_embarque_efetiva": 177,
-    "com_embarque_efetiva": 5461,
+    "sem_embarque_efetiva": 184,
+    "com_embarque_efetiva": 5464,
     "loggers_sem_lastsync": 4,
-    "nao_avaliados": 177,
-    "pedidos_com_agente": 5921,
+    "nao_avaliados": 184,
+    "pedidos_com_agente": 5931,
     "dtbtransporte": {
-      "consultados": 771,
-      "mapeados": 770,
-      "linhas": 827
+      "consultados": 774,
+      "mapeados": 773,
+      "linhas": 830
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 40,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5427,
+      "n_sem_primeiro_sync": 5430,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -381,11 +381,11 @@
       "dia_iso": "2026-11-13",
       "dia": "13/11",
       "dia_full": "13/11/2026",
-      "pedidos": 76,
-      "loggers": 722,
-      "sincronizados": 661,
+      "pedidos": 79,
+      "loggers": 725,
+      "sincronizados": 664,
       "pendentes": 60,
-      "sem_embarque": 11,
+      "sem_embarque": 18,
       "cobranca_gru": 1,
       "pedidos_pendentes": 19,
       "pct": 8.3,
@@ -394,7 +394,7 @@
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 722
+      "n_sem_primeiro_sync": 725
     },
     {
       "dia_iso": "2026-11-14",

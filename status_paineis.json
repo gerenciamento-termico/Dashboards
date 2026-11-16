@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-11-16T09:37:39",
+    "gerado_em":  "2026-11-16T09:46:56",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -8,11 +8,11 @@
                     },
                     {
                         "arquivo":  "ESTOQUE_DATALOGGERS.html",
-                        "atualizado_em":  "2026-11-16T09:30:45"
+                        "atualizado_em":  "2026-11-16T09:40:49"
                     },
                     {
                         "arquivo":  "CONTROLE_ENTREGAS_20D.html",
-                        "atualizado_em":  "2026-11-16T09:31:04"
+                        "atualizado_em":  "2026-11-16T09:41:17"
                     },
                     {
                         "arquivo":  "REVERSA_DATALOGGERS.html",
@@ -20,15 +20,15 @@
                     },
                     {
                         "arquivo":  "REVERSA_FORTEX.html",
-                        "atualizado_em":  "2026-11-16T09:31:28"
+                        "atualizado_em":  "2026-11-16T09:41:42"
                     },
                     {
                         "arquivo":  "GESTAO_DISPOSITIVOS.html",
-                        "atualizado_em":  "2026-11-16T09:37:04"
+                        "atualizado_em":  "2026-11-16T09:46:29"
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-11-16T09:37:29"
+                        "atualizado_em":  "2026-11-16T09:46:52"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",
@@ -52,15 +52,15 @@
                     },
                     {
                         "arquivo":  "ENTREGAS_VS_SINCRONISMO.html",
-                        "atualizado_em":  "2026-11-16T09:35:12"
+                        "atualizado_em":  "2026-11-16T09:44:57"
                     },
                     {
                         "arquivo":  "SINCRONISMO_48H.html",
-                        "atualizado_em":  "2026-11-16T09:35:21"
+                        "atualizado_em":  "2026-11-16T09:45:03"
                     },
                     {
                         "arquivo":  "RETIRADA_AEROPORTO.html",
-                        "atualizado_em":  "2026-11-16T09:36:43"
+                        "atualizado_em":  "2026-11-16T09:46:07"
                     }
                 ]
 }

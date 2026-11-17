@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-17T14:57:59",
+  "gerado_em": "2026-11-17T15:07:55",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5610,
-    "pedidos_janela": 827,
-    "loggers_ares_janela": 5204,
-    "loggers_ares_antes_dedup": 5238,
+    "pares_janela": 5611,
+    "pedidos_janela": 828,
+    "loggers_ares_janela": 5205,
+    "loggers_ares_antes_dedup": 5239,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 188,
     "cobranca_gru_janela": 11,
-    "sem_embarque_efetiva": 179,
+    "sem_embarque_efetiva": 180,
     "com_embarque_efetiva": 5059,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 179,
-    "pedidos_com_agente": 5610,
+    "nao_avaliados": 180,
+    "pedidos_com_agente": 5611,
     "dtbtransporte": {
-      "consultados": 827,
-      "mapeados": 827,
-      "linhas": 883
+      "consultados": 828,
+      "mapeados": 828,
+      "linhas": 884
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 54,
@@ -442,7 +442,7 @@
       "loggers": 157,
       "sincronizados": 118,
       "pendentes": 39,
-      "sem_embarque": 1,
+      "sem_embarque": 2,
       "cobranca_gru": 0,
       "pedidos_pendentes": 16,
       "pct": 24.8,

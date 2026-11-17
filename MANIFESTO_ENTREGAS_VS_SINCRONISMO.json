@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-17T17:27:43",
+  "gerado_em": "2026-11-17T17:47:39",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5765,
-    "pedidos_janela": 848,
-    "loggers_ares_janela": 5328,
-    "loggers_ares_antes_dedup": 5363,
+    "pares_janela": 5827,
+    "pedidos_janela": 857,
+    "loggers_ares_janela": 5390,
+    "loggers_ares_antes_dedup": 5425,
     "dedup_dia_logger": 35,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 234,
+    "pendentes_janela": 251,
     "cobranca_gru_janela": 6,
-    "sem_embarque_efetiva": 198,
-    "com_embarque_efetiva": 5165,
+    "sem_embarque_efetiva": 227,
+    "com_embarque_efetiva": 5198,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 198,
-    "pedidos_com_agente": 5765,
+    "nao_avaliados": 227,
+    "pedidos_com_agente": 5827,
     "dtbtransporte": {
-      "consultados": 848,
-      "mapeados": 848,
-      "linhas": 906
+      "consultados": 857,
+      "mapeados": 857,
+      "linhas": 915
     },
     "top10_agentes_pendencias": {
-      "BEL - MH FROTA TRANSPORTE": 54,
+      "BEL - MH FROTA TRANSPORTE": 71,
       "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 45,
       "VTCLOG - GRU": 26,
       "VTCLOG CNF - CONTAGEM": 22,
@@ -52,7 +52,7 @@
       "POA - GMB TRANSPORTES E LOGISTICA ME": 4
     },
     "top10_ufs_pendencias": {
-      "PA": 57,
+      "PA": 74,
       "AM": 45,
       "MG": 30,
       "MA": 21,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5130,
+      "n_sem_primeiro_sync": 5163,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-17",
       "dia": "17/11",
       "dia_full": "17/11/2026",
-      "pedidos": 64,
-      "loggers": 262,
-      "sincronizados": 174,
-      "pendentes": 88,
-      "sem_embarque": 20,
+      "pedidos": 70,
+      "loggers": 295,
+      "sincronizados": 190,
+      "pendentes": 105,
+      "sem_embarque": 49,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 24,
-      "pct": 33.6,
+      "pedidos_pendentes": 27,
+      "pct": 35.6,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 262
+      "n_sem_primeiro_sync": 295
     }
   ],
   "erros_validacao": {},

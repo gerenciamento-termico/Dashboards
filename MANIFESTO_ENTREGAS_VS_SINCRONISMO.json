@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-17T13:42:24",
+  "gerado_em": "2026-11-17T13:52:28",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5605,
-    "pedidos_janela": 822,
-    "loggers_ares_janela": 5199,
-    "loggers_ares_antes_dedup": 5233,
+    "pares_janela": 5606,
+    "pedidos_janela": 823,
+    "loggers_ares_janela": 5200,
+    "loggers_ares_antes_dedup": 5234,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 186,
-    "cobranca_gru_janela": 12,
+    "cobranca_gru_janela": 11,
     "sem_embarque_efetiva": 178,
-    "com_embarque_efetiva": 5055,
+    "com_embarque_efetiva": 5056,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 178,
-    "pedidos_com_agente": 5605,
+    "pedidos_com_agente": 5606,
     "dtbtransporte": {
-      "consultados": 822,
-      "mapeados": 822,
-      "linhas": 878
+      "consultados": 823,
+      "mapeados": 823,
+      "linhas": 879
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 54,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5021,
+      "n_sem_primeiro_sync": 5022,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -307,10 +307,10 @@
       "dia_full": "10/11/2026",
       "pedidos": 68,
       "loggers": 412,
-      "sincronizados": 399,
+      "sincronizados": 400,
       "pendentes": 8,
       "sem_embarque": 20,
-      "cobranca_gru": 5,
+      "cobranca_gru": 4,
       "pedidos_pendentes": 8,
       "pct": 1.9,
       "n_latencia": 0,
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-17",
       "dia": "17/11",
       "dia_full": "17/11/2026",
-      "pedidos": 39,
-      "loggers": 153,
-      "sincronizados": 116,
+      "pedidos": 40,
+      "loggers": 154,
+      "sincronizados": 117,
       "pendentes": 37,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 14,
-      "pct": 24.2,
+      "pct": 24.0,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 153
+      "n_sem_primeiro_sync": 154
     }
   ],
   "erros_validacao": {},

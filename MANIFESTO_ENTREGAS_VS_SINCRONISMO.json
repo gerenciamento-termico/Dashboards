@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-17T14:02:24",
+  "gerado_em": "2026-11-17T14:57:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5606,
-    "pedidos_janela": 823,
-    "loggers_ares_janela": 5200,
-    "loggers_ares_antes_dedup": 5234,
+    "pares_janela": 5610,
+    "pedidos_janela": 827,
+    "loggers_ares_janela": 5204,
+    "loggers_ares_antes_dedup": 5238,
     "dedup_dia_logger": 34,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 186,
+    "pendentes_janela": 188,
     "cobranca_gru_janela": 11,
-    "sem_embarque_efetiva": 178,
-    "com_embarque_efetiva": 5056,
+    "sem_embarque_efetiva": 179,
+    "com_embarque_efetiva": 5059,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 178,
-    "pedidos_com_agente": 5606,
+    "nao_avaliados": 179,
+    "pedidos_com_agente": 5610,
     "dtbtransporte": {
-      "consultados": 823,
-      "mapeados": 823,
-      "linhas": 879
+      "consultados": 827,
+      "mapeados": 827,
+      "linhas": 883
     },
     "top10_agentes_pendencias": {
       "BEL - MH FROTA TRANSPORTE": 54,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 5022,
+      "n_sem_primeiro_sync": 5025,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-17",
       "dia": "17/11",
       "dia_full": "17/11/2026",
-      "pedidos": 40,
-      "loggers": 154,
-      "sincronizados": 117,
-      "pendentes": 37,
-      "sem_embarque": 0,
+      "pedidos": 43,
+      "loggers": 157,
+      "sincronizados": 118,
+      "pendentes": 39,
+      "sem_embarque": 1,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 14,
-      "pct": 24.0,
+      "pedidos_pendentes": 16,
+      "pct": 24.8,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 154
+      "n_sem_primeiro_sync": 157
     }
   ],
   "erros_validacao": {},

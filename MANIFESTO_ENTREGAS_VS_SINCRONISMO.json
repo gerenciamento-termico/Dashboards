@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-17T08:34:34",
+  "gerado_em": "2026-11-17T08:45:26",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 181,
+    "pendentes_janela": 180,
     "cobranca_gru_janela": 22,
     "sem_embarque_efetiva": 199,
     "com_embarque_efetiva": 4898,
@@ -40,7 +40,7 @@
       "linhas": 838
     },
     "top10_agentes_pendencias": {
-      "VTCLOG CNF - CONTAGEM": 42,
+      "VTCLOG CNF - CONTAGEM": 41,
       "BEL - MH FROTA TRANSPORTE": 38,
       "SLZ - REIS CAVALCANTE EXPRESSO": 21,
       "VTCLOG - GRU": 17,
@@ -52,7 +52,7 @@
       "CWB - TGEX TRANSPORTES E LOCACAO DE VEIC": 4
     },
     "top10_ufs_pendencias": {
-      "MG": 47,
+      "MG": 46,
       "PA": 41,
       "MA": 22,
       "AP": 14,
@@ -421,12 +421,12 @@
       "dia_full": "16/11/2026",
       "pedidos": 42,
       "loggers": 209,
-      "sincronizados": 145,
-      "pendentes": 58,
+      "sincronizados": 146,
+      "pendentes": 57,
       "sem_embarque": 23,
       "cobranca_gru": 6,
       "pedidos_pendentes": 8,
-      "pct": 27.8,
+      "pct": 27.3,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

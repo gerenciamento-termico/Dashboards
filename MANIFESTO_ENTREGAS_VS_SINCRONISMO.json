@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-18T15:02:15",
+  "gerado_em": "2026-11-18T15:13:06",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5307,
-    "pedidos_janela": 837,
-    "loggers_ares_janela": 4879,
-    "loggers_ares_antes_dedup": 4906,
+    "pares_janela": 5308,
+    "pedidos_janela": 838,
+    "loggers_ares_janela": 4880,
+    "loggers_ares_antes_dedup": 4907,
     "dedup_dia_logger": 27,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 259,
+    "pendentes_janela": 244,
     "cobranca_gru_janela": 9,
-    "sem_embarque_efetiva": 156,
+    "sem_embarque_efetiva": 157,
     "com_embarque_efetiva": 4750,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 156,
-    "pedidos_com_agente": 5307,
+    "nao_avaliados": 157,
+    "pedidos_com_agente": 5308,
     "dtbtransporte": {
-      "consultados": 837,
-      "mapeados": 837,
-      "linhas": 893
+      "consultados": 838,
+      "mapeados": 838,
+      "linhas": 894
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 43,
@@ -46,10 +46,10 @@
       "FOR - NT TRANSPORTE LTDA": 20,
       "SLZ - REIS CAVALCANTE EXPRESSO": 19,
       "MCP - A A CARVALHO ROCHA ME": 16,
-      "NAT - J MORAES SERVICOS DE ENTREGA": 15,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
       "CGB - JR TRANSPORTES": 12,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 12
+      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 12,
+      "RBR - RODOTEC": 11
     },
     "top10_ufs_pendencias": {
       "BA": 47,
@@ -57,11 +57,11 @@
       "CE": 23,
       "MA": 20,
       "AP": 16,
-      "RN": 15,
       "MG": 14,
       "SC": 14,
       "MT": 12,
-      "SP": 12
+      "SP": 12,
+      "AM": 12
     },
     "latencia": {
       "n_agente": 0,
@@ -421,12 +421,12 @@
       "dia_full": "17/11/2026",
       "pedidos": 82,
       "loggers": 355,
-      "sincronizados": 306,
-      "pendentes": 45,
+      "sincronizados": 321,
+      "pendentes": 30,
       "sem_embarque": 0,
       "cobranca_gru": 4,
-      "pedidos_pendentes": 20,
-      "pct": 12.7,
+      "pedidos_pendentes": 18,
+      "pct": 8.5,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
@@ -442,7 +442,7 @@
       "loggers": 208,
       "sincronizados": 123,
       "pendentes": 85,
-      "sem_embarque": 0,
+      "sem_embarque": 1,
       "cobranca_gru": 0,
       "pedidos_pendentes": 18,
       "pct": 40.9,

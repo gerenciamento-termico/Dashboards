@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-18T17:28:01",
+  "gerado_em": "2026-11-18T17:39:58",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 236,
+    "pendentes_janela": 235,
     "cobranca_gru_janela": 10,
     "sem_embarque_efetiva": 156,
     "com_embarque_efetiva": 4793,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 44,
       "BEL - MH FROTA TRANSPORTE": 34,
-      "VTCLOG - GRU": 23,
+      "VTCLOG - GRU": 22,
       "FOR - NT TRANSPORTE LTDA": 20,
       "SLZ - REIS CAVALCANTE EXPRESSO": 19,
       "MCP - A A CARVALHO ROCHA ME": 16,
@@ -59,8 +59,8 @@
       "AP": 16,
       "MG": 14,
       "SC": 14,
-      "SP": 13,
       "MT": 12,
+      "SP": 12,
       "AC": 11
     },
     "latencia": {
@@ -345,12 +345,12 @@
       "dia_full": "13/11/2026",
       "pedidos": 83,
       "loggers": 695,
-      "sincronizados": 663,
-      "pendentes": 31,
+      "sincronizados": 664,
+      "pendentes": 30,
       "sem_embarque": 10,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 11,
-      "pct": 4.5,
+      "pedidos_pendentes": 10,
+      "pct": 4.3,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

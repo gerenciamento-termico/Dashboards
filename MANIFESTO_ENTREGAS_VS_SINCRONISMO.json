@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-18T15:43:05",
+  "gerado_em": "2026-11-18T15:53:33",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 245,
+    "pendentes_janela": 238,
     "cobranca_gru_janela": 9,
     "sem_embarque_efetiva": 156,
     "com_embarque_efetiva": 4767,
@@ -48,8 +48,8 @@
       "MCP - A A CARVALHO ROCHA ME": 16,
       "CGB - JR TRANSPORTES": 12,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 12,
-      "MAO- GR TRANSPORTES E LOGISTICA MULTIMODAL": 12,
-      "RBR - RODOTEC": 11
+      "RBR - RODOTEC": 11,
+      "THE - AERONEIVA EXPRESS": 8
     },
     "top10_ufs_pendencias": {
       "BA": 47,
@@ -61,7 +61,7 @@
       "SP": 13,
       "SC": 13,
       "MT": 12,
-      "AM": 12
+      "AC": 11
     },
     "latencia": {
       "n_agente": 0,
@@ -440,12 +440,12 @@
       "dia_full": "18/11/2026",
       "pedidos": 55,
       "loggers": 225,
-      "sincronizados": 138,
-      "pendentes": 87,
+      "sincronizados": 145,
+      "pendentes": 80,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 20,
-      "pct": 38.7,
+      "pct": 35.6,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

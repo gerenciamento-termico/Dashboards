@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-18T14:42:05",
+  "gerado_em": "2026-11-18T14:51:59",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5305,
-    "pedidos_janela": 835,
-    "loggers_ares_janela": 4877,
-    "loggers_ares_antes_dedup": 4904,
+    "pares_janela": 5306,
+    "pedidos_janela": 836,
+    "loggers_ares_janela": 4878,
+    "loggers_ares_antes_dedup": 4905,
     "dedup_dia_logger": 27,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
     "pendentes_janela": 260,
     "cobranca_gru_janela": 9,
-    "sem_embarque_efetiva": 157,
-    "com_embarque_efetiva": 4747,
+    "sem_embarque_efetiva": 156,
+    "com_embarque_efetiva": 4749,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 157,
-    "pedidos_com_agente": 5305,
+    "nao_avaliados": 156,
+    "pedidos_com_agente": 5306,
     "dtbtransporte": {
-      "consultados": 835,
-      "mapeados": 835,
-      "linhas": 891
+      "consultados": 836,
+      "mapeados": 836,
+      "linhas": 892
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 43,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 4720,
+      "n_sem_primeiro_sync": 4722,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -419,11 +419,11 @@
       "dia_iso": "2026-11-17",
       "dia": "17/11",
       "dia_full": "17/11/2026",
-      "pedidos": 81,
-      "loggers": 354,
-      "sincronizados": 304,
+      "pedidos": 82,
+      "loggers": 355,
+      "sincronizados": 305,
       "pendentes": 46,
-      "sem_embarque": 1,
+      "sem_embarque": 0,
       "cobranca_gru": 4,
       "pedidos_pendentes": 21,
       "pct": 13.0,
@@ -432,26 +432,26 @@
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 354
+      "n_sem_primeiro_sync": 355
     },
     {
       "dia_iso": "2026-11-18",
       "dia": "18/11",
       "dia_full": "18/11/2026",
-      "pedidos": 45,
-      "loggers": 206,
-      "sincronizados": 121,
+      "pedidos": 46,
+      "loggers": 207,
+      "sincronizados": 122,
       "pendentes": 85,
       "sem_embarque": 0,
       "cobranca_gru": 0,
       "pedidos_pendentes": 18,
-      "pct": 41.3,
+      "pct": 41.1,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 206
+      "n_sem_primeiro_sync": 207
     }
   ],
   "erros_validacao": {},

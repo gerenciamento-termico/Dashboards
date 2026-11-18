@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-18T08:04:39",
+  "gerado_em": "2026-11-18T08:14:47",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 234,
+    "pendentes_janela": 219,
     "cobranca_gru_janela": 6,
     "sem_embarque_efetiva": 176,
     "com_embarque_efetiva": 4575,
@@ -40,7 +40,7 @@
       "linhas": 842
     },
     "top10_agentes_pendencias": {
-      "BEL - MH FROTA TRANSPORTE": 50,
+      "BEL - MH FROTA TRANSPORTE": 35,
       "CGB - JR TRANSPORTES": 25,
       "VTCLOG - GRU": 23,
       "VTCLOG CNF - CONTAGEM": 21,
@@ -52,7 +52,7 @@
       "THE - AERONEIVA EXPRESS": 8
     },
     "top10_ufs_pendencias": {
-      "PA": 53,
+      "PA": 38,
       "MG": 29,
       "MT": 25,
       "MA": 20,
@@ -421,12 +421,12 @@
       "dia_full": "17/11/2026",
       "pedidos": 77,
       "loggers": 350,
-      "sincronizados": 258,
-      "pendentes": 91,
+      "sincronizados": 273,
+      "pendentes": 76,
       "sem_embarque": 20,
       "cobranca_gru": 1,
       "pedidos_pendentes": 23,
-      "pct": 26.0,
+      "pct": 21.7,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

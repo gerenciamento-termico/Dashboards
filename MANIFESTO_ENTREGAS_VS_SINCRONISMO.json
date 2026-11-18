@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-18T11:15:15",
+  "gerado_em": "2026-11-18T11:25:21",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,25 +19,25 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5196,
-    "pedidos_janela": 807,
-    "loggers_ares_janela": 4769,
-    "loggers_ares_antes_dedup": 4796,
+    "pares_janela": 5202,
+    "pedidos_janela": 811,
+    "loggers_ares_janela": 4774,
+    "loggers_ares_antes_dedup": 4801,
     "dedup_dia_logger": 27,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 227,
+    "pendentes_janela": 228,
     "cobranca_gru_janela": 5,
     "sem_embarque_efetiva": 176,
-    "com_embarque_efetiva": 4620,
+    "com_embarque_efetiva": 4625,
     "loggers_sem_lastsync": 0,
     "nao_avaliados": 176,
-    "pedidos_com_agente": 5196,
+    "pedidos_com_agente": 5202,
     "dtbtransporte": {
-      "consultados": 807,
-      "mapeados": 807,
-      "linhas": 863
+      "consultados": 811,
+      "mapeados": 811,
+      "linhas": 867
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 43,
@@ -46,8 +46,8 @@
       "SLZ - REIS CAVALCANTE EXPRESSO": 19,
       "MCP - A A CARVALHO ROCHA ME": 16,
       "NAT - J MORAES SERVICOS DE ENTREGA": 15,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 13,
       "CGB - JR TRANSPORTES": 12,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 12,
       "RBR - RODOTEC": 11,
       "THE - AERONEIVA EXPRESS": 8
     },
@@ -59,14 +59,14 @@
       "AP": 16,
       "RN": 15,
       "SP": 14,
-      "SC": 13,
+      "SC": 14,
       "MT": 12,
       "AC": 11
     },
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 4593,
+      "n_sem_primeiro_sync": 4598,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-18",
       "dia": "18/11",
       "dia_full": "18/11/2026",
-      "pedidos": 21,
-      "loggers": 82,
-      "sincronizados": 32,
-      "pendentes": 50,
+      "pedidos": 24,
+      "loggers": 87,
+      "sincronizados": 36,
+      "pendentes": 51,
       "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 10,
-      "pct": 61.0,
+      "pedidos_pendentes": 11,
+      "pct": 58.6,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 82
+      "n_sem_primeiro_sync": 87
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-19T11:50:45",
+  "gerado_em": "2026-11-19T12:01:02",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 224,
+    "pendentes_janela": 223,
     "cobranca_gru_janela": 9,
     "sem_embarque_efetiva": 205,
     "com_embarque_efetiva": 4745,
@@ -48,7 +48,7 @@
       "FOR - NT TRANSPORTE LTDA": 12,
       "CGB - JR TRANSPORTES": 11,
       "RBR - RODOTEC": 10,
-      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 10,
+      "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 9,
       "VTCLOG CNF - CONTAGEM": 8
     },
     "top10_ufs_pendencias": {
@@ -59,9 +59,9 @@
       "SP": 15,
       "MG": 14,
       "CE": 14,
-      "SC": 11,
       "MT": 11,
-      "AC": 10
+      "AC": 10,
+      "SC": 10
     },
     "latencia": {
       "n_agente": 0,
@@ -421,12 +421,12 @@
       "dia_full": "18/11/2026",
       "pedidos": 87,
       "loggers": 307,
-      "sincronizados": 237,
-      "pendentes": 70,
+      "sincronizados": 238,
+      "pendentes": 69,
       "sem_embarque": 50,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 19,
-      "pct": 22.8,
+      "pedidos_pendentes": 18,
+      "pct": 22.5,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

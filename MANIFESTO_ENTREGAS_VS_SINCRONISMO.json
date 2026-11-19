@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-19T14:13:44",
+  "gerado_em": "2026-11-19T14:23:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,30 +19,30 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5392,
-    "pedidos_janela": 887,
-    "loggers_ares_janela": 4940,
-    "loggers_ares_antes_dedup": 4966,
+    "pares_janela": 5395,
+    "pedidos_janela": 889,
+    "loggers_ares_janela": 4943,
+    "loggers_ares_antes_dedup": 4969,
     "dedup_dia_logger": 26,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 215,
+    "pendentes_janela": 216,
     "cobranca_gru_janela": 8,
-    "sem_embarque_efetiva": 206,
-    "com_embarque_efetiva": 4760,
+    "sem_embarque_efetiva": 205,
+    "com_embarque_efetiva": 4764,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 206,
-    "pedidos_com_agente": 5392,
+    "nao_avaliados": 205,
+    "pedidos_com_agente": 5395,
     "dtbtransporte": {
-      "consultados": 887,
-      "mapeados": 887,
-      "linhas": 944
+      "consultados": 889,
+      "mapeados": 889,
+      "linhas": 946
     },
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 45,
       "BEL - MH FROTA TRANSPORTE": 34,
-      "VTCLOG - GRU": 24,
+      "VTCLOG - GRU": 25,
       "SLZ - REIS CAVALCANTE EXPRESSO": 18,
       "MCP - A A CARVALHO ROCHA ME": 16,
       "FOR - NT TRANSPORTE LTDA": 12,
@@ -61,12 +61,12 @@
       "CE": 13,
       "AC": 10,
       "SC": 7,
-      "PI": 6
+      "RS": 6
     },
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 4734,
+      "n_sem_primeiro_sync": 4738,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-19",
       "dia": "19/11",
       "dia_full": "19/11/2026",
-      "pedidos": 31,
-      "loggers": 39,
-      "sincronizados": 32,
-      "pendentes": 7,
-      "sem_embarque": 1,
+      "pedidos": 34,
+      "loggers": 43,
+      "sincronizados": 35,
+      "pendentes": 8,
+      "sem_embarque": 0,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 5,
-      "pct": 17.9,
+      "pedidos_pendentes": 6,
+      "pct": 18.6,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 39
+      "n_sem_primeiro_sync": 43
     }
   ],
   "erros_validacao": {},

@@ -1,6 +1,6 @@
 window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
   "fonte": "VTC STAGE (vtc_stage.documentos)",
-  "geradoEm": "19/11/2026 14:17:15",
+  "geradoEm": "19/11/2026 14:28:35",
   "summary": {
     "ARES": {
       "totalEstoque": null,
@@ -30,9 +30,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "SENSOR VTC": {
       "totalEstoque": null,
-      "loggersTransito": 220,
+      "loggersTransito": 217,
       "loggersEntregues": 5056,
-      "loggersRetornados": 1136,
+      "loggersRetornados": 1133,
       "registrosEntregas": 138393,
       "registrosEstoque": 0,
       "semStatus": 0,
@@ -69,9 +69,9 @@ window.GESTAO_DISPOSITIVOS_STAGE_DATA = {
     },
     "ALL": {
       "totalEstoque": null,
-      "loggersTransito": 220,
+      "loggersTransito": 217,
       "loggersEntregues": 5056,
-      "loggersRetornados": 1136,
+      "loggersRetornados": 1133,
       "registrosEntregas": 145330,
       "registrosEstoque": 0,
       "semStatus": 0,

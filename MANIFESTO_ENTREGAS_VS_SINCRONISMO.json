@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-19T08:00:56",
+  "gerado_em": "2026-11-19T08:10:12",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,7 +27,7 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 259,
+    "pendentes_janela": 258,
     "cobranca_gru_janela": 10,
     "sem_embarque_efetiva": 205,
     "com_embarque_efetiva": 4707,
@@ -40,7 +40,7 @@
       "linhas": 905
     },
     "top10_agentes_pendencias": {
-      "SSA - LUTY LOG": 44,
+      "SSA - LUTY LOG": 43,
       "BEL - MH FROTA TRANSPORTE": 34,
       "VTCLOG RIO GALEAO": 31,
       "VTCLOG - GRU": 22,
@@ -52,7 +52,7 @@
       "RBR - RODOTEC": 10
     },
     "top10_ufs_pendencias": {
-      "BA": 48,
+      "BA": 47,
       "PA": 37,
       "RJ": 31,
       "CE": 22,
@@ -421,12 +421,12 @@
       "dia_full": "18/11/2026",
       "pedidos": 82,
       "loggers": 295,
-      "sincronizados": 183,
-      "pendentes": 111,
+      "sincronizados": 184,
+      "pendentes": 110,
       "sem_embarque": 50,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 26,
-      "pct": 37.6,
+      "pedidos_pendentes": 25,
+      "pct": 37.3,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-19T17:43:33",
+  "gerado_em": "2026-11-19T17:53:25",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -27,12 +27,12 @@
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 202,
+    "pendentes_janela": 203,
     "cobranca_gru_janela": 9,
-    "sem_embarque_efetiva": 207,
-    "com_embarque_efetiva": 4800,
+    "sem_embarque_efetiva": 205,
+    "com_embarque_efetiva": 4802,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 207,
+    "nao_avaliados": 205,
     "pedidos_com_agente": 5433,
     "dtbtransporte": {
       "consultados": 916,
@@ -42,7 +42,7 @@
     "top10_agentes_pendencias": {
       "SSA - LUTY LOG": 43,
       "BEL - MH FROTA TRANSPORTE": 34,
-      "VTCLOG - GRU": 24,
+      "VTCLOG - GRU": 25,
       "SLZ - REIS CAVALCANTE EXPRESSO": 18,
       "MCP - A A CARVALHO ROCHA ME": 16,
       "RBR - RODOTEC": 10,
@@ -66,7 +66,7 @@
     "latencia": {
       "n_agente": 0,
       "n_so_gru": 0,
-      "n_sem_primeiro_sync": 4771,
+      "n_sem_primeiro_sync": 4772,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null
@@ -438,20 +438,20 @@
       "dia_iso": "2026-11-19",
       "dia": "19/11",
       "dia_full": "19/11/2026",
-      "pedidos": 59,
-      "loggers": 76,
+      "pedidos": 61,
+      "loggers": 77,
       "sincronizados": 69,
-      "pendentes": 6,
-      "sem_embarque": 1,
+      "pendentes": 7,
+      "sem_embarque": 0,
       "cobranca_gru": 1,
-      "pedidos_pendentes": 5,
-      "pct": 7.9,
+      "pedidos_pendentes": 6,
+      "pct": 9.1,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
       "p90_horas": null,
       "n_sync_so_gru": 0,
-      "n_sem_primeiro_sync": 76
+      "n_sem_primeiro_sync": 77
     }
   ],
   "erros_validacao": {},

@@ -1,5 +1,5 @@
 {
-  "gerado_em": "2026-11-19T15:23:39",
+  "gerado_em": "2026-11-19T15:33:29",
   "status": "VALIDADO",
   "janela_dias": 20,
   "regras": {
@@ -19,28 +19,28 @@
     "ocultos_operacao": "pedido+logger+dia em ocultos_operacao_entregas_vs.json sai da cobranca, da serie e do tempo. Nao muda regra. Aba Erros operacionais"
   },
   "contagens": {
-    "pares_janela": 5408,
-    "pedidos_janela": 897,
-    "loggers_ares_janela": 4954,
-    "loggers_ares_antes_dedup": 4982,
-    "dedup_dia_logger": 28,
+    "pares_janela": 5410,
+    "pedidos_janela": 899,
+    "loggers_ares_janela": 4955,
+    "loggers_ares_antes_dedup": 4984,
+    "dedup_dia_logger": 29,
     "ocultos_operacao": 0,
     "ocultos_lista": 227,
     "ocultos_ausentes": 227,
-    "pendentes_janela": 209,
+    "pendentes_janela": 205,
     "cobranca_gru_janela": 8,
-    "sem_embarque_efetiva": 209,
+    "sem_embarque_efetiva": 211,
     "com_embarque_efetiva": 4773,
     "loggers_sem_lastsync": 0,
-    "nao_avaliados": 209,
-    "pedidos_com_agente": 5408,
+    "nao_avaliados": 211,
+    "pedidos_com_agente": 5410,
     "dtbtransporte": {
-      "consultados": 897,
-      "mapeados": 897,
-      "linhas": 954
+      "consultados": 899,
+      "mapeados": 899,
+      "linhas": 956
     },
     "top10_agentes_pendencias": {
-      "SSA - LUTY LOG": 45,
+      "SSA - LUTY LOG": 43,
       "BEL - MH FROTA TRANSPORTE": 34,
       "VTCLOG - GRU": 25,
       "SLZ - REIS CAVALCANTE EXPRESSO": 18,
@@ -49,10 +49,10 @@
       "VTCLOG CNF - CONTAGEM": 8,
       "THE - AERONEIVA EXPRESS": 7,
       "FLN - TGEX TRANSPORTES E LOCACAO DE VEIC": 6,
-      "FOR - NT TRANSPORTE LTDA": 6
+      "VDC - MASPEX CARGO": 5
     },
     "top10_ufs_pendencias": {
-      "BA": 50,
+      "BA": 48,
       "PA": 37,
       "MA": 19,
       "AP": 16,
@@ -60,8 +60,8 @@
       "MG": 14,
       "AC": 10,
       "SC": 7,
-      "CE": 7,
-      "RS": 6
+      "RS": 6,
+      "PI": 6
     },
     "latencia": {
       "n_agente": 0,
@@ -421,12 +421,12 @@
       "dia_full": "18/11/2026",
       "pedidos": 88,
       "loggers": 309,
-      "sincronizados": 246,
-      "pendentes": 63,
+      "sincronizados": 250,
+      "pendentes": 59,
       "sem_embarque": 50,
       "cobranca_gru": 0,
-      "pedidos_pendentes": 17,
-      "pct": 20.4,
+      "pedidos_pendentes": 16,
+      "pct": 19.1,
       "n_latencia": 0,
       "media_horas": null,
       "mediana_horas": null,
@@ -442,7 +442,7 @@
       "loggers": 52,
       "sincronizados": 45,
       "pendentes": 7,
-      "sem_embarque": 2,
+      "sem_embarque": 3,
       "cobranca_gru": 0,
       "pedidos_pendentes": 6,
       "pct": 13.5,

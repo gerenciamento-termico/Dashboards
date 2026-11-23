@@ -1,5 +1,5 @@
 ﻿{
-    "gerado_em":  "2026-11-23T13:12:20",
+    "gerado_em":  "2026-11-23T14:12:57",
     "intervalo_min":  10,
     "paineis":  [
                     {
@@ -8,11 +8,11 @@
                     },
                     {
                         "arquivo":  "ESTOQUE_DATALOGGERS.html",
-                        "atualizado_em":  "2026-11-23T13:07:59"
+                        "atualizado_em":  "2026-11-23T13:18:05"
                     },
                     {
                         "arquivo":  "CONTROLE_ENTREGAS_20D.html",
-                        "atualizado_em":  "2026-11-23T13:08:16"
+                        "atualizado_em":  "2026-11-23T13:18:22"
                     },
                     {
                         "arquivo":  "REVERSA_DATALOGGERS.html",
@@ -20,7 +20,7 @@
                     },
                     {
                         "arquivo":  "REVERSA_FORTEX.html",
-                        "atualizado_em":  "2026-11-23T13:08:42"
+                        "atualizado_em":  "2026-11-23T13:18:47"
                     },
                     {
                         "arquivo":  "GESTAO_DISPOSITIVOS.html",
@@ -28,7 +28,7 @@
                     },
                     {
                         "arquivo":  "RASTREIO_CAIXAS_SEM_DATALOGGER.html",
-                        "atualizado_em":  "2026-11-23T13:12:18"
+                        "atualizado_em":  "2026-11-23T14:12:56"
                     },
                     {
                         "arquivo":  "INDICADOR_VTCBOX.html",
